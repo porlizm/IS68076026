@@ -18,6 +18,11 @@
 
 ## ประวัติ session
 
+### 1 ต.ค. 2569 · Session 10 (ต่อ): จัดระเบียบโฟลเดอร์แม่ `Documents\IS - n8n resume analysis`
+- รากโฟลเดอร์เหลือ `Final_IS/` + `archive/` + `README.md` (ชี้มาที่ Final_IS)
+- ย้าย 15 รายการ (01_docs–07_sheets_import, IS_Files_01OCT26, Data_Set.xlsx และ PDF ฉบับขอสอบที่ sha ตรงกับใน Final_IS, README/MOVE_LOG เดิม, .work, .agents และ .git ว่าง) ไป `archive/2026-10_pre_Final_IS/` · บันทึก `archive/MOVE_LOG_01OCT26.csv` · ไม่มีสคริปต์ใน Final_IS อ้างไฟล์นอกโฟลเดอร์
+- ยังมีสำเนาเก่าอีกชุดที่ `Downloads\IS - n8n resume analysis` (ไม่ได้แตะ)
+
 ### 1 ต.ค. 2569 · Session 10 (ต่อ): ย้ายชุด 5 workflow เดิมเข้า archive (DEC-38)
 - ย้าย 5 ไฟล์ไป `archive/01OCT26/workflows_5wf_DEC-30/` + MOVE_LOG + README "ไม่ใช้งาน" · `workflows/` เหลือ `WF_Final_IS.json` + `manifest.json` + `src/`
 - build เขียนเฉพาะ WF_Final_IS (`--legacy <dir>` สร้างชุดเดิมได้ ตรวจแล้ว sha ตรงไฟล์ที่ย้าย) · validator/tests สร้างชุดเดิมในหน่วยความจำ และไม่ผ่านถ้ามี workflow อื่นใน `workflows/`
