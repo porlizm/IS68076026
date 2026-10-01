@@ -34,6 +34,7 @@
 | 35 | 1 ต.ค. | การเรียกโมเดลซ้ำและการเรียกโมเดลใน Code node | ✅ |
 | 36 | 1 ต.ค. | แก้ข้อบกพร่องในเล่มที่ไม่ต้องตัดสินใจ | ✅ |
 | 37 | 1 ต.ค. | รวม 5 workflow เป็นไฟล์เดียว `WF_Final_IS` (ชุด 5 ไฟล์ยังสร้างและตรวจคู่กัน) | ✅ สร้างแล้ว · ⏳ S6 ใน n8n · ⏳ ผลต่อเล่ม 3.4/ตาราง 3.9 รอตัดสิน |
+| 38 | 1 ต.ค. | ย้ายชุด 5 workflow เดิมออกจาก `workflows/` ไป archive · `workflows/` เหลือ WF_Final_IS ไฟล์เดียว | ✅ |
 
 ---
 
@@ -113,4 +114,11 @@
 **ผลต่อเล่ม** ⏳ รอตัดสิน: หัวข้อ 3.4 และตารางที่ 3.9 ระบุ "5 workflow" — ถ้าใช้ WF_Final_IS ให้แก้เป็น "workflow เดียว แบ่งเป็น 5 ส่วนตามหน้าที่" (ชื่อส่วนและหน้าที่เดิม) · ตาราง 3.10 ที่อ้างชื่อ workflow ใช้ชื่อส่วนได้ตามเดิม · จำนวนเทสต์ `{{tests_total}}` อัปเดตอัตโนมัติ (46 → 51)
 **ข้อควรระวัง** นำเข้าเฉพาะ `WF_Final_IS.json` · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ (trigger สองตัวอ่านแถวเดียวกัน) · ถ้างานหนึ่งล้มกลางลูป งานที่เหลือใน execution เดียวกันจะไม่ถูกประมวลผล (เหมือนชุด 5 ไฟล์ที่ Main หยุดทั้ง execution) ต้องส่งใหม่
 **วิธีย้อนกลับ** นำเข้าชุด 5 ไฟล์ตาม `import_order` ใน `workflows/manifest.json` (ยังสร้างและผ่านตัวตรวจทุกครั้ง) · ลบ `buildFinal` และ `validateFinal` ถ้าไม่ใช้แล้ว
+
+## DEC-38 · ย้ายชุด 5 workflow เดิมออกจาก `workflows/` (ต่อจาก DEC-37)
+**ปัญหา** `workflows/` มีทั้ง WF_Final_IS และชุด 5 ไฟล์ เสี่ยงเปิดหรือนำเข้าผิดไฟล์
+**การตัดสินใจ** ย้าย `WF_Main_Intake/WF_SUB_GapEngine/WF_SUB_Decide/WF_SUB_Deliver/WF_Error.json` ไป `archive/01OCT26/workflows_5wf_DEC-30/` (บันทึก `archive/MOVE_LOG.csv` + README "ไม่ใช้งาน") · `build_workflows.mjs` เขียนเฉพาะ `WF_Final_IS.json` · ชุด 5 ไฟล์ยังสร้างในหน่วยความจำ (`loadWorkflows()` เรียก `buildAll()`) เพื่อให้เทสต์บั๊ก B1–B11 และการเทียบโหนดของ `validateFinal` ทำงานเหมือนเดิม · `validate_workflows.mjs` ไม่ผ่านถ้า `workflows/` มี workflow JSON อื่นนอกจาก WF_Final_IS · `manifest.json` เปลี่ยนเป็น `import` + `workflow` + `legacy_5wf` (sha ของชุดเดิมยังบันทึกไว้)
+**ไฟล์** `scripts/build_workflows.mjs` · `scripts/validate_workflows.mjs` · `workflows/manifest.json` · `archive/01OCT26/workflows_5wf_DEC-30/` · `archive/MOVE_LOG.csv` · `docs/Setup_Guide.md` · `README.md`
+**ผลต่อเล่ม** ไม่มีเพิ่มจาก DEC-37
+**วิธีย้อนกลับ** `node scripts/build_workflows.mjs --legacy <โฟลเดอร์>` สร้างชุด 5 ไฟล์ล่าสุด (ตรวจแล้ว sha ตรงกับไฟล์ที่ย้าย) แล้วนำเข้าตาม `legacy_5wf.import_order`
 

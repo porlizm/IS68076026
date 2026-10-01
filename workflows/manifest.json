@@ -1,56 +1,57 @@
 {
-  "built_at": "2026-10-01T02:53:35.234Z",
+  "built_at": "2026-10-01T03:05:18.013Z",
   "engine_sha256": "9189db7b85f31606c9d1711a9c7fa717ced077133565bc8adcf60864e9054980",
   "engine_version": "engine-1.0.0-01OCT26",
   "n8n_version": "2.39.9",
   "node_version": "24",
-  "import_order": [
-    "WF_Error",
-    "WF_SUB_GapEngine",
-    "WF_SUB_Decide",
-    "WF_SUB_Deliver",
-    "WF_Main_Intake"
-  ],
-  "workflows": {
-    "WF_Error": {
-      "file": "WF_Error.json",
-      "id": "is68ErrorWF00001",
-      "nodes": 6,
-      "sha256": "4e99924aa193d29167d9e3f5af794ce7f310a4954d5e15e06410201508a2e4f4"
-    },
-    "WF_SUB_GapEngine": {
-      "file": "WF_SUB_GapEngine.json",
-      "id": "is68GapEngine001",
-      "nodes": 11,
-      "sha256": "1761a0999f8a04279f3b5af417b2aeb044e4900f05aa9bf5da43a9ff57ebaa22"
-    },
-    "WF_SUB_Decide": {
-      "file": "WF_SUB_Decide.json",
-      "id": "is68Decide000001",
-      "nodes": 13,
-      "sha256": "84348263554fa746a0a5bcc4eee3ef969b98d77986f89d7e6266329573977208"
-    },
-    "WF_SUB_Deliver": {
-      "file": "WF_SUB_Deliver.json",
-      "id": "is68Deliver00001",
-      "nodes": 13,
-      "sha256": "9f3725873090a47d848397c655e1bd9febb1b53005f5d68401a03b0aa90b8a16"
-    },
-    "WF_Main_Intake": {
-      "file": "WF_Main_Intake.json",
-      "id": "is68MainIntake01",
-      "nodes": 17,
-      "sha256": "d5e98344860c08eb4da696af883b1c5580b7531e1f6d8685bceba6900cafff90"
-    }
-  },
-  "single_workflow": {
-    "recommended": true,
+  "import": "WF_Final_IS.json",
+  "note": "นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_Final_IS.json (DEC-37) · ชุด 5 ไฟล์เดิมเลิกใช้และย้ายไป archive แล้ว (DEC-38)",
+  "workflow": {
     "decision": "DEC-37",
     "file": "WF_Final_IS.json",
     "id": "is68FinalIS00001",
     "nodes": 59,
     "sticky_notes": 5,
-    "sha256": "ea0f97c4f7fbf107d945037f0e96f2acb735fc3879ab7abf112e8da16afbb325",
-    "note": "นำเข้าไฟล์นี้ไฟล์เดียว (n8n import:workflow --input=workflows/WF_Final_IS.json) · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ เพราะ trigger จะอ่านแถวเดียวกันซ้ำ"
+    "sha256": "ea0f97c4f7fbf107d945037f0e96f2acb735fc3879ab7abf112e8da16afbb325"
+  },
+  "legacy_5wf": {
+    "status": "ไม่ใช้ · ห้ามนำเข้าพร้อม WF_Final_IS",
+    "decision": "DEC-30 → DEC-38",
+    "archived_copy": "archive/01OCT26/workflows_5wf_DEC-30/",
+    "rebuild": "node scripts/build_workflows.mjs --legacy <โฟลเดอร์>",
+    "import_order": [
+      "WF_Error",
+      "WF_SUB_GapEngine",
+      "WF_SUB_Decide",
+      "WF_SUB_Deliver",
+      "WF_Main_Intake"
+    ],
+    "workflows": {
+      "WF_Error": {
+        "id": "is68ErrorWF00001",
+        "nodes": 6,
+        "sha256": "4e99924aa193d29167d9e3f5af794ce7f310a4954d5e15e06410201508a2e4f4"
+      },
+      "WF_SUB_GapEngine": {
+        "id": "is68GapEngine001",
+        "nodes": 11,
+        "sha256": "1761a0999f8a04279f3b5af417b2aeb044e4900f05aa9bf5da43a9ff57ebaa22"
+      },
+      "WF_SUB_Decide": {
+        "id": "is68Decide000001",
+        "nodes": 13,
+        "sha256": "84348263554fa746a0a5bcc4eee3ef969b98d77986f89d7e6266329573977208"
+      },
+      "WF_SUB_Deliver": {
+        "id": "is68Deliver00001",
+        "nodes": 13,
+        "sha256": "9f3725873090a47d848397c655e1bd9febb1b53005f5d68401a03b0aa90b8a16"
+      },
+      "WF_Main_Intake": {
+        "id": "is68MainIntake01",
+        "nodes": 17,
+        "sha256": "d5e98344860c08eb4da696af883b1c5580b7531e1f6d8685bceba6900cafff90"
+      }
+    }
   }
 }

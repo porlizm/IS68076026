@@ -1,5 +1,6 @@
 // build_workflows.mjs — สร้าง workflow ทั้งห้าตามตารางที่ 3.9 จากแหล่งเดียว (ห้ามแก้ JSON ด้วยมือ)
-//   node scripts/build_workflows.mjs  -> workflows/WF_*.json + workflows/WF_Final_IS.json (DEC-37 รวมเป็นไฟล์เดียว) + workflows/manifest.json
+//   node scripts/build_workflows.mjs  -> workflows/WF_Final_IS.json (DEC-37 ไฟล์เดียวที่ใช้งาน) + workflows/manifest.json
+//   ชุด 5 ไฟล์เดิม (DEC-30) สร้างในหน่วยความจำเพื่อตรวจเทียบ · เขียนไฟล์เฉพาะเมื่อสั่ง --legacy <โฟลเดอร์> (DEC-38)
 // Code node ที่ต้องใช้ตรรกะฝัง engine/engine.js ทั้งไฟล์ระหว่างเครื่องหมาย ENGINE BEGIN/END (ตรวจทีละไบต์ใน validate_workflows.mjs)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -315,22 +316,27 @@ export function buildAll() {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  // DEC-38: เขียนเฉพาะ workflows/WF_Final_IS.json (ไฟล์ที่ใช้งาน) · ชุด 5 ไฟล์เดิมสร้างในหน่วยความจำเพื่อตรวจเทียบเท่านั้น
+  //   ต้องการไฟล์ชุด 5 ไฟล์เพื่อย้อนกลับ: node scripts/build_workflows.mjs --legacy <โฟลเดอร์ปลายทาง นอก workflows/>
   const all = buildAll();
-  const man = { built_at: new Date().toISOString(), engine_sha256: ENGINE_SHA, engine_version: ENGINE.ENGINE_VERSION, n8n_version: '2.39.9', node_version: '24', import_order: ['WF_Error', 'WF_SUB_GapEngine', 'WF_SUB_Decide', 'WF_SUB_Deliver', 'WF_Main_Intake'], workflows: {} };
-  for (const [k, w] of Object.entries(all)) {
-    const file = k + '.json';
-    const txt = JSON.stringify(w, null, 2) + '\n';
-    fs.writeFileSync(path.join(ROOT, 'workflows', file), txt);
-    man.workflows[k] = { file, id: w.id, nodes: w.nodes.length, sha256: ENGINE.sha256Hex(txt) };
-    console.log(`${k.padEnd(18)} ${w.nodes.length} nodes`);
-  }
-  // DEC-37: workflow เดียว (นำเข้าไฟล์นี้ไฟล์เดียว แทนชุด 5 ไฟล์ · ห้ามเปิดใช้งานทั้งสองชุดพร้อมกัน)
+  const li = process.argv.indexOf('--legacy');
+  const legacyDir = li > 0 ? path.resolve(process.argv[li + 1] || '') : null;
+  if (legacyDir && path.resolve(legacyDir) === path.join(ROOT, 'workflows')) throw new Error('--legacy ห้ามเขียนลง workflows/ (DEC-38 กันนำเข้าผิดไฟล์)');
   const fin = buildFinal(all);
   const ftxt = JSON.stringify(fin, null, 2) + '\n';
   fs.writeFileSync(path.join(ROOT, 'workflows', FINAL.name + '.json'), ftxt);
   const real = fin.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length;
-  man.single_workflow = { recommended: true, decision: 'DEC-37', file: FINAL.name + '.json', id: fin.id, nodes: real, sticky_notes: fin.nodes.length - real, sha256: ENGINE.sha256Hex(ftxt),
-    note: 'นำเข้าไฟล์นี้ไฟล์เดียว (n8n import:workflow --input=workflows/WF_Final_IS.json) · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ เพราะ trigger จะอ่านแถวเดียวกันซ้ำ' };
+  const man = { built_at: new Date().toISOString(), engine_sha256: ENGINE_SHA, engine_version: ENGINE.ENGINE_VERSION, n8n_version: '2.39.9', node_version: '24',
+    import: FINAL.name + '.json',
+    note: 'นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_Final_IS.json (DEC-37) · ชุด 5 ไฟล์เดิมเลิกใช้และย้ายไป archive แล้ว (DEC-38)',
+    workflow: { decision: 'DEC-37', file: FINAL.name + '.json', id: fin.id, nodes: real, sticky_notes: fin.nodes.length - real, sha256: ENGINE.sha256Hex(ftxt) },
+    legacy_5wf: { status: 'ไม่ใช้ · ห้ามนำเข้าพร้อม WF_Final_IS', decision: 'DEC-30 → DEC-38', archived_copy: 'archive/01OCT26/workflows_5wf_DEC-30/',
+      rebuild: 'node scripts/build_workflows.mjs --legacy <โฟลเดอร์>', import_order: ['WF_Error', 'WF_SUB_GapEngine', 'WF_SUB_Decide', 'WF_SUB_Deliver', 'WF_Main_Intake'], workflows: {} } };
+  for (const [k, w] of Object.entries(all)) {
+    const txt = JSON.stringify(w, null, 2) + '\n';
+    man.legacy_5wf.workflows[k] = { id: w.id, nodes: w.nodes.length, sha256: ENGINE.sha256Hex(txt) };
+    if (legacyDir) { fs.mkdirSync(legacyDir, { recursive: true }); fs.writeFileSync(path.join(legacyDir, k + '.json'), txt); console.log(`legacy ${k.padEnd(18)} ${w.nodes.length} nodes → ${legacyDir}`); }
+  }
   console.log(`${FINAL.name.padEnd(18)} ${real} nodes + ${fin.nodes.length - real} sticky notes`);
   fs.writeFileSync(path.join(ROOT, 'workflows', 'manifest.json'), JSON.stringify(man, null, 2) + '\n');
   console.log('engine_sha256', ENGINE_SHA);

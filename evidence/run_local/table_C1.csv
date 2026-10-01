@@ -1,4 +1,4 @@
 case,role_id,run_id,usable_models,decided,total,correct_on_decided,accuracy_on_decided,R,C,unsupported_claims,n_claims,plan_items,plan_hours,Hmax,gaps,gap_coverage,gap_coverage_with_candidate,uncovered_no_candidate,uncovered_over_capacity,pii_masked,model_calls,send_calls,report_hash
 A,R01,RUN-20261001100000-84e93a84,3,30,30,29,0.967,66.25,1,4,67,5,156,259.8,13,0.8462,0.8462,0,2,3,3,3,9a23472452475953e1d196576883abc4776d08e4a1cf11f83d3465281963b71d
 B,R06,RUN-20261001100000-bad84c85,3,30,30,30,1,19.63,1,2,25,11,225,259.8,27,0.8148,0.8148,0,5,3,3,3,86a3d94a5ec06264896460adb808e212fb1baf4fb5de06bb2100490f90542a76
-C,R18,RUN-20261001100000-90a83f11,2,28,30,27,0.964,38.57,0.9343,3,33,9,166,259.8,19,0.7895,0.7895,0,4,3,5,5,fe13d0ca37dad17d7d32feb236d28abc792f080ccfdac6490e8df55202081d71
+C,R18,RUN-20261001100000-90a83f11,2,28,30,27,0.964,38.57,0.9343,3,33,9,166,259.8,19,0.7895,0.7895,0,4,3,5,5,3aa7747f635ef90ae37f928caa72ae291c7d38599da7c82d7ab2c2c1973bc8a3

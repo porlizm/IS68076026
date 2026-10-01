@@ -3,13 +3,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, ENGINE } from './lib/refs.mjs';
+import { buildAll } from './build_workflows.mjs';
 
 export const EXPECTED_NODES = { WF_Main_Intake: 17, WF_SUB_GapEngine: 11, WF_SUB_Decide: 13, WF_SUB_Deliver: 13, WF_Error: 6 };
 const BEGIN = '// ==== ENGINE BEGIN (engine/engine.js · ห้ามแก้ในนี้ แก้ที่ไฟล์ต้นทางแล้ว build ใหม่) ====\n';
 const END = '\n// ==== ENGINE END ====\n';
 
+// DEC-38: ชุด 5 ไฟล์ไม่อยู่ใน workflows/ แล้ว — สร้างในหน่วยความจำจากแหล่งเดียวกัน (build_workflows.mjs) เพื่อตรวจบั๊ก B1–B11 และเทียบกับ WF_Final_IS
 export function loadWorkflows() {
-  return Object.fromEntries(Object.keys(EXPECTED_NODES).map((k) => [k, JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', k + '.json'), 'utf8'))]));
+  return JSON.parse(JSON.stringify(buildAll()));
 }
 
 // ตรวจรายโหนด (ใช้ร่วมกันระหว่างชุด 5 ไฟล์และ WF_Final_IS)
@@ -226,6 +228,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const wfs = loadWorkflows();
   const errs = [...validate(wfs), ...validateFinal(loadFinal(), wfs)];
   if (errs.length) { console.error('ไม่ผ่าน:\n  ' + errs.join('\n  ')); process.exit(1); }
-  console.log('ผ่าน · workflow 5 ไฟล์ · node 17/11/13/13/6 · engine ฝังตรงทุกไบต์ · บั๊ก B1 B3 B5 B6 B7 B9 B10 ผ่านการตรวจเชิงโครงสร้าง');
+  // DEC-38: workflows/ ต้องมี workflow JSON ไฟล์เดียว กันนำเข้าผิด
+  const extra = fs.readdirSync(path.join(ROOT, 'workflows')).filter((f) => f.endsWith('.json') && !['WF_Final_IS.json', 'manifest.json'].includes(f));
+  if (extra.length) { console.error('ไม่ผ่าน: workflows/ มีไฟล์ workflow อื่นนอกจาก WF_Final_IS.json: ' + extra.join(', ') + ' (ย้ายเข้า archive/ ตาม DEC-38)'); process.exit(1); }
+  console.log('ผ่าน · workflow 5 ไฟล์ (สร้างในหน่วยความจำ · ไม่ใช้งาน) · node 17/11/13/13/6 · engine ฝังตรงทุกไบต์ · บั๊ก B1 B3 B5 B6 B7 B9 B10 ผ่านการตรวจเชิงโครงสร้าง');
   console.log(`ผ่าน · WF_Final_IS ${EXPECTED_FINAL_NODES} node · ไม่มีการเรียกข้าม workflow · โหนดเดิมตรงชุด 5 ไฟล์ · ไม่มีการอ้างค่าข้ามรอบใน Loop Over Runs (DEC-37)`);
 }

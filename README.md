@@ -29,7 +29,7 @@ Final_IS/
 ├─ engine/engine.js      ตรรกะเดียว (R0–R4, สมการ 3.1–3.8, จัดแผน, รายงาน, อีเมล)
 ├─ prompts/              analyst_v1.0 + JSON schema
 ├─ config/               project · models · sheets · pricing · env_template.env
-├─ workflows/            WF_Final_IS 59 (ไฟล์เดียว · แนะนำ · DEC-37) · ชุดเดิม Main 17 · GapEngine 11 · Decide 13 · Deliver 13 · Error 6 + src/ + manifest
+├─ workflows/            WF_Final_IS.json (59 node · ไฟล์เดียวที่ใช้ · DEC-37) + src/ (โค้ดต่อโหนด) + manifest · ชุด 5 ไฟล์เดิมอยู่ archive/01OCT26/workflows_5wf_DEC-30/ (DEC-38)
 ├─ synthetic/            เรซูเมสังเคราะห์ 3 กรณี (เฉลย · PDF ข้อความ/สแกน · ผลตอบกลับจำลอง)
 ├─ tests/                Node test 51 กรณี (engine · data · pipeline · workflow sandbox บั๊ก B1–B11)
 ├─ analysis/             metrics · bootstrap · coding_sheets · run_analysis · ข้อมูลซ้อม 30+5 · tests 8 กรณี

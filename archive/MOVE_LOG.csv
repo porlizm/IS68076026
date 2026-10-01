@@ -128,3 +128,8 @@ date,action,from,to,reason
 2026-10-01,copy,IS_Files_01OCT26/source_from_project/systemflowglassmorphism.png,source/project_files/systemflowglassmorphism.png,DEC-27 rebuild: source copy (originals kept in place)
 2026-10-01,copy,IS_Files_01OCT26/source_from_project/_MOVE_LOG_31AUG26.csv,source/project_files/_MOVE_LOG_31AUG26.csv,DEC-27 rebuild: source copy (originals kept in place)
 2026-10-01,move,_bundle_Final_IS_01OCT26.tar.gz,archive/01OCT26/_bundle_Final_IS_01OCT26.tar.gz,transfer bundle from cloud session
+2026-10-01,move,workflows/WF_Main_Intake.json,archive/01OCT26/workflows_5wf_DEC-30/WF_Main_Intake.json,DEC-38 ชุด 5 workflow เดิมไม่ใช้แล้ว (ใช้ WF_Final_IS ตาม DEC-37) กันนำเข้าผิดไฟล์
+2026-10-01,move,workflows/WF_SUB_GapEngine.json,archive/01OCT26/workflows_5wf_DEC-30/WF_SUB_GapEngine.json,DEC-38 ชุด 5 workflow เดิมไม่ใช้แล้ว (ใช้ WF_Final_IS ตาม DEC-37) กันนำเข้าผิดไฟล์
+2026-10-01,move,workflows/WF_SUB_Decide.json,archive/01OCT26/workflows_5wf_DEC-30/WF_SUB_Decide.json,DEC-38 ชุด 5 workflow เดิมไม่ใช้แล้ว (ใช้ WF_Final_IS ตาม DEC-37) กันนำเข้าผิดไฟล์
+2026-10-01,move,workflows/WF_SUB_Deliver.json,archive/01OCT26/workflows_5wf_DEC-30/WF_SUB_Deliver.json,DEC-38 ชุด 5 workflow เดิมไม่ใช้แล้ว (ใช้ WF_Final_IS ตาม DEC-37) กันนำเข้าผิดไฟล์
+2026-10-01,move,workflows/WF_Error.json,archive/01OCT26/workflows_5wf_DEC-30/WF_Error.json,DEC-38 ชุด 5 workflow เดิมไม่ใช้แล้ว (ใช้ WF_Final_IS ตาม DEC-37) กันนำเข้าผิดไฟล์
