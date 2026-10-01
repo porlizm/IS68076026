@@ -1,7 +1,19 @@
-# NEXT STEPS: ลำดับงาน IS 68076026 (อัปเดต 1 ต.ค. 2569 · Session 9)
+# NEXT STEPS: ลำดับงาน IS 68076026 (อัปเดต 1 ต.ค. 2569 · Final_IS)
 
 > ติ๊ก `[x]` เมื่อเสร็จ และเขียนหลักฐานสั้น ๆ ต่อท้าย · รหัสระยะตาม `docs/Plan_IS_30SEP26.md`
 > 👤 = ผู้วิจัยทำ · 🤖 = Claude ทำได้ · ⛔ = ต้องรอสิ่งอื่นก่อน
+
+---
+
+## ขั้น 0: งานค้างจาก Final_IS 1 ต.ค. 2569 (Prompt_Report v2.0) · ทำก่อน
+
+- [ ] F1. 👤 เปิดตรวจรายการเรียนรู้ใหม่ 14 รายการใน `data/corpus_additions.csv` (ชื่อ ผู้ให้บริการ ชั่วโมง ราคา เนื้อหา) แล้วกรอก `researcher_result` = LIVE/OK หรือเหตุผลที่ไม่ผ่าน · ตัดองค์ประกอบที่ไม่เห็นด้วยในคอลัมน์ `elements` ได้
+- [ ] F2. 👤 ยืนยัน URL 28 รายการใน `data/url_manual_check.csv` (Claude บันทึกผลเปิดหน้าไว้ในคอลัมน์ note แล้ว)
+- [ ] F3. 👤 ยืนยัน DEC-45 (ใช้รายการพื้นฐานกับทุกอาชีพที่มีองค์ประกอบเดียวกัน) · ย้อนได้ด้วย `--foundation-uncovered-only`
+- [ ] F4. 🤖 หลัง F1–F3: `python scripts/build_data_all.py && bash scripts/run_all_checks.sh && python scripts/build_book.py && python scripts/export_pdf.py && python scripts/check_docx_format.py && python scripts/check_overlap.py` → Gate G-600 · commit + tag `gate-600`
+- [ ] F5. 👤🤖 ทดสอบ `workflows/WF_IS68076026.json` ใน n8n 2.39.9 ตาม `evidence/n8n_test_01OCT26.md` แล้วแทน [รอข้อมูล] ในหัวข้อ 3.6.3
+- [ ] F6. 👤 เปิด `build/IS_68076026_Final_01OCT26.docx` ใน Word → ยืนยันอัปเดตฟิลด์ → ตรวจสารบัญ เลขหน้า สมการ
+- [ ] F7. 👤 หาผู้เชี่ยวชาญ IOC 3 คน (ภาคผนวก ช) · ยื่นจริยธรรม · remote backup (ข้อ 2–3)
 
 ---
 

@@ -24,8 +24,10 @@ APPROVED = {"source_checked_by_script", "expert_reviewed"}
 L1 = "L1_researcher_tagged"
 
 
-def candidates(url=False, add=False):
+def candidates(url=False, add=False, base=False):
     c, m, rv, req = rd("corpus.csv"), rd("mappings.csv"), rd("mapping_review.csv"), rd("requirements.csv")
+    if base:  # ก่อนเพิ่มรายการ coverage track (DEC-46)
+        drop = set(c.item_id[c.batch == "v1.5_coverage_track"]); c = c[~c.item_id.isin(drop)]; m = m[~m.item_id.isin(drop)]
     st = dict(zip(rv.map_id, rv.mapping_status)); fl = dict(zip(rv.map_id, rv.review_flags))
     hours = dict(zip(c.item_id, c.estimated_hours.astype(float)))
     ver = dict(zip(c.item_id, c.verification_status == "verified"))
@@ -71,7 +73,7 @@ def main():
     wi = json.load(open(D("evidence", "coverage_whatif.json"), encoding="utf-8"))
     strat = proj.get("plan_strategy", "weighted_greedy")
     out = dict(Hmax=Hmax, strategy=strat, scenarios={})
-    for name, opt in dict(current={}, url_verified=dict(url=True), additions_confirmed=dict(add=True),
+    for name, opt in dict(before_track=dict(base=True), current={}, url_verified=dict(url=True), additions_confirmed=dict(add=True),
                           url_and_additions=dict(url=True, add=True)).items():
         req, G, hours = candidates(**opt)
         eng = {r["role_id"]: r for r in wi["scenarios"][name][strat]["primary_6m10h_both"]["per_role"]}

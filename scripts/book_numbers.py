@@ -14,6 +14,12 @@ J = lambda *p: json.load(open(os.path.join(ROOT, *p), encoding="utf-8"))
 TH_MONTH = ["", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."]
 
 
+def term_th(t):
+    """คำศัพท์ตาม Prompt_Report 8.4 สำหรับข้อความที่มาจากไฟล์ข้อมูล (ไม่แก้ไฟล์ข้อมูล)"""
+    for a, b in (("การจับคู่", "การเทียบรหัส"), ("ตามข้อกำหนด", "ตามความต้องการของงาน")): t = t.replace(a, b)
+    return t
+
+
 def fmt(x, d=0):
     if isinstance(x, str): return x
     return f"{x:,.{d}f}"
@@ -71,19 +77,24 @@ def main():
     n["cov_plan_mean_items"] = f"{cap[(6, 10)]['mean_items_per_plan']:.1f}"; n["cov_plan_mean_hours"] = f"{cap[(6, 10)]['mean_hours_per_plan']:.1f}"
     n["Hmax_6m10h"] = f"{cap[(6, 10)]['Hmax']:.1f}"; n["Hmax_6m5h"] = f"{cap[(6, 5)]['Hmax']:.1f}"
     dg = J("evidence", "coverage_diagnostics.json")
-    cur, fut = dg["scenarios"]["current"], dg["scenarios"]["url_and_additions"]
-    mins = [r["ilp_min_hours_all"] for r in cur["roles"]]; fmins = [r["ilp_min_hours_all"] for r in fut["roles"]]
-    n["ilp_min_lo"], n["ilp_min_hi"] = fmt(min(mins)), fmt(max(mins)); n["ilp_fit_roles"] = fmt(sum(r["fits_Hmax"] for r in cur["roles"]))
-    n["ilp_max_cov"] = fmt(cur["totals"]["ilp"]); n["ilp_min_lo_add"], n["ilp_min_hi_add"] = fmt(min(fmins)), fmt(max(fmins))
+    # base = คลังก่อนเพิ่มรายการ coverage track (DEC-46) ใช้กับย่อหน้าวินิจฉัยในหัวข้อ 3.2 เพื่อไม่ให้ตัวเลขเปลี่ยนเมื่อผู้วิจัยยืนยันรายการ
+    base = dg["scenarios"].get("before_track", dg["scenarios"]["current"])
+    cur, fut = dg["scenarios"]["current"], dg["scenarios"]["additions_confirmed"]
+    n["ilp_max_cov_now"] = fmt(cur["totals"]["ilp"])
+    wia = J("evidence", "coverage_whatif.json")["scenarios"]
+    n["cov_plan_cf"] = fmt(wia["current"]["coverage_first"]["primary_6m10h_both"]["covered"])
+    mins = [r["ilp_min_hours_all"] for r in base["roles"]]; fmins = [r["ilp_min_hours_all"] for r in fut["roles"]]
+    n["ilp_min_lo"], n["ilp_min_hi"] = fmt(min(mins)), fmt(max(mins)); n["ilp_fit_roles"] = fmt(sum(r["fits_Hmax"] for r in base["roles"]))
+    n["ilp_max_cov"] = fmt(base["totals"]["ilp"]); n["ilp_min_lo_add"], n["ilp_min_hi_add"] = fmt(min(fmins)), fmt(max(fmins))
     n["ilp_fit_roles_add"] = fmt(sum(r["fits_Hmax"] for r in fut["roles"]))
-    n["cause_hours"] = fmt(cur["totals"].get("cause_hours", 0)); n["cause_selection"] = fmt(cur["totals"].get("cause_selection", 0))
-    n["cause_no_item"] = fmt(cur["totals"].get("cause_no_item", 0))
+    n["cause_hours"] = fmt(base["totals"].get("cause_hours", 0)); n["cause_selection"] = fmt(base["totals"].get("cause_selection", 0))
+    n["cause_no_item"] = fmt(base["totals"].get("cause_no_item", 0))
     adds = pd.read_csv(os.path.join(ROOT, "data", "corpus_additions.csv"), dtype=str, keep_default_na=False)
     conf = adds.researcher_result.str.strip().str.upper().isin(["LIVE", "OK", "VERIFIED"])
     n["add_total"] = fmt(len(adds)); n["add_confirmed"] = fmt(int(conf.sum())); n["add_pending"] = fmt(int((~conf).sum()))
     n["add_hours_lo"] = fmt(adds.estimated_hours.astype(float).min()); n["add_hours_hi"] = fmt(adds.estimated_hours.astype(float).max())
     n["foundation_ext_maps"] = fmt((pd.read_csv(os.path.join(ROOT, "data", "corpus_change_log.csv"), dtype=str).change == "foundation_L1_extended").sum())
-    wi = J("evidence", "coverage_whatif.json")["scenarios"]["url_and_additions"][n["plan_strategy"]]["primary_6m10h_both"]["covered"]
+    wi = wia["additions_confirmed"][n["plan_strategy"]]["primary_6m10h_both"]["covered"]
     n["cov_whatif_plan"] = fmt(wi); n["cov_whatif_corpus"] = fmt(fut["totals"]["coverable"])
     if sim["corpus_coverage"] == 600 and cap[(6, 10)]["covered"] == 600:
         n["cov_status_note"] = "ทั้งสองตัวชี้วัดถึงเป้า 600 ข้อ"
@@ -91,7 +102,15 @@ def main():
         n["cov_status_note"] = (f"ยังไม่ถึงเป้า เพราะรายการเรียนรู้ใหม่ {n['add_pending']} รายการยังรอผู้วิจัยเปิดตรวจยืนยัน "
                                 f"ระบบจึงยังไม่นับรายการเหล่านี้ เมื่อยืนยันครบ การจำลองชุดเดียวกันให้ความครอบคลุมของคลัง "
                                 f"{n['cov_whatif_corpus']} ข้อ และของแผนจำลอง {n['cov_whatif_plan']} ข้อ")
-    trow = ["| อาชีพ | ข้อที่มีรายการรองรับ | แผนจำลองครอบคลุม | ชั่วโมงของแผน | ชั่วโมงขั้นต่ำเพื่อครบทุกข้อ (ILP) |", "|---|---|---|---|---|"]
+    m12, m18, m24 = (int(mon[x]["covered"]) for x in (12, 18, 24))
+    n["cov_24m_note"] = (f"เมื่อเรียน 10 ชั่วโมงต่อสัปดาห์ แผน 12 18 และ 24 เดือนครอบคลุม {fmt(m12)} {fmt(m18)} และ {fmt(m24)} ข้อตามลำดับ"
+                         + (" ข้อที่ยังขาดที่ 24 เดือนคือข้อที่คลังไม่มีรายการรองรับ" if m24 == int(sim["corpus_coverage"]) and m24 < 600 else ""))
+    arow = ["| รหัส | รายการเรียนรู้ | ผู้ให้บริการ | ชั่วโมง | องค์ประกอบ O*NET | สถานะ |", "|---|---|---|---|---|---|"]
+    for a, ok in zip(adds.itertuples(), conf):
+        arow.append(f"| {a.key} | {a.title} | {a.provider} | {fmt(float(a.estimated_hours))} | {a.elements.replace('|', ', ')} | "
+                    + ("ผู้วิจัยยืนยันแล้ว" if ok else "รอผู้วิจัยตรวจ") + " |")
+    n["additions_table"] = "\n".join(arow)
+    trow = ["| อาชีพ | ข้อที่มีรายการรองรับ | แผนจำลองครอบคลุม (ข้อ) | ชั่วโมงของแผน | ชั่วโมงขั้นต่ำเพื่อครบทุกข้อ (ILP) |", "|---|---|---|---|---|"]
     per = {r["role_id"]: r for r in sim["primary_6m10h_both"]["per_role"]}
     for r in cur["roles"]:
         trow.append(f"| {r['role_id']} | {r['coverable']} | {per[r['role_id']]['covered']} | {per[r['role_id']]['hours']:,.0f} | {r['ilp_min_hours_all']:,.0f} |")
@@ -107,6 +126,96 @@ def main():
     import re as _re
     tr = open(os.path.join(ROOT, "evidence", "WF_analysis.md"), encoding="utf-8").read().split("## 2 · Traceability")[1].split("\n## ")[0]
     n["trace_rows"] = fmt(len([l for l in tr.split("\n") if l.startswith("| ") and not l.startswith("| ช่วง")]))
+    # ---------- ตัวอย่างเดินเรื่อง กรณี A (เรซูเมสังเคราะห์) ----------
+    ra = os.path.join(ROOT, "evidence", "run_local", "case_A")
+    da = pd.read_csv(os.path.join(ra, "decisions.csv")); pa = pd.read_csv(os.path.join(ra, "plan_items.csv")); sa = J("evidence", "run_local", "case_A", "summary.json")
+    vc = da.final_status.value_counts()
+    n.update(cA_ev=fmt(int(vc.get("evidenced", 0))), cA_pa=fmt(int(vc.get("partially", 0))), cA_mi=fmt(int(vc.get("missing", 0))),
+             cA_gaps=fmt(sa["gaps"]), cA_claims=fmt(sa["n_claims"]), cA_overcap=fmt(sa["uncovered_over_capacity"]), cA_pii=fmt(sa["pii_masked"]),
+             cA_Hmax=f"{sa['Hmax']:.1f}", cA_run_id=sa["run_id"])
+    pr = da[da.requirement_id == "REQ-R01-2.B.3.e"].iloc[0]
+    n.update(cA_prog_s=fmt(int(pr.evidence_char_start)), cA_prog_e=fmt(int(pr.evidence_char_end)), cA_prog_agree=f"{pr.agreement_level:.2f}")
+    t = ["| ลำดับ | รายการเรียนรู้ | ชั่วโมง | ชั่วโมงสะสม | ช่องว่างที่ครอบคลุมเพิ่ม |", "|---|---|---|---|---|"]
+    for r in pa.itertuples(): t.append(f"| {r.rank} | {r.title} ({r.item_id}) | {r.estimated_hours:,.0f} | {r.cumulative_hours:,.0f} | {r.n_new_requirements} |")
+    n["cA_plan_table"] = "\n".join(t)
+    t = ["| รายการ | กรณี A | กรณี B | กรณี C |", "|---|---|---|---|"]
+    lab = [("อาชีพเป้าหมาย", None), ("โมเดลที่ใช้ได้ (m)", "m"), ("ข้อที่ระบบสรุปได้ จาก 30", "decided"), ("ข้อที่ตรงเฉลย จากข้อที่สรุปได้", "correct"),
+           ("คะแนน R", "R"), ("สัดส่วน C", "C"), ("ข้อสรุปที่ไม่ผ่านเกณฑ์ตรวจหลักฐาน", "U"), ("รายการในแผน", "items"), ("ชั่วโมงของแผน", "hours"), ("ความครอบคลุมช่องว่างของแผน", "gapcov")]
+    roles_ = {k: J("synthetic", f"case_{k}", "meta.json")["role_id"] for k in "ABC"}
+    for th, key in lab:
+        t.append(f"| {th} | " + " | ".join(roles_[k] if key is None else n[f"c{k}_{key}"] for k in "ABC") + " |")
+    n["synthetic_table"] = "\n".join(t)
+    # ---------- ตารางที่สร้างจากไฟล์ข้อมูล ----------
+    R = J("data", "roles.json")["roles"]; rq = pd.read_csv(os.path.join(ROOT, "data", "requirements.csv"), dtype=str, keep_default_na=False)
+    TRK = {"software": "ซอฟต์แวร์", "data": "ข้อมูล", "analytics": "วิเคราะห์ธุรกิจ", "security": "ความมั่นคงปลอดภัย", "network": "เครือข่าย", "cloud": "คลาวด์", "management": "บริหาร"}
+    t = ["| รหัส | อาชีพเป้าหมาย | รหัส SOC | สายงาน | การเทียบรหัส |", "|---|---|---|---|---|"]
+    for r in R: t.append(f"| {r['role_id']} | {r['role_name_th']} | {r['soc_code']} | {TRK.get(r['track'], r['track'])} | {'ตรงรหัส' if r['mapping_type'] == 'exact' else 'ใกล้เคียง'} |")
+    n["roles_table"] = "\n".join(t); n["roles_proxy"] = fmt(sum(r["mapping_type"] != "exact" for r in R)); n["roles_proxy_ids"] = " ".join(r["role_id"] for r in R if r["mapping_type"] != "exact")
+    t = ["| รหัส | อาชีพเป้าหมาย | ชื่อใน O*NET | เหตุผลของการเทียบ |", "|---|---|---|---|"]
+    for r in R:
+        if r["mapping_type"] != "exact": t.append(f"| {r['role_id']} {r['soc_code']} | {r['target_role']} | {r['onet_title']} | {term_th(r['mapping_rationale_th'])} |")
+    n["soc_proxy_table"] = "\n".join(t)
+    dom = rq.domain.value_counts()
+    t = ["| โดเมน | กลุ่มรหัสใน O*NET | จำนวนข้อกำหนดอ้างอิง | สัดส่วน |", "|---|---|---|---|"]
+    code = {"Work Activities": "4.A", "Essential Skills": "2.A", "Transferable Skills": "2.B", "Knowledge": "2.C"}
+    for d_ in ["Work Activities", "Essential Skills", "Transferable Skills", "Knowledge"]: t.append(f"| {d_} | {code[d_]} | {int(dom[d_]):,} | {dom[d_] / len(rq) * 100:.1f}% |")
+    t.append(f"| รวม | | {len(rq):,} | 100.0% |"); n["domain_table"] = "\n".join(t)
+    n.update({f"dom_{k.split()[0].lower()}": fmt(int(dom[k])) for k in code})
+    r1 = rq[rq.role_id == "R01"].copy(); r1["rk"] = r1.rank_in_role.astype(int); r1 = r1.sort_values("rk")
+    pick = pd.concat([r1[r1.domain == d_].head(2) for d_ in code]).sort_values("rk")
+    t = ["| รหัสข้อกำหนดอ้างอิง | โดเมน | องค์ประกอบ | IM | น้ำหนัก | ตัวอย่างคำพ้อง |", "|---|---|---|---|---|---|"]
+    for r in pick.itertuples(): t.append(f"| {r.requirement_id} | {r.domain} | {r.element_name} | {float(r.importance_im):.2f} | {float(r.weight_renormalized):.4f} | {', '.join(r.element_aliases.split('|')[:3])} |")
+    n["req_r01_table"] = "\n".join(t)
+    ws = [r["weight_share_of_pool"] for r in R]; n["wsp_min"], n["wsp_max"] = f"{min(ws):.4f}", f"{max(ws):.4f}"
+    SH = J("config", "sheets.json")["tabs"]
+    GRP = {"operational": "ผลการทำงาน", "evaluation": "การประเมิน", "reference": "ข้อมูลอ้างอิง", "google_forms": "Google Forms เขียน"}
+    USE = {"runs": "หนึ่งแถวต่องาน สถานะและสรุปผล", "ocr_results": "บริการอ่านข้อความ จำนวนจุดที่ปิดบัง ค่าแฮช", "model_calls": "การเรียกโมเดลทุกครั้งรวมครั้งที่ล้ม",
+           "findings": "ข้อสรุปรายโมเดลและผลกฎ R2 R3", "decisions": "สถานะสุดท้ายรายข้อกำหนดอ้างอิงและหลักฐาน", "plan_items": "รายการในแผนตามลำดับ", "deliveries": "ผลการส่งรายงาน",
+           "audit_log": "เหตุการณ์ของระบบ", "ground_truth": "ชุดคำตอบอ้างอิงของผู้ให้รหัสสองคน", "pathway_review": "ผลตรวจแผนของผู้ประเมิน",
+           "ref_roles": "อาชีพ 20 อาชีพ", "ref_requirements": "ข้อกำหนดอ้างอิง 600 ข้อพร้อมคำพ้อง", "ref_corpus": "คลังรายการเรียนรู้", "ref_mappings": "ความเชื่อมโยงพร้อมสถานะการตรวจ",
+           "form_responses": "คำตอบแบบฟอร์มรับเรซูเม", "evaluation_responses": "คำตอบแบบประเมินของผู้เข้าร่วม"}
+    t = ["| แท็บ | กลุ่ม | คอลัมน์ | เก็บอะไร |", "|---|---|---|---|"]
+    for k, v in SH.items(): t.append(f"| {k} | {GRP.get(v['group'], v['group'])} | {len(v['columns'])} | {USE.get(k, '')} |")
+    n["tabs_table"] = "\n".join(t); n["tabs_total"] = fmt(len(SH)); n["tabs_operational"] = fmt(sum(v["group"] == "operational" for v in SH.values()))
+    t = []
+    for k, v in SH.items():
+        t.append(f"**แท็บ {k}** ({GRP.get(v['group'], v['group'])} · เขียนแบบ {v['write_mode']}) คอลัมน์: " + ", ".join(v["columns"]))
+    n["data_dictionary"] = "\n\n".join(t)
+    PC = J("config", "project.json"); MC = J("config", "models.json")["defaults"]
+    rowsC = [("requirements_per_role", PC["requirements_per_role"], "ข้อกำหนดอ้างอิงต่ออาชีพ"), ("max_file_bytes", f"{PC['max_file_bytes']:,}", "ขนาดไฟล์สูงสุด (ไบต์)"), ("max_pages", PC["max_pages"], "จำนวนหน้าสูงสุด"),
+             ("text_layer_min_chars", PC["text_layer_min_chars"], "อักขระขั้นต่ำที่ถือว่า PDF มีชั้นข้อความ"), ("theta", PC["theta"], "เกณฑ์คะแนน ov ของกฎ R3"), ("overlap_denominator_cap", PC["overlap_denominator_cap"], "เพดานตัวหารของ ov"),
+             ("alias_min_length", PC["alias_min_length"], "ความยาวคำพ้องขั้นต่ำ (อักขระ)"), ("min_usable_models", PC["min_usable_models"], "โมเดลที่ใช้ได้ขั้นต่ำ"), ("weeks_per_month", PC["weeks_per_month"], "สัปดาห์ต่อเดือนในสมการ Hmax"),
+             ("allowed_months", " / ".join(map(str, PC["allowed_months"])), "กรอบเวลาที่เลือกได้ (เดือน)"), ("max_hours_per_week", PC["max_hours_per_week"], "ชั่วโมงต่อสัปดาห์สูงสุด"), ("plan_strategy", PC["plan_strategy"], "วิธีเลือกรายการเรียนรู้"),
+             ("min_approved_share_of_L1", PC["min_approved_share_of_L1"], "สัดส่วน L1 ที่ต้องผ่านตรวจขั้นต่ำ"), ("retention_days", PC["retention_days"], "วันเก็บข้อมูลหลังส่งผล"),
+             ("temperature", MC["temperature"], "ค่าความสุ่มของโมเดล (รอทดสอบเชื่อมต่อ)"), ("max_output_tokens", f"{MC['max_output_tokens']:,}", "ความยาวผลตอบกลับสูงสุด (token)"), ("timeout_ms", f"{MC['timeout_ms']:,}", "เวลารอต่อการเรียก (มิลลิวินาที)"),
+             ("max_attempts", MC["max_attempts"], "จำนวนครั้งที่เรียกซ้ำเมื่อ 429 หรือหมดเวลา")]
+    t = ["| พารามิเตอร์ | ค่า | ความหมาย |", "|---|---|---|"] + [f"| {a} | {b} | {c} |" for a, b, c in rowsC]
+    n["config_table"] = "\n".join(t)
+    n["theta"] = str(PC["theta"]); n["retention_days"] = fmt(PC["retention_days"]); n["deletion_contact"] = PC["deletion_contact"]
+    wfj = J("workflows", "WF_IS68076026.json"); secn = {}
+    for i, s_ in enumerate(wfj["meta"]["is68"]["sections"], 1):
+        for x in s_["nodes"]: secn[x] = f"{i} {s_['th']}"
+    TY = {"code": "Code", "googleSheets": "Google Sheets", "googleSheetsTrigger": "Google Sheets Trigger", "if": "IF", "splitInBatches": "Loop Over Items", "googleDrive": "Google Drive",
+          "extractFromFile": "Extract From File", "httpRequest": "HTTP Request", "merge": "Merge", "gmail": "Gmail", "errorTrigger": "Error Trigger"}
+    t = ["| ช่วง | โหนด | ชนิด | สิ่งที่โหนดอ่านหรือเขียน |", "|---|---|---|---|"]
+    for nd in wfj["nodes"]:
+        if nd["type"].endswith("stickyNote"): continue
+        ty = nd["type"].split(".")[-1]; pr = nd.get("parameters", {}); what = ""
+        if ty == "code":
+            import re as _r; m_ = _r.search(r"NODE GLUE: (workflows/src/[\w.]+)", pr.get("jsCode", "")); what = m_.group(1).replace("workflows/src/", "") if m_ else ""
+            if "ENGINE BEGIN" in pr.get("jsCode", ""): what += " + engine.js"
+        elif ty in ("googleSheets",): what = f"แท็บ {pr['sheetName']['value']} ({pr['operation']})"
+        elif ty == "googleSheetsTrigger": what = "แท็บ form_responses (แถวใหม่ ทุก 1 นาที)"
+        elif ty == "httpRequest" and "documentai" in pr.get("url", ""): what = "Google Document AI processor (:process)"
+        elif ty == "httpRequest": what = pr.get("url", "").replace("=", "", 1).split("?")[0].split("{{")[0][:60] or "LOCAL_OCR_URL"
+        elif ty == "if": what = "เงื่อนไข " + pr["conditions"]["conditions"][0]["leftValue"].replace("={{ $json.", "").replace(" }}", "")
+        elif ty == "googleDrive": what = pr.get("operation", "")
+        elif ty == "gmail": what = "ส่งอีเมล"
+        elif ty == "merge": what = "รอทุกขาเข้า"
+        elif ty == "splitInBatches": what = f"ทีละ {pr.get('batchSize')} งาน"
+        elif ty == "extractFromFile": what = "ชั้นข้อความของ PDF"
+        t.append(f"| {secn.get(nd['name'], '')} | {nd['name']} | {TY.get(ty, ty)} | {what} |")
+    n["wf_node_table"] = "\n".join(t)
     rows = ["| ไฟล์ | จำนวนแถว | SHA-256 |", "|---|---|---|"]
     for f, v in man["files"].items(): rows.append(f"| {f} | {v['rows']:,} | {v['sha256']} |")
     n["manifest_table"] = "\n".join(rows)

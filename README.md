@@ -45,15 +45,19 @@ Final_IS/
 python scripts/build_data_all.py       # data/ + sheets_import/ + manifest จาก source/
 bash   scripts/run_all_checks.sh       # manifest · run_local · coverage · workflows · tests · analysis · numbers
 node   scripts/build_workflows.mjs     # สร้าง workflow ใหม่หลังแก้ engine หรือ workflows/src
-python scripts/build_book.py           # เล่ม -> build/IS_68076026_latest.docx
+python scripts/book_numbers.py         # book/numbers.json
+python scripts/build_book.py           # เล่ม -> build/IS_68076026_Final_<DDMMMYY>.docx
+python scripts/export_pdf.py           # PDF (อัปเดตสารบัญด้วย LibreOffice)
+python scripts/check_docx_format.py && python scripts/check_overlap.py   # QA เล่ม
 ```
 
 ## สถานะ (1 ต.ค. 2569)
 | ส่วน | สถานะ |
 |---|---|
 | ข้อมูลอ้างอิง | ✅ สร้างแล้ว · ⏳ URL 28 รายการ (36 แถว) รอผู้วิจัยตรวจด้วยตา |
-| engine + tests | ✅ 46/46 · analysis 8/8 |
-| workflow 5 ไฟล์ | ✅ validator ผ่าน · ⏳ S6 ทดสอบใน n8n จริง |
-| เล่ม | ✅ Markdown + docx · ⏳ อาจารย์ยืนยัน D1/D4 · ตรวจหน้าตาใน Word |
+| engine + tests | ✅ 61/61 · analysis 8/8 |
+| workflow | ✅ `WF_IS68076026.json` 63 โหนด validator ผ่าน (DEC-42) · ⏳ ทดสอบใน n8n จริง |
+| ความครอบคลุม 600 | ⏳ คลัง 598/600 · แผนจำลอง 538/600 · รอผู้วิจัยยืนยันรายการใหม่ 14 รายการ (DEC-46) → จำลองได้ 600/600 |
+| เล่ม Final | ✅ เขียนใหม่ทั้งเล่ม · `build/IS_68076026_Final_01OCT26.docx/.pdf` 74 หน้า · QA ผ่าน (`evidence/QA_Final_01OCT26.md`) |
 | จริยธรรม | ✅ ร่าง 6 ไฟล์ · ⏳ ผู้วิจัยกรอกช่อง ⚠ → อาจารย์ตรวจ → ยื่น |
 | backup | ⏳ ต้องสร้าง GitHub private + push (NEXT_STEPS ข้อ 2–3) |

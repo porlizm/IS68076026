@@ -2,7 +2,7 @@
 // ใช้ buildPlan ของ engine ตัวเดียวกับระบบ · ผลใช้ใน book/numbers.json และ evidence/
 //   node scripts/simulate_coverage.mjs                       -> evidence/coverage_simulation.json (ข้อมูลจริง)
 //   node scripts/simulate_coverage.mjs --what-if             -> evidence/coverage_whatif.json (สถานการณ์สมมติ ห้ามใช้เป็นผลในเล่ม)
-// สถานการณ์สมมติ: url = รายการรอตรวจ URL ผ่านทั้งหมด · add = รายการใน data/corpus_additions.csv ที่ผู้วิจัยยังไม่ยืนยันผ่านทั้งหมด
+// สถานการณ์: before_track = คลังก่อนเพิ่มรายการ coverage track (ฐานของการวินิจฉัยในเล่ม) · url = รายการรอตรวจ URL ผ่านทั้งหมด · add = รายการใน data/corpus_additions.csv ที่ผู้วิจัยยังไม่ยืนยันผ่านทั้งหมด
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, ENGINE as E, loadRefs, readCSV } from './lib/refs.mjs';
@@ -10,8 +10,12 @@ import { ROOT, ENGINE as E, loadRefs, readCSV } from './lib/refs.mjs';
 const refs = loadRefs();
 const APPROVED = 'source_checked_by_script';
 
-export function scenario(refs, { url = false, add = false } = {}) {
+export function scenario(refs, { url = false, add = false, base = false } = {}) {
   let corpus = refs.corpus; let mappings = refs.mappings;
+  if (base) { // ก่อนเพิ่มรายการ coverage track (DEC-46): ตัดรายการ batch v1.5_coverage_track ที่ยืนยันแล้วออก เพื่อให้ตัวเลขวินิจฉัยในเล่มคงที่
+    const drop = new Set(corpus.filter((c) => c.batch === 'v1.5_coverage_track').map((c) => c.item_id));
+    corpus = corpus.filter((c) => !drop.has(c.item_id)); mappings = mappings.filter((m) => !drop.has(m.item_id));
+  }
   if (url) {
     corpus = corpus.map((c) => ({ ...c, verification_status: 'verified' }));
     const rv = new Map(refs.review.map((r) => [r.map_id, r]));
@@ -60,7 +64,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(im
   const strategy = refs.projectCfg.plan_strategy || 'weighted_greedy';
   if (process.argv.includes('--what-if')) {
     const res = { note: 'สถานการณ์สมมติเพื่อวางแผน (ห้ามรายงานเป็นผลในเล่ม)', corpus_version: refs.manifest.corpus_version, scenarios: {} };
-    for (const [name, opt] of Object.entries({ current: {}, url_verified: { url: true }, additions_confirmed: { add: true }, url_and_additions: { url: true, add: true } })) {
+    for (const [name, opt] of Object.entries({ before_track: { base: true }, current: {}, url_verified: { url: true }, additions_confirmed: { add: true }, url_and_additions: { url: true, add: true } })) {
       const sc = scenario(refs, opt);
       res.scenarios[name] = {};
       for (const st of E.PLAN_STRATEGIES) res.scenarios[name][st] = run(sc, st);

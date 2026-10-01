@@ -1,20 +1,28 @@
 # LOG: IS 68076026 (บันทึกความคืบหน้าและจุดทำต่อ)
 
 > ไฟล์นี้คือจุดเริ่มของทุก session ให้อ่านหัวข้อ **ทำต่อจากตรงนี้** ก่อน
-> อัปเดตล่าสุด: 1 ต.ค. 2569 · ระยะปัจจุบัน: **R0 backup + E จริยธรรม + รอยืนยันจากอาจารย์** (D, S1–S5, B1–B4, I สร้างเสร็จแล้ว)
+> อัปเดตล่าสุด: 1 ต.ค. 2569 · ระยะปัจจุบัน: **เล่ม Final เสร็จ (gate-book) · รอ G-600 จากการยืนยันรายการของผู้วิจัย + ทดสอบ n8n จริง + จริยธรรม**
 > ประวัติถึง 23 ก.ย. อยู่ใน Project `claude/LOG_Final_IS.md`
 
 ---
 
 ## ▶ ทำต่อจากตรงนี้
 
-1. 👤 ยืนยันรายการใหม่ 14 รายการ + URL ค้าง (ดู `evidence/coverage_600_01OCT26.md`)
-2. 👤🤖 ทดสอบ `WF_IS68076026.json` ใน n8n 2.39.9 ตาม `evidence/n8n_test_01OCT26.md`
-3. 🤖 Phase 3 · เขียนเล่มใหม่
+1. 👤 ทำ NEXT_STEPS ขั้น 0 (F1–F3): ยืนยันรายการใหม่ 14 รายการ, URL 28 รายการ, DEC-45
+2. 🤖 F4: รันสร้างข้อมูลและเล่มใหม่ → Gate G-600 → tag `gate-600`
+3. 👤🤖 F5: ทดสอบ workflow ใน n8n จริง แล้วแทน [รอข้อมูล] ในหัวข้อ 3.6.3
 
 ---
 
 ## ประวัติ session
+
+### 1 ต.ค. 2569 · Phase 3–5 Final_IS (Prompt_Report v2.0)
+
+- **ทำ** เขียนเล่มใหม่ทั้งเล่ม `book/00_front.md`–`05_appendix.md` จาก fact sheet + numbers.json (DEC-44) · เอกสารอ้างอิง 23 รายการ ตรวจมีจริง (IEEE ตามลำดับอ้าง) · เพิ่ม key `cov_24m_note`, `cov_plan_cf`, `ilp_max_cov_now`, `additions_table` และฉาก `before_track` ใน simulate_coverage/coverage_diagnostics ให้ย่อหน้าวินิจฉัยคงที่หลังผู้วิจัยยืนยันรายการ
+- **สคริปต์ใหม่** `build_book.py` (เขียนใหม่ตามหัวข้อ 9 · section ต่อบท · ฝังฟอนต์ · สมการตาราง 1×3 · ความกว้างคอลัมน์ตามข้อความ) · `export_pdf.py` (LibreOffice UNO อัปเดตสารบัญ) · `check_docx_format.py` (33 ข้อ) · `check_overlap.py` (≥ 40 อักขระ) · `source_trace.py`
+- **พบ** ความซ้ำกับเล่มเดิมรอบแรก 195 จุด → เขียนต้นทางใหม่จนเหลือ 0 (ข้อยกเว้นมีเหตุผล 24 ช่วง: คำถามวิจัย/วัตถุประสงค์ แบบประเมิน ข้อความจาก roles.json) · ผู้อ่านทดสอบชี้ว่า 0.967 ในบทคัดย่อชวนเข้าใจผิด → ลบ · ขยายนิยามความครอบคลุมในหัวข้อ 1.6
+- **ผล** `build/IS_68076026_Final_01OCT26.docx` + `.pdf` 74 หน้า · format 33/33 · overlap 0 · tests 61/61 · `evidence/QA_Final_01OCT26.md`, `evidence/Source_Trace.md`
+- **ค้าง** G-600 ยังไม่ผ่าน (598/538) รอ 👤 ยืนยันรายการใหม่ 14 + URL 28 · ผล n8n จริง · IOC
 
 ### 1 ต.ค. 2569 · Session 12 · Phase 2 workflow เดียว WF_IS68076026
 **ทำอะไร** `buildSingle` → `workflows/WF_IS68076026.json` 63 โหนด 7 ช่วง · `validateSingle` + `check_traceability.mjs` (32 แถว ครอบคลุม 63/63 โหนด) · `tests/single_workflow.test.mjs` (A/B/C ตรง engine · สองแถวต่อ poll · ล้มกลางลูป · โมเดลล้มครบ · อัปโหลดล้มแต่อีเมลสำเร็จ · ไฟล์เกินขนาด/หน้า · ไม่ยินยอม · ชั้นข้อความ) · tests 61/61 · ย้าย WF_Final_IS ไป archive · `evidence/WF_analysis.md` · `evidence/n8n_test_01OCT26.md` (⏳) · ฟอนต์ TH Sarabun New ใน `assets/fonts/` (ผู้วิจัยอนุญาตดาวน์โหลด) · รูป 3 รูปจาก workflow จริง

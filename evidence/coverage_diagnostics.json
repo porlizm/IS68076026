@@ -2,13 +2,287 @@
  "Hmax": 259.8,
  "strategy": "weighted_greedy",
  "scenarios": {
+  "before_track": {
+   "totals": {
+    "plan": 538,
+    "ilp": 549,
+    "coverable": 598,
+    "cause_selection": 17,
+    "cause_hours": 43,
+    "cause_no_item": 2
+   },
+   "roles": [
+    {
+     "role_id": "R01",
+     "plan_covered": 25,
+     "ilp_max_covered": 26,
+     "ilp_min_hours_all": 501.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R01-2.B.3.b": "selection",
+      "REQ-R01-2.B.4.e": "selection",
+      "REQ-R01-2.B.4.h": "selection",
+      "REQ-R01-2.C.4.a": "hours",
+      "REQ-R01-4.A.1.a.2": "hours"
+     }
+    },
+    {
+     "role_id": "R02",
+     "plan_covered": 28,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 677.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R02-2.B.3.a": "hours",
+      "REQ-R02-2.C.4.a": "hours"
+     }
+    },
+    {
+     "role_id": "R03",
+     "plan_covered": 26,
+     "ilp_max_covered": 26,
+     "ilp_min_hours_all": 437.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R03-2.B.3.m": "hours",
+      "REQ-R03-2.C.4.a": "hours",
+      "REQ-R03-4.A.2.a.3": "hours",
+      "REQ-R03-4.A.3.b.6": "hours"
+     }
+    },
+    {
+     "role_id": "R04",
+     "plan_covered": 29,
+     "ilp_max_covered": 29,
+     "ilp_min_hours_all": 332.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R04-2.C.3.a": "hours"
+     }
+    },
+    {
+     "role_id": "R05",
+     "plan_covered": 25,
+     "ilp_max_covered": 27,
+     "ilp_min_hours_all": 505.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R05-2.B.3.e": "hours",
+      "REQ-R05-2.B.4.e": "selection",
+      "REQ-R05-2.C.1.e": "selection",
+      "REQ-R05-2.C.3.a": "hours",
+      "REQ-R05-4.A.2.a.1": "hours"
+     }
+    },
+    {
+     "role_id": "R06",
+     "plan_covered": 28,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 370.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R06-2.B.4.e": "hours",
+      "REQ-R06-4.A.2.b.2": "hours"
+     }
+    },
+    {
+     "role_id": "R07",
+     "plan_covered": 24,
+     "ilp_max_covered": 26,
+     "ilp_min_hours_all": 430.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R07-2.B.4.g": "hours",
+      "REQ-R07-2.B.4.h": "hours",
+      "REQ-R07-4.A.2.a.3": "selection",
+      "REQ-R07-4.A.2.b.2": "hours",
+      "REQ-R07-4.A.2.b.4": "hours",
+      "REQ-R07-4.A.3.b.6": "selection"
+     }
+    },
+    {
+     "role_id": "R08",
+     "plan_covered": 28,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 467.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R08-2.C.3.b": "hours",
+      "REQ-R08-2.C.3.c": "hours"
+     }
+    },
+    {
+     "role_id": "R09",
+     "plan_covered": 25,
+     "ilp_max_covered": 25,
+     "ilp_min_hours_all": 727.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R09-2.A.1.e": "hours",
+      "REQ-R09-2.C.1.a": "hours",
+      "REQ-R09-4.A.2.a.3": "hours",
+      "REQ-R09-4.A.2.b.2": "hours",
+      "REQ-R09-4.A.3.b.1": "hours"
+     }
+    },
+    {
+     "role_id": "R10",
+     "plan_covered": 26,
+     "ilp_max_covered": 26,
+     "ilp_min_hours_all": 452.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R10-2.B.4.e": "hours",
+      "REQ-R10-2.C.9.a": "hours",
+      "REQ-R10-4.A.2.b.2": "hours",
+      "REQ-R10-4.A.3.b.6": "hours"
+     }
+    },
+    {
+     "role_id": "R11",
+     "plan_covered": 25,
+     "ilp_max_covered": 26,
+     "ilp_min_hours_all": 622.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R11-2.A.2.d": "hours",
+      "REQ-R11-2.B.4.g": "hours",
+      "REQ-R11-2.C.1.a": "hours",
+      "REQ-R11-2.C.3.b": "selection",
+      "REQ-R11-2.C.9.a": "hours"
+     }
+    },
+    {
+     "role_id": "R12",
+     "plan_covered": 29,
+     "ilp_max_covered": 29,
+     "ilp_min_hours_all": 322.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R12-2.B.4.h": "hours"
+     }
+    },
+    {
+     "role_id": "R13",
+     "plan_covered": 27,
+     "ilp_max_covered": 27,
+     "ilp_min_hours_all": 536.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R13-2.B.4.h": "hours",
+      "REQ-R13-2.C.3.b": "hours",
+      "REQ-R13-2.C.9.a": "hours"
+     }
+    },
+    {
+     "role_id": "R14",
+     "plan_covered": 27,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 296.0,
+     "fits_Hmax": false,
+     "coverable": 29,
+     "uncovered": {
+      "REQ-R14-2.B.4.g": "selection",
+      "REQ-R14-4.A.1.a.2": "selection",
+      "REQ-R14-4.A.3.b.5": "no_item"
+     }
+    },
+    {
+     "role_id": "R15",
+     "plan_covered": 29,
+     "ilp_max_covered": 29,
+     "ilp_min_hours_all": 312.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R15-4.A.2.a.3": "hours"
+     }
+    },
+    {
+     "role_id": "R16",
+     "plan_covered": 28,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 351.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R16-2.B.3.a": "hours",
+      "REQ-R16-2.B.4.h": "hours"
+     }
+    },
+    {
+     "role_id": "R17",
+     "plan_covered": 28,
+     "ilp_max_covered": 29,
+     "ilp_min_hours_all": 322.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R17-2.B.4.h": "hours",
+      "REQ-R17-2.C.9.a": "selection"
+     }
+    },
+    {
+     "role_id": "R18",
+     "plan_covered": 27,
+     "ilp_max_covered": 28,
+     "ilp_min_hours_all": 285.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R18-2.B.4.e": "selection",
+      "REQ-R18-2.B.4.h": "selection",
+      "REQ-R18-2.C.3.a": "selection"
+     }
+    },
+    {
+     "role_id": "R19",
+     "plan_covered": 28,
+     "ilp_max_covered": 29,
+     "ilp_min_hours_all": 285.0,
+     "fits_Hmax": false,
+     "coverable": 30,
+     "uncovered": {
+      "REQ-R19-2.C.3.a": "selection",
+      "REQ-R19-4.A.1.a.2": "selection"
+     }
+    },
+    {
+     "role_id": "R20",
+     "plan_covered": 26,
+     "ilp_max_covered": 27,
+     "ilp_min_hours_all": 606.0,
+     "fits_Hmax": false,
+     "coverable": 29,
+     "uncovered": {
+      "REQ-R20-2.B.1.b": "hours",
+      "REQ-R20-4.A.2.a.1": "no_item",
+      "REQ-R20-4.A.3.b.1": "selection",
+      "REQ-R20-4.A.4.b.1": "hours"
+     }
+    }
+   ]
+  },
   "current": {
    "totals": {
     "plan": 538,
     "ilp": 549,
     "coverable": 598,
-    "cause_hours": 43,
     "cause_selection": 17,
+    "cause_hours": 43,
     "cause_no_item": 2
    },
    "roles": [
@@ -281,8 +555,8 @@
     "plan": 540,
     "ilp": 550,
     "coverable": 599,
-    "cause_hours": 43,
     "cause_selection": 16,
+    "cause_hours": 43,
     "cause_no_item": 1
    },
    "roles": [

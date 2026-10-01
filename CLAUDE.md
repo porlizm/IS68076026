@@ -18,7 +18,7 @@
 | เรื่อง | ไฟล์ |
 |---|---|
 | สเปกระบบและเล่มฉบับขอสอบ | `docs/baseline/IS_68076026_ExamSubmission_21SEP26.pdf` (read-only · sha256 ใน `docs/baseline/SHA256.txt`) |
-| เล่มฉบับแก้ | `book/*.md` (ต้นฉบับ) → `scripts/build_book.py` → `build/*.docx` |
+| เล่ม Final (DEC-44) | `book/*.md` (ต้นฉบับ · เขียนใหม่ 1 ต.ค. 2569) → `scripts/build_book.py` → `build/IS_68076026_Final_<DDMMMYY>.docx` → `scripts/export_pdf.py` → `.pdf` |
 | ข้อมูลอ้างอิง | `data/` สร้างด้วย `scripts/build_data_all.py` จาก `source/` เท่านั้น |
 | ตรรกะ | `engine/engine.js` (ไฟล์เดียว ฝังลง workflow) |
 | ค่าควบคุม | `config/project.json`, `config/models.json`, `config/sheets.json` |
@@ -46,11 +46,13 @@
 ## คำสั่งตรวจ
 ```
 bash scripts/run_all_checks.sh                 # ทั้งหมด
-node --test tests/*.test.mjs                   # engine + data + workflow + WF_Final_IS (51)
-node scripts/validate_workflows.mjs            # workflow 5 ไฟล์ + WF_Final_IS (DEC-37)
+node --test tests/*.test.mjs                   # engine + data + workflow เดียว (61)
+node scripts/validate_workflows.mjs            # WF_IS68076026 (DEC-42) · 63 โหนด
 python -m unittest discover -s analysis/tests -t .   # analysis (8)
-python scripts/build_book.py --check           # เล่ม: ไม่มี placeholder ค้าง ภาพ/สมการครบ
-python scripts/check_book_vs_pdf.py            # รายงานจุดที่ต่างจากฉบับขอสอบ
+python scripts/build_book.py --check           # เล่ม: ไม่มี {{key}}/[@key] ค้าง ภาพ/สมการ/อ้างอิงครบ
+python scripts/check_docx_format.py            # รูปแบบตาม Prompt_Report หัวข้อ 9–10 (33 ข้อ)
+python scripts/check_overlap.py                # ความซ้ำกับเล่มเดิม ≥ 40 อักขระ ต้อง 0
+python scripts/source_trace.py                 # evidence/Source_Trace.md
 ```
 
 ## สไตล์เอกสาร
