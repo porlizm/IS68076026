@@ -8,15 +8,17 @@
 
 ## ▶ ทำต่อจากตรงนี้
 
-1. 👤 สร้าง GitHub private repo แล้ว `git remote add origin … && git push -u origin main --tags` (NEXT_STEPS ข้อ 2–3)
-2. 👤 ตรวจ URL 28 รายการใน `data/url_manual_check.csv` → `python scripts/build_data_all.py` → `bash scripts/run_all_checks.sh` (ข้อ 16)
-3. 👤 ส่งอีเมล `docs/Advisor_Email_D0-D5.md` + แนบเล่ม docx และร่างจริยธรรม (ข้อ 7–8)
-4. 👤 กรอกช่อง ⚠ ในเอกสาร `docs/ethics/` + อบรมจริยธรรม (ข้อ 9, 13)
-5. 👤🤖 S6 ทดสอบ `workflows/WF_Final_IS.json` (ไฟล์เดียว · DEC-37) ใน n8n 2.39.9 ตาม `docs/Setup_Guide.md` ข้อ 4–5 (ข้อ 25) แล้วตัดสินผลต่อเล่ม (ข้อ 25b)
+1. 🤖 Phase 1 · ข้อมูลอ้างอิงและการครอบคลุม 600 (ดู `Prompt_Report.md` v2.0 หัวข้อ 6)
+2. 👤 ข้อค้างเดิม: remote backup (NEXT_STEPS 2–3) · จริยธรรม (9, 13)
 
 ---
 
 ## ประวัติ session
+
+### 1 ต.ค. 2569 · Session 12 · Phase 0 ตาม Prompt_Report v2.0 (เขียนเล่มใหม่ทั้งหมด)
+**ทำอะไร** commit งานค้าง (pre-Phase-0) · DEC-40–44 · ย้ายร่างเล่มเดิม (`book/0*.md`, `book/figures/`, docx) ไป `archive/01OCT26/book_draft_v0/` + MOVE_LOG · สร้าง `book/00_fact_sheet.md` 180 ข้อ ทุกข้อมีแหล่งที่มา ยาวสุด 205 อักขระ
+**พบอะไร** git บนเครื่องลบ lock file ไม่ได้จนได้สิทธิ์ลบในโฟลเดอร์ (ให้สิทธิ์แล้วใน session นี้) · probe ILP: ภายใต้ Hmax 259.8 ชม. แม้เลือกแบบเหมาะที่สุดก็ครอบคลุมได้ราว 496/600 และชั่วโมงขั้นต่ำเพื่อครบ 30 ข้อต่ออาชีพอยู่ที่ 331–1,011 ชม. → ต้องเพิ่มรายการสั้นที่ครอบคลุมหลายข้อ (Phase 1)
+**Gate G0** ผ่าน · DEC ครบ · ร่างเดิมอยู่ใน archive · fact sheet ผ่านการตรวจ
 
 ### 1 ต.ค. 2569 · Session 11: Demo รอบที่ 1 สำหรับคณะกรรมการ (DEC-39)
 **ทำอะไร** `demo/WF_Demo.json` 28 โหนด: หน้าเว็บ glassmorphism (Light/Dark, ฟอร์ม 4 อาชีพ, 6/12/18/24 เดือน, ชม./สัปดาห์, อัปโหลด) → OCR (text layer / Gemini) → ปิดบัง PII → Gemini + R0·R2·R3 → แผน (3.7–3.8) → รายงาน + ดาวน์โหลด PDF + บันทึก Google Drive · ข้อมูลจริง hardcode (O*NET 31.0 + คลัง v1.5R verified) · เรซูเมสมมติ 4 อาชีพ + ไฟล์สแกนใน `demo/samples/` · คู่มือ `demo/README_Demo.md`
