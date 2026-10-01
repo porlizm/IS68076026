@@ -1,6 +1,6 @@
 {
  "schema": "report-v1.0",
- "engine_version": "engine-1.0.0-01OCT26",
+ "engine_version": "engine-1.1.0-01OCT26",
  "run_id": "RUN-20261001100000-84e93a84",
  "role_id": "R01",
  "role_name_th": "วิศวกรซอฟต์แวร์หรือนักพัฒนาซอฟต์แวร์",
@@ -712,5 +712,5 @@
   "decisions_sha256": "9a9fec0690bc6f2326d03b2460743a08312f9ead61b9a56139be478f2cf81a6c",
   "plan_sha256": "54f7269202bfa023a580dd4238416cf674ca3ef165e0a5ee24c35736654b7c4f"
  },
- "report_hash": "e4dff65b5b6db474d600f340e2db7f4bff13a35d4ade59ba1cda36298b821b19"
+ "report_hash": "ffe414f1303518be73a8e114b15d2d1c30df332a61d15311deb330f003238f57"
 }

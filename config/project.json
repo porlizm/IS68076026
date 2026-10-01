@@ -11,6 +11,8 @@
   "accepted_mime": [
     "application/pdf"
   ],
+  "text_layer_min_chars": 200,
+  "text_layer_note": "DEC-42 · ถ้าชั้นข้อความของ PDF มีอักขระที่ไม่ใช่ช่องว่าง ≥ ค่านี้ ใช้ชั้นข้อความ ไม่เรียก Document AI",
   "max_hours_per_week": 60,
   "theta": 0.15,
   "overlap_denominator_cap": 25,

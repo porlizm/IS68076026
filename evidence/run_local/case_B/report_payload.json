@@ -1,6 +1,6 @@
 {
  "schema": "report-v1.0",
- "engine_version": "engine-1.0.0-01OCT26",
+ "engine_version": "engine-1.1.0-01OCT26",
  "run_id": "RUN-20261001100000-bad84c85",
  "role_id": "R06",
  "role_name_th": "นักวิทยาศาสตร์ข้อมูล",
@@ -798,5 +798,5 @@
   "decisions_sha256": "2f1cc1992f13c1a497f3937432cb08246f4ccf1cace2d2722a5b555bfea08a6e",
   "plan_sha256": "fe3e6326a2f0fa0e5d20f92d9a95fa56f40b264e83b960fe3937e4a96638b24f"
  },
- "report_hash": "eeec00e1a01bb46bd5f8a5311566e2b528e608b1824b02fb7e4cd625a16f6f9a"
+ "report_hash": "80f91ec017e6f1adf5d9c210ccca8ab7c1234255bb6602166604d9a8ac454a2a"
 }

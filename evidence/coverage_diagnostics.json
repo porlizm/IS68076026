@@ -7,8 +7,8 @@
     "plan": 538,
     "ilp": 549,
     "coverable": 598,
-    "cause_selection": 17,
     "cause_hours": 43,
+    "cause_selection": 17,
     "cause_no_item": 2
    },
    "roles": [
@@ -281,8 +281,8 @@
     "plan": 540,
     "ilp": 550,
     "coverable": 599,
-    "cause_selection": 16,
     "cause_hours": 43,
+    "cause_selection": 16,
     "cause_no_item": 1
    },
    "roles": [

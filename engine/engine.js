@@ -14,7 +14,7 @@
 const ENGINE = (function () {
   'use strict';
 
-  const ENGINE_VERSION = 'engine-1.0.0-01OCT26';
+  const ENGINE_VERSION = 'engine-1.1.0-01OCT26'; // 1.1: plan_strategy (DEC-47) · planRowsFrom (DEC-42)
   const STATUSES = ['evidenced', 'partially', 'missing'];
   const FINAL_STATUSES = ['evidenced', 'partially', 'missing', 'abstained'];
   const STATUS_SCORE = { evidenced: 1, partially: 0.5, missing: 0 };
@@ -687,8 +687,11 @@ const ENGINE = (function () {
     const { ctx, requirements, text, modelResults, corpus, mappings, projectCfg, nowIso } = input;
     const ev = evaluateRun({ runId: ctx.run_id, roleId: ctx.role_id, requirements, text, modelResults, projectCfg, nowIso });
     const plan = buildPlan({ decisions: ev.decisions, corpus, mappings, mode: ctx.mode, months: ctx.timeline_months, hoursPerWeek: ctx.hours_per_week, projectCfg, roleId: ctx.role_id });
-    const planRows = plan.items.map((i) => ({ run_id: ctx.run_id, rank: i.rank, item_id: i.item_id, item_type: i.item_type, title: i.title, provider: i.provider, source_url: i.source_url, estimated_hours: i.estimated_hours, cumulative_hours: i.cumulative_hours, covers_requirements: i.covers_requirements, n_new_requirements: i.n_new_requirements, new_weight_covered: i.new_weight_covered, mapping_status: i.mapping_status, phase: i.phase }));
-    return { eval: ev, plan, planRows };
+    return { eval: ev, plan, planRows: planRowsFrom(ctx, plan) };
+  }
+  // แถว plan_items ของแผนหนึ่งแผน (ใช้ร่วมกันระหว่าง decideAndPlan และโหนด Build Learning Plan ของ WF_IS68076026)
+  function planRowsFrom(ctx, plan) {
+    return plan.items.map((i) => ({ run_id: ctx.run_id, rank: i.rank, item_id: i.item_id, item_type: i.item_type, title: i.title, provider: i.provider, source_url: i.source_url, estimated_hours: i.estimated_hours, cumulative_hours: i.cumulative_hours, covers_requirements: i.covers_requirements, n_new_requirements: i.n_new_requirements, new_weight_covered: i.new_weight_covered, mapping_status: i.mapping_status, phase: i.phase }));
   }
 
   return {
@@ -698,7 +701,7 @@ const ENGINE = (function () {
     normalizeText, maskPII, prepareText,
     buildPrompt, buildProviderRequest, parseProviderResponse, callModelWithRetry, isRetryable,
     ruleR0, ruleR2, tokenize, targetTokens, overlapScore, evaluateRun, computeScores,
-    capacityHours, buildPlan, decideAndPlan, mergeMappingReview,
+    capacityHours, buildPlan, decideAndPlan, planRowsFrom, mergeMappingReview,
     freezeReport, renderReportHTML, buildEmail, nextStage, runRowFrom, modelStatusSummary,
   };
 })();

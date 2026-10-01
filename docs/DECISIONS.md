@@ -213,3 +213,9 @@
 **ผลต่อเล่ม** หัวข้อการจัดแผนอธิบายผลการเทียบหนึ่งย่อหน้า
 **วิธีย้อนกลับ** ตั้ง plan_strategy = coverage_first
 
+### DEC-42 (บันทึกผลการดำเนินการ 1 ต.ค. 2569)
+- `workflows/WF_IS68076026.json` 63 โหนด + sticky note 7 แผ่น (ช่วง 10/8/11/6/8/14/6) สร้างด้วย `buildSingle` · `WF_Final_IS.json` ย้ายไป `archive/01OCT26/WF_Final_IS_DEC-37/`
+- ต่างจาก WF_Final_IS: (1) อ่านชั้นข้อความ PDF ก่อน (Extract From File · `config/project.json` text_layer_min_chars = 200) แล้วจึง Document AI → OCR ในเครื่อง (2) แยก Decide & Plan เป็น Apply Rules R0-R4 กับ Build Learning Plan (`engine.planRowsFrom` · engine 1.1.0) (3) อัปโหลด PDF ล้มแต่อีเมลสำเร็จ = delivered + error_code pdf_upload_failed (4) ตัวตรวจ `validateSingle` ตรวจชื่อโหนด กริยา + กรรม · 7 ช่วง · CFG ตรง config/ · dominator ของลูป (5) traceability `evidence/WF_analysis.md` ตรวจด้วย `scripts/check_traceability.mjs`
+- เทสต์ใหม่ `tests/single_workflow.test.mjs` 9 กรณี + plan_strategy 1 กรณี → รวม 61/61 · ⏳ ทดสอบใน n8n จริง (`evidence/n8n_test_01OCT26.md`)
+- รูปสำหรับเล่มจาก workflow จริง: `scripts/make_figures.py` (TH Sarabun New จาก `assets/fonts/`)
+

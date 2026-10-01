@@ -1,6 +1,6 @@
 {
  "schema": "report-v1.0",
- "engine_version": "engine-1.0.0-01OCT26",
+ "engine_version": "engine-1.1.0-01OCT26",
  "run_id": "RUN-20261001100000-90a83f11",
  "role_id": "R18",
  "role_name_th": "นักวิเคราะห์ระบบและนักวิเคราะห์ธุรกิจสายไอที",
@@ -759,5 +759,5 @@
   "decisions_sha256": "a7d59ce949b675f4cacfc10b745bc208817c95144c5538a61ad135e95bbc9a34",
   "plan_sha256": "da2624623566302a81b6f18189d6bf2278ba4fc57b4219baa35fc962b359f958"
  },
- "report_hash": "5373868542ab5470a1247c19abf6b034399e4b9dc230409bf7ed8a7a0bb7dec1"
+ "report_hash": "238f6bbd1795a170a8f7f7d55862359b73622c1d1dae4f1e9f4e4f35a7951eff"
 }

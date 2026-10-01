@@ -98,6 +98,15 @@ def main():
     n["coverage_role_table"] = "\n".join(trow)
     url = pd.read_csv(os.path.join(ROOT, "data", "url_manual_check.csv"), dtype=str, keep_default_na=False)
     n["url_pending_urls"] = fmt(int((~url.researcher_result.str.strip().str.upper().isin(["LIVE", "OK", "VERIFIED"])).sum()))
+    wm = J("workflows", "manifest.json")
+    n["wf_name"] = wm["workflow"]["file"].replace(".json", ""); n["wf_nodes"] = fmt(wm["workflow"]["nodes"]); n["wf_notes"] = fmt(wm["workflow"]["sticky_notes"])
+    n["wf_sections"] = fmt(len(wm["workflow"]["sections"])); n["n8n_version"] = wm["n8n_version"]; n["engine_version"] = wm["engine_version"]
+    for i, s_ in enumerate(wm["workflow"]["sections"], 1): n[f"wf_s{i}_nodes"] = fmt(s_["nodes"]); n[f"wf_s{i}_th"] = s_["th"]
+    n["wf_final_nodes"] = fmt(wm["superseded"]["WF_Final_IS"]["nodes"])
+    n["text_layer_min_chars"] = fmt(J("config", "project.json")["text_layer_min_chars"])
+    import re as _re
+    tr = open(os.path.join(ROOT, "evidence", "WF_analysis.md"), encoding="utf-8").read().split("## 2 · Traceability")[1].split("\n## ")[0]
+    n["trace_rows"] = fmt(len([l for l in tr.split("\n") if l.startswith("| ") and not l.startswith("| ช่วง")]))
     rows = ["| ไฟล์ | จำนวนแถว | SHA-256 |", "|---|---|---|"]
     for f, v in man["files"].items(): rows.append(f"| {f} | {v['rows']:,} | {v['sha256']} |")
     n["manifest_table"] = "\n".join(rows)

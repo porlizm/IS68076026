@@ -1,56 +1,92 @@
 {
-  "built_at": "2026-10-01T07:55:27.260Z",
-  "engine_sha256": "0f28b4bad06ff91944d74932a4975a3c49c036cdd11d5cb2346e74c5ac9f99c4",
-  "engine_version": "engine-1.0.0-01OCT26",
+  "built_at": "2026-10-01T08:03:16.408Z",
+  "engine_sha256": "e1863ad94151d6ac7f3f94a6ce6d811c834f10e20519e5cc889479523a997996",
+  "engine_version": "engine-1.1.0-01OCT26",
   "n8n_version": "2.39.9",
   "node_version": "24",
-  "import": "WF_Final_IS.json",
-  "note": "นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_Final_IS.json (DEC-37) · ชุด 5 ไฟล์เดิมเลิกใช้และย้ายไป archive แล้ว (DEC-38)",
+  "import": "WF_IS68076026.json",
+  "note": "นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_IS68076026.json (DEC-42) · WF_Final_IS (DEC-37) และชุด 5 ไฟล์ (DEC-30) อยู่ใน archive/",
   "workflow": {
-    "decision": "DEC-37",
-    "file": "WF_Final_IS.json",
-    "id": "is68FinalIS00001",
-    "nodes": 59,
-    "sticky_notes": 5,
-    "sha256": "b9540ae45c895327e21acc895a26493e648e8db2fe3f2938a976991c933c127c"
-  },
-  "legacy_5wf": {
-    "status": "ไม่ใช้ · ห้ามนำเข้าพร้อม WF_Final_IS",
-    "decision": "DEC-30 → DEC-38",
-    "archived_copy": "archive/01OCT26/workflows_5wf_DEC-30/",
-    "rebuild": "node scripts/build_workflows.mjs --legacy <โฟลเดอร์>",
-    "import_order": [
-      "WF_Error",
-      "WF_SUB_GapEngine",
-      "WF_SUB_Decide",
-      "WF_SUB_Deliver",
-      "WF_Main_Intake"
+    "decision": "DEC-42",
+    "file": "WF_IS68076026.json",
+    "id": "is68Single000001",
+    "nodes": 63,
+    "sticky_notes": 7,
+    "sections": [
+      {
+        "key": "S1",
+        "th": "รับข้อมูล",
+        "nodes": 10
+      },
+      {
+        "key": "S2",
+        "th": "อ่านและปิดบังข้อมูล",
+        "nodes": 8
+      },
+      {
+        "key": "S3",
+        "th": "วิเคราะห์ 3 โมเดล",
+        "nodes": 11
+      },
+      {
+        "key": "S4",
+        "th": "ตรวจและรวมผล",
+        "nodes": 6
+      },
+      {
+        "key": "S5",
+        "th": "จัดแผน",
+        "nodes": 8
+      },
+      {
+        "key": "S6",
+        "th": "ส่งรายงาน",
+        "nodes": 14
+      },
+      {
+        "key": "S7",
+        "th": "บันทึกและข้อผิดพลาด",
+        "nodes": 6
+      }
     ],
-    "workflows": {
-      "WF_Error": {
-        "id": "is68ErrorWF00001",
-        "nodes": 6,
-        "sha256": "8f2a7cb3083bf40aeac543d722c4da73b90007d502dac3a70f50635f9ade4684"
-      },
-      "WF_SUB_GapEngine": {
-        "id": "is68GapEngine001",
-        "nodes": 11,
-        "sha256": "404551847322e887154af7c35e1b0f9f6dc6af643abff1ffc09fb6047948a0fb"
-      },
-      "WF_SUB_Decide": {
-        "id": "is68Decide000001",
-        "nodes": 13,
-        "sha256": "92b686bb1e301199cc834b7dc9582262323b29e8c25664099a06f8d61d6cc961"
-      },
-      "WF_SUB_Deliver": {
-        "id": "is68Deliver00001",
-        "nodes": 13,
-        "sha256": "df5582e97803d1aeb019d29b37f3ce786760b1055a90dd8521f6353aacce83be"
-      },
-      "WF_Main_Intake": {
-        "id": "is68MainIntake01",
-        "nodes": 17,
-        "sha256": "c31610c26f828b65ffc6335374c09e9bdaa93e1d66b11a829f180224ea78ef8b"
+    "sha256": "57fdaf52226a4c148bf188ea1e9cf3c7fa68448c2e37ee737029dabd679529d5"
+  },
+  "superseded": {
+    "WF_Final_IS": {
+      "decision": "DEC-37 → DEC-42",
+      "nodes": 59,
+      "sha256": "0012cab14e369e0bad486e1d2f437eb67f5eb07c725573e4c0b17a0c1331caa6",
+      "archived_copy": "archive/01OCT26/WF_Final_IS_DEC-37/"
+    },
+    "legacy_5wf": {
+      "decision": "DEC-30 → DEC-38",
+      "archived_copy": "archive/01OCT26/workflows_5wf_DEC-30/",
+      "workflows": {
+        "WF_Error": {
+          "id": "is68ErrorWF00001",
+          "nodes": 6,
+          "sha256": "6d1811e393be089a010609be3ed8dc9e52b1f38d473ae94dbf09fb7b8533d590"
+        },
+        "WF_SUB_GapEngine": {
+          "id": "is68GapEngine001",
+          "nodes": 11,
+          "sha256": "8e1b0f3ac17d91277640efaadfa2622af7902b1dc98b523b53905d133fbca4ce"
+        },
+        "WF_SUB_Decide": {
+          "id": "is68Decide000001",
+          "nodes": 13,
+          "sha256": "3bd1eaab6e3ce1ccc240c213e5e99c43bb817d96c9069c10d1594572116ef1e1"
+        },
+        "WF_SUB_Deliver": {
+          "id": "is68Deliver00001",
+          "nodes": 13,
+          "sha256": "abf6eeb359d8b00ef96bf3f481f223edc4611699a81b132fb2985e2eedeba890"
+        },
+        "WF_Main_Intake": {
+          "id": "is68MainIntake01",
+          "nodes": 17,
+          "sha256": "946bf0373579768ddcef230d75904b4ee5b332e66d13259dd229329e3b793086"
+        }
       }
     }
   }

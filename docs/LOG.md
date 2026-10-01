@@ -8,13 +8,17 @@
 
 ## ▶ ทำต่อจากตรงนี้
 
-1. 👤 ยืนยันรายการใหม่ 14 รายการใน `data/corpus_additions.csv` (ดูตารางใน `evidence/coverage_600_01OCT26.md`) และกรอก `researcher_result` ใน `data/url_manual_check.csv` → `python scripts/build_data_all.py` → `bash scripts/run_all_checks.sh` → `python scripts/coverage_report.py` → build เล่มใหม่ (ตัวเลขในเล่มเปลี่ยนเอง)
-2. 👤 ยืนยันการตีความ DEC-45 (foundation map ทุกอาชีพ)
-3. 🤖 Phase 2 · workflow เดียว `WF_IS68076026.json`
+1. 👤 ยืนยันรายการใหม่ 14 รายการ + URL ค้าง (ดู `evidence/coverage_600_01OCT26.md`)
+2. 👤🤖 ทดสอบ `WF_IS68076026.json` ใน n8n 2.39.9 ตาม `evidence/n8n_test_01OCT26.md`
+3. 🤖 Phase 3 · เขียนเล่มใหม่
 
 ---
 
 ## ประวัติ session
+
+### 1 ต.ค. 2569 · Session 12 · Phase 2 workflow เดียว WF_IS68076026
+**ทำอะไร** `buildSingle` → `workflows/WF_IS68076026.json` 63 โหนด 7 ช่วง · `validateSingle` + `check_traceability.mjs` (32 แถว ครอบคลุม 63/63 โหนด) · `tests/single_workflow.test.mjs` (A/B/C ตรง engine · สองแถวต่อ poll · ล้มกลางลูป · โมเดลล้มครบ · อัปโหลดล้มแต่อีเมลสำเร็จ · ไฟล์เกินขนาด/หน้า · ไม่ยินยอม · ชั้นข้อความ) · tests 61/61 · ย้าย WF_Final_IS ไป archive · `evidence/WF_analysis.md` · `evidence/n8n_test_01OCT26.md` (⏳) · ฟอนต์ TH Sarabun New ใน `assets/fonts/` (ผู้วิจัยอนุญาตดาวน์โหลด) · รูป 3 รูปจาก workflow จริง
+**Gate G-WF** ✅ validator + tests ผ่าน · traceability ครบ · ⏳ ผลใน n8n จริงระบุชัดใน evidence
 
 ### 1 ต.ค. 2569 · Session 12 · Phase 1 ข้อมูลอ้างอิงและการครอบคลุม 600
 **ทำอะไร** รหัสรุ่น `CORPUS_IS68076026-v1.5-01OCT26` (DEC-43) · เปิด URL ค้าง 28 URL ด้วยเบราว์เซอร์ → `note` ใน url_manual_check.csv + `evidence/url_check/url_check_01OCT26.md` (ตรงชื่อ 8 · เปลี่ยนชื่อ/URL ใหม่ 7 · ไม่พบหน้า 4 · ยืนยันไม่ได้ 9) · `scripts/coverage_diagnostics.py` (ILP PuLP/CBC) · DEC-45 foundation map ทุกอาชีพ · DEC-46 รายการใหม่ 14 รายการ (`data/corpus_additions.csv`) · DEC-47 เทียบวิธีเลือก · `simulate_coverage.mjs --what-if` · `scripts/coverage_report.py` → `evidence/coverage_600_01OCT26.md` · numbers.json เพิ่มค่าความครอบคลุม (106 ค่า) และติดตามใน git

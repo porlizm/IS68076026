@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, ENGINE } from './lib/refs.mjs';
-import { buildAll } from './build_workflows.mjs';
+import { buildAll, buildFinal } from './build_workflows.mjs';
 
 export const EXPECTED_NODES = { WF_Main_Intake: 17, WF_SUB_GapEngine: 11, WF_SUB_Decide: 13, WF_SUB_Deliver: 13, WF_Error: 6 };
 const BEGIN = '// ==== ENGINE BEGIN (engine/engine.js · ห้ามแก้ในนี้ แก้ที่ไฟล์ต้นทางแล้ว build ใหม่) ====\n';
@@ -118,7 +118,8 @@ const STAGE_INPUT = { WF_SUB_GapEngine: 'GapEngine Input', WF_SUB_Decide: 'Decid
 // โหนดที่ตั้งใจเปลี่ยนจากชุด 5 ไฟล์ (ต้องตรงกับ DEC-37)
 const CHANGED = { 'Record Delivery': 'jsCode', 'Upload PDF': 'onError', 'Send Email': 'onError', 'Findings Rows': 'position', 'Append findings': 'position' };
 
-export function loadFinal() { return JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', FINAL_FILE), 'utf8')); }
+// DEC-42: WF_Final_IS ย้ายไป archive แล้ว — สร้างในหน่วยความจำจากแหล่งเดียวกันเพื่อเทสต์เทียบ
+export function loadFinal() { return JSON.parse(JSON.stringify(buildFinal(buildAll()))); }
 
 const refsIn = (s) => [...String(s).matchAll(/\$\(\s*'([^']+)'\s*\)/g)].map((m) => m[1]);
 function nodeRefs(n) {
@@ -224,13 +225,104 @@ export function validateFinal(w, wfs) {
   return errors;
 }
 
+
+// ------------------------------------------------------------------ WF_IS68076026 (DEC-42)
+export const SINGLE_FILE = 'WF_IS68076026.json';
+export const EXPECTED_SINGLE_NODES = 63;
+export function loadSingle() { return JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', SINGLE_FILE), 'utf8')); }
+export function validateSingle(w) {
+  const errors = [];
+  const E = (msg) => errors.push(`WF_IS68076026: ${msg}`);
+  const engineSrc = fs.readFileSync(path.join(ROOT, 'engine', 'engine.js'), 'utf8');
+  const real = w.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote');
+  const notes = w.nodes.filter((n) => n.type === 'n8n-nodes-base.stickyNote');
+  const byName = Object.fromEntries(real.map((n) => [n.name, n]));
+  if (real.length !== EXPECTED_SINGLE_NODES) E(`มี ${real.length} node (ต้อง ${EXPECTED_SINGLE_NODES})`);
+  if (new Set(w.nodes.map((n) => n.name)).size !== w.nodes.length) E('ชื่อ node ซ้ำ');
+  if (w.settings.executionOrder !== 'v1') E('executionOrder ต้องเป็น v1');
+  if (w.settings.errorWorkflow) E('ไม่ต้องตั้ง errorWorkflow (ใช้ Error Trigger ในไฟล์เดียวกัน)');
+  if (real.filter((n) => n.type === 'n8n-nodes-base.errorTrigger').length !== 1) E('ต้องมี Error Trigger 1 โหนด');
+  if (real.filter((n) => n.type === 'n8n-nodes-base.googleSheetsTrigger').length !== 1) E('ต้องมี Google Sheets Trigger 1 โหนด');
+  for (const n of real) if (/executeWorkflow/.test(n.type)) E(`${n.name}: ไม่ควรมีการเรียกข้าม workflow (${n.type})`);
+  // ภาคผนวก ข: 7 ช่วง · ทุกโหนดอยู่ในช่วงเดียว · sticky note ครบ
+  const secs = (w.meta.is68.sections || []);
+  if (secs.length !== 7 || notes.length !== 7) E(`ต้องมี 7 ช่วงและ sticky note 7 แผ่น (ได้ ${secs.length}/${notes.length})`);
+  const inSec = secs.flatMap((s) => s.nodes);
+  if (inSec.length !== real.length || new Set(inSec).size !== real.length || inSec.some((x) => !byName[x])) E('ทุกโหนดต้องอยู่ในช่วงเดียวพอดี');
+  // ชื่อโหนดเป็นกริยา + กรรม (คำแรกเป็นคำกริยาภาษาอังกฤษ หรือคำถามของ IF)
+  const VERBS = /^(Watch|Read|Validate|Is|Has|Log|Loop|Create|Download|Check|Extract|Choose|Run|Mask|Save|Record|Start|Load|Build|Call|Wait|Collect|Apply|Mark|Freeze|Render|Upload|Export|Send|Delete|Catch|Get|Classify|Notify)\b/;
+  for (const n of real) if (!VERBS.test(n.name)) E(`${n.name}: ชื่อโหนดควรขึ้นต้นด้วยคำกริยา`);
+  // connections + fan-in
+  const incoming = {}; const succ = {};
+  for (const [from, c] of Object.entries(w.connections)) {
+    if (!byName[from]) E(`connection จาก node ที่ไม่มี: ${from}`);
+    (c.main || []).forEach((outs, oi) => (outs || []).forEach((t) => {
+      if (!byName[t.node]) E(`connection ไป node ที่ไม่มี: ${t.node}`);
+      (incoming[t.node] = incoming[t.node] || []).push({ from, oi, ii: t.index });
+      (succ[from] = succ[from] || []).push({ to: t.node, oi });
+    }));
+  }
+  for (const n of real) if (!incoming[n.name] && !/Trigger$/.test(n.type) && !['n8n-nodes-base.googleSheetsTrigger', 'n8n-nodes-base.errorTrigger'].includes(n.type)) E(`${n.name}: ไม่มีขาเข้า`);
+  nodeChecks({ ...w, nodes: real }, engineSrc, E, { ids: new Set(), gmailAllowed: (n) => ['Send Report Email', 'Notify Researcher'].includes(n.name) });
+  const allowed = w.meta.is68.exclusive_fan_in || {};
+  for (const [node, ins] of Object.entries(incoming)) {
+    const srcs = new Set(ins.map((x) => x.from + '#' + x.oi));
+    if (srcs.size > 1 && byName[node] && byName[node].type !== 'n8n-nodes-base.merge' && !allowed[node]) E(`${node}: มี ${srcs.size} ขาเข้าแต่ไม่ใช่ Merge และไม่ได้ประกาศ exclusive_fan_in (บั๊ก B5)`);
+  }
+  for (const n of real) for (const r of nodeRefs(n)) if (!byName[r]) E(`${n.name}: อ้าง $('${r}') ที่ไม่มีในไฟล์`);
+  // ค่าควบคุมอ่านจาก config/ เท่านั้น: CFG ที่ฝังในทุก Code node ต้องเท่ากับไฟล์ config ปัจจุบัน
+  const cfgNow = { project: JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'project.json'), 'utf8')), models: JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'models.json'), 'utf8')), sheets: JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'sheets.json'), 'utf8')) };
+  for (const n of real.filter((x) => x.type === 'n8n-nodes-base.code')) {
+    const m = n.parameters.jsCode.match(/(?:^|\n)const CFG = (\{.*\});\n\/\/ ==== NODE GLUE/);
+    if (!m) { if (/CFG\./.test(n.parameters.jsCode)) E(`${n.name}: ใช้ CFG แต่ไม่ได้ฝังค่าจาก config/`); continue; }
+    const cfg = JSON.parse(m[1]);
+    for (const k of ['project', 'models', 'sheets']) if (JSON.stringify(cfg[k]) !== JSON.stringify(cfgNow[k])) E(`${n.name}: CFG.${k} ไม่ตรงกับ config/${k}.json (build ใหม่)`);
+  }
+  // B7 Gmail รับ binary จาก Export Report PDF โดยตรง
+  const toGmail = (incoming['Send Report Email'] || []).map((x) => x.from);
+  if (JSON.stringify(toGmail) !== JSON.stringify(['Export Report PDF'])) E(`Send Report Email ต้องรับข้อมูลจาก Export Report PDF โดยตรง (ได้ ${toGmail}) (บั๊ก B7)`);
+  for (const nm of ['Upload Report PDF', 'Send Report Email']) if (byName[nm] && byName[nm].onError !== 'continueRegularOutput') E(`${nm}: ต้องเป็น continueRegularOutput เพื่อให้ Merge ได้ครบสองขาเสมอ`);
+  // ลูป
+  const loop = byName['Loop Over Requests'];
+  if (!loop || loop.type !== 'n8n-nodes-base.splitInBatches' || loop.parameters.batchSize !== 1) E('Loop Over Requests ต้องเป็น splitInBatches batchSize=1');
+  const lo = (w.connections['Loop Over Requests'] || { main: [] }).main;
+  if (!lo[1] || lo[1].map((t) => t.node).join() !== 'Create Run Row') E('ขา loop (output 1) ต้องไป Create Run Row');
+  const back = (incoming['Loop Over Requests'] || []).map((x) => x.from).sort().join();
+  if (back !== 'Is New Request?,Mark Run Delivered') E(`ขาเข้า Loop Over Requests ต้องมาจาก Is New Request? และ Mark Run Delivered (ได้ ${back})`);
+  const body = new Set(); const q = ['Create Run Row'];
+  while (q.length) { const x = q.shift(); if (body.has(x) || x === 'Loop Over Requests') continue; body.add(x); (succ[x] || []).forEach((s) => q.push(s.to)); }
+  if (!body.has('Mark Run Delivered')) E('จากขา loop ต้องไปถึง Mark Run Delivered ได้');
+  const order = [...body];
+  const dom = Object.fromEntries(order.map((x) => [x, new Set(order)]));
+  dom['Create Run Row'] = new Set(['Create Run Row']);
+  for (let changed = true; changed;) {
+    changed = false;
+    for (const x of order) {
+      if (x === 'Create Run Row') continue;
+      const preds = (incoming[x] || []).map((i) => i.from).filter((p) => body.has(p));
+      if (!preds.length) continue;
+      let d;
+      if (byName[x].type === 'n8n-nodes-base.merge') { d = new Set(); preds.forEach((p) => dom[p].forEach((v) => d.add(v))); }
+      else { d = new Set(dom[preds[0]]); preds.slice(1).forEach((p) => { for (const v of d) if (!dom[p].has(v)) d.delete(v); }); }
+      d.add(x);
+      if (d.size !== dom[x].size || [...d].some((v) => !dom[x].has(v))) { dom[x] = d; changed = true; }
+    }
+  }
+  for (const x of order) for (const r of nodeRefs(byName[x])) {
+    if (body.has(r) && !dom[x].has(r)) E(`${x}: อ้าง $('${r}') ซึ่งอาจไม่ได้ทำงานในรอบนี้ของ Loop Over Requests (จะได้ค่าของงานก่อนหน้า)`);
+  }
+  if (w.meta.is68.engine_sha256 !== ENGINE.sha256Hex(engineSrc)) E('engine_sha256 ใน meta ไม่ตรงกับ engine/engine.js');
+  return errors;
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const wfs = loadWorkflows();
-  const errs = [...validate(wfs), ...validateFinal(loadFinal(), wfs)];
+  const errs = [...validate(wfs), ...validateFinal(loadFinal(), wfs), ...validateSingle(loadSingle())];
   if (errs.length) { console.error('ไม่ผ่าน:\n  ' + errs.join('\n  ')); process.exit(1); }
-  // DEC-38: workflows/ ต้องมี workflow JSON ไฟล์เดียว กันนำเข้าผิด
-  const extra = fs.readdirSync(path.join(ROOT, 'workflows')).filter((f) => f.endsWith('.json') && !['WF_Final_IS.json', 'manifest.json'].includes(f));
-  if (extra.length) { console.error('ไม่ผ่าน: workflows/ มีไฟล์ workflow อื่นนอกจาก WF_Final_IS.json: ' + extra.join(', ') + ' (ย้ายเข้า archive/ ตาม DEC-38)'); process.exit(1); }
-  console.log('ผ่าน · workflow 5 ไฟล์ (สร้างในหน่วยความจำ · ไม่ใช้งาน) · node 17/11/13/13/6 · engine ฝังตรงทุกไบต์ · บั๊ก B1 B3 B5 B6 B7 B9 B10 ผ่านการตรวจเชิงโครงสร้าง');
-  console.log(`ผ่าน · WF_Final_IS ${EXPECTED_FINAL_NODES} node · ไม่มีการเรียกข้าม workflow · โหนดเดิมตรงชุด 5 ไฟล์ · ไม่มีการอ้างค่าข้ามรอบใน Loop Over Runs (DEC-37)`);
+  // DEC-38/42: workflows/ ต้องมี workflow JSON ไฟล์เดียว กันนำเข้าผิด
+  const extra = fs.readdirSync(path.join(ROOT, 'workflows')).filter((f) => f.endsWith('.json') && ![SINGLE_FILE, 'manifest.json'].includes(f));
+  if (extra.length) { console.error('ไม่ผ่าน: workflows/ มีไฟล์ workflow อื่นนอกจาก ' + SINGLE_FILE + ': ' + extra.join(', ') + ' (ย้ายเข้า archive/ ตาม DEC-42)'); process.exit(1); }
+  const one = loadSingle();
+  console.log('ผ่าน · ชุด 5 ไฟล์และ WF_Final_IS (สร้างในหน่วยความจำ · ไม่ใช้งาน) · บั๊ก B1 B3 B5 B6 B7 B9 B10');
+  console.log(`ผ่าน · WF_IS68076026 ${EXPECTED_SINGLE_NODES} node · 7 ช่วง · ไม่มีการเรียกข้าม workflow · ทุก $('โหนด') มีจริง · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/ · engine ฝังตรงทุกไบต์ (${one.meta.is68.engine_sha256.slice(0, 12)})`);
 }

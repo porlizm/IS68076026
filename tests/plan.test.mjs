@@ -75,3 +75,16 @@ test('DEC-21: mergeMappingReview โยนเมื่อไฟล์หาย �
   assert.throws(() => E.mergeMappingReview(maps, rv(8)), /10 แถว แต่มีสถานะผ่านการตรวจเพียง 8/);
   assert.equal(E.mergeMappingReview(maps, rv(9)).filter((m) => m.mapping_status === 'source_checked_by_script').length, 9);
 });
+
+test('plan_strategy: ค่าตั้งเป็น weighted_greedy (DEC-47) · coverage_first เลือกตามจำนวนข้อต่อชั่วโมง · ค่าที่ไม่รู้จักหยุดทำงาน', async () => {
+  const { loadRefs, ENGINE: E } = await import('../scripts/lib/refs.mjs');
+  const refs = loadRefs();
+  assert.equal(refs.projectCfg.plan_strategy, 'weighted_greedy');
+  const decisions = refs.requirements.filter((r) => r.role_id === 'R01').map((r) => ({ requirement_id: r.requirement_id, final_status: 'missing', weight: Number(r.weight_renormalized) }));
+  const base = { decisions, corpus: refs.corpus, mappings: refs.mappings, mode: 'both', months: 6, hoursPerWeek: 10, projectCfg: refs.projectCfg, roleId: 'R01' };
+  const a = E.buildPlan(base); const b = E.buildPlan({ ...base, strategy: 'coverage_first' });
+  assert.equal(a.strategy, 'weighted_greedy'); assert.equal(b.strategy, 'coverage_first');
+  assert.ok(a.total_hours <= a.Hmax && b.total_hours <= b.Hmax);
+  assert.ok(b.items[0].c_k >= Math.max(...b.items.map((i) => i.c_k)) - 1e-9, 'coverage_first: รายการแรกมี c_k สูงสุดในแผน');
+  assert.throws(() => E.buildPlan({ ...base, strategy: 'ilp' }), /plan_strategy ไม่รู้จัก/);
+});

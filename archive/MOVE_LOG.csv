@@ -144,3 +144,4 @@ date,action,from,to,reason
 2026-10-01,move,book/figures/,archive/01OCT26/book_draft_v0/figures/,DEC-44 เขียนเล่มใหม่ทั้งหมด: เก็บรูปเดิม 24 รูป
 2026-10-01,move,build/IS_68076026_01OCT26.docx,archive/01OCT26/book_draft_v0/build/IS_68076026_01OCT26.docx,DEC-44 เก็บ docx ร่างเดิม (ไม่อยู่ใน git)
 2026-10-01,move,build/IS_68076026_latest.docx,archive/01OCT26/book_draft_v0/build/IS_68076026_latest.docx,DEC-44 เก็บ docx ร่างเดิม (ไม่อยู่ใน git)
+2026-10-01,move,workflows/WF_Final_IS.json,archive/01OCT26/WF_Final_IS_DEC-37/WF_Final_IS.json,DEC-42 ใช้ WF_IS68076026 ไฟล์เดียว
