@@ -1,121 +1,264 @@
 version,item_id,requirement_id,change,detail,decision
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F1,REQ-R02-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F1,REQ-R03-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R05-F1,REQ-R05-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R06-F1,REQ-R06-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R07-F1,REQ-R07-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R09-F1,REQ-R09-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F1,REQ-R10-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-F1,REQ-R12-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F1,REQ-R13-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F1,REQ-R14-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F1,REQ-R15-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R16-F1,REQ-R16-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F1,REQ-R17-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R18-F1,REQ-R18-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F1,REQ-R19-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R01-F2,REQ-R01-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R01-F2,REQ-R01-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F2,REQ-R02-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F2,REQ-R02-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F2,REQ-R03-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F2,REQ-R03-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R04-F2,REQ-R04-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R05-F2,REQ-R05-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R06-F2,REQ-R06-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R07-F2,REQ-R07-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F2,REQ-R08-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R09-F2,REQ-R09-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F2,REQ-R10-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F2,REQ-R10-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R11-F2,REQ-R11-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-F2,REQ-R12-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-F2,REQ-R12-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F2,REQ-R13-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F2,REQ-R13-4.A.2.a.4,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F2,REQ-R13-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F2,REQ-R14-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F2,REQ-R14-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F2,REQ-R15-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F2,REQ-R15-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R16-F2,REQ-R16-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R16-F2,REQ-R16-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F2,REQ-R17-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F2,REQ-R17-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R18-F2,REQ-R18-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F2,REQ-R19-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F2,REQ-R19-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F2,REQ-R19-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-F2,REQ-R20-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-F2,REQ-R20-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-F2,REQ-R20-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F3,REQ-R02-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F3,REQ-R02-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F3,REQ-R03-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F3,REQ-R03-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R04-F3,REQ-R04-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R05-F3,REQ-R05-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R05-F3,REQ-R05-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R06-F3,REQ-R06-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F3,REQ-R08-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F3,REQ-R08-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R09-F3,REQ-R09-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R09-F3,REQ-R09-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F3,REQ-R10-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F3,REQ-R10-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F3,REQ-R10-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-F3,REQ-R12-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F3,REQ-R13-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F3,REQ-R14-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F3,REQ-R14-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F3,REQ-R15-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F3,REQ-R15-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F3,REQ-R17-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F3,REQ-R17-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R18-F3,REQ-R18-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R18-F3,REQ-R18-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F3,REQ-R19-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F4,REQ-R08-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F4,REQ-R08-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R09-F4,REQ-R09-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F4,REQ-R10-4.A.2.b.1,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F4,REQ-R10-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F4,REQ-R10-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R11-F4,REQ-R11-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F4,REQ-R15-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F4,REQ-R15-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-F4,REQ-R17-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R19-F4,REQ-R19-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-F4,REQ-R20-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-F4,REQ-R20-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R01-F5,REQ-R01-4.A.2.b.5,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F5,REQ-R02-4.A.2.b.5,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R06-F5,REQ-R06-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R07-F5,REQ-R07-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-F5,REQ-R10-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R11-F5,REQ-R11-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-F5,REQ-R12-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-F5,REQ-R13-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R14-F5,REQ-R14-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R15-F5,REQ-R15-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-F6,REQ-R02-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R03-F6,REQ-R03-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R07-F6,REQ-R07-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R08-F6,REQ-R08-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
-CORPUS-IS68076026-v1.5R-01OCT26,CRT-R07-08,REQ-R07-2.C.3.b,L2_to_L1_promoted,ออกแบบและปรับแต่งระบบ LLM ระดับโปรดักชัน (คง mapping_rule R10-design),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R10-02,REQ-R10-2.C.3.b,L2_to_L1_promoted,ออกแบบสคีมาและโครงสร้างจัดเก็บข้อมูล (คง mapping_rule R10-design),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRT-R11-01,REQ-R11-2.C.3.b,L2_to_L1_promoted,ออกแบบสถาปัตยกรรมความมั่นคงปลอดภัย (คง mapping_rule R10-design),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R12-06,REQ-R12-2.C.3.b,L2_to_L1_promoted,หลักการทำงานของกลไกป้องกันเชิงเทคนิค (คง mapping_rule R10-design),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R13-05,REQ-R13-2.C.3.b,L2_to_L1_promoted,เข้าใจกลไกทางเทคนิคของระบบเป้าหมายจึงออกแบบการทดสอบได้ (คง mapping_rule R10-design),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRT-R10-10,REQ-R10-2.C.9.a,L2_to_L1_promoted,VPC การแบ่งซับเน็ต และการเชื่อมต่อระหว่างบริการ (คง mapping_rule R12-telecom),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R16-08,REQ-R16-2.C.9.a,L2_to_L1_promoted,เครือข่ายบนคลาวด์และการกำหนดเส้นทาง (คง mapping_rule R12-telecom),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-05,REQ-R17-2.C.9.a,L2_to_L1_promoted,ตั้งค่าเครือข่ายระดับ OS และวินิจฉัยการเชื่อมต่อ (คง mapping_rule R12-telecom),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R02-02,REQ-R02-2.B.3.a,L2_to_L1_promoted,เดินครบวงจรจากรับความต้องการไปถึงออกแบบระบบ (คง mapping_rule R18-system),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R04-10,REQ-R04-4.A.4.b.1,L2_to_L1_promoted,จัดคิวงาน มอบหมายงาน และติดตามความคืบหน้าของทีม (คง mapping_rule R08-people),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-02,REQ-R17-2.B.3.g,L2_to_L1_promoted,กำหนด SLI/SLO และเฝ้าระวังสถานะบริการต่อเนื่อง (คง mapping_rule R09-monitor),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R17-06,REQ-R17-2.B.3.m,L2_to_L1_promoted,terraform validate/plan และการตรวจนโยบายก่อนขึ้นระบบจริง (คง mapping_rule R14-quality),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRT-R14-10,REQ-R14-4.A.4.c.1,L2_to_L1_promoted,บริหารแฟ้มคดี รักษาสายการครอบครองพยานหลักฐาน และจัดทำรายงาน (คง mapping_rule R15-resource),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R04-02,REQ-R04-4.A.2.a.1,L2_to_L1_promoted,ประเมินคุณภาพซอฟต์แวร์ด้วยเกณฑ์และกรณีทดสอบ (คง mapping_rule R14-quality),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R07-10,REQ-R07-4.A.2.a.1,L2_to_L1_promoted,ประเมินคุณภาพผลลัพธ์ของโมเดลด้วยเกณฑ์และชุดทดสอบ (คง mapping_rule R14-quality),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRT-R18-06,REQ-R18-4.A.2.a.1,L2_to_L1_promoted,IREB กำหนดเกณฑ์คุณภาพของข้อกำหนดและวิธีตรวจตามเกณฑ์นั้น (คง mapping_rule R14-quality),DEC-19
-CORPUS-IS68076026-v1.5R-01OCT26,CRS-R20-06,REQ-R20-4.A.2.a.1,L2_to_L1_promoted,กำหนดระดับบริการและประเมินคุณภาพบริการที่ส่งมอบ (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F1,REQ-R02-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F1,REQ-R03-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F1,REQ-R04-2.C.7.a,foundation_L1_extended,Write Professional Emails in English,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F1,REQ-R05-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F1,REQ-R06-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F1,REQ-R07-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F1,REQ-R09-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F1,REQ-R10-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F1,REQ-R11-2.C.7.a,foundation_L1_extended,Write Professional Emails in English,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F1,REQ-R12-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F1,REQ-R13-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F1,REQ-R14-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F1,REQ-R15-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F1,REQ-R16-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F1,REQ-R17-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F1,REQ-R18-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F1,REQ-R19-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F2,REQ-R01-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F2,REQ-R01-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F2,REQ-R01-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F2,REQ-R01-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F2,REQ-R02-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F2,REQ-R02-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F2,REQ-R02-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F2,REQ-R02-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F2,REQ-R03-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F2,REQ-R03-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F2,REQ-R03-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F2,REQ-R03-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F2,REQ-R04-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F2,REQ-R04-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F2,REQ-R04-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F2,REQ-R04-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F2,REQ-R05-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F2,REQ-R05-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F2,REQ-R05-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F2,REQ-R05-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F2,REQ-R06-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F2,REQ-R06-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F2,REQ-R06-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F2,REQ-R06-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F2,REQ-R07-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F2,REQ-R07-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F2,REQ-R07-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F2,REQ-R07-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F2,REQ-R08-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F2,REQ-R08-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F2,REQ-R08-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F2,REQ-R08-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F2,REQ-R09-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F2,REQ-R09-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F2,REQ-R09-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F2,REQ-R09-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F2,REQ-R10-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F2,REQ-R10-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F2,REQ-R10-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F2,REQ-R10-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F2,REQ-R11-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F2,REQ-R11-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F2,REQ-R11-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F2,REQ-R11-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F2,REQ-R12-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F2,REQ-R12-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F2,REQ-R12-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F2,REQ-R12-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F2,REQ-R13-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F2,REQ-R13-4.A.2.a.4,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F2,REQ-R13-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F2,REQ-R13-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F2,REQ-R14-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F2,REQ-R14-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F2,REQ-R14-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F2,REQ-R14-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F2,REQ-R15-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F2,REQ-R15-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F2,REQ-R15-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F2,REQ-R15-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F2,REQ-R16-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F2,REQ-R16-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F2,REQ-R16-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F2,REQ-R16-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F2,REQ-R17-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F2,REQ-R17-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F2,REQ-R17-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F2,REQ-R17-4.A.1.b.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F2,REQ-R18-4.A.1.a.1,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F2,REQ-R18-4.A.2.a.2,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F2,REQ-R18-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F2,REQ-R18-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F2,REQ-R19-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F2,REQ-R19-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F2,REQ-R19-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F2,REQ-R19-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F2,REQ-R20-4.A.1.a.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F2,REQ-R20-4.A.1.b.1,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F2,REQ-R20-4.A.2.a.4,foundation_L1_extended,Understanding Research Methods,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F2,REQ-R20-4.A.2.a.2,foundation_L1_added,Understanding Research Methods,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F3,REQ-R01-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F3,REQ-R01-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F3,REQ-R01-2.A.2.b,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F3,REQ-R02-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F3,REQ-R02-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F3,REQ-R02-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F3,REQ-R03-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F3,REQ-R03-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F3,REQ-R04-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F3,REQ-R04-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F3,REQ-R05-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F3,REQ-R05-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F3,REQ-R05-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F3,REQ-R06-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F3,REQ-R06-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F3,REQ-R06-2.A.2.b,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F3,REQ-R07-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F3,REQ-R07-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F3,REQ-R08-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F3,REQ-R08-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F3,REQ-R09-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F3,REQ-R09-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F3,REQ-R09-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F3,REQ-R10-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F3,REQ-R10-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F3,REQ-R10-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F3,REQ-R11-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F3,REQ-R11-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F3,REQ-R12-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F3,REQ-R12-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F3,REQ-R13-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F3,REQ-R13-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F3,REQ-R13-2.A.2.b,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F3,REQ-R14-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F3,REQ-R14-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F3,REQ-R14-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F3,REQ-R15-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F3,REQ-R15-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F3,REQ-R16-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F3,REQ-R16-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F3,REQ-R16-2.A.2.b,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F3,REQ-R17-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F3,REQ-R17-2.A.1.a,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F3,REQ-R18-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F3,REQ-R18-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F3,REQ-R18-2.A.2.b,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F3,REQ-R19-4.A.2.b.3,foundation_L1_added,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F3,REQ-R19-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F3,REQ-R20-2.A.1.a,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F3,REQ-R20-4.A.2.b.3,foundation_L1_extended,Learning How to Learn: Powerful mental tools to help you master tough subjects,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F4,REQ-R01-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F4,REQ-R01-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F4,REQ-R01-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F4,REQ-R02-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F4,REQ-R02-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F4,REQ-R02-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F4,REQ-R03-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F4,REQ-R03-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F4,REQ-R03-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F4,REQ-R04-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F4,REQ-R04-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F4,REQ-R04-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F4,REQ-R05-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F4,REQ-R05-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F4,REQ-R05-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F4,REQ-R06-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F4,REQ-R06-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F4,REQ-R06-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F4,REQ-R07-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F4,REQ-R07-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F4,REQ-R07-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F4,REQ-R08-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F4,REQ-R08-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F4,REQ-R08-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F4,REQ-R09-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F4,REQ-R09-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F4,REQ-R09-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F4,REQ-R10-4.A.2.b.1,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F4,REQ-R10-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F4,REQ-R10-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F4,REQ-R11-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F4,REQ-R11-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F4,REQ-R11-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F4,REQ-R12-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F4,REQ-R12-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F4,REQ-R13-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F4,REQ-R13-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F4,REQ-R13-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F4,REQ-R14-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F4,REQ-R14-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F4,REQ-R15-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F4,REQ-R15-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F4,REQ-R15-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F4,REQ-R16-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F4,REQ-R16-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F4,REQ-R16-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F4,REQ-R17-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F4,REQ-R17-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F4,REQ-R17-2.B.2.i,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F4,REQ-R18-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F4,REQ-R18-2.A.2.a,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F4,REQ-R19-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F4,REQ-R19-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F4,REQ-R20-4.A.2.b.1,foundation_L1_extended,Critical Thinking Skills for the Professional,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F4,REQ-R20-2.A.2.a,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F4,REQ-R20-2.B.2.i,foundation_L1_added,Critical Thinking Skills for the Professional,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F5,REQ-R01-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-F5,REQ-R01-4.A.2.b.5,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F5,REQ-R02-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F5,REQ-R02-4.A.2.b.5,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F5,REQ-R03-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F5,REQ-R04-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-F5,REQ-R05-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F5,REQ-R06-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F5,REQ-R07-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F5,REQ-R08-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F5,REQ-R09-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-F5,REQ-R10-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-F5,REQ-R11-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-F5,REQ-R12-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-F5,REQ-R13-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-F5,REQ-R14-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-F5,REQ-R15-4.A.2.b.6,foundation_L1_added,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-F5,REQ-R16-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-F5,REQ-R17-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-F5,REQ-R18-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F5,REQ-R19-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-F5,REQ-R19-4.A.2.b.5,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-F5,REQ-R20-4.A.2.b.6,foundation_L1_extended,"Work Smarter, Not Harder: Time Management for Personal & Professional Productivity",DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F6,REQ-R02-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F6,REQ-R03-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F6,REQ-R06-4.A.1.b.3,foundation_L1_extended,Project Planning: Putting It All Together,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F6,REQ-R07-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F6,REQ-R08-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F6,REQ-R09-4.A.1.b.3,foundation_L1_extended,Project Planning: Putting It All Together,DEC-45
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N01,,coverage_item_pending_researcher,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N02,,coverage_item_pending_researcher,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N03,,coverage_item_pending_researcher,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N04,,coverage_item_pending_researcher,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N05,,coverage_item_pending_researcher,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N06,,coverage_item_pending_researcher,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N07,,coverage_item_pending_researcher,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N08,,coverage_item_pending_researcher,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N09,,coverage_item_pending_researcher,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N10,,coverage_item_pending_researcher,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N11,,coverage_item_pending_researcher,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N12,,coverage_item_pending_researcher,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N13,,coverage_item_pending_researcher,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N14,,coverage_item_pending_researcher,Introduction to Relational Databases (RDBMS),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRT-R07-08,REQ-R07-2.C.3.b,L2_to_L1_promoted,ออกแบบและปรับแต่งระบบ LLM ระดับโปรดักชัน (คง mapping_rule R10-design),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-02,REQ-R10-2.C.3.b,L2_to_L1_promoted,ออกแบบสคีมาและโครงสร้างจัดเก็บข้อมูล (คง mapping_rule R10-design),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRT-R11-01,REQ-R11-2.C.3.b,L2_to_L1_promoted,ออกแบบสถาปัตยกรรมความมั่นคงปลอดภัย (คง mapping_rule R10-design),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-06,REQ-R12-2.C.3.b,L2_to_L1_promoted,หลักการทำงานของกลไกป้องกันเชิงเทคนิค (คง mapping_rule R10-design),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-05,REQ-R13-2.C.3.b,L2_to_L1_promoted,เข้าใจกลไกทางเทคนิคของระบบเป้าหมายจึงออกแบบการทดสอบได้ (คง mapping_rule R10-design),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRT-R10-10,REQ-R10-2.C.9.a,L2_to_L1_promoted,VPC การแบ่งซับเน็ต และการเชื่อมต่อระหว่างบริการ (คง mapping_rule R12-telecom),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-08,REQ-R16-2.C.9.a,L2_to_L1_promoted,เครือข่ายบนคลาวด์และการกำหนดเส้นทาง (คง mapping_rule R12-telecom),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-05,REQ-R17-2.C.9.a,L2_to_L1_promoted,ตั้งค่าเครือข่ายระดับ OS และวินิจฉัยการเชื่อมต่อ (คง mapping_rule R12-telecom),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-02,REQ-R02-2.B.3.a,L2_to_L1_promoted,เดินครบวงจรจากรับความต้องการไปถึงออกแบบระบบ (คง mapping_rule R18-system),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-10,REQ-R04-4.A.4.b.1,L2_to_L1_promoted,จัดคิวงาน มอบหมายงาน และติดตามความคืบหน้าของทีม (คง mapping_rule R08-people),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-02,REQ-R17-2.B.3.g,L2_to_L1_promoted,กำหนด SLI/SLO และเฝ้าระวังสถานะบริการต่อเนื่อง (คง mapping_rule R09-monitor),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-06,REQ-R17-2.B.3.m,L2_to_L1_promoted,terraform validate/plan และการตรวจนโยบายก่อนขึ้นระบบจริง (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRT-R14-10,REQ-R14-4.A.4.c.1,L2_to_L1_promoted,บริหารแฟ้มคดี รักษาสายการครอบครองพยานหลักฐาน และจัดทำรายงาน (คง mapping_rule R15-resource),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-02,REQ-R04-4.A.2.a.1,L2_to_L1_promoted,ประเมินคุณภาพซอฟต์แวร์ด้วยเกณฑ์และกรณีทดสอบ (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-10,REQ-R07-4.A.2.a.1,L2_to_L1_promoted,ประเมินคุณภาพผลลัพธ์ของโมเดลด้วยเกณฑ์และชุดทดสอบ (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRT-R18-06,REQ-R18-4.A.2.a.1,L2_to_L1_promoted,IREB กำหนดเกณฑ์คุณภาพของข้อกำหนดและวิธีตรวจตามเกณฑ์นั้น (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-06,REQ-R20-4.A.2.a.1,L2_to_L1_promoted,กำหนดระดับบริการและประเมินคุณภาพบริการที่ส่งมอบ (คง mapping_rule R14-quality),DEC-19

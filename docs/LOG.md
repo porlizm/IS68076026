@@ -8,12 +8,18 @@
 
 ## ▶ ทำต่อจากตรงนี้
 
-1. 🤖 Phase 1 · ข้อมูลอ้างอิงและการครอบคลุม 600 (ดู `Prompt_Report.md` v2.0 หัวข้อ 6)
-2. 👤 ข้อค้างเดิม: remote backup (NEXT_STEPS 2–3) · จริยธรรม (9, 13)
+1. 👤 ยืนยันรายการใหม่ 14 รายการใน `data/corpus_additions.csv` (ดูตารางใน `evidence/coverage_600_01OCT26.md`) และกรอก `researcher_result` ใน `data/url_manual_check.csv` → `python scripts/build_data_all.py` → `bash scripts/run_all_checks.sh` → `python scripts/coverage_report.py` → build เล่มใหม่ (ตัวเลขในเล่มเปลี่ยนเอง)
+2. 👤 ยืนยันการตีความ DEC-45 (foundation map ทุกอาชีพ)
+3. 🤖 Phase 2 · workflow เดียว `WF_IS68076026.json`
 
 ---
 
 ## ประวัติ session
+
+### 1 ต.ค. 2569 · Session 12 · Phase 1 ข้อมูลอ้างอิงและการครอบคลุม 600
+**ทำอะไร** รหัสรุ่น `CORPUS_IS68076026-v1.5-01OCT26` (DEC-43) · เปิด URL ค้าง 28 URL ด้วยเบราว์เซอร์ → `note` ใน url_manual_check.csv + `evidence/url_check/url_check_01OCT26.md` (ตรงชื่อ 8 · เปลี่ยนชื่อ/URL ใหม่ 7 · ไม่พบหน้า 4 · ยืนยันไม่ได้ 9) · `scripts/coverage_diagnostics.py` (ILP PuLP/CBC) · DEC-45 foundation map ทุกอาชีพ · DEC-46 รายการใหม่ 14 รายการ (`data/corpus_additions.csv`) · DEC-47 เทียบวิธีเลือก · `simulate_coverage.mjs --what-if` · `scripts/coverage_report.py` → `evidence/coverage_600_01OCT26.md` · numbers.json เพิ่มค่าความครอบคลุม (106 ค่า) และติดตามใน git
+**พบอะไร** คลัง 598/600 · แผนจำลอง 489 → 538/600 · ILP ชั่วโมงขั้นต่ำต่ออาชีพ 285–727 ชม. (เกิน Hmax ทุกอาชีพ) · ถ้ายืนยันรายการใหม่ครบ 600/600 ทั้งสองตัวชี้วัด และทุกอาชีพอยู่ใน Hmax
+**Gate G-600** ❌ ยังไม่ผ่าน (ไม่ปรับตัวเลข) · ต้องให้ผู้วิจัยยืนยันรายการใหม่ 14 รายการ + URL ค้าง 28 URL · ผู้วิจัยสั่งให้ทำต่อจนได้เล่ม (1 ต.ค.)
 
 ### 1 ต.ค. 2569 · Session 12 · Phase 0 ตาม Prompt_Report v2.0 (เขียนเล่มใหม่ทั้งหมด)
 **ทำอะไร** commit งานค้าง (pre-Phase-0) · DEC-40–44 · ย้ายร่างเล่มเดิม (`book/0*.md`, `book/figures/`, docx) ไป `archive/01OCT26/book_draft_v0/` + MOVE_LOG · สร้าง `book/00_fact_sheet.md` 180 ข้อ ทุกข้อมีแหล่งที่มา ยาวสุด 205 อักขระ

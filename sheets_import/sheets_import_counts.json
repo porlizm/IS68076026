@@ -48,11 +48,11 @@
     "columns": 10
   },
   "ref_corpus": {
-    "rows": 571,
+    "rows": 602,
     "columns": 10
   },
   "ref_mappings": {
-    "rows": 6883,
+    "rows": 7012,
     "columns": 7
   },
   "form_responses": {

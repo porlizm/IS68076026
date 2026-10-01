@@ -27,6 +27,7 @@ const ENGINE = (function () {
     'he she his her also etc including include includes such other than more most very well both each all any')
     .split(' '));
   const MODEL_KEYS = ['A', 'B', 'C'];
+  const PLAN_STRATEGIES = ['weighted_greedy', 'coverage_first'];
 
   // ----------------------------------------------------------------------------------------------
   // 0) ยูทิลิตี: SHA-256 (บริสุทธิ์), canonical JSON, escape HTML
@@ -500,6 +501,10 @@ const ENGINE = (function () {
     const covered = new Set(); let cum = 0; let rank = 0;
     const pool = Object.keys(Gk).sort();
     const EPS = 1e-12;
+    // วิธีเลือก (DEC-47): weighted_greedy = น้ำหนักช่องว่างใหม่ต่อชั่วโมง · coverage_first = จำนวนช่องว่างใหม่ต่อชั่วโมง (เท่ากันใช้น้ำหนักต่อชั่วโมง)
+    const strategy = input.strategy || projectCfg.plan_strategy || 'weighted_greedy';
+    if (!PLAN_STRATEGIES.includes(strategy)) throw new Error('plan_strategy ไม่รู้จัก: ' + strategy);
+    result.strategy = strategy;
     for (;;) {
       let best = null;
       for (const id of pool) {
@@ -508,13 +513,18 @@ const ENGINE = (function () {
         const add = [...Gk[id]].filter((r) => !covered.has(r));
         if (add.length === 0) continue;
         const wsum = add.reduce((s, r) => s + w[r], 0);
-        const dk = wsum / h;                                                  // สมการ 3.8
-        if (!best || dk > best.dk + EPS || (Math.abs(dk - best.dk) <= EPS && id < best.id)) best = { id, dk, add, wsum, h };
+        const dk = wsum / h;                                                  // d_k น้ำหนักต่อชั่วโมง
+        const ck = add.length / h;                                            // c_k จำนวนข้อต่อชั่วโมง
+        const key = strategy === 'coverage_first' ? [ck, dk] : [dk, ck];
+        const better = !best || key[0] > best.key[0] + EPS
+          || (Math.abs(key[0] - best.key[0]) <= EPS && (key[1] > best.key[1] + EPS
+            || (Math.abs(key[1] - best.key[1]) <= EPS && id < best.id)));
+        if (better) best = { id, dk, ck, key, add, wsum, h };
       }
       if (!best) break;
       rank++; cum += best.h; best.add.forEach((r) => covered.add(r));
       const it = items[best.id];
-      result.items.push({ rank, item_id: best.id, item_type: it.item_type, title: it.title, provider: it.provider, source_url: safeHttpsUrl(it.source_url) || '', estimated_hours: best.h, cumulative_hours: round(cum, 2), covers_requirements: best.add.sort().join('|'), n_new_requirements: best.add.length, new_weight_covered: round(best.wsum, 6), d_k: round(best.dk, 8), mapping_status: 'source_checked_by_script', phase: it.phase });
+      result.items.push({ rank, item_id: best.id, item_type: it.item_type, title: it.title, provider: it.provider, source_url: safeHttpsUrl(it.source_url) || '', estimated_hours: best.h, cumulative_hours: round(cum, 2), covers_requirements: best.add.sort().join('|'), n_new_requirements: best.add.length, new_weight_covered: round(best.wsum, 6), d_k: round(best.dk, 8), c_k: round(best.ck, 8), mapping_status: 'source_checked_by_script', phase: it.phase });
     }
     result.total_hours = round(cum, 2);
     const withCand = gaps.filter((g) => candByReq[g]);
@@ -682,7 +692,7 @@ const ENGINE = (function () {
   }
 
   return {
-    ENGINE_VERSION, STATUSES, FINAL_STATUSES, R0_CODES, L1_LAYER, SCHEMA_VERSION, MODEL_KEYS,
+    ENGINE_VERSION, STATUSES, FINAL_STATUSES, PLAN_STRATEGIES, R0_CODES, L1_LAYER, SCHEMA_VERSION, MODEL_KEYS,
     sha256Hex, canonicalJSON, escapeHtml, safeHttpsUrl,
     parseFormRow, responseId, makeRunId, validateIntake, checkFile, isDuplicate,
     normalizeText, maskPII, prepareText,

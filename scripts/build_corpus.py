@@ -25,7 +25,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data")
 TODAY = "2026-10-01"
 V14 = "CORPUS-IS68076026-v1.4R-01OCT26"
-V15 = "CORPUS-IS68076026-v1.5R-01OCT26"
+V15 = "CORPUS_IS68076026-v1.5-01OCT26"  # DEC-43 (เดิม CORPUS-IS68076026-v1.5R-01OCT26 ตาม DEC-31)
 
 # ---------- DEC-18 foundation track (URL เปิดตรวจแล้ว 19SEP26 และตรวจซ้ำ 01OCT26) ----------
 FOUNDATION = [
@@ -126,6 +126,9 @@ def main():
     ap.add_argument("--src-dir", required=True)
     ap.add_argument("--version", default="v1.5", choices=["v1.4", "v1.5"])
     ap.add_argument("--close-r14-repair", action="store_true")
+    ap.add_argument("--foundation-uncovered-only", action="store_true",
+                    help="ย้อนกลับ DEC-45: map foundation เฉพาะข้อที่ยังไม่มี L1 (แบบ DEC-18 เดิม)")
+    ap.add_argument("--no-additions", action="store_true", help="ย้อนกลับ DEC-46: ไม่อ่าน data/corpus_additions.csv")
     a = ap.parse_args()
 
     req = rd(os.path.join(DATA, "requirements.csv"))
@@ -173,7 +176,9 @@ def main():
         template = corpus.iloc[0].copy()
         new_items, new_maps = [], []
         for f in FOUNDATION:
-            tgt = unc[unc.element_id.isin(f["elements"])]
+            # DEC-45: ใช้กับทุกอาชีพที่มีองค์ประกอบตามรายการของ DEC-18 (เดิมเฉพาะข้อที่ยังไม่มี L1)
+            tgt = (unc if a.foundation_uncovered_only else req)[
+                (unc if a.foundation_uncovered_only else req).element_id.isin(f["elements"])]
             for rid, g in tgt.groupby("role_id"):
                 r = rinfo[rid]
                 it = template.copy()
@@ -203,10 +208,63 @@ def main():
                                          coverage_layer="L1_researcher_tagged", coverage_strength="supporting",
                                          mapping_rule="R24-foundation", mapping_method="foundation_track",
                                          mapping_status="pending_review"))
+                    was = q.requirement_id in covered
                     log.append(dict(version=V15, item_id=it.item_id, requirement_id=q.requirement_id,
-                                    change="foundation_L1_added", detail=f["title"], decision="DEC-18"))
+                                    change="foundation_L1_extended" if was else "foundation_L1_added",
+                                    detail=f["title"], decision="DEC-45" if was else "DEC-18"))
         corpus = pd.concat([corpus, pd.DataFrame(new_items)], ignore_index=True)
         maps = pd.concat([maps, pd.DataFrame(new_maps)[MAP_COLS]], ignore_index=True)
+
+        # ---------------- DEC-46 coverage track (data/corpus_additions.csv) ----------------
+        # รายการใหม่ที่ Claude เปิดหน้าเว็บจริง (1 ต.ค. 2569) · เข้าคลังเมื่อผู้วิจัยกรอก researcher_result = LIVE เท่านั้น (DEC-16)
+        # รายการที่ยังไม่ยืนยันไม่เข้าคลังเลย (ไม่กระทบเกณฑ์ 90% ของ DEC-21) · ผลถ้ายืนยันครบดูได้จาก scripts/coverage_diagnostics.py
+        add_path = os.path.join(DATA, "corpus_additions.csv")
+        if os.path.exists(add_path) and not a.no_additions:
+            adds = rd(add_path)
+            add_items, add_maps = [], []
+            for _, f in adds.iterrows():
+                confirmed = f.researcher_result.strip().upper() in ("LIVE", "OK", "VERIFIED")
+                if not confirmed:
+                    log.append(dict(version=V15, item_id=f"CRS-*-{f.key}", requirement_id="",
+                                    change="coverage_item_pending_researcher", detail=f.title, decision="DEC-46"))
+                    continue
+                els = [e for e in f.elements.split("|") if e]
+                tgt = req[req.element_id.isin(els)]
+                for rid, g in tgt.groupby("role_id"):
+                    r = rinfo[rid]
+                    it = template.copy()
+                    for k in it.index: it[k] = ""
+                    it.update(dict(item_id=f"CRS-{rid}-{f.key}", item_type="course", role_id=rid,
+                                   role_name_th=r["role_name_th"], target_role=r["target_role"], soc_code=r["soc_code"],
+                                   track=r["track"], mapping_type=r["mapping_type"], priority_rank="95",
+                                   title=f.title, provider=f.provider, provider_type="mooc_platform",
+                                   platform=f.platform, source_url=f.source_url, credential_type="single_course",
+                                   level="Beginner", difficulty_1_5="1", delivery_mode="self-paced online",
+                                   language="English", learning_outcomes_th=f.learning_outcomes_th,
+                                   skills_taught=f.skills_taught, tools_technologies="", produces_portfolio_artifact="no",
+                                   estimated_hours=f.estimated_hours, cost_category=f.cost_category,
+                                   cost_amount_usd=f.cost_amount_usd, prerequisites="ไม่มี", phase="foundation",
+                                   recommendation_mode="course_only|both", global_recognition_tier="2",
+                                   verification_status="verified", verification_date=f.researcher_checked_at or TODAY,
+                                   verified_by="ผู้วิจัย (DEC-46)",
+                                   researcher_notes=f"coverage track {f.key} (DEC-46) · {f.hours_note} · Claude เปิดหน้า {f.claude_checked_at}: {f.claude_page_evidence}",
+                                   corpus_version=V15, snapshot_version="ONET31.0-IS68076026-v1.0",
+                                   batch="v1.5_coverage_track"))
+                    add_items.append(it)
+                    for _, q in g.iterrows():
+                        add_maps.append(dict(map_id=f"{it.item_id}|{q.requirement_id}", item_id=it.item_id,
+                                             item_type="course", role_id=rid, requirement_id=q.requirement_id,
+                                             domain=q.domain, element_id=q.element_id, element_name=q.element_name,
+                                             importance_im=q.importance_im, weight_renormalized=q.weight_renormalized,
+                                             coverage_layer="L1_researcher_tagged", coverage_strength="supporting",
+                                             mapping_rule="R25-coverage", mapping_method="coverage_track",
+                                             mapping_status="pending_review"))
+                        log.append(dict(version=V15, item_id=it.item_id, requirement_id=q.requirement_id,
+                                        change="coverage_L1_added",
+                                        detail=f.title, decision="DEC-46"))
+            if add_items:
+                corpus = pd.concat([corpus, pd.DataFrame(add_items)], ignore_index=True)
+                maps = pd.concat([maps, pd.DataFrame(add_maps)[MAP_COLS]], ignore_index=True)
 
         # ---------------- DEC-19 promote ----------------
         todo = list(PROMOTE) + ([R14_REPAIR] if a.close_r14_repair else [])
@@ -238,19 +296,34 @@ def main():
     assert corpus.source_url.str.startswith("https://").all()
 
     # ---------------- gap request ----------------
-    covered = set(l1.requirement_id)
+    # ข้อกำหนดที่ยังไม่มีรายการ L1 ที่ verified รองรับ · คอลัมน์ proposed_items = รายการ coverage track ที่รอผู้วิจัยยืนยัน (DEC-46)
+    ver = set(corpus[corpus.verification_status == "verified"].item_id)
+    covered = set(l1[l1.item_id.isin(ver)].requirement_id)
+    pend = l1[~l1.item_id.isin(ver)]
+    prop = {}
+    add_path = os.path.join(DATA, "corpus_additions.csv")
+    if os.path.exists(add_path) and not a.no_additions:
+        for _, f in rd(add_path).iterrows():
+            if f.researcher_result.strip().upper() in ("LIVE", "OK", "VERIFIED"): continue
+            for _, q in req[req.element_id.isin(f.elements.split("|"))].iterrows():
+                prop[q.requirement_id] = "|".join(filter(None, [prop.get(q.requirement_id, ""), f.key]))
     gap = req[~req.requirement_id.isin(covered)]
+    def why(q):
+        if q.requirement_id in prop: return "มีรายการ coverage track รอผู้วิจัยยืนยันใน data/corpus_additions.csv"
+        if q.requirement_id == "REQ-R14-4.A.3.b.5":
+            return "ไม่มีรายการ verified ที่สอนการซ่อมบำรุงอุปกรณ์อิเล็กทรอนิกส์ (DEC-19)"
+        if q.requirement_id in set(pend.requirement_id): return "มี L1 แต่รายการรอตรวจ URL (data/url_manual_check.csv)"
+        return "ยังไม่มีรายการชั้น L1"
     gap_rows = [dict(requirement_id=q.requirement_id, role_id=q.role_id, element_id=q.element_id,
                      element_name=q.element_name, domain=q.domain, importance_im=q.importance_im,
                      rank_in_role=q.rank_in_role, selected_reason=q.selected_reason,
-                     status="open", reason=("ไม่มีรายการในคลังที่สอนการซ่อมบำรุงอุปกรณ์อิเล็กทรอนิกส์จริง "
-                                            "ตัวเลือกจากกฎ R19-fix เป็นหลักสูตรกู้คืนระบบ (DEC-19)")
-                     if q.requirement_id == "REQ-R14-4.A.3.b.5" else "ยังไม่มีรายการชั้น L1",
-                     decision="DEC-19") for _, q in gap.iterrows()]
+                     status="proposed" if q.requirement_id in prop else "open", reason=why(q),
+                     proposed_items=prop.get(q.requirement_id, ""),
+                     decision="DEC-46" if q.requirement_id in prop else "DEC-19") for _, q in gap.iterrows()]
     pd.DataFrame(gap_rows, columns=["requirement_id", "role_id", "element_id", "element_name", "domain",
                                     "importance_im", "rank_in_role", "selected_reason", "status", "reason",
-                                    "decision"]).to_csv(os.path.join(DATA, "corpus_gap_request.csv"), index=False,
-                                                        encoding="utf-8", lineterminator="\n")
+                                    "proposed_items", "decision"]).to_csv(
+        os.path.join(DATA, "corpus_gap_request.csv"), index=False, encoding="utf-8", lineterminator="\n")
 
     corpus.to_csv(os.path.join(DATA, "corpus.csv"), index=False, encoding="utf-8", lineterminator="\n")
     maps[MAP_COLS].to_csv(os.path.join(DATA, "mappings.csv"), index=False, encoding="utf-8", lineterminator="\n")

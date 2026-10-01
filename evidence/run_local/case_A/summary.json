@@ -11,16 +11,16 @@
  "C": 1,
  "unsupported_claims": 4,
  "n_claims": 67,
- "plan_items": 5,
- "plan_hours": 156,
+ "plan_items": 7,
+ "plan_hours": 185,
  "Hmax": 259.8,
  "gaps": 13,
- "gap_coverage": 0.8462,
- "gap_coverage_with_candidate": 0.8462,
+ "gap_coverage": 0.9231,
+ "gap_coverage_with_candidate": 0.9231,
  "uncovered_no_candidate": 0,
- "uncovered_over_capacity": 2,
+ "uncovered_over_capacity": 1,
  "pii_masked": 3,
  "model_calls": 3,
  "send_calls": 3,
- "report_hash": "9a23472452475953e1d196576883abc4776d08e4a1cf11f83d3465281963b71d"
+ "report_hash": "e4dff65b5b6db474d600f340e2db7f4bff13a35d4ade59ba1cda36298b821b19"
 }

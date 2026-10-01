@@ -41,6 +41,9 @@
 | 42 | 1 ต.ค. | D2 workflow เดียว `WF_IS68076026.json` ครอบคลุมทุกขั้น (แทน DEC-30, DEC-37) | ✅ ผู้วิจัยตัดสิน · ดำเนินการใน Phase 2 |
 | 43 | 1 ต.ค. | D3 ชื่อรุ่นคลัง `CORPUS_IS68076026-v1.5-01OCT26` (แทนชื่อใน DEC-31) | ✅ |
 | 44 | 1 ต.ค. | WF_Demo ไม่ใส่ในเล่ม (DEC-39 เป็นงานนอกเล่ม) · เขียนเล่มใหม่ทั้งหมดจาก fact sheet | ✅ |
+| 45 | 1 ต.ค. | รายการพื้นฐาน DEC-18 map กับทุกอาชีพที่มีองค์ประกอบเดียวกัน | ✅ ใช้แล้ว · 👤 ผู้วิจัยยืนยัน |
+| 46 | 1 ต.ค. | coverage track: รายการเรียนรู้ใหม่ 14 รายการใน `data/corpus_additions.csv` เข้าคลังเมื่อผู้วิจัยยืนยัน | ⏳ รอผู้วิจัยยืนยันทุกรายการ |
+| 47 | 1 ต.ค. | วิธีเลือกรายการคง weighted_greedy (สมการ d_k) หลังเทียบ coverage_first และ ILP | ✅ |
 
 ---
 
@@ -183,4 +186,30 @@
 **ไฟล์ที่กระทบ** `book/` · `archive/01OCT26/book_draft_v0/` · `scripts/build_book.py` · `scripts/check_docx_format.py` · `scripts/check_overlap.py` · `evidence/`
 **ผลต่อเล่ม** ทั้งเล่ม
 **วิธีย้อนกลับ** คัดลอก `archive/01OCT26/book_draft_v0/*.md` กลับไป `book/`
+
+## DEC-45 · รายการพื้นฐาน (DEC-18) ใช้กับทุกอาชีพที่มีองค์ประกอบเดียวกัน
+**วันที่** 1 ต.ค. 2569 · Claude เสนอและใช้ใน build · 👤 ผู้วิจัยยืนยันการตีความ
+**ปัญหา** DEC-18 map รายการพื้นฐาน 6 รายการ (URL ตรวจแล้ว ชั่วโมง 6–21) เฉพาะข้อที่ตอนนั้นยังไม่มี L1 อาชีพอื่นที่มีองค์ประกอบเดียวกันจึงเหลือแต่ใบรับรองยาว 40–300 ชม. ทำให้ ILP พบว่าไม่มีอาชีพใดครอบคลุม 30 ข้อได้ภายใน Hmax 259.8 ชม.
+**การตัดสินใจ** ใช้รายการองค์ประกอบของแต่ละรายการตาม DEC-18 เดิม แต่ map กับทุกอาชีพที่มีองค์ประกอบนั้นในชุด 30 ข้อ (ชั้น L1 · mapping_method foundation_track) · บันทึกแถวที่เพิ่มเป็น `foundation_L1_extended` ใน `data/corpus_change_log.csv`
+**ผล** คลัง 571 → 602 รายการ · L1 เพิ่ม 129 แถว · แผนจำลอง 6 เดือน 10 ชม. 489 → 538/600 · ความครอบคลุมของคลังคง 598
+**ไฟล์ที่กระทบ** `scripts/build_corpus.py` · `data/corpus.csv` · `data/mappings.csv` · `data/mapping_review.csv` · `data/corpus_change_log.csv` · `data/manifest.json` · `sheets_import/`
+**ผลต่อเล่ม** ตัวเลขคลังและความครอบคลุมเปลี่ยนตาม `book/numbers.json`
+**วิธีย้อนกลับ** `python scripts/build_data_all.py` โดยแก้ขั้น build_corpus ให้ใส่ `--foundation-uncovered-only`
+
+## DEC-46 · coverage track: รายการเรียนรู้ใหม่ที่สั้นและครอบคลุมหลายข้อ
+**วันที่** 1 ต.ค. 2569 · ⏳ รอผู้วิจัยยืนยันทุกรายการ (DEC-16)
+**ปัญหา** หลัง DEC-45 ยังขาด 2 ข้อในคลัง และแผนจำลองขาด 62 ข้อ · ILP ระบุว่าสาเหตุหลักคือชั่วโมงไม่พอ (43 ข้อ) ไม่ใช่ลำดับการเลือก (17 ข้อ)
+**การตัดสินใจ** Claude เปิดหน้าเว็บจริงด้วยเบราว์เซอร์ 1 ต.ค. 2569 แล้วเสนอ 14 หลักสูตร (Coursera · ผู้ให้บริการ Google, IBM, Duke, Michigan, UC Irvine, UVA, Imperial, Board Infinity, Coursera) ชั่วโมง 2–23 (ใช้ค่าที่มากกว่าระหว่างชั่วโมงที่หน้าเว็บระบุกับผลรวมโมดูล) ลงใน `data/corpus_additions.csv` พร้อมองค์ประกอบ O*NET ที่สอน · `build_corpus.py` นำเข้าคลังเฉพาะแถวที่ผู้วิจัยกรอก `researcher_result` = LIVE · แถวที่ยังไม่ยืนยันไม่เข้าคลังเลย จึงไม่กระทบเกณฑ์ 90% ของ DEC-21
+**ผล (จำลอง ไม่ใช่ผล)** ถ้ายืนยันครบ: คลัง 600/600 · แผนจำลอง 600/600 · ILP ทุกอาชีพอยู่ใน Hmax (166–236 ชม.) · ปิด REQ-R14-4.A.3.b.5 ด้วย Technical Support Fundamentals แทน `--close-r14-repair`
+**ไฟล์ที่กระทบ** `data/corpus_additions.csv` (ใหม่ · ผู้วิจัยแก้ได้ด้วยโปรแกรมแก้ข้อความ) · `scripts/build_corpus.py` · `data/corpus_gap_request.csv` (คอลัมน์ proposed_items) · `scripts/simulate_coverage.mjs --what-if` · `scripts/coverage_diagnostics.py` · `evidence/coverage_600_01OCT26.md`
+**ผลต่อเล่ม** เล่มรายงานค่าที่นับได้จริงจาก numbers.json และประโยค `{{cov_status_note}}` ที่หายเองเมื่อถึง 600
+**วิธีย้อนกลับ** ลบแถวใน `data/corpus_additions.csv` หรือใส่ `--no-additions`
+
+## DEC-47 · วิธีเลือกรายการเรียนรู้คงสมการ d_k (weighted_greedy)
+**วันที่** 1 ต.ค. 2569
+**ปัญหา** Prompt_Report ข้อ 1.4(1) ให้เทียบ coverage-first greedy กับ ILP สำหรับอาชีพที่แผนไม่ครบทั้งที่ ILP ทำได้
+**การตัดสินใจ** เพิ่มตัวเลือก `strategy` ใน `engine.buildPlan` (weighted_greedy · coverage_first) และ ILP ใน `scripts/coverage_diagnostics.py` เป็นตัวเทียบ · ผล 6 เดือน 10 ชม.: ข้อมูลปัจจุบัน 538 / 539 / ILP 549 · ถ้ายืนยันรายการใหม่ 600 / 600 / 600 · ต่างกันไม่เกิน 1 ข้อระหว่างสองวิธี greedy และ ILP ทำใน Code node ไม่ได้ จึงคง weighted_greedy (`config/project.json` plan_strategy) ตามสมการเดิม
+**ไฟล์ที่กระทบ** `engine/engine.js` (strategy, c_k) · `config/project.json` · `scripts/simulate_coverage.mjs`
+**ผลต่อเล่ม** หัวข้อการจัดแผนอธิบายผลการเทียบหนึ่งย่อหน้า
+**วิธีย้อนกลับ** ตั้ง plan_strategy = coverage_first
 

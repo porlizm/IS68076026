@@ -61,6 +61,43 @@ def main():
                   f"c{k}_hours": fmt(s["plan_hours"]), f"c{k}_abstained": fmt(s["total"] - s["decided"]),
                   f"c{k}_gapcov": s["gap_coverage"] if isinstance(s["gap_coverage"], str) else f"{s['gap_coverage']:.2f}",
                   f"c{k}_nocand": fmt(s["uncovered_no_candidate"])})
+    # ---------- ความครอบคลุม 600 (DEC-41) ----------
+    n["cov_corpus"] = fmt(sim["corpus_coverage"]); n["cov_plan"] = fmt(cap[(6, 10)]["covered"])
+    n["cov_corpus_gap"] = fmt(600 - sim["corpus_coverage"]); n["cov_plan_gap"] = fmt(600 - cap[(6, 10)]["covered"])
+    n["plan_strategy"] = sim.get("strategy", "weighted_greedy")
+    for h in (5, 15, 20): n[f"cov_plan_6m{h}h"] = fmt(cap[(6, h)]["covered"])
+    mon = {s["months"]: s for s in sim.get("by_months_10h", [])}
+    for mm in (12, 18, 24): n[f"cov_plan_{mm}m10h"] = fmt(mon[mm]["covered"]) if mm in mon else "N/A"
+    n["cov_plan_mean_items"] = f"{cap[(6, 10)]['mean_items_per_plan']:.1f}"; n["cov_plan_mean_hours"] = f"{cap[(6, 10)]['mean_hours_per_plan']:.1f}"
+    n["Hmax_6m10h"] = f"{cap[(6, 10)]['Hmax']:.1f}"; n["Hmax_6m5h"] = f"{cap[(6, 5)]['Hmax']:.1f}"
+    dg = J("evidence", "coverage_diagnostics.json")
+    cur, fut = dg["scenarios"]["current"], dg["scenarios"]["url_and_additions"]
+    mins = [r["ilp_min_hours_all"] for r in cur["roles"]]; fmins = [r["ilp_min_hours_all"] for r in fut["roles"]]
+    n["ilp_min_lo"], n["ilp_min_hi"] = fmt(min(mins)), fmt(max(mins)); n["ilp_fit_roles"] = fmt(sum(r["fits_Hmax"] for r in cur["roles"]))
+    n["ilp_max_cov"] = fmt(cur["totals"]["ilp"]); n["ilp_min_lo_add"], n["ilp_min_hi_add"] = fmt(min(fmins)), fmt(max(fmins))
+    n["ilp_fit_roles_add"] = fmt(sum(r["fits_Hmax"] for r in fut["roles"]))
+    n["cause_hours"] = fmt(cur["totals"].get("cause_hours", 0)); n["cause_selection"] = fmt(cur["totals"].get("cause_selection", 0))
+    n["cause_no_item"] = fmt(cur["totals"].get("cause_no_item", 0))
+    adds = pd.read_csv(os.path.join(ROOT, "data", "corpus_additions.csv"), dtype=str, keep_default_na=False)
+    conf = adds.researcher_result.str.strip().str.upper().isin(["LIVE", "OK", "VERIFIED"])
+    n["add_total"] = fmt(len(adds)); n["add_confirmed"] = fmt(int(conf.sum())); n["add_pending"] = fmt(int((~conf).sum()))
+    n["add_hours_lo"] = fmt(adds.estimated_hours.astype(float).min()); n["add_hours_hi"] = fmt(adds.estimated_hours.astype(float).max())
+    n["foundation_ext_maps"] = fmt((pd.read_csv(os.path.join(ROOT, "data", "corpus_change_log.csv"), dtype=str).change == "foundation_L1_extended").sum())
+    wi = J("evidence", "coverage_whatif.json")["scenarios"]["url_and_additions"][n["plan_strategy"]]["primary_6m10h_both"]["covered"]
+    n["cov_whatif_plan"] = fmt(wi); n["cov_whatif_corpus"] = fmt(fut["totals"]["coverable"])
+    if sim["corpus_coverage"] == 600 and cap[(6, 10)]["covered"] == 600:
+        n["cov_status_note"] = "ทั้งสองตัวชี้วัดถึงเป้า 600 ข้อ"
+    else:
+        n["cov_status_note"] = (f"ยังไม่ถึงเป้า เพราะรายการเรียนรู้ใหม่ {n['add_pending']} รายการยังรอผู้วิจัยเปิดตรวจยืนยัน "
+                                f"ระบบจึงยังไม่นับรายการเหล่านี้ เมื่อยืนยันครบ การจำลองชุดเดียวกันให้ความครอบคลุมของคลัง "
+                                f"{n['cov_whatif_corpus']} ข้อ และของแผนจำลอง {n['cov_whatif_plan']} ข้อ")
+    trow = ["| อาชีพ | ข้อที่มีรายการรองรับ | แผนจำลองครอบคลุม | ชั่วโมงของแผน | ชั่วโมงขั้นต่ำเพื่อครบทุกข้อ (ILP) |", "|---|---|---|---|---|"]
+    per = {r["role_id"]: r for r in sim["primary_6m10h_both"]["per_role"]}
+    for r in cur["roles"]:
+        trow.append(f"| {r['role_id']} | {r['coverable']} | {per[r['role_id']]['covered']} | {per[r['role_id']]['hours']:,.0f} | {r['ilp_min_hours_all']:,.0f} |")
+    n["coverage_role_table"] = "\n".join(trow)
+    url = pd.read_csv(os.path.join(ROOT, "data", "url_manual_check.csv"), dtype=str, keep_default_na=False)
+    n["url_pending_urls"] = fmt(int((~url.researcher_result.str.strip().str.upper().isin(["LIVE", "OK", "VERIFIED"])).sum()))
     rows = ["| ไฟล์ | จำนวนแถว | SHA-256 |", "|---|---|---|"]
     for f, v in man["files"].items(): rows.append(f"| {f} | {v['rows']:,} | {v['sha256']} |")
     n["manifest_table"] = "\n".join(rows)

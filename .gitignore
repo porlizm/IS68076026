@@ -14,7 +14,7 @@ analysis/output/main/
 
 # build outputs (สร้างใหม่ได้ด้วยสคริปต์)
 build/
-book/numbers.json
+# book/numbers.json ตรึงใน git ตั้งแต่ Phase 1 (Prompt_Report 1.7)
 
 # OS / editor
 Thumbs.db
