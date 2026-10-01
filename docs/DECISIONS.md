@@ -122,3 +122,16 @@
 **ผลต่อเล่ม** ไม่มีเพิ่มจาก DEC-37
 **วิธีย้อนกลับ** `node scripts/build_workflows.mjs --legacy <โฟลเดอร์>` สร้างชุด 5 ไฟล์ล่าสุด (ตรวจแล้ว sha ตรงกับไฟล์ที่ย้าย) แล้วนำเข้าตาม `legacy_5wf.import_order`
 
+
+
+## DEC-39 · Demo รอบที่ 1 สำหรับคณะกรรมการ `demo/WF_Demo.json` (1 ต.ค. 2569)
+**ปัญหา** ต้องมีระบบที่โชว์ได้ทันทีบน n8n ในเครื่อง ตั้งแต่ฟอร์มถึงรายงาน โดยไม่ต้องตั้ง Google Sheets/Document AI/3 โมเดลแบบ `WF_Final_IS`
+**การตัดสินใจ**
+- workflow แยก `demo/WF_Demo.json` (28 โหนด) ไม่แตะ `workflows/` · หน้าเว็บเสิร์ฟจาก Webhook (`/webhook/is-demo`) · วิเคราะห์ที่ `/webhook/is-demo-analyze` · บันทึก PDF ที่ `/webhook/is-demo-save-pdf`
+- 4 อาชีพ R07 R15 R19 R20 · ข้อมูลจริงแบบ hardcode จาก `Data_Set.xlsx` + `data/requirements.csv` + `data/corpus.csv` (verified) + mapping L1 ผ่านตรวจ → `demo/build_demo_data.py`
+- Gemini โมเดลเดียว (ผู้วิจัยเลือก) ทำ OCR (เฉพาะไฟล์สแกน/รูป) + วิเคราะห์ด้วย prompt `analyst_v1.0` + ส่วนเสริม profile สำหรับแสดงผล · ตรวจ R0/R2/R3 ด้วยฟังก์ชันจาก `engine.js` ตรงทุกไบต์ · ไม่มี R1/R4 · ไม่ส่ง temperature (Gemini 3 แนะนำค่าเริ่มต้น)
+- Gemini ล้ม → กฎสำรองจับคู่คำพ้อง (ติดป้ายบนรายงาน) · แผนใช้ตรรกะ `buildPlan` (สมการ 3.7–3.8)
+- PDF ทำฝั่งเบราว์เซอร์ด้วย html-to-image + jsPDF เพราะ n8n 2.39 ใส่ CSP sandbox ทำให้ html2pdf/html2canvas ใช้ไม่ได้ · ส่งขึ้น Drive ผ่าน webhook (ผู้วิจัยเลือก)
+**ไฟล์ที่กระทบ** `demo/` เท่านั้น (ไม่เปลี่ยน engine/data/workflows/เล่ม)
+**ผลต่อเล่ม** ไม่มี (เป็นเครื่องมือสาธิต) · ถ้าจะอ้างในเล่มต้องระบุว่าเป็นรุ่นสาธิตโมเดลเดียว
+**ย้อนกลับ** ลบโฟลเดอร์ `demo/` หรือ unpublish workflow ใน n8n

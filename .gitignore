@@ -30,3 +30,8 @@ node_modules/
 
 # transfer bundles
 archive/01OCT26/*.tar.gz
+
+# demo test artifacts
+demo/test/node_modules/
+demo/test/out/
+demo/test/shots/

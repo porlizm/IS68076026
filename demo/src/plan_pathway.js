@@ -1,0 +1,119 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Plan Pathway (สมการ 3.7–3.8) · ตรรกะเดียวกับ engine.buildPlan
+//   Hmax = M × 4.33 × h                         (3.7)
+//   d_k  = Σ w(ข้อกำหนดช่องว่างใหม่ที่ k ปิดได้) / ชั่วโมง_k   (3.8)  เลือกมากสุดทีละรายการจนเต็ม Hmax
+//   ใช้เฉพาะคลังที่ verified + ความเชื่อมโยง L1 ที่ผ่านตรวจ (DEC-16, DEC-21) → ไม่มี URL ที่โมเดลแต่งขึ้น
+//   Demo เพิ่ม: ตัดใบรับรองที่ผู้สมัครมีแล้ว · จัดตารางเรียนรายสัปดาห์ตามลำดับ phase
+// ─────────────────────────────────────────────────────────────────────────────
+const round = (x, d) => (x === null || x === undefined || Number.isNaN(x) ? null : Math.round(x * 10 ** d) / 10 ** d);
+const v = $('Config & Validate').first().json;
+const cfg = v.cfg;
+const { months, hours_per_week: h, mode } = v.input;
+const role = $('Load Role Data (O*NET 31.0)').first().json.role;
+const text = $('Clean Text & Mask PII').first().json.text;
+const ev = $input.first().json;
+const rows = ev.requirements;
+
+const Hmax = round(months * cfg.WEEKS_PER_MONTH * h, 4);                       // สมการ 3.7
+const w = Object.fromEntries(rows.map((r) => [r.id, r.w]));
+const nameOf = Object.fromEntries(rows.map((r) => [r.id, r.name]));
+const gaps = rows.filter((r) => r.status === 'missing' || r.status === 'partially').map((r) => r.id);
+const gapSet = new Set(gaps);
+
+// ใบรับรองที่มีอยู่แล้ว (ค้นในเรซูเมแบบตรงคำ)
+const lines = text.toLowerCase().split(/\n|,|;|\||•/).map((l) => ' ' + l.replace(/\s+/g, ' ') + ' ');
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function owned(it) {
+  if (it.type !== 'certification') return null;
+  const keys = [];
+  if (it.exam_code && /^[A-Za-z0-9-]{3,}$/.test(it.exam_code)) keys.push(it.exam_code);
+  (it.title.match(/\(([^)]+)\)/g) || []).forEach((p) => { const k = p.slice(1, -1).trim(); if (k.length >= 3 && k.length <= 20) keys.push(k); });
+  keys.push(it.title.replace(/\s*\([^)]*\)\s*/g, ' ').trim());
+  for (const k of keys) {
+    const re = new RegExp('(^|[^a-z0-9])' + esc(k.toLowerCase()) + '($|[^a-z0-9])');
+    // ตรวจทีละบรรทัด และตัดกรณี "PMP preparation course" / "studying for CCNA" — ยังไม่ได้ใบรับรองจริง
+    for (const line of lines) {
+      if (re.test(line) && !/prep|preparation|course|training|studying|in progress|candidate|planned|กำลัง|เตรียมสอบ/.test(line)) return k;
+    }
+  }
+  return null;
+}
+const ownedItems = [];
+const Gk = {}; const candByReq = {};
+for (const it of role.items) {
+  const cov = (it.covers_l1 || []).filter((r) => gapSet.has(r));
+  const o = owned(it);
+  if (o) { ownedItems.push({ id: it.id, title: it.title, matched: o }); continue; }
+  if (!cov.length) continue;
+  cov.forEach((r) => { candByReq[r] = true; });
+  if (!it.modes.includes(mode)) continue;
+  Gk[it.id] = new Set(cov);
+}
+const items = Object.fromEntries(role.items.map((i) => [i.id, i]));
+const covered = new Set(); let cum = 0; const chosen = [];
+const pool = Object.keys(Gk).sort(); const EPS = 1e-12;
+for (;;) {
+  let best = null;
+  for (const id of pool) {
+    const hk = items[id].hours;
+    if (cum + hk > Hmax + EPS) continue;
+    const add = [...Gk[id]].filter((r) => !covered.has(r));
+    if (!add.length) continue;
+    const wsum = add.reduce((s, r) => s + w[r], 0);
+    const dk = wsum / hk;                                                       // สมการ 3.8
+    if (!best || dk > best.dk + EPS || (Math.abs(dk - best.dk) <= EPS && id < best.id)) best = { id, dk, add, wsum, hk };
+  }
+  if (!best) break;
+  cum += best.hk; best.add.forEach((r) => covered.add(r));
+  chosen.push({ ...best, rank: chosen.length + 1 });
+}
+
+// จัดตารางเรียน: foundation → core → advanced/cert prep แล้วตามลำดับที่ถูกเลือก
+const PHASE_ORDER = { foundation: 0, core_gap_closure: 1, advanced_or_cert_prep: 2 };
+const PHASE_TH = { foundation: 'ปูพื้นฐาน', core_gap_closure: 'ปิดช่องว่างหลัก', advanced_or_cert_prep: 'ขั้นสูง / เตรียมสอบใบรับรอง' };
+const ordered = chosen.slice().sort((a, b) => (PHASE_ORDER[items[a.id].phase] ?? 1) - (PHASE_ORDER[items[b.id].phase] ?? 1) || a.rank - b.rank);
+let t = 0;
+const planItems = ordered.map((c, i) => {
+  const it = items[c.id];
+  const startW = t / h; t += c.hk; const endW = t / h;
+  return {
+    seq: i + 1, pick_rank: c.rank, id: it.id, type: it.type, title: it.title, provider: it.provider, platform: it.platform,
+    url: /^https:\/\/[^\s"'<>]+$/i.test(it.url) ? it.url : '', level: it.level, difficulty: it.difficulty, delivery: it.delivery,
+    language: it.language, outcome_th: it.outcome_th, skills: it.skills, hours: c.hk, cost_cat: it.cost_cat, cost_usd: it.cost_usd,
+    exam_code: it.exam_code, validity_years: it.validity_years, phase: it.phase, phase_th: PHASE_TH[it.phase] || it.phase,
+    portfolio: it.portfolio, verified_on: it.verified_on,
+    covers: c.add.sort().map((r) => ({ id: r, name: nameOf[r] })), new_weight: round(c.wsum, 6), d_k: round(c.dk, 8),
+    start_week: round(startW, 2), end_week: round(endW, 2),
+    start_month: round(startW / cfg.WEEKS_PER_MONTH, 2), end_month: round(endW / cfg.WEEKS_PER_MONTH, 2),
+  };
+});
+
+// คะแนนคาดการณ์หลังเรียนจบแผน (สมมติว่าช่องว่างที่แผนครอบคลุมกลายเป็น evidenced)
+const D = rows.filter((r) => r.status !== 'abstained');
+const wD = D.reduce((s, r) => s + r.w, 0);
+const after = D.reduce((s, r) => s + r.w * (covered.has(r.id) ? 1 : ({ evidenced: 1, partially: 0.5, missing: 0 })[r.status]), 0);
+const withCand = gaps.filter((g) => candByReq[g]);
+let notice = '';
+if (!gaps.length) notice = 'ไม่พบช่องว่างทักษะจากข้อกำหนดที่ระบบสรุปได้ จึงไม่มีรายการเรียนรู้ในแผน';
+else if (!planItems.length) notice = 'ยังไม่มีรายการที่ผ่านการตรวจความเชื่อมโยงและอยู่ภายในเวลาที่จัดสรรได้ ลองเพิ่มชั่วโมงต่อสัปดาห์หรือระยะเวลา';
+
+return [{
+  json: {
+    ...ev,
+    plan: {
+      months, hours_per_week: h, mode, Hmax, total_hours: round(cum, 2), utilization: Hmax ? round(cum / Hmax, 4) : null,
+      weeks_needed: round(cum / h, 1), n_gaps: gaps.length, n_covered: covered.size,
+      gap_coverage: gaps.length ? round(covered.size / gaps.length, 4) : null,
+      gap_coverage_with_candidate: withCand.length ? round(covered.size / withCand.length, 4) : null,
+      uncovered_no_candidate: gaps.filter((g) => !candByReq[g]).map((r) => ({ id: r, name: nameOf[r] })),
+      uncovered_over_capacity: gaps.filter((g) => candByReq[g] && !covered.has(g)).map((r) => ({ id: r, name: nameOf[r] })),
+      owned: ownedItems,
+      items: planItems,
+      n_courses: planItems.filter((p) => p.type === 'course').length,
+      n_certs: planItems.filter((p) => p.type === 'certification').length,
+      cost_usd: planItems.reduce((s, p) => s + (p.cost_usd || 0), 0),
+      projected_readiness_pct: wD ? round((after / wD) * 100, 2) : null,
+      notice,
+    },
+  },
+}];

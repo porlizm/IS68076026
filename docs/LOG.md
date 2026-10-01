@@ -18,6 +18,11 @@
 
 ## ประวัติ session
 
+### 1 ต.ค. 2569 · Session 11: Demo รอบที่ 1 สำหรับคณะกรรมการ (DEC-39)
+**ทำอะไร** `demo/WF_Demo.json` 28 โหนด: หน้าเว็บ glassmorphism (Light/Dark, ฟอร์ม 4 อาชีพ, 6/12/18/24 เดือน, ชม./สัปดาห์, อัปโหลด) → OCR (text layer / Gemini) → ปิดบัง PII → Gemini + R0·R2·R3 → แผน (3.7–3.8) → รายงาน + ดาวน์โหลด PDF + บันทึก Google Drive · ข้อมูลจริง hardcode (O*NET 31.0 + คลัง v1.5R verified) · เรซูเมสมมติ 4 อาชีพ + ไฟล์สแกนใน `demo/samples/` · คู่มือ `demo/README_Demo.md`
+**พบอะไร** n8n 2.39 เสิร์ฟ HTML ของ webhook ใต้ CSP sandbox → html2pdf ใช้ไม่ได้ (แก้ด้วย html-to-image + jsPDF) · ทดสอบบน n8n 2.39.9 จริง (import/publish/รันครบ, CORS null ถูกต้อง) แต่ยังไม่ได้ทดสอบกับ Gemini/Drive จริง
+**ค้าง** 👤 ใส่ Gemini API key + Drive credential แล้วซ้อมตาม README ก่อนวันโชว์ · commit `demo/`
+
 ### 1 ต.ค. 2569 · Session 10 (ต่อ): จัดระเบียบโฟลเดอร์แม่ `Documents\IS - n8n resume analysis`
 - รากโฟลเดอร์เหลือ `Final_IS/` + `archive/` + `README.md` (ชี้มาที่ Final_IS)
 - ย้าย 15 รายการ (01_docs–07_sheets_import, IS_Files_01OCT26, Data_Set.xlsx และ PDF ฉบับขอสอบที่ sha ตรงกับใน Final_IS, README/MOVE_LOG เดิม, .work, .agents และ .git ว่าง) ไป `archive/2026-10_pre_Final_IS/` · บันทึก `archive/MOVE_LOG_01OCT26.csv` · ไม่มีสคริปต์ใน Final_IS อ้างไฟล์นอกโฟลเดอร์

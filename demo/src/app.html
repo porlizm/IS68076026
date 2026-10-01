@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill-Gap Navigator · IS 68076026</title>
+<script>
+  (function () { // ตั้งธีมก่อนวาดหน้า (หน้า n8n อยู่ใน sandbox → localStorage อาจใช้ไม่ได้)
+    var t = null;
+    try { t = localStorage.getItem('sgn-theme'); } catch (e) {}
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>/*@@APP_CSS@@*/</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-in glass">
+    <div class="brand">
+      <div class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c3-6 6-9 9-10"/><path d="M13 9l-1.5-4.5L16 6"/><circle cx="18" cy="6" r="2.2"/><circle cx="5" cy="19" r="1.6"/></svg></div>
+      <div>Skill-Gap Navigator<small>IS 68076026 · ITM KMITL</small></div>
+    </div>
+    <div class="nav-sp"></div>
+    <span class="chip" id="envChip"><span class="dot"></span><span id="envTxt">n8n · Production</span></span>
+    <span class="chip">O*NET 31.0</span>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="สลับโหมดสว่าง/มืด" title="สลับโหมดสว่าง/มืด">
+      <span class="theme-ico">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<main class="shell">
+  <!-- ======================= VIEW 1 · FORM ======================= -->
+  <section class="view on" id="vForm" aria-labelledby="heroTitle">
+    <div class="hero">
+      <span class="eyebrow glass">Multi-Model GenAI · Hallucination-Reduced <b>Demo รอบที่ 1</b></span>
+      <h1 id="heroTitle">วิเคราะห์ช่องว่างทักษะ<wbr><span style="white-space:nowrap">จากเรซูเม</span><br><span class="grad-text">พร้อมเส้นทางการเรียนรู้ที่ตรวจสอบได้</span></h1>
+      <p>เลือกอาชีพเป้าหมาย กำหนดเวลาเรียน แล้วอัปโหลดเรซูเม ระบบจะเทียบกับข้อกำหนด O*NET 30 ข้อ ตรวจหลักฐานแบบตรงตัวอักษร และจัดแผนคอร์ส/ใบรับรองจากคลังที่ยืนยันแล้วเท่านั้น</p>
+      <div class="hero-meta">
+        <span class="chip">30 ข้อกำหนด/อาชีพ · 4 โดเมน</span>
+        <span class="chip">กฎตรวจ R0 · R2 · R3</span>
+        <span class="chip">คลังคอร์ส verified 103 รายการ</span>
+      </div>
+    </div>
+
+    <form class="form-card glass" id="mainForm" novalidate>
+      <div class="step" id="st1">
+        <div class="step-n">1</div>
+        <div>
+          <h3>อาชีพเป้าหมาย</h3>
+          <p class="hint">ข้อกำหนดของแต่ละอาชีพมาจาก O*NET 31.0 (Top-30 ตามค่าความสำคัญ IM ≥ 3.0)</p>
+          <div class="roles" id="roles" role="radiogroup" aria-label="อาชีพเป้าหมาย"></div>
+        </div>
+      </div>
+
+      <div class="step" id="st2">
+        <div class="step-n">2</div>
+        <div>
+          <h3>เวลาที่ใช้เรียน</h3>
+          <p class="hint">ระบบจะจัดแผนไม่ให้เกินชั่วโมงเรียนรวมที่คุณมี</p>
+          <div class="row2">
+            <div>
+              <div class="label">ระยะเวลา</div>
+              <div class="seg" id="segMonths" role="group" aria-label="ระยะเวลาเรียน">
+                <span class="pill"></span>
+                <button type="button" data-v="6">6<small>เดือน</small></button>
+                <button type="button" data-v="12">12<small>เดือน</small></button>
+                <button type="button" data-v="18">18<small>เดือน</small></button>
+                <button type="button" data-v="24">24<small>เดือน</small></button>
+              </div>
+              <div class="label" style="margin-top:18px">รูปแบบแผน</div>
+              <div class="seg" id="segMode" role="group" aria-label="รูปแบบแผน">
+                <span class="pill"></span>
+                <button type="button" data-v="both">คอร์ส + ใบรับรอง</button>
+                <button type="button" data-v="course_only">คอร์สอย่างเดียว</button>
+                <button type="button" data-v="certification_only">ใบรับรองอย่างเดียว</button>
+              </div>
+            </div>
+            <div>
+              <div class="label"><label for="hrs">ชั่วโมงเรียนต่อสัปดาห์</label><span>1–40 ชม.</span></div>
+              <div class="slider-wrap">
+                <input type="range" id="hrs" min="1" max="40" step="1" value="10" aria-label="ชั่วโมงต่อสัปดาห์">
+                <input class="num-box" id="hrsNum" type="number" min="1" max="60" value="10" aria-label="ชั่วโมงต่อสัปดาห์ (ตัวเลข)">
+              </div>
+              <div class="presets" id="presets">
+                <button type="button" data-v="5">5 ชม.</button><button type="button" data-v="10">10 ชม.</button>
+                <button type="button" data-v="15">15 ชม.</button><button type="button" data-v="20">20 ชม.</button>
+              </div>
+              <div class="capacity">
+                <div class="big"><span id="capH">520</span><span style="font-size:15px;font-weight:600"> ชม.</span></div>
+                <div class="eq">ชั่วโมงเรียนรวมสูงสุด (สมการ 3.7)<br><span class="mono" id="capEq">Hmax = 12 × 4.33 × 10</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="st3">
+        <div class="step-n">3</div>
+        <div>
+          <h3>อัปโหลดเรซูเม</h3>
+          <p class="hint">PDF (มีข้อความหรือสแกน) หรือรูปภาพ PNG/JPG · ไม่เกิน 10 MB · อ่านสูงสุด 5 หน้า</p>
+          <label class="drop" id="drop" for="file">
+            <div class="drop-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+            <strong>ลากไฟล์มาวาง หรือคลิกเพื่อเลือก</strong>
+            <span>ข้อมูลส่วนบุคคล (อีเมล เบอร์โทร URL เลขบัตร) จะถูกปิดบังก่อนส่งให้ AI</span>
+            <input type="file" id="file" class="sr" accept="application/pdf,image/png,image/jpeg">
+          </label>
+          <div class="file-chip" id="fileChip">
+            <div class="fi" id="fileIco">PDF</div>
+            <div class="fn"><b id="fileName">resume.pdf</b><span id="fileMeta">—</span></div>
+            <button type="button" class="icon-btn" id="fileClear" aria-label="ลบไฟล์"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="consent">
+            <span class="cbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span>
+            <span>ยินยอมให้ระบบประมวลผลเรซูเมเพื่อการสาธิตงานวิจัย ข้อความถูกปิดบังข้อมูลส่วนบุคคลก่อนส่งให้ Google Gemini และไม่มีการบันทึกไฟล์ลงฐานข้อมูล</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <div class="sum" id="formSum">เลือกอาชีพเป้าหมายเพื่อเริ่มต้น</div>
+        <button class="btn btn-primary" id="submitBtn" type="submit" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
+          วิเคราะห์และวางแผน
+        </button>
+      </div>
+    </form>
+
+    <div class="how">
+      <div class="glass reveal"><span class="hi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><b>1 · OCR</b>อ่าน text layer ก่อน ถ้าเป็นไฟล์สแกนจึงใช้ Gemini OCR</div>
+      <div class="glass reveal"><span class="hi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><b>2 · ปิดบัง PII</b>อีเมล เบอร์ URL เลขบัตร ถูกแทนด้วยป้ายกำกับ</div>
+      <div class="glass reveal"><span class="hi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></span><b>3 · วิเคราะห์</b>Gemini ตัดสิน 30 ข้อกำหนดพร้อมคัดข้อความอ้างอิง</div>
+      <div class="glass reveal"><span class="hi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><b>4 · ตรวจ R0·R2·R3</b>ตัดคำตอบที่อ้างข้อความไม่มีจริงหรือไม่เกี่ยวข้อง</div>
+      <div class="glass reveal"><span class="hi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6.5a3.5 3.5 0 0 0 0-7h-5a3.5 3.5 0 0 1 0-7H16"/></svg></span><b>5 · วางแผน</b>เลือกคอร์สที่ปิดช่องว่างได้มากที่สุดต่อชั่วโมง (สมการ 3.8)</div>
+    </div>
+  </section>
+
+  <!-- ======================= VIEW 2 · PROCESSING ======================= -->
+  <section class="view" id="vProc" aria-live="polite">
+    <div class="proc glass">
+      <div class="orb" aria-hidden="true"></div>
+      <h2>กำลังวิเคราะห์เรซูเม</h2>
+      <p class="sub" id="procSub">n8n กำลังประมวลผลตามขั้นตอนด้านล่าง</p>
+      <ol class="steps" id="steps"><span class="beam" id="beam"></span></ol>
+      <div class="tipline" id="tip"></div>
+      <div class="elapsed"><span id="procRun">—</span><span>เวลาที่ใช้ <b class="num" id="elapsed">0.0</b> วินาที</span></div>
+    </div>
+  </section>
+
+  <!-- ======================= VIEW 3 · REPORT ======================= -->
+  <section class="view" id="vReport">
+    <div id="report"></div>
+  </section>
+</main>
+
+<div class="dock glass" id="dock">
+  <button class="btn btn-ghost btn-sm" id="btnNew" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>วิเคราะห์ใหม่</button>
+  <button class="btn btn-ghost btn-sm" id="btnPdf" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>ดาวน์โหลด PDF</button>
+  <button class="btn btn-primary btn-sm" id="btnDrive" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a5 5 0 0 1-.6-10A6 6 0 0 1 18 8.5a4.5 4.5 0 0 1-.5 9"/><path d="M12 12v8"/><path d="M9 15l3-3 3 3"/></svg>บันทึกลง Google Drive</button>
+</div>
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
+<div class="tip" id="tipBox" role="tooltip"></div>
+
+<script>
+window.__BOOT__ = "__BOOT__";
+</script>
+<script>/*@@APP_JS@@*/</script>
+</body>
+</html>
