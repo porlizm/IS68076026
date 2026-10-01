@@ -1,0 +1,13 @@
+{
+ "rq1_macro_f1": true,
+ "rq1_abstain": true,
+ "kappa": true,
+ "rq2_relevance": true,
+ "rq2_item_accuracy": true,
+ "rq2_time": true,
+ "rq2_likert": {
+  "ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน": true,
+  "ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ": true,
+  "ข้อ 3 เหมาะกับเวลาที่จัดสรรได้": true
+ }
+}

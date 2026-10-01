@@ -1,0 +1,15 @@
+﻿metric_id,metric_name,definition_th,numerator,denominator,rq,computed_by,reported_in,notes
+MT-01,Extraction precision,จำนวนทักษะที่สกัดถูกต้อง หารด้วยจำนวนทักษะทั้งหมดที่ระบบสกัด,ทักษะที่สกัดถูกต้อง,ทักษะทั้งหมดที่ระบบสกัด,RQ1,analysis_v5.py,§4.2,
+MT-02,Extraction recall,จำนวนทักษะที่สกัดถูกต้อง หารด้วยจำนวนทักษะทั้งหมดใน ground truth,ทักษะที่สกัดถูกต้อง,ทักษะทั้งหมดใน ground truth,RQ1,analysis_v5.py,§4.2,
+MT-03,Extraction F1,ค่า harmonic mean ของ precision และ recall,—,—,RQ1,analysis_v5.py,§4.2,
+MT-04,Gap accuracy,จำนวนสถานะช่องว่างที่ตรงกับ ground truth หารด้วยข้อกำหนดทั้งหมดที่ประเมิน,สถานะที่ตรงกัน,30 รายการ × จำนวนผู้เข้าร่วม,RQ1,Workflow H + analysis_v5.py,§4.2,
+MT-05,Hallucination rate,ข้ออ้างช่องว่างที่ไม่มีหลักฐาน หารด้วยข้ออ้างช่องว่างทั้งหมดในเงื่อนไขนั้น,ข้ออ้างที่ไม่มีหลักฐาน,ข้ออ้างช่องว่างทั้งหมดในเงื่อนไขนั้น,RQ2,Workflow H + analysis_v5.py,§4.3,เกณฑ์ a priori: ของกรอบต้องต่ำกว่าทุก baseline
+MT-06,Out-of-scope claim rate,ข้ออ้างที่กล่าวถึงสมรรถนะนอกชุด 30 ที่ตรึงไว้ หารด้วยข้ออ้างทั้งหมดในเงื่อนไขนั้น,ข้ออ้างนอกชุด 30,ข้ออ้างทั้งหมดในเงื่อนไขนั้น,RQ2,condition_result,§4.3,ของกรอบต้องเป็น 0 โดยโครงสร้าง · ถ้าไม่เป็น 0 คือบั๊กของกฎ R0 ไม่ใช่ผลการทดลอง
+MT-07,Validation recall cost,ช่องว่างจริงที่ validation ตัดออก หารด้วยช่องว่างจริงทั้งหมดใน ground truth,ช่องว่างจริงที่ถูกตัด,ช่องว่างจริงทั้งหมด,RQ2,analysis_v5.py,§4.3,เกณฑ์ a priori ≤ 10% (CFG-16) · ต้องรายงานคู่กับ MT-05 เสมอ
+MT-08,False-exclusion rate,ข้ออ้างที่ถูกตัดออกแต่เป็นข้ออ้างจริง หารด้วยข้ออ้างที่ถูกตัดทั้งหมด,ข้ออ้างที่ถูกตัดแต่จริง,ข้ออ้างที่ถูกตัดทั้งหมด,RQ2,analysis_v5.py,§4.3,ใช้ exclusion_reason ในการแยกกลุ่ม
+MT-09,Whitelist compliance,รายการแนะนำที่อยู่ใน frozen corpus หารด้วยรายการแนะนำทั้งหมด,รายการที่อยู่ใน corpus,รายการแนะนำทั้งหมด,RQ3,pipeline_run,§4.4,1 ใน 5 ตัวของ recommendation validity
+MT-10,Recommendation-mode compliance,รายการแนะนำที่ตรงกับ mode ที่ผู้ใช้เลือก หารด้วยรายการแนะนำทั้งหมด,รายการที่ตรง mode,รายการแนะนำทั้งหมด,RQ3,pipeline_run,§4.4,เทียบกับ mode_rules
+MT-11,Gap coverage,ช่องว่างที่ผ่าน validation และมีรายการเรียนอย่างน้อยหนึ่งรายการ หารด้วยช่องว่างที่มี candidate ใน corpus,ช่องว่างที่มีรายการรองรับ,ช่องว่างที่มี candidate,RQ3,pipeline_run,§4.4,🔴 ต้องรายงานสองค่าตาม DEC-11: นับเฉพาะ mapping ชั้น L1 (อนุรักษ์นิยม) และนับ L1+L2 (ขอบบน)
+MT-12,Timeline feasibility,เวลารวมของรายการที่เลือกต้องไม่เกิน learning capacity ของผู้ใช้,แผนที่ไม่เกิน capacity,แผนทั้งหมด,RQ3,pipeline_run,§4.4,capacity ตาม CFG-09
+MT-13,Report-reference validity,รหัส คะแนน และรายการ timeline ในรายงานต้องตรงกับ verified JSON payload,รายงานที่รหัสตรงทั้งหมด,รายงานทั้งหมด,RQ3,pipeline_run.report_reference_validity,§4.4,
+MT-14,Evidence verified ratio,ข้อความหลักฐานที่ตรวจพบจริงในเรซูเมฉบับนิรนาม หารด้วยข้อความหลักฐานทั้งหมดที่ขั้น parsing สร้าง,หลักฐานที่ตรวจพบจริง,หลักฐานทั้งหมดที่ parser สร้าง,RQ1 · GATE-P,pipeline_run,§4.5,เกณฑ์ผ่าน pilot ≥ 0.90 (CFG-17) · เกณฑ์หยุด pipeline < 0.60 (CFG-02)

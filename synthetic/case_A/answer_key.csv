@@ -1,0 +1,31 @@
+requirement_id,element_id,element_name,expected_status,evidence_sentence,char_start,char_end
+REQ-R01-2.C.3.a,2.C.3.a,Computers and Electronics,evidenced,Maintained operating system images and server hardware inventory for 120 Linux and Windows hosts.,587,684
+REQ-R01-4.A.3.b.1,4.A.3.b.1,Working with Computers,evidenced,Configured Linux servers and set up computer systems networks for the staging and production environments.,478,584
+REQ-R01-4.A.2.a.2,4.A.2.a.2,Processing Information,evidenced,Designed an ETL pipeline that transformed data from five source systems into a PostgreSQL warehouse.,687,787
+REQ-R01-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,evidenced,Diagnosed production problems during on-call rotations and applied problem solving to restore service within SLA.,790,903
+REQ-R01-4.A.2.b.2,4.A.2.b.2,Thinking Creatively,evidenced,Designed databases and REST APIs for a new loyalty application from scratch.,1151,1227
+REQ-R01-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",evidenced,Coordinated with product owners and QA peers in daily stand-up meetings to report progress and blockers.,1654,1758
+REQ-R01-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,evidenced,"Analyzed API latency data and query plans to identify slow endpoints, improving p95 response time by 35 percent.",1539,1651
+REQ-R01-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,missing,,-1,-1
+REQ-R01-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",evidenced,Organized sprint backlog grooming and prioritized technical debt items with the team lead.,1761,1851
+REQ-R01-4.A.1.a.1,4.A.1.a.1,Getting Information,missing,,-1,-1
+REQ-R01-2.B.3.e,2.B.3.e,Programming,evidenced,Built and deployed a Python programming service for batch data processing used by 40 internal teams.,375,475
+REQ-R01-4.A.2.a.3,4.A.2.a.3,Evaluating Information to Determine Compliance with Standards,partially,Familiar with code review checklists and audit logging requirements.,2188,2256
+REQ-R01-2.A.2.a,2.A.2.a,Critical Thinking,partially,"Skills: critical thinking, teamwork, time management.",2259,2312
+REQ-R01-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,evidenced,Wrote documentation and runbooks for deployment procedures that reduced onboarding time for new engineers.,1230,1336
+REQ-R01-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,missing,,-1,-1
+REQ-R01-4.A.1.a.2,4.A.1.a.2,"Monitoring Processes, Materials, or Surroundings",evidenced,Set up observability dashboards and alerting in Grafana and monitored systems for latency regressions.,1339,1441
+REQ-R01-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",missing,,-1,-1
+REQ-R01-2.B.4.e,2.B.4.e,Judgment and Decision Making,partially,Participated in architecture meetings where the team selected approach options for caching.,2386,2477
+REQ-R01-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,missing,,-1,-1
+REQ-R01-2.C.4.a,2.C.4.a,Mathematics,partially,Coursework in statistics and linear algebra during the B.Eng. program.,2115,2185
+REQ-R01-2.C.1.e,2.C.1.e,Customer and Personal Service,missing,,-1,-1
+REQ-R01-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,missing,,-1,-1
+REQ-R01-2.A.1.a,2.A.1.a,Reading Comprehension,evidenced,Read specifications and RFC documents to implement OAuth 2.0 and OpenID Connect correctly.,1952,2042
+REQ-R01-2.A.2.b,2.A.2.b,Active Learning,partially,"Completed course: AWS Cloud Practitioner Essentials (online, 2025).",2045,2112
+REQ-R01-2.B.4.g,2.B.4.g,Systems Analysis,evidenced,Performed impact analysis and data flow modelling before migrating the monolith billing module.,1854,1949
+REQ-R01-2.A.1.b,2.A.1.b,Active Listening,missing,,-1,-1
+REQ-R01-2.B.2.i,2.B.2.i,Complex Problem Solving,evidenced,Debugged memory leaks in a Java microservice and resolved the incident by performing root cause analysis with heap dumps.,906,1027
+REQ-R01-2.B.3.b,2.B.3.b,Technology Design,evidenced,Led the system design of an event-driven order service and wrote the technical design document reviewed by architects.,1030,1148
+REQ-R01-2.B.4.h,2.B.4.h,Systems Evaluation,evidenced,Ran benchmarking and load tests to measure system performance before each quarterly release.,1444,1536
+REQ-R01-4.A.2.b.5,4.A.2.b.5,Scheduling Work and Activities,partially,Helped maintain the release schedule calendar for the platform team.,2315,2383

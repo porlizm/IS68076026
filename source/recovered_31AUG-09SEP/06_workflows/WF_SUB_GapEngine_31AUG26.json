@@ -1,0 +1,519 @@
+{
+  "name": "WF_SUB_GapEngine_31AUG26",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "submission_id"
+            },
+            {
+              "name": "role_id"
+            },
+            {
+              "name": "resume_profile"
+            },
+            {
+              "name": "evidence_corpus"
+            },
+            {
+              "name": "config"
+            },
+            {
+              "name": "rules_version"
+            },
+            {
+              "name": "snapshot_version"
+            },
+            {
+              "name": "run_index"
+            }
+          ]
+        }
+      },
+      "id": "a0738592",
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "onet_requirements",
+          "mode": "name"
+        },
+        "options": {
+          "returnAllMatches": true
+        }
+      },
+      "id": "a2eacbeb",
+      "name": "Load Requirements (30)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// สร้าง prompt เดียวใช้กับ analyst ทั้งสามตัว เพื่อให้ทุกเงื่อนไขได้อินพุตเดียวกัน (§3.8)\n// จงใจไม่ส่ง weight และ element_aliases ให้โมเดลเห็น — weight ทำให้โมเดลจัดอันดับเอง\n// ส่วน alias คือเฉลยของกฎ R3\nconst inp = $('When Executed by Another Workflow').first().json;\nconst reqs = $input.all().map(i=>i.json).filter(r=>r.requirement_id && r.role_id===inp.role_id);                 // 30 แถวของบทบาทนั้น\nconst profile = inp.resume_profile;            // JSON จากขั้น parse\nconst evidenceCorpus = inp.evidence_corpus;    // ข้อความนิรนาม + profile JSON\nconst list = reqs.map(r =>\n  `${r.requirement_id} | ${r.domain} | ${r.element_name} | ${r.element_description}`).join('\\n');\nconst system = [\n  'You assess whether a resume shows evidence for each required competency.',\n  'Rules you MUST follow:',\n  '1. Use ONLY the requirement_id values given below. Never invent one.',\n  '2. status must be one of: evidenced, partially, missing.',\n  '3. For evidenced or partially you MUST quote text that appears VERBATIM in the resume.',\n  '4. Never paraphrase a quote. Never infer a skill from a related tool.',\n  '5. Return strict JSON only, no prose.'\n].join('\\n');\nconst user = [\n  'REQUIREMENTS (requirement_id | domain | name | description):', list, '',\n  'RESUME PROFILE (JSON):', JSON.stringify(profile), '',\n  'RESUME TEXT (anonymised):', evidenceCorpus, '',\n  'Return: {\"claims\":[{\"requirement_id\":\"...\",\"status\":\"...\",\"evidence_quote\":\"...\",\"confidence\":0.0}]}'\n].join('\\n');\nreturn [{ json: { ...inp, requirements: reqs, system_prompt: system, user_prompt: user,\n                  prompt_version: 'P2-v0.9-draft' } }];\n"
+      },
+      "id": "cba89bb4",
+      "name": "Build Gap Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 3
+      },
+      "id": "36dc2850",
+      "name": "Merge Analyst Outputs",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model:'glm-5.2', temperature:0, thinking:{type:'disabled'}, messages:[{role:'system',content:$json.system_prompt},{role:'user',content:$json.user_prompt}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "c4f4bb63",
+      "name": "Call GLM 5.2 (analyst A)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const _r = $input.first().json;\nconst _t = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst _u = _r?.usage ?? _r?.usageMetadata ?? {};\nreturn [{ json: { ...$('Build Gap Prompt').first().json, raw_a:_t, usage_a:_u, model_a:'glm-5.2' } }];\n"
+      },
+      "id": "9463e799",
+      "name": "Tag A",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model:'claude-sonnet-5', max_tokens:8000, temperature:0, system:$json.system_prompt, messages:[{role:'user',content:$json.user_prompt}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        }
+      },
+      "id": "5199a3b5",
+      "name": "Call Sonnet 5 (analyst B)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const _r = $input.first().json;\nconst _t = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst _u = _r?.usage ?? _r?.usageMetadata ?? {};\nreturn [{ json: { raw_b:_t, usage_b:_u, model_b:'claude-sonnet-5' } }];\n"
+      },
+      "id": "f9964396",
+      "name": "Tag B",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ generationConfig:{temperature:0,thinkingConfig:{thinkingLevel:'minimal'}}, systemInstruction:{parts:[{text:$json.system_prompt}]}, contents:[{role:'user',parts:[{text:$json.user_prompt}]}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "506ec3cd",
+      "name": "Call Gemini 3.7 Flash (analyst C)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const _r = $input.first().json;\nconst _t = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst _u = _r?.usage ?? _r?.usageMetadata ?? {};\nreturn [{ json: { raw_c:_t, usage_c:_u, model_c:'gemini-3.7-flash' } }];\n"
+      },
+      "id": "5f7dd03b",
+      "name": "Tag C",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// ============================================================================\n// Deterministic Validation — กฎ R0 ถึง R4 · Readiness · ablation · เงื่อนไข C1–C4\n// ห้ามมี LLM ในชั้นนี้โดยเด็ดขาด (RQ2) · ทุกค่าคงที่อ่านจาก config ที่ฉีดเข้ามา\n// ============================================================================\nconst merged = $input.all().map(i => i.json);\nconst base = merged.find(m => m.requirements) || merged[0];\nconst CFG = base.config;                       // จาก config_master\nconst THETA = Number(CFG.THETA);\nconst reqs = base.requirements;\nconst allow = new Set(reqs.map(r => r.requirement_id));\nconst byId = Object.fromEntries(reqs.map(r => [r.requirement_id, r]));\nconst prefix = 'REQ-' + base.role_id + '-';\nconst corpusText = (base.evidence_corpus || '').toLowerCase();\n\n// ---------- ตัวช่วย ----------\nconst stem = w => w.replace(/(ing|ed|es|s|ment|tion|ions)$/,'');\nconst toks = s => (s||'').toLowerCase().match(/[a-z0-9ก-๙]+/g)?.map(stem) || [];\nfunction parseModel(raw) {\n  // ทนต่อ code fence และข้อความห่อหุ้ม\n  if (!raw) return [];\n  let t = String(raw).trim().replace(/^```(json)?/,'').replace(/```$/,'');\n  const s = t.indexOf('{'), e = t.lastIndexOf('}');\n  if (s < 0 || e < 0) return [];\n  try { const o = JSON.parse(t.slice(s, e+1)); return Array.isArray(o.claims) ? o.claims : []; }\n  catch { return []; }\n}\nconst MODELS = [\n  { key:'A', cond:'glm_only',    label:'glm-5.2',          raw: base.raw_a },\n  { key:'B', cond:'sonnet_only', label:'claude-sonnet-5',  raw: base.raw_b },\n  { key:'C', cond:'gemini_only', label:'gemini-3.7-flash', raw: base.raw_c },\n];\nconst parsed = {}, failed = [];\nfor (const m of MODELS) {\n  const c = parseModel(m.raw);\n  parsed[m.key] = c;\n  if (!c.length) failed.push(m.key);\n}\nif (failed.length === MODELS.length) throw new Error('ERR-GAPENGINE-FAILED: ทุกโมเดลคืนผลที่อ่านไม่ได้');\nconst tierCap = failed.length > 0 ? 'medium' : 'high';   // CFG-08\n\n// ---------- R2 · หลักฐานปรากฏจริงในข้อความหรือไม่ ----------\nconst quoteOk = q => !!q && corpusText.includes(String(q).toLowerCase().trim());\n\n// ---------- R3 · ความสอดคล้องเชิงความหมาย ----------\nfunction relevance(q, r) {\n  const tq = toks(q), td = toks(r.element_name + ' ' + r.element_description);\n  if (!tq.length || !td.length) return { ov:0, alias:false, ok:false };\n  const inter = tq.filter(t => td.includes(t)).length;\n  const ov = inter / Math.min(tq.length, td.length);\n  const aliases = String(r.element_aliases||'').split('|').map(a=>a.trim().toLowerCase()).filter(Boolean);\n  const ql = String(q).toLowerCase();\n  const alias = aliases.some(a => ql.includes(a) || toks(a).every(t => tq.includes(t)));\n  return { ov, alias, ok: ov >= THETA || alias };\n}\n\n// ---------- รวมข้ออ้างของทุกโมเดล ----------\nconst claimsByReq = {};           // requirement_id -> { A:{...}, B:{...}, C:{...} }\nconst outOfScope = { A:0, B:0, C:0 };\nconst totals    = { A:0, B:0, C:0 };\nconst gapClaims = { A:0, B:0, C:0 };\nfor (const m of MODELS) {\n  for (const c of parsed[m.key]) {\n    totals[m.key]++;\n    const id = String(c.requirement_id||'').trim();\n    const status = String(c.status||'').toLowerCase();\n    if (status === 'missing' || status === 'partially') gapClaims[m.key]++;\n    // ---------- R0 · ขอบเขต (DEC-08) ----------\n    if (!id.startsWith(prefix) || !allow.has(id)) { outOfScope[m.key]++; continue; }\n    (claimsByReq[id] = claimsByReq[id] || {})[m.key] = c;\n  }\n}\n\n// ---------- ตัดสินรายข้อกำหนด ----------\nconst rows = [];\nlet abl = { A1:0, A2:0, A3:0 };\nfor (const rid of Object.keys(claimsByReq)) {\n  const r = byId[rid], votes = claimsByReq[rid];\n  const keys = Object.keys(votes);\n  const tally = {};\n  for (const k of keys) { const s = String(votes[k].status||'').toLowerCase(); tally[s] = (tally[s]||0) + 1; }\n  const ranked = Object.entries(tally).sort((a,b) => b[1]-a[1]);\n  const top = ranked[0], tie = ranked.length > 1 && ranked[1][1] === top[1];\n\n  let status = top[0], supporters = keys.filter(k => String(votes[k].status).toLowerCase() === status);\n  let excl = '', tier = '', ov = 0, alias = false, quote = '', ok = true;\n\n  // ---------- R1 · เสียงข้างมาก ----------\n  if (tie)                { excl = 'EX-R1-TIED'; ok = false; }\n  else if (top[1] < 2)    { excl = 'EX-R1-NO-MAJORITY'; ok = false; }\n  if (ok) abl.A1++;\n\n  // ---------- R2 · หลักฐานตรงตัว ----------\n  if (ok && status !== 'missing') {\n    quote = votes[supporters[0]].evidence_quote || '';\n    if (!quoteOk(quote)) { excl = 'EX-R2-QUOTE-NOT-FOUND'; ok = false; }\n  }\n  if (ok) abl.A2++;\n\n  // ---------- R3 · ความสอดคล้อง ----------\n  if (ok && status !== 'missing') {\n    const rel = relevance(quote, r); ov = rel.ov; alias = rel.alias;\n    if (!rel.ok) { excl = 'EX-R3-RELEVANCE-BELOW-THETA'; ok = false; }\n  }\n  if (ok) abl.A3++;\n\n  // ---------- R4 · ระดับความเชื่อมั่น ----------\n  if (ok) tier = (top[1] >= 3 && tierCap === 'high') ? 'high' : 'medium';\n\n  rows.push({\n    submission_id: base.submission_id, run_index: base.run_index || 1, role_id: base.role_id,\n    snapshot_version: base.snapshot_version, rules_version: base.rules_version,\n    validated_at: new Date().toISOString(), requirement_id: rid,\n    domain: r.domain, element_name: r.element_name, weight: Number(r.weight_renormalized),\n    final_status: ok ? status : 'excluded', confidence_tier: tier, exclusion_reason: excl,\n    supporting_models: supporters.map(k => MODELS.find(m=>m.key===k).label).join('|'),\n    evidence_id: ok && quote ? 'EV-' + rid : '', evidence_quote: quote,\n    rationale: ok ? '' : excl,\n    per_model_json: JSON.stringify({ votes, ov: Number(ov.toFixed(4)), al: alias, tie }),\n    ablation_A1: !tie && top[1] >= 2 ? 1 : 0,\n    ablation_A2: (!tie && top[1] >= 2 && (status === 'missing' || quoteOk(quote))) ? 1 : 0,\n    ablation_A3: ok ? 1 : 0,\n  });\n}\n\n// ---------- Readiness · เหนือ validated เท่านั้น (§3.6) ----------\nconst validated = rows.filter(r => r.final_status !== 'excluded');\nconst excluded  = rows.filter(r => r.final_status === 'excluded');\nconst score = s => s === 'evidenced' ? 1 : (s === 'partially' ? 0.5 : 0);\nconst denom = validated.reduce((a,r) => a + r.weight, 0);\nconst numer = validated.reduce((a,r) => a + r.weight * score(r.final_status), 0);\nconst readiness = denom > 0 ? 100 * numer / denom : 0;\n\n// ---------- เงื่อนไข C1–C4 ----------\nconst cond = MODELS.map(m => ({\n  submission_id: base.submission_id, run_index: base.run_index || 1, condition: m.cond,\n  n_claims: totals[m.key], n_gap_claims: gapClaims[m.key],\n  n_out_of_scope_claims: outOfScope[m.key],\n  out_of_scope_claim_rate: totals[m.key] ? outOfScope[m.key] / totals[m.key] : 0,\n  rules_version: base.rules_version, theta: THETA,\n}));\ncond.push({\n  submission_id: base.submission_id, run_index: base.run_index || 1, condition: 'framework',\n  n_claims: rows.length, n_gap_claims: validated.filter(r => r.final_status !== 'evidenced').length,\n  n_out_of_scope_claims: 0,                    // เป็น 0 โดยโครงสร้างเพราะกฎ R0 (DEC-08)\n  out_of_scope_claim_rate: 0, rules_version: base.rules_version, theta: THETA,\n});\n\nreturn [{ json: {\n  ...base, gap_result: rows, condition_result: cond,\n  readiness_pct: Number(readiness.toFixed(2)),\n  n_validated: validated.length, n_excluded: excluded.length,\n  weight_share_of_pool: base.weight_share_of_pool,\n  ablation: abl, analyst_failures: failed,\n  verified_gaps: validated.filter(r => r.final_status !== 'evidenced')\n                          .map(r => ({ requirement_id: r.requirement_id, weight: r.weight,\n                                       element_name: r.element_name, status: r.final_status })),\n} }];\n"
+      },
+      "id": "0fac6162",
+      "name": "Deterministic Validation (R0–R4)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1750,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gap_result",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,run_index,role_id,snapshot_version,rules_version,validated_at,requirement_id,domain,element_name,weight,final_status,confidence_tier,exclusion_reason,supporting_models,evidence_id,evidence_quote,rationale,per_model_json,ablation_A1,ablation_A2,ablation_A3"
+      },
+      "id": "3ea2210d",
+      "name": "Write gap_result",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2000,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "condition_result",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,run_index,condition,n_claims,n_gap_claims,n_out_of_scope_claims,out_of_scope_claim_rate,rules_version,theta"
+      },
+      "id": "26c89dce",
+      "name": "Write condition_result",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2000,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "model_call_log",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,run_index,role_id,stage,model_id,provider,temperature,latency_ms,input_tokens,output_tokens,reasoning_tokens,prompt_version,snapshot_version,access_date,raw_response_sha256,raw_response_truncated,raw_response"
+      },
+      "id": "d5b51e00",
+      "name": "Write model_call_log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2000,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: $('Deterministic Validation (R0–R4)').first().json }];"
+      },
+      "id": "265abe77",
+      "name": "Return to Main",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2250,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Load Requirements (30)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Requirements (30)": {
+      "main": [
+        [
+          {
+            "node": "Build Gap Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Gap Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call GLM 5.2 (analyst A)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call Sonnet 5 (analyst B)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call Gemini 3.7 Flash (analyst C)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call GLM 5.2 (analyst A)": {
+      "main": [
+        [
+          {
+            "node": "Tag A",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag A": {
+      "main": [
+        [
+          {
+            "node": "Merge Analyst Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Sonnet 5 (analyst B)": {
+      "main": [
+        [
+          {
+            "node": "Tag B",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag B": {
+      "main": [
+        [
+          {
+            "node": "Merge Analyst Outputs",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Call Gemini 3.7 Flash (analyst C)": {
+      "main": [
+        [
+          {
+            "node": "Tag C",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag C": {
+      "main": [
+        [
+          {
+            "node": "Merge Analyst Outputs",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge Analyst Outputs": {
+      "main": [
+        [
+          {
+            "node": "Deterministic Validation (R0–R4)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deterministic Validation (R0–R4)": {
+      "main": [
+        [
+          {
+            "node": "Write gap_result",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Write condition_result",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Write model_call_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write gap_result": {
+      "main": [
+        [
+          {
+            "node": "Return to Main",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "errorWorkflow": "__SET_ERROR_WORKFLOW_ID__"
+  },
+  "meta": {
+    "instanceId": "IS68076026",
+    "description": "แกนงานวิจัย · analyst 3 ตัว + validation ด้วยโค้ดล้วน · สร้าง 2026-08-31 · snapshot ONET31.0-IS68076026-v1.0 · corpus CORPUS-IS68076026-v1.2-31AUG26 · rules RULES-IS68076026-v1.0-31AUG26"
+  },
+  "tags": [
+    {
+      "name": "IS68076026"
+    }
+  ]
+}

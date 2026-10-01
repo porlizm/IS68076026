@@ -1,0 +1,11 @@
+﻿condition_id,name,description_th,data_source,extra_api_calls,rq,notes
+C1,glm_only,ผลดิบของ GLM 5.2 ไม่ผ่าน validation,gap_result.per_model_json (A),ไม่,RQ2,baseline
+C2,sonnet_only,ผลดิบของ Claude Sonnet 5 ไม่ผ่าน validation,gap_result.per_model_json (B),ไม่,RQ2,baseline
+C3,gemini_only,ผลดิบของ Gemini 3.7 Flash ไม่ผ่าน validation,gap_result.per_model_json (C),ไม่,RQ2,baseline
+C4,framework,ผ่านกฎ R0 → R4 ครบ,gap_result.final_status,ไม่,RQ2,เงื่อนไขหลักของงานวิจัย
+C5,tradeoff,วัด recall cost และ false exclusion ของ C4 เทียบ ground truth,gap_result.exclusion_reason + ground_truth,ไม่,RQ2,ต้องรายงานคู่กับ hallucination rate เสมอ
+C6,extraction,วัด precision recall F1 ของขั้นสกัดทักษะ,resume_profile + ground_truth (extraction set),ไม่,RQ1,
+C7,ablation_A1,ใช้เพียงกฎความเห็นพ้อง (R1),gap_result.ablation_A1,ไม่,RQ2,คำนวณจาก log เดิม
+C8,ablation_A2,R1 + การตรวจข้อความหลักฐาน (R2),gap_result.ablation_A2,ไม่,RQ2,คำนวณจาก log เดิม
+C9,ablation_A3,R1 + R2 + ความสอดคล้องเชิงความหมาย (R3),gap_result.ablation_A3,ไม่,RQ2,ห้ามตัดออกจากแผนแม้เวลาไม่พอ เพราะตอบ RQ2 โดยตรงและไม่มีต้นทุน API
+C10,robustness,สุ่ม 10 เรซูเมด้วย seed ที่บันทึก แล้วรันสามโมเดลโดยเปิด reasoning ต่ำสุด,รันใหม่ 30 API calls,ใช่ (30 calls),อภิปราย,อยู่ในบทที่ 5 ไม่ใช่ผลการวิจัย · n=10 ไม่มี power · เป็นรายการแรกที่ตัดได้ถ้าเวลาไม่พอ

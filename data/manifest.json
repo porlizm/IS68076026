@@ -1,0 +1,49 @@
+{
+  "project": "IS 68076026",
+  "dataset_version": "ONET31.0-IS68076026-v1.0",
+  "corpus_version": "CORPUS-IS68076026-v1.5R-01OCT26",
+  "rules_version": "RULES-IS68076026-v1.0",
+  "prompt_version": "analyst_v1.0",
+  "updated_at": "2026-10-01T09:12:15+07:00",
+  "frozen": false,
+  "freeze_blockers": [
+    "รายการรอตรวจ URL 36 รายการ (data/url_manual_check.csv)",
+    "ยังไม่ผ่านการทดสอบนำร่อง 5 คน (P3) และยังไม่ได้หนังสือรับรองจริยธรรม (G2)",
+    "ยังไม่ได้ smoke test โมเดลจริงและบันทึกรหัสรุ่นในตารางที่ 3.8"
+  ],
+  "approved_rows": 1942,
+  "files": {
+    "requirements.csv": {
+      "sha256": "7ab13883eddba28dcae3486aa8df7d9183bd48e7b7d67e02ffd7a76cd4a9abf8",
+      "rows": 600
+    },
+    "roles.json": {
+      "sha256": "60960420a8ab5f6ac2e53d8658fcb93f82b6696642f1f6d37019a0fe2b3379ec",
+      "rows": 20
+    },
+    "aliases.csv": {
+      "sha256": "dec7f7bcc2a20d36129d7a3bbb80fae7004ab8cf4cb2a3d9bec5501e2432f98d",
+      "rows": 61
+    },
+    "corpus.csv": {
+      "sha256": "21b0342d5bbcd22954ca0b5dc5a266aa48b6e1035b56955f9f865acd8b3eeba9",
+      "rows": 571
+    },
+    "mappings.csv": {
+      "sha256": "f9935333ec9df17cf120cb069ccd24f620de7f4abc8d32ca3c9ebaddcc224d43",
+      "rows": 6883
+    },
+    "mapping_review.csv": {
+      "sha256": "e09fb55e171bcf5de0dbb2722a848266ccad1dd2bf38434af6ecf11272bc1e47",
+      "rows": 6883
+    },
+    "corpus_gap_request.csv": {
+      "sha256": "d40a4ceb0ee37c0314d4f01e7d44104baab3d6f7989d1023c8407421753013c5",
+      "rows": 1
+    },
+    "url_manual_check.csv": {
+      "sha256": "4ea460d3f784af820a6fd6743a2726f4e1517eb8022f0420802b8446fe62d234",
+      "rows": 28
+    }
+  }
+}

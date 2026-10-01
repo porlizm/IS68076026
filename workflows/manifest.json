@@ -1,0 +1,46 @@
+{
+  "built_at": "2026-10-01T02:12:17.282Z",
+  "engine_sha256": "9189db7b85f31606c9d1711a9c7fa717ced077133565bc8adcf60864e9054980",
+  "engine_version": "engine-1.0.0-01OCT26",
+  "n8n_version": "2.39.9",
+  "node_version": "24",
+  "import_order": [
+    "WF_Error",
+    "WF_SUB_GapEngine",
+    "WF_SUB_Decide",
+    "WF_SUB_Deliver",
+    "WF_Main_Intake"
+  ],
+  "workflows": {
+    "WF_Error": {
+      "file": "WF_Error.json",
+      "id": "is68ErrorWF00001",
+      "nodes": 6,
+      "sha256": "636c84c1c0de25a035831890ef43b5a6ab973c1d380d023ac9c460271da2a89b"
+    },
+    "WF_SUB_GapEngine": {
+      "file": "WF_SUB_GapEngine.json",
+      "id": "is68GapEngine001",
+      "nodes": 11,
+      "sha256": "1761a0999f8a04279f3b5af417b2aeb044e4900f05aa9bf5da43a9ff57ebaa22"
+    },
+    "WF_SUB_Decide": {
+      "file": "WF_SUB_Decide.json",
+      "id": "is68Decide000001",
+      "nodes": 13,
+      "sha256": "84348263554fa746a0a5bcc4eee3ef969b98d77986f89d7e6266329573977208"
+    },
+    "WF_SUB_Deliver": {
+      "file": "WF_SUB_Deliver.json",
+      "id": "is68Deliver00001",
+      "nodes": 13,
+      "sha256": "9f3725873090a47d848397c655e1bd9febb1b53005f5d68401a03b0aa90b8a16"
+    },
+    "WF_Main_Intake": {
+      "file": "WF_Main_Intake.json",
+      "id": "is68MainIntake01",
+      "nodes": 17,
+      "sha256": "d5e98344860c08eb4da696af883b1c5580b7531e1f6d8685bceba6900cafff90"
+    }
+  }
+}

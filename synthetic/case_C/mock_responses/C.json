@@ -1,0 +1,5 @@
+{
+ "simulate": "http_error",
+ "status": 429,
+ "times": 3
+}

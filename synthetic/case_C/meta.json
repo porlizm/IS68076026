@@ -1,0 +1,28 @@
+{
+ "case": "C",
+ "role_id": "R18",
+ "mode": "both",
+ "timeline_months": 6,
+ "hours_per_week": 10,
+ "email": "kittipong.mock@mail.test",
+ "timestamp": "2026-10-01T09:03:00+07:00",
+ "file_id": "SYNTH_FILE_C_0000000000000000000000",
+ "ocr_engine": "scanned_fixture (ต้องผ่าน OCR จริงใน S6)",
+ "pii_expected": {
+  "EMAIL": 1,
+  "URL": 1,
+  "ID": 0,
+  "PHONE": 1
+ },
+ "deviations": {
+  "A": {
+   "4.A.1.a.2": "flip:evidenced"
+  },
+  "B": {
+   "4.A.2.a.1": "flip:evidenced",
+   "4.A.2.b.2": "generic:partially"
+  },
+  "C": "HTTP_429"
+ },
+ "fictional": true
+}

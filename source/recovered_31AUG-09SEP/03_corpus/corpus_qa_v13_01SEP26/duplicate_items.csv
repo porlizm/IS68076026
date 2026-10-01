@@ -1,0 +1,61 @@
+﻿title,provider,n_rows,item_ids,roles,estimated_hours ที่ต่างกัน
+agile with atlassian jira,atlassian,3,CRS-R04-10|CRS-R09-13|CRS-R18-04,R04|R09|R18,N
+aws certified developer – associate,amazon web services,4,CRT-R01-01|CRT-R02-02|CRT-R03-03|CRT-R04-07,R01|R02|R03|R04,N
+aws certified generative ai developer – professional,amazon web services,2,CRT-R06-03|CRT-R07-03,R06|R07,N
+aws certified machine learning engineer – associate,amazon web services,2,CRT-R06-02|CRT-R07-02,R06|R07,N
+aws certified solutions architect – associate,amazon web services,13,CRT-R01-02|CRT-R05-11|CRT-R06-11|CRT-R07-11|CRT-R08-11|CRT-R09-11|CRT-R10-10|CRT-R12-11|CRT-R13-11|CRT-R15-11|CRT-R16-01|CRT-R18-11|CRT-R20-11,R01|R05|R06|R07|R08|R09|R10|R12|R13|R15|R16|R18|R20,N
+business analytics specialization,university of pennsylvania (wharton),2,CRS-R09-08|CRS-R18-05,R09|R18,N
+certified kubernetes administrator (cka),cloud native computing foundation,2,CRT-R16-08|CRT-R17-01,R16|R17,N
+certified kubernetes application developer (ckad),cloud native computing foundation,4,CRT-R01-05|CRT-R07-09|CRT-R14-11|CRT-R17-02,R01|R07|R14|R17,N
+certified secure software lifecycle professional (csslp),isc2,3,CRT-R01-09|CRT-R02-04|CRT-R03-10,R01|R02|R03,N
+comptia cysa+,comptia,2,CRT-R11-02|CRT-R14-09,R11|R14,N
+comptia security+,comptia,2,CRT-R11-01|CRT-R12-01,R11|R12,N
+data visualization with tableau specialization,university of california davis,3,CRS-R06-10|CRS-R09-05|CRS-R10-13,R06|R09|R10,N
+data warehousing for business intelligence specialization,university of colorado,2,CRS-R08-04|CRS-R10-08,R08|R10,N
+databricks certified machine learning associate,databricks,2,CRT-R06-06|CRT-R07-06,R06|R07,N
+databricks certified machine learning professional,databricks,2,CRT-R06-01|CRT-R07-07,R06|R07,N
+deep learning specialization,deeplearning.ai,2,CRS-R06-03|CRS-R07-01,R06|R07,N
+foundations of project management,google,10,CRS-R02-11|CRS-R03-11|CRS-R04-16|CRS-R08-12|CRS-R11-13|CRS-R12-15|CRS-R13-13|CRS-R14-12|CRS-R15-12|CRS-R17-13,R02|R03|R04|R08|R11|R12|R13|R14|R15|R17,N
+giac certified incident handler (gcih),giac (sans),2,CRT-R11-08|CRT-R14-03,R11|R14,N
+giac security essentials (gsec),giac (sans),2,CRT-R11-07|CRT-R12-08,R11|R12,N
+github foundations,github,2,CRT-R01-06|CRT-R02-07,R01|R02,N
+google advanced data analytics professional certificate,google,2,CRS-R06-07|CRS-R09-02,R06|R09,N
+google cloud professional cloud developer,google cloud,2,CRT-R01-07|CRT-R02-06,R01|R02,N
+google cloud professional machine learning engineer,google cloud,2,CRT-R06-04|CRT-R07-01,R06|R07,N
+google cybersecurity professional certificate,google,3,CRS-R11-01|CRS-R12-01|CRS-R13-09,R11|R12|R13,N
+google it automation with python professional certificate,google,6,CRS-R01-03|CRS-R02-13|CRS-R03-14|CRS-R04-03|CRS-R16-12|CRS-R17-09,R01|R02|R03|R04|R16|R17,N
+google project management professional certificate,google,2,CRS-R18-03|CRS-R19-01,R18|R19,N
+google technical writing courses (one and two),google,10,CRS-R04-15|CRS-R05-13|CRS-R06-12|CRS-R09-14|CRS-R11-12|CRS-R12-12|CRS-R15-11|CRS-R16-13|CRS-R17-11|CRS-R20-13,R04|R05|R06|R09|R11|R12|R15|R16|R17|R20,N
+hashicorp certified: terraform associate,hashicorp,2,CRT-R16-07|CRT-R17-03,R16|R17,N
+hashicorp terraform associate learning path,hashicorp,2,CRS-R16-06|CRS-R17-06,R16|R17,N
+iaap web accessibility specialist (was),international association of accessibility professionals,2,CRT-R02-05|CRT-R05-05,R02|R05,N
+ibm devops and software engineering professional certificate,ibm,2,CRS-R04-04|CRS-R17-01,R04|R17,N
+iiba certification in business data analytics (cbda),international institute of business analysis,2,CRT-R09-06|CRT-R18-07,R09|R18,N
+improving communication skills,university of pennsylvania (wharton),20,CRS-R01-11|CRS-R02-12|CRS-R03-13|CRS-R04-11|CRS-R05-12|CRS-R06-16|CRS-R07-11|CRS-R08-11|CRS-R09-12|CRS-R10-11|CRS-R11-11|CRS-R12-11|CRS-R13-11|CRS-R14-11|CRS-R15-14|CRS-R16-11|CRS-R17-12|CRS-R18-12|CRS-R19-12|CRS-R20-12,R01|R02|R03|R04|R05|R06|R07|R08|R09|R10|R11|R12|R13|R14|R15|R16|R17|R18|R19|R20,N
+informs certified analytics professional (cap),informs,2,CRT-R06-08|CRT-R09-08,R06|R09,N
+"introduction to containers w/ docker, kubernetes & openshift",ibm,2,CRS-R01-07|CRS-R17-07,R01|R17,N
+introduction to kubernetes (lfs158),the linux foundation,4,CRS-R01-09|CRS-R03-16|CRS-R16-09|CRS-R17-04,R01|R03|R16|R17,N
+introduction to linux (lfs101),the linux foundation,7,CRS-R10-10|CRS-R12-16|CRS-R13-14|CRS-R15-10|CRS-R17-05|CRS-R19-11|CRS-R20-14,R10|R12|R13|R15|R17|R19|R20,N
+introduction to statistics,stanford university,4,CRS-R04-12|CRS-R08-13|CRS-R09-11|CRS-R10-14,R04|R08|R09|R10,N
+isc2 certified information systems security professional (cissp),isc2,3,CRT-R11-12|CRT-R12-02|CRT-R20-09,R11|R12|R20,N
+itil 4 foundation,peoplecert (axelos),8,CRT-R01-11|CRT-R10-11|CRT-R11-11|CRT-R13-12|CRT-R16-11|CRT-R17-11|CRT-R19-09|CRT-R20-04,R01|R10|R11|R13|R16|R17|R19|R20,N
+leading teams,university of michigan,4,CRS-R03-15|CRS-R04-13|CRS-R12-13|CRS-R16-14,R03|R04|R12|R16,N
+mathematics for machine learning and data science specialization,deeplearning.ai,2,CRS-R06-05|CRS-R07-07,R06|R07,N
+meta database engineer professional certificate,meta,3,CRS-R01-06|CRS-R03-17|CRS-R10-01,R01|R03|R10,N
+meta front-end developer professional certificate,meta,2,CRS-R02-01|CRS-R05-09,R02|R05,N
+microsoft certified: azure ai cloud developer associate,microsoft,4,CRT-R01-03|CRT-R02-01|CRT-R03-02|CRT-R07-05,R01|R02|R03|R07,N
+microsoft certified: devops engineer expert,microsoft,2,CRT-R04-06|CRT-R17-04,R04|R17,N
+natural language processing specialization,deeplearning.ai,2,CRS-R06-09|CRS-R07-05,R06|R07,N
+nvidia-certified associate: generative ai llms,nvidia,2,CRT-R06-10|CRT-R07-08,R06|R07,N
+oracle certified professional: java se 21 developer,oracle,2,CRT-R01-04|CRT-R03-01,R01|R03,N
+palo alto networks certified network security engineer (pcnse),palo alto networks,2,CRT-R12-09|CRT-R15-06,R12|R15,N
+palo alto networks network security fundamentals,palo alto networks,2,CRS-R12-09|CRS-R15-09,R12|R15,N
+pcpp1 – certified professional in python programming 1,python institute,2,CRT-R01-08|CRT-R03-08,R01|R03,N
+"penetration testing, incident response and forensics",ibm,2,CRS-R13-01|CRS-R14-01,R13|R14,N
+pmi project management professional (pmp),project management institute,2,CRT-R19-01|CRT-R20-08,R19|R20,N
+professional scrum developer i (psd i),scrum.org,3,CRT-R01-10|CRT-R03-09|CRT-R04-10,R01|R03|R04,N
+professional scrum product owner i (pspo i),scrum.org,2,CRT-R05-10|CRT-R18-10,R05|R18,N
+site reliability engineering: measuring and managing reliability,google cloud,11,CRS-R02-14|CRS-R03-12|CRS-R04-14|CRS-R06-17|CRS-R12-14|CRS-R13-12|CRS-R15-13|CRS-R16-15|CRS-R17-02|CRS-R18-11|CRS-R20-11,R02|R03|R04|R06|R12|R13|R15|R16|R17|R18|R20,N
+snowpro core certification,snowflake,2,CRT-R08-06|CRT-R10-07,R08|R10,N
+sql for data science,university of california davis,6,CRS-R06-18|CRS-R07-15|CRS-R08-14|CRS-R09-07|CRS-R10-04|CRS-R18-06,R06|R07|R08|R09|R10|R18,N
+web accessibility by google,google,2,CRS-R02-10|CRS-R05-08,R02|R05,N

@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+book_numbers.py — คำนวณตัวเลขทุกตัวที่เล่มอ้าง จากไฟล์จริง (ไม่พิมพ์ตัวเลขลงเล่มด้วยมือ)
+  python scripts/book_numbers.py   -> book/numbers.json
+แหล่ง: data/*.csv · data/manifest.json · evidence/mapping_review_summary.json · evidence/coverage_simulation.json
+       evidence/run_local/case_*/summary.json · evidence/test_summary.json
+ตัวเลขในเล่มเขียนเป็น {{key}} และ scripts/build_book.py แทนค่าตอน build ถ้าไม่มี key ใด build จะหยุด
+"""
+import json, os, datetime
+import pandas as pd
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+J = lambda *p: json.load(open(os.path.join(ROOT, *p), encoding="utf-8"))
+TH_MONTH = ["", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."]
+
+
+def fmt(x, d=0):
+    if isinstance(x, str): return x
+    return f"{x:,.{d}f}"
+
+
+def main():
+    c = pd.read_csv(os.path.join(ROOT, "data", "corpus.csv"), dtype=str, keep_default_na=False)
+    m = pd.read_csv(os.path.join(ROOT, "data", "mappings.csv"), dtype=str, keep_default_na=False)
+    gap = pd.read_csv(os.path.join(ROOT, "data", "corpus_gap_request.csv"), dtype=str, keep_default_na=False)
+    rv = J("evidence", "mapping_review_summary.json")
+    man = J("data", "manifest.json")
+    sim = J("evidence", "coverage_simulation.json")
+    tests = J("evidence", "test_summary.json")
+    h = c.estimated_hours.astype(float)
+    n = {
+        "corpus_version": man["corpus_version"], "corpus_items": fmt(len(c)),
+        "corpus_courses": fmt((c.item_type == "course").sum()), "corpus_certs": fmt((c.item_type == "certification").sum()),
+        "hours_min": fmt(h.min()), "hours_max": fmt(h.max()), "hours_median": fmt(h.median()),
+        "cert_hours_mean": fmt(h[c.item_type == "certification"].mean()), "course_hours_mean": fmt(h[c.item_type == "course"].mean()),
+        "map_total": fmt(len(m)), "map_L1": fmt((m.coverage_layer == "L1_researcher_tagged").sum()),
+        "map_L2": fmt((m.coverage_layer == "L2_rule_augmented").sum()),
+        "map_passed": fmt(rv["rows_passed"]), "map_failed_not_L1": fmt(rv["rows_failed_not_L1"]),
+        "map_failed_L1_other": fmt(rv["rows_failed_L1_other"]), "items_in_passed": fmt(rv["items_in_passed_rows"]),
+        "req_covered": fmt(rv["requirements_with_passed_item"]), "per_role_min": fmt(rv["per_role_min"]), "per_role_max": fmt(rv["per_role_max"]),
+        "req_uncovered": fmt(600 - rv["requirements_with_passed_item"]),
+        "req_uncovered_ids": ", ".join(gap.requirement_id) if len(gap) else "ไม่มี",
+        "foundation_rows": fmt((c.batch == "v1.5_foundation").sum()), "foundation_maps": fmt((m.mapping_method == "foundation_track").sum()),
+        "promoted": fmt((m.mapping_method == "researcher_promoted").sum()),
+        "url_pending_items": fmt((c.verification_status != "verified").sum()),
+        "tests_total": fmt(tests["pass"] + tests["fail"]), "tests_pass": fmt(tests["pass"]),
+        "manifest_frozen": "ตรึงแล้ว" if man["frozen"] else "ยังไม่ตรึง (ตรึงหลังการทดสอบนำร่องตามหัวข้อ 3.7)",
+    }
+    d = datetime.date.fromisoformat(rv.get("reviewed_at", "2026-10-01")) if rv.get("reviewed_at") else datetime.date(2026, 10, 1)
+    n["review_date_th"] = f"{d.day} {TH_MONTH[d.month]} {d.year + 543}"
+    cap = {(s["months"], s["hours_per_week"]): s for s in sim["by_capacity"]}
+    mode = {s["mode"]: s for s in sim["by_mode_6m10h"]}
+    n["sim_both_6m10h"] = fmt(cap[(6, 10)]["covered"]); n["sim_both_6m5h"] = fmt(cap[(6, 5)]["covered"])
+    n["sim_cert_6m10h"] = fmt(mode["certification_only"]["covered"]); n["sim_course_6m10h"] = fmt(mode["course_only"]["covered"])
+    for k in "ABC":
+        s = J("evidence", "run_local", f"case_{k}", "summary.json")
+        R = s["R"]
+        n.update({f"c{k}_m": fmt(s["usable_models"]), f"c{k}_decided": fmt(s["decided"]), f"c{k}_correct": fmt(s["correct_on_decided"]),
+                  f"c{k}_acc": f"{s['accuracy_on_decided']:.3f}", f"c{k}_R": R if isinstance(R, str) else f"{R:.2f}",
+                  f"c{k}_C": f"{float(s['C']):.3f}", f"c{k}_U": fmt(s["unsupported_claims"]), f"c{k}_items": fmt(s["plan_items"]),
+                  f"c{k}_hours": fmt(s["plan_hours"]), f"c{k}_abstained": fmt(s["total"] - s["decided"]),
+                  f"c{k}_gapcov": s["gap_coverage"] if isinstance(s["gap_coverage"], str) else f"{s['gap_coverage']:.2f}",
+                  f"c{k}_nocand": fmt(s["uncovered_no_candidate"])})
+    rows = ["| ไฟล์ | จำนวนแถว | SHA-256 |", "|---|---|---|"]
+    for f, v in man["files"].items(): rows.append(f"| {f} | {v['rows']:,} | {v['sha256']} |")
+    n["manifest_table"] = "\n".join(rows)
+    with open(os.path.join(ROOT, "book", "numbers.json"), "w", encoding="utf-8") as fh:
+        json.dump(n, fh, ensure_ascii=False, indent=1); fh.write("\n")
+    print(f"numbers.json · {len(n)} ค่า · corpus {n['corpus_items']} · map {n['map_total']} · passed {n['map_passed']} · req {n['req_covered']}/600 · tests {n['tests_total']}")
+
+
+if __name__ == "__main__":
+    main()

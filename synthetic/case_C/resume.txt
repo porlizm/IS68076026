@@ -1,0 +1,31 @@
+Kittipong Mock
+IT Systems / Business Analyst
+Email: kittipong.mock@mail.test | Phone: 02 123 4567 | https://www.linkedin.com/in/kittipong-mock
+
+SUMMARY
+IT Systems / Business Analyst seeking growth in the R18 target occupation.
+
+EDUCATION
+B.B.A. Information Systems, Example University, 2018
+
+EXPERIENCE
+IT Business Analyst, Example Manufacturing Co., 2020-present
+System Support Officer, Example Bank, 2018-2020
+
+KEY ACHIEVEMENTS AND SKILLS
+- Gathered requirements from finance and procurement users through workshops and translated them into user stories.
+- Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.
+- Produced process modeling diagrams and data flow analysis for the ERP procurement module.
+- Documented functional specifications and test scenarios for three ERP change requests.
+- Provided user support and handled service desk tickets for the finance system after go-live.
+- Explained technical details of the new workflow to non-technical managers in monthly briefings.
+- Reviewed requirements documents and vendor specifications to confirm scope before sign-off.
+- Carried out a compliance check of approval workflows against the internal audit policy.
+- Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.
+- Planned and prioritized the backlog for two release cycles with the project manager.
+- Presented project status updates at team meetings.
+- Contributed to user guide drafts reviewed by the documentation team.
+- Participated in vendor evaluation for a document management system.
+- Completed course: IIBA ECBA preparation (self-study).
+- English: good command, IELTS 6.5.
+- Monitored systems and job queues on the reporting server during month-end.

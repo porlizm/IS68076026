@@ -1,0 +1,25 @@
+﻿config_id,parameter,value,unit,source_of_truth,frozen,freeze_stage,affects,notes
+CFG-01,THETA,0.15,สัดส่วน,เล่ม §3.5.4,pending,หลัง pilot (3.3),กฎ R3 Evidence Relevance,จูนด้วย n8n Evaluations บน pilot ก่อนตรึง · หาจุดที่ recall cost ต่ำสุดโดย hallucination ไม่ขึ้น
+CFG-02,EVIDENCE_VERIFIED_RATIO_MIN,0.60,สัดส่วน,n8n README §3,pending,W3,Evidence Quality Gate,ต่ำกว่านี้แปลว่า parser แต่งข้อความ หยุดก่อนเสียโควตา analyst · ยังไม่มีในเล่ม ต้องเพิ่ม
+CFG-03,TEXT_DENSITY_MIN,200,ตัวอักษร/หน้า,n8n README §3,pending,W3,Text Density Gate → OCR,ต่ำกว่านี้ถือว่าเป็น PDF สแกน · ยังไม่มีในเล่ม ต้องเพิ่ม
+CFG-04,R3_OVERLAP_FORMULA,"overlap = |tokens(quote) ∩ tokens(element_name + element_description)| ÷ min(|tokens(quote)|, |tokens(desc)|)",สูตร,n8n README §2.3,pending,W3,กฎ R3,ตัวหารใช้ min() เพราะคำอธิบาย O*NET ยาว 20–30 คำ แต่ quote ยาวประโยคเดียว · token ผ่าน light stemmer ก่อนเทียบ
+CFG-05,R3_PASS_CONDITION,overlap ≥ THETA OR alias_hit,เงื่อนไข,n8n README §2.3,pending,W3,กฎ R3,alias_hit ผ่านได้ทั้งแบบวลีตรงและแบบทุก token ของ alias ปรากฏครบ
+CFG-06,TIER_HIGH_RULE,3 จาก 3 โมเดลเห็นตรงกัน และหลักฐานผ่าน R2 R3,เงื่อนไข,เล่ม §3.5.4,yes,—,Confidence Tier,
+CFG-07,TIER_MEDIUM_RULE,2 จาก 3 โมเดลเห็นตรงกัน และหลักฐานผ่าน,เงื่อนไข,เล่ม §3.5.4,yes,—,Confidence Tier,
+CFG-08,API_FAILURE_TIER_CAP,medium,ระดับ,เล่ม §3.5.4,yes,—,Confidence Tier,ถ้า analyst ล้ม 1 ตัว เดินต่อด้วย 2 ตัวได้ แต่เพดานความเชื่อมั่นคือ medium
+CFG-09,CAPACITY_FORMULA,timeline_months × 4.33 × hours_per_week,สูตร,เล่ม §3.5.5,yes,—,Pathway planner,
+CFG-10,WEEKS_PER_MONTH,4.33,สัปดาห์,เล่ม §3.5.5,yes,—,Pathway planner,
+CFG-11,ANALYST_TEMPERATURE,0,—,DEC-04,yes,—,MDL-03 MDL-04 MDL-05,SA v3 §15 ต้องแก้จาก 0.2 เป็น 0
+CFG-12,PARSE_TEMPERATURE,0,—,Workflow v2 ข้อ 5,yes,—,MDL-02,parse ต้อง deterministic เพราะผลิต evidence_text ที่กฎ R2 ตรวจ verbatim และมี gate 0.60
+CFG-12b,REPORT_TEMPERATURE,0.2,—,ภาคผนวก ข.1,yes,—,MDL-07,ขั้นเขียนรายงานมี Reference Check คุมท้ายอยู่แล้ว
+CFG-13,REPEAT_RUN_K,3,รอบ,Development_Process 4.3,yes,—,Repeat-run stability,
+CFG-14,REPEAT_RUN_SUBSAMPLE,0.20,สัดส่วน,Development_Process 4.3,yes,—,Repeat-run stability,6 รายจาก 30
+CFG-15,REASONING_TOKEN_MAX_RATIO,0.05,สัดส่วนของ output token,PROTOCOL-01,yes,—,GATE-P,ระวังตัวเชื่อมที่แปลง disabled เป็น low เงียบ ๆ ต้องดูตัวเลขไม่ใช่ดูว่า API ไม่ error
+CFG-16,RECALL_COST_THRESHOLD,0.10,สัดส่วน,เล่ม §3.8,yes,—,เกณฑ์ตีความ a priori,เกณฑ์คู่: hallucination ต่ำกว่าทุก baseline และ recall cost ≤ 10%
+CFG-17,EVIDENCE_RATIO_GATE_P,0.90,สัดส่วน,GATE-P,yes,—,เกณฑ์ผ่าน pilot,
+CFG-18,RATER_SAMPLE,0.20,สัดส่วน,เล่ม §3.7,yes,—,intra-rater และ inter-rater,180 ข้อจาก 900
+CFG-19,COHEN_KAPPA_MIN,0.70,ค่า kappa,เล่ม §3.7,yes,—,ความน่าเชื่อถือของ ground truth,ต่ำกว่าเกณฑ์ต้องปรับ codebook แล้วทำซ้ำ
+CFG-20,REPORT_WORD_BUDGET,(ตรึงหลัง pilot),คำต่อหัวข้อ,Development_Process 3.3,pending,หลัง pilot,PR-04,สำคัญต่อ RQ3 เพราะความยาวรายงานกระทบคะแนนการรับรู้
+CFG-21,ACCEPTED_FILE_TYPES,pdf,ชนิดไฟล์,n8n README §4,yes,—,Form + Intake,ไม่รับ DOCX เพราะสกัดข้อความไม่น่าเชื่อถือและ Document AI ไม่รองรับ · ต้องระบุใน §1.5 §3.5.2 และเอกสารชี้แจง
+CFG-22,BOOTSTRAP_ITERATIONS,10000,รอบ,SA v3 §12.4,yes,—,analysis_v5.py,seed ต้องตรึงและบันทึก
+CFG-23,RULES_VERSION,RULES-IS68076026-v1.0-31AUG26,รหัส,เอกสารนี้,pending,พร้อม THETA,gap_result.rules_version,คอลัมน์ rules_version ใน gap_result ต้องชี้มาที่แถวชุดนี้

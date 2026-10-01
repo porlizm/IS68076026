@@ -1,0 +1,70 @@
+﻿ที่อยู่เดิม,ที่อยู่ใหม่,ชนิด
+Codebook_GroundTruth_31AUG26.md,01_docs/Codebook_GroundTruth_31AUG26.md,ไฟล์
+Course_Career.xlsx,archive/2026-08_corpus_versions/Course_Career.xlsx,ไฟล์
+Course_Career_31AUG26.xlsx,archive/2026-08_corpus_versions/Course_Career_31AUG26.xlsx,ไฟล์
+Course_Career_v11_31AUG26.xlsx,archive/2026-08_corpus_versions/Course_Career_v11_31AUG26.xlsx,ไฟล์
+Course_Career_v12_31AUG26.xlsx,03_corpus/Course_Career_v12_31AUG26.xlsx,ไฟล์
+DECISIONS_31AUG26.md,01_docs/DECISIONS_31AUG26.md,ไฟล์
+Data_Set.xlsx,02_dataset/Data_Set.xlsx,ไฟล์
+Development_Process.md,archive/2026-08_book_versions/Development_Process.md,ไฟล์
+Development_Process_31AUG26.md,01_docs/Development_Process_31AUG26.md,ไฟล์
+Guideline n8n v4.md,01_docs/Guideline n8n v4.md,ไฟล์
+IS1 - 68076026 v.2.docx,archive/2026-07_proposal/IS1 - 68076026 v.2.docx,ไฟล์
+IS_68076026(28AUG26).docx,archive/2026-08_book_versions/IS_68076026(28AUG26).docx,ไฟล์
+IS_68076026(28AUG26)_v2.docx,archive/2026-08_book_versions/IS_68076026(28AUG26)_v2.docx,ไฟล์
+IS_68076026(29AUG26)_v1.docx,archive/2026-08_book_versions/IS_68076026(29AUG26)_v1.docx,ไฟล์
+IS_68076026(29AUG26)_v2.docx,archive/2026-08_book_versions/IS_68076026(29AUG26)_v2.docx,ไฟล์
+IS_68076026(29AUG26)_v3.docx,01_docs/IS_68076026(29AUG26)_v3.docx,ไฟล์
+Master_Data_31AUG26.xlsx,04_master_data/Master_Data_31AUG26.xlsx,ไฟล์
+N8N Flow Files,archive/2026-08_n8n_legacy/N8N Flow Files,โฟลเดอร์
+Occupation_list.md,archive/2026-08_dataset_pre_dec07/Occupation_list.md,ไฟล์
+Research Proposal (thai) v2.docx,archive/2026-07_proposal/Research Proposal (thai) v2.docx,ไฟล์
+Research Proposal - Danusorn Anantakan - Revised 10JUL26.md,archive/2026-07_proposal/Research Proposal - Danusorn Anantakan - Revised 10JUL26.md,ไฟล์
+Research Proposal - Danusorn Anantakan - Revised Complete 10JUL26.docx,archive/2026-07_proposal/Research Proposal - Danusorn Anantakan - Revised Complete 10JUL26.docx,ไฟล์
+System Architecture v3.md,01_docs/System Architecture v3.md,ไฟล์
+System Architecture.md,archive/2026-07_proposal/System Architecture.md,ไฟล์
+System Architecture.svg,archive/2026-07_proposal/System Architecture.svg,ไฟล์
+System_Architecture_Proposal_1.md,archive/2026-07_proposal/System_Architecture_Proposal_1.md,ไฟล์
+URL_Verification_Report_31AUG26.md,01_docs/URL_Verification_Report_31AUG26.md,ไฟล์
+__pycache__,archive/_trash/__pycache__,โฟลเดอร์
+aliases.py,02_dataset/aliases.py,ไฟล์
+apply_url_verification_31AUG26.py,05_scripts/apply_url_verification_31AUG26.py,ไฟล์
+build_corpus_v10_31AUG26.py,05_scripts/build_corpus_v10_31AUG26.py,ไฟล์
+build_corpus_v12_31AUG26.py,05_scripts/build_corpus_v12_31AUG26.py,ไฟล์
+build_master_data_31AUG26.py,05_scripts/build_master_data_31AUG26.py,ไฟล์
+build_onet_requirements_28AUG26.py,02_dataset/build_onet_requirements_28AUG26.py,ไฟล์
+check_consistency.py,05_scripts/check_consistency.py,ไฟล์
+check_corpus_31AUG26.py,05_scripts/check_corpus_31AUG26.py,ไฟล์
+corpus_change_log_v12_31AUG26.csv,03_corpus/corpus_change_log_v12_31AUG26.csv,ไฟล์
+corpus_master.csv,archive/2026-08_corpus_versions/corpus_master.csv,ไฟล์
+corpus_master_31AUG26.csv,archive/2026-08_corpus_versions/corpus_master_31AUG26.csv,ไฟล์
+corpus_master_v11_31AUG26.csv,archive/2026-08_corpus_versions/corpus_master_v11_31AUG26.csv,ไฟล์
+corpus_master_v12_31AUG26.csv,03_corpus/corpus_master_v12_31AUG26.csv,ไฟล์
+corpus_qa_31AUG26,archive/2026-08_corpus_versions/corpus_qa_31AUG26,โฟลเดอร์
+corpus_qa_v10_31AUG26,03_corpus/corpus_qa_v10_31AUG26,โฟลเดอร์
+corpus_version_log_31AUG26.json,archive/2026-08_corpus_versions/corpus_version_log_31AUG26.json,ไฟล์
+corpus_version_log_v11_31AUG26.json,archive/2026-08_corpus_versions/corpus_version_log_v11_31AUG26.json,ไฟล์
+corpus_version_log_v12_31AUG26.json,03_corpus/corpus_version_log_v12_31AUG26.json,ไฟล์
+dataset_version_log_28AUG26.json,02_dataset/dataset_version_log_28AUG26.json,ไฟล์
+dataset_version_log_regenerated.json,archive/2026-08_dataset_pre_dec07/dataset_version_log_regenerated.json,ไฟล์
+db_31_0_excel,02_dataset/db_31_0_excel,โฟลเดอร์
+element_aliases_28AUG26.csv,02_dataset/element_aliases_28AUG26.csv,ไฟล์
+extracted_docx_text.txt,archive/2026-07_proposal/extracted_docx_text.txt,ไฟล์
+ground_truth_extraction_template_31AUG26.csv,04_master_data/ground_truth_extraction_template_31AUG26.csv,ไฟล์
+ground_truth_template_31AUG26.csv,04_master_data/ground_truth_template_31AUG26.csv,ไฟล์
+item_competency_map.csv,archive/2026-08_corpus_versions/item_competency_map.csv,ไฟล์
+item_competency_map_31AUG26.csv,03_corpus/item_competency_map_31AUG26.csv,ไฟล์
+make_thai_proposal_docx.py,archive/2026-07_proposal/make_thai_proposal_docx.py,ไฟล์
+master_data_csv_31AUG26,04_master_data/master_data_csv_31AUG26,โฟลเดอร์
+onet_requirements.csv,archive/2026-08_dataset_pre_dec07/onet_requirements.csv,ไฟล์
+onet_requirements_28AUG26.csv,02_dataset/onet_requirements_28AUG26.csv,ไฟล์
+onet_requirements_excluded_28AUG26.csv,02_dataset/onet_requirements_excluded_28AUG26.csv,ไฟล์
+record_url_result_31AUG26.py,05_scripts/record_url_result_31AUG26.py,ไฟล์
+rules_version_log_31AUG26.json,04_master_data/rules_version_log_31AUG26.json,ไฟล์
+system-flow-glassmorphism.png,archive/2026-07_proposal/system-flow-glassmorphism.png,ไฟล์
+translated_pasted_text.txt,archive/2026-07_proposal/translated_pasted_text.txt,ไฟล์
+url_action_list_31AUG26.csv,03_corpus/url_action_list_31AUG26.csv,ไฟล์
+url_verification_31AUG26.csv,03_corpus/url_verification_31AUG26.csv,ไฟล์
+~$ample - Paper - IS1-67076010.docx,archive/_trash/~$ample - Paper - IS1-67076010.docx,ไฟล์
+_reorganize_31AUG26.py,05_scripts/_reorganize_31AUG26.py,ไฟล์
+corpus_qa_v10_31AUG26,archive/2026-08_corpus_versions/corpus_qa_v10_31AUG26,โฟลเดอร์

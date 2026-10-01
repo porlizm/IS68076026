@@ -1,0 +1,4 @@
+﻿mode_id,mode,include_item_type,exclude_item_type,exception,ordering_rule,metric_checked,notes
+MODE-01,course_only,course,certification,รายการที่ is_prerequisite = Y ยังใส่ได้แม้เป็น certification,เรียงตาม weight ของช่องว่างที่ปิดได้ มากไปน้อย แล้วเวลาเรียนน้อยไปมาก,Recommendation-mode compliance,ความครอบคลุมของโหมดนี้ = 556/600 requirement
+MODE-02,certification_only,certification,course,หลักสูตรที่บันทึกเป็น prerequisite ของใบรับรองนั้นยังใส่ได้,เรียงตาม weight มากไปน้อย แล้วเวลาเตรียมสอบน้อยไปมาก,Recommendation-mode compliance,ความครอบคลุมของโหมดนี้ = 518/600 requirement
+MODE-03,both,course | certification,—,—,ปิด core gap ก่อน (phase = core_gap_closure) แล้วจึงเป็นการเตรียมใบรับรอง (advanced_or_cert_prep),Recommendation-mode compliance,ความครอบคลุมของโหมดนี้ = 600/600 requirement

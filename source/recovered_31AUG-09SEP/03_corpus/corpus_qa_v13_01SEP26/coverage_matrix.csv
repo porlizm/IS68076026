@@ -1,0 +1,601 @@
+﻿requirement_id,role_id,domain,element_name,importance_im,weight_renormalized,n_items,n_courses,n_certifications,n_L1,n_L2,n_primary,covered_any,covered_L1,covered_course_only,covered_certification_only,covered_both
+REQ-R01-2.C.3.a,R01,Knowledge,Computers and Electronics,4.75,0.041304,20,10,10,14,6,13,Y,Y,Y,Y,Y
+REQ-R01-4.A.3.b.1,R01,Work Activities,Working with Computers,4.61,0.040087,20,10,10,12,8,10,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.a.2,R01,Work Activities,Processing Information,4.38,0.038087,8,6,2,4,4,1,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.1,R01,Work Activities,Making Decisions and Solving Problems,4.34,0.037739,16,7,9,5,11,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.2,R01,Work Activities,Thinking Creatively,4.33,0.037652,11,6,5,4,7,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.4.a.2,R01,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.23,0.036783,5,2,3,4,1,4,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.a.4,R01,Work Activities,Analyzing Data or Information,4.2,0.036522,7,5,2,2,5,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.3,R01,Work Activities,Updating and Using Relevant Knowledge,4.1,0.035652,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.6,R01,Work Activities,"Organizing, Planning, and Prioritizing Work",4.06,0.035304,17,8,9,3,14,1,Y,Y,Y,Y,Y
+REQ-R01-4.A.1.a.1,R01,Work Activities,Getting Information,4.04,0.035130,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R01-2.B.3.e,R01,Transferable Skills,Programming,4.0,0.034783,12,6,6,12,0,12,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.a.3,R01,Work Activities,Evaluating Information to Determine Compliance with Standards,3.94,0.034261,7,2,5,4,3,2,Y,Y,Y,Y,Y
+REQ-R01-2.A.2.a,R01,Essential Skills,Critical Thinking,3.88,0.033739,16,7,9,5,11,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.3.b.6,R01,Work Activities,Documenting/Recording Information,3.78,0.032870,4,2,2,4,0,2,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.4,R01,Work Activities,Developing Objectives and Strategies,3.76,0.032696,2,1,1,1,1,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.1.a.2,R01,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.7,0.032174,2,0,2,2,0,0,Y,Y,N,Y,Y
+REQ-R01-4.A.1.b.1,R01,Work Activities,"Identifying Objects, Actions, and Events",3.66,0.031826,16,7,9,0,16,0,Y,N,Y,Y,Y
+REQ-R01-2.B.4.e,R01,Transferable Skills,Judgment and Decision Making,3.62,0.031478,2,1,1,1,1,0,Y,Y,Y,Y,Y
+REQ-R01-4.A.4.a.1,R01,Work Activities,Interpreting the Meaning of Information for Others,3.61,0.031391,5,2,3,1,4,1,Y,Y,Y,Y,Y
+REQ-R01-2.C.4.a,R01,Knowledge,Mathematics,3.57,0.031043,4,3,1,2,2,2,Y,Y,Y,Y,Y
+REQ-R01-2.C.1.e,R01,Knowledge,Customer and Personal Service,3.56,0.030957,2,0,2,1,1,1,Y,Y,N,Y,Y
+REQ-R01-4.A.4.a.4,R01,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.54,0.030783,5,2,3,4,1,2,Y,Y,Y,Y,Y
+REQ-R01-2.A.1.a,R01,Essential Skills,Reading Comprehension,3.5,0.030435,20,10,10,2,18,0,Y,Y,Y,Y,Y
+REQ-R01-2.A.2.b,R01,Essential Skills,Active Learning,3.5,0.030435,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R01-2.B.4.g,R01,Transferable Skills,Systems Analysis,3.5,0.030435,17,9,8,12,5,5,Y,Y,Y,Y,Y
+REQ-R01-2.A.1.b,R01,Essential Skills,Active Listening,3.38,0.029391,5,2,3,2,3,1,Y,Y,Y,Y,Y
+REQ-R01-2.B.2.i,R01,Transferable Skills,Complex Problem Solving,3.38,0.029391,16,7,9,6,10,3,Y,Y,Y,Y,Y
+REQ-R01-2.B.3.b,R01,Transferable Skills,Technology Design,3.38,0.029391,10,5,5,2,8,2,Y,Y,Y,Y,Y
+REQ-R01-2.B.4.h,R01,Transferable Skills,Systems Evaluation,3.38,0.029391,11,5,6,2,9,2,Y,Y,Y,Y,Y
+REQ-R01-4.A.2.b.5,R01,Work Activities,Scheduling Work and Activities,3.32,0.028870,2,1,1,0,2,0,Y,N,Y,Y,Y
+REQ-R02-4.A.3.b.1,R02,Work Activities,Working with Computers,4.88,0.043529,21,11,10,9,12,4,Y,Y,Y,Y,Y
+REQ-R02-4.A.1.a.1,R02,Work Activities,Getting Information,4.48,0.039961,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R02-2.C.3.a,R02,Knowledge,Computers and Electronics,4.38,0.039069,21,11,10,17,4,15,Y,Y,Y,Y,Y
+REQ-R02-4.A.2.b.2,R02,Work Activities,Thinking Creatively,4.38,0.039069,11,8,3,8,3,5,Y,Y,Y,Y,Y
+REQ-R02-4.A.2.b.3,R02,Work Activities,Updating and Using Relevant Knowledge,4.29,0.038266,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R02-4.A.2.b.1,R02,Work Activities,Making Decisions and Solving Problems,4.25,0.037909,20,11,9,1,19,0,Y,Y,Y,Y,Y
+REQ-R02-4.A.2.a.2,R02,Work Activities,Processing Information,4.13,0.036839,5,3,2,2,3,1,Y,Y,Y,Y,Y
+REQ-R02-2.B.3.e,R02,Transferable Skills,Programming,4.12,0.036750,17,9,8,17,0,17,Y,Y,Y,Y,Y
+REQ-R02-4.A.2.b.6,R02,Work Activities,"Organizing, Planning, and Prioritizing Work",3.91,0.034876,13,8,5,1,12,0,Y,Y,Y,Y,Y
+REQ-R02-4.A.4.a.2,R02,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",3.88,0.034609,2,1,1,2,0,2,Y,Y,Y,Y,Y
+REQ-R02-2.A.2.a,R02,Essential Skills,Critical Thinking,3.75,0.033449,19,10,9,2,17,0,Y,Y,Y,Y,Y
+REQ-R02-4.A.1.b.1,R02,Work Activities,"Identifying Objects, Actions, and Events",3.67,0.032736,19,10,9,0,19,0,Y,N,Y,Y,Y
+REQ-R02-2.A.1.a,R02,Essential Skills,Reading Comprehension,3.62,0.032290,20,10,10,4,16,1,Y,Y,Y,Y,Y
+REQ-R02-2.B.2.i,R02,Transferable Skills,Complex Problem Solving,3.62,0.032290,20,11,9,5,15,3,Y,Y,Y,Y,Y
+REQ-R02-2.B.3.a,R02,Transferable Skills,Operations Analysis,3.62,0.032290,3,2,1,0,3,0,Y,N,Y,Y,Y
+REQ-R02-2.C.7.a,R02,Knowledge,English Language,3.54,0.031576,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R02-4.A.2.a.4,R02,Work Activities,Analyzing Data or Information,3.54,0.031576,6,4,2,3,3,1,Y,Y,Y,Y,Y
+REQ-R02-4.A.4.a.4,R02,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.54,0.031576,2,1,1,2,0,1,Y,Y,Y,Y,Y
+REQ-R02-2.A.1.b,R02,Essential Skills,Active Listening,3.5,0.031219,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R02-2.A.2.b,R02,Essential Skills,Active Learning,3.5,0.031219,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R02-4.A.2.b.5,R02,Work Activities,Scheduling Work and Activities,3.46,0.030863,1,0,1,0,1,0,Y,N,N,Y,Y
+REQ-R02-4.A.3.b.6,R02,Work Activities,Documenting/Recording Information,3.46,0.030863,2,0,2,2,0,1,Y,Y,N,Y,Y
+REQ-R02-2.B.4.e,R02,Transferable Skills,Judgment and Decision Making,3.38,0.030149,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R02-2.C.4.a,R02,Knowledge,Mathematics,3.35,0.029881,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R02-4.A.1.b.3,R02,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",3.33,0.029703,3,2,1,0,3,0,Y,N,Y,Y,Y
+REQ-R02-4.A.2.a.3,R02,Work Activities,Evaluating Information to Determine Compliance with Standards,3.33,0.029703,9,5,4,7,2,4,Y,Y,Y,Y,Y
+REQ-R02-4.A.2.b.4,R02,Work Activities,Developing Objectives and Strategies,3.33,0.029703,2,2,0,2,0,1,Y,Y,Y,N,Y
+REQ-R02-4.A.4.a.1,R02,Work Activities,Interpreting the Meaning of Information for Others,3.33,0.029703,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R02-4.A.4.b.6,R02,Work Activities,Providing Consultation and Advice to Others,3.29,0.029346,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R02-2.A.1.d,R02,Essential Skills,Speaking,3.25,0.028989,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R03-4.A.3.b.1,R03,Work Activities,Working with Computers,4.95,0.042217,23,13,10,8,15,2,Y,Y,Y,Y,Y
+REQ-R03-2.C.3.a,R03,Knowledge,Computers and Electronics,4.87,0.041535,23,13,10,20,3,17,Y,Y,Y,Y,Y
+REQ-R03-2.B.3.e,R03,Transferable Skills,Programming,4.75,0.040512,20,12,8,20,0,20,Y,Y,Y,Y,Y
+REQ-R03-4.A.2.a.2,R03,Work Activities,Processing Information,4.59,0.039147,7,5,2,2,5,1,Y,Y,Y,Y,Y
+REQ-R03-4.A.2.a.4,R03,Work Activities,Analyzing Data or Information,4.52,0.038550,6,4,2,1,5,0,Y,Y,Y,Y,Y
+REQ-R03-4.A.1.a.1,R03,Work Activities,Getting Information,4.51,0.038465,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R03-4.A.2.b.1,R03,Work Activities,Making Decisions and Solving Problems,4.45,0.037953,20,11,9,1,19,0,Y,Y,Y,Y,Y
+REQ-R03-4.A.2.b.2,R03,Work Activities,Thinking Creatively,4.35,0.037100,12,9,3,8,4,8,Y,Y,Y,Y,Y
+REQ-R03-4.A.1.b.1,R03,Work Activities,"Identifying Objects, Actions, and Events",4.22,0.035991,19,10,9,0,19,0,Y,N,Y,Y,Y
+REQ-R03-4.A.2.b.3,R03,Work Activities,Updating and Using Relevant Knowledge,4.16,0.035480,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R03-4.A.4.a.2,R03,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.13,0.035224,2,1,1,2,0,2,Y,Y,Y,Y,Y
+REQ-R03-4.A.1.b.3,R03,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",3.88,0.033092,2,2,0,0,2,0,Y,N,Y,N,Y
+REQ-R03-4.A.3.b.6,R03,Work Activities,Documenting/Recording Information,3.82,0.032580,1,0,1,1,0,0,Y,Y,N,Y,Y
+REQ-R03-2.A.1.b,R03,Essential Skills,Active Listening,3.75,0.031983,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R03-2.A.2.a,R03,Essential Skills,Critical Thinking,3.75,0.031983,19,10,9,4,15,1,Y,Y,Y,Y,Y
+REQ-R03-2.B.2.i,R03,Transferable Skills,Complex Problem Solving,3.75,0.031983,20,11,9,8,12,4,Y,Y,Y,Y,Y
+REQ-R03-4.A.2.b.4,R03,Work Activities,Developing Objectives and Strategies,3.6,0.030704,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R03-4.A.2.b.6,R03,Work Activities,"Organizing, Planning, and Prioritizing Work",3.59,0.030618,15,8,7,2,13,1,Y,Y,Y,Y,Y
+REQ-R03-4.A.2.a.3,R03,Work Activities,Evaluating Information to Determine Compliance with Standards,3.55,0.030277,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R03-4.A.4.b.2,R03,Work Activities,Developing and Building Teams,3.55,0.030277,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R03-2.C.4.a,R03,Knowledge,Mathematics,3.53,0.030107,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R03-4.A.4.a.1,R03,Work Activities,Interpreting the Meaning of Information for Others,3.51,0.029936,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R03-2.B.3.m,R03,Transferable Skills,Quality Control Analysis,3.5,0.029851,3,2,1,2,1,1,Y,Y,Y,Y,Y
+REQ-R03-2.C.3.b,R03,Knowledge,Engineering and Technology,3.47,0.029595,8,6,2,1,7,0,Y,Y,Y,Y,Y
+REQ-R03-4.A.1.a.2,R03,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.45,0.029424,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R03-4.A.4.a.4,R03,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.45,0.029424,2,1,1,2,0,2,Y,Y,Y,Y,Y
+REQ-R03-4.A.4.b.6,R03,Work Activities,Providing Consultation and Advice to Others,3.43,0.029254,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R03-2.C.7.a,R03,Knowledge,English Language,3.41,0.029083,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R03-2.A.1.a,R03,Essential Skills,Reading Comprehension,3.38,0.028827,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R03-2.B.4.g,R03,Transferable Skills,Systems Analysis,3.38,0.028827,11,6,5,8,3,7,Y,Y,Y,Y,Y
+REQ-R04-4.A.3.b.1,R04,Work Activities,Working with Computers,4.94,0.042071,20,10,10,8,12,5,Y,Y,Y,Y,Y
+REQ-R04-4.A.1.a.1,R04,Work Activities,Getting Information,4.65,0.039601,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R04-4.A.4.a.2,R04,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.44,0.037813,4,2,2,4,0,4,Y,Y,Y,Y,Y
+REQ-R04-2.C.3.a,R04,Knowledge,Computers and Electronics,4.41,0.037557,20,10,10,1,19,1,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.a.2,R04,Work Activities,Processing Information,4.38,0.037302,7,3,4,2,5,0,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.b.3,R04,Work Activities,Updating and Using Relevant Knowledge,4.36,0.037132,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R04-4.A.2.a.4,R04,Work Activities,Analyzing Data or Information,4.26,0.036280,9,5,4,6,3,4,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.a.3,R04,Work Activities,Evaluating Information to Determine Compliance with Standards,4.24,0.036110,19,9,10,9,10,7,Y,Y,Y,Y,Y
+REQ-R04-4.A.1.b.1,R04,Work Activities,"Identifying Objects, Actions, and Events",4.22,0.035939,17,8,9,2,15,0,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.b.6,R04,Work Activities,"Organizing, Planning, and Prioritizing Work",4.09,0.034832,10,5,5,4,6,2,Y,Y,Y,Y,Y
+REQ-R04-4.A.3.b.6,R04,Work Activities,Documenting/Recording Information,4.06,0.034577,6,3,3,5,1,3,Y,Y,Y,Y,Y
+REQ-R04-2.A.1.a,R04,Essential Skills,Reading Comprehension,4.0,0.034066,20,10,10,2,18,1,Y,Y,Y,Y,Y
+REQ-R04-4.A.4.a.4,R04,Work Activities,Establishing and Maintaining Interpersonal Relationships,4.0,0.034066,4,2,2,4,0,3,Y,Y,Y,Y,Y
+REQ-R04-2.A.1.b,R04,Essential Skills,Active Listening,3.88,0.033044,4,2,2,2,2,1,Y,Y,Y,Y,Y
+REQ-R04-2.A.1.d,R04,Essential Skills,Speaking,3.88,0.033044,4,2,2,1,3,1,Y,Y,Y,Y,Y
+REQ-R04-2.A.2.a,R04,Essential Skills,Critical Thinking,3.88,0.033044,19,9,10,4,15,0,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.b.1,R04,Work Activities,Making Decisions and Solving Problems,3.85,0.032788,17,8,9,1,16,0,Y,Y,Y,Y,Y
+REQ-R04-4.A.2.b.2,R04,Work Activities,Thinking Creatively,3.85,0.032788,11,6,5,1,10,1,Y,Y,Y,Y,Y
+REQ-R04-2.C.7.a,R04,Knowledge,English Language,3.79,0.032277,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R04-2.A.1.c,R04,Essential Skills,Writing,3.75,0.031937,4,3,1,1,3,1,Y,Y,Y,Y,Y
+REQ-R04-2.A.2.d,R04,Essential Skills,Monitoring,3.62,0.030830,3,2,1,1,2,0,Y,Y,Y,Y,Y
+REQ-R04-2.B.3.e,R04,Transferable Skills,Programming,3.62,0.030830,10,7,3,10,0,10,Y,Y,Y,Y,Y
+REQ-R04-4.A.1.a.2,R04,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.5,0.029808,9,6,3,8,1,3,Y,Y,Y,Y,Y
+REQ-R04-4.A.4.b.1,R04,Work Activities,Coordinating the Work and Activities of Others,3.48,0.029637,3,1,2,0,3,0,Y,N,Y,Y,Y
+REQ-R04-4.A.2.a.1,R04,Work Activities,"Judging the Qualities of Objects, Services, or People",3.45,0.029382,19,9,10,0,19,0,Y,N,Y,Y,Y
+REQ-R04-4.A.4.b.2,R04,Work Activities,Developing and Building Teams,3.45,0.029382,4,2,2,1,3,1,Y,Y,Y,Y,Y
+REQ-R04-2.B.2.i,R04,Transferable Skills,Complex Problem Solving,3.38,0.028786,17,8,9,1,16,1,Y,Y,Y,Y,Y
+REQ-R04-2.B.3.m,R04,Transferable Skills,Quality Control Analysis,3.38,0.028786,19,9,10,15,4,14,Y,Y,Y,Y,Y
+REQ-R04-4.A.4.a.1,R04,Work Activities,Interpreting the Meaning of Information for Others,3.32,0.028275,4,2,2,1,3,1,Y,Y,Y,Y,Y
+REQ-R04-2.C.4.a,R04,Knowledge,Mathematics,3.29,0.028019,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R05-4.A.3.b.1,R05,Work Activities,Working with Computers,4.98,0.044298,20,10,10,2,18,2,Y,Y,Y,Y,Y
+REQ-R05-4.A.1.a.1,R05,Work Activities,Getting Information,4.78,0.042519,20,10,10,1,19,1,Y,Y,Y,Y,Y
+REQ-R05-4.A.1.b.1,R05,Work Activities,"Identifying Objects, Actions, and Events",4.53,0.040295,17,9,8,0,17,0,Y,N,Y,Y,Y
+REQ-R05-4.A.2.b.1,R05,Work Activities,Making Decisions and Solving Problems,4.53,0.040295,18,9,9,1,17,0,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.b.2,R05,Work Activities,Thinking Creatively,4.33,0.038516,19,10,9,6,13,6,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.a.2,R05,Work Activities,Processing Information,4.26,0.037894,7,3,4,1,6,0,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.a.4,R05,Work Activities,Analyzing Data or Information,4.11,0.036559,13,5,8,11,2,10,Y,Y,Y,Y,Y
+REQ-R05-4.A.4.a.1,R05,Work Activities,Interpreting the Meaning of Information for Others,4.09,0.036381,13,8,5,12,1,4,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.b.6,R05,Work Activities,"Organizing, Planning, and Prioritizing Work",3.98,0.035403,12,7,5,1,11,0,Y,Y,Y,Y,Y
+REQ-R05-2.C.3.a,R05,Knowledge,Computers and Electronics,3.96,0.035225,21,10,11,3,18,2,Y,Y,Y,Y,Y
+REQ-R05-2.C.7.a,R05,Knowledge,English Language,3.84,0.034158,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R05-4.A.4.a.2,R05,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",3.79,0.033713,5,4,1,4,1,1,Y,Y,Y,Y,Y
+REQ-R05-2.A.1.a,R05,Essential Skills,Reading Comprehension,3.75,0.033357,20,10,10,6,14,4,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.b.3,R05,Work Activities,Updating and Using Relevant Knowledge,3.7,0.032912,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R05-4.A.1.a.2,R05,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.63,0.032290,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R05-2.C.1.e,R05,Knowledge,Customer and Personal Service,3.57,0.031756,10,4,6,3,7,0,Y,Y,Y,Y,Y
+REQ-R05-2.A.2.a,R05,Essential Skills,Critical Thinking,3.5,0.031133,17,9,8,4,13,0,Y,Y,Y,Y,Y
+REQ-R05-2.B.4.e,R05,Transferable Skills,Judgment and Decision Making,3.5,0.031133,4,1,3,4,0,1,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.a.3,R05,Work Activities,Evaluating Information to Determine Compliance with Standards,3.5,0.031133,11,5,6,5,6,3,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.a.1,R05,Work Activities,"Judging the Qualities of Objects, Services, or People",3.46,0.030777,12,6,6,1,11,0,Y,Y,Y,Y,Y
+REQ-R05-2.A.1.b,R05,Essential Skills,Active Listening,3.38,0.030066,10,6,4,8,2,7,Y,Y,Y,Y,Y
+REQ-R05-2.A.2.b,R05,Essential Skills,Active Learning,3.38,0.030066,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R05-2.B.2.i,R05,Transferable Skills,Complex Problem Solving,3.38,0.030066,18,10,8,1,17,1,Y,Y,Y,Y,Y
+REQ-R05-4.A.2.b.4,R05,Work Activities,Developing Objectives and Strategies,3.38,0.030066,4,2,2,4,0,3,Y,Y,Y,Y,Y
+REQ-R05-4.A.4.a.3,R05,Work Activities,Communicating with People Outside the Organization,3.28,0.029176,4,3,1,1,3,1,Y,Y,Y,Y,Y
+REQ-R05-2.B.3.e,R05,Transferable Skills,Programming,3.25,0.028909,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R05-4.A.3.b.6,R05,Work Activities,Documenting/Recording Information,3.19,0.028376,4,2,2,4,0,2,Y,Y,Y,Y,Y
+REQ-R05-4.A.4.a.4,R05,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.15,0.028020,4,3,1,2,2,1,Y,Y,Y,Y,Y
+REQ-R05-2.A.1.c,R05,Essential Skills,Writing,3.12,0.027753,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R05-2.A.1.d,R05,Essential Skills,Speaking,3.12,0.027753,4,3,1,1,3,1,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.a.4,R06,Work Activities,Analyzing Data or Information,4.83,0.041470,25,15,10,25,0,25,Y,Y,Y,Y,Y
+REQ-R06-4.A.3.b.1,R06,Work Activities,Working with Computers,4.75,0.040783,22,12,10,5,17,2,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.a.2,R06,Work Activities,Processing Information,4.71,0.040440,18,11,7,10,8,5,Y,Y,Y,Y,Y
+REQ-R06-2.C.4.a,R06,Knowledge,Mathematics,4.52,0.038808,3,3,0,3,0,3,Y,Y,Y,N,Y
+REQ-R06-4.A.4.a.1,R06,Work Activities,Interpreting the Meaning of Information for Others,4.48,0.038465,6,4,2,6,0,2,Y,Y,Y,Y,Y
+REQ-R06-2.A.1.e,R06,Essential Skills,Mathematics,4.38,0.037606,14,9,5,14,0,12,Y,Y,Y,Y,Y
+REQ-R06-4.A.1.a.1,R06,Work Activities,Getting Information,4.33,0.037177,21,11,10,1,20,0,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.b.1,R06,Work Activities,Making Decisions and Solving Problems,4.33,0.037177,20,9,11,1,19,0,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.b.3,R06,Work Activities,Updating and Using Relevant Knowledge,4.33,0.037177,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R06-2.A.2.a,R06,Essential Skills,Critical Thinking,4.25,0.036490,22,12,10,7,15,5,Y,Y,Y,Y,Y
+REQ-R06-2.C.3.a,R06,Knowledge,Computers and Electronics,4.24,0.036404,21,10,11,5,16,0,Y,Y,Y,Y,Y
+REQ-R06-4.A.4.a.2,R06,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.0,0.034344,4,4,0,2,2,1,Y,Y,Y,N,Y
+REQ-R06-2.A.1.a,R06,Essential Skills,Reading Comprehension,3.88,0.033313,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R06-4.A.3.b.6,R06,Work Activities,Documenting/Recording Information,3.88,0.033313,2,2,0,2,0,2,Y,Y,Y,N,Y
+REQ-R06-4.A.2.b.2,R06,Work Activities,Thinking Creatively,3.83,0.032884,7,3,4,1,6,0,Y,Y,Y,Y,Y
+REQ-R06-2.B.2.i,R06,Transferable Skills,Complex Problem Solving,3.75,0.032197,19,9,10,4,15,0,Y,Y,Y,Y,Y
+REQ-R06-2.B.3.e,R06,Transferable Skills,Programming,3.75,0.032197,18,10,8,18,0,18,Y,Y,Y,Y,Y
+REQ-R06-4.A.1.b.1,R06,Work Activities,"Identifying Objects, Actions, and Events",3.71,0.031854,19,9,10,0,19,0,Y,N,Y,Y,Y
+REQ-R06-2.A.1.d,R06,Essential Skills,Speaking,3.62,0.031081,4,4,0,1,3,1,Y,Y,Y,N,Y
+REQ-R06-2.A.2.b,R06,Essential Skills,Active Learning,3.62,0.031081,20,10,10,4,16,1,Y,Y,Y,Y,Y
+REQ-R06-4.A.4.b.6,R06,Work Activities,Providing Consultation and Advice to Others,3.6,0.030909,5,4,1,2,3,1,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.b.6,R06,Work Activities,"Organizing, Planning, and Prioritizing Work",3.54,0.030394,14,7,7,0,14,0,Y,N,Y,Y,Y
+REQ-R06-2.A.1.b,R06,Essential Skills,Active Listening,3.5,0.030051,4,4,0,1,3,1,Y,Y,Y,N,Y
+REQ-R06-2.A.1.c,R06,Essential Skills,Writing,3.5,0.030051,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R06-2.B.4.e,R06,Transferable Skills,Judgment and Decision Making,3.38,0.029020,4,1,3,3,1,1,Y,Y,Y,Y,Y
+REQ-R06-2.A.2.d,R06,Essential Skills,Monitoring,3.25,0.027904,4,1,3,1,3,0,Y,Y,Y,Y,Y
+REQ-R06-4.A.1.b.3,R06,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",3.22,0.027647,6,3,3,1,5,0,Y,Y,Y,Y,Y
+REQ-R06-4.A.2.b.4,R06,Work Activities,Developing Objectives and Strategies,3.21,0.027561,4,3,1,3,1,1,Y,Y,Y,Y,Y
+REQ-R06-4.A.4.a.4,R06,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.08,0.026445,4,4,0,1,3,1,Y,Y,Y,N,Y
+REQ-R06-2.C.7.a,R06,Knowledge,English Language,3.0,0.025758,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R07-4.A.3.b.1,R07,Work Activities,Working with Computers,4.97,0.040387,22,12,10,4,18,3,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.b.1,R07,Work Activities,Making Decisions and Solving Problems,4.65,0.037786,20,9,11,1,19,0,Y,Y,Y,Y,Y
+REQ-R07-4.A.1.a.1,R07,Work Activities,Getting Information,4.62,0.037543,21,11,10,1,20,0,Y,Y,Y,Y,Y
+REQ-R07-2.C.3.a,R07,Knowledge,Computers and Electronics,4.57,0.037136,21,10,11,7,14,2,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.b.3,R07,Work Activities,Updating and Using Relevant Knowledge,4.57,0.037136,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.a.4,R07,Work Activities,Analyzing Data or Information,4.56,0.037055,21,13,8,21,0,19,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.b.2,R07,Work Activities,Thinking Creatively,4.53,0.036811,6,3,3,2,4,2,Y,Y,Y,Y,Y
+REQ-R07-4.A.3.b.6,R07,Work Activities,Documenting/Recording Information,4.37,0.035511,1,0,1,1,0,1,Y,Y,N,Y,Y
+REQ-R07-4.A.2.a.2,R07,Work Activities,Processing Information,4.32,0.035105,11,7,4,3,8,3,Y,Y,Y,Y,Y
+REQ-R07-4.A.1.b.1,R07,Work Activities,"Identifying Objects, Actions, and Events",4.31,0.035024,19,9,10,0,19,0,Y,N,Y,Y,Y
+REQ-R07-4.A.4.a.2,R07,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.3,0.034942,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R07-4.A.4.a.1,R07,Work Activities,Interpreting the Meaning of Information for Others,4.27,0.034699,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R07-4.A.4.a.3,R07,Work Activities,Communicating with People Outside the Organization,4.22,0.034292,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R07-4.A.1.b.3,R07,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",4.2,0.034130,4,0,4,0,4,0,Y,N,N,Y,Y
+REQ-R07-2.C.4.a,R07,Knowledge,Mathematics,4.06,0.032992,8,6,2,8,0,7,Y,Y,Y,Y,Y
+REQ-R07-2.A.2.a,R07,Essential Skills,Critical Thinking,4.0,0.032504,23,13,10,5,18,4,Y,Y,Y,Y,Y
+REQ-R07-2.B.2.i,R07,Transferable Skills,Complex Problem Solving,4.0,0.032504,19,9,10,4,15,0,Y,Y,Y,Y,Y
+REQ-R07-2.B.4.e,R07,Transferable Skills,Judgment and Decision Making,4.0,0.032504,5,2,3,4,1,1,Y,Y,Y,Y,Y
+REQ-R07-2.C.3.b,R07,Knowledge,Engineering and Technology,3.95,0.032098,5,2,3,0,5,0,Y,N,Y,Y,Y
+REQ-R07-2.C.7.a,R07,Knowledge,English Language,3.89,0.031611,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R07-2.A.1.a,R07,Essential Skills,Reading Comprehension,3.75,0.030473,20,10,10,1,19,1,Y,Y,Y,Y,Y
+REQ-R07-2.A.1.b,R07,Essential Skills,Active Listening,3.75,0.030473,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R07-2.B.4.g,R07,Transferable Skills,Systems Analysis,3.75,0.030473,12,3,9,11,1,10,Y,Y,Y,Y,Y
+REQ-R07-4.A.4.a.4,R07,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.75,0.030473,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R07-4.A.2.b.4,R07,Work Activities,Developing Objectives and Strategies,3.71,0.030148,3,2,1,1,2,0,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.b.6,R07,Work Activities,"Organizing, Planning, and Prioritizing Work",3.67,0.029823,11,5,6,0,11,0,Y,N,Y,Y,Y
+REQ-R07-2.B.3.e,R07,Transferable Skills,Programming,3.62,0.029417,19,13,6,19,0,17,Y,Y,Y,Y,Y
+REQ-R07-2.B.4.h,R07,Transferable Skills,Systems Evaluation,3.62,0.029417,5,1,4,4,1,4,Y,Y,Y,Y,Y
+REQ-R07-4.A.2.a.1,R07,Work Activities,"Judging the Qualities of Objects, Services, or People",3.54,0.028766,3,1,2,0,3,0,Y,N,Y,Y,Y
+REQ-R07-4.A.2.a.3,R07,Work Activities,Evaluating Information to Determine Compliance with Standards,3.54,0.028766,6,1,5,4,2,1,Y,Y,Y,Y,Y
+REQ-R08-4.A.3.b.1,R08,Work Activities,Working with Computers,4.76,0.040549,20,10,10,2,18,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.a.4,R08,Work Activities,Analyzing Data or Information,4.62,0.039356,21,11,10,8,13,4,Y,Y,Y,Y,Y
+REQ-R08-4.A.1.a.1,R08,Work Activities,Getting Information,4.38,0.037312,21,11,10,1,20,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.a.2,R08,Work Activities,Processing Information,4.38,0.037312,21,11,10,14,7,11,Y,Y,Y,Y,Y
+REQ-R08-2.C.3.a,R08,Knowledge,Computers and Electronics,4.3,0.036630,21,10,11,9,12,5,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.b.1,R08,Work Activities,Making Decisions and Solving Problems,4.29,0.036545,21,10,11,1,20,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.b.3,R08,Work Activities,Updating and Using Relevant Knowledge,4.24,0.036119,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R08-4.A.4.a.2,R08,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.15,0.035352,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-4.A.1.b.1,R08,Work Activities,"Identifying Objects, Actions, and Events",4.1,0.034926,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R08-2.C.3.b,R08,Knowledge,Engineering and Technology,3.95,0.033649,12,6,6,1,11,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.1.b.3,R08,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",3.9,0.033223,1,1,0,0,1,0,Y,N,Y,N,Y
+REQ-R08-4.A.2.a.3,R08,Work Activities,Evaluating Information to Determine Compliance with Standards,3.9,0.033223,8,2,6,5,3,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.b.2,R08,Work Activities,Thinking Creatively,3.9,0.033223,13,7,6,1,12,1,Y,Y,Y,Y,Y
+REQ-R08-2.A.1.a,R08,Essential Skills,Reading Comprehension,3.88,0.033052,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R08-2.A.2.a,R08,Essential Skills,Critical Thinking,3.88,0.033052,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R08-2.B.2.i,R08,Transferable Skills,Complex Problem Solving,3.88,0.033052,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R08-2.B.4.e,R08,Transferable Skills,Judgment and Decision Making,3.88,0.033052,6,2,4,3,3,1,Y,Y,Y,Y,Y
+REQ-R08-4.A.3.b.6,R08,Work Activities,Documenting/Recording Information,3.86,0.032882,2,1,1,2,0,2,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.b.4,R08,Work Activities,Developing Objectives and Strategies,3.8,0.032371,5,2,3,1,4,1,Y,Y,Y,Y,Y
+REQ-R08-2.B.4.g,R08,Transferable Skills,Systems Analysis,3.75,0.031945,17,8,9,16,1,14,Y,Y,Y,Y,Y
+REQ-R08-2.C.3.c,R08,Knowledge,Design,3.71,0.031604,12,6,6,1,11,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.2.b.6,R08,Work Activities,"Organizing, Planning, and Prioritizing Work",3.71,0.031604,9,5,4,2,7,2,Y,Y,Y,Y,Y
+REQ-R08-2.C.4.a,R08,Knowledge,Mathematics,3.67,0.031263,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R08-4.A.4.b.6,R08,Work Activities,Providing Consultation and Advice to Others,3.57,0.030411,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-4.A.1.a.2,R08,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.55,0.030241,5,1,4,5,0,0,Y,Y,Y,Y,Y
+REQ-R08-4.A.4.a.1,R08,Work Activities,Interpreting the Meaning of Information for Others,3.52,0.029986,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-2.A.1.b,R08,Essential Skills,Active Listening,3.5,0.029815,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-2.A.1.d,R08,Essential Skills,Speaking,3.5,0.029815,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-4.A.4.a.4,R08,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.48,0.029645,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R08-2.B.3.e,R08,Transferable Skills,Programming,3.38,0.028793,17,9,8,17,0,17,Y,Y,Y,Y,Y
+REQ-R09-4.A.2.a.4,R09,Work Activities,Analyzing Data or Information,4.73,0.040846,20,10,10,20,0,20,Y,Y,Y,Y,Y
+REQ-R09-4.A.3.b.1,R09,Work Activities,Working with Computers,4.68,0.040415,20,10,10,7,13,2,Y,Y,Y,Y,Y
+REQ-R09-4.A.2.a.2,R09,Work Activities,Processing Information,4.64,0.040069,20,10,10,12,8,11,Y,Y,Y,Y,Y
+REQ-R09-4.A.4.a.1,R09,Work Activities,Interpreting the Meaning of Information for Others,4.55,0.039292,17,9,8,17,0,10,Y,Y,Y,Y,Y
+REQ-R09-4.A.1.a.1,R09,Work Activities,Getting Information,4.5,0.038860,20,10,10,2,18,1,Y,Y,Y,Y,Y
+REQ-R09-2.C.3.a,R09,Knowledge,Computers and Electronics,4.29,0.037047,21,10,11,1,20,0,Y,Y,Y,Y,Y
+REQ-R09-4.A.4.a.2,R09,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.23,0.036528,7,6,1,3,4,2,Y,Y,Y,Y,Y
+REQ-R09-4.A.2.b.3,R09,Work Activities,Updating and Using Relevant Knowledge,4.05,0.034974,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R09-2.A.1.a,R09,Essential Skills,Reading Comprehension,4.0,0.034542,20,10,10,2,18,0,Y,Y,Y,Y,Y
+REQ-R09-4.A.2.b.6,R09,Work Activities,"Organizing, Planning, and Prioritizing Work",3.95,0.034111,11,7,4,1,10,1,Y,Y,Y,Y,Y
+REQ-R09-4.A.1.b.1,R09,Work Activities,"Identifying Objects, Actions, and Events",3.91,0.033765,18,9,9,0,18,0,Y,N,Y,Y,Y
+REQ-R09-2.A.1.b,R09,Essential Skills,Active Listening,3.88,0.033506,7,5,2,4,3,4,Y,Y,Y,Y,Y
+REQ-R09-2.A.1.d,R09,Essential Skills,Speaking,3.88,0.033506,6,5,1,1,5,1,Y,Y,Y,Y,Y
+REQ-R09-2.A.2.a,R09,Essential Skills,Critical Thinking,3.88,0.033506,18,9,9,1,17,0,Y,Y,Y,Y,Y
+REQ-R09-2.A.2.b,R09,Essential Skills,Active Learning,3.88,0.033506,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R09-2.C.4.a,R09,Knowledge,Mathematics,3.82,0.032988,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R09-4.A.2.b.1,R09,Work Activities,Making Decisions and Solving Problems,3.82,0.032988,19,9,10,1,18,0,Y,Y,Y,Y,Y
+REQ-R09-2.C.7.a,R09,Knowledge,English Language,3.77,0.032556,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R09-4.A.2.b.2,R09,Work Activities,Thinking Creatively,3.77,0.032556,9,6,3,2,7,1,Y,Y,Y,Y,Y
+REQ-R09-2.A.1.c,R09,Essential Skills,Writing,3.75,0.032383,5,3,2,1,4,1,Y,Y,Y,Y,Y
+REQ-R09-4.A.4.a.4,R09,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.64,0.031434,7,6,1,2,5,1,Y,Y,Y,Y,Y
+REQ-R09-2.B.4.e,R09,Transferable Skills,Judgment and Decision Making,3.62,0.031261,5,1,4,4,1,2,Y,Y,Y,Y,Y
+REQ-R09-2.A.1.e,R09,Essential Skills,Mathematics,3.5,0.030225,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R09-4.A.3.b.6,R09,Work Activities,Documenting/Recording Information,3.5,0.030225,8,6,2,6,2,2,Y,Y,Y,Y,Y
+REQ-R09-4.A.4.b.6,R09,Work Activities,Providing Consultation and Advice to Others,3.41,0.029447,6,5,1,2,4,1,Y,Y,Y,Y,Y
+REQ-R09-2.B.2.i,R09,Transferable Skills,Complex Problem Solving,3.38,0.029188,18,9,9,0,18,0,Y,N,Y,Y,Y
+REQ-R09-4.A.1.b.3,R09,Work Activities,"Estimating the Quantifiable Characteristics of Products, Events, or Information",3.27,0.028238,3,3,0,1,2,0,Y,Y,Y,N,Y
+REQ-R09-4.A.2.a.3,R09,Work Activities,Evaluating Information to Determine Compliance with Standards,3.24,0.027979,5,1,4,3,2,1,Y,Y,Y,Y,Y
+REQ-R09-2.C.1.a,R09,Knowledge,Administration and Management,3.14,0.027116,3,3,0,1,2,0,Y,Y,Y,N,Y
+REQ-R09-2.B.4.g,R09,Transferable Skills,Systems Analysis,3.12,0.026943,15,6,9,3,12,3,Y,Y,Y,Y,Y
+REQ-R10-4.A.3.b.1,R10,Work Activities,Working with Computers,4.83,0.042328,20,10,10,2,18,1,Y,Y,Y,Y,Y
+REQ-R10-2.C.3.a,R10,Knowledge,Computers and Electronics,4.79,0.041977,20,10,10,18,2,18,Y,Y,Y,Y,Y
+REQ-R10-4.A.2.b.1,R10,Work Activities,Making Decisions and Solving Problems,4.18,0.036631,16,6,10,0,16,0,Y,N,Y,Y,Y
+REQ-R10-4.A.1.a.1,R10,Work Activities,Getting Information,4.12,0.036106,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R10-4.A.1.b.1,R10,Work Activities,"Identifying Objects, Actions, and Events",4.11,0.036018,16,6,10,0,16,0,Y,N,Y,Y,Y
+REQ-R10-4.A.2.a.4,R10,Work Activities,Analyzing Data or Information,4.0,0.035054,20,10,10,5,15,2,Y,Y,Y,Y,Y
+REQ-R10-2.C.7.a,R10,Knowledge,English Language,3.96,0.034703,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R10-2.C.1.e,R10,Knowledge,Customer and Personal Service,3.93,0.034440,1,0,1,1,0,1,Y,Y,N,Y,Y
+REQ-R10-4.A.2.a.2,R10,Work Activities,Processing Information,3.92,0.034353,19,9,10,8,11,8,Y,Y,Y,Y,Y
+REQ-R10-2.A.2.a,R10,Essential Skills,Critical Thinking,3.88,0.034002,16,6,10,0,16,0,Y,N,Y,Y,Y
+REQ-R10-2.B.2.i,R10,Transferable Skills,Complex Problem Solving,3.88,0.034002,16,6,10,0,16,0,Y,N,Y,Y,Y
+REQ-R10-4.A.4.a.4,R10,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.86,0.033827,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R10-4.A.4.a.2,R10,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",3.84,0.033652,2,2,0,2,0,1,Y,Y,Y,N,Y
+REQ-R10-2.A.1.a,R10,Essential Skills,Reading Comprehension,3.75,0.032863,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R10-2.A.1.b,R10,Essential Skills,Active Listening,3.75,0.032863,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R10-2.B.4.e,R10,Transferable Skills,Judgment and Decision Making,3.75,0.032863,4,0,4,3,1,0,Y,Y,N,Y,Y
+REQ-R10-4.A.2.a.3,R10,Work Activities,Evaluating Information to Determine Compliance with Standards,3.75,0.032863,8,2,6,8,0,1,Y,Y,Y,Y,Y
+REQ-R10-4.A.2.b.2,R10,Work Activities,Thinking Creatively,3.73,0.032688,10,6,4,1,9,0,Y,Y,Y,Y,Y
+REQ-R10-4.A.2.b.3,R10,Work Activities,Updating and Using Relevant Knowledge,3.68,0.032250,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R10-4.A.2.b.6,R10,Work Activities,"Organizing, Planning, and Prioritizing Work",3.62,0.031724,6,2,4,0,6,0,Y,N,Y,Y,Y
+REQ-R10-4.A.3.b.6,R10,Work Activities,Documenting/Recording Information,3.61,0.031636,3,3,0,1,2,1,Y,Y,Y,N,Y
+REQ-R10-2.C.4.a,R10,Knowledge,Mathematics,3.55,0.031110,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R10-2.C.9.a,R10,Knowledge,Telecommunications,3.54,0.031023,1,0,1,0,1,0,Y,N,N,Y,Y
+REQ-R10-2.C.3.b,R10,Knowledge,Engineering and Technology,3.51,0.030760,9,5,4,0,9,0,Y,N,Y,Y,Y
+REQ-R10-2.A.2.b,R10,Essential Skills,Active Learning,3.5,0.030672,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R10-4.A.4.a.1,R10,Work Activities,Interpreting the Meaning of Information for Others,3.47,0.030409,2,2,0,2,0,2,Y,Y,Y,N,Y
+REQ-R10-4.A.1.a.2,R10,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.42,0.029971,9,3,6,9,0,7,Y,Y,Y,Y,Y
+REQ-R10-4.A.4.a.7,R10,Work Activities,Resolving Conflicts and Negotiating with Others,3.42,0.029971,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R10-2.A.1.d,R10,Essential Skills,Speaking,3.38,0.029621,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R10-2.B.3.e,R10,Transferable Skills,Programming,3.38,0.029621,6,5,1,6,0,5,Y,Y,Y,Y,Y
+REQ-R11-4.A.3.b.1,R11,Work Activities,Working with Computers,4.7,0.040598,20,10,10,4,16,0,Y,Y,Y,Y,Y
+REQ-R11-4.A.1.a.1,R11,Work Activities,Getting Information,4.5,0.038870,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R11-2.C.3.a,R11,Knowledge,Computers and Electronics,4.35,0.037575,20,10,10,9,11,8,Y,Y,Y,Y,Y
+REQ-R11-4.A.1.b.1,R11,Work Activities,"Identifying Objects, Actions, and Events",4.29,0.037056,18,9,9,15,3,11,Y,Y,Y,Y,Y
+REQ-R11-2.C.7.a,R11,Knowledge,English Language,4.26,0.036797,20,10,10,3,17,0,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.a.3,R11,Work Activities,Evaluating Information to Determine Compliance with Standards,4.12,0.035588,12,6,6,12,0,7,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.a.2,R11,Work Activities,Processing Information,4.09,0.035329,11,6,5,2,9,2,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.a.4,R11,Work Activities,Analyzing Data or Information,4.08,0.035242,13,8,5,11,2,10,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.b.3,R11,Work Activities,Updating and Using Relevant Knowledge,4.05,0.034983,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R11-4.A.3.b.6,R11,Work Activities,Documenting/Recording Information,4.03,0.034810,7,2,5,7,0,2,Y,Y,Y,Y,Y
+REQ-R11-2.A.1.a,R11,Essential Skills,Reading Comprehension,4.0,0.034551,21,10,11,9,12,5,Y,Y,Y,Y,Y
+REQ-R11-4.A.4.a.2,R11,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.0,0.034551,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.b.1,R11,Work Activities,Making Decisions and Solving Problems,3.94,0.034033,18,9,9,1,17,1,Y,Y,Y,Y,Y
+REQ-R11-4.A.1.a.2,R11,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.92,0.033860,16,8,8,14,2,9,Y,Y,Y,Y,Y
+REQ-R11-2.A.2.a,R11,Essential Skills,Critical Thinking,3.88,0.033515,20,10,10,8,12,4,Y,Y,Y,Y,Y
+REQ-R11-2.A.1.b,R11,Essential Skills,Active Listening,3.75,0.032392,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R11-2.B.2.i,R11,Transferable Skills,Complex Problem Solving,3.75,0.032392,18,9,9,0,18,0,Y,N,Y,Y,Y
+REQ-R11-4.A.4.a.1,R11,Work Activities,Interpreting the Meaning of Information for Others,3.74,0.032305,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R11-2.C.1.a,R11,Knowledge,Administration and Management,3.68,0.031787,6,2,4,1,5,1,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.b.6,R11,Work Activities,"Organizing, Planning, and Prioritizing Work",3.67,0.031701,13,6,7,0,13,0,Y,N,Y,Y,Y
+REQ-R11-2.C.3.b,R11,Knowledge,Engineering and Technology,3.64,0.031442,2,1,1,0,2,0,Y,N,Y,Y,Y
+REQ-R11-2.C.9.a,R11,Knowledge,Telecommunications,3.64,0.031442,6,3,3,1,5,1,Y,Y,Y,Y,Y
+REQ-R11-2.A.1.d,R11,Essential Skills,Speaking,3.62,0.031269,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R11-4.A.2.b.2,R11,Work Activities,Thinking Creatively,3.56,0.030751,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R11-2.A.1.c,R11,Essential Skills,Writing,3.5,0.030232,4,2,2,1,3,1,Y,Y,Y,Y,Y
+REQ-R11-4.A.4.a.4,R11,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.45,0.029800,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R11-2.C.1.e,R11,Knowledge,Customer and Personal Service,3.42,0.029541,1,0,1,1,0,1,Y,Y,N,Y,Y
+REQ-R11-2.A.2.d,R11,Essential Skills,Monitoring,3.38,0.029196,9,4,5,6,3,1,Y,Y,Y,Y,Y
+REQ-R11-2.B.4.e,R11,Transferable Skills,Judgment and Decision Making,3.38,0.029196,3,1,2,2,1,2,Y,Y,Y,Y,Y
+REQ-R11-2.B.4.g,R11,Transferable Skills,Systems Analysis,3.38,0.029196,12,6,6,1,11,1,Y,Y,Y,Y,Y
+REQ-R12-4.A.3.b.1,R12,Work Activities,Working with Computers,4.89,0.041392,21,11,10,1,20,1,Y,Y,Y,Y,Y
+REQ-R12-2.C.3.a,R12,Knowledge,Computers and Electronics,4.63,0.039191,22,11,11,15,7,13,Y,Y,Y,Y,Y
+REQ-R12-4.A.1.a.1,R12,Work Activities,Getting Information,4.5,0.038090,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R12-4.A.1.b.1,R12,Work Activities,"Identifying Objects, Actions, and Events",4.44,0.037583,20,10,10,1,19,1,Y,Y,Y,Y,Y
+REQ-R12-4.A.2.b.3,R12,Work Activities,Updating and Using Relevant Knowledge,4.42,0.037413,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R12-4.A.2.a.4,R12,Work Activities,Analyzing Data or Information,4.37,0.036990,8,4,4,1,7,1,Y,Y,Y,Y,Y
+REQ-R12-4.A.4.a.2,R12,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.26,0.036059,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-4.A.2.b.1,R12,Work Activities,Making Decisions and Solving Problems,4.17,0.035297,20,9,11,1,19,0,Y,Y,Y,Y,Y
+REQ-R12-4.A.2.a.2,R12,Work Activities,Processing Information,4.16,0.035212,7,3,4,0,7,0,Y,N,Y,Y,Y
+REQ-R12-4.A.3.b.6,R12,Work Activities,Documenting/Recording Information,4.16,0.035212,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.A.1.a,R12,Essential Skills,Reading Comprehension,4.12,0.034874,20,10,10,5,15,3,Y,Y,Y,Y,Y
+REQ-R12-4.A.2.a.3,R12,Work Activities,Evaluating Information to Determine Compliance with Standards,4.05,0.034281,19,9,10,19,0,17,Y,Y,Y,Y,Y
+REQ-R12-4.A.4.b.3,R12,Work Activities,Training and Teaching Others,4.05,0.034281,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.A.2.a,R12,Essential Skills,Critical Thinking,4.0,0.033858,19,9,10,4,15,1,Y,Y,Y,Y,Y
+REQ-R12-2.C.3.b,R12,Knowledge,Engineering and Technology,4.0,0.033858,10,3,7,0,10,0,Y,N,Y,Y,Y
+REQ-R12-4.A.4.a.1,R12,Work Activities,Interpreting the Meaning of Information for Others,3.89,0.032927,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.A.1.b,R12,Essential Skills,Active Listening,3.88,0.032842,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-4.A.2.b.6,R12,Work Activities,"Organizing, Planning, and Prioritizing Work",3.79,0.032081,11,1,10,0,11,0,Y,N,Y,Y,Y
+REQ-R12-4.A.4.a.3,R12,Work Activities,Communicating with People Outside the Organization,3.74,0.031657,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-4.A.4.b.6,R12,Work Activities,Providing Consultation and Advice to Others,3.63,0.030726,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.A.1.c,R12,Essential Skills,Writing,3.62,0.030642,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.A.2.d,R12,Essential Skills,Monitoring,3.62,0.030642,3,2,1,1,2,0,Y,Y,Y,Y,Y
+REQ-R12-4.A.2.b.2,R12,Work Activities,Thinking Creatively,3.58,0.030303,11,4,7,1,10,1,Y,Y,Y,Y,Y
+REQ-R12-2.C.7.a,R12,Knowledge,English Language,3.53,0.029880,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R12-4.A.1.a.2,R12,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.53,0.029880,15,9,6,15,0,5,Y,Y,Y,Y,Y
+REQ-R12-2.A.1.d,R12,Essential Skills,Speaking,3.5,0.029626,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-4.A.4.b.2,R12,Work Activities,Developing and Building Teams,3.47,0.029372,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R12-2.B.3.m,R12,Transferable Skills,Quality Control Analysis,3.38,0.028610,9,5,4,2,7,2,Y,Y,Y,Y,Y
+REQ-R12-2.B.4.g,R12,Transferable Skills,Systems Analysis,3.38,0.028610,18,8,10,14,4,11,Y,Y,Y,Y,Y
+REQ-R12-2.B.4.h,R12,Transferable Skills,Systems Evaluation,3.38,0.028610,12,5,7,6,6,6,Y,Y,Y,Y,Y
+REQ-R13-4.A.3.b.1,R13,Work Activities,Working with Computers,5.0,0.040206,21,11,10,1,20,1,Y,Y,Y,Y,Y
+REQ-R13-2.C.3.a,R13,Knowledge,Computers and Electronics,4.95,0.039804,22,11,11,5,17,2,Y,Y,Y,Y,Y
+REQ-R13-4.A.3.b.6,R13,Work Activities,Documenting/Recording Information,4.65,0.037391,12,5,7,6,6,0,Y,Y,Y,Y,Y
+REQ-R13-4.A.2.b.1,R13,Work Activities,Making Decisions and Solving Problems,4.6,0.036989,20,9,11,1,19,0,Y,Y,Y,Y,Y
+REQ-R13-4.A.1.a.1,R13,Work Activities,Getting Information,4.58,0.036829,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R13-4.A.2.a.3,R13,Work Activities,Evaluating Information to Determine Compliance with Standards,4.55,0.036587,14,6,8,2,12,1,Y,Y,Y,Y,Y
+REQ-R13-4.A.2.b.3,R13,Work Activities,Updating and Using Relevant Knowledge,4.45,0.035783,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R13-4.A.2.a.4,R13,Work Activities,Analyzing Data or Information,4.42,0.035542,17,8,9,0,17,0,Y,N,Y,Y,Y
+REQ-R13-4.A.2.a.2,R13,Work Activities,Processing Information,4.4,0.035381,17,8,9,0,17,0,Y,N,Y,Y,Y
+REQ-R13-2.A.2.a,R13,Essential Skills,Critical Thinking,4.38,0.035220,20,10,10,20,0,19,Y,Y,Y,Y,Y
+REQ-R13-4.A.2.b.2,R13,Work Activities,Thinking Creatively,4.25,0.034175,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R13-4.A.4.a.1,R13,Work Activities,Interpreting the Meaning of Information for Others,4.25,0.034175,3,2,1,3,0,1,Y,Y,Y,Y,Y
+REQ-R13-4.A.1.b.1,R13,Work Activities,"Identifying Objects, Actions, and Events",4.2,0.033773,20,10,10,13,7,6,Y,Y,Y,Y,Y
+REQ-R13-2.C.9.a,R13,Knowledge,Telecommunications,4.15,0.033371,8,4,4,1,7,0,Y,Y,Y,Y,Y
+REQ-R13-4.A.4.a.2,R13,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.15,0.033371,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R13-4.A.2.b.6,R13,Work Activities,"Organizing, Planning, and Prioritizing Work",4.05,0.032567,13,5,8,0,13,0,Y,N,Y,Y,Y
+REQ-R13-2.A.1.a,R13,Essential Skills,Reading Comprehension,4.0,0.032165,20,10,10,7,13,6,Y,Y,Y,Y,Y
+REQ-R13-2.A.1.c,R13,Essential Skills,Writing,4.0,0.032165,13,5,8,11,2,7,Y,Y,Y,Y,Y
+REQ-R13-2.C.3.b,R13,Knowledge,Engineering and Technology,3.95,0.031763,1,1,0,0,1,0,Y,N,Y,N,Y
+REQ-R13-4.A.4.a.3,R13,Work Activities,Communicating with People Outside the Organization,3.95,0.031763,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R13-2.A.1.b,R13,Essential Skills,Active Listening,3.88,0.031200,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R13-2.B.2.i,R13,Transferable Skills,Complex Problem Solving,3.88,0.031200,19,9,10,13,6,12,Y,Y,Y,Y,Y
+REQ-R13-2.B.3.e,R13,Transferable Skills,Programming,3.88,0.031200,14,7,7,14,0,8,Y,Y,Y,Y,Y
+REQ-R13-2.C.7.a,R13,Knowledge,English Language,3.8,0.030556,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R13-2.C.1.e,R13,Knowledge,Customer and Personal Service,3.75,0.030154,2,0,2,1,1,1,Y,Y,N,Y,Y
+REQ-R13-4.A.4.b.6,R13,Work Activities,Providing Consultation and Advice to Others,3.75,0.030154,2,2,0,2,0,1,Y,Y,Y,N,Y
+REQ-R13-4.A.1.a.2,R13,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.65,0.029350,2,2,0,2,0,1,Y,Y,Y,N,Y
+REQ-R13-2.A.2.b,R13,Essential Skills,Active Learning,3.62,0.029109,20,10,10,3,17,0,Y,Y,Y,Y,Y
+REQ-R13-2.B.4.h,R13,Transferable Skills,Systems Evaluation,3.62,0.029109,15,8,7,1,14,1,Y,Y,Y,Y,Y
+REQ-R13-4.A.2.b.4,R13,Work Activities,Developing Objectives and Strategies,3.6,0.028948,4,2,2,2,2,1,Y,Y,Y,Y,Y
+REQ-R14-4.A.3.b.1,R14,Work Activities,Working with Computers,4.85,0.041933,21,10,11,5,16,4,Y,Y,Y,Y,Y
+REQ-R14-2.C.3.a,R14,Knowledge,Computers and Electronics,4.68,0.040463,21,10,11,4,17,1,Y,Y,Y,Y,Y
+REQ-R14-4.A.2.b.3,R14,Work Activities,Updating and Using Relevant Knowledge,4.65,0.040204,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R14-4.A.2.a.4,R14,Work Activities,Analyzing Data or Information,4.48,0.038734,15,7,8,9,6,7,Y,Y,Y,Y,Y
+REQ-R14-4.A.1.a.1,R14,Work Activities,Getting Information,4.44,0.038388,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R14-4.A.3.b.6,R14,Work Activities,Documenting/Recording Information,4.44,0.038388,18,8,10,18,0,14,Y,Y,Y,Y,Y
+REQ-R14-4.A.4.a.1,R14,Work Activities,Interpreting the Meaning of Information for Others,4.3,0.037178,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-4.A.2.a.2,R14,Work Activities,Processing Information,4.26,0.036832,14,6,8,0,14,0,Y,N,Y,Y,Y
+REQ-R14-4.A.1.b.1,R14,Work Activities,"Identifying Objects, Actions, and Events",4.12,0.035622,19,9,10,16,3,14,Y,Y,Y,Y,Y
+REQ-R14-4.A.2.b.1,R14,Work Activities,Making Decisions and Solving Problems,4.04,0.034930,18,8,10,3,15,3,Y,Y,Y,Y,Y
+REQ-R14-4.A.2.b.6,R14,Work Activities,"Organizing, Planning, and Prioritizing Work",3.96,0.034238,7,1,6,0,7,0,Y,N,Y,Y,Y
+REQ-R14-4.A.4.a.3,R14,Work Activities,Communicating with People Outside the Organization,3.88,0.033547,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-4.A.4.a.2,R14,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",3.85,0.033287,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-2.A.1.a,R14,Essential Skills,Reading Comprehension,3.75,0.032423,20,10,10,8,12,3,Y,Y,Y,Y,Y
+REQ-R14-2.C.8.b,R14,Knowledge,Law and Government,3.72,0.032163,8,3,5,8,0,5,Y,Y,Y,Y,Y
+REQ-R14-2.C.7.a,R14,Knowledge,English Language,3.7,0.031990,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R14-4.A.2.b.2,R14,Work Activities,Thinking Creatively,3.7,0.031990,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-4.A.1.a.2,R14,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.67,0.031731,9,4,5,7,2,5,Y,Y,Y,Y,Y
+REQ-R14-4.A.4.b.6,R14,Work Activities,Providing Consultation and Advice to Others,3.59,0.031039,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-4.A.4.a.4,R14,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.54,0.030607,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-4.A.2.a.3,R14,Work Activities,Evaluating Information to Determine Compliance with Standards,3.52,0.030434,8,3,5,6,2,1,Y,Y,Y,Y,Y
+REQ-R14-2.A.1.b,R14,Essential Skills,Active Listening,3.5,0.030261,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-2.A.1.c,R14,Essential Skills,Writing,3.5,0.030261,12,5,7,5,7,2,Y,Y,Y,Y,Y
+REQ-R14-2.A.1.d,R14,Essential Skills,Speaking,3.5,0.030261,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R14-2.B.4.e,R14,Transferable Skills,Judgment and Decision Making,3.5,0.030261,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R14-2.A.2.b,R14,Essential Skills,Active Learning,3.38,0.029224,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R14-2.B.2.i,R14,Transferable Skills,Complex Problem Solving,3.38,0.029224,18,8,10,4,14,3,Y,Y,Y,Y,Y
+REQ-R14-4.A.3.b.5,R14,Work Activities,Repairing and Maintaining Electronic Equipment,3.33,0.028791,7,3,4,0,7,0,Y,N,Y,Y,Y
+REQ-R14-4.A.4.c.1,R14,Work Activities,Performing Administrative Activities,3.31,0.028618,3,1,2,0,3,0,Y,N,Y,Y,Y
+REQ-R14-2.B.4.g,R14,Transferable Skills,Systems Analysis,3.12,0.026976,12,5,7,1,11,0,Y,Y,Y,Y,Y
+REQ-R15-4.A.3.b.1,R15,Work Activities,Working with Computers,4.75,0.040292,20,10,10,6,14,4,Y,Y,Y,Y,Y
+REQ-R15-2.C.3.a,R15,Knowledge,Computers and Electronics,4.68,0.039698,21,10,11,14,7,12,Y,Y,Y,Y,Y
+REQ-R15-4.A.1.a.1,R15,Work Activities,Getting Information,4.4,0.037323,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R15-4.A.2.b.3,R15,Work Activities,Updating and Using Relevant Knowledge,4.3,0.036475,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R15-2.C.3.b,R15,Knowledge,Engineering and Technology,4.25,0.036051,14,8,6,7,7,4,Y,Y,Y,Y,Y
+REQ-R15-2.C.9.a,R15,Knowledge,Telecommunications,4.25,0.036051,20,10,10,19,1,18,Y,Y,Y,Y,Y
+REQ-R15-4.A.2.a.3,R15,Work Activities,Evaluating Information to Determine Compliance with Standards,4.15,0.035202,4,1,3,4,0,2,Y,Y,Y,Y,Y
+REQ-R15-2.A.2.a,R15,Essential Skills,Critical Thinking,4.12,0.034948,17,7,10,0,17,0,Y,N,Y,Y,Y
+REQ-R15-4.A.2.b.1,R15,Work Activities,Making Decisions and Solving Problems,4.05,0.034354,18,7,11,1,17,0,Y,Y,Y,Y,Y
+REQ-R15-2.A.1.a,R15,Essential Skills,Reading Comprehension,4.0,0.033930,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R15-4.A.4.a.2,R15,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.0,0.033930,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R15-4.A.1.a.2,R15,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.95,0.033506,4,3,1,4,0,1,Y,Y,Y,Y,Y
+REQ-R15-4.A.1.b.1,R15,Work Activities,"Identifying Objects, Actions, and Events",3.95,0.033506,18,8,10,4,14,0,Y,Y,Y,Y,Y
+REQ-R15-4.A.2.a.4,R15,Work Activities,Analyzing Data or Information,3.9,0.033082,4,3,1,1,3,0,Y,Y,Y,Y,Y
+REQ-R15-4.A.3.b.6,R15,Work Activities,Documenting/Recording Information,3.9,0.033082,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R15-2.B.2.i,R15,Transferable Skills,Complex Problem Solving,3.88,0.032912,17,7,10,0,17,0,Y,N,Y,Y,Y
+REQ-R15-2.B.3.e,R15,Transferable Skills,Programming,3.88,0.032912,4,3,1,4,0,2,Y,Y,Y,Y,Y
+REQ-R15-2.B.4.h,R15,Transferable Skills,Systems Evaluation,3.88,0.032912,10,6,4,6,4,5,Y,Y,Y,Y,Y
+REQ-R15-4.A.2.a.2,R15,Work Activities,Processing Information,3.85,0.032658,4,3,1,0,4,0,Y,N,Y,Y,Y
+REQ-R15-2.C.7.a,R15,Knowledge,English Language,3.8,0.032233,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R15-2.A.1.b,R15,Essential Skills,Active Listening,3.75,0.031809,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R15-2.B.4.e,R15,Transferable Skills,Judgment and Decision Making,3.75,0.031809,4,1,3,4,0,1,Y,Y,Y,Y,Y
+REQ-R15-2.B.4.g,R15,Transferable Skills,Systems Analysis,3.75,0.031809,13,7,6,9,4,9,Y,Y,Y,Y,Y
+REQ-R15-2.A.1.c,R15,Essential Skills,Writing,3.62,0.030707,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R15-4.A.2.b.6,R15,Work Activities,"Organizing, Planning, and Prioritizing Work",3.58,0.030367,9,1,8,0,9,0,Y,N,Y,Y,Y
+REQ-R15-2.A.1.d,R15,Essential Skills,Speaking,3.5,0.029689,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R15-2.B.1.b,R15,Transferable Skills,Coordination,3.5,0.029689,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R15-4.A.1.b.2,R15,Work Activities,"Inspecting Equipment, Structures, or Materials",3.5,0.029689,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R15-4.A.2.b.4,R15,Work Activities,Developing Objectives and Strategies,3.5,0.029689,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R15-4.A.4.a.1,R15,Work Activities,Interpreting the Meaning of Information for Others,3.5,0.029689,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R16-2.C.3.a,R16,Knowledge,Computers and Electronics,4.91,0.041333,21,11,10,11,10,9,Y,Y,Y,Y,Y
+REQ-R16-4.A.3.b.1,R16,Work Activities,Working with Computers,4.68,0.039397,21,11,10,7,14,6,Y,Y,Y,Y,Y
+REQ-R16-4.A.2.b.1,R16,Work Activities,Making Decisions and Solving Problems,4.45,0.037461,19,9,10,1,18,0,Y,Y,Y,Y,Y
+REQ-R16-4.A.1.a.1,R16,Work Activities,Getting Information,4.41,0.037124,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R16-2.C.7.a,R16,Knowledge,English Language,4.09,0.034431,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R16-4.A.2.a.2,R16,Work Activities,Processing Information,4.05,0.034094,3,2,1,1,2,0,Y,Y,Y,Y,Y
+REQ-R16-4.A.2.b.3,R16,Work Activities,Updating and Using Relevant Knowledge,4.05,0.034094,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R16-2.A.1.a,R16,Essential Skills,Reading Comprehension,4.0,0.033673,20,10,10,2,18,2,Y,Y,Y,Y,Y
+REQ-R16-2.A.1.b,R16,Essential Skills,Active Listening,4.0,0.033673,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.A.2.a,R16,Essential Skills,Critical Thinking,4.0,0.033673,18,8,10,1,17,0,Y,Y,Y,Y,Y
+REQ-R16-4.A.2.b.6,R16,Work Activities,"Organizing, Planning, and Prioritizing Work",4.0,0.033673,14,5,9,3,11,0,Y,Y,Y,Y,Y
+REQ-R16-4.A.4.a.2,R16,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.0,0.033673,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.C.9.a,R16,Knowledge,Telecommunications,3.95,0.033252,5,3,2,0,5,0,Y,N,Y,Y,Y
+REQ-R16-4.A.1.b.1,R16,Work Activities,"Identifying Objects, Actions, and Events",3.95,0.033252,18,8,10,0,18,0,Y,N,Y,Y,Y
+REQ-R16-4.A.2.a.3,R16,Work Activities,Evaluating Information to Determine Compliance with Standards,3.91,0.032915,6,1,5,4,2,2,Y,Y,Y,Y,Y
+REQ-R16-4.A.3.b.6,R16,Work Activities,Documenting/Recording Information,3.9,0.032831,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.A.1.c,R16,Essential Skills,Writing,3.88,0.032663,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.A.1.d,R16,Essential Skills,Speaking,3.88,0.032663,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.B.4.g,R16,Transferable Skills,Systems Analysis,3.88,0.032663,18,9,9,17,1,15,Y,Y,Y,Y,Y
+REQ-R16-2.B.4.h,R16,Transferable Skills,Systems Evaluation,3.88,0.032663,15,8,7,9,6,9,Y,Y,Y,Y,Y
+REQ-R16-2.C.1.e,R16,Knowledge,Customer and Personal Service,3.86,0.032494,4,1,3,1,3,1,Y,Y,Y,Y,Y
+REQ-R16-4.A.2.a.4,R16,Work Activities,Analyzing Data or Information,3.86,0.032494,5,3,2,3,2,3,Y,Y,Y,Y,Y
+REQ-R16-2.C.3.b,R16,Knowledge,Engineering and Technology,3.77,0.031737,13,7,6,2,11,0,Y,Y,Y,Y,Y
+REQ-R16-2.B.2.i,R16,Transferable Skills,Complex Problem Solving,3.75,0.031568,19,9,10,1,18,0,Y,Y,Y,Y,Y
+REQ-R16-2.B.3.a,R16,Transferable Skills,Operations Analysis,3.75,0.031568,15,8,7,1,14,0,Y,Y,Y,Y,Y
+REQ-R16-4.A.4.a.1,R16,Work Activities,Interpreting the Meaning of Information for Others,3.67,0.030895,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-2.A.2.b,R16,Essential Skills,Active Learning,3.62,0.030474,20,10,10,2,18,1,Y,Y,Y,Y,Y
+REQ-R16-4.A.4.b.3,R16,Work Activities,Training and Teaching Others,3.59,0.030221,2,1,1,1,1,1,Y,Y,Y,Y,Y
+REQ-R16-4.A.4.b.6,R16,Work Activities,Providing Consultation and Advice to Others,3.55,0.029885,3,1,2,3,0,1,Y,Y,Y,Y,Y
+REQ-R16-2.A.2.d,R16,Essential Skills,Monitoring,3.5,0.029464,5,2,3,1,4,0,Y,Y,Y,Y,Y
+REQ-R17-4.A.3.b.1,R17,Work Activities,Working with Computers,4.83,0.041674,20,10,10,12,8,7,Y,Y,Y,Y,Y
+REQ-R17-2.C.3.a,R17,Knowledge,Computers and Electronics,4.63,0.039948,20,10,10,8,12,7,Y,Y,Y,Y,Y
+REQ-R17-4.A.1.a.1,R17,Work Activities,Getting Information,4.23,0.036497,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R17-4.A.2.b.1,R17,Work Activities,Making Decisions and Solving Problems,4.2,0.036238,17,7,10,2,15,1,Y,Y,Y,Y,Y
+REQ-R17-4.A.2.a.4,R17,Work Activities,Analyzing Data or Information,4.1,0.035375,5,2,3,3,2,3,Y,Y,Y,Y,Y
+REQ-R17-4.A.2.b.3,R17,Work Activities,Updating and Using Relevant Knowledge,4.1,0.035375,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R17-4.A.2.a.2,R17,Work Activities,Processing Information,4.03,0.034771,3,0,3,0,3,0,Y,N,N,Y,Y
+REQ-R17-2.A.1.b,R17,Essential Skills,Active Listening,4.0,0.034513,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R17-2.B.3.k,R17,Transferable Skills,Troubleshooting,4.0,0.034513,10,5,5,10,0,5,Y,Y,Y,Y,Y
+REQ-R17-2.B.4.e,R17,Transferable Skills,Judgment and Decision Making,4.0,0.034513,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R17-2.B.4.g,R17,Transferable Skills,Systems Analysis,4.0,0.034513,18,9,9,12,6,11,Y,Y,Y,Y,Y
+REQ-R17-2.B.4.h,R17,Transferable Skills,Systems Evaluation,4.0,0.034513,12,6,6,4,8,4,Y,Y,Y,Y,Y
+REQ-R17-4.A.3.b.6,R17,Work Activities,Documenting/Recording Information,4.0,0.034513,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R17-4.A.2.a.3,R17,Work Activities,Evaluating Information to Determine Compliance with Standards,3.9,0.033650,4,1,3,2,2,1,Y,Y,Y,Y,Y
+REQ-R17-4.A.4.a.2,R17,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",3.9,0.033650,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R17-2.A.1.a,R17,Essential Skills,Reading Comprehension,3.88,0.033477,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R17-2.A.2.a,R17,Essential Skills,Critical Thinking,3.88,0.033477,17,7,10,0,17,0,Y,N,Y,Y,Y
+REQ-R17-2.A.2.d,R17,Essential Skills,Monitoring,3.88,0.033477,10,4,6,5,5,4,Y,Y,Y,Y,Y
+REQ-R17-2.B.2.i,R17,Transferable Skills,Complex Problem Solving,3.88,0.033477,17,7,10,1,16,0,Y,Y,Y,Y,Y
+REQ-R17-4.A.1.b.1,R17,Work Activities,"Identifying Objects, Actions, and Events",3.7,0.031924,17,7,10,2,15,0,Y,Y,Y,Y,Y
+REQ-R17-4.A.1.a.2,R17,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.6,0.031061,15,6,9,15,0,10,Y,Y,Y,Y,Y
+REQ-R17-4.A.2.b.2,R17,Work Activities,Thinking Creatively,3.6,0.031061,6,4,2,1,5,1,Y,Y,Y,Y,Y
+REQ-R17-2.C.9.a,R17,Knowledge,Telecommunications,3.57,0.030802,4,1,3,0,4,0,Y,N,Y,Y,Y
+REQ-R17-2.B.3.e,R17,Transferable Skills,Programming,3.5,0.030198,7,4,3,7,0,5,Y,Y,Y,Y,Y
+REQ-R17-2.B.3.g,R17,Transferable Skills,Operations Monitoring,3.5,0.030198,10,4,6,0,10,0,Y,N,Y,Y,Y
+REQ-R17-4.A.2.b.6,R17,Work Activities,"Organizing, Planning, and Prioritizing Work",3.5,0.030198,13,4,9,6,7,2,Y,Y,Y,Y,Y
+REQ-R17-2.B.3.m,R17,Transferable Skills,Quality Control Analysis,3.38,0.029163,3,1,2,0,3,0,Y,N,Y,Y,Y
+REQ-R17-2.C.1.e,R17,Knowledge,Customer and Personal Service,3.37,0.029077,2,0,2,1,1,1,Y,Y,N,Y,Y
+REQ-R17-2.C.7.a,R17,Knowledge,English Language,3.37,0.029077,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R17-4.A.2.b.4,R17,Work Activities,Developing Objectives and Strategies,3.37,0.029077,6,3,3,6,0,1,Y,Y,Y,Y,Y
+REQ-R18-4.A.3.b.1,R18,Work Activities,Working with Computers,4.96,0.042488,20,10,10,4,16,3,Y,Y,Y,Y,Y
+REQ-R18-2.C.3.a,R18,Knowledge,Computers and Electronics,4.63,0.039661,21,10,11,1,20,0,Y,Y,Y,Y,Y
+REQ-R18-4.A.1.a.1,R18,Work Activities,Getting Information,4.59,0.039318,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.b.1,R18,Work Activities,Making Decisions and Solving Problems,4.59,0.039318,17,7,10,1,16,0,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.b.3,R18,Work Activities,Updating and Using Relevant Knowledge,4.44,0.038033,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R18-4.A.2.a.2,R18,Work Activities,Processing Information,4.43,0.037948,18,9,9,1,17,1,Y,Y,Y,Y,Y
+REQ-R18-4.A.4.a.2,R18,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.17,0.035720,11,7,4,3,8,3,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.a.4,R18,Work Activities,Analyzing Data or Information,4.15,0.035549,19,10,9,8,11,7,Y,Y,Y,Y,Y
+REQ-R18-4.A.1.a.2,R18,Work Activities,"Monitoring Processes, Materials, or Surroundings",4.03,0.034521,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R18-2.A.1.d,R18,Essential Skills,Speaking,4.0,0.034264,10,6,4,3,7,3,Y,Y,Y,Y,Y
+REQ-R18-2.A.1.a,R18,Essential Skills,Reading Comprehension,3.88,0.033236,20,10,10,6,14,4,Y,Y,Y,Y,Y
+REQ-R18-4.A.1.b.1,R18,Work Activities,"Identifying Objects, Actions, and Events",3.78,0.032380,16,7,9,0,16,0,Y,N,Y,Y,Y
+REQ-R18-2.A.1.b,R18,Essential Skills,Active Listening,3.75,0.032123,13,7,6,9,4,9,Y,Y,Y,Y,Y
+REQ-R18-2.A.2.a,R18,Essential Skills,Critical Thinking,3.75,0.032123,16,7,9,1,15,0,Y,Y,Y,Y,Y
+REQ-R18-2.B.4.g,R18,Transferable Skills,Systems Analysis,3.75,0.032123,18,7,11,11,7,10,Y,Y,Y,Y,Y
+REQ-R18-2.B.4.h,R18,Transferable Skills,Systems Evaluation,3.75,0.032123,18,7,11,2,16,2,Y,Y,Y,Y,Y
+REQ-R18-2.C.1.e,R18,Knowledge,Customer and Personal Service,3.7,0.031694,10,6,4,4,6,2,Y,Y,Y,Y,Y
+REQ-R18-4.A.4.a.1,R18,Work Activities,Interpreting the Meaning of Information for Others,3.69,0.031609,13,8,5,9,4,3,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.a.3,R18,Work Activities,Evaluating Information to Determine Compliance with Standards,3.68,0.031523,8,1,7,4,4,0,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.a.1,R18,Work Activities,"Judging the Qualities of Objects, Services, or People",3.64,0.031180,7,1,6,0,7,0,Y,N,Y,Y,Y
+REQ-R18-4.A.2.b.6,R18,Work Activities,"Organizing, Planning, and Prioritizing Work",3.64,0.031180,9,4,5,2,7,2,Y,Y,Y,Y,Y
+REQ-R18-4.A.2.b.2,R18,Work Activities,Thinking Creatively,3.63,0.031095,7,4,3,2,5,2,Y,Y,Y,Y,Y
+REQ-R18-2.A.2.b,R18,Essential Skills,Active Learning,3.62,0.031009,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R18-2.B.4.e,R18,Transferable Skills,Judgment and Decision Making,3.62,0.031009,9,2,7,5,4,2,Y,Y,Y,Y,Y
+REQ-R18-4.A.3.b.6,R18,Work Activities,Documenting/Recording Information,3.59,0.030752,12,7,5,10,2,5,Y,Y,Y,Y,Y
+REQ-R18-4.A.4.a.4,R18,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.57,0.030581,10,6,4,2,8,1,Y,Y,Y,Y,Y
+REQ-R18-2.C.7.a,R18,Knowledge,English Language,3.48,0.029810,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R18-4.A.2.b.4,R18,Work Activities,Developing Objectives and Strategies,3.46,0.029639,10,5,5,7,3,4,Y,Y,Y,Y,Y
+REQ-R18-4.A.1.b.2,R18,Work Activities,"Inspecting Equipment, Structures, or Materials",3.39,0.029039,3,2,1,1,2,1,Y,Y,Y,Y,Y
+REQ-R18-2.A.1.c,R18,Essential Skills,Writing,3.38,0.028953,10,8,2,3,7,2,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.b.1,R19,Work Activities,Coordinating the Work and Activities of Others,4.86,0.037759,11,5,6,5,6,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.a.2,R19,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.7,0.036516,12,6,6,3,9,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.1.a.1,R19,Work Activities,Getting Information,4.67,0.036283,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R19-4.A.2.b.6,R19,Work Activities,"Organizing, Planning, and Prioritizing Work",4.62,0.035895,12,6,6,11,1,10,Y,Y,Y,Y,Y
+REQ-R19-4.A.3.b.1,R19,Work Activities,Working with Computers,4.52,0.035118,21,11,10,2,19,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.b.5,R19,Work Activities,Scheduling Work and Activities,4.45,0.034574,6,4,2,4,2,2,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.b.2,R19,Work Activities,Developing and Building Teams,4.43,0.034418,11,5,6,6,5,3,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.b.1,R19,Work Activities,Making Decisions and Solving Problems,4.4,0.034185,16,8,8,1,15,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.b.3,R19,Work Activities,Updating and Using Relevant Knowledge,4.4,0.034185,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R19-4.A.4.c.3,R19,Work Activities,Monitoring and Controlling Resources,4.4,0.034185,14,7,7,3,11,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.b.4,R19,Work Activities,Developing Objectives and Strategies,4.33,0.033642,14,8,6,11,3,5,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.a.1,R19,Work Activities,Interpreting the Meaning of Information for Others,4.33,0.033642,12,6,6,2,10,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.a.4,R19,Work Activities,Establishing and Maintaining Interpersonal Relationships,4.33,0.033642,12,6,6,5,7,4,Y,Y,Y,Y,Y
+REQ-R19-2.C.7.a,R19,Knowledge,English Language,4.29,0.033331,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R19-4.A.1.b.1,R19,Work Activities,"Identifying Objects, Actions, and Events",4.29,0.033331,16,8,8,0,16,0,Y,N,Y,Y,Y
+REQ-R19-4.A.4.b.4,R19,Work Activities,"Guiding, Directing, and Motivating Subordinates",4.29,0.033331,11,5,6,2,9,1,Y,Y,Y,Y,Y
+REQ-R19-2.C.1.e,R19,Knowledge,Customer and Personal Service,4.24,0.032942,3,1,2,1,2,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.4.a.7,R19,Work Activities,Resolving Conflicts and Negotiating with Others,4.24,0.032942,11,5,6,1,10,0,Y,Y,Y,Y,Y
+REQ-R19-2.C.3.a,R19,Knowledge,Computers and Electronics,4.19,0.032554,21,11,10,1,20,1,Y,Y,Y,Y,Y
+REQ-R19-4.A.3.b.6,R19,Work Activities,Documenting/Recording Information,4.19,0.032554,6,3,3,6,0,4,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.a.4,R19,Work Activities,Analyzing Data or Information,4.16,0.032321,5,3,2,2,3,0,Y,Y,Y,Y,Y
+REQ-R19-4.A.2.a.2,R19,Work Activities,Processing Information,4.14,0.032165,4,3,1,0,4,0,Y,N,Y,Y,Y
+REQ-R19-4.A.4.a.3,R19,Work Activities,Communicating with People Outside the Organization,4.14,0.032165,12,6,6,1,11,1,Y,Y,Y,Y,Y
+REQ-R19-2.A.2.a,R19,Essential Skills,Critical Thinking,4.12,0.032010,16,8,8,0,16,0,Y,N,Y,Y,Y
+REQ-R19-4.A.1.a.2,R19,Work Activities,"Monitoring Processes, Materials, or Surroundings",4.1,0.031855,2,2,0,1,1,0,Y,Y,Y,N,Y
+REQ-R19-2.A.1.a,R19,Essential Skills,Reading Comprehension,4.0,0.031078,20,10,10,2,18,1,Y,Y,Y,Y,Y
+REQ-R19-2.A.1.b,R19,Essential Skills,Active Listening,4.0,0.031078,12,6,6,4,8,4,Y,Y,Y,Y,Y
+REQ-R19-2.B.1.b,R19,Transferable Skills,Coordination,4.0,0.031078,12,5,7,12,0,11,Y,Y,Y,Y,Y
+REQ-R19-2.B.5.a,R19,Transferable Skills,Time Management,4.0,0.031078,7,4,3,3,4,1,Y,Y,Y,Y,Y
+REQ-R19-2.B.5.d,R19,Transferable Skills,Management of Personnel Resources,3.88,0.030145,12,6,6,4,8,3,Y,Y,Y,Y,Y
+REQ-R20-4.A.3.b.1,R20,Work Activities,Working with Computers,4.9,0.040346,21,11,10,1,20,1,Y,Y,Y,Y,Y
+REQ-R20-2.C.3.a,R20,Knowledge,Computers and Electronics,4.77,0.039275,22,11,11,3,19,2,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.b.1,R20,Work Activities,Making Decisions and Solving Problems,4.51,0.037135,17,7,10,1,16,0,Y,Y,Y,Y,Y
+REQ-R20-4.A.1.a.1,R20,Work Activities,Getting Information,4.43,0.036476,20,10,10,0,20,0,Y,N,Y,Y,Y
+REQ-R20-4.A.4.a.2,R20,Work Activities,"Communicating with Supervisors, Peers, or Subordinates",4.36,0.035900,11,6,5,1,10,1,Y,Y,Y,Y,Y
+REQ-R20-4.A.1.b.1,R20,Work Activities,"Identifying Objects, Actions, and Events",4.31,0.035488,16,7,9,0,16,0,Y,N,Y,Y,Y
+REQ-R20-4.A.2.b.6,R20,Work Activities,"Organizing, Planning, and Prioritizing Work",4.31,0.035488,8,1,7,1,7,1,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.a.4,R20,Work Activities,Analyzing Data or Information,4.25,0.034994,6,5,1,3,3,3,Y,Y,Y,Y,Y
+REQ-R20-2.A.2.a,R20,Essential Skills,Critical Thinking,4.12,0.033923,16,7,9,0,16,0,Y,N,Y,Y,Y
+REQ-R20-4.A.4.b.2,R20,Work Activities,Developing and Building Teams,4.12,0.033923,10,5,5,2,8,0,Y,Y,Y,Y,Y
+REQ-R20-2.C.1.e,R20,Knowledge,Customer and Personal Service,4.05,0.033347,5,1,4,2,3,2,Y,Y,Y,Y,Y
+REQ-R20-2.A.1.a,R20,Essential Skills,Reading Comprehension,4.0,0.032935,20,10,10,1,19,1,Y,Y,Y,Y,Y
+REQ-R20-2.A.1.b,R20,Essential Skills,Active Listening,4.0,0.032935,11,6,5,1,10,1,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.b.4,R20,Work Activities,Developing Objectives and Strategies,3.99,0.032853,17,8,9,15,2,11,Y,Y,Y,Y,Y
+REQ-R20-4.A.4.b.4,R20,Work Activities,"Guiding, Directing, and Motivating Subordinates",3.98,0.032771,10,5,5,2,8,2,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.a.2,R20,Work Activities,Processing Information,3.94,0.032441,5,5,0,0,5,0,Y,N,Y,N,Y
+REQ-R20-4.A.4.a.4,R20,Work Activities,Establishing and Maintaining Interpersonal Relationships,3.9,0.032112,11,6,5,2,9,1,Y,Y,Y,Y,Y
+REQ-R20-4.A.4.b.1,R20,Work Activities,Coordinating the Work and Activities of Others,3.9,0.032112,10,5,5,2,8,2,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.b.3,R20,Work Activities,Updating and Using Relevant Knowledge,3.89,0.032030,20,10,10,1,19,0,Y,Y,Y,Y,Y
+REQ-R20-2.A.1.d,R20,Essential Skills,Speaking,3.88,0.031947,11,6,5,1,10,1,Y,Y,Y,Y,Y
+REQ-R20-2.A.2.d,R20,Essential Skills,Monitoring,3.88,0.031947,1,1,0,1,0,1,Y,Y,Y,N,Y
+REQ-R20-2.B.4.e,R20,Transferable Skills,Judgment and Decision Making,3.88,0.031947,19,9,10,14,5,6,Y,Y,Y,Y,Y
+REQ-R20-4.A.2.a.1,R20,Work Activities,"Judging the Qualities of Objects, Services, or People",3.86,0.031783,15,8,7,0,15,0,Y,N,Y,Y,Y
+REQ-R20-4.A.1.a.2,R20,Work Activities,"Monitoring Processes, Materials, or Surroundings",3.79,0.031206,2,2,0,2,0,1,Y,Y,Y,N,Y
+REQ-R20-4.A.4.b.5,R20,Work Activities,Coaching and Developing Others,3.76,0.030959,10,5,5,1,9,1,Y,Y,Y,Y,Y
+REQ-R20-2.A.1.c,R20,Essential Skills,Writing,3.75,0.030877,2,2,0,1,1,1,Y,Y,Y,N,Y
+REQ-R20-2.B.1.b,R20,Transferable Skills,Coordination,3.75,0.030877,1,0,1,1,0,1,Y,Y,N,Y,Y
+REQ-R20-2.B.2.i,R20,Transferable Skills,Complex Problem Solving,3.75,0.030877,16,7,9,0,16,0,Y,N,Y,Y,Y
+REQ-R20-4.A.2.a.3,R20,Work Activities,Evaluating Information to Determine Compliance with Standards,3.72,0.030630,16,8,8,8,8,7,Y,Y,Y,Y,Y
+REQ-R20-2.C.1.a,R20,Knowledge,Administration and Management,3.7,0.030465,20,10,10,16,4,8,Y,Y,Y,Y,Y

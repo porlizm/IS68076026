@@ -1,0 +1,17 @@
+{
+  "_comment": "ตารางที่ 3.7–3.8 · รหัสรุ่นอ่านจาก env MODEL_A/B/C_ID เท่านั้น · ห้ามเรียกผู้ให้บริการรายเดียวสามครั้งแล้วรายงานว่าเป็นสามโมเดล · verified=false จนกว่าจะผ่าน smoke test (NEXT_STEPS ข้อ 32)",
+  "defaults": {
+    "temperature": 0,
+    "max_output_tokens": 4096,
+    "timeout_ms": 90000,
+    "max_attempts": 2,
+    "max_attempts_meaning": "จำนวนครั้งที่เรียกซ้ำหลังครั้งแรก (รวมสูงสุด 3 ครั้งต่อโมเดลต่องาน)",
+    "retry_on_status": [429],
+    "retry_on_timeout": true
+  },
+  "models": {
+    "A": {"provider": "OpenAI", "api": "openai_chat_completions", "endpoint": "https://api.openai.com/v1/chat/completions", "model_env": "MODEL_A_ID", "key_env": "OPENAI_API_KEY", "send_temperature": true, "verified": false, "verified_model_id": "", "verified_at": ""},
+    "B": {"provider": "Anthropic", "api": "anthropic_messages", "endpoint": "https://api.anthropic.com/v1/messages", "anthropic_version": "2023-06-01", "model_env": "MODEL_B_ID", "key_env": "ANTHROPIC_API_KEY", "send_temperature": true, "verified": false, "verified_model_id": "", "verified_at": "", "note": "รุ่นใหม่บางรุ่นอาจตอบ HTTP 400 เมื่อส่ง temperature ถ้า smoke test ยืนยัน ให้ตั้ง send_temperature=false พร้อม DEC และแก้ตาราง 3.7/3.10"},
+    "C": {"provider": "Google", "api": "google_generative_language", "endpoint": "https://generativelanguage.googleapis.com/v1beta/models", "model_env": "MODEL_C_ID", "key_env": "GOOGLE_API_KEY", "send_temperature": true, "verified": false, "verified_model_id": "", "verified_at": ""}
+  }
+}

@@ -1,0 +1,14 @@
+﻿code,stage,description_th,halts_pipeline,notify_researcher,notes
+ERR-CONSENT-DECLINED,intake,ผู้เข้าร่วมไม่ยินยอม,ใช่,ไม่,บันทึก consent_log แล้วหยุด
+ERR-INVALID-FILE-TYPE,intake,ไฟล์ที่อัปโหลดไม่ใช่ PDF,ใช่,ไม่,ตาม CFG-21
+ERR-DUPLICATE-SUBMISSION,intake,พบ submission ซ้ำ,ใช่,ใช่,บันทึก duplicate_log
+ERR-PDF-UNREADABLE,parse,เปิดไฟล์ PDF ไม่ได้,ใช่,ใช่,
+ERR-OCR-EMPTY,parse,OCR คืนข้อความว่าง,ใช่,ใช่,
+ERR-PARSER-FAILED,parse,parser คืน JSON ที่ไม่ผ่าน schema,ใช่,ใช่,
+ERR-EVIDENCE-RATIO-LOW,parse,evidence_verified_ratio < 0.60,ใช่,ใช่,หยุดก่อนเสียโควตา analyst
+ERR-ANALYST-TIMEOUT,gap,analyst ตัวใดตัวหนึ่งหมดเวลา,ไม่,ใช่,เดินต่อด้วย 2 ตัว เพดาน tier = medium
+ERR-GAPENGINE-FAILED,gap,SUB_GapEngine ล้มทั้งตัว,ใช่,ใช่,
+ERR-RANKER-FAILED,recommend,ranker ล้มหรือคืน item_id ที่ไม่มีใน corpus,ไม่,ใช่,ใช้ลำดับ deterministic แทน (weight มากก่อน แล้วเวลาน้อยก่อน)
+ERR-NO-CANDIDATE-FOUND,recommend,ไม่มี candidate ที่ผ่านเกณฑ์ใน corpus,ไม่,ใช่,บันทึก no_candidate_found = true · ห้ามสร้างรายการทดแทนเอง
+ERR-REPORTER-FAILED,report,reporter ล้มหรืออ้างรหัสที่ไม่มีจริง,ไม่,ใช่,ใช้ template · ตั้ง report_mode = deterministic_fallback
+ERR-SHEETS-WRITE-FAILED,log,เขียน Google Sheets ไม่สำเร็จ,ใช่,ใช่,ต้องรู้ภายในวันเดียวกัน

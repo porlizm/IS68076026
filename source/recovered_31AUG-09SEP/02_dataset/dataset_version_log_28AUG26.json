@@ -1,0 +1,27 @@
+{
+  "snapshot_version": "ONET31.0-IS68076026-v1.0",
+  "source_version": "O*NET 31.0 Database (August 2026 Release)",
+  "source_license": "CC BY 4.0 — U.S. Department of Labor / ETA. O*NET is a trademark of USDOL/ETA.",
+  "frozen_at": "2026-08-28T00:00:00+07:00",
+  "frozen_by": "ดนุสรณ์ อนันตกาล (Danusorn Anantakan), 68076026",
+  "policy": {
+    "selection": "Stratified Top-30 (DEC-03)",
+    "top_n": 30,
+    "domain_quota_per_domain": 3,
+    "domains_in_quota": ["Essential Skills", "Transferable Skills", "Knowledge", "Work Activities"],
+    "excluded_domains": ["Abilities"],
+    "excluded_by": "DEC-07",
+    "tie_break": "importance_im DESC, element_id ASC",
+    "im_threshold": 3.0,
+    "theta_evidence_overlap": 0.15
+  },
+  "coverage_of_candidate_pool_weight": {"mean": 0.7026, "min": 0.5128, "max": 0.9749},
+  "files": [
+    {"file": "Data_Set.xlsx", "sha256": "665d149951f0f5c50f60f490045e685a4eb2ee5c7f22a178244d302ebbc475cd", "row_count": null},
+    {"file": "onet_requirements_28AUG26.csv", "sha256": "8ab70032c2a5125701584d3c02dc23f3ba5e7d97bb6fc78299f6163668f6e77c", "row_count": 600},
+    {"file": "onet_requirements_excluded_28AUG26.csv", "sha256": "bac5592c29d0445ee3574469d3608a55f99e03ae858d7eafc530f87f7495c0b1", "row_count": 354},
+    {"file": "element_aliases_28AUG26.csv", "sha256": "ea60e46fdd1c2d3f2228677584ce7938dad0cca492a25c873b4a66cf861bcf01", "row_count": 61}
+  ],
+  "generated_at": "2026-08-28T15:04:28.594636+00:00",
+  "verified_at": "2026-08-29 — Data_Set.xlsx SHA-256 re-computed and matched"
+}

@@ -1,0 +1,128 @@
+{
+  "name": "WF_ERR_Notifier_31AUG26",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4b90b490",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const e = $input.first().json;\nconst KNOWN = ['ERR-CONSENT-DECLINED','ERR-INVALID-FILE-TYPE','ERR-DUPLICATE-SUBMISSION',\n  'ERR-PDF-UNREADABLE','ERR-OCR-EMPTY','ERR-PARSER-FAILED','ERR-EVIDENCE-RATIO-LOW',\n  'ERR-ANALYST-TIMEOUT','ERR-GAPENGINE-FAILED','ERR-RANKER-FAILED','ERR-NO-CANDIDATE-FOUND',\n  'ERR-REPORTER-FAILED','ERR-SHEETS-WRITE-FAILED'];   // enum_error_type\nconst msg = e.execution?.error?.message || '';\nconst code = KNOWN.find(k => msg.includes(k)) || 'ERR-UNCLASSIFIED';\nreturn [{ json: { submission_id: e.execution?.customData?.submission_id || '',\n  role_id: '', stage: e.execution?.lastNodeExecuted || '', error_type: code,\n  error_message: msg.slice(0,500), node: e.execution?.lastNodeExecuted || '',\n  execution_id: e.execution?.id || '', logged_at: new Date().toISOString() } }];"
+      },
+      "id": "5e6456d3",
+      "name": "Format Error Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "audit_log",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,role_id,stage,error_type,error_message,node,execution_id,logged_at"
+      },
+      "id": "806738a7",
+      "name": "Write audit_log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "__SET_RESEARCHER_EMAIL__",
+        "subject": "=[IS68076026] {{ $json.error_type }} · {{ $json.execution_id }}",
+        "emailType": "text",
+        "message": "={{ JSON.stringify($json, null, 2) }}",
+        "options": {}
+      },
+      "id": "8c5b0e49",
+      "name": "Notify Researcher",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Format Error Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Row": {
+      "main": [
+        [
+          {
+            "node": "Write audit_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write audit_log": {
+      "main": [
+        [
+          {
+            "node": "Notify Researcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true
+  },
+  "meta": {
+    "instanceId": "IS68076026",
+    "description": "error workflow กลาง · สร้าง 2026-08-31 · snapshot ONET31.0-IS68076026-v1.0 · corpus CORPUS-IS68076026-v1.2-31AUG26 · rules RULES-IS68076026-v1.0-31AUG26"
+  },
+  "tags": [
+    {
+      "name": "IS68076026"
+    }
+  ]
+}

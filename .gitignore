@@ -1,0 +1,32 @@
+# secrets & personal data - NEVER commit
+.env
+*.env
+!config/env_template.env
+private/
+credentials*.json
+service_account*.json
+*token*.json
+
+# participant data
+data/participants/
+exports/
+analysis/output/main/
+
+# build outputs (สร้างใหม่ได้ด้วยสคริปต์)
+build/
+book/numbers.json
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*
+*.tmp
+.vscode/
+__pycache__/
+*.pyc
+node_modules/
+.n8n/
+
+# transfer bundles
+archive/01OCT26/*.tar.gz

@@ -1,0 +1,66 @@
+{
+  "runs": {
+    "rows": 0,
+    "columns": 24
+  },
+  "ocr_results": {
+    "rows": 0,
+    "columns": 9
+  },
+  "model_calls": {
+    "rows": 0,
+    "columns": 12
+  },
+  "findings": {
+    "rows": 0,
+    "columns": 13
+  },
+  "decisions": {
+    "rows": 0,
+    "columns": 14
+  },
+  "plan_items": {
+    "rows": 0,
+    "columns": 14
+  },
+  "deliveries": {
+    "rows": 0,
+    "columns": 9
+  },
+  "audit_log": {
+    "rows": 0,
+    "columns": 5
+  },
+  "ground_truth": {
+    "rows": 0,
+    "columns": 12
+  },
+  "pathway_review": {
+    "rows": 0,
+    "columns": 10
+  },
+  "ref_roles": {
+    "rows": 20,
+    "columns": 7
+  },
+  "ref_requirements": {
+    "rows": 600,
+    "columns": 10
+  },
+  "ref_corpus": {
+    "rows": 571,
+    "columns": 10
+  },
+  "ref_mappings": {
+    "rows": 6883,
+    "columns": 7
+  },
+  "form_responses": {
+    "rows": 0,
+    "columns": 8
+  },
+  "evaluation_responses": {
+    "rows": 0,
+    "columns": 6
+  }
+}

@@ -1,0 +1,22 @@
+Warunee Sample
+Junior Data Analyst
+Email: warunee.sample@mail.test | Phone: 089-765-4321 | github.com/warunee-sample
+
+SUMMARY
+Junior Data Analyst seeking growth in the R06 target occupation.
+
+EDUCATION
+B.Sc. Economics, Example University, 2024
+
+EXPERIENCE
+Data Intern, Example Retail Co., 2024
+
+KEY ACHIEVEMENTS AND SKILLS
+- Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.
+- Analyzed customer churn data in SQL and presented the findings to the marketing manager.
+- Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.
+- Relevant courses: Probability, Statistics for Business, Calculus I.
+- Background in applied mathematics from undergraduate studies.
+- Completed course: Google Data Analytics Certificate (in progress).
+- Languages: Thai (native), English (TOEIC 785).
+- Gave a short presentation of a class project to fellow students.

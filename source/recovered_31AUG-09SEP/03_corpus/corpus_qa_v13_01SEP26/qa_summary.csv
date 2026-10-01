@@ -1,0 +1,19 @@
+﻿check_id,ชื่อการตรวจ,ผล,รายละเอียด
+CHK-01,รูปแบบ requirement_id ถูกต้องทุกค่า,PASS,0 รายการผิด
+CHK-02,prefix ตรงกับ role_id ของแถวนั้น,PASS,0 รายการผิด
+CHK-03,ทุก competency_id อยู่ในชุด 30 ของบทบาทนั้น,PASS,0 รายการผิด
+CHK-04,ไม่มี requirement ซ้ำภายในรายการเดียว,PASS,0 รายการซ้ำ
+CHK-05,n_competencies ตรงกับจำนวนจริง,PASS,0 แถวไม่ตรง
+CHK-06,corpus_master กับ item_competency_map ตรงกันทุกคู่,PASS,มีเฉพาะใน CSV 0 คู่ · มีเฉพาะใน map 0 คู่
+CHK-07,target_role / soc_code ตรงกับไฟล์อ้างอิง,PASS,0 แถวไม่ตรง
+CHK-08,รูปแบบ item_id สอดคล้องกับ item_type และ role_id,PASS,0 แถวไม่ตรง
+CHK-09,item_id ไม่ซ้ำ,PASS,ซ้ำ 0 รหัส
+CHK-10,role_index ที่ไฟล์ประกาศตรงกับที่คำนวณใหม่,PASS,0 ช่องไม่ตรง
+CHK-11,รายการ uncovered ตรงกับชีต uncovered_requirements,PASS,คำนวณได้ 0 · ในชีต 0 · ต่างกัน 0
+CHK-12,ผ่าน Completeness Gate ทุกแถว,PASS,0 ช่องว่าง
+CHK-13,คำศัพท์ควบคุมถูกต้องทุกฟิลด์,PASS,0 ค่าไม่อยู่ในชุด
+CHK-14,ค่าตัวเลขและ URL สมเหตุสมผล,PASS,0 ค่าผิด
+CHK-15,รายการเดียวกันข้ามบทบาทให้ค่าตรงกัน (ชั่วโมง/URL),PASS,รายการไม่ซ้ำจริง 347 · ใช้ซ้ำข้ามบทบาท 60 · ให้ค่าขัดกัน 0
+CHK-16,ทุกบทบาทจัดรายการได้ ≥ 3 รายการที่กรอบเวลาแคบสุด (6 เดือน 5 ชม./สัปดาห์),PASS,บทบาทที่จัดได้ < 3 รายการ: -
+CHK-17,ตรวจ URL ครบทุกแถวแล้ว (verification_status = verified),REVIEW,verified 463/499 · ค้างตรวจ 36
+CHK-18,ไม่มี requirement ที่ไม่มีรายการรองรับ,PASS,0 requirement จาก 600 ยังไม่มีรายการ (0.0%)

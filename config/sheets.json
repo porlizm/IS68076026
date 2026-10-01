@@ -1,0 +1,28 @@
+{
+  "_comment": "แหล่งความจริงเดียวของโครงสร้างสเปรดชีต (ตารางที่ 3.20 + ภาคผนวก ง) · workflow, build_sheets_import.py และเทสต์อ่านไฟล์นี้ · เปลี่ยนแล้วต้องมี DEC",
+  "schema_version": "sheets-v1.1-01OCT26",
+  "spreadsheet_env": "SHEET_ID",
+  "decision_refs": ["DEC-34 เพิ่ม ocr_results.masked_text_file_id · findings.quote_text_version · ground_truth.coder_1_status/coder_2_status ตามที่เล่มหัวข้อ 3.11 และภาคผนวก ง ระบุว่าต้องเพิ่มก่อนเก็บข้อมูลกลุ่มหลัก"],
+  "tabs": {
+    "runs": {"group": "operational", "write_mode": "upsert:run_id", "columns": ["run_id","response_id","created_at","updated_at","email","role_id","mode","timeline_months","hours_per_week","file_id","stage","ocr_engine","model_status","readiness_pct","weighted_coverage","n_evidenced","n_partially","n_missing","n_abstained","unsupported_claims","report_hash","pdf_file_id","email_status","error_code"]},
+    "ocr_results": {"group": "operational", "write_mode": "append", "columns": ["run_id","engine","engine_version","page_count","char_count","pii_masked_count","text_sha256","masked_text_file_id","created_at"]},
+    "model_calls": {"group": "operational", "write_mode": "append", "columns": ["run_id","model_key","provider","model_id","attempt","status","latency_ms","input_tokens","output_tokens","finish_reason","error_code","created_at"]},
+    "findings": {"group": "operational", "write_mode": "append", "columns": ["run_id","requirement_id","model_key","claimed_status","quote","quote_char_start","quote_char_end","quote_text_version","quote_verified","overlap_score","model_confidence","rule_flags","created_at"]},
+    "decisions": {"group": "operational", "write_mode": "append", "columns": ["run_id","requirement_id","element_id","element_name","domain","weight","final_status","agreement_level","n_usable_models","rule_flags","evidence_quote","evidence_char_start","evidence_char_end","created_at"]},
+    "plan_items": {"group": "operational", "write_mode": "append", "columns": ["run_id","rank","item_id","item_type","title","provider","source_url","estimated_hours","cumulative_hours","covers_requirements","n_new_requirements","new_weight_covered","mapping_status","phase"]},
+    "deliveries": {"group": "operational", "write_mode": "append", "columns": ["run_id","report_hash","pdf_file_id","web_view_link","file_name","email_to","email_status","error_code","sent_at"]},
+    "audit_log": {"group": "operational", "write_mode": "append", "columns": ["ts","actor","run_id","event","detail"]},
+    "ground_truth": {"group": "evaluation", "write_mode": "append", "columns": ["run_id","requirement_id","reference_status","evidence_quote","coder_1","coder_1_status","coder_2","coder_2_status","agreement","resolution_note","participant_disagreed","coded_at"]},
+    "pathway_review": {"group": "evaluation", "write_mode": "append", "columns": ["run_id","item_id","requirement_id","relevant_to_reference_gap","item_data_correct","within_time_budget","error_source","review_note","reviewer","reviewed_at"]},
+    "ref_roles": {"group": "reference", "write_mode": "read_only", "expected_rows": 20, "columns": ["role_id","role_name_th","target_role","soc_code","track","n_requirements_selected","weight_share_of_pool"]},
+    "ref_requirements": {"group": "reference", "write_mode": "read_only", "expected_rows": 600, "columns": ["requirement_id","role_id","domain","element_id","element_name","element_description","importance_im","rank_in_role","weight_renormalized","element_aliases"]},
+    "ref_corpus": {"group": "reference", "write_mode": "read_only", "expected_rows_from": "data/corpus.csv", "columns": ["item_id","item_type","role_id","title","provider","source_url","estimated_hours","recommendation_mode","phase","verification_status"]},
+    "ref_mappings": {"group": "reference", "write_mode": "read_only", "expected_rows_from": "data/mappings.csv", "note": "mapping_status มาจาก data/mapping_review.csv (merge ตอนสร้างไฟล์นำเข้า) ถ้าแถว source_checked_by_script น้อยกว่า 90% ของ L1 ระบบต้องหยุด (DEC-21)", "columns": ["map_id","item_id","role_id","requirement_id","coverage_layer","coverage_strength","mapping_status"]},
+    "form_responses": {"group": "google_forms", "write_mode": "forms", "columns": ["Timestamp","Email Address","อัปโหลดเรซูเม (PDF)","อาชีพเป้าหมาย","ระยะเวลาที่ต้องการใช้เรียนรู้","ชั่วโมงที่เรียนได้ต่อสัปดาห์","สิ่งที่ต้องการให้แนะนำ","ความยินยอม"]},
+    "evaluation_responses": {"group": "google_forms", "write_mode": "forms", "columns": ["Timestamp","รหัสงานที่ปรากฏในรายงาน","ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน","ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ","ข้อ 3 เหมาะกับเวลาที่จัดสรรได้","ส่วนใดของแผนที่ต้องการเปลี่ยน"]}
+  },
+  "form_value_maps": {
+    "mode": {"หลักสูตร": "course_only", "ใบรับรอง": "certification_only", "ทั้งสองประเภท": "both"},
+    "consent_yes": ["ยินยอม", "ข้าพเจ้ายินยอม", "Yes", "TRUE", "true"]
+  }
+}

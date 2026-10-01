@@ -1,0 +1,21 @@
+role_id,role_name_th,target_role,soc_code,track,n_requirements_selected,weight_share_of_pool
+R01,วิศวกรซอฟต์แวร์หรือนักพัฒนาซอฟต์แวร์,Software Engineer (Backend/Full-stack),15-1252.00,software,30,0.8198
+R02,นักพัฒนาเว็บ,Web Developer,15-1254.00,software,30,0.7846
+R03,นักพัฒนาแอปพลิเคชันและโมบายล์,Application / Mobile Developer,15-1251.00,software,30,0.7273
+R04,วิศวกรทดสอบและ QA Automation,QA & Test Automation Engineer,15-1253.00,software,30,0.7149
+R05,นักออกแบบ UX/UI,UX/UI & Digital Product Designer,15-1255.00,software,30,0.8598
+R06,นักวิทยาศาสตร์ข้อมูล,Data Scientist,15-2051.00,data,30,0.9749
+R07,วิศวกรแมชชีนเลิร์นนิงและปัญญาประดิษฐ์,Machine Learning / AI Engineer,15-1221.00,data,30,0.6573
+R08,วิศวกรข้อมูล,Data Engineer,15-1243.00,data,30,0.6543
+R09,นักวิเคราะห์ข้อมูลเชิงธุรกิจ,Data / BI Analyst,15-2051.01,analytics,30,0.7915
+R10,ผู้ดูแลฐานข้อมูล,Database Administrator,15-1242.00,data,30,0.6961
+R11,นักวิเคราะห์ความมั่นคงปลอดภัยสารสนเทศ,Information Security / SOC Analyst,15-1212.00,security,30,0.7257
+R12,วิศวกรความมั่นคงปลอดภัย,Security Engineer,15-1299.05,security,30,0.6982
+R13,ผู้ทดสอบเจาะระบบ,Penetration Tester,15-1299.04,security,30,0.6443
+R14,นักนิติวิทยาศาสตร์ดิจิทัลและการรับมือเหตุการณ์,Digital Forensics & Incident Response,15-1299.06,security,30,0.8022
+R15,วิศวกรและสถาปนิกเครือข่าย,Network Engineer / Architect,15-1241.00,network,30,0.5544
+R16,วิศวกรและสถาปนิกระบบคลาวด์,Cloud Engineer / Solutions Architect,15-1299.08,cloud,30,0.5832
+R17,วิศวกร DevOps และ SRE,DevOps / Site Reliability Engineer,15-1244.00,cloud,30,0.6755
+R18,นักวิเคราะห์ระบบและนักวิเคราะห์ธุรกิจสายไอที,Systems / Business Analyst (IT),15-1211.00,analytics,30,0.6375
+R19,ผู้จัดการโครงการไอที,IT Project Manager,15-1299.09,management,30,0.5128
+R20,ผู้จัดการฝ่ายสารสนเทศ,IT / IS Manager,11-3021.00,management,30,0.5384

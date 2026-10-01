@@ -1,0 +1,12 @@
+{
+  "name": "is68076026-final-is",
+  "private": true,
+  "type": "commonjs",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "run-local": "node scripts/run_local.mjs",
+    "build-workflows": "node scripts/build_workflows.mjs",
+    "validate-workflows": "node scripts/validate_workflows.mjs"
+  }
+}

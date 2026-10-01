@@ -1,0 +1,5 @@
+﻿timeline_id,timeline_months,weeks,capacity_5h,capacity_10h,capacity_15h,phase_plan,notes
+TL-06,6,25.98,129.9,259.8,389.7,foundation → core_gap_closure,กรอบเวลาแคบสุด · ทุกบทบาทต้องจัดแผนได้อย่างน้อย 3 รายการ (QA-16)
+TL-12,12,51.96,259.8,519.6,779.4,foundation → core_gap_closure → advanced_or_cert_prep,
+TL-18,18,77.94,389.7,779.4,1169.1,สามระยะ เว้นช่วงเตรียมสอบ,
+TL-24,24,103.92,519.6,1039.2,1558.8,สามระยะ เผื่อใบรับรองระดับ Professional,

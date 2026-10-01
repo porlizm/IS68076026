@@ -1,0 +1,968 @@
+{
+  "name": "WF_Main_31AUG26",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "การวิเคราะห์ช่องว่างทักษะจากเรซูเม (IS 68076026)",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "consent",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "ยินยอม"
+                  },
+                  {
+                    "option": "ไม่ยินยอม"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "resume",
+              "fieldType": "file",
+              "requiredField": true,
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf"
+            },
+            {
+              "fieldLabel": "role_id",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "R01"
+                  },
+                  {
+                    "option": "R02"
+                  },
+                  {
+                    "option": "R03"
+                  },
+                  {
+                    "option": "R04"
+                  },
+                  {
+                    "option": "R05"
+                  },
+                  {
+                    "option": "R06"
+                  },
+                  {
+                    "option": "R07"
+                  },
+                  {
+                    "option": "R08"
+                  },
+                  {
+                    "option": "R09"
+                  },
+                  {
+                    "option": "R10"
+                  },
+                  {
+                    "option": "R11"
+                  },
+                  {
+                    "option": "R12"
+                  },
+                  {
+                    "option": "R13"
+                  },
+                  {
+                    "option": "R14"
+                  },
+                  {
+                    "option": "R15"
+                  },
+                  {
+                    "option": "R16"
+                  },
+                  {
+                    "option": "R17"
+                  },
+                  {
+                    "option": "R18"
+                  },
+                  {
+                    "option": "R19"
+                  },
+                  {
+                    "option": "R20"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "recommendation_mode",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "course_only"
+                  },
+                  {
+                    "option": "certification_only"
+                  },
+                  {
+                    "option": "both"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "timeline_months",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "6"
+                  },
+                  {
+                    "option": "12"
+                  },
+                  {
+                    "option": "18"
+                  },
+                  {
+                    "option": "24"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "hours_per_week",
+              "fieldType": "number",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8ea94e23",
+      "name": "On Resume Submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// รับจากฟอร์ม → ตรวจความยินยอมและชนิดไฟล์ → ตั้ง submission_id → ฉีด config\nconst f = $input.first().json;\nconst bin = $input.first().binary || {};\nconst CFG = { THETA: 0.15, EVIDENCE_RATIO_MIN: 0.60, TEXT_DENSITY_MIN: 200,\n              WEEKS_PER_MONTH: 4.33, RULES_VERSION: 'RULES-IS68076026-v1.0-31AUG26' };   // config_master\nconst consent = String(f.consent || '').trim();\nconst fileKey = Object.keys(bin)[0];\nconst fileName = fileKey ? (bin[fileKey].fileName || '') : '';\nconst isPdf = /\\.pdf$/i.test(fileName) || (fileKey && bin[fileKey].mimeType === 'application/pdf');\nlet error_type = '';\nif (consent !== 'ยินยอม' && consent.toLowerCase() !== 'i consent') error_type = 'ERR-CONSENT-DECLINED';\nelse if (!isPdf) error_type = 'ERR-INVALID-FILE-TYPE';\nconst id = 'SUB-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' +\n           Math.random().toString(36).slice(2,8).toUpperCase();\nreturn [{ json: {\n  submission_id: id, run_index: 1, consent_at: new Date().toISOString(),\n  role_id: f.role_id, recommendation_mode: f.recommendation_mode,\n  timeline_months: Number(f.timeline_months), hours_per_week: Number(f.hours_per_week),\n  learning_capacity_hours: Number(f.timeline_months) * CFG.WEEKS_PER_MONTH * Number(f.hours_per_week),\n  participant_name: f.name || '', participant_email: f.email || '',\n  file_name: fileName, binary_property: fileKey || '',\n  config: CFG, rules_version: CFG.RULES_VERSION,\n  snapshot_version: 'ONET31.0-IS68076026-v1.0', corpus_version: 'CORPUS-IS68076026-v1.2-31AUG26',\n  error_type, ok: error_type === '',\n  stage: 'intake', logged_at: new Date().toISOString(),\n}, binary: $input.first().binary }];\n"
+      },
+      "id": "05104f29",
+      "name": "Init Submission & Gate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        }
+      },
+      "id": "c8df9e31",
+      "name": "Consent & File Type OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "audit_log",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,role_id,stage,error_type,error_message,node,execution_id,logged_at"
+      },
+      "id": "28d57323",
+      "name": "Write audit_log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "={{ $json.binary_property }}",
+        "options": {}
+      },
+      "id": "84a6e385",
+      "name": "Extract PDF Text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $('Init Submission & Gate').first().json;\nconst r = $input.first().json;\nconst text = String(r.text || '');\nconst pages = Number(r.numpages || 1);\nconst d = pages ? text.replace(/\\s/g,'').length / pages : 0;\nreturn [{ json: { ...b, text, page_count: pages, char_density_per_page: Math.round(d),\n                  needs_ocr: d < b.config.TEXT_DENSITY_MIN, ocr_used: false },\n          binary: $('Init Submission & Gate').first().binary }];"
+      },
+      "id": "c7e8e9d5",
+      "name": "Density Check",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.needs_ocr }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        }
+      },
+      "id": "c05b6c51",
+      "name": "Needs OCR?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us-documentai.googleapis.com/v1/projects/__SET_GCP_PROJECT__/locations/us/processors/__SET_PROCESSOR_ID__/processorVersions/__SET_PROCESSOR_VERSION__:process",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ rawDocument: { content: $('Init Submission & Gate').first().binary[$json.binary_property].data, mimeType: 'application/pdf' }, skipHumanReview: true }) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "5e62e62c",
+      "name": "Google Document AI OCR",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $('Density Check').first().json;\nconst t = $input.first().json?.document?.text || '';\n// ERR-OCR-EMPTY อยู่ใน enum_error_type อยู่แล้วแต่ไม่เคยถูกยิง — ยิงที่นี่\nif (!String(t).trim()) throw new Error('ERR-OCR-EMPTY: Document AI คืนข้อความว่าง');\nreturn [{ json: { ...b, text: t, ocr_used: true, ocr_engine: 'google-document-ai',\n                  ocr_processor_version: '__SET_PROCESSOR_VERSION__' } }];"
+      },
+      "id": "802be313",
+      "name": "Normalize OCR Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// ปิดบัง PII ตาม pii_masking_rules → ตรวจความหนาแน่นข้อความ → สร้าง parse prompt\n// ⚠ ลำดับการแทนที่สำคัญ: เลขบัตรประชาชนต้องมาก่อนเบอร์โทร\nconst j = $input.first().json;\nlet text = String(j.text || j.ocr_text || '');\nconst rules = [\n  ['PII-04', /\\b\\d{1}[-\\s]?\\d{4}[-\\s]?\\d{5}[-\\s]?\\d{2}[-\\s]?\\d{1}\\b/g, '[NATIONAL_ID]'],\n  ['PII-02', /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}/g, '[EMAIL]'],\n  ['PII-03', /(\\+66|0)\\s?\\d{1,2}[-\\s]?\\d{3}[-\\s]?\\d{3,4}/g, '[PHONE]'],\n  ['PII-07', /https?:\\/\\/(www\\.)?(linkedin\\.com\\/in|github\\.com|facebook\\.com)\\/[^\\s]+/gi, '[PROFILE_URL]'],\n  ['PII-05', /(บ้านเลขที่|หมู่|ซอย|ถนน|ตำบล|แขวง|อำเภอ|เขต|จังหวัด)[^\\n]{0,60}/g, '[ADDRESS]'],\n  ['PII-08', /(วันเกิด|Date of Birth|DOB)\\s*[:：]?\\s*[^\\n]{0,30}/gi, '[DOB]'],\n];\nlet n = 0;\nfor (const [, re, tok] of rules) { text = text.replace(re, () => { n++; return tok; }); }\nif (j.participant_name) {                       // PII-01 ใช้ค่าจากฟอร์มเพราะ regex จับชื่อไทยไม่แม่น\n  const parts = String(j.participant_name).split(/\\s+/).filter(p => p.length > 1);\n  for (const p of parts) { const re = new RegExp(p.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'),'gi');\n                           text = text.replace(re, () => { n++; return '[NAME]'; }); }\n}\nconst system = 'Extract a structured profile from the resume. Every evidence_text you output MUST appear ' +\n               'verbatim in the resume. Never paraphrase. Never invent. Return strict JSON only.';\nconst user = 'RESUME (anonymised):\\n' + text + '\\n\\nReturn: {\"skills\":[{\"name\":\"...\",\"evidence_text\":\"...\"}],' +\n             '\"experience\":[{\"title\":\"...\",\"evidence_text\":\"...\"}],\"education\":[...],\"certifications\":[...]}';\n// ไม่คำนวณ density/needs_ocr ซ้ำที่นี่ — ค่าจาก Density Check คือค่าที่อธิบายว่าทำไมถึงเรียก OCR\n// การคำนวณใหม่หลัง mask PII จะทับค่านั้นด้วยตัวเลขที่ไม่มีความหมายในบันทึก pipeline_run\nreturn [{ json: { ...j, anonymised_text: text, pii_redactions: n,\n                  system_prompt: system, user_prompt: user, prompt_version: 'P1-v0.9-draft' } }];\n"
+      },
+      "id": "19012bc3",
+      "name": "Anonymise & Build Parse Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model:'gpt-5.6-terra', temperature:0, response_format:{type:'json_object'}, messages:[{role:'system',content:$json.system_prompt},{role:'user',content:$json.user_prompt}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "7f53203b",
+      "name": "Call GPT-5.6 Terra (parse)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ดึงข้อความจากผลตอบของผู้ให้บริการ (รองรับทั้ง 3 รูปแบบ) แล้วผูกกลับเข้ากับ item เดิม\nconst _r = $input.first().json;\nconst _txt = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst j = { ...$('Anonymise & Build Parse Prompt').first().json, llm_raw: _txt, llm_usage: _r?.usage ?? _r?.usageMetadata ?? {} };\n\n// ตรวจว่า evidence_text ทุกข้อเป็นข้อความจริงในเรซูเมนิรนาม → คำนวณ evidence_verified_ratio\nconst CFG = j.config;\nconst raw = j.llm_raw || '';\nlet profile = {};\ntry { const s = raw.indexOf('{'), e = raw.lastIndexOf('}'); profile = JSON.parse(raw.slice(s, e+1)); }\ncatch { return [{ json: { ...j, ok:false, error_type:'ERR-PARSER-FAILED', stage:'parse' } }]; }\nconst hay = String(j.anonymised_text||'').toLowerCase();\nlet claimed = 0, verified = 0;\nconst walk = o => { if (!o || typeof o !== 'object') return;\n  if (Array.isArray(o)) return o.forEach(walk);\n  if (o.evidence_text) { claimed++; if (hay.includes(String(o.evidence_text).toLowerCase().trim())) verified++; }\n  Object.values(o).forEach(walk); };\nwalk(profile);\nconst ratio = claimed ? verified / claimed : 0;\nconst pass = ratio >= CFG.EVIDENCE_RATIO_MIN;\nreturn [{ json: { ...j, resume_profile: profile, n_evidence_claimed: claimed,\n  n_evidence_verified: verified, evidence_verified_ratio: Number(ratio.toFixed(4)),\n  evidence_corpus: j.anonymised_text + '\\n' + JSON.stringify(profile),\n  ok: pass, error_type: pass ? '' : 'ERR-EVIDENCE-RATIO-LOW', stage: 'parse' } }];\n"
+      },
+      "id": "d0a32663",
+      "name": "Validate Profile",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        }
+      },
+      "id": "ff7c2374",
+      "name": "Evidence Quality Gate",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2640,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "__SET_SUB_GAPENGINE_WORKFLOW_ID__",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "8f45fa2b",
+      "name": "Call SUB_GapEngine",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2860,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "recommendation_master",
+          "mode": "name"
+        },
+        "options": {
+          "returnAllMatches": true
+        }
+      },
+      "id": "e88f85e7",
+      "name": "Load Corpus (verified only)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3080,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// กรอง corpus ด้วยโค้ด แล้วส่งเฉพาะ item_id ที่อนุญาตให้โมเดลจัดอันดับ\n// DEC-11: รับเฉพาะ verification_status = verified และนับความครอบคลุมจากชั้น L1 เท่านั้น\n// competency_ids_l1 คือชุด requirement_id ชั้น L1 ที่ DEC-16 เพิ่มเข้ามาใน corpus v1.3\n// competency_ids (L1+L2) ยังคำนวณคู่กันไว้เพื่อรายงานสองค่าตาม §3.8\nconst j = $('Call SUB_GapEngine').first().json;\nconst rows = $input.all().map(i => i.json).filter(r => r.item_id);\nconst mode = j.recommendation_mode;\nconst gapIds = new Set(j.verified_gaps.map(g => g.requirement_id));\nconst wByReq = Object.fromEntries(j.verified_gaps.map(g => [g.requirement_id, g.weight]));\nconst eligible = rows.filter(r =>\n  r.role_id === j.role_id &&\n  String(r.verification_status) === 'verified' &&                       // DEC-11 / GATE-C\n  String(r.recommendation_mode||'').split('|').includes(mode) &&\n  String(r.competency_ids_l1||'').split('|').some(c => gapIds.has(c)));\nconst scored = eligible.map(r => {\n  const covered    = String(r.competency_ids_l1||'').split('|').filter(c => gapIds.has(c));\n  const coveredAny = String(r.competency_ids||'').split('|').filter(c => gapIds.has(c));\n  return { item_id: r.item_id, item_type: r.item_type, title: r.title, provider: r.provider,\n           estimated_hours: Number(r.estimated_hours), phase: r.phase,\n           covers_requirement_ids_l1: covered.join('|'),\n           covers_requirement_ids: coveredAny.join('|'),\n           gap_weight_covered: covered.reduce((a,c) => a + (wByReq[c]||0), 0),\n           is_prerequisite: r.is_prerequisite || 'no' };\n}).sort((a,b) => b.gap_weight_covered - a.gap_weight_covered ||\n                 a.estimated_hours - b.estimated_hours);           // ลำดับ deterministic สำรอง\nconst whitelist = scored.slice(0, 40);                              // จำกัด payload ไม่ให้ prompt ยาวเกิน\nconst system = 'Rank the given learning items. You may ONLY return item_id values from the provided list. ' +\n               'Never invent an item. Never change estimated_hours. Return strict JSON only.';\nconst user = 'VERIFIED GAPS:\\n' + JSON.stringify(j.verified_gaps) +\n             '\\n\\nALLOWED ITEMS:\\n' + JSON.stringify(whitelist) +\n             '\\n\\nMODE: ' + mode + '   CAPACITY_HOURS: ' + j.learning_capacity_hours +\n             '\\n\\nReturn: {\"ranked\":[{\"item_id\":\"...\",\"rank\":1,\"why\":\"...\"}]}';\nreturn [{ json: { ...j, whitelist, whitelist_ids: whitelist.map(w => w.item_id),\n                  no_candidate_found: whitelist.length === 0,\n                  system_prompt: system, user_prompt: user, prompt_version: 'P3-v0.9-draft' } }];\n"
+      },
+      "id": "d811939a",
+      "name": "Pre-filter Corpus & Build Rank Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3300,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model:'claude-sonnet-5', max_tokens:4000, temperature:0, system:$json.system_prompt, messages:[{role:'user',content:$json.user_prompt}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        }
+      },
+      "id": "f7706ecc",
+      "name": "Call Sonnet 5 (rank)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ดึงข้อความจากผลตอบของผู้ให้บริการ (รองรับทั้ง 3 รูปแบบ) แล้วผูกกลับเข้ากับ item เดิม\nconst _r = $input.first().json;\nconst _txt = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst j = { ...$('Pre-filter Corpus & Build Rank Prompt').first().json, llm_raw: _txt, llm_usage: _r?.usage ?? _r?.usageMetadata ?? {} };\n\n// ตรวจ whitelist ซ้ำ → เติมรายการที่โมเดลตกหล่นด้วยลำดับ deterministic → ตัดตามความจุ → แบ่ง phase\nconst allowed = new Set(j.whitelist_ids);\nconst byId = Object.fromEntries(j.whitelist.map(w => [w.item_id, w]));\nlet ranked = [];\ntry { const raw = j.llm_raw || ''; const s = raw.indexOf('{'), e = raw.lastIndexOf('}');\n      ranked = JSON.parse(raw.slice(s, e+1)).ranked || []; } catch { ranked = []; }\nconst kept = [], rejected = [];\nfor (const r of ranked) { if (allowed.has(r.item_id)) kept.push(r.item_id); else rejected.push(r.item_id); }\nfor (const w of j.whitelist) if (!kept.includes(w.item_id)) kept.push(w.item_id);   // เติมส่วนที่ขาด\nconst whitelist_compliance = ranked.length ? (ranked.length - rejected.length) / ranked.length : 1;\nconst mode = j.recommendation_mode;\nconst mode_ok = kept.every(id => String(byId[id].item_type) === (mode === 'certification_only' ? 'certification'\n                 : mode === 'course_only' ? 'course' : byId[id].item_type) || byId[id].is_prerequisite === 'yes');\nconst PHASE = { foundation: 1, core_gap_closure: 2, advanced_or_cert_prep: 3 };\nconst ordered = kept.map(id => byId[id]).sort((a,b) => (PHASE[a.phase]||9) - (PHASE[b.phase]||9) ||\n                                                        b.gap_weight_covered - a.gap_weight_covered);\nconst cap = Number(j.learning_capacity_hours);\nlet used = 0; const selected = [], deferred = [];\nfor (const it of ordered) {\n  if (used + it.estimated_hours <= cap) { used += it.estimated_hours; selected.push(it); }\n  else deferred.push({ ...it, defer_reason: 'เกินความจุการเรียนที่ผู้เข้าร่วมระบุ' });\n}\nconst coveredL1  = new Set(selected.flatMap(s => String(s.covers_requirement_ids_l1||'').split('|')).filter(Boolean));\nconst coveredAny = new Set(selected.flatMap(s => String(s.covers_requirement_ids).split('|')).filter(Boolean));\nconst nGap = j.verified_gaps.length;\nconst gap_coverage_l1  = nGap ? j.verified_gaps.filter(g => coveredL1.has(g.requirement_id)).length / nGap : 0;\nconst gap_coverage_any = nGap ? j.verified_gaps.filter(g => coveredAny.has(g.requirement_id)).length / nGap : 0;\nreturn [{ json: { ...j, selected, deferred, planned_hours: used,\n  timeline_feasible: used <= cap, whitelist_compliance,\n  recommendation_mode_compliance: mode_ok ? 1 : 0,\n  gap_coverage_l1:  Number(gap_coverage_l1.toFixed(4)),\n  gap_coverage_any: Number(gap_coverage_any.toFixed(4)),\n  recommendation_result: selected.map((s, i) => ({\n    submission_id: j.submission_id, run_index: j.run_index, role_id: j.role_id, rank: i + 1,\n    item_id: s.item_id, item_type: s.item_type, title: s.title, provider: s.provider,\n    phase: s.phase, estimated_hours: s.estimated_hours,\n    covers_requirement_ids: s.covers_requirement_ids,\n    covers_requirement_ids_l1: s.covers_requirement_ids_l1, status: 'selected' })) } }];\n"
+      },
+      "id": "19506f98",
+      "name": "Rank Post-Validation & Pathway",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3740,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "proxy_mapping_log",
+          "mode": "name"
+        },
+        "options": {
+          "returnAllMatches": true
+        }
+      },
+      "id": "b4c95a7f",
+      "name": "Load proxy_mapping_log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// สร้าง payload ให้ผู้เขียนรายงาน — โมเดลเรียบเรียงถ้อยคำเท่านั้น ห้ามเพิ่มหรือแก้ข้อมูล\nconst j = $('Rank Post-Validation & Pathway').first().json;\nconst proxy = $input.all().map(i => i.json).find(r => r.role_id === j.role_id && r.transparency_text_th);\nconst payload = {\n  role: j.role_id, readiness_pct: j.readiness_pct,\n  weight_share_of_pool: j.weight_share_of_pool,\n  n_validated: j.n_validated, n_excluded: j.n_excluded,\n  gaps: j.verified_gaps, items: j.selected, deferred: j.deferred,\n  timeline_months: j.timeline_months, planned_hours: j.planned_hours,\n  capacity_hours: j.learning_capacity_hours,\n};\nconst transparency = [\n  proxy ? proxy.transparency_text_th : '',\n  'ค่าความพร้อมคำนวณจากชุดข้อกำหนด 30 รายการที่ตรึงไว้ ซึ่งครอบคลุมน้ำหนักของบทบาทนี้ ' +\n  (Number(j.weight_share_of_pool)*100).toFixed(1) + ' เปอร์เซ็นต์ จึงไม่ใช่คะแนนความสามารถหรือโอกาสได้งาน',\n  'ข้อเสนอแนะทั้งหมดเลือกจากคลังที่ตรึงไว้เท่านั้น ระบบไม่สร้างชื่อหลักสูตรหรือใบรับรองขึ้นเอง',\n  'This page includes information from O*NET 31.0 Database by USDOL/ETA. Used under CC BY 4.0.',\n].filter(Boolean).join('\\n');\nconst system = 'Write a Thai-language report from the JSON payload. You may ONLY use ids, numbers and item ' +\n               'titles that appear in the payload. Never add a gap, change a score, select a new item, or ' +\n               'alter the timeline. Keep each section within its word budget.';\nconst user = 'PAYLOAD:\\n' + JSON.stringify(payload) + '\\n\\nTRANSPARENCY NOTES (include verbatim):\\n' +\n             transparency + '\\n\\nWORD BUDGET: สรุปภาพรวม 120 คำ · ช่องว่างที่พบ 200 คำ · แผนการเรียน 200 คำ';\nreturn [{ json: { ...j, report_payload: payload, transparency_text: transparency,\n                  system_prompt: system, user_prompt: user, prompt_version: 'P4-v0.9-draft' } }];\n"
+      },
+      "id": "43a65392",
+      "name": "Build Report Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4180,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model:'gpt-5.6-terra', temperature:0.2, messages:[{role:'system',content:$json.system_prompt},{role:'user',content:$json.user_prompt}] }) }}",
+        "options": {
+          "timeout": 180000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "7449dfcf",
+      "name": "Call GPT-5.6 Terra (report)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ดึงข้อความจากผลตอบของผู้ให้บริการ (รองรับทั้ง 3 รูปแบบ) แล้วผูกกลับเข้ากับ item เดิม\nconst _r = $input.first().json;\nconst _txt = _r?.choices?.[0]?.message?.content ?? _r?.content?.[0]?.text ?? _r?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\nconst j = { ...$('Build Report Prompt').first().json, llm_raw: _txt, llm_usage: _r?.usage ?? _r?.usageMetadata ?? {} };\n\n// ตรวจว่ารหัสทุกตัวในรายงานมีอยู่จริงใน payload — ถ้าไม่ตรงให้ทิ้งแล้วใช้ template\nconst md = String(j.llm_raw || '');\nconst known = new Set([...j.selected.map(s => s.item_id), ...j.verified_gaps.map(g => g.requirement_id)]);\nconst found = md.match(/\\b(CRS|CRT|SUP)-R\\d{2}-\\d{2}\\b|\\bREQ-R\\d{2}-[\\d.A-Za-z]+\\b/g) || [];\nconst bad = [...new Set(found.filter(x => !known.has(x)))];\nlet report = md, mode = 'llm';\nif (!md.trim() || bad.length) {\n  mode = 'deterministic_fallback';\n  report = ['# รายงานวิเคราะห์ช่องว่างทักษะ', '',\n    'ความพร้อมของบทบาทนี้ ' + j.readiness_pct + ' เปอร์เซ็นต์ ' +\n    '(จากข้อกำหนดที่ผ่านการตรวจสอบ ' + j.n_validated + ' รายการ)', '',\n    '## ช่องว่างที่พบ',\n    ...j.verified_gaps.map(g => '- ' + g.requirement_id + ' · ' + g.element_name + ' · ' + g.status),\n    '', '## แผนการเรียนที่แนะนำ',\n    ...j.selected.map((s,i) => (i+1) + '. ' + s.title + ' (' + s.item_id + ') · ' + s.estimated_hours + ' ชั่วโมง'),\n    '', '## หมายเหตุความโปร่งใส', j.transparency_text].join('\\n');\n}\nreturn [{ json: { ...j, report_markdown: report, report_mode: mode,\n                  report_reference_validity: bad.length ? 0 : 1,\n                  report_violations: bad.join('|'), completed_at: new Date().toISOString() } }];\n"
+      },
+      "id": "d73f0078",
+      "name": "Reference Check & Fallback",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4620,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "pipeline_run",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,run_index,role_id,snapshot_version,consent_at,file_sha256,page_count,char_density_per_page,ocr_used,ocr_engine,ocr_processor_version,pii_redactions,evidence_verified_ratio,n_evidence_claimed,n_evidence_verified,readiness_pct,n_validated,n_excluded,recommendation_mode,timeline_months,hours_per_week,learning_capacity_hours,planned_hours,timeline_feasible,whitelist_compliance,recommendation_mode_compliance,gap_coverage_l1,gap_coverage_any,no_candidate_found,report_mode,report_reference_validity,report_violations,report_markdown_sha256,report_markdown,completed_at"
+      },
+      "id": "1cbfe960",
+      "name": "Write pipeline_run",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4840,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_GOOGLE_SHEET_ID__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "recommendation_result",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        },
+        "_note": "คอลัมน์ตาม sheet_headers_28AUG26.csv: submission_id,run_index,role_id,rank,item_id,item_type,title,provider,phase,estimated_hours,covers_requirement_ids,covers_requirement_ids_l1,status"
+      },
+      "id": "aad138ad",
+      "name": "Write recommendation_result",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5060,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.participant_email }}",
+        "subject": "=รายงานวิเคราะห์ช่องว่างทักษะ · {{ $json.submission_id }}",
+        "emailType": "text",
+        "message": "={{ $json.report_markdown }}",
+        "options": {}
+      },
+      "id": "261be42e",
+      "name": "Send Report Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        5280,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "On Resume Submission": {
+      "main": [
+        [
+          {
+            "node": "Init Submission & Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Init Submission & Gate": {
+      "main": [
+        [
+          {
+            "node": "Consent & File Type OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consent & File Type OK?": {
+      "main": [
+        [
+          {
+            "node": "Extract PDF Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Write audit_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract PDF Text": {
+      "main": [
+        [
+          {
+            "node": "Density Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Density Check": {
+      "main": [
+        [
+          {
+            "node": "Needs OCR?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs OCR?": {
+      "main": [
+        [
+          {
+            "node": "Google Document AI OCR",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Anonymise & Build Parse Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Document AI OCR": {
+      "main": [
+        [
+          {
+            "node": "Normalize OCR Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize OCR Output": {
+      "main": [
+        [
+          {
+            "node": "Anonymise & Build Parse Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anonymise & Build Parse Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call GPT-5.6 Terra (parse)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call GPT-5.6 Terra (parse)": {
+      "main": [
+        [
+          {
+            "node": "Validate Profile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Profile": {
+      "main": [
+        [
+          {
+            "node": "Evidence Quality Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evidence Quality Gate": {
+      "main": [
+        [
+          {
+            "node": "Call SUB_GapEngine",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Write audit_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call SUB_GapEngine": {
+      "main": [
+        [
+          {
+            "node": "Load Corpus (verified only)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Corpus (verified only)": {
+      "main": [
+        [
+          {
+            "node": "Pre-filter Corpus & Build Rank Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pre-filter Corpus & Build Rank Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call Sonnet 5 (rank)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Sonnet 5 (rank)": {
+      "main": [
+        [
+          {
+            "node": "Rank Post-Validation & Pathway",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rank Post-Validation & Pathway": {
+      "main": [
+        [
+          {
+            "node": "Load proxy_mapping_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load proxy_mapping_log": {
+      "main": [
+        [
+          {
+            "node": "Build Report Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Report Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call GPT-5.6 Terra (report)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call GPT-5.6 Terra (report)": {
+      "main": [
+        [
+          {
+            "node": "Reference Check & Fallback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reference Check & Fallback": {
+      "main": [
+        [
+          {
+            "node": "Write pipeline_run",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Write recommendation_result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write pipeline_run": {
+      "main": [
+        [
+          {
+            "node": "Send Report Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "errorWorkflow": "__SET_ERROR_WORKFLOW_ID__"
+  },
+  "meta": {
+    "instanceId": "IS68076026",
+    "description": "intake → parse → GapEngine → rank → pathway → report · สร้าง 2026-08-31 · snapshot ONET31.0-IS68076026-v1.0 · corpus CORPUS-IS68076026-v1.2-31AUG26 · rules RULES-IS68076026-v1.0-31AUG26"
+  },
+  "tags": [
+    {
+      "name": "IS68076026"
+    }
+  ]
+}

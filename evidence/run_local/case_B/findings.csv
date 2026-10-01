@@ -1,0 +1,91 @@
+run_id,requirement_id,model_key,claimed_status,quote,quote_char_start,quote_char_end,quote_text_version,quote_verified,overlap_score,model_confidence,rule_flags,created_at
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.4,A,evidenced,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.2,A,evidenced,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.4.a,A,partially,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.e,A,partially,Background in applied mathematics from undergraduate studies.,636,697,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.a.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.3,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.a,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.3.a,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.a,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.6,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.2.i,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.3.e,A,evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.d,A,partially,Gave a short presentation of a class project to fellow students.,818,882,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.b,A,partially,Completed course: Google Data Analytics Certificate (in progress).,700,766,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.b.6,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.6,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.b,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.c,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.4.e,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.d,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.3,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.4,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.4,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.7.a,A,partially,"Languages: Thai (native), English (TOEIC 785).",769,815,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.4,B,evidenced,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.2,B,evidenced,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.4.a,B,partially,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.e,B,partially,Background in applied mathematics from undergraduate studies.,636,697,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.a.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.1,B,evidenced,"Data Intern, Example Retail Co., 2024",214,251,normalized,true,0,0.9,R3_low_overlap,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.3,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.a,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.3.a,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.2,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.a,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.6,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.2,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.2.i,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.3.e,B,evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.d,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.b,B,partially,Completed course: Google Data Analytics Certificate (in progress).,700,766,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.b.6,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.6,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.b,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.c,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.4.e,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.d,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.3,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.4,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.4,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.7.a,B,partially,"Languages: Thai (native), English (TOEIC 785).",769,815,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.4,C,evidenced,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.1,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.2,C,evidenced,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.4.a,C,evidenced,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.1,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.e,C,partially,The candidate background in applied mathematics from undergraduate studies (summarised),-1,-1,,false,,0.6,R2_quote_not_found,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.a.1,C,partially,"Data Intern, Example Retail Co., 2024",214,251,normalized,true,0.1667,0.6,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.1,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.3,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.a,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.3.a,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.2,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.a,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.6,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.2,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.2.i,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.3.e,C,evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.1,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.d,C,partially,Gave a short presentation of a class project to fellow students.,818,882,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.b,C,partially,Completed course: Google Data Analytics Certificate (in progress).,700,766,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.b.6,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.6,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.b,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.c,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.4.e,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.d,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.3,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.4,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.4,C,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.7.a,C,partially,"Languages: Thai (native), English (TOEIC 785).",769,815,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00

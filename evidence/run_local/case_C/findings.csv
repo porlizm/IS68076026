@@ -1,0 +1,61 @@
+run_id,requirement_id,model_key,claimed_status,quote,quote_char_start,quote_char_end,quote_text_version,quote_verified,overlap_score,model_confidence,rule_flags,created_at
+RUN-20261001100000-90a83f11,REQ-R18-4.A.3.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.3.a,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.a.1,A,evidenced,Gathered requirements from finance and procurement users through workshops and translated them into user stories.,385,498,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.3,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.4,A,evidenced,Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.,1165,1264,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.a.2,A,evidenced,Monitored systems and job queues on the reporting server during month-end.,1640,1714,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.d,A,partially,Presented project status updates at team meetings.,1354,1404,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.a,A,evidenced,Reviewed requirements documents and vendor specifications to confirm scope before sign-off.,981,1072,normalized,true,0.3333,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.b.1,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.b,A,evidenced,Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.,501,604,normalized,true,0.2727,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.2.a,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.g,A,evidenced,Produced process modeling diagrams and data flow analysis for the ERP procurement module.,607,696,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.h,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.1.e,A,evidenced,Provided user support and handled service desk tickets for the finance system after go-live.,788,880,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.1,A,evidenced,Explained technical details of the new workflow to non-technical managers in monthly briefings.,883,978,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.3,A,evidenced,Carried out a compliance check of approval workflows against the internal audit policy.,1075,1162,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.1,A,partially,Participated in vendor evaluation for a document management system.,1478,1545,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.6,A,evidenced,Planned and prioritized the backlog for two release cycles with the project manager.,1267,1351,normalized,true,0.25,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.2.b,A,partially,Completed course: IIBA ECBA preparation (self-study).,1548,1601,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.e,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.3.b.6,A,evidenced,Documented functional specifications and test scenarios for three ERP change requests.,699,785,normalized,true,0,0.9,R3_low_overlap,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.4,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.7.a,A,partially,"English: good command, IELTS 6.5.",1604,1637,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.4,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.b.2,A,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.c,A,partially,Contributed to user guide drafts reviewed by the documentation team.,1407,1475,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.3.b.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.3.a,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.a.1,B,evidenced,Gathered requirements from finance and procurement users through workshops and translated them into user stories.,385,498,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.3,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.2,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.2,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.4,B,evidenced,Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.,1165,1264,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.a.2,B,partially,Monitored systems and job queues on the reporting server during month-end.,1640,1714,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.d,B,partially,Presented project status updates at team meetings.,1354,1404,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.a,B,evidenced,Reviewed requirements documents and vendor specifications to confirm scope before sign-off.,981,1072,normalized,true,0.3333,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.b.1,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.b,B,evidenced,Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.,501,604,normalized,true,0.2727,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.2.a,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.g,B,evidenced,Produced process modeling diagrams and data flow analysis for the ERP procurement module.,607,696,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.h,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.1.e,B,evidenced,Provided user support and handled service desk tickets for the finance system after go-live.,788,880,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.1,B,evidenced,Explained technical details of the new workflow to non-technical managers in monthly briefings.,883,978,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.3,B,evidenced,Carried out a compliance check of approval workflows against the internal audit policy.,1075,1162,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.a.1,B,evidenced,Participated in vendor evaluation for a document management system.,1478,1545,normalized,true,1,0.9,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.6,B,evidenced,Planned and prioritized the backlog for two release cycles with the project manager.,1267,1351,normalized,true,0.25,0.9,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.2,B,partially,"IT Business Analyst, Example Manufacturing Co., 2020-present",245,305,normalized,true,0,0.6,R3_low_overlap,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.2.b,B,partially,Completed course: IIBA ECBA preparation (self-study).,1548,1601,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.B.4.e,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.3.b.6,B,evidenced,Documented functional specifications and test scenarios for three ERP change requests.,699,785,normalized,true,0,0.9,R3_low_overlap,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.4.a.4,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.C.7.a,B,partially,"English: good command, IELTS 6.5.",1604,1637,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.2.b.4,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-4.A.1.b.2,B,missing,,-1,-1,,,,0.8,model_missing,2026-10-01T10:00:00+07:00
+RUN-20261001100000-90a83f11,REQ-R18-2.A.1.c,B,partially,Contributed to user guide drafts reviewed by the documentation team.,1407,1475,normalized,true,1,0.6,R3_alias_hit,2026-10-01T10:00:00+07:00

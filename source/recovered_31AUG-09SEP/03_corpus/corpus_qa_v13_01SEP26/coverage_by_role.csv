@@ -1,0 +1,21 @@
+﻿role_id,target_role,n_requirements,covered_any,covered_L1,uncovered,gap_coverage_pct,gap_coverage_L1_pct,weight_coverage_pct,weight_coverage_L1_pct,covered_under_course_only,covered_under_certification_only,covered_under_both
+R01,Software Engineer (Backend/Full-stack),30,30,27,0,100.0,90.0,100.0,90.4,28,30,30
+R02,Web Developer,30,30,22,0,100.0,73.3,100.0,73.3,28,27,30
+R03,Application / Mobile Developer,30,30,24,0,100.0,80.0,100.0,79.9,29,26,30
+R04,QA & Test Automation Engineer,30,30,26,0,100.0,86.7,100.0,86.4,30,30,30
+R05,UX/UI & Digital Product Designer,30,30,26,0,100.0,86.7,100.0,86.3,30,28,30
+R06,Data Scientist,30,30,26,0,100.0,86.7,100.0,87.9,30,23,30
+R07,Machine Learning / AI Engineer,30,30,24,0,100.0,80.0,100.0,80.9,28,25,30
+R08,Data Engineer,30,30,24,0,100.0,80.0,100.0,79.7,30,22,30
+R09,Data / BI Analyst,30,30,25,0,100.0,83.3,100.0,83.6,30,27,30
+R10,Database Administrator,30,30,18,0,100.0,60.0,100.0,59.9,27,23,30
+R11,Information Security / SOC Analyst,30,30,26,0,100.0,86.7,100.0,86.6,29,30,30
+R12,Security Engineer,30,30,24,0,100.0,80.0,100.0,79.3,30,20,30
+R13,Penetration Tester,30,30,23,0,100.0,76.7,100.0,76.2,29,23,30
+R14,Digital Forensics & Incident Response,30,30,22,0,100.0,73.3,100.0,73.2,30,22,30
+R15,Network Engineer / Architect,30,30,22,0,100.0,73.3,100.0,72.9,30,21,30
+R16,Cloud Engineer / Solutions Architect,30,30,26,0,100.0,86.7,100.0,86.2,30,30,30
+R17,DevOps / Site Reliability Engineer,30,30,21,0,100.0,70.0,100.0,70.7,28,27,30
+R18,Systems / Business Analyst (IT),30,30,25,0,100.0,83.3,100.0,83.8,30,30,30
+R19,IT Project Manager,30,30,24,0,100.0,80.0,100.0,79.9,30,29,30
+R20,IT / IS Manager,30,30,24,0,100.0,80.0,100.0,79.9,29,26,30

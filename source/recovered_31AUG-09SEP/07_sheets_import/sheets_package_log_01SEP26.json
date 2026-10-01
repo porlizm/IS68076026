@@ -1,0 +1,208 @@
+{
+  "sheets_package_version": "SHEETS-IS68076026-v1.2-01SEP26",
+  "snapshot_version": "ONET31.0-IS68076026-v1.0",
+  "corpus_version": "CORPUS-IS68076026-v1.3-01SEP26",
+  "rules_version": "RULES-IS68076026-v1.0-31AUG26",
+  "packaged_at": "2026-09-01T00:00:00+07:00",
+  "tabs": [
+    {
+      "group": "DatasetMaster",
+      "tab": "onet_requirements",
+      "rows": 600,
+      "cols": 17
+    },
+    {
+      "group": "DatasetMaster",
+      "tab": "element_aliases",
+      "rows": 61,
+      "cols": 6
+    },
+    {
+      "group": "DatasetMaster",
+      "tab": "onet_requirements_excluded",
+      "rows": 354,
+      "cols": 8
+    },
+    {
+      "group": "DatasetMaster",
+      "tab": "role_map",
+      "rows": 20,
+      "cols": 17
+    },
+    {
+      "group": "CorpusMaster",
+      "tab": "recommendation_master",
+      "rows": 499,
+      "cols": 49
+    },
+    {
+      "group": "CorpusMaster",
+      "tab": "item_competency_map",
+      "rows": 6780,
+      "cols": 15
+    },
+    {
+      "group": "CorpusMaster",
+      "tab": "corpus_build_errors",
+      "rows": 0,
+      "cols": 7
+    },
+    {
+      "group": "CorpusMaster",
+      "tab": "corpus_gap_request",
+      "rows": 23,
+      "cols": 13
+    },
+    {
+      "group": "MasterData",
+      "tab": "conditions_master",
+      "rows": 10,
+      "cols": 7
+    },
+    {
+      "group": "MasterData",
+      "tab": "config_master",
+      "rows": 24,
+      "cols": 9
+    },
+    {
+      "group": "MasterData",
+      "tab": "enum_error_type",
+      "rows": 13,
+      "cols": 6
+    },
+    {
+      "group": "MasterData",
+      "tab": "enum_exclusion_reason",
+      "rows": 7,
+      "cols": 6
+    },
+    {
+      "group": "MasterData",
+      "tab": "metric_registry",
+      "rows": 14,
+      "cols": 9
+    },
+    {
+      "group": "MasterData",
+      "tab": "mode_rules",
+      "rows": 3,
+      "cols": 8
+    },
+    {
+      "group": "MasterData",
+      "tab": "model_registry",
+      "rows": 7,
+      "cols": 13
+    },
+    {
+      "group": "MasterData",
+      "tab": "pii_masking_rules",
+      "rows": 10,
+      "cols": 8
+    },
+    {
+      "group": "MasterData",
+      "tab": "prompt_registry",
+      "rows": 6,
+      "cols": 11
+    },
+    {
+      "group": "MasterData",
+      "tab": "provider_policy_register",
+      "rows": 5,
+      "cols": 10
+    },
+    {
+      "group": "MasterData",
+      "tab": "proxy_mapping_log",
+      "rows": 5,
+      "cols": 8
+    },
+    {
+      "group": "MasterData",
+      "tab": "timeline_master",
+      "rows": 4,
+      "cols": 8
+    },
+    {
+      "group": "PipelineData",
+      "tab": "pipeline_run",
+      "rows": 0,
+      "cols": 35
+    },
+    {
+      "group": "PipelineData",
+      "tab": "gap_result",
+      "rows": 0,
+      "cols": 21
+    },
+    {
+      "group": "PipelineData",
+      "tab": "condition_result",
+      "rows": 0,
+      "cols": 9
+    },
+    {
+      "group": "PipelineData",
+      "tab": "recommendation_result",
+      "rows": 0,
+      "cols": 13
+    },
+    {
+      "group": "PipelineData",
+      "tab": "model_call_log",
+      "rows": 0,
+      "cols": 17
+    },
+    {
+      "group": "PipelineData",
+      "tab": "audit_log",
+      "rows": 0,
+      "cols": 8
+    },
+    {
+      "group": "ResearchEval",
+      "tab": "ground_truth",
+      "rows": 0,
+      "cols": 13
+    },
+    {
+      "group": "ResearchEval",
+      "tab": "ground_truth_extraction",
+      "rows": 0,
+      "cols": 7
+    },
+    {
+      "group": "ResearchEval",
+      "tab": "evaluation_metrics",
+      "rows": 0,
+      "cols": 8
+    },
+    {
+      "group": "Review",
+      "tab": "corpus_pending_verification",
+      "rows": 36,
+      "cols": 12
+    },
+    {
+      "group": "Review",
+      "tab": "alias_collision_review",
+      "rows": 23,
+      "cols": 6
+    }
+  ],
+  "total_cells": 141673,
+  "files": {
+    "IS68076026_ResearchData_01SEP26.xlsx": "1e9582007a2dba8170f9690f35b9edbc4e6f4063ab71d3197733ab4841f02c1d"
+  },
+  "source_sha256_verified": {
+    "Data_Set.xlsx": "665d149951f0f5c50f60f490045e685a4eb2ee5c7f22a178244d302ebbc475cd",
+    "onet_requirements_28AUG26.csv": "8ab70032c2a5125701584d3c02dc23f3ba5e7d97bb6fc78299f6163668f6e77c",
+    "corpus_master_v13_01SEP26.csv": "6bb7b6e2bec933743df4af441997d07595bc0febf3c698d055ed9bc9cf932300",
+    "item_competency_map_v13_01SEP26.csv": "07a8a9ce52cabf2b463c8614921046090d5da445d03535abfdb959b772260b8f",
+    "Course_Career_v13_01SEP26.xlsx": "aa340e25bc3e36a8b3a87c4edc3d8407eb83648f8961c7ad4d0580fdc42a0b53",
+    "Master_Data_31AUG26.xlsx": "a58e31d976caa6b2203d0624fff31e2d67f48bde6f77908dadda44d3e85fa16f"
+  },
+  "generated_at": "2026-09-01T05:12:21.286755+00:00"
+}

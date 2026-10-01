@@ -1,0 +1,19 @@
+{
+  "corpus_version": "CORPUS-IS68076026-v1.5R-01OCT26",
+  "rows_total": 6883,
+  "rows_passed": 1942,
+  "rows_failed_not_L1": 4807,
+  "rows_failed_L1_other": 134,
+  "failed_L1_reasons": {
+    "C1_item_not_verified": 134
+  },
+  "items_in_passed_rows": 535,
+  "items_total": 571,
+  "requirements_with_passed_item": 598,
+  "requirements_total": 600,
+  "roles_passed": 20,
+  "per_role_min": 29,
+  "per_role_max": 30,
+  "L1_rows": 2076,
+  "passed_share_of_L1": 0.9355
+}

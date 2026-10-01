@@ -1,0 +1,30 @@
+{
+ "case": "B",
+ "role_id": "R06",
+ "mode": "both",
+ "timeline_months": 6,
+ "hours_per_week": 10,
+ "email": "warunee.sample@mail.test",
+ "timestamp": "2026-10-01T09:02:00+07:00",
+ "file_id": "SYNTH_FILE_B_0000000000000000000000",
+ "ocr_engine": "text_layer_fixture",
+ "pii_expected": {
+  "EMAIL": 1,
+  "URL": 1,
+  "ID": 0,
+  "PHONE": 1
+ },
+ "deviations": {
+  "A": {},
+  "B": {
+   "2.A.1.d": "flip:missing",
+   "4.A.2.b.1": "generic:evidenced"
+  },
+  "C": {
+   "2.C.4.a": "flip:evidenced",
+   "2.A.1.e": "paraphrase",
+   "4.A.1.a.1": "generic:partially"
+  }
+ },
+ "fictional": true
+}

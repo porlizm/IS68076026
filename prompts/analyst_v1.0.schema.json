@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analyst_v1.0.schema.json",
+  "title": "ผลตอบกลับของโมเดลตาม prompt analyst_v1.0 (หัวข้อ 3.5.2) · กฎ R0 ใน engine.js ตรวจตามโครงสร้างนี้",
+  "type": "object",
+  "required": ["schema_version", "role_id", "assessments"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"const": "analyst_v1.0"},
+    "role_id": {"type": "string", "pattern": "^R(0[1-9]|1[0-9]|20)$"},
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "status"],
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^REQ-R\\d{2}-[0-9A-Za-z.]+$"},
+          "status": {"enum": ["evidenced", "partially", "missing"]},
+          "quote": {"type": "string", "description": "prompt กำหนด 20–300 ตัวอักษร แต่ R0 ไม่ตรวจความยาว (รายงานการกระจายเป็นข้อมูลควบคุมคุณภาพ)"},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+        }
+      }
+    }
+  },
+  "x-r0-reason-codes": ["no_output", "invalid_json", "schema_mismatch", "role_mismatch", "incomplete_coverage"]
+}

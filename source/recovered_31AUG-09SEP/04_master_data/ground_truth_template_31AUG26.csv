@@ -1,0 +1,2 @@
+﻿submission_id,role_id,requirement_id,element_name,gt_status,gt_evidence_quote,gt_evidence_section,rule_applied,annotator_id,round,annotated_at,time_spent_sec,note
+SUB-EXAMPLE,R01,REQ-R01-2.B.3.e,Programming,evidenced,พัฒนา REST API ด้วย Python และ Django สำหรับระบบจัดการคำสั่งซื้อ,experience,,A1,main,2026-11-05T10:15:00+07:00,95,แถวตัวอย่าง ให้ลบก่อนใช้จริง

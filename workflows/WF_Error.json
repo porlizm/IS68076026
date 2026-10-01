@@ -1,0 +1,341 @@
+{
+  "id": "is68ErrorWF00001",
+  "name": "WF_Error",
+  "active": false,
+  "nodes": [
+    {
+      "id": "is68ErrorWF00001-001",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "is68ErrorWF00001-002",
+      "name": "Get Failed Execution",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        300
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.N8N_API_URL }}/api/v1/executions/{{ $json.execution.id }}?includeData=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "n8nApi",
+        "options": {}
+      },
+      "credentials": {
+        "n8nApi": {
+          "id": "CRED_N8N_API",
+          "name": "IS68 n8n API"
+        }
+      }
+    },
+    {
+      "id": "is68ErrorWF00001-003",
+      "name": "Classify Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const CFG = {\"project\":{\"_comment\":\"ค่าควบคุมของโครงการ (ตารางที่ 3.10) · เปลี่ยนค่าได้เฉพาะก่อน freeze และต้องมี DEC · หลัง freeze ห้ามเปลี่ยน (P3)\",\"project\":\"IS 68076026\",\"title_en\":\"A Multi-Model Generative-AI Framework for Reducing Hallucination in Resume-Based Skill-Gap Analysis and Personalized Learning Pathways\",\"researcher_name_th\":\"ดนุสรณ์ อนันตกาล (ผู้วิจัย)\",\"deletion_contact\":\"68076026@kmitl.ac.th\",\"evaluation_form_url\":\"\",\"requirements_per_role\":30,\"max_file_bytes\":10485760,\"max_pages\":5,\"accepted_mime\":[\"application/pdf\"],\"max_hours_per_week\":60,\"theta\":0.15,\"overlap_denominator_cap\":25,\"alias_min_length\":4,\"quote_length_prompt\":{\"min\":20,\"max\":300,\"enforced_by_R0\":false},\"min_usable_models\":2,\"allowed_months\":[6,12,18,24],\"primary_evaluation_months\":6,\"weeks_per_month\":4.33,\"allowed_modes\":[\"course_only\",\"certification_only\",\"both\"],\"approved_mapping_statuses\":[\"source_checked_by_script\",\"expert_reviewed\"],\"coverage_layer_used\":\"L1_researcher_tagged (กำหนดในโค้ด engine.js ไม่ใช่ค่านี้)\",\"min_approved_share_of_L1\":0.9,\"prompt_version\":\"analyst_v1.0\",\"rules_version\":\"RULES-IS68076026-v1.0\",\"retention_days\":90,\"email_enabled\":false,\"ocr\":{\"primary\":\"google_document_ai\",\"processor_env\":\"DOCAI_PROCESSOR_ID\",\"location_env\":\"DOCAI_LOCATION\",\"project_env\":\"GCP_PROJECT_ID\",\"fallback\":\"local_ocr\",\"fallback_url_env\":\"LOCAL_OCR_URL\"},\"drive\":{\"forms_upload_folder_env\":\"DRIVE_FORM_FOLDER_ID\",\"reports_folder_env\":\"DRIVE_REPORT_FOLDER_ID\",\"masked_text_folder_env\":\"DRIVE_MASKED_TEXT_FOLDER_ID\"},\"researcher_alert_email_env\":\"RESEARCHER_EMAIL\"},\"models\":{\"_comment\":\"ตารางที่ 3.7–3.8 · รหัสรุ่นอ่านจาก env MODEL_A/B/C_ID เท่านั้น · ห้ามเรียกผู้ให้บริการรายเดียวสามครั้งแล้วรายงานว่าเป็นสามโมเดล · verified=false จนกว่าจะผ่าน smoke test (NEXT_STEPS ข้อ 32)\",\"defaults\":{\"temperature\":0,\"max_output_tokens\":4096,\"timeout_ms\":90000,\"max_attempts\":2,\"max_attempts_meaning\":\"จำนวนครั้งที่เรียกซ้ำหลังครั้งแรก (รวมสูงสุด 3 ครั้งต่อโมเดลต่องาน)\",\"retry_on_status\":[429],\"retry_on_timeout\":true},\"models\":{\"A\":{\"provider\":\"OpenAI\",\"api\":\"openai_chat_completions\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"model_env\":\"MODEL_A_ID\",\"key_env\":\"OPENAI_API_KEY\",\"send_temperature\":true,\"verified\":false,\"verified_model_id\":\"\",\"verified_at\":\"\"},\"B\":{\"provider\":\"Anthropic\",\"api\":\"anthropic_messages\",\"endpoint\":\"https://api.anthropic.com/v1/messages\",\"anthropic_version\":\"2023-06-01\",\"model_env\":\"MODEL_B_ID\",\"key_env\":\"ANTHROPIC_API_KEY\",\"send_temperature\":true,\"verified\":false,\"verified_model_id\":\"\",\"verified_at\":\"\",\"note\":\"รุ่นใหม่บางรุ่นอาจตอบ HTTP 400 เมื่อส่ง temperature ถ้า smoke test ยืนยัน ให้ตั้ง send_temperature=false พร้อม DEC และแก้ตาราง 3.7/3.10\"},\"C\":{\"provider\":\"Google\",\"api\":\"google_generative_language\",\"endpoint\":\"https://generativelanguage.googleapis.com/v1beta/models\",\"model_env\":\"MODEL_C_ID\",\"key_env\":\"GOOGLE_API_KEY\",\"send_temperature\":true,\"verified\":false,\"verified_model_id\":\"\",\"verified_at\":\"\"}}},\"sheets\":{\"_comment\":\"แหล่งความจริงเดียวของโครงสร้างสเปรดชีต (ตารางที่ 3.20 + ภาคผนวก ง) · workflow, build_sheets_import.py และเทสต์อ่านไฟล์นี้ · เปลี่ยนแล้วต้องมี DEC\",\"schema_version\":\"sheets-v1.1-01OCT26\",\"spreadsheet_env\":\"SHEET_ID\",\"decision_refs\":[\"DEC-34 เพิ่ม ocr_results.masked_text_file_id · findings.quote_text_version · ground_truth.coder_1_status/coder_2_status ตามที่เล่มหัวข้อ 3.11 และภาคผนวก ง ระบุว่าต้องเพิ่มก่อนเก็บข้อมูลกลุ่มหลัก\"],\"tabs\":{\"runs\":{\"group\":\"operational\",\"write_mode\":\"upsert:run_id\",\"columns\":[\"run_id\",\"response_id\",\"created_at\",\"updated_at\",\"email\",\"role_id\",\"mode\",\"timeline_months\",\"hours_per_week\",\"file_id\",\"stage\",\"ocr_engine\",\"model_status\",\"readiness_pct\",\"weighted_coverage\",\"n_evidenced\",\"n_partially\",\"n_missing\",\"n_abstained\",\"unsupported_claims\",\"report_hash\",\"pdf_file_id\",\"email_status\",\"error_code\"]},\"ocr_results\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"engine\",\"engine_version\",\"page_count\",\"char_count\",\"pii_masked_count\",\"text_sha256\",\"masked_text_file_id\",\"created_at\"]},\"model_calls\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"model_key\",\"provider\",\"model_id\",\"attempt\",\"status\",\"latency_ms\",\"input_tokens\",\"output_tokens\",\"finish_reason\",\"error_code\",\"created_at\"]},\"findings\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"requirement_id\",\"model_key\",\"claimed_status\",\"quote\",\"quote_char_start\",\"quote_char_end\",\"quote_text_version\",\"quote_verified\",\"overlap_score\",\"model_confidence\",\"rule_flags\",\"created_at\"]},\"decisions\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"requirement_id\",\"element_id\",\"element_name\",\"domain\",\"weight\",\"final_status\",\"agreement_level\",\"n_usable_models\",\"rule_flags\",\"evidence_quote\",\"evidence_char_start\",\"evidence_char_end\",\"created_at\"]},\"plan_items\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"rank\",\"item_id\",\"item_type\",\"title\",\"provider\",\"source_url\",\"estimated_hours\",\"cumulative_hours\",\"covers_requirements\",\"n_new_requirements\",\"new_weight_covered\",\"mapping_status\",\"phase\"]},\"deliveries\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"report_hash\",\"pdf_file_id\",\"web_view_link\",\"file_name\",\"email_to\",\"email_status\",\"error_code\",\"sent_at\"]},\"audit_log\":{\"group\":\"operational\",\"write_mode\":\"append\",\"columns\":[\"ts\",\"actor\",\"run_id\",\"event\",\"detail\"]},\"ground_truth\":{\"group\":\"evaluation\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"requirement_id\",\"reference_status\",\"evidence_quote\",\"coder_1\",\"coder_1_status\",\"coder_2\",\"coder_2_status\",\"agreement\",\"resolution_note\",\"participant_disagreed\",\"coded_at\"]},\"pathway_review\":{\"group\":\"evaluation\",\"write_mode\":\"append\",\"columns\":[\"run_id\",\"item_id\",\"requirement_id\",\"relevant_to_reference_gap\",\"item_data_correct\",\"within_time_budget\",\"error_source\",\"review_note\",\"reviewer\",\"reviewed_at\"]},\"ref_roles\":{\"group\":\"reference\",\"write_mode\":\"read_only\",\"expected_rows\":20,\"columns\":[\"role_id\",\"role_name_th\",\"target_role\",\"soc_code\",\"track\",\"n_requirements_selected\",\"weight_share_of_pool\"]},\"ref_requirements\":{\"group\":\"reference\",\"write_mode\":\"read_only\",\"expected_rows\":600,\"columns\":[\"requirement_id\",\"role_id\",\"domain\",\"element_id\",\"element_name\",\"element_description\",\"importance_im\",\"rank_in_role\",\"weight_renormalized\",\"element_aliases\"]},\"ref_corpus\":{\"group\":\"reference\",\"write_mode\":\"read_only\",\"expected_rows_from\":\"data/corpus.csv\",\"columns\":[\"item_id\",\"item_type\",\"role_id\",\"title\",\"provider\",\"source_url\",\"estimated_hours\",\"recommendation_mode\",\"phase\",\"verification_status\"]},\"ref_mappings\":{\"group\":\"reference\",\"write_mode\":\"read_only\",\"expected_rows_from\":\"data/mappings.csv\",\"note\":\"mapping_status มาจาก data/mapping_review.csv (merge ตอนสร้างไฟล์นำเข้า) ถ้าแถว source_checked_by_script น้อยกว่า 90% ของ L1 ระบบต้องหยุด (DEC-21)\",\"columns\":[\"map_id\",\"item_id\",\"role_id\",\"requirement_id\",\"coverage_layer\",\"coverage_strength\",\"mapping_status\"]},\"form_responses\":{\"group\":\"google_forms\",\"write_mode\":\"forms\",\"columns\":[\"Timestamp\",\"Email Address\",\"อัปโหลดเรซูเม (PDF)\",\"อาชีพเป้าหมาย\",\"ระยะเวลาที่ต้องการใช้เรียนรู้\",\"ชั่วโมงที่เรียนได้ต่อสัปดาห์\",\"สิ่งที่ต้องการให้แนะนำ\",\"ความยินยอม\"]},\"evaluation_responses\":{\"group\":\"google_forms\",\"write_mode\":\"forms\",\"columns\":[\"Timestamp\",\"รหัสงานที่ปรากฏในรายงาน\",\"ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน\",\"ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ\",\"ข้อ 3 เหมาะกับเวลาที่จัดสรรได้\",\"ส่วนใดของแผนที่ต้องการเปลี่ยน\"]}},\"form_value_maps\":{\"mode\":{\"หลักสูตร\":\"course_only\",\"ใบรับรอง\":\"certification_only\",\"ทั้งสองประเภท\":\"both\"},\"consent_yes\":[\"ยินยอม\",\"ข้าพเจ้ายินยอม\",\"Yes\",\"TRUE\",\"true\"]}},\"prompt\":\"You are an evidence checker for a research study on resume-based skill-gap analysis.\\nYou will receive (1) a target occupation code, (2) a list of occupational requirements from O*NET 31.0, and (3) the text of one resume in which personal data has already been replaced by placeholders such as [EMAIL], [URL], [PHONE] and [ID].\\n\\nFollow these nine rules exactly.\\n1. Judge each requirement separately, using only the resume text provided between the RESUME markers.\\n2. Do not infer a skill from a job title, a company name, an institution name, or the number of years of experience.\\n3. Choose exactly one status per requirement: \\\"evidenced\\\", \\\"partially\\\" or \\\"missing\\\".\\n   - \\\"evidenced\\\": the text describes performing the work or applying the knowledge named by the requirement, with a concrete task, tool or result. Merely listing the skill name is not enough.\\n   - \\\"partially\\\": the text supports only part of the requirement, or mentions it only as a course, a training, or a bare skill name without context of use.\\n   - \\\"missing\\\": no text in the resume relates to the requirement.\\n4. When the status is not \\\"missing\\\", copy one contiguous passage from the resume text into \\\"quote\\\", character for character, 20 to 300 characters long.\\n5. Do not paraphrase, summarise, translate, correct spelling, change capitalisation, or join fragments taken from different places.\\n6. If you cannot copy such a passage, answer \\\"missing\\\" and leave \\\"quote\\\" as an empty string.\\n7. Report \\\"confidence\\\" as a number from 0 to 1 describing your own certainty. It will not override the text check.\\n8. Return one assessment for every requirement listed, using the exact requirement_id values given, and nothing else.\\n9. Reply with a single JSON object only, with no text before or after it, in this form:\\n{\\\"schema_version\\\": \\\"analyst_v1.0\\\", \\\"role_id\\\": \\\"<the occupation code>\\\", \\\"assessments\\\": [{\\\"requirement_id\\\": \\\"<id>\\\", \\\"status\\\": \\\"evidenced|partially|missing\\\", \\\"quote\\\": \\\"<exact passage or empty>\\\", \\\"confidence\\\": 0.0}]}\\n\\nOCCUPATION CODE: {{ROLE_ID}}\\n\\nREQUIREMENTS (JSON):\\n{{REQUIREMENTS_JSON}}\\n\\nRESUME START\\n{{RESUME_TEXT}}\\nRESUME END\\n\",\"roleIds\":[\"R01\",\"R02\",\"R03\",\"R04\",\"R05\",\"R06\",\"R07\",\"R08\",\"R09\",\"R10\",\"R11\",\"R12\",\"R13\",\"R14\",\"R15\",\"R16\",\"R17\",\"R18\",\"R19\",\"R20\"],\"roleNames\":{\"R01\":\"วิศวกรซอฟต์แวร์หรือนักพัฒนาซอฟต์แวร์\",\"R02\":\"นักพัฒนาเว็บ\",\"R03\":\"นักพัฒนาแอปพลิเคชันและโมบายล์\",\"R04\":\"วิศวกรทดสอบและ QA Automation\",\"R05\":\"นักออกแบบ UX/UI\",\"R06\":\"นักวิทยาศาสตร์ข้อมูล\",\"R07\":\"วิศวกรแมชชีนเลิร์นนิงและปัญญาประดิษฐ์\",\"R08\":\"วิศวกรข้อมูล\",\"R09\":\"นักวิเคราะห์ข้อมูลเชิงธุรกิจ\",\"R10\":\"ผู้ดูแลฐานข้อมูล\",\"R11\":\"นักวิเคราะห์ความมั่นคงปลอดภัยสารสนเทศ\",\"R12\":\"วิศวกรความมั่นคงปลอดภัย\",\"R13\":\"ผู้ทดสอบเจาะระบบ\",\"R14\":\"นักนิติวิทยาศาสตร์ดิจิทัลและการรับมือเหตุการณ์\",\"R15\":\"วิศวกรและสถาปนิกเครือข่าย\",\"R16\":\"วิศวกรและสถาปนิกระบบคลาวด์\",\"R17\":\"วิศวกร DevOps และ SRE\",\"R18\":\"นักวิเคราะห์ระบบและนักวิเคราะห์ธุรกิจสายไอที\",\"R19\":\"ผู้จัดการโครงการไอที\",\"R20\":\"ผู้จัดการฝ่ายสารสนเทศ\"},\"refs\":{\"manifest_files\":{\"requirements.csv\":{\"sha256\":\"7ab13883eddba28dcae3486aa8df7d9183bd48e7b7d67e02ffd7a76cd4a9abf8\",\"rows\":600},\"roles.json\":{\"sha256\":\"60960420a8ab5f6ac2e53d8658fcb93f82b6696642f1f6d37019a0fe2b3379ec\",\"rows\":20},\"aliases.csv\":{\"sha256\":\"dec7f7bcc2a20d36129d7a3bbb80fae7004ab8cf4cb2a3d9bec5501e2432f98d\",\"rows\":61},\"corpus.csv\":{\"sha256\":\"21b0342d5bbcd22954ca0b5dc5a266aa48b6e1035b56955f9f865acd8b3eeba9\",\"rows\":571},\"mappings.csv\":{\"sha256\":\"f9935333ec9df17cf120cb069ccd24f620de7f4abc8d32ca3c9ebaddcc224d43\",\"rows\":6883},\"mapping_review.csv\":{\"sha256\":\"e09fb55e171bcf5de0dbb2722a848266ccad1dd2bf38434af6ecf11272bc1e47\",\"rows\":6883},\"corpus_gap_request.csv\":{\"sha256\":\"d40a4ceb0ee37c0314d4f01e7d44104baab3d6f7989d1023c8407421753013c5\",\"rows\":1},\"url_manual_check.csv\":{\"sha256\":\"4ea460d3f784af820a6fd6743a2726f4e1517eb8022f0420802b8446fe62d234\",\"rows\":28}},\"prompt_sha256\":\"032719788ff8cb4e556853a81295e5c2d087551a660144cdc00aac6b8b8f35aa\",\"dataset_version\":\"ONET31.0-IS68076026-v1.0\",\"corpus_version\":\"CORPUS-IS68076026-v1.5R-01OCT26\",\"prompt_version\":\"analyst_v1.0\",\"rules_version\":\"RULES-IS68076026-v1.0\"},\"expected\":{\"corpus_rows\":571,\"mapping_rows\":6883}};\n// ==== NODE GLUE: workflows/src/error_classify.js ====\n// WF_Error · Classify Error — บั๊ก B11: หา run_id จากข้อมูลของ execution ที่ล้มเหลว (หรือข้อความ [run_id=...])\nconst trig = $('Error Trigger').first().json;\nlet execData = {};\ntry { execData = $('Get Failed Execution').first().json || {}; } catch (e) { execData = {}; }\nconst msg = String((trig.execution && trig.execution.error && trig.execution.error.message) || '');\nconst hay = msg + ' ' + JSON.stringify(execData).slice(0, 2000000);\nconst m = hay.match(/RUN-\\d{14}-[0-9a-f]{8}/);\nconst run_id = m ? m[0] : 'UNKNOWN-' + ((trig.execution && trig.execution.id) || 'noexec');\nconst code = (msg.match(/\\] ([a-z_]+):/) || [])[1]\n  || (/ข้อผิดพลาดของข้อมูลอ้างอิง/.test(msg) ? 'reference_data_error' : (/download|drive/i.test(msg) ? 'file_download_failed' : 'unexpected_error'));\nconst now = new Date().toISOString();\nconst wf = (trig.workflow && trig.workflow.name) || '';\nconst node = (trig.execution && trig.execution.lastNodeExecuted) || '';\nreturn [{ json: {\n  run_update: { run_id, updated_at: now, stage: 'failed', error_code: code },\n  audit: { ts: now, actor: 'WF_Error', run_id, event: 'workflow_error', detail: JSON.stringify({ workflow: wf, node, message: msg.slice(0, 500), execution_id: trig.execution && trig.execution.id }) },\n  alert: { subject: `[IS68076026][ERROR] ${run_id} ${code}`, body: `workflow: ${wf}\\nnode: ${node}\\nerror: ${msg.slice(0, 800)}\\nexecution: ${trig.execution && trig.execution.url || ''}\\n\\nผู้เข้าร่วมไม่ได้รับข้อความข้อผิดพลาดทางเทคนิค (ตาราง 3.22)` },\n} }];\n"
+      },
+      "executeOnce": true
+    },
+    {
+      "id": "is68ErrorWF00001-004",
+      "name": "Mark Run Failed",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        300
+      ],
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.SHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "runs"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "run_id": "={{ $json.run_update.run_id }}",
+            "updated_at": "={{ $json.run_update.updated_at }}",
+            "stage": "={{ $json.run_update.stage }}",
+            "error_code": "={{ $json.run_update.error_code }}"
+          },
+          "matchingColumns": [
+            "run_id"
+          ],
+          "schema": [
+            {
+              "id": "run_id",
+              "displayName": "run_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "stage",
+              "displayName": "stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "error_code",
+              "displayName": "error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "credentials": {
+        "googleApi": {
+          "id": "CRED_GOOGLE_SERVICE_ACCOUNT",
+          "name": "IS68 Google Service Account"
+        }
+      }
+    },
+    {
+      "id": "is68ErrorWF00001-005",
+      "name": "Append Audit",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        880,
+        300
+      ],
+      "executeOnce": true,
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.SHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "audit_log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ts": "={{ $('Classify Error').first().json.audit.ts }}",
+            "actor": "={{ $('Classify Error').first().json.audit.actor }}",
+            "run_id": "={{ $('Classify Error').first().json.audit.run_id }}",
+            "event": "={{ $('Classify Error').first().json.audit.event }}",
+            "detail": "={{ $('Classify Error').first().json.audit.detail }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ts",
+              "displayName": "ts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "actor",
+              "displayName": "actor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "run_id",
+              "displayName": "run_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "event",
+              "displayName": "event",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "detail",
+              "displayName": "detail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "credentials": {
+        "googleApi": {
+          "id": "CRED_GOOGLE_SERVICE_ACCOUNT",
+          "name": "IS68 Google Service Account"
+        }
+      }
+    },
+    {
+      "id": "is68ErrorWF00001-006",
+      "name": "Notify Researcher",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1100,
+        300
+      ],
+      "onError": "continueRegularOutput",
+      "webhookId": "is68-gmail-error",
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $env.RESEARCHER_EMAIL }}",
+        "subject": "={{ $('Classify Error').first().json.alert.subject }}",
+        "emailType": "text",
+        "message": "={{ $('Classify Error').first().json.alert.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "CRED_GMAIL_OAUTH2",
+          "name": "IS68 Gmail OAuth2 (researcher)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Failed Execution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Failed Execution": {
+      "main": [
+        [
+          {
+            "node": "Classify Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify Error": {
+      "main": [
+        [
+          {
+            "node": "Mark Run Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Run Failed": {
+      "main": [
+        [
+          {
+            "node": "Append Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append Audit": {
+      "main": [
+        [
+          {
+            "node": "Notify Researcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "timezone": "Asia/Bangkok"
+  },
+  "pinData": {},
+  "tags": [
+    {
+      "name": "IS68076026"
+    }
+  ],
+  "meta": {
+    "is68": {
+      "engine_sha256": "9189db7b85f31606c9d1711a9c7fa717ced077133565bc8adcf60864e9054980",
+      "engine_version": "engine-1.0.0-01OCT26",
+      "config_sha256": "ef96b7605e309767048a41dc8fc6dac9743ff88054d7430a1e71e42a6b6572ee",
+      "built_by": "scripts/build_workflows.mjs",
+      "spec": "ตารางที่ 3.9",
+      "exclusive_fan_in": {}
+    }
+  }
+}

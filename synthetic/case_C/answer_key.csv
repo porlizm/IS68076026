@@ -1,0 +1,31 @@
+requirement_id,element_id,element_name,expected_status,evidence_sentence,char_start,char_end
+REQ-R18-4.A.3.b.1,4.A.3.b.1,Working with Computers,missing,,-1,-1
+REQ-R18-2.C.3.a,2.C.3.a,Computers and Electronics,missing,,-1,-1
+REQ-R18-4.A.1.a.1,4.A.1.a.1,Getting Information,evidenced,Gathered requirements from finance and procurement users through workshops and translated them into user stories.,385,498
+REQ-R18-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,missing,,-1,-1
+REQ-R18-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,missing,,-1,-1
+REQ-R18-4.A.2.a.2,4.A.2.a.2,Processing Information,missing,,-1,-1
+REQ-R18-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",missing,,-1,-1
+REQ-R18-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,evidenced,Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.,1165,1264
+REQ-R18-4.A.1.a.2,4.A.1.a.2,"Monitoring Processes, Materials, or Surroundings",partially,Monitored systems and job queues on the reporting server during month-end.,1640,1714
+REQ-R18-2.A.1.d,2.A.1.d,Speaking,partially,Presented project status updates at team meetings.,1354,1404
+REQ-R18-2.A.1.a,2.A.1.a,Reading Comprehension,evidenced,Reviewed requirements documents and vendor specifications to confirm scope before sign-off.,981,1072
+REQ-R18-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",missing,,-1,-1
+REQ-R18-2.A.1.b,2.A.1.b,Active Listening,evidenced,Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.,501,604
+REQ-R18-2.A.2.a,2.A.2.a,Critical Thinking,missing,,-1,-1
+REQ-R18-2.B.4.g,2.B.4.g,Systems Analysis,evidenced,Produced process modeling diagrams and data flow analysis for the ERP procurement module.,607,696
+REQ-R18-2.B.4.h,2.B.4.h,Systems Evaluation,missing,,-1,-1
+REQ-R18-2.C.1.e,2.C.1.e,Customer and Personal Service,evidenced,Provided user support and handled service desk tickets for the finance system after go-live.,788,880
+REQ-R18-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,evidenced,Explained technical details of the new workflow to non-technical managers in monthly briefings.,883,978
+REQ-R18-4.A.2.a.3,4.A.2.a.3,Evaluating Information to Determine Compliance with Standards,evidenced,Carried out a compliance check of approval workflows against the internal audit policy.,1075,1162
+REQ-R18-4.A.2.a.1,4.A.2.a.1,"Judging the Qualities of Objects, Services, or People",partially,Participated in vendor evaluation for a document management system.,1478,1545
+REQ-R18-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",evidenced,Planned and prioritized the backlog for two release cycles with the project manager.,1267,1351
+REQ-R18-4.A.2.b.2,4.A.2.b.2,Thinking Creatively,missing,,-1,-1
+REQ-R18-2.A.2.b,2.A.2.b,Active Learning,partially,Completed course: IIBA ECBA preparation (self-study).,1548,1601
+REQ-R18-2.B.4.e,2.B.4.e,Judgment and Decision Making,missing,,-1,-1
+REQ-R18-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,evidenced,Documented functional specifications and test scenarios for three ERP change requests.,699,785
+REQ-R18-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,missing,,-1,-1
+REQ-R18-2.C.7.a,2.C.7.a,English Language,partially,"English: good command, IELTS 6.5.",1604,1637
+REQ-R18-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,missing,,-1,-1
+REQ-R18-4.A.1.b.2,4.A.1.b.2,"Inspecting Equipment, Structures, or Materials",missing,,-1,-1
+REQ-R18-2.A.1.c,2.A.1.c,Writing,partially,Contributed to user guide drafts reviewed by the documentation team.,1407,1475

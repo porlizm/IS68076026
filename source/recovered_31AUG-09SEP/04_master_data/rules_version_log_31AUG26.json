@@ -1,0 +1,24 @@
+{
+  "rules_version": "RULES-IS68076026-v1.0-31AUG26",
+  "built_at": "2026-09-01T05:04:08+00:00",
+  "sheets": {
+    "README": 25,
+    "model_registry": 7,
+    "prompt_registry": 6,
+    "config_master": 24,
+    "pii_masking_rules": 10,
+    "proxy_mapping_log": 5,
+    "mode_rules": 3,
+    "timeline_master": 4,
+    "conditions_master": 10,
+    "metric_registry": 14,
+    "enum_exclusion_reason": 7,
+    "enum_error_type": 13,
+    "provider_policy_register": 5
+  },
+  "frozen_at": null,
+  "sha256": {
+    "Master_Data_31AUG26.xlsx": "a58e31d976caa6b2203d0624fff31e2d67f48bde6f77908dadda44d3e85fa16f"
+  },
+  "note": "frozen_at ยังเป็น null — ตรึงได้หลัง pilot เมื่อ THETA และ word budget นิ่งแล้ว"
+}

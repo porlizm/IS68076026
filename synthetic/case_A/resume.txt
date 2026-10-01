@@ -1,0 +1,37 @@
+Somchai Example
+Backend Software Engineer
+Email: somchai.example@mail.test | Phone: +66 81 234 5678 | linkedin.com/in/somchai-example
+
+SUMMARY
+Backend Software Engineer seeking growth in the R01 target occupation.
+
+EDUCATION
+B.Eng. Computer Engineering, Example University, 2019
+
+EXPERIENCE
+Software Engineer, Example Commerce Co., Ltd., 2021-present
+Junior Developer, Example Startup, 2019-2021
+
+KEY ACHIEVEMENTS AND SKILLS
+- Built and deployed a Python programming service for batch data processing used by 40 internal teams.
+- Configured Linux servers and set up computer systems networks for the staging and production environments.
+- Maintained operating system images and server hardware inventory for 120 Linux and Windows hosts.
+- Designed an ETL pipeline that transformed data from five source systems into a PostgreSQL warehouse.
+- Diagnosed production problems during on-call rotations and applied problem solving to restore service within SLA.
+- Debugged memory leaks in a Java microservice and resolved the incident by performing root cause analysis with heap dumps.
+- Led the system design of an event-driven order service and wrote the technical design document reviewed by architects.
+- Designed databases and REST APIs for a new loyalty application from scratch.
+- Wrote documentation and runbooks for deployment procedures that reduced onboarding time for new engineers.
+- Set up observability dashboards and alerting in Grafana and monitored systems for latency regressions.
+- Ran benchmarking and load tests to measure system performance before each quarterly release.
+- Analyzed API latency data and query plans to identify slow endpoints, improving p95 response time by 35 percent.
+- Coordinated with product owners and QA peers in daily stand-up meetings to report progress and blockers.
+- Organized sprint backlog grooming and prioritized technical debt items with the team lead.
+- Performed impact analysis and data flow modelling before migrating the monolith billing module.
+- Read specifications and RFC documents to implement OAuth 2.0 and OpenID Connect correctly.
+- Completed course: AWS Cloud Practitioner Essentials (online, 2025).
+- Coursework in statistics and linear algebra during the B.Eng. program.
+- Familiar with code review checklists and audit logging requirements.
+- Skills: critical thinking, teamwork, time management.
+- Helped maintain the release schedule calendar for the platform team.
+- Participated in architecture meetings where the team selected approach options for caching.

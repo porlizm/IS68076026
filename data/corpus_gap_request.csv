@@ -1,0 +1,2 @@
+requirement_id,role_id,element_id,element_name,domain,importance_im,rank_in_role,selected_reason,status,reason,decision
+REQ-R14-4.A.3.b.5,R14,4.A.3.b.5,Repairing and Maintaining Electronic Equipment,Work Activities,3.33,39,top_rank,open,ไม่มีรายการในคลังที่สอนการซ่อมบำรุงอุปกรณ์อิเล็กทรอนิกส์จริง ตัวเลือกจากกฎ R19-fix เป็นหลักสูตรกู้คืนระบบ (DEC-19),DEC-19

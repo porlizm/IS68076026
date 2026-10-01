@@ -1,0 +1,11 @@
+{
+  "_comment": "ใช้ประมาณงบ API เท่านั้น ไม่ใช้ในตรรกะ · กรอกราคาจริงจากหน้าราคาของผู้ให้บริการ ณ วันที่ smoke test (ห้ามเดา) · หน่วย USD ต่อ 1 ล้าน token",
+  "as_of": "",
+  "models": {
+    "A": {"input_per_1m": null, "output_per_1m": null, "source_url": ""},
+    "B": {"input_per_1m": null, "output_per_1m": null, "source_url": ""},
+    "C": {"input_per_1m": null, "output_per_1m": null, "source_url": ""}
+  },
+  "document_ai": {"per_1000_pages": null, "source_url": ""},
+  "budget_assumptions": {"participants": 35, "synthetic_runs": 30, "calls_per_run": 3, "max_attempts_per_call": 3, "est_input_tokens_per_call": 9000, "est_output_tokens_per_call": 3000}
+}

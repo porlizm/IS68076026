@@ -1,0 +1,8 @@
+﻿registry_id,stage,model_name,model_id,provider,temperature,reasoning_config,output_used_for,price_in_usd_per_1m,price_out_usd_per_1m,access_date,verification_status,notes
+MDL-01,document_ocr,Google Document AI,(processorId ที่จะตั้ง),Google,—,—,สกัดข้อความเท่านั้น ไม่ใช่โมเดลกำเนิดข้อความ,,,2026-08-31,pending,ต้องระบุ region และ processorId ก่อนใช้ · ตรวจตาม GATE-01 ข้อ 9
+MDL-02,resume_parser,GPT-5.6 Terra,gpt-5.6-terra,OpenAI,0,ไม่ส่งพารามิเตอร์ reasoning,สร้าง structured profile เท่านั้น ไม่ตัดสินช่องว่าง,,,2026-08-31,pending,ห้ามใช้ alias gpt-5.6 · ต้องยืนยัน model id และราคาจริงตาม GATE-01 ข้อ 2
+MDL-03,analyst_a,GLM 5.2,glm-5.2,Zhipu AI (Z.ai),0,"thinking:{""type"":""disabled""}",ข้อเสนอการตัดสินเท่านั้น ไม่ใช่ข้อสรุป,,,2026-08-31,pending,🚦 GATE-01 · ต้องได้คำยืนยัน EOL เป็นลายลักษณ์อักษร · ต้องพิสูจน์ reasoning_tokens = 0 จากการยิง API จริง
+MDL-04,analyst_b,Claude Sonnet 5,claude-sonnet-5,Anthropic,0,extended thinking ปิด (ไม่ส่ง thinking),ข้อเสนอการตัดสินเท่านั้น ไม่ใช่ข้อสรุป,,,2026-08-31,pending,ต้องยืนยัน output_config.format และการปิด extended thinking ตาม GATE-01 ข้อ 4
+MDL-05,analyst_c,Gemini 3.7 Flash,gemini-3.7-flash,Google,0,"thinkingLevel:""minimal""",ข้อเสนอการตัดสินเท่านั้น ไม่ใช่ข้อสรุป,,,2026-08-31,pending,ปิด reasoning สนิทไม่ได้ · ระดับ minimal เป็นค่าต่ำสุด · ห้ามส่ง thinking_budget คู่กัน · ต้องพิสูจน์ด้วย PROTOCOL-01
+MDL-06,ranker,Claude Sonnet 5,claude-sonnet-5,Anthropic,0,extended thinking ปิด,จัดอันดับเฉพาะ item_id ที่อยู่ใน whitelist,,,2026-08-31,pending,ห้ามสร้างชื่อหลักสูตร URL หรือรหัสรายการใหม่
+MDL-07,report_writer,GPT-5.6 Terra,gpt-5.6-terra,OpenAI,0.2,ไม่ส่งพารามิเตอร์ reasoning,เรียบเรียงถ้อยคำเท่านั้น,,,2026-08-31,pending,ห้ามเพิ่มช่องว่างใหม่ เปลี่ยนคะแนน เลือกรายการใหม่ หรือแก้ timeline

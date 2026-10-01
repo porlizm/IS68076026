@@ -1,0 +1,34 @@
+{
+  "corpus_version": "CORPUS-IS68076026-v1.3-01SEP26",
+  "snapshot_version": "ONET31.0-IS68076026-v1.0",
+  "previous_version": "CORPUS-IS68076026-v1.2-31AUG26",
+  "decisions_applied": [
+    "DEC-09",
+    "DEC-10",
+    "DEC-11",
+    "DEC-14",
+    "DEC-15",
+    "DEC-16"
+  ],
+  "built_at": "2026-09-01T05:08:34.131278+00:00",
+  "row_count": {
+    "corpus_master": 499,
+    "item_competency_map": 6780,
+    "rows_added_by_DEC16": 68,
+    "maps_added_by_DEC16": 237
+  },
+  "coverage": {
+    "L1_and_verified_pct": 79.8,
+    "L1_and_verified_n": 479,
+    "any_layer_verified_pct": 99.8,
+    "any_layer_verified_n": 599,
+    "remaining_gap_pairs": 121
+  },
+  "sha256": {
+    "corpus_master_v13_01SEP26.csv": "6bb7b6e2bec933743df4af441997d07595bc0febf3c698d055ed9bc9cf932300",
+    "item_competency_map_v13_01SEP26.csv": "07a8a9ce52cabf2b463c8614921046090d5da445d03535abfdb959b772260b8f",
+    "Course_Career_v13_01SEP26.xlsx": "aa340e25bc3e36a8b3a87c4edc3d8407eb83648f8961c7ad4d0580fdc42a0b53"
+  },
+  "frozen_at": null,
+  "note": "frozen_at ยังเป็น null — ต้องทบทวน mapping ของแถว batch v1.3_crossrole (68 แถว) และปิดช่องว่างที่เหลือตาม corpus_gap_request_01SEP26.csv ก่อนตรึง"
+}

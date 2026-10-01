@@ -1,0 +1,31 @@
+requirement_id,element_id,element_name,expected_status,evidence_sentence,char_start,char_end
+REQ-R06-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,evidenced,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462
+REQ-R06-4.A.3.b.1,4.A.3.b.1,Working with Computers,missing,,-1,-1
+REQ-R06-4.A.2.a.2,4.A.2.a.2,Processing Information,evidenced,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563
+REQ-R06-2.C.4.a,2.C.4.a,Mathematics,partially,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633
+REQ-R06-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,missing,,-1,-1
+REQ-R06-2.A.1.e,2.A.1.e,Mathematics,partially,Background in applied mathematics from undergraduate studies.,636,697
+REQ-R06-4.A.1.a.1,4.A.1.a.1,Getting Information,missing,,-1,-1
+REQ-R06-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,missing,,-1,-1
+REQ-R06-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,missing,,-1,-1
+REQ-R06-2.A.2.a,2.A.2.a,Critical Thinking,missing,,-1,-1
+REQ-R06-2.C.3.a,2.C.3.a,Computers and Electronics,missing,,-1,-1
+REQ-R06-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",missing,,-1,-1
+REQ-R06-2.A.1.a,2.A.1.a,Reading Comprehension,missing,,-1,-1
+REQ-R06-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,missing,,-1,-1
+REQ-R06-4.A.2.b.2,4.A.2.b.2,Thinking Creatively,missing,,-1,-1
+REQ-R06-2.B.2.i,2.B.2.i,Complex Problem Solving,missing,,-1,-1
+REQ-R06-2.B.3.e,2.B.3.e,Programming,evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371
+REQ-R06-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",missing,,-1,-1
+REQ-R06-2.A.1.d,2.A.1.d,Speaking,partially,Gave a short presentation of a class project to fellow students.,818,882
+REQ-R06-2.A.2.b,2.A.2.b,Active Learning,partially,Completed course: Google Data Analytics Certificate (in progress).,700,766
+REQ-R06-4.A.4.b.6,4.A.4.b.6,Providing Consultation and Advice to Others,missing,,-1,-1
+REQ-R06-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",missing,,-1,-1
+REQ-R06-2.A.1.b,2.A.1.b,Active Listening,missing,,-1,-1
+REQ-R06-2.A.1.c,2.A.1.c,Writing,missing,,-1,-1
+REQ-R06-2.B.4.e,2.B.4.e,Judgment and Decision Making,missing,,-1,-1
+REQ-R06-2.A.2.d,2.A.2.d,Monitoring,missing,,-1,-1
+REQ-R06-4.A.1.b.3,4.A.1.b.3,"Estimating the Quantifiable Characteristics of Products, Events, or Information",missing,,-1,-1
+REQ-R06-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,missing,,-1,-1
+REQ-R06-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,missing,,-1,-1
+REQ-R06-2.C.7.a,2.C.7.a,English Language,partially,"Languages: Thai (native), English (TOEIC 785).",769,815

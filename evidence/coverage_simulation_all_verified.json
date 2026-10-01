@@ -1,0 +1,90 @@
+{
+ "assume_all_verified": true,
+ "corpus_version": "CORPUS-IS68076026-v1.5R-01OCT26",
+ "by_capacity": [
+  {
+   "months": 6,
+   "hours_per_week": 5,
+   "Hmax": 129.9,
+   "covered": 391,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 65.2,
+   "mean_items_per_plan": 7.5,
+   "mean_hours_per_plan": 116.3
+  },
+  {
+   "months": 6,
+   "hours_per_week": 10,
+   "Hmax": 259.8,
+   "covered": 493,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 82.2,
+   "mean_items_per_plan": 10.8,
+   "mean_hours_per_plan": 231.6
+  },
+  {
+   "months": 6,
+   "hours_per_week": 15,
+   "Hmax": 389.7,
+   "covered": 540,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 90,
+   "mean_items_per_plan": 12.2,
+   "mean_hours_per_plan": 345.1
+  },
+  {
+   "months": 12,
+   "hours_per_week": 10,
+   "Hmax": 519.6,
+   "covered": 570,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 95,
+   "mean_items_per_plan": 13,
+   "mean_hours_per_plan": 451.1
+  },
+  {
+   "months": 24,
+   "hours_per_week": 10,
+   "Hmax": 1039.2,
+   "covered": 598,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 99.7,
+   "mean_items_per_plan": 14.3,
+   "mean_hours_per_plan": 634
+  }
+ ],
+ "by_mode_6m10h": [
+  {
+   "mode": "both",
+   "covered": 493,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 82.2,
+   "mean_items_per_plan": 10.8,
+   "mean_hours_per_plan": 231.6
+  },
+  {
+   "mode": "course_only",
+   "covered": 471,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 78.5,
+   "mean_items_per_plan": 10.3,
+   "mean_hours_per_plan": 216.3
+  },
+  {
+   "mode": "certification_only",
+   "covered": 209,
+   "with_candidate": 599,
+   "total": 600,
+   "pct": 34.8,
+   "mean_items_per_plan": 3.4,
+   "mean_hours_per_plan": 209.3
+  }
+ ]
+}

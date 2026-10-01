@@ -1,0 +1,8 @@
+﻿code,rule,description_th,counts_toward_recall_cost,counts_toward_out_of_scope,notes
+EX-R0-OUT-OF-SCOPE,R0,requirement_id ไม่ขึ้นต้นด้วย REQ-<role_id>- หรือไม่อยู่ในชุด 30 ที่ตรึงไว้,ไม่,ใช่,ตัดออกก่อนนับเสียง · เป็นตัวตั้งของ MT-06
+EX-R1-NO-MAJORITY,R1,มีโมเดลสนับสนุนเพียงตัวเดียว,ใช่,ไม่,
+EX-R1-TIED,R1,เสียงเท่ากันจนไม่มีข้างมาก,ใช่,ไม่,ต้องแยกออกจาก EX-R1-NO-MAJORITY เพราะเป็นคนละสาเหตุ
+EX-R2-QUOTE-NOT-FOUND,R2,evidence quote ไม่พบเป็น substring ในข้อความนิรนาม,ใช่,ไม่,ตรวจกับข้อความหลังปิดบัง PII ตาม pii_masking_rules
+EX-R3-RELEVANCE-BELOW-THETA,R3,overlap ต่ำกว่า THETA และไม่มี alias hit,ใช่,ไม่,เป็นตัวตั้งหลักของ MT-07 · ใช้จูน THETA
+EX-API-MODEL-FAILURE,—,โมเดลตัวใดตัวหนึ่งเรียกไม่สำเร็จ,ไม่,ไม่,ไม่นับเป็น recall cost เพราะไม่ใช่การตัดสินของชั้น validation · เพดาน tier = medium
+EX-PARSE-LOW-EVIDENCE-RATIO,—,evidence_verified_ratio ต่ำกว่า 0.60 จนหยุดก่อนเรียก analyst,ไม่,ไม่,บันทึกเป็น audit_log ด้วย
