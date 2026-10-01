@@ -1,5 +1,5 @@
 // build_workflows.mjs — สร้าง workflow ทั้งห้าตามตารางที่ 3.9 จากแหล่งเดียว (ห้ามแก้ JSON ด้วยมือ)
-//   node scripts/build_workflows.mjs  -> workflows/WF_*.json + workflows/manifest.json
+//   node scripts/build_workflows.mjs  -> workflows/WF_*.json + workflows/WF_Final_IS.json (DEC-37 รวมเป็นไฟล์เดียว) + workflows/manifest.json
 // Code node ที่ต้องใช้ตรรกะฝัง engine/engine.js ทั้งไฟล์ระหว่างเครื่องหมาย ENGINE BEGIN/END (ตรวจทีละไบต์ใน validate_workflows.mjs)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -204,6 +204,111 @@ function buildError() {
   return wf(W, n, c, { exclusive_fan_in: {} });
 }
 
+// ------------------------------------------------------------------ WF_Final_IS (DEC-37)
+// รวม 5 workflow ข้างบนเป็น workflow เดียว โดยใช้โหนดและโค้ดชุดเดียวกัน (ไม่เขียนตรรกะใหม่):
+//   · ตัด Execute Workflow 3 โหนด และ "When Called by Main" 3 โหนด → แทนด้วย Code node "<Stage> Input" ที่คืน { payload } รูปเดิม
+//   · Loop Over Runs (batch 1) แทน mode=each ของ Execute Workflow: ทำทีละงาน งานละ 1 รอบ แล้ววนกลับจาก Update Run Delivered
+//   · WF_Error เป็นสาขาหนึ่งของไฟล์ (Error Trigger) — n8n ใช้ workflow ที่มี Error Trigger เป็น error workflow ของตัวเองโดยปริยาย
+//   · ปรับให้ปลอดภัยในลูป: Decide ส่งแถว findings เป็นสาขาข้าง (findings ว่างได้เมื่อโมเดลใช้ไม่ได้ทั้งหมด) ·
+//     Deliver ให้ Upload PDF / Send Email ส่งผลทางขาปกติเข้า Merge แล้ว Collect Delivery Result → Record Delivery (ขาเข้าไม่ซ้อนกัน)
+export const FINAL = { name: 'WF_Final_IS', id: 'is68FinalIS00001' };
+export const STAGE_INPUT = { WF_SUB_GapEngine: 'GapEngine Input', WF_SUB_Decide: 'Decide Input', WF_SUB_Deliver: 'Deliver Input' };
+const glueOnly = (f) => '// ==== NODE GLUE: workflows/src/' + f + ' ====\n' + SRC(f);
+const STAGES = [
+  { wf: 'WF_Main_Intake', title: '1 · Intake (เดิม WF_Main_Intake)', color: 7, body: 'Google Sheets Trigger → ตรวจความยินยอม/ซ้ำ → Loop Over Runs (ทีละงาน) → ดาวน์โหลด PDF → OCR (Document AI / สำรอง) → ปิดบัง PII → บันทึก ocr_results\n\nCredential: Google Service Account · Drive OAuth2\nenv: SHEET_ID · DOCAI_* · GCP_PROJECT_ID · LOCAL_OCR_URL · DRIVE_MASKED_TEXT_FOLDER_ID' },
+  { wf: 'WF_SUB_GapEngine', title: '2 · GapEngine (เดิม WF_SUB_GapEngine)', color: 4, body: 'อ่านข้อกำหนด 30 ข้อของอาชีพ → prompt ชุดเดียว → เรียกโมเดล A/B/C พร้อมกัน (retry ≤ 2) → บันทึก model_calls\n\nenv: MODEL_A/B/C_ID · OPENAI/ANTHROPIC/GOOGLE_API_KEY' },
+  { wf: 'WF_SUB_Decide', title: '3 · Decide (เดิม WF_SUB_Decide)', color: 5, body: 'กฎ R0→R2→R3→R1→R4 · สมการ 3.1–3.8 · แผนการเรียนรู้ → findings / decisions / plan_items → runs (ready)' },
+  { wf: 'WF_SUB_Deliver', title: '4 · Deliver (เดิม WF_SUB_Deliver)', color: 6, body: 'Render HTML → Google Doc → PDF → อัปโหลด + ส่งอีเมล → ลบไฟล์ชั่วคราว → deliveries / runs (delivered) → วนกลับ Loop Over Runs\n\nCredential: Drive OAuth2 · Gmail OAuth2 · env: DRIVE_REPORT_FOLDER_ID · RESEARCHER_EMAIL' },
+  { wf: 'WF_Error', title: '5 · Error (เดิม WF_Error)', color: 3, body: 'ทำงานเมื่อ execution ของ workflow นี้ล้มเหลว (production เท่านั้น) → หา run_id → runs = failed → audit_log → แจ้งผู้วิจัย\n\nไม่ต้องตั้ง Error Workflow ใน Settings · Credential: n8n API · env: N8N_API_URL' },
+];
+
+function buildFinal(parts) {
+  const P = JSON.parse(JSON.stringify(parts));
+  // ตำแหน่ง: สี่ช่วงเรียงซ้ายไปขวา Error อยู่ด้านล่าง · dx ของ Main เลื่อนโหนดตั้งแต่ x=1100 ไป 220 เพื่อวาง Loop Over Runs
+  const shift = { WF_Main_Intake: (x) => (x >= 1100 ? x + 220 : x), WF_SUB_GapEngine: (x) => x + 3080, WF_SUB_Decide: (x) => x + 5060,
+    WF_SUB_Deliver: (x) => (x >= 1980 ? x + 220 : x) + 7480, WF_Error: (x) => x };
+  const dy = { WF_Error: 1000 };
+  const drop = new Set(['Call GapEngine', 'Call Decide', 'Call Deliver', 'When Called by Main']);
+  let k = 0; const fid = () => `${FINAL.id}-${String(++k).padStart(3, '0')}`;
+  const nodes = []; const stageOf = {};
+  for (const st of STAGES) {
+    for (const n of P[st.wf].nodes) {
+      if (drop.has(n.name)) continue;
+      n.id = fid();
+      n.position = [shift[st.wf](n.position[0]), n.position[1] + (dy[st.wf] || 0)];
+      if (n.type === 'n8n-nodes-base.code' && STAGE_INPUT[st.wf]) {
+        const js = n.parameters.jsCode; const cut = js.indexOf(ENGINE_END); const at = cut < 0 ? 0 : cut + ENGINE_END.length;
+        n.parameters.jsCode = js.slice(0, at) + js.slice(at).split("$('When Called by Main')").join(`$('${STAGE_INPUT[st.wf]}')`);
+      }
+      nodes.push(n); stageOf[n.name] = st.wf;
+    }
+  }
+  const byName = (nm) => nodes.find((n) => n.name === nm);
+  const add = (n, wf) => { n.id = fid(); nodes.push(n); stageOf[n.name] = wf; return n; };
+  // โหนดใหม่ 5 โหนด (glue อยู่ใน workflows/src/final_*.js)
+  add({ id: '', name: 'Loop Over Runs', type: 'n8n-nodes-base.splitInBatches', typeVersion: 3, position: [1100, 200], parameters: { batchSize: 1, options: {} } }, 'WF_Main_Intake');
+  const codeNode = (name, file, pos, wf, withCfg = false) => add({ id: '', name, type: 'n8n-nodes-base.code', typeVersion: 2, position: pos, executeOnce: true,
+    parameters: { mode: 'runOnceForAllItems', jsCode: withCfg ? code(file, false) : glueOnly(file) } }, wf);
+  codeNode('GapEngine Input', 'final_gap_input.js', [3080, 300], 'WF_SUB_GapEngine');
+  codeNode('Decide Input', 'final_decide_input.js', [5060, 300], 'WF_SUB_Decide');
+  codeNode('Deliver Input', 'final_deliver_input.js', [7480, 300], 'WF_SUB_Deliver');
+  codeNode('Collect Delivery Result', 'final_deliver_collect.js', [7480 + 1980, 200], 'WF_SUB_Deliver');
+  // Record Delivery: ใช้ glue ของ WF_Final_IS (อ่านจาก $input) · Upload PDF / Send Email ส่ง error ทางขาปกติเข้า Merge
+  const rec = byName('Record Delivery'); rec.parameters.jsCode = glueOnly('final_deliver_record.js');
+  for (const nm of ['Upload PDF', 'Send Email']) byName(nm).onError = 'continueRegularOutput';
+  // Decide: findings เป็นสาขาข้าง (ตำแหน่ง y ระหว่างแผนกับสาขาหลัก จึงทำงานก่อนสาขาหลักตาม v1)
+  for (const nm of ['Findings Rows', 'Append findings']) byName(nm).position[1] = 180;
+  // sticky notes ต่อช่วง
+  for (const st of STAGES) {
+    const ps = nodes.filter((n) => stageOf[n.name] === st.wf).map((n) => n.position);
+    const x0 = Math.min(...ps.map((p) => p[0])) - 40; const x1 = Math.max(...ps.map((p) => p[0])) + 140;
+    const y0 = Math.min(...ps.map((p) => p[1])) - 220; const y1 = Math.max(...ps.map((p) => p[1])) + 160;
+    nodes.push({ id: fid(), name: 'Note ' + st.title.split(' ')[0] + ' ' + st.wf.replace(/^WF_(SUB_)?/, ''), type: 'n8n-nodes-base.stickyNote', typeVersion: 1, position: [x0, y0],
+      parameters: { content: `## ${st.title}\n${st.body}`, width: x1 - x0, height: y1 - y0, color: st.color } });
+  }
+  // connections: รวมของเดิม ตัดเส้นที่เกี่ยวกับโหนดที่ตัดทิ้ง แล้วต่อเส้นใหม่
+  const c = {};
+  const removed = new Set([...drop]);
+  for (const st of STAGES) for (const [from, cc] of Object.entries(P[st.wf].connections)) {
+    if (removed.has(from)) continue;
+    cc.main.forEach((outs, oi) => (outs || []).forEach((t) => { if (!removed.has(t.node)) link(c, from, t.node, oi, t.index); }));
+  }
+  const unlink = (from, to, oi) => { const outs = c[from].main[oi]; const i = outs.findIndex((t) => t.node === to); if (i < 0) throw new Error(`unlink ${from}->${to}`); outs.splice(i, 1); };
+  const L = (a, b, o, i) => link(c, a, b, o, i);
+  // Main: Not Duplicate? → Loop Over Runs → (loop) Create Run Row
+  unlink('Not Duplicate?', 'Create Run Row', 0); L('Not Duplicate?', 'Loop Over Runs', 0); L('Loop Over Runs', 'Create Run Row', 1);
+  // Main → GapEngine → Decide → Deliver
+  L('Append OCR Result', 'GapEngine Input'); L('GapEngine Input', 'Read Requirements');
+  L('Assemble Model Results', 'Decide Input'); L('Decide Input', 'Read Corpus');
+  L('Return Report Payload', 'Deliver Input'); L('Deliver Input', 'Read Deliveries');
+  // Decide: Decide & Plan → Decision Rows (สาขาหลัก) · Append findings ไม่ต่อไป Decision Rows แล้ว
+  unlink('Append findings', 'Decision Rows', 0); L('Decide & Plan', 'Decision Rows');
+  // Deliver: Upload PDF / Send Email ไม่มี error output · Delete Temp Doc → Collect Delivery Result → Record Delivery
+  for (const nm of ['Upload PDF', 'Send Email']) { c[nm].main = c[nm].main.slice(0, 1); }
+  unlink('Delete Temp Doc', 'Record Delivery', 0); L('Delete Temp Doc', 'Collect Delivery Result'); L('Collect Delivery Result', 'Record Delivery');
+  // วนกลับ
+  L('Update Run Delivered', 'Loop Over Runs');
+  for (const v of Object.values(c)) while (v.main.length && v.main[v.main.length - 1].length === 0 && v.main.length > 1) v.main.pop();
+
+  const w = wf('WF_Error', nodes, c, {
+    source_workflows: Object.fromEntries(STAGES.map((s) => [s.wf, IDS[s.wf]])),
+    stage_of_node: stageOf,
+    exclusive_fan_in: {
+      'Log Skipped': 'false-branch ของ IF สองตัว แต่ละ item ผ่านได้ทางเดียว',
+      'Prepare Text & Mask PII': 'สำเร็จของ OCR หลัก หรือผลของ OCR สำรอง (ไม่เกิดพร้อมกัน)',
+      'Loop Over Runs': 'ขาเข้าครั้งแรกจาก Not Duplicate? และขาวนกลับจาก Update Run Delivered (คนละรอบ)',
+      'Record Delivery': 'false-branch ของ Not Yet Delivered? หรือ error output ของ Upload as Google Doc / Export PDF หรือ Collect Delivery Result (เส้นทางสำเร็จ) — ไม่เกิดพร้อมกัน',
+    },
+    loop: { node: 'Loop Over Runs', batch_size: 1, back_edge_from: 'Update Run Delivered' },
+    spec: 'ตารางที่ 3.9 (5 ช่วงในไฟล์เดียว · DEC-37)',
+  });
+  w.id = FINAL.id; w.name = FINAL.name;
+  delete w.settings.errorWorkflow; // ใช้ Error Trigger ในไฟล์เดียวกัน
+  w.meta.is68.built_by = 'scripts/build_workflows.mjs#buildFinal';
+  return w;
+}
+
+export { buildFinal };
 export function buildAll() {
   seq = 0;
   return { WF_Error: buildError(), WF_SUB_GapEngine: buildGap(), WF_SUB_Decide: buildDecide(), WF_SUB_Deliver: buildDeliver(), WF_Main_Intake: buildMain() };
@@ -219,6 +324,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     man.workflows[k] = { file, id: w.id, nodes: w.nodes.length, sha256: ENGINE.sha256Hex(txt) };
     console.log(`${k.padEnd(18)} ${w.nodes.length} nodes`);
   }
+  // DEC-37: workflow เดียว (นำเข้าไฟล์นี้ไฟล์เดียว แทนชุด 5 ไฟล์ · ห้ามเปิดใช้งานทั้งสองชุดพร้อมกัน)
+  const fin = buildFinal(all);
+  const ftxt = JSON.stringify(fin, null, 2) + '\n';
+  fs.writeFileSync(path.join(ROOT, 'workflows', FINAL.name + '.json'), ftxt);
+  const real = fin.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length;
+  man.single_workflow = { recommended: true, decision: 'DEC-37', file: FINAL.name + '.json', id: fin.id, nodes: real, sticky_notes: fin.nodes.length - real, sha256: ENGINE.sha256Hex(ftxt),
+    note: 'นำเข้าไฟล์นี้ไฟล์เดียว (n8n import:workflow --input=workflows/WF_Final_IS.json) · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ เพราะ trigger จะอ่านแถวเดียวกันซ้ำ' };
+  console.log(`${FINAL.name.padEnd(18)} ${real} nodes + ${fin.nodes.length - real} sticky notes`);
   fs.writeFileSync(path.join(ROOT, 'workflows', 'manifest.json'), JSON.stringify(man, null, 2) + '\n');
   console.log('engine_sha256', ENGINE_SHA);
 }

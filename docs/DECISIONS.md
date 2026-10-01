@@ -33,6 +33,7 @@
 | 34 | 1 ต.ค. | เพิ่ม 4 คอลัมน์ที่เล่มระบุว่าต้องเพิ่มก่อนเก็บข้อมูลหลัก | ✅ |
 | 35 | 1 ต.ค. | การเรียกโมเดลซ้ำและการเรียกโมเดลใน Code node | ✅ |
 | 36 | 1 ต.ค. | แก้ข้อบกพร่องในเล่มที่ไม่ต้องตัดสินใจ | ✅ |
+| 37 | 1 ต.ค. | รวม 5 workflow เป็นไฟล์เดียว `WF_Final_IS` (ชุด 5 ไฟล์ยังสร้างและตรวจคู่กัน) | ✅ สร้างแล้ว · ⏳ S6 ใน n8n · ⏳ ผลต่อเล่ม 3.4/ตาราง 3.9 รอตัดสิน |
 
 ---
 
@@ -98,3 +99,18 @@
 5. ภาคผนวก ค ใช้ผลรันใหม่ (เรซูเมสังเคราะห์สร้างใหม่ทั้งหมด) และอธิบายข้อที่ไม่ตรงเฉลย
 6. สารบัญสร้างจากหัวข้อจริง จึงมีภาคผนวก จ และ ฉ · "ค่ามัชฌิมมัธยฐาน" → "ค่ามัธยฐาน" · แยกเอกสารอ้างอิงเป็นรายการ
 7. ตรวจรูป จ.7 แล้ว ถูกต้อง (R1 ตัดสิน R4 บันทึก) ข้อสังเกตเดิมว่าเขียน "สรุปสถานะด้วย R4" ไม่พบในรูปของ PDF ฉบับนี้
+
+## DEC-37 · รวม 5 workflow เป็น workflow เดียว `WF_Final_IS` (ต่อจาก DEC-30)
+**ปัญหา** ผู้วิจัยกังวลว่าการส่งข้อมูลข้าม workflow (Execute Workflow 3 จุด) จะผิดพลาด และการตั้งค่า 5 ไฟล์ (workflowId, error workflow, ลำดับนำเข้า, credential ต่อไฟล์) สับสน · ข้อสังเกตเพิ่มเติมจากการตรวจ: (ก) ถ้าโมเดลใช้ไม่ได้ทั้งสามตัว findings จะว่างและ WF_SUB_Decide หยุดก่อนอัปเดต runs (ข) ถ้า Upload PDF ล้มแต่ Send Email สำเร็จ Record Delivery ทำงานสองครั้ง
+**การตัดสินใจ**
+1. `scripts/build_workflows.mjs#buildFinal` สร้าง `workflows/WF_Final_IS.json` จากโหนดของ 5 workflow เดิม **ชุดเดียวกัน** (โค้ดใน Code node และ engine ฝังตรงทุกไบต์) · 59 node + sticky note 5 ช่วง (Intake · GapEngine · Decide · Deliver · Error)
+2. ตัด Execute Workflow 3 โหนด และ "When Called by Main" 3 โหนด → แทนด้วย Code node `GapEngine Input` / `Decide Input` / `Deliver Input` ที่คืน `{ payload }` รูปเดิม (สัญญาข้อมูลไม่เปลี่ยน)
+3. `Loop Over Runs` (Split in Batches v3, batch 1) แทน `mode=each` ของ Execute Workflow (บั๊ก B6): ทำทีละงาน วนกลับจาก `Update Run Delivered`
+4. Error เป็นสาขาในไฟล์เดียวกัน (Error Trigger) ไม่ตั้ง `settings.errorWorkflow` — n8n ใช้ workflow ที่มี Error Trigger เป็น error workflow ของตัวเองโดยปริยาย · `error_classify.js` หา run_id จากรอบล่าสุดของ Loop Over Runs ก่อน (execution เดียวอาจมีหลายงาน) แล้วจึงใช้วิธีเดิม — ชุด 5 ไฟล์ไม่มีโหนดนี้จึงทำงานเหมือนเดิม
+5. ปรับให้ปลอดภัยในลูป (เฉพาะ WF_Final_IS): Decide ส่งแถว findings เป็นสาขาข้าง (แก้ข้อ ก) · Upload PDF / Send Email ใช้ `continueRegularOutput` เข้า Merge แล้ว `Collect Delivery Result` → `Record Delivery` (แก้ข้อ ข) · Record Delivery ใช้ `final_deliver_record.js` ที่อ่านจาก `$input` เท่านั้น เพื่อไม่หยิบผลของงานก่อนหน้า · ลบไฟล์ชั่วคราวไม่ได้ = ส่งสำเร็จแต่บันทึก `temp_doc_delete_failed`
+6. ตัวตรวจ `validateFinal` ตรวจเพิ่ม: ไม่มี Execute Workflow · ทุก `$('ชื่อโหนด')` มีจริง · โหนดเดิมพารามิเตอร์ตรงชุด 5 ไฟล์ยกเว้นที่ระบุ · ไม่อ้างผลของโหนดในลูปที่อาจไม่ได้ทำงานในรอบนี้ (ตรวจด้วย dominator) · ลูปวนกลับครบ · tests `tests/final_workflow.test.mjs` 5 กรณี (ผลกรณี A/B/C เท่ากับชุด 5 ไฟล์)
+**ไฟล์** `scripts/build_workflows.mjs` · `scripts/validate_workflows.mjs` · `workflows/src/final_*.js` (5 ไฟล์ใหม่) · `workflows/src/error_classify.js` · `workflows/WF_Final_IS.json` · `workflows/WF_Error.json` (โค้ด Classify Error) · `workflows/manifest.json` (`single_workflow`) · `tests/final_workflow.test.mjs` · `docs/Setup_Guide.md`
+**ผลต่อเล่ม** ⏳ รอตัดสิน: หัวข้อ 3.4 และตารางที่ 3.9 ระบุ "5 workflow" — ถ้าใช้ WF_Final_IS ให้แก้เป็น "workflow เดียว แบ่งเป็น 5 ส่วนตามหน้าที่" (ชื่อส่วนและหน้าที่เดิม) · ตาราง 3.10 ที่อ้างชื่อ workflow ใช้ชื่อส่วนได้ตามเดิม · จำนวนเทสต์ `{{tests_total}}` อัปเดตอัตโนมัติ (46 → 51)
+**ข้อควรระวัง** นำเข้าเฉพาะ `WF_Final_IS.json` · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ (trigger สองตัวอ่านแถวเดียวกัน) · ถ้างานหนึ่งล้มกลางลูป งานที่เหลือใน execution เดียวกันจะไม่ถูกประมวลผล (เหมือนชุด 5 ไฟล์ที่ Main หยุดทั้ง execution) ต้องส่งใหม่
+**วิธีย้อนกลับ** นำเข้าชุด 5 ไฟล์ตาม `import_order` ใน `workflows/manifest.json` (ยังสร้างและผ่านตัวตรวจทุกครั้ง) · ลบ `buildFinal` และ `validateFinal` ถ้าไม่ใช้แล้ว
+

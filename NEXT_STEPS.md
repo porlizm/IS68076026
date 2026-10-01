@@ -48,7 +48,9 @@
 - [x] 22. 🤖 S3 synthetic A/B/C (C = PDF สแกน + โมเดล C ตอบ 429 × 3)
 - [x] 23. 🤖 S4 5 workflow 17/11/13/13/6 + build + validator · B1–B11 เป็นเทสต์ · retry 2 ครั้ง
 - [x] 24. 🤖 S5 `config/` + `env_template.env` + `docs/Setup_Guide.md`
-- [ ] 25. 👤🤖 S6 นำเข้า n8n 2.39.9 + บริการจำลอง → `evidence/S6_n8n_test_<วันที่>.md` → **Gate G1-sys**
+- [x] 24b. 🤖 DEC-37 รวมเป็น workflow เดียว `workflows/WF_Final_IS.json` (59 node) · validator + tests 51/51
+- [ ] 25. 👤🤖 S6 นำเข้า n8n 2.39.9 + บริการจำลอง → `evidence/S6_n8n_test_<วันที่>.md` → **Gate G1-sys** · ใช้ `WF_Final_IS.json` ไฟล์เดียว และทดสอบเพิ่ม: ฟอร์ม 2 แถวในรอบ poll เดียว (ลูปต้องทำครบ 2 งาน) · ทำให้ล้มกลางทาง (Error Trigger ในไฟล์ต้องบันทึก run_id ถูกงาน)
+- [ ] 25b. 👤 ตัดสินผลต่อเล่มของ DEC-37: แก้ 3.4/ตาราง 3.9 เป็น "workflow เดียว 5 ส่วน" หรือคงชุด 5 ไฟล์ · หลัง S6 ผ่านให้ย้ายชุดที่ไม่ใช้เข้า `archive/<วันที่>/`
 
 ## ขั้น 4 (ขนาน): เล่ม (B)
 

@@ -12,11 +12,16 @@
 2. 👤 ตรวจ URL 28 รายการใน `data/url_manual_check.csv` → `python scripts/build_data_all.py` → `bash scripts/run_all_checks.sh` (ข้อ 16)
 3. 👤 ส่งอีเมล `docs/Advisor_Email_D0-D5.md` + แนบเล่ม docx และร่างจริยธรรม (ข้อ 7–8)
 4. 👤 กรอกช่อง ⚠ ในเอกสาร `docs/ethics/` + อบรมจริยธรรม (ข้อ 9, 13)
-5. 👤🤖 S6 ทดสอบ 5 workflow ใน n8n 2.39.9 ตาม `docs/Setup_Guide.md` ข้อ 5 (ข้อ 25)
+5. 👤🤖 S6 ทดสอบ `workflows/WF_Final_IS.json` (ไฟล์เดียว · DEC-37) ใน n8n 2.39.9 ตาม `docs/Setup_Guide.md` ข้อ 4–5 (ข้อ 25) แล้วตัดสินผลต่อเล่ม (ข้อ 25b)
 
 ---
 
 ## ประวัติ session
+
+### 1 ต.ค. 2569 · Session 10: รวม 5 workflow เป็นไฟล์เดียว WF_Final_IS (DEC-37)
+**ทำอะไร** `buildFinal` ใน `build_workflows.mjs` สร้าง `workflows/WF_Final_IS.json` 59 node + โน้ต 5 ช่วง จากโหนดชุดเดิม · ตัด Execute Workflow/When Called by Main → `<Stage> Input` · Loop Over Runs (batch 1) · Error Trigger ในไฟล์ · `validateFinal` (dominator check กันค่าข้ามรอบ) · tests 46 → 51 · ชุด 5 ไฟล์ยังสร้างได้ (เปลี่ยนเฉพาะโค้ด Classify Error ใน WF_Error)
+**พบอะไร** ชุด 5 ไฟล์มีสองจุดเสี่ยง: findings ว่าง (โมเดลล้มทั้งหมด) ทำให้ Decide หยุดก่อนอัปเดต runs · Upload PDF ล้ม + Send Email สำเร็จ ทำให้ Record Delivery ทำงานสองครั้ง → แก้ใน WF_Final_IS แล้ว ชุด 5 ไฟล์ยังไม่แก้
+**ค้าง** S6 ใน n8n จริง (sandbox ไม่ใช่ n8n) · ผลต่อเล่ม 3.4/ตาราง 3.9 (NEXT_STEPS 25b)
 
 ### 1 ต.ค. 2569 · Session 9: สร้างโครงการ Final_IS ใหม่ทั้งหมด (Cowork บนคลาวด์ + เชื่อมเครื่อง)
 **ทำอะไร**

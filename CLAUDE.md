@@ -46,8 +46,8 @@
 ## คำสั่งตรวจ
 ```
 bash scripts/run_all_checks.sh                 # ทั้งหมด
-node --test tests/*.test.mjs                   # engine + data + workflow (46)
-node scripts/validate_workflows.mjs            # workflow 5 ไฟล์
+node --test tests/*.test.mjs                   # engine + data + workflow + WF_Final_IS (51)
+node scripts/validate_workflows.mjs            # workflow 5 ไฟล์ + WF_Final_IS (DEC-37)
 python -m unittest discover -s analysis/tests -t .   # analysis (8)
 python scripts/build_book.py --check           # เล่ม: ไม่มี placeholder ค้าง ภาพ/สมการครบ
 python scripts/check_book_vs_pdf.py            # รายงานจุดที่ต่างจากฉบับขอสอบ

@@ -714,7 +714,7 @@
    "attempt": 1,
    "status": "error",
    "error_code": "429",
-   "latency_ms": 1,
+   "latency_ms": 0,
    "input_tokens": 0,
    "output_tokens": 0
   },
@@ -736,7 +736,7 @@
    "attempt": 3,
    "status": "error",
    "error_code": "429",
-   "latency_ms": 0,
+   "latency_ms": 1,
    "input_tokens": 0,
    "output_tokens": 0
   }
@@ -754,5 +754,5 @@
   "decisions_sha256": "a7d59ce949b675f4cacfc10b745bc208817c95144c5538a61ad135e95bbc9a34",
   "plan_sha256": "0b601c67ac9a8358c53c28c89bc432805115fe074ac88ec4f6b318ab84f57c31"
  },
- "report_hash": "92052ae95c7863cc5e5a6b00acb8484680327df55a0bd691b2390102cd65ed0a"
+ "report_hash": "fe13d0ca37dad17d7d32feb236d28abc792f080ccfdac6490e8df55202081d71"
 }

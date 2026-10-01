@@ -38,7 +38,8 @@ copy config\env_template.env .env      # แล้วกรอกค่า
 npx n8n@2.39.9                          # หรือ Docker n8nio/n8n:2.39.9 พร้อม --env-file .env
 ```
 - Credentials 4 ชุด: **Google Service Account** (googleApi, scopes: spreadsheets, drive.readonly, cloud-platform) · **Drive OAuth2 (researcher)** · **Gmail OAuth2 (researcher)** · **n8n API** (สร้าง API key ใน n8n และตั้ง `N8N_API_URL=http://localhost:5678`)
-- นำเข้า workflow ตามลำดับใน `workflows/manifest.json` (id ในไฟล์คงที่ จึงไม่ต้องแก้ workflowId): `n8n import:workflow --separate --input=workflows/`
+- **แนะนำ (DEC-37): นำเข้า workflow เดียว** `n8n import:workflow --input=workflows/WF_Final_IS.json` (หรือ n8n → Import from File) · ไม่ต้องตั้ง Error Workflow ใน Settings เพราะมี Error Trigger อยู่ในไฟล์ · ตั้ง credential 4 ชุดในไฟล์เดียว (โน้ตสีบอกว่าแต่ละช่วงใช้ credential/env อะไร) · **ห้ามนำเข้าหรือเปิดใช้งานชุด 5 ไฟล์พร้อมกัน**
+- ทางเลือกเดิม (DEC-30): นำเข้า 5 ไฟล์ตาม `import_order` ใน `workflows/manifest.json` ทีละไฟล์ (`n8n import:workflow --input=workflows/WF_Error.json` …) · อย่าใช้ `--separate --input=workflows/` เพราะจะนำเข้า `WF_Final_IS.json` ด้วย
 - เปิดแต่ละ node ที่ใช้ credential แล้วเลือก credential จริง (placeholder ชื่อ `CRED_*`)
 - **ห้ามแก้ Code node ใน n8n** ถ้าต้องแก้ ให้แก้ `engine/engine.js` หรือ `workflows/src/*.js` แล้ว `node scripts/build_workflows.mjs` + `node scripts/validate_workflows.mjs` และนำเข้าใหม่
 

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-01T02:12:17.282Z",
+  "built_at": "2026-10-01T02:53:35.234Z",
   "engine_sha256": "9189db7b85f31606c9d1711a9c7fa717ced077133565bc8adcf60864e9054980",
   "engine_version": "engine-1.0.0-01OCT26",
   "n8n_version": "2.39.9",
@@ -16,7 +16,7 @@
       "file": "WF_Error.json",
       "id": "is68ErrorWF00001",
       "nodes": 6,
-      "sha256": "636c84c1c0de25a035831890ef43b5a6ab973c1d380d023ac9c460271da2a89b"
+      "sha256": "4e99924aa193d29167d9e3f5af794ce7f310a4954d5e15e06410201508a2e4f4"
     },
     "WF_SUB_GapEngine": {
       "file": "WF_SUB_GapEngine.json",
@@ -42,5 +42,15 @@
       "nodes": 17,
       "sha256": "d5e98344860c08eb4da696af883b1c5580b7531e1f6d8685bceba6900cafff90"
     }
+  },
+  "single_workflow": {
+    "recommended": true,
+    "decision": "DEC-37",
+    "file": "WF_Final_IS.json",
+    "id": "is68FinalIS00001",
+    "nodes": 59,
+    "sticky_notes": 5,
+    "sha256": "ea0f97c4f7fbf107d945037f0e96f2acb735fc3879ab7abf112e8da16afbb325",
+    "note": "นำเข้าไฟล์นี้ไฟล์เดียว (n8n import:workflow --input=workflows/WF_Final_IS.json) · ห้ามเปิดใช้งานพร้อมชุด 5 ไฟล์ เพราะ trigger จะอ่านแถวเดียวกันซ้ำ"
   }
 }
