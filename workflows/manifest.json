@@ -1,16 +1,17 @@
 {
-  "built_at": "2026-10-01T08:03:16.408Z",
+  "built_at": "2026-10-01T15:01:24.428Z",
   "engine_sha256": "e1863ad94151d6ac7f3f94a6ce6d811c834f10e20519e5cc889479523a997996",
   "engine_version": "engine-1.1.0-01OCT26",
   "n8n_version": "2.39.9",
   "node_version": "24",
-  "import": "WF_IS68076026.json",
-  "note": "นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_IS68076026.json (DEC-42) · WF_Final_IS (DEC-37) และชุด 5 ไฟล์ (DEC-30) อยู่ใน archive/",
+  "import": "WF_IS_68076026_01OCT26.json",
+  "note": "นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_IS_68076026_01OCT26.json (DEC-48) · id เดิม จึงแทนที่ WF_IS68076026 (DEC-42) ที่เคยนำเข้า · รุ่นก่อนทั้งหมดอยู่ใน archive/",
   "workflow": {
-    "decision": "DEC-42",
-    "file": "WF_IS68076026.json",
+    "decision": "DEC-48",
+    "tested_in_n8n": "evidence/n8n_test_01OCT26.md",
+    "file": "WF_IS_68076026_01OCT26.json",
     "id": "is68Single000001",
-    "nodes": 63,
+    "nodes": 69,
     "sticky_notes": 7,
     "sections": [
       {
@@ -41,21 +42,27 @@
       {
         "key": "S6",
         "th": "ส่งรายงาน",
-        "nodes": 14
+        "nodes": 16
       },
       {
         "key": "S7",
         "th": "บันทึกและข้อผิดพลาด",
-        "nodes": 6
+        "nodes": 10
       }
     ],
-    "sha256": "57fdaf52226a4c148bf188ea1e9cf3c7fa68448c2e37ee737029dabd679529d5"
+    "sha256": "6dcca2e31c70c4684ad67b50c9f8ec07e5aadfe46bf8509e77f88b6ddfaa5c47"
   },
   "superseded": {
+    "WF_IS68076026": {
+      "decision": "DEC-42 → DEC-48",
+      "nodes": 63,
+      "sha256": "57fdaf52226a4c148bf188ea1e9cf3c7fa68448c2e37ee737029dabd679529d5",
+      "archived_copy": "archive/01OCT26/WF_IS68076026_DEC-42/"
+    },
     "WF_Final_IS": {
       "decision": "DEC-37 → DEC-42",
       "nodes": 59,
-      "sha256": "0012cab14e369e0bad486e1d2f437eb67f5eb07c725573e4c0b17a0c1331caa6",
+      "sha256": "5ff4c038b2905fbc0ab9a33b82dba1ae434d74634b4e46ea01616db355b90007",
       "archived_copy": "archive/01OCT26/WF_Final_IS_DEC-37/"
     },
     "legacy_5wf": {
@@ -65,27 +72,27 @@
         "WF_Error": {
           "id": "is68ErrorWF00001",
           "nodes": 6,
-          "sha256": "6d1811e393be089a010609be3ed8dc9e52b1f38d473ae94dbf09fb7b8533d590"
+          "sha256": "fb8a4456eab6a542f934fbc5b1f4f69fb03dc49aa0a779fb3d37cf37c8a8e2fe"
         },
         "WF_SUB_GapEngine": {
           "id": "is68GapEngine001",
           "nodes": 11,
-          "sha256": "8e1b0f3ac17d91277640efaadfa2622af7902b1dc98b523b53905d133fbca4ce"
+          "sha256": "ccd8a3032b98633e55c7b131526209e25cda24cae2bec207e9f8793cf9d51b15"
         },
         "WF_SUB_Decide": {
           "id": "is68Decide000001",
           "nodes": 13,
-          "sha256": "3bd1eaab6e3ce1ccc240c213e5e99c43bb817d96c9069c10d1594572116ef1e1"
+          "sha256": "ac6c55ca52e2aeec7413ff2f2496fda369e24243bcdfa32e08b7fdbaa4dc324a"
         },
         "WF_SUB_Deliver": {
           "id": "is68Deliver00001",
           "nodes": 13,
-          "sha256": "abf6eeb359d8b00ef96bf3f481f223edc4611699a81b132fb2985e2eedeba890"
+          "sha256": "bcc19fb1d808946aa0264c552f0de4644fe8097a6a0a64a81c9344812038ec15"
         },
         "WF_Main_Intake": {
           "id": "is68MainIntake01",
           "nodes": 17,
-          "sha256": "946bf0373579768ddcef230d75904b4ee5b332e66d13259dd229329e3b793086"
+          "sha256": "1ed7acdc6003f7277a093386a4a408f6c6afaee1b3ce8738342ecbfafe8e941b"
         }
       }
     }

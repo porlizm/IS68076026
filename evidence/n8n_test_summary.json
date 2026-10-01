@@ -1,0 +1,84 @@
+{
+ "date": "2026-10-01",
+ "n8n_version": "2.39.9",
+ "node_version": "24.21.0",
+ "workflow": "WF_IS_68076026_01OCT26",
+ "decision": "DEC-48",
+ "cases": 14,
+ "pass": 14,
+ "checks": 71,
+ "checks_pass": 71,
+ "services": "mock (evidence/n8n_s6/mock_server.mjs) — ไม่ใช่บริการจริงของ Google/OpenAI/Anthropic",
+ "per_case": [
+  {
+   "no": 1,
+   "title": "นำเข้าและเปิดใช้งาน (import:workflow + activate)",
+   "pass": true
+  },
+  {
+   "no": 2,
+   "title": "เรซูเม A มีชั้นข้อความ",
+   "pass": true
+  },
+  {
+   "no": 3,
+   "title": "เรซูเม C สแกน + โมเดล C ตอบ 429 ทุกครั้ง",
+   "pass": true
+  },
+  {
+   "no": 4,
+   "title": "สองแถวในการ poll เดียว",
+   "pass": true
+  },
+  {
+   "no": 5,
+   "title": "ไม่ให้ความยินยอม",
+   "pass": true
+  },
+  {
+   "no": 6,
+   "title": "ไฟล์ 6 หน้า",
+   "pass": true
+  },
+  {
+   "no": 7,
+   "title": "ล้มกลางลูป (สองงาน · อ่าน ref_corpus ไม่ได้)",
+   "pass": true
+  },
+  {
+   "no": 8,
+   "title": "โมเดลล้มครบสามตัว (401)",
+   "pass": true
+  },
+  {
+   "no": 9,
+   "title": "อัปโหลด PDF ล้ม (Drive ตอบ 403 quota ที่ขั้นอัปโหลด PDF)",
+   "pass": true
+  },
+  {
+   "no": 10,
+   "title": "Document AI ล้ม → OCR ในเครื่อง",
+   "pass": true
+  },
+  {
+   "no": 11,
+   "title": "OCR ล้มทั้งหลักและสำรอง",
+   "pass": true
+  },
+  {
+   "no": 13,
+   "title": "โฟลเดอร์รายงานผิด (สร้าง Doc ชั่วคราวไม่ได้ → ไม่มี PDF)",
+   "pass": true
+  },
+  {
+   "no": 14,
+   "title": "trigger อ่านชีตไม่ได้ต่อเนื่อง ~3 นาที",
+   "pass": true
+  },
+  {
+   "no": 12,
+   "title": "PDF 6 หน้าแบบ object stream",
+   "pass": true
+  }
+ ]
+}

@@ -51,7 +51,7 @@ def fig_architecture():
     d += f'subgraph cluster_g {{ label="Google Workspace\\nบัญชีของผู้วิจัย"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
     d += 'form [label="Google Forms\\nรับเรซูเมและเงื่อนไข"]; sheets [label="Google Sheets\\nฐานข้อมูลของระบบ"]; drive [label="Google Drive\\nไฟล์และรายงาน"]; gmail [label="Gmail\\nส่งรายงาน"]; }\n'
     d += f'subgraph cluster_n {{ label="n8n 2.39.9\\nในเครื่องผู้วิจัย"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
-    d += f'wf [label="workflow เดียว\\nWF_IS68076026\\n7 ช่วง\\nengine.js + config/", fillcolor="{C["c"]}"]; }}\n'
+    d += f'wf [label="workflow เดียว\\n{J("workflows", "manifest.json")["workflow"]["file"][:-5]}\\n7 ช่วง\\nengine.js + config/", fillcolor="{C["c"]}"]; }}\n'
     d += f'subgraph cluster_x {{ label="บริการภายนอก"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
     d += f'ocr [label="Document AI\\nอ่านข้อความจากภาพ", fillcolor="{C["b"]}"]; llm [label="โมเดล A B C\\nสามผู้ให้บริการ", fillcolor="{C["b"]}"]; }}\n'
     d += 'form -> sheets [style=dotted, constraint=false]; form -> drive [style=dotted, constraint=false];\n'
@@ -61,7 +61,7 @@ def fig_architecture():
 
 
 def fig_workflow():
-    wf = J("workflows", "WF_IS68076026.json"); secs = wf["meta"]["is68"]["sections"]
+    wf = J("workflows", J("workflows", "manifest.json")["import"]); secs = wf["meta"]["is68"]["sections"]
     show = {"S1": ["Watch Form Responses", "Validate Form Rows", "Loop Over Requests", "Check PDF File"],
             "S2": ["Extract Text Layer", "Run Document AI OCR", "Mask Personal Data", "Save Masked Text"],
             "S3": ["Load Requirements", "Build Prompt", "Call Model A · B · C", "Record Model Calls"],

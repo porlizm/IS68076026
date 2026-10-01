@@ -37,17 +37,18 @@ python scripts/build_book.py             # เล่ม -> build/IS_68076026_lat
 copy config\env_template.env .env      # แล้วกรอกค่า
 npx n8n@2.39.9                          # หรือ Docker n8nio/n8n:2.39.9 พร้อม --env-file .env
 ```
-- Credentials 4 ชุด: **Google Service Account** (googleApi, scopes: spreadsheets, drive.readonly, cloud-platform) · **Drive OAuth2 (researcher)** · **Gmail OAuth2 (researcher)** · **n8n API** (สร้าง API key ใน n8n และตั้ง `N8N_API_URL=http://localhost:5678`)
-- **DEC-42: นำเข้า workflow เดียว** `n8n import:workflow --input=workflows/WF_IS68076026.json` (หรือ n8n → Import from File) · ไม่ต้องตั้ง Error Workflow ใน Settings เพราะมี Error Trigger อยู่ในไฟล์ · ตั้ง credential 4 ชุดในไฟล์เดียว (โน้ตสีบอกว่าแต่ละช่วงใช้ credential/env อะไร) · **ห้ามนำเข้าหรือเปิดใช้งานชุด 5 ไฟล์พร้อมกัน**
-- ชุด 5 ไฟล์เดิม (DEC-30) เลิกใช้และย้ายไป `archive/01OCT26/workflows_5wf_DEC-30/` แล้ว (DEC-38) · `workflows/` มี workflow ไฟล์เดียวคือ `WF_IS68076026.json` (WF_Final_IS ย้ายไป `archive/01OCT26/WF_Final_IS_DEC-37/` ตาม DEC-42) · ใช้โหนด Extract From File (มากับ n8n) อ่านชั้นข้อความก่อน OCR · ถ้าต้องย้อนกลับ: `node scripts/build_workflows.mjs --legacy <โฟลเดอร์>`
+- Credentials 4 ชุด: **Google Service Account** (googleApi · เปิด **Set up for use in HTTP Request node** และใส่ Scope `https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.readonly` เพราะโหนด Run Document AI OCR เป็น HTTP Request — ถ้าไม่เปิด n8n จะไม่แนบ token · DEC-48) · **Drive OAuth2 (researcher)** · **Gmail OAuth2 (researcher)** · **n8n API** (สร้าง API key ใน n8n และตั้ง `N8N_API_URL=http://localhost:5678`)
+- **DEC-48: นำเข้า workflow เดียว** `n8n import:workflow --input=workflows/WF_IS_68076026_01OCT26.json` (หรือ n8n → Import from File) · ใช้ id เดิมของ WF_IS68076026 (DEC-42) จึงนำเข้าทับรุ่นก่อนได้เลย · เปิดใช้งาน (Publish/Activate) หลังตั้ง credential · การ poll ครั้งแรกหลังเปิดใช้งานจำตำแหน่งแถวล่าสุดเท่านั้น แถวที่อยู่ก่อนเปิดใช้งานจะไม่ถูกประมวลผล · **หยุด n8n ก่อนใช้ `n8n import:workflow`** (หรือนำเข้าผ่านหน้า UI) — ทดสอบแล้วว่านำเข้าด้วย CLI ขณะ server ทำงานแล้วเปิดใช้งานซ้ำ ทำให้มี poller สองตัวอ่านแถวเดียวกัน (ระบบกันงานซ้ำได้ด้วย response_id แต่ไม่ควรเกิด) · ไม่ต้องตั้ง Error Workflow ใน Settings เพราะมี Error Trigger อยู่ในไฟล์ · ตั้ง credential 4 ชุดในไฟล์เดียว (โน้ตสีบอกว่าแต่ละช่วงใช้ credential/env อะไร) · **ห้ามนำเข้าหรือเปิดใช้งานชุด 5 ไฟล์พร้อมกัน**
+- ชุด 5 ไฟล์เดิม (DEC-30) เลิกใช้และย้ายไป `archive/01OCT26/workflows_5wf_DEC-30/` แล้ว (DEC-38) · `workflows/` มี workflow ไฟล์เดียวคือ `WF_IS_68076026_01OCT26.json` (WF_IS68076026 ย้ายไป `archive/01OCT26/WF_IS68076026_DEC-42/` ตาม DEC-48 · WF_Final_IS อยู่ที่ `archive/01OCT26/WF_Final_IS_DEC-37/`) · ใช้โหนด Extract From File (มากับ n8n) อ่านชั้นข้อความก่อน OCR · ถ้าต้องย้อนกลับ: `node scripts/build_workflows.mjs --legacy <โฟลเดอร์>`
 - เปิดแต่ละ node ที่ใช้ credential แล้วเลือก credential จริง (placeholder ชื่อ `CRED_*`)
 - **ห้ามแก้ Code node ใน n8n** ถ้าต้องแก้ ให้แก้ `engine/engine.js` หรือ `workflows/src/*.js` แล้ว `node scripts/build_workflows.mjs` + `node scripts/validate_workflows.mjs` และนำเข้าใหม่
 
 ## 5. S6 ทดสอบใน n8n ด้วยบริการจำลอง (Gate G1-sys)
+> DEC-48: Claude รันชุดนี้ใน n8n 2.39.9 จริงแล้ว 1 ต.ค. 2569 (บริการ Google/โมเดลจำลองบนคลาวด์ · ผลใน `evidence/n8n_test_01OCT26.md` · ชุดเครื่องมือใน `evidence/n8n_s6/`) · ข้างล่างคือการทดสอบซ้ำบนเครื่องผู้วิจัยกับบัญชี Google จริง
 1. ตั้ง `email_enabled=false` (ค่าเริ่มต้น: รายงานส่งให้ `RESEARCHER_EMAIL`)
 2. ส่งฟอร์มด้วย `synthetic/case_A/resume_text.pdf`, `case_B/resume_text.pdf`, `case_C/resume_scanned.pdf`
 3. ใช้ mock โมเดล: ตั้ง endpoint ใน `config/models.json` ชี้ไปบริการจำลองในเครื่องที่คืน `synthetic/case_*/mock_responses/*.json` (หรือใช้ pinData ใน n8n) แล้ว build workflow ใหม่
-4. ตรวจในสเปรดชีต: runs.stage = delivered · decisions 30 แถว · model_calls (กรณี C ต้องมีโมเดล C 3 แถว 429) · deliveries 1 แถว · ไม่มีอีเมลซ้ำ (B5, B7)
+4. ตรวจในสเปรดชีต: runs.stage = delivered · decisions 30 แถว · model_calls (กรณี C ต้องมีโมเดล C 3 แถว 429 ห่างกัน ≥ 5 และ ≥ 15 วินาที) · deliveries 1 แถว · ไม่มีอีเมลซ้ำ (B5, B7)
 5. ทดสอบข้อผิดพลาด: ไฟล์ 6 หน้า · ไม่ยินยอม · ส่งซ้ำ · ลบสิทธิ์โฟลเดอร์ → ต้องได้ failed + audit_log + อีเมลถึงผู้วิจัย (B11)
 6. บันทึกผลใน `evidence/S6_n8n_test_<วันที่>.md` (ภาพหน้าจอ + execution id) แล้วแทน "ทดสอบ workflow ใน n8n" ในตาราง 3.1
 

@@ -7,7 +7,9 @@
     "max_attempts": 2,
     "max_attempts_meaning": "จำนวนครั้งที่เรียกซ้ำหลังครั้งแรก (รวมสูงสุด 3 ครั้งต่อโมเดลต่องาน)",
     "retry_on_status": [429],
-    "retry_on_timeout": true
+    "retry_on_timeout": true,
+    "retry_backoff_ms": [5000, 15000],
+    "retry_backoff_meaning": "DEC-48 · รอก่อนเรียกซ้ำครั้งที่ 1 และ 2 (มิลลิวินาที) · ถ้าผู้ให้บริการส่ง Retry-After ใช้ค่าที่มากกว่า (ไม่เกิน 30 วินาที)"
   },
   "models": {
     "A": {"provider": "OpenAI", "api": "openai_chat_completions", "endpoint": "https://api.openai.com/v1/chat/completions", "model_env": "MODEL_A_ID", "key_env": "OPENAI_API_KEY", "send_temperature": true, "verified": false, "verified_model_id": "", "verified_at": ""},

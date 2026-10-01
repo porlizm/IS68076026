@@ -46,8 +46,8 @@
 ## คำสั่งตรวจ
 ```
 bash scripts/run_all_checks.sh                 # ทั้งหมด
-node --test tests/*.test.mjs                   # engine + data + workflow เดียว (61)
-node scripts/validate_workflows.mjs            # WF_IS68076026 (DEC-42) · 63 โหนด
+node --test tests/*.test.mjs                   # engine + data + workflow เดียว (65)
+node scripts/validate_workflows.mjs            # WF_IS_68076026_01OCT26 (DEC-48) · 69 โหนด
 python -m unittest discover -s analysis/tests -t .   # analysis (8)
 python scripts/build_book.py --check           # เล่ม: ไม่มี {{key}}/[@key] ค้าง ภาพ/สมการ/อ้างอิงครบ
 python scripts/check_docx_format.py            # รูปแบบตาม Prompt_Report หัวข้อ 9–10 (33 ข้อ)

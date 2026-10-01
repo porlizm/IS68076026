@@ -1,7 +1,10 @@
-// WF_IS68076026 · Choose Text Source (runOnceForEachItem) — ใช้ชั้นข้อความของ PDF ถ้ามีข้อความพอ ไม่เช่นนั้นส่งไป OCR (DEC-42)
+// WF_IS_68076026_01OCT26 · Choose Text Source (runOnceForEachItem) — ใช้ชั้นข้อความของ PDF ถ้ามีข้อความพอ ไม่เช่นนั้นส่งไป OCR (DEC-42)
 // ขาเข้าคือผลของ Extract Text Layer (onError = continueRegularOutput: PDF ที่อ่านชั้นข้อความไม่ได้จะมาเป็น { error })
+// DEC-48: นับหน้าซ้ำด้วยผลของ Extract From File (numpages จาก pdf.js) เพราะ PDF ที่บีบอัด object stream นับด้วย regex ใน Check PDF File ไม่ได้
 const base = $('Check PDF File').item.json;
 const j = $input.item.json || {};
+const pdfPages = Number(j.numpages) || 0;
+if (pdfPages > CFG.project.max_pages) throw new Error(`[run_id=${base.ctx.run_id}] too_many_pages: pages=${pdfPages} (extractFromFile)`);
 const text = typeof j.text === 'string' ? j.text : '';
 const nonSpace = text.replace(/\s+/g, '').length;
 const use = !j.error && nonSpace >= CFG.project.text_layer_min_chars;

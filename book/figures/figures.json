@@ -37,15 +37,15 @@
   "caption": "สถาปัตยกรรมของระบบ",
   "alt": "แผนภาพสามส่วนจากซ้ายไปขวา: Google Workspace (Forms Sheets Drive Gmail) เชื่อมกับ workflow เดียวใน n8n ซึ่งเป็นจุดเดียวที่เรียก Document AI และโมเดลสามผู้ให้บริการ",
   "width_cm": 14.65,
-  "print_font_pt": 13.3,
+  "print_font_pt": 12.1,
   "px": [
-   2864,
+   3143,
    1852
   ]
  },
  "fig_workflow": {
   "file": "figures/fig_workflow.png",
-  "caption": "ช่วงการทำงาน 7 ช่วงของ workflow WF_IS68076026",
+  "caption": "ช่วงการทำงาน 7 ช่วงของ workflow WF_IS_68076026_01OCT26",
   "alt": "เจ็ดกล่องเรียงตามลำดับงาน แต่ละกล่องระบุชื่อช่วง จำนวนโหนด และโหนดสำคัญ ช่วงที่หกวนกลับไปช่วงแรกเพื่อทำงานถัดไป ช่วงที่เจ็ดรับข้อผิดพลาด",
   "width_cm": 14.65,
   "print_font_pt": 17.2,

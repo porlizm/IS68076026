@@ -1,5 +1,5 @@
 // build_workflows.mjs — สร้าง workflow จากแหล่งเดียว (ห้ามแก้ JSON ด้วยมือ)
-//   node scripts/build_workflows.mjs  -> workflows/WF_IS68076026.json (DEC-42 ไฟล์เดียวที่ใช้งาน) + workflows/manifest.json
+//   node scripts/build_workflows.mjs  -> workflows/WF_IS_68076026_01OCT26.json (DEC-48 ไฟล์เดียวที่ใช้งาน · ต่อยอด DEC-42) + workflows/manifest.json
 //   buildAll (ชุด 5 ไฟล์ DEC-30) และ buildFinal (WF_Final_IS DEC-37) สร้างในหน่วยความจำเพื่อเทสต์เทียบ
 //   ชุด 5 ไฟล์เดิม (DEC-30) สร้างในหน่วยความจำเพื่อตรวจเทียบ · เขียนไฟล์เฉพาะเมื่อสั่ง --legacy <โฟลเดอร์> (DEC-38)
 // Code node ที่ต้องใช้ตรรกะฝัง engine/engine.js ทั้งไฟล์ระหว่างเครื่องหมาย ENGINE BEGIN/END (ตรวจทีละไบต์ใน validate_workflows.mjs)
@@ -312,21 +312,23 @@ function buildFinal(parts) {
 
 export { buildFinal };
 
-// ------------------------------------------------------------------ WF_IS68076026 (DEC-42)
+// ------------------------------------------------------------------ WF_IS_68076026_01OCT26 (DEC-48 · ต่อยอด WF_IS68076026 ของ DEC-42)
+// DEC-48: ทดสอบใน n8n 2.39.9 จริงกับบริการจำลอง แล้วแก้จุดที่ใช้งานจริงไม่ได้ (evidence/n8n_test_01OCT26.md)
 // workflow เดียวที่ใช้งาน: อ่านซ้ายไปขวา 7 ช่วง (sticky note) · ชื่อโหนดเป็นกริยา + กรรม · ฝัง engine.js ตรงทุกไบต์ · ค่าควบคุมจาก config/ (CFG)
 // โค้ดของแต่ละโหนดมาจาก workflows/src/ (ไฟล์เดิมของ DEC-30/37 ที่เปลี่ยนเฉพาะชื่อโหนดที่อ้าง หรือไฟล์ single_*.js)
-export const SINGLE = { name: 'WF_IS68076026', id: 'is68Single000001' };
+// id เดิมของ DEC-42 ตั้งใจให้การนำเข้าแทนที่ workflow รุ่นก่อนใน n8n (กัน trigger สองตัวอ่านแถวเดียวกัน)
+export const SINGLE = { name: 'WF_IS_68076026_01OCT26', id: 'is68Single000001', decision: 'DEC-48' };
 export const SECTIONS = [
-  { key: 'S1', th: 'รับข้อมูล', color: 7, body: 'Google Sheets Trigger ตรวจคำตอบใหม่ของฟอร์ม → ตรวจความยินยอมและข้อมูลเข้า → กันงานซ้ำ (response_id) → ทำทีละงาน (Loop) → สร้างแถว runs (running) → ดาวน์โหลดและตรวจไฟล์ PDF ≤ 10 MB ≤ 5 หน้า' },
-  { key: 'S2', th: 'อ่านและปิดบังข้อมูล', color: 6, body: 'ใช้ชั้นข้อความของ PDF ถ้ามี (text_layer_min_chars) ไม่เช่นนั้น Document AI → สำรอง OCR ในเครื่อง · ปรับรูปข้อความ 5 กฎ · ปิดบัง EMAIL URL ID PHONE · เก็บข้อความหลังปิดบังใน Drive ส่วนตัว + sha256 ใน ocr_results' },
-  { key: 'S3', th: 'วิเคราะห์ 3 โมเดล', color: 4, body: 'โหลดข้อกำหนด 30 ข้อของอาชีพ → prompt analyst_v1.0 ชุดเดียว → เรียกโมเดล A B C แยกกัน (เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา) → บันทึก model_calls ทุกครั้ง' },
+  { key: 'S1', th: 'รับข้อมูล', color: 7, body: 'Google Sheets Trigger ตรวจคำตอบใหม่ของฟอร์ม → ตรวจความยินยอมและข้อมูลเข้า → กันงานซ้ำ (response_id) → ทำทีละงาน (Loop) → สร้างแถว runs (running) → ดาวน์โหลดและตรวจไฟล์ PDF ≤ 10 MB ≤ 5 หน้า · ตั้ง N8N_CONCURRENCY_PRODUCTION_LIMIT=1 ให้ทำทีละ execution' },
+  { key: 'S2', th: 'อ่านและปิดบังข้อมูล', color: 6, body: 'ใช้ชั้นข้อความของ PDF ถ้ามี (text_layer_min_chars · นับหน้าซ้ำด้วย numpages) ไม่เช่นนั้น Document AI → สำรอง OCR ในเครื่อง (ล้มทั้งคู่ = ocr_failed) · ปรับรูปข้อความ 5 กฎ · ปิดบัง EMAIL URL ID PHONE · เก็บข้อความหลังปิดบังใน Drive ส่วนตัว + sha256 ใน ocr_results' },
+  { key: 'S3', th: 'วิเคราะห์ 3 โมเดล', color: 4, body: 'โหลดข้อกำหนด 30 ข้อของอาชีพ → prompt analyst_v1.0 ชุดเดียว → เรียกโมเดล A B C แยกกัน (เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา · รอ retry_backoff_ms หรือ Retry-After) → บันทึก model_calls ทุกครั้ง' },
   { key: 'S4', th: 'ตรวจและรวมผล', color: 5, body: 'R0 → R2 → R3 (θ 0.15) → R1 (≥ 2 เสียง · min_usable_models 2) → R4 · คะแนน R C U · findings เป็นสาขาข้าง (ว่างได้เมื่อโมเดลล้มครบ) → decisions' },
   { key: 'S5', th: 'จัดแผน', color: 3, body: 'ช่องว่าง = missing/partially · Hmax = M × 4.33 × h · เลือกจาก mapping L1 ที่ผ่านตรวจ (plan_strategy) · course_only / certification_only / both → plan_items · runs (ready) · ตรึงชุดข้อมูลรายงาน' },
-  { key: 'S6', th: 'ส่งรายงาน', color: 2, body: 'รายงานภาษาไทย HTML → Google Doc → PDF → อัปโหลด Drive + Gmail รายบุคคล → ลบไฟล์ชั่วคราว → บันทึกการส่งครั้งเดียว → runs (delivered/failed) → งานถัดไป' },
-  { key: 'S7', th: 'บันทึกและข้อผิดพลาด', color: 1, body: 'Error Trigger ในไฟล์เดียวกัน → หา run_id (งานล่าสุดของลูป) → runs = failed → audit_log → แจ้งผู้วิจัย · ผู้เข้าร่วมไม่เห็นข้อผิดพลาดทางเทคนิค' },
+  { key: 'S6', th: 'ส่งรายงาน', color: 2, body: 'รายงานภาษาไทย HTML → Google Doc → PDF → อัปโหลด Drive + Gmail รายบุคคล → ลบไฟล์ชั่วคราว → บันทึกการส่งครั้งเดียว → runs (delivered/failed) → ส่งไม่สำเร็จแจ้งผู้วิจัย → งานถัดไป' },
+  { key: 'S7', th: 'บันทึกและข้อผิดพลาด', color: 1, body: 'Error Trigger ในไฟล์เดียวกัน → หา run_id (งานล่าสุดของลูป) → runs = failed → audit_log → แจ้งผู้วิจัย → งานที่ยังไม่ได้เริ่มในรอบเดียวกันบันทึก failed/batch_aborted · ล้มก่อนมีงาน (trigger) ไม่เขียน runs และแจ้งไม่เกินชั่วโมงละครั้ง · ผู้เข้าร่วมไม่เห็นข้อผิดพลาดทางเทคนิค' },
 ];
 function buildSingle() {
-  const W = 'WF_IS68076026'; const c = {}; let k = 0;
+  const W = SINGLE.name; const c = {}; let k = 0;
   const id = () => `${SINGLE.id}-${String(++k).padStart(3, '0')}`;
   const ren = (txt, m) => { for (const [a, b] of Object.entries(m)) txt = txt.split(`$('${a}')`).join(`$('${b}')`).split(`['${a}']`).join(`['${b}']`); return txt; };
   const G = (file, m = {}, withEngine = true) => (withEngine ? ENGINE_BEGIN + ENGINE_SRC + ENGINE_END : '') + 'const CFG = ' + CFG_JSON + ';\n// ==== NODE GLUE: workflows/src/' + file + ' ====\n' + ren(SRC(file), m);
@@ -334,6 +336,8 @@ function buildSingle() {
   const C = (s, name, file, pos, m = {}, extra = {}) => { sec[name] = s; return { id: id(), name, type: 'n8n-nodes-base.code', typeVersion: 2, position: pos,
     parameters: { mode: extra.each ? 'runOnceForEachItem' : 'runOnceForAllItems', jsCode: G(file, m, extra.engine !== false) }, ...(extra.each ? {} : { executeOnce: true }) }; };
   const T = (s, node) => { sec[node.name] = s; node.id = id(); return node; };
+  // DEC-48: Call Model A/B/C ใช้โค้ดชุดเดียว (workflows/src/single_call_model.js) ต่างกันเฉพาะ KEY
+  const CM = (name, key, pos) => { const nd = C('S3', name, 'single_call_model.js', pos); nd.parameters.jsCode = nd.parameters.jsCode.split('__KEY__').join(key); return nd; };
   const RD = (s, name, tab, pos, filter) => T(s, N.sheetsRead(W, name, tab, pos, filter));
   const WR = (s, name, tab, op, prefix, pos, extra) => T(s, N.sheetsWrite(W, name, tab, op, prefix, pos, extra));
   const IF = (s, name, field, pos) => T(s, N.iff(W, name, field, pos));
@@ -356,7 +360,7 @@ function buildSingle() {
     C('S2', 'Choose Text Source', 'single_choose_text.js', [2300, 200], {}, { each: true, engine: false }),
     IF('S2', 'Has Text Layer?', 'use_text_layer', [2520, 200]),
     H('S2', 'Run Document AI OCR', { method: 'POST', url: '=https://{{ $env.DOCAI_LOCATION }}-documentai.googleapis.com/v1/projects/{{ $env.GCP_PROJECT_ID }}/locations/{{ $env.DOCAI_LOCATION }}/processors/{{ $env.DOCAI_PROCESSOR_ID }}:process', authentication: 'predefinedCredentialType', nodeCredentialType: 'googleApi', sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ rawDocument: { content: $json.pdf_b64, mimeType: 'application/pdf' }, skipHumanReview: true }) }}", options: { timeout: 120000 } }, [2740, 380], { onError: 'continueErrorOutput', credentials: CRED.sa }),
-    H('S2', 'Run Local OCR', { method: 'POST', url: '={{ $env.LOCAL_OCR_URL }}', sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ pdf_b64: $('Check PDF File').item.json.pdf_b64, run_id: $('Check PDF File').item.json.ctx.run_id }) }}", options: { timeout: 180000 } }, [2960, 560]),
+    H('S2', 'Run Local OCR', { method: 'POST', url: '={{ $env.LOCAL_OCR_URL }}', sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ pdf_b64: $('Check PDF File').item.json.pdf_b64, run_id: $('Check PDF File').item.json.ctx.run_id }) }}", options: { timeout: 180000 } }, [2960, 560], { onError: 'continueRegularOutput' }),
     C('S2', 'Mask Personal Data', 'main_prepare_text.js', [3180, 200], { 'Check File': 'Check PDF File' }, { each: true }),
     H('S2', 'Save Masked Text', { method: 'POST', url: 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', authentication: 'predefinedCredentialType', nodeCredentialType: 'googleDriveOAuth2Api', sendHeaders: true, headerParameters: { parameters: [{ name: 'Content-Type', value: '={{ $json.masked_upload.content_type }}' }] }, sendBody: true, contentType: 'raw', rawContentType: '={{ $json.masked_upload.content_type }}', body: '={{ $json.masked_upload.body }}', options: {} }, [3400, 200], { credentials: CRED.drive }),
     WR('S2', 'Record OCR Result', 'ocr_results', 'append', "$('Mask Personal Data').item.json.ocr_row", [3620, 200]),
@@ -364,9 +368,9 @@ function buildSingle() {
     C('S3', 'Start Analysis', 'final_gap_input.js', [3940, 200], { 'Prepare Text & Mask PII': 'Mask Personal Data' }, { engine: false }),
     RD('S3', 'Load Requirements', 'ref_requirements', [4160, 200], { lookupColumn: 'role_id', lookupValue: '={{ $json.payload.ctx.role_id }}' }),
     C('S3', 'Build Prompt', 'gap_build_prompt.js', [4380, 200], { 'When Called by Main': 'Start Analysis', 'Read Requirements': 'Load Requirements' }),
-    C('S3', 'Call Model A', 'gap_call_model_A.js', [4600, 0]),
-    C('S3', 'Call Model B', 'gap_call_model_B.js', [4600, 200]),
-    C('S3', 'Call Model C', 'gap_call_model_C.js', [4600, 400]),
+    CM('Call Model A', 'A', [4600, 0]),
+    CM('Call Model B', 'B', [4600, 200]),
+    CM('Call Model C', 'C', [4600, 400]),
     T('S3', { id: '', name: 'Wait for All Models', type: 'n8n-nodes-base.merge', typeVersion: 3, position: [4820, 200], parameters: { numberInputs: 3 } }),
     C('S3', 'Build Model Call Rows', 'gap_to_calls.js', [5040, 200], {}, { engine: false }),
     WR('S3', 'Record Model Calls', 'model_calls', 'append', '$json', [5260, 200]),
@@ -403,17 +407,28 @@ function buildSingle() {
     C('S6', 'Build Delivery Record', 'single_deliver_record.js', [10620, 300], {}, { engine: false }),
     WR('S6', 'Record Delivery', 'deliveries', 'append', '$json.delivery_row', [10840, 300]),
     WR('S6', 'Mark Run Delivered', 'runs', 'appendOrUpdate', "$('Build Delivery Record').first().json.run_update", [11060, 300], { executeOnce: true, cols: ['run_id', 'updated_at', 'stage', 'pdf_file_id', 'email_status', 'error_code'] }),
+    // DEC-48: ส่งไม่สำเร็จ (ไม่ใช่ error ของ n8n) → แจ้งผู้วิจัย แล้ววนไปงานถัดไปเหมือนกัน
+    IF('S6', 'Is Delivery Failed?', 'delivery_failed', [11280, 300]),
+    T('S6', { id: '', name: 'Notify Delivery Failure', type: 'n8n-nodes-base.gmail', typeVersion: 2.1, position: [11500, 180], onError: 'continueRegularOutput', webhookId: 'is68-gmail-delivery-failed', parameters: { authentication: 'oAuth2', resource: 'message', operation: 'send', sendTo: '={{ $env.RESEARCHER_EMAIL }}', subject: "={{ $('Build Delivery Record').first().json.alert.subject }}", emailType: 'text', message: "={{ $('Build Delivery Record').first().json.alert.body }}", options: { appendAttribution: false } }, credentials: CRED.gmail }),
     // ---- S7 บันทึกและข้อผิดพลาด (แถวล่าง)
     T('S7', { id: '', name: 'Catch Workflow Error', type: 'n8n-nodes-base.errorTrigger', typeVersion: 1, position: [0, 1100], parameters: {} }),
-    H('S7', 'Get Failed Execution', { method: 'GET', url: '={{ $env.N8N_API_URL }}/api/v1/executions/{{ $json.execution.id }}?includeData=true', authentication: 'predefinedCredentialType', nodeCredentialType: 'n8nApi', options: {} }, [220, 1100], { onError: 'continueRegularOutput', credentials: CRED.n8n }),
-    C('S7', 'Classify Error', 'error_classify.js', [440, 1100], { 'Error Trigger': 'Catch Workflow Error', 'Loop Over Runs': 'Loop Over Requests' }, { engine: false }),
-    WR('S7', 'Mark Run Failed', 'runs', 'appendOrUpdate', '$json.run_update', [660, 1100], { cols: ['run_id', 'updated_at', 'stage', 'error_code'] }),
-    WR('S7', 'Log Error', 'audit_log', 'append', "$('Classify Error').first().json.audit", [880, 1100], { executeOnce: true }),
-    T('S7', { id: '', name: 'Notify Researcher', type: 'n8n-nodes-base.gmail', typeVersion: 2.1, position: [1100, 1100], onError: 'continueRegularOutput', webhookId: 'is68-gmail-error', parameters: { authentication: 'oAuth2', resource: 'message', operation: 'send', sendTo: '={{ $env.RESEARCHER_EMAIL }}', subject: "={{ $('Classify Error').first().json.alert.subject }}", emailType: 'text', message: "={{ $('Classify Error').first().json.alert.body }}", options: { appendAttribution: false } }, credentials: CRED.gmail }),
+    H('S7', 'Get Failed Execution', { method: 'GET', url: "={{ $env.N8N_API_URL }}/api/v1/executions/{{ $json.execution && $json.execution.id ? $json.execution.id : 'none' }}?includeData=true", authentication: 'predefinedCredentialType', nodeCredentialType: 'n8nApi', options: { timeout: 30000 } }, [220, 1100], { onError: 'continueRegularOutput', credentials: CRED.n8n }),
+    C('S7', 'Classify Error', 'single_error_classify.js', [440, 1100], {}, { engine: false }),
+    IF('S7', 'Is Run Known?', 'run_known', [660, 1100]),
+    WR('S7', 'Mark Run Failed', 'runs', 'appendOrUpdate', '$json.run_update', [880, 1000], { cols: ['run_id', 'updated_at', 'stage', 'error_code'] }),
+    WR('S7', 'Log Error', 'audit_log', 'append', "$('Classify Error').first().json.audit", [1100, 1100], { executeOnce: true }),
+    IF('S7', 'Is Alert Due?', 'notify', [1320, 1100]),
+    T('S7', { id: '', name: 'Notify Researcher', type: 'n8n-nodes-base.gmail', typeVersion: 2.1, position: [1540, 1000], onError: 'continueRegularOutput', webhookId: 'is68-gmail-error', parameters: { authentication: 'oAuth2', resource: 'message', operation: 'send', sendTo: '={{ $env.RESEARCHER_EMAIL }}', subject: "={{ $('Classify Error').first().json.alert.subject }}", emailType: 'text', message: "={{ $('Classify Error').first().json.alert.body }}", options: { appendAttribution: false } }, credentials: CRED.gmail }),
+    C('S7', 'Build Aborted Rows', 'single_aborted_rows.js', [1760, 1000], {}, { engine: false }),
+    WR('S7', 'Record Aborted Requests', 'runs', 'append', '$json', [1980, 1000]),
   ];
   const by = (nm) => n.find((x) => x.name === nm);
   by('Record OCR Result').parameters.columns.value.masked_text_file_id = '={{ $json.id }}';
-  by('Log Models Called').parameters.columns.value = { ts: '={{ $now.toISO() }}', actor: 'WF_IS68076026', run_id: "={{ $('Build Prompt').first().json.ctx.run_id }}", event: 'models_called', detail: "={{ JSON.stringify($('Wait for All Models').all().map(i => ({ k: i.json.model_key, s: i.json.result.status, n: i.json.result.calls.length }))) }}" };
+  for (const nm of ['Is Run Known?', 'Is Alert Due?']) by(nm).parameters.conditions.conditions[0].leftValue = `={{ $('Classify Error').first().json.${nm === 'Is Run Known?' ? 'run_known' : 'notify'} }}`;
+  by('Is Delivery Failed?').parameters.conditions.conditions[0].leftValue = "={{ $('Build Delivery Record').first().json.delivery_failed }}";
+  // DEC-48: append แบบ values:append ของ Google (ไม่คำนวณแถวสุดท้ายเองแล้ว PUT) กันสอง execution เขียนทับแถวเดียวกัน
+  for (const x of n) if (x.type === 'n8n-nodes-base.googleSheets' && /^append/.test(x.parameters.operation)) x.parameters.options = { ...x.parameters.options, useAppend: true };
+  by('Log Models Called').parameters.columns.value = { ts: '={{ $now.toISO() }}', actor: SINGLE.name, run_id: "={{ $('Build Prompt').first().json.ctx.run_id }}", event: 'models_called', detail: "={{ JSON.stringify($('Wait for All Models').all().map(i => ({ k: i.json.model_key, s: i.json.result.status, n: i.json.result.calls.length }))) }}" };
   // แถว findings/decisions อ่านจากผลของ Apply Rules R0-R4 ({ eval: { findings, decisions } })
   for (const nm of ['Build Finding Rows', 'Build Decision Rows']) by(nm).parameters.jsCode = by(nm).parameters.jsCode.replace("$('Decide & Plan').first().json.", "$('Apply Rules R0-R4').first().json.eval.");
   const L = (a, b, o, i) => link(c, a, b, o, i);
@@ -441,8 +456,12 @@ function buildSingle() {
   L('Export Report PDF', 'Upload Report PDF', 0); L('Export Report PDF', 'Send Report Email', 0); L('Export Report PDF', 'Build Delivery Record', 1);
   L('Upload Report PDF', 'Wait for Upload and Email', 0, 0); L('Send Report Email', 'Wait for Upload and Email', 0, 1);
   L('Wait for Upload and Email', 'Delete Temp Doc'); L('Delete Temp Doc', 'Collect Delivery Result'); L('Collect Delivery Result', 'Build Delivery Record');
-  L('Build Delivery Record', 'Record Delivery'); L('Record Delivery', 'Mark Run Delivered'); L('Mark Run Delivered', 'Loop Over Requests');
-  L('Catch Workflow Error', 'Get Failed Execution'); L('Get Failed Execution', 'Classify Error'); L('Classify Error', 'Mark Run Failed'); L('Mark Run Failed', 'Log Error'); L('Log Error', 'Notify Researcher');
+  L('Build Delivery Record', 'Record Delivery'); L('Record Delivery', 'Mark Run Delivered'); L('Mark Run Delivered', 'Is Delivery Failed?');
+  L('Is Delivery Failed?', 'Notify Delivery Failure', 0); L('Is Delivery Failed?', 'Loop Over Requests', 1); L('Notify Delivery Failure', 'Loop Over Requests');
+  L('Catch Workflow Error', 'Get Failed Execution'); L('Get Failed Execution', 'Classify Error'); L('Classify Error', 'Is Run Known?');
+  L('Is Run Known?', 'Mark Run Failed', 0); L('Is Run Known?', 'Log Error', 1); L('Mark Run Failed', 'Log Error');
+  L('Log Error', 'Is Alert Due?'); L('Is Alert Due?', 'Notify Researcher', 0);
+  L('Notify Researcher', 'Build Aborted Rows'); L('Build Aborted Rows', 'Record Aborted Requests');
   for (const s of SECTIONS) {
     const ps = n.filter((x) => sec[x.name] === s.key).map((x) => x.position);
     const x0 = Math.min(...ps.map((p) => p[0])) - 60; const x1 = Math.max(...ps.map((p) => p[0])) + 180;
@@ -454,11 +473,12 @@ function buildSingle() {
     exclusive_fan_in: {
       'Log Skipped Request': 'false-branch ของ IF สองตัว แต่ละ item ผ่านได้ทางเดียว',
       'Mask Personal Data': 'ชั้นข้อความ (Has Text Layer? true) หรือ Document AI สำเร็จ หรือ OCR ในเครื่อง — ไม่เกิดพร้อมกันสำหรับ item เดียว',
-      'Loop Over Requests': 'ขาเข้าครั้งแรกจาก Is New Request? และขาวนกลับจาก Mark Run Delivered (คนละรอบ)',
+      'Loop Over Requests': 'ขาเข้าครั้งแรกจาก Is New Request? และขาวนกลับจาก Is Delivery Failed? (false) หรือ Notify Delivery Failure (คนละรอบ · แต่ละงานผ่านได้ทางเดียว)',
+      'Log Error': 'Is Run Known? false (ล้มก่อนมีงาน) หรือ Mark Run Failed (หลัง true) — ไม่เกิดพร้อมกัน',
       'Build Delivery Record': 'false-branch ของ Is Not Yet Delivered? หรือ error output ของ Upload Report as Google Doc / Export Report PDF หรือ Collect Delivery Result — ไม่เกิดพร้อมกัน',
     },
-    loop: { node: 'Loop Over Requests', batch_size: 1, first_node: 'Create Run Row', back_edge_from: 'Mark Run Delivered' },
-    spec: 'Prompt_Report v2.0 ภาคผนวก ข · DEC-42',
+    loop: { node: 'Loop Over Requests', batch_size: 1, first_node: 'Create Run Row', back_edge_from: ['Is Delivery Failed?', 'Notify Delivery Failure'] },
+    spec: 'Prompt_Report v2.0 ภาคผนวก ข · DEC-42 · DEC-48 (ทดสอบใน n8n 2.39.9 จริง)',
   });
   w.id = SINGLE.id; w.name = SINGLE.name;
   delete w.settings.errorWorkflow;
@@ -473,7 +493,7 @@ export function buildAll() {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  // DEC-42: เขียนเฉพาะ workflows/WF_IS68076026.json · WF_Final_IS (DEC-37) และชุด 5 ไฟล์ (DEC-30) สร้างในหน่วยความจำเพื่อเทสต์เทียบเท่านั้น
+  // DEC-48: เขียนเฉพาะ workflows/WF_IS_68076026_01OCT26.json · WF_Final_IS (DEC-37) และชุด 5 ไฟล์ (DEC-30) สร้างในหน่วยความจำเพื่อเทสต์เทียบเท่านั้น
   //   ต้องการไฟล์เดิมเพื่อย้อนกลับ: node scripts/build_workflows.mjs --legacy <โฟลเดอร์ปลายทาง นอก workflows/>
   const all = buildAll();
   const li = process.argv.indexOf('--legacy');
@@ -486,9 +506,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const real = one.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length;
   const man = { built_at: new Date().toISOString(), engine_sha256: ENGINE_SHA, engine_version: ENGINE.ENGINE_VERSION, n8n_version: '2.39.9', node_version: '24',
     import: SINGLE.name + '.json',
-    note: 'นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/WF_IS68076026.json (DEC-42) · WF_Final_IS (DEC-37) และชุด 5 ไฟล์ (DEC-30) อยู่ใน archive/',
-    workflow: { decision: 'DEC-42', file: SINGLE.name + '.json', id: one.id, nodes: real, sticky_notes: one.nodes.length - real, sections: one.meta.is68.sections.map((s) => ({ key: s.key, th: s.th, nodes: s.nodes.length })), sha256: ENGINE.sha256Hex(txt) },
-    superseded: { WF_Final_IS: { decision: 'DEC-37 → DEC-42', nodes: fin.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length, sha256: ENGINE.sha256Hex(JSON.stringify(fin, null, 2) + '\n'), archived_copy: 'archive/01OCT26/WF_Final_IS_DEC-37/' },
+    note: 'นำเข้าไฟล์นี้ไฟล์เดียว: n8n import:workflow --input=workflows/' + SINGLE.name + '.json (DEC-48) · id เดิม จึงแทนที่ WF_IS68076026 (DEC-42) ที่เคยนำเข้า · รุ่นก่อนทั้งหมดอยู่ใน archive/',
+    workflow: { decision: SINGLE.decision, tested_in_n8n: 'evidence/n8n_test_01OCT26.md', file: SINGLE.name + '.json', id: one.id, nodes: real, sticky_notes: one.nodes.length - real, sections: one.meta.is68.sections.map((s) => ({ key: s.key, th: s.th, nodes: s.nodes.length })), sha256: ENGINE.sha256Hex(txt) },
+    superseded: { WF_IS68076026: { decision: 'DEC-42 → DEC-48', nodes: 63, sha256: '57fdaf52226a4c148bf188ea1e9cf3c7fa68448c2e37ee737029dabd679529d5', archived_copy: 'archive/01OCT26/WF_IS68076026_DEC-42/' },
+      WF_Final_IS: { decision: 'DEC-37 → DEC-42', nodes: fin.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length, sha256: ENGINE.sha256Hex(JSON.stringify(fin, null, 2) + '\n'), archived_copy: 'archive/01OCT26/WF_Final_IS_DEC-37/' },
       legacy_5wf: { decision: 'DEC-30 → DEC-38', archived_copy: 'archive/01OCT26/workflows_5wf_DEC-30/', workflows: {} } } };
   for (const [k, w] of Object.entries(all)) {
     const t = JSON.stringify(w, null, 2) + '\n';

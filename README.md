@@ -55,8 +55,8 @@ python scripts/check_docx_format.py && python scripts/check_overlap.py   # QA �
 | ส่วน | สถานะ |
 |---|---|
 | ข้อมูลอ้างอิง | ✅ สร้างแล้ว · ⏳ URL 28 รายการ (36 แถว) รอผู้วิจัยตรวจด้วยตา |
-| engine + tests | ✅ 61/61 · analysis 8/8 |
-| workflow | ✅ `WF_IS68076026.json` 63 โหนด validator ผ่าน (DEC-42) · ⏳ ทดสอบใน n8n จริง |
+| engine + tests | ✅ 65/65 · analysis 8/8 |
+| workflow | ✅ `WF_IS_68076026_01OCT26.json` 69 โหนด (DEC-48) · ผ่านใน n8n 2.39.9 จริงกับบริการจำลอง (`evidence/n8n_test_01OCT26.md`) · ⏳ บัญชี Google/โมเดลจริง |
 | ความครอบคลุม 600 | ⏳ คลัง 598/600 · แผนจำลอง 538/600 · รอผู้วิจัยยืนยันรายการใหม่ 14 รายการ (DEC-46) → จำลองได้ 600/600 |
 | เล่ม Final | ✅ เขียนใหม่ทั้งเล่ม · `build/IS_68076026_Final_01OCT26.docx/.pdf` 74 หน้า · QA ผ่าน (`evidence/QA_Final_01OCT26.md`) |
 | จริยธรรม | ✅ ร่าง 6 ไฟล์ · ⏳ ผู้วิจัยกรอกช่อง ⚠ → อาจารย์ตรวจ → ยื่น |

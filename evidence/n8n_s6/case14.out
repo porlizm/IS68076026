@@ -1,0 +1,80 @@
+--- case 14: trigger อ่านชีตไม่ได้ต่อเนื่อง ~3 นาที
+{
+ "no": 14,
+ "checks": [
+  {
+   "ok": true,
+   "check": "poll ล้ม 3 ครั้ง"
+  },
+  {
+   "ok": false,
+   "check": "Error Trigger ทำงาน 2 ครั้ง สำเร็จทุกครั้ง"
+  },
+  {
+   "ok": true,
+   "check": "ไม่มีแถว runs ปลอม (0)"
+  },
+  {
+   "ok": false,
+   "check": "audit_log 2 แถว"
+  },
+  {
+   "ok": true,
+   "check": "อีเมลถึงผู้วิจัย 1 ฉบับ (ไม่เกินชั่วโมงละครั้ง)"
+  }
+ ],
+ "executions": [
+  {
+   "id": "65",
+   "mode": "trigger",
+   "status": "error",
+   "error": "Forbidden - perhaps check your credentials?",
+   "lastNode": "Watch Form Responses",
+   "nodes_run": 1,
+   "non_success": [
+    "Watch Form Responses#0 None items=0 Forbidden - perhaps check your credentials?"
+   ]
+  },
+  {
+   "id": "66",
+   "mode": "error",
+   "status": "success",
+   "error": null,
+   "lastNode": "Build Aborted Rows",
+   "nodes_run": 8,
+   "non_success": []
+  },
+  {
+   "id": "67",
+   "mode": "trigger",
+   "status": "error",
+   "error": "Forbidden - perhaps check your credentials?",
+   "lastNode": "Watch Form Responses",
+   "nodes_run": 1,
+   "non_success": [
+    "Watch Form Responses#0 None items=0 Forbidden - perhaps check your credentials?"
+   ]
+  },
+  {
+   "id": "68",
+   "mode": "error",
+   "status": "success",
+   "error": null,
+   "lastNode": "Is Alert Due?",
+   "nodes_run": 6,
+   "non_success": []
+  },
+  {
+   "id": "69",
+   "mode": "trigger",
+   "status": "error",
+   "error": "Forbidden - perhaps check your credentials?",
+   "lastNode": "Watch Form Responses",
+   "nodes_run": 1,
+   "non_success": [
+    "Watch Form Responses#0 None items=0 Forbidden - perhaps check your credentials?"
+   ]
+  }
+ ]
+}
+FAIL /home/claude/s6/s6_results.json

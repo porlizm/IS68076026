@@ -15,6 +15,6 @@ const s = ev.scores;
 const runRow = ENGINE.runRowFrom(input.ctx, { stage: 'ready', updated_at: now, ocr_engine: input.ctx.ocr_engine, model_status: ENGINE.modelStatusSummary(ev),
   readiness_pct: s.readiness_pct, weighted_coverage: s.weighted_coverage, n_evidenced: s.n_evidenced, n_partially: s.n_partially, n_missing: s.n_missing,
   n_abstained: s.n_abstained, unsupported_claims: s.unsupported_claims, report_hash: payload.report_hash });
-const audit = { ts: now, actor: 'WF_IS68076026', run_id: input.ctx.run_id, event: ev.halted ? 'halted_min_models' : 'decided',
+const audit = { ts: now, actor: 'WF_IS_68076026_01OCT26', run_id: input.ctx.run_id, event: ev.halted ? 'halted_min_models' : 'decided',
   detail: JSON.stringify({ m: ev.m, U: s.U, plan_items: plan.items.length, strategy: plan.strategy, notice: plan.notice }) };
 return [{ json: { ctx: input.ctx, plan_rows: ENGINE.planRowsFrom(input.ctx, plan), run_row: runRow, audit, report_payload: payload } }];

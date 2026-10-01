@@ -1,11 +1,11 @@
 // check_traceability.mjs — ตรวจตาราง traceability ใน evidence/WF_analysis.md (Prompt_Report 2.3)
-//   ทุกแถวมีครบสามช่อง · ทุกโหนดมีใน workflows/WF_IS68076026.json · ทุก T:<ชื่อเทสต์> ตรงกับ test(...) ใน tests/*.test.mjs
+//   ทุกแถวมีครบสามช่อง · ทุกโหนดมีใน workflows/<manifest.import> · ทุก T:<ชื่อเทสต์> ตรงกับ test(...) ใน tests/*.test.mjs
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const md = fs.readFileSync(path.join(ROOT, 'evidence', 'WF_analysis.md'), 'utf8');
-const wf = JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', 'WF_IS68076026.json'), 'utf8'));
+const wf = JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', 'manifest.json'), 'utf8')).import), 'utf8'));
 const names = new Set(wf.nodes.map((n) => n.name));
 const titles = fs.readdirSync(path.join(ROOT, 'tests')).filter((f) => f.endsWith('.test.mjs'))
   .flatMap((f) => [...fs.readFileSync(path.join(ROOT, 'tests', f), 'utf8').matchAll(/^test\((['`])(.*?)\1/gm)].map((m) => m[2]));

@@ -44,6 +44,7 @@
 | 45 | 1 ต.ค. | รายการพื้นฐาน DEC-18 map กับทุกอาชีพที่มีองค์ประกอบเดียวกัน | ✅ ใช้แล้ว · 👤 ผู้วิจัยยืนยัน |
 | 46 | 1 ต.ค. | coverage track: รายการเรียนรู้ใหม่ 14 รายการใน `data/corpus_additions.csv` เข้าคลังเมื่อผู้วิจัยยืนยัน | ⏳ รอผู้วิจัยยืนยันทุกรายการ |
 | 47 | 1 ต.ค. | วิธีเลือกรายการคง weighted_greedy (สมการ d_k) หลังเทียบ coverage_first และ ILP | ✅ |
+| 48 | 1 ต.ค. | workflow ใช้งานจริง `WF_IS_68076026_01OCT26` (ต่อยอด DEC-42) หลังทดสอบใน n8n 2.39.9 จริงกับบริการจำลอง | ✅ ผ่านใน n8n จริง (บริการจำลอง) · ⏳ บัญชี Google/โมเดลจริง |
 
 ---
 
@@ -219,3 +220,21 @@
 - เทสต์ใหม่ `tests/single_workflow.test.mjs` 9 กรณี + plan_strategy 1 กรณี → รวม 61/61 · ⏳ ทดสอบใน n8n จริง (`evidence/n8n_test_01OCT26.md`)
 - รูปสำหรับเล่มจาก workflow จริง: `scripts/make_figures.py` (TH Sarabun New จาก `assets/fonts/`)
 
+
+## DEC-48 · workflow ใช้งานจริง `WF_IS_68076026_01OCT26` (ต่อยอด DEC-42)
+**วันที่** 1 ต.ค. 2569 · ผู้วิจัยสั่ง ("รวม 5 workflow เป็น 1 ที่ใช้งานจริง ชื่อ WF_IS_68076026_01OCT26 อ้างอิงเล่ม IS_68076026_Final_01OCT26") และเลือกแนวทาง "ต่อยอดเป็นรุ่นใช้งานจริง + ทดสอบใน n8n 2.39.9 บนคลาวด์กับบริการจำลอง"
+**ปัญหา** WF_IS68076026 (DEC-42) รวม 5 workflow แล้วและตรงเล่มบท 3.3 แต่ไม่เคยรันใน n8n จริง (เล่ม 3.6.3 และ `evidence/n8n_test_01OCT26.md` ยัง ⏳) · เทสต์ใน sandbox รันโค้ดของโหนดแต่ไม่ได้รันกลไกของ n8n
+**การตัดสินใจ**
+1. ติดตั้ง n8n 2.39.9 บน Node 24 แล้วรัน workflow จริงกับบริการจำลองของ Google/OpenAI/Anthropic/Gemini (`evidence/n8n_s6/`) · ผลใน `evidence/n8n_test_01OCT26.md` และ `evidence/n8n_test_summary.json`
+2. แก้จุดที่พบ (ไม่แตะ engine.js · ตรรกะการวิจัยเดิม):
+   - Call Model A/B/C → `workflows/src/single_call_model.js`: task runner ของ n8n 2.x ส่ง error ของ `this.helpers.httpRequest` ข้าม RPC โดยไม่มีรหัส HTTP ทำให้ 429 ไม่ถูกเรียกซ้ำ → ใช้ returnFullResponse + ignoreHttpStatusErrors สร้าง error ที่มี httpCode เอง · จับเวลาด้วย Promise.race · รอก่อนเรียกซ้ำตาม `config/models.json defaults.retry_backoff_ms` = [5000, 15000] หรือ Retry-After (≤ 30 วินาที)
+   - Choose Text Source ตรวจ `numpages` ของ Extract From File (PDF แบบ object stream นับหน้าด้วย regex ไม่ได้)
+   - Run Local OCR = continueRegularOutput → `ocr_failed` พร้อม run_id
+   - Google Sheets append ทุกโหนดใช้ `useAppend` (values:append) · env `N8N_CONCURRENCY_PRODUCTION_LIMIT=1`
+   - ช่วง 6 เพิ่ม Is Delivery Failed? → Notify Delivery Failure (ส่งไม่สำเร็จไม่ใช่ error ของ n8n จึงไม่มีใครรู้)
+   - ช่วง 7 `single_error_classify.js` + Is Run Known? + Is Alert Due? + Build Aborted Rows + Record Aborted Requests: งานที่ยังไม่ได้เริ่มในรอบที่ล้มบันทึก failed/batch_aborted · trigger ล้ม (ไม่มีงาน) ไม่เขียนแถว runs ปลอมและแจ้งไม่เกินชั่วโมงละครั้ง
+3. ชื่อ workflow/ไฟล์ `WF_IS_68076026_01OCT26` · ใช้ id เดิม `is68Single000001` เพื่อให้นำเข้าแทนที่รุ่น DEC-42 ใน n8n (กัน trigger สองตัว) · 69 โหนด + sticky note 7 แผ่น (ช่วง 10/8/11/6/8/16/10) · ย้าย `WF_IS68076026.json` ไป `archive/01OCT26/WF_IS68076026_DEC-42/`
+**ไฟล์ที่กระทบ** `scripts/build_workflows.mjs` · `scripts/validate_workflows.mjs` (EXPECTED 69 + กฎ DEC-48) · `workflows/src/single_call_model.js` `single_choose_text.js` `single_error_classify.js` `single_aborted_rows.js` `single_deliver_record.js` `single_build_plan.js` (ชื่อ actor) · `config/models.json` (retry_backoff_ms) · `config/env_template.env` · `tests/single_workflow.test.mjs` (+4 เทสต์ · mock เป็น response เต็มแบบ n8n) · `scripts/book_numbers.py` `make_figures.py` `check_traceability.mjs` `source_trace.py` (อ่านชื่อไฟล์จาก manifest) · `evidence/WF_analysis.md` · `evidence/n8n_test_01OCT26.md` · `evidence/n8n_test_summary.json` · `evidence/n8n_s6/` · `docs/Setup_Guide.md` · `book/03_chapter3.md` · `book/00_fact_sheet.md`
+**ผลต่อเล่ม** {{wf_name}} {{wf_nodes}} {{wf_s6_nodes}} {{wf_s7_nodes}} {{tests_total}} อัปเดตเอง · ตาราง 3.1 แยกแถว "ทดสอบใน n8n กับบริการจำลอง" (ทำแล้ว) กับ "เชื่อมบริการจริง" (ยังไม่ทำ) · 3.3.2 ช่วง 6 แจ้งผู้วิจัยเมื่อส่งไม่สำเร็จ · ช่วง 7 batch_aborted · 3.3.5 เวลารอก่อนเรียกซ้ำ {{retry_backoff_text}} · ตาราง 3.9 แถว retry_backoff_ms · 3.6.3 แทน ⏳ ด้วยผล {{n8n_pass}}/{{n8n_cases}} กรณี
+**หมายเหตุ** config/models.json เปลี่ยน จึง sha ของชุด 5 ไฟล์/WF_Final_IS ที่สร้างในหน่วยความจำต่างจากไฟล์ใน archive (ไม่กระทบการใช้งาน)
+**วิธีย้อนกลับ** นำ `archive/01OCT26/WF_IS68076026_DEC-42/WF_IS68076026.json` กลับไป `workflows/` · `git revert` commit ของ DEC-48 · ลบ retry_backoff_ms ใน config/models.json แล้ว build ใหม่

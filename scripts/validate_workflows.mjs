@@ -226,13 +226,15 @@ export function validateFinal(w, wfs) {
 }
 
 
-// ------------------------------------------------------------------ WF_IS68076026 (DEC-42)
-export const SINGLE_FILE = 'WF_IS68076026.json';
-export const EXPECTED_SINGLE_NODES = 63;
+// ------------------------------------------------------------------ WF_IS_68076026_01OCT26 (DEC-48 · ต่อยอด DEC-42)
+export const SINGLE_NAME = 'WF_IS_68076026_01OCT26';
+export const SINGLE_FILE = SINGLE_NAME + '.json';
+export const EXPECTED_SINGLE_NODES = 69;
 export function loadSingle() { return JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', SINGLE_FILE), 'utf8')); }
 export function validateSingle(w) {
   const errors = [];
-  const E = (msg) => errors.push(`WF_IS68076026: ${msg}`);
+  const E = (msg) => errors.push(`${SINGLE_NAME}: ${msg}`);
+  if (w.name !== SINGLE_NAME) E(`ชื่อ workflow ต้องเป็น ${SINGLE_NAME} (ได้ ${w.name})`);
   const engineSrc = fs.readFileSync(path.join(ROOT, 'engine', 'engine.js'), 'utf8');
   const real = w.nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote');
   const notes = w.nodes.filter((n) => n.type === 'n8n-nodes-base.stickyNote');
@@ -263,7 +265,7 @@ export function validateSingle(w) {
     }));
   }
   for (const n of real) if (!incoming[n.name] && !/Trigger$/.test(n.type) && !['n8n-nodes-base.googleSheetsTrigger', 'n8n-nodes-base.errorTrigger'].includes(n.type)) E(`${n.name}: ไม่มีขาเข้า`);
-  nodeChecks({ ...w, nodes: real }, engineSrc, E, { ids: new Set(), gmailAllowed: (n) => ['Send Report Email', 'Notify Researcher'].includes(n.name) });
+  nodeChecks({ ...w, nodes: real }, engineSrc, E, { ids: new Set(), gmailAllowed: (n) => ['Send Report Email', 'Notify Researcher', 'Notify Delivery Failure'].includes(n.name) });
   const allowed = w.meta.is68.exclusive_fan_in || {};
   for (const [node, ins] of Object.entries(incoming)) {
     const srcs = new Set(ins.map((x) => x.from + '#' + x.oi));
@@ -288,7 +290,8 @@ export function validateSingle(w) {
   const lo = (w.connections['Loop Over Requests'] || { main: [] }).main;
   if (!lo[1] || lo[1].map((t) => t.node).join() !== 'Create Run Row') E('ขา loop (output 1) ต้องไป Create Run Row');
   const back = (incoming['Loop Over Requests'] || []).map((x) => x.from).sort().join();
-  if (back !== 'Is New Request?,Mark Run Delivered') E(`ขาเข้า Loop Over Requests ต้องมาจาก Is New Request? และ Mark Run Delivered (ได้ ${back})`);
+  if (back !== 'Is Delivery Failed?,Is New Request?,Notify Delivery Failure') E(`ขาเข้า Loop Over Requests ต้องมาจาก Is New Request? · Is Delivery Failed? · Notify Delivery Failure (ได้ ${back})`);
+  if (((w.connections['Mark Run Delivered'] || { main: [[]] }).main[0] || []).map((t) => t.node).join() !== 'Is Delivery Failed?') E('Mark Run Delivered ต้องต่อไป Is Delivery Failed? (DEC-48 แจ้งผู้วิจัยเมื่อส่งไม่สำเร็จ)');
   const body = new Set(); const q = ['Create Run Row'];
   while (q.length) { const x = q.shift(); if (body.has(x) || x === 'Loop Over Requests') continue; body.add(x); (succ[x] || []).forEach((s) => q.push(s.to)); }
   if (!body.has('Mark Run Delivered')) E('จากขา loop ต้องไปถึง Mark Run Delivered ได้');
@@ -312,6 +315,17 @@ export function validateSingle(w) {
     if (body.has(r) && !dom[x].has(r)) E(`${x}: อ้าง $('${r}') ซึ่งอาจไม่ได้ทำงานในรอบนี้ของ Loop Over Requests (จะได้ค่าของงานก่อนหน้า)`);
   }
   if (w.meta.is68.engine_sha256 !== ENGINE.sha256Hex(engineSrc)) E('engine_sha256 ใน meta ไม่ตรงกับ engine/engine.js');
+  // DEC-48: จุดที่พบจากการทดสอบใน n8n 2.39.9 จริง
+  for (const k of ['A', 'B', 'C']) {
+    const js = (byName['Call Model ' + k] || { parameters: {} }).parameters.jsCode || '';
+    if (!/returnFullResponse: true, ignoreHttpStatusErrors: true/.test(js) || !js.includes(`const KEY = '${k}';`) || js.includes('__KEY__')) E(`Call Model ${k}: ต้องอ่านรหัส HTTP จาก response เต็ม (task runner ไม่ส่งรหัส HTTP ของ error ข้าม RPC) และ KEY = ${k}`);
+  }
+  if (!byName['Run Local OCR'] || byName['Run Local OCR'].onError !== 'continueRegularOutput') E('Run Local OCR: ต้องเป็น continueRegularOutput ให้ Mask Personal Data แจ้ง ocr_failed พร้อม run_id');
+  for (const n of real) if (n.type === 'n8n-nodes-base.googleSheets' && /^append/.test(n.parameters.operation) && !(n.parameters.options && n.parameters.options.useAppend === true)) E(`${n.name}: append ต้องตั้ง useAppend (values:append) กันเขียนทับแถวเมื่อมีหลาย execution`);
+  const ab = (w.connections['Notify Researcher'] || { main: [] }).main;
+  if (!ab[0] || ab[0].map((t) => t.node).join() !== 'Build Aborted Rows' || ((w.connections['Build Aborted Rows'] || { main: [[]] }).main[0] || []).map((t) => t.node).join() !== 'Record Aborted Requests') E('ต้องต่อ Notify Researcher → Build Aborted Rows → Record Aborted Requests (งานที่ยังไม่ได้เริ่มต้องไม่หายเงียบ)');
+  if (!/\? \$json\.execution\.id : 'none'/.test(String((byName['Get Failed Execution'] || { parameters: {} }).parameters.url))) E('Get Failed Execution: ถ้าไม่มี execution.id (trigger ล้ม) ต้องไม่เรียก /api/v1/executions/ แบบรายการ (ดึงข้อมูลทุก execution จน n8n หน่วยความจำเต็ม)');
+  if (!/numpages/.test((byName['Choose Text Source'] || { parameters: {} }).parameters.jsCode || '')) E('Choose Text Source: ต้องนับหน้าซ้ำด้วย numpages ของ Extract From File');
   return errors;
 }
 
@@ -321,8 +335,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (errs.length) { console.error('ไม่ผ่าน:\n  ' + errs.join('\n  ')); process.exit(1); }
   // DEC-38/42: workflows/ ต้องมี workflow JSON ไฟล์เดียว กันนำเข้าผิด
   const extra = fs.readdirSync(path.join(ROOT, 'workflows')).filter((f) => f.endsWith('.json') && ![SINGLE_FILE, 'manifest.json'].includes(f));
-  if (extra.length) { console.error('ไม่ผ่าน: workflows/ มีไฟล์ workflow อื่นนอกจาก ' + SINGLE_FILE + ': ' + extra.join(', ') + ' (ย้ายเข้า archive/ ตาม DEC-42)'); process.exit(1); }
+  if (extra.length) { console.error('ไม่ผ่าน: workflows/ มีไฟล์ workflow อื่นนอกจาก ' + SINGLE_FILE + ': ' + extra.join(', ') + ' (ย้ายเข้า archive/ ตาม DEC-42/48)'); process.exit(1); }
   const one = loadSingle();
   console.log('ผ่าน · ชุด 5 ไฟล์และ WF_Final_IS (สร้างในหน่วยความจำ · ไม่ใช้งาน) · บั๊ก B1 B3 B5 B6 B7 B9 B10');
-  console.log(`ผ่าน · WF_IS68076026 ${EXPECTED_SINGLE_NODES} node · 7 ช่วง · ไม่มีการเรียกข้าม workflow · ทุก $('โหนด') มีจริง · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/ · engine ฝังตรงทุกไบต์ (${one.meta.is68.engine_sha256.slice(0, 12)})`);
+  console.log(`ผ่าน · ${SINGLE_NAME} ${EXPECTED_SINGLE_NODES} node · 7 ช่วง · ไม่มีการเรียกข้าม workflow · ทุก $('โหนด') มีจริง · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/ · engine ฝังตรงทุกไบต์ (${one.meta.is68.engine_sha256.slice(0, 12)})`);
 }

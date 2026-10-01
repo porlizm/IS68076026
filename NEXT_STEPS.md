@@ -11,7 +11,8 @@
 - [ ] F2. 👤 ยืนยัน URL 28 รายการใน `data/url_manual_check.csv` (Claude บันทึกผลเปิดหน้าไว้ในคอลัมน์ note แล้ว)
 - [ ] F3. 👤 ยืนยัน DEC-45 (ใช้รายการพื้นฐานกับทุกอาชีพที่มีองค์ประกอบเดียวกัน) · ย้อนได้ด้วย `--foundation-uncovered-only`
 - [ ] F4. 🤖 หลัง F1–F3: `python scripts/build_data_all.py && bash scripts/run_all_checks.sh && python scripts/build_book.py && python scripts/export_pdf.py && python scripts/check_docx_format.py && python scripts/check_overlap.py` → Gate G-600 · commit + tag `gate-600`
-- [ ] F5. 👤🤖 ทดสอบ `workflows/WF_IS68076026.json` ใน n8n 2.39.9 ตาม `evidence/n8n_test_01OCT26.md` แล้วแทน [รอข้อมูล] ในหัวข้อ 3.6.3
+- [x] F5. 🤖 ทดสอบใน n8n 2.39.9 จริงกับบริการจำลอง → `WF_IS_68076026_01OCT26.json` (DEC-48) · ผลใน `evidence/n8n_test_01OCT26.md` · 3.6.3 ใส่ผลแล้ว
+- [ ] F5b. 👤 นำเข้า `workflows/WF_IS_68076026_01OCT26.json` ใน n8n บนเครื่อง (ทับรุ่นเดิมได้ เพราะ id เดียวกัน) · credential googleApi เปิด "Set up for use in HTTP Request node" + scope · env `N8N_CONCURRENCY_PRODUCTION_LIMIT=1`, `N8N_API_URL` · ทดสอบกับบัญชี Google จริง (Setup Guide ข้อ 5)
 - [ ] F6. 👤 เปิด `build/IS_68076026_Final_01OCT26.docx` ใน Word → ยืนยันอัปเดตฟิลด์ → ตรวจสารบัญ เลขหน้า สมการ
 - [ ] F7. 👤 หาผู้เชี่ยวชาญ IOC 3 คน (ภาคผนวก ช) · ยื่นจริยธรรม · remote backup (ข้อ 2–3)
 

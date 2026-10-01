@@ -24,6 +24,11 @@
 - **ผล** `build/IS_68076026_Final_01OCT26.docx` + `.pdf` 74 หน้า · format 33/33 · overlap 0 · tests 61/61 · `evidence/QA_Final_01OCT26.md`, `evidence/Source_Trace.md`
 - **ค้าง** G-600 ยังไม่ผ่าน (598/538) รอ 👤 ยืนยันรายการใหม่ 14 + URL 28 · ผล n8n จริง · IOC
 
+### 1 ต.ค. 2569 · Session 13 · DEC-48 workflow ใช้งานจริง WF_IS_68076026_01OCT26
+**ทำอะไร** ติดตั้ง n8n 2.39.9 + Node 24 บนคลาวด์ · บริการจำลอง Google/โมเดล (`evidence/n8n_s6/`) · นำเข้า WF_IS68076026 (DEC-42) แล้วรันจริง → พบ 7 จุด → แก้ใน build (ไม่แตะ engine) → `workflows/WF_IS_68076026_01OCT26.json` 69 โหนด · รันชุดทดสอบใน n8n จริงซ้ำ (ผลใน `evidence/n8n_test_01OCT26.md`) · tests 65/65 · traceability ครบ · เล่ม 3.1/3.3.2/3.3.5/3.6.3 + ตาราง 3.9
+**พบอะไร** สำคัญที่สุด: task runner ของ n8n 2.x ทำให้รหัส HTTP ของ error หาย ระบบรุ่นก่อนจึงไม่เรียกซ้ำเมื่อ 429 (เทสต์ sandbox ผ่านเพราะ mock ใส่รหัสให้) · ระหว่างทดสอบ บริการจำลองที่ฟัง 127.0.0.1:443 ทำให้สะพานไปเครื่องผู้วิจัยใช้ไม่ได้ (แก้โดยใช้ 127.0.0.2 และ /etc/hosts เฉพาะ process ของ n8n)
+**ค้าง** 👤 ทดสอบกับบัญชี Google/โมเดลจริง (F5b, ข้อ 31–33) · build เล่ม docx ใหม่ (ตัวเลข {{key}} อัปเดตแล้วใน numbers.json)
+
 ### 1 ต.ค. 2569 · Session 12 · Phase 2 workflow เดียว WF_IS68076026
 **ทำอะไร** `buildSingle` → `workflows/WF_IS68076026.json` 63 โหนด 7 ช่วง · `validateSingle` + `check_traceability.mjs` (32 แถว ครอบคลุม 63/63 โหนด) · `tests/single_workflow.test.mjs` (A/B/C ตรง engine · สองแถวต่อ poll · ล้มกลางลูป · โมเดลล้มครบ · อัปโหลดล้มแต่อีเมลสำเร็จ · ไฟล์เกินขนาด/หน้า · ไม่ยินยอม · ชั้นข้อความ) · tests 61/61 · ย้าย WF_Final_IS ไป archive · `evidence/WF_analysis.md` · `evidence/n8n_test_01OCT26.md` (⏳) · ฟอนต์ TH Sarabun New ใน `assets/fonts/` (ผู้วิจัยอนุญาตดาวน์โหลด) · รูป 3 รูปจาก workflow จริง
 **Gate G-WF** ✅ validator + tests ผ่าน · traceability ครบ · ⏳ ผลใน n8n จริงระบุชัดใน evidence

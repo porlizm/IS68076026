@@ -123,6 +123,9 @@ def main():
     for i, s_ in enumerate(wm["workflow"]["sections"], 1): n[f"wf_s{i}_nodes"] = fmt(s_["nodes"]); n[f"wf_s{i}_th"] = s_["th"]
     n["wf_final_nodes"] = fmt(wm["superseded"]["WF_Final_IS"]["nodes"])
     n["text_layer_min_chars"] = fmt(J("config", "project.json")["text_layer_min_chars"])
+    # DEC-48: ผลทดสอบใน n8n จริง (evidence/n8n_test_summary.json สร้างจากชุดทดสอบ evidence/n8n_s6/) และเวลารอก่อนเรียกซ้ำจาก config/models.json
+    nt = J("evidence", "n8n_test_summary.json"); n["n8n_cases"] = fmt(nt["cases"]); n["n8n_pass"] = fmt(nt["pass"])
+    bo = J("config", "models.json")["defaults"]["retry_backoff_ms"]; n["retry_backoff_text"] = " และ ".join(fmt(x / 1000) for x in bo) + " วินาที"
     import re as _re
     tr = open(os.path.join(ROOT, "evidence", "WF_analysis.md"), encoding="utf-8").read().split("## 2 · Traceability")[1].split("\n## ")[0]
     n["trace_rows"] = fmt(len([l for l in tr.split("\n") if l.startswith("| ") and not l.startswith("| ช่วง")]))
@@ -188,11 +191,11 @@ def main():
              ("allowed_months", " / ".join(map(str, PC["allowed_months"])), "กรอบเวลาที่เลือกได้ (เดือน)"), ("max_hours_per_week", PC["max_hours_per_week"], "ชั่วโมงต่อสัปดาห์สูงสุด"), ("plan_strategy", PC["plan_strategy"], "วิธีเลือกรายการเรียนรู้"),
              ("min_approved_share_of_L1", PC["min_approved_share_of_L1"], "สัดส่วน L1 ที่ต้องผ่านตรวจขั้นต่ำ"), ("retention_days", PC["retention_days"], "วันเก็บข้อมูลหลังส่งผล"),
              ("temperature", MC["temperature"], "ค่าความสุ่มของโมเดล (รอทดสอบเชื่อมต่อ)"), ("max_output_tokens", f"{MC['max_output_tokens']:,}", "ความยาวผลตอบกลับสูงสุด (token)"), ("timeout_ms", f"{MC['timeout_ms']:,}", "เวลารอต่อการเรียก (มิลลิวินาที)"),
-             ("max_attempts", MC["max_attempts"], "จำนวนครั้งที่เรียกซ้ำเมื่อ 429 หรือหมดเวลา")]
+             ("max_attempts", MC["max_attempts"], "จำนวนครั้งที่เรียกซ้ำเมื่อ 429 หรือหมดเวลา"), ("retry_backoff_ms", " / ".join(f"{x:,}" for x in MC["retry_backoff_ms"]), "เวลารอก่อนเรียกซ้ำครั้งที่ 1 และ 2 (มิลลิวินาที)")]
     t = ["| พารามิเตอร์ | ค่า | ความหมาย |", "|---|---|---|"] + [f"| {a} | {b} | {c} |" for a, b, c in rowsC]
     n["config_table"] = "\n".join(t)
     n["theta"] = str(PC["theta"]); n["retention_days"] = fmt(PC["retention_days"]); n["deletion_contact"] = PC["deletion_contact"]
-    wfj = J("workflows", "WF_IS68076026.json"); secn = {}
+    wfj = J("workflows", J("workflows", "manifest.json")["import"]); secn = {}
     for i, s_ in enumerate(wfj["meta"]["is68"]["sections"], 1):
         for x in s_["nodes"]: secn[x] = f"{i} {s_['th']}"
     TY = {"code": "Code", "googleSheets": "Google Sheets", "googleSheetsTrigger": "Google Sheets Trigger", "if": "IF", "splitInBatches": "Loop Over Items", "googleDrive": "Google Drive",
@@ -208,7 +211,9 @@ def main():
         elif ty == "googleSheetsTrigger": what = "แท็บ form_responses (แถวใหม่ ทุก 1 นาที)"
         elif ty == "httpRequest" and "documentai" in pr.get("url", ""): what = "Google Document AI processor (:process)"
         elif ty == "httpRequest": what = pr.get("url", "").replace("=", "", 1).split("?")[0].split("{{")[0][:60] or "LOCAL_OCR_URL"
-        elif ty == "if": what = "เงื่อนไข " + pr["conditions"]["conditions"][0]["leftValue"].replace("={{ $json.", "").replace(" }}", "")
+        elif ty == "if":
+            import re as _r; lv = pr["conditions"]["conditions"][0]["leftValue"]; m_ = _r.search(r"\$\('([^']+)'\)\.first\(\)\.json\.(\w+)", lv)
+            what = "เงื่อนไข " + (f"{m_.group(2)} (จาก {m_.group(1)})" if m_ else lv.replace("={{ $json.", "").replace(" }}", ""))
         elif ty == "googleDrive": what = pr.get("operation", "")
         elif ty == "gmail": what = "ส่งอีเมล"
         elif ty == "merge": what = "รอทุกขาเข้า"

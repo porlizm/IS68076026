@@ -1,17 +1,20 @@
-// WF_IS68076026 (DEC-42): ตัวตรวจโครงสร้าง + รัน Code node ใน sandbox · ภาคผนวก ข ของ Prompt_Report v2.0 (traceability ใน evidence/WF_analysis.md)
+// WF_IS_68076026_01OCT26 (DEC-48 · ต่อยอด DEC-42): ตัวตรวจโครงสร้าง + รัน Code node ใน sandbox · ภาคผนวก ข ของ Prompt_Report v2.0 (traceability ใน evidence/WF_analysis.md)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import path from 'node:path';
 import fs from 'node:fs';
 import { ROOT, loadRefs } from '../scripts/lib/refs.mjs';
-import { loadSingle, validateSingle, EXPECTED_SINGLE_NODES } from '../scripts/validate_workflows.mjs';
+import { loadSingle, validateSingle, EXPECTED_SINGLE_NODES, SINGLE_NAME } from '../scripts/validate_workflows.mjs';
 import { runCase } from '../scripts/run_local.mjs';
 
 const refs = loadRefs();
 const one = loadSingle();
 const clone = (o) => JSON.parse(JSON.stringify(o));
-async function runNode(w, name, { input = [], nodes = {}, env = {}, helpers = {}, itemIndex = 0 } = {}) {
+// DEC-48: setTimeout จำลอง — บันทึกระยะรอ (retry_backoff_ms) แล้วทำทันที · ตัวจับเวลาหมดเวลา (> 60 วินาที) ไม่ยิง เว้นแต่ fireAll
+const sleeps = [];
+const fakeTimers = (fireAll = false) => ({ setTimeout: (f, ms) => { if (ms <= 60000) sleeps.push(ms); if (fireAll || ms <= 60000) setImmediate(f); return 0; }, clearTimeout: () => {} });
+async function runNode(w, name, { input = [], nodes = {}, env = {}, helpers = {}, itemIndex = 0, timers = fakeTimers() } = {}) {
   const n = w.nodes.find((x) => x.name === name);
   if (!n) throw new Error('ไม่มีโหนด ' + name);
   const items = input.map((j) => (j && (j.json || j.binary) ? { json: j.json || {}, binary: j.binary } : { json: j }));
@@ -21,7 +24,7 @@ async function runNode(w, name, { input = [], nodes = {}, env = {}, helpers = {}
     return { all: () => arr, first: () => arr[0], item: arr[itemIndex] || arr[0] };
   };
   const $input = { all: () => items, first: () => items[0], item: items[itemIndex] };
-  const sandbox = { $, $input, $env: env, $itemIndex: itemIndex, console, Buffer, Date, JSON, Math, Promise, Object, Array, String, Number, Set, Map, Error, RegExp, URL, encodeURIComponent };
+  const sandbox = { ...timers, $, $input, $env: env, $itemIndex: itemIndex, console, Buffer, Date, JSON, Math, Promise, Object, Array, String, Number, Set, Map, Error, RegExp, URL, encodeURIComponent };
   vm.createContext(sandbox);
   const fn = vm.runInContext('(async function(){' + n.parameters.jsCode + '\n})', sandbox);
   const res = await fn.call({ helpers });
@@ -34,7 +37,7 @@ const ENV = { MODEL_A_ID: 'a', MODEL_B_ID: 'b', MODEL_C_ID: 'c', OPENAI_API_KEY:
 const corpusSheet = () => refs.corpus.map((c) => Object.fromEntries(refs.sheetsCfg.tabs.ref_corpus.columns.map((k) => [k, c[k]])));
 const mapsSheet = () => refs.mappings.map((m) => Object.fromEntries(refs.sheetsCfg.tabs.ref_mappings.columns.map((k) => [k, m[k]])));
 
-test(`WF_IS68076026 ผ่านตัวตรวจ: ${EXPECTED_SINGLE_NODES} โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/`, () => {
+test(`${SINGLE_NAME} ผ่านตัวตรวจ: ${EXPECTED_SINGLE_NODES} โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/`, () => {
   assert.deepEqual(validateSingle(one), []);
   assert.equal(one.settings.errorWorkflow, undefined);
   assert.deepEqual(one.meta.is68.sections.map((s) => s.th), ['รับข้อมูล', 'อ่านและปิดบังข้อมูล', 'วิเคราะห์ 3 โมเดล', 'ตรวจและรวมผล', 'จัดแผน', 'ส่งรายงาน', 'บันทึกและข้อผิดพลาด']);
@@ -53,14 +56,17 @@ test('ตัวตรวจจับข้อผิดพลาดหลัง�
   assert.ok(validateSingle(e).some((x) => /เรียกข้าม workflow/.test(x)));
 });
 
+// DEC-48: จำลอง this.helpers.httpRequest ของ n8n 2.39.9 แบบ returnFullResponse + ignoreHttpStatusErrors (รหัส HTTP อยู่ใน statusCode ไม่ throw)
 function httpFor(caseDir, k, failAll = false) {
   const mock = JSON.parse(fs.readFileSync(path.join(caseDir, 'mock_responses', k + '.json'), 'utf8')); let n = 0;
   return async (opts) => { n++;
-    if (failAll || (mock.simulate === 'http_error' && n <= mock.times)) { const e = new Error('HTTP 429'); e.httpCode = '429'; throw e; }
+    assert.equal(opts.returnFullResponse, true); assert.equal(opts.ignoreHttpStatusErrors, true);
+    if (failAll || (mock.simulate === 'http_error' && n <= mock.times)) return { statusCode: 429, headers: {}, body: { error: { message: 'rate limited' } } };
     const txt = mock.text;
-    if (/openai/.test(opts.url)) return { choices: [{ message: { content: txt }, finish_reason: 'stop' }], usage: { prompt_tokens: 1, completion_tokens: 1 }, model: 'mock-a' };
-    if (/anthropic/.test(opts.url)) return { content: [{ type: 'text', text: txt }], usage: { input_tokens: 1, output_tokens: 1 }, stop_reason: 'end_turn', model: 'mock-b' };
-    return { candidates: [{ content: { parts: [{ text: txt }] }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: 1, candidatesTokenCount: 1 }, modelVersion: 'mock-c' }; };
+    const wrap = (body) => ({ statusCode: 200, headers: { 'content-type': 'application/json' }, body });
+    if (/openai/.test(opts.url)) return wrap({ choices: [{ message: { content: txt }, finish_reason: 'stop' }], usage: { prompt_tokens: 1, completion_tokens: 1 }, model: 'mock-a' });
+    if (/anthropic/.test(opts.url)) return wrap({ content: [{ type: 'text', text: txt }], usage: { input_tokens: 1, output_tokens: 1 }, stop_reason: 'end_turn', model: 'mock-b' });
+    return wrap({ candidates: [{ content: { parts: [{ text: txt }] }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: 1, candidatesTokenCount: 1 }, modelVersion: 'mock-c' }); };
 }
 // เดินช่วง 3 → 6 ด้วยโค้ดจริงของโหนด
 async function flow(cid, { failAll = false } = {}) {
@@ -111,6 +117,7 @@ test('โมเดลล้มครบสามตัว: ทุกข้อ ab
   assert.equal(r.plan.run_row.readiness_pct, 'N/A');
   assert.equal(r.pRows.length, 0);
   assert.equal(r.calls.length, 9, '3 โมเดล x (1 + เรียกซ้ำ 2) บันทึกครบ');
+  assert.ok(r.calls.every((c) => c.json.error_code === '429'), 'รหัส 429 มาจาก statusCode ของ response เต็ม');
   assert.ok(/ไม่พบช่องว่าง/.test(r.frz.report_payload.plan.notice));
   assert.equal(r.ren.not_yet_delivered, true);
 });
@@ -127,7 +134,8 @@ test('ฟอร์มสองแถวในการ poll เดียว: ไ
   // ลูปทำทีละงาน: splitInBatches batch 1 ขา loop → Create Run Row · วนกลับจาก Mark Run Delivered
   const loop = one.nodes.find((n) => n.name === 'Loop Over Requests');
   assert.equal(loop.parameters.batchSize, 1);
-  assert.equal(one.connections['Mark Run Delivered'].main[0][0].node, 'Loop Over Requests');
+  assert.equal(one.connections['Mark Run Delivered'].main[0][0].node, 'Is Delivery Failed?');
+  assert.deepEqual([one.connections['Is Delivery Failed?'].main[1][0].node, one.connections['Notify Delivery Failure'].main[0][0].node], ['Loop Over Requests', 'Loop Over Requests']);
 });
 
 test('ไฟล์เกินขนาด / เกินหน้า / ไม่ใช่ PDF ถูกปฏิเสธพร้อม run_id และรหัสสาเหตุ', async () => {
@@ -170,6 +178,8 @@ test('ส่งรายงาน: อัปโหลด PDF ล้มแต่�
   assert.deepEqual([upFail.run_update.stage, upFail.delivery_row.email_status, upFail.delivery_row.error_code], ['delivered', 'sent', 'pdf_upload_failed']);
   const emFail = await rec({}, { id: 'P' }, { error: { message: 'gmail' } });
   assert.deepEqual([emFail.run_update.stage, emFail.delivery_row.error_code], ['failed', 'email_failed']);
+  assert.equal(emFail.delivery_failed, true); assert.match(emFail.alert.subject, /\[IS68076026\]\[DELIVERY\] RUN-20261001090000-cccccccc email_failed/);
+  assert.equal(ok.delivery_failed, false); assert.equal(upFail.delivery_failed, false);
   const delFail = await rec({ error: { message: '404' } }, { id: 'P' }, { id: 'M' });
   assert.deepEqual([delFail.run_update.stage, delFail.delivery_row.error_code], ['delivered', 'temp_doc_delete_failed']);
   // งานก่อนหน้าส่งสำเร็จ (โหนด Upload/Send มีค่าค้าง) แต่งานนี้ Export ล้ม → ต้องไม่ได้ PDF ของงานก่อน
@@ -195,5 +205,68 @@ test('ล้มกลางลูป: Error Trigger ในไฟล์เดี�
   const o2 = J(await runNode(one, 'Classify Error', { nodes: { 'Catch Workflow Error': t2, 'Get Failed Execution': [{}] } }));
   assert.deepEqual([o2.run_update.run_id, o2.run_update.error_code], ['RUN-20261001090100-33333333', 'file_too_large']);
   assert.deepEqual(one.connections['Catch Workflow Error'].main[0].map((t) => t.node), ['Get Failed Execution']);
-  assert.deepEqual(one.connections['Log Error'].main[0].map((t) => t.node), ['Notify Researcher']);
+  assert.deepEqual(one.connections['Log Error'].main[0].map((t) => t.node), ['Is Alert Due?']);
+  assert.deepEqual(one.connections['Is Alert Due?'].main[0].map((t) => t.node), ['Notify Researcher']);
+  assert.equal(out.run_known, true); assert.equal(out.notify, true);
+});
+
+test('DEC-48 เรียกโมเดลใน n8n 2.x: 429 เรียกซ้ำพร้อมรอ retry_backoff_ms · หมดเวลาเรียกซ้ำ · 401 ไม่เรียกซ้ำ', async () => {
+  const caseDir = path.join(ROOT, 'synthetic', 'case_A');
+  const built = [{ json: { ctx: { run_id: 'RUN-20261001090000-dddddddd', role_id: 'R01' }, prompt: 'p' } }];
+  sleeps.length = 0;
+  const r429 = J(await runNode(one, 'Call Model C', { nodes: { 'Build Prompt': built }, env: ENV, helpers: { httpRequest: httpFor(caseDir, 'C', true) } }));
+  assert.deepEqual(r429.result.calls.map((c) => [c.attempt, c.error_code]), [[1, '429'], [2, '429'], [3, '429']]);
+  assert.deepEqual(sleeps, refs.modelsCfg.defaults.retry_backoff_ms, 'รอ 5 และ 15 วินาทีก่อนเรียกซ้ำ');
+  let n = 0;
+  const hang = J(await runNode(one, 'Call Model A', { nodes: { 'Build Prompt': built }, env: ENV, timers: fakeTimers(true), helpers: { httpRequest: () => { n++; return new Promise(() => {}); } } }));
+  assert.equal(n, 3); assert.deepEqual(hang.result.calls.map((c) => c.status), ['timeout', 'timeout', 'timeout']);
+  const r401 = J(await runNode(one, 'Call Model B', { nodes: { 'Build Prompt': built }, env: ENV, helpers: { httpRequest: async () => ({ statusCode: 401, headers: {}, body: { error: 'bad key' } }) } }));
+  assert.deepEqual(r401.result.calls.map((c) => c.error_code), ['401']);
+  // ข้อผิดพลาดที่ข้าม RPC มาเป็นวัตถุไม่มีรหัส HTTP (ที่พบใน n8n จริง) ต้องไม่ทำให้โหนดล้ม
+  const rpc = J(await runNode(one, 'Call Model B', { nodes: { 'Build Prompt': built }, env: ENV, helpers: { httpRequest: async () => { throw { message: 'socket hang up' }; } } }));
+  assert.equal(rpc.result.status, 'failed'); assert.equal(rpc.result.calls.length, 1);
+});
+
+test('DEC-48 นับหน้าซ้ำด้วย numpages ของ Extract From File (PDF แบบ object stream)', async () => {
+  const base = { ctx: { run_id: 'RUN-20261001090000-eeeeeeee', page_count: 0 }, pdf_b64: 'JVBERi0=' };
+  await assert.rejects(runNode(one, 'Choose Text Source', { input: [{ numpages: 6, text: 'x'.repeat(500) }], nodes: { 'Check PDF File': [base] } }), /\[run_id=RUN-20261001090000-eeeeeeee\] too_many_pages: pages=6/);
+  const ok = await runNode(one, 'Choose Text Source', { input: [{ numpages: 5, text: 'x'.repeat(500) }], nodes: { 'Check PDF File': [base] } });
+  assert.equal(ok.json.use_text_layer, true);
+});
+
+test('DEC-48 ล้มกลางลูป: งานที่ยังไม่ได้เริ่มใน execution เดียวกันบันทึก failed/batch_aborted ไม่หายเงียบ', async () => {
+  const v = (id, extra = {}) => ({ json: { run_id: id, valid: true, not_duplicate: true, run_row: { run_id: id, email: id.slice(-4) + '@mail.test', role_id: 'R01', stage: 'running' }, ...extra } });
+  const runData = {
+    'Validate Form Rows': [{ data: { main: [[v('RUN-20261001090100-11111111'), v('RUN-20261001090100-22222222'), v('RUN-20261001090100-33333333'), v('RUN-20261001090100-44444444', { valid: false })]] } }],
+    'Loop Over Requests': [{ data: { main: [[], [{ json: { run_id: 'RUN-20261001090100-11111111' } }]] } }],
+  };
+  const trig = [{ execution: { id: '92', error: { message: 'Forbidden - perhaps check your credentials?' }, lastNodeExecuted: 'Load Corpus' }, workflow: { name: SINGLE_NAME } }];
+  const out = J(await runNode(one, 'Classify Error', { nodes: { 'Catch Workflow Error': trig, 'Get Failed Execution': [{ data: { resultData: { runData } } }] } }));
+  assert.equal(out.run_update.run_id, 'RUN-20261001090100-11111111');
+  assert.deepEqual(out.pending_rows.map((r) => [r.run_id, r.stage, r.error_code]), [['RUN-20261001090100-22222222', 'failed', 'batch_aborted'], ['RUN-20261001090100-33333333', 'failed', 'batch_aborted']]);
+  assert.match(out.alert.body, /RUN-20261001090100-22222222/); assert.match(out.alert.subject, /\+2 batch_aborted/);
+  const rows = await runNode(one, 'Build Aborted Rows', { nodes: { 'Classify Error': [out] } });
+  assert.equal(rows.length, 2); assert.equal(rows[0].json.email, '2222@mail.test');
+  const none = await runNode(one, 'Build Aborted Rows', { nodes: { 'Classify Error': [{ ...out, pending_rows: [] }] } });
+  assert.deepEqual(none, []);
+});
+
+test('DEC-48 ล้มก่อนมีงาน (trigger อ่านชีตไม่ได้): ไม่เขียนแถว runs ปลอม · อีเมลไม่เกินชั่วโมงละครั้ง', async () => {
+  // รูปข้อมูลจริงของ Error Trigger เมื่อ poll ล้ม (n8n 2.39.9): ไม่มี execution มีแต่ trigger.error
+  const trig = [{ trigger: { error: { message: 'Forbidden - perhaps check your credentials?', description: 'The caller does not have permission', name: 'NodeApiError' }, mode: 'trigger' }, workflow: { id: 'is68Single000001', name: SINGLE_NAME } }];
+  const sd = {};
+  const runCls = async () => {
+    const n = one.nodes.find((x) => x.name === 'Classify Error');
+    const sandbox = { ...fakeTimers(), $: (nm) => ({ first: () => ({ json: nm === 'Catch Workflow Error' ? trig[0] : {} }) }), $getWorkflowStaticData: () => sd, console, Date, JSON, Math, Set, String, Number, RegExp, Object, Array, Error };
+    vm.createContext(sandbox);
+    return JSON.parse(JSON.stringify(await vm.runInContext('(async function(){' + n.parameters.jsCode + '\n})', sandbox)()))[0].json;
+  };
+  const a = await runCls();
+  assert.equal(a.run_known, false); assert.equal(a.notify, true); assert.deepEqual(a.pending_rows, []);
+  assert.equal(a.run_update.error_code, 'trigger_failed'); assert.match(a.audit.detail, /The caller does not have permission/);
+  assert.match(one.nodes.find((x) => x.name === 'Get Failed Execution').parameters.url, /: 'none' \}\}\?includeData=true/, 'ไม่เรียก /executions/ แบบรายการเมื่อไม่มี execution.id');
+  const b = await runCls();
+  assert.equal(b.notify, false, 'ครั้งที่สองภายในหนึ่งชั่วโมงไม่ส่งอีเมล');
+  assert.deepEqual(one.connections['Is Run Known?'].main.map((o) => o.map((t) => t.node)), [['Mark Run Failed'], ['Log Error']]);
+  assert.deepEqual(one.connections['Is Alert Due?'].main[0].map((t) => t.node), ['Notify Researcher']);
 });

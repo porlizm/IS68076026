@@ -1,0 +1,1004 @@
+[
+ {
+  "no": 1,
+  "title": "นำเข้าและเปิดใช้งาน (import:workflow + activate)",
+  "executions": [],
+  "runs": [],
+  "checks": [
+   {
+    "ok": true,
+    "check": "ชื่อ WF_IS_68076026_01OCT26"
+   },
+   {
+    "ok": true,
+    "check": "69 โหนด + 7 sticky note"
+   },
+   {
+    "ok": true,
+    "check": "active=true (n8n ตรวจพารามิเตอร์ trigger ผ่าน)"
+   }
+  ]
+ },
+ {
+  "no": 2,
+  "title": "เรซูเม A มีชั้นข้อความ",
+  "elapsed_s": 49.1,
+  "executions": [
+   {
+    "id": "75",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 56,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 3,
+   "findings": 90,
+   "decisions": 30,
+   "plan_items": 7,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 3,
+   "docai": 0,
+   "files": 2
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001144536-53ba59b5",
+    "stage": "delivered",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=3;A:ok;B:ok;C:ok",
+    "readiness_pct": 66.25,
+    "n_abstained": 0,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_93ef212617712189ae18502464bb",
+    "error_code": ""
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution trigger สำเร็จ ไม่มี error execution"
+   },
+   {
+    "ok": true,
+    "check": "runs.stage = delivered"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว"
+   },
+   {
+    "ok": true,
+    "check": "decisions 30 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแนบ PDF 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "ocr_results.engine = pdf_text_layer"
+   },
+   {
+    "ok": true,
+    "check": "pdf_file_id=mockpdf_93ef212617712189ae18502464bb error_code=''"
+   },
+   {
+    "ok": true,
+    "check": "R = 66.25 (ตรง run_local 66.25)"
+   },
+   {
+    "ok": true,
+    "check": "plan_items 7 (ตรง run_local 7)"
+   },
+   {
+    "ok": true,
+    "check": "ลบ Google Doc ชั่วคราวแล้ว"
+   }
+  ]
+ },
+ {
+  "no": 3,
+  "title": "เรซูเม C สแกน + โมเดล C ตอบ 429 ทุกครั้ง",
+  "elapsed_s": 79.1,
+  "executions": [
+   {
+    "id": "76",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 57,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 5,
+   "findings": 60,
+   "decisions": 30,
+   "plan_items": 9,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 5,
+   "docai": 1,
+   "files": 2
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001144636-7aa79fd7",
+    "stage": "delivered",
+    "ocr_engine": "google_document_ai",
+    "model_status": "m=2;A:ok;B:ok;C:call_failed",
+    "readiness_pct": 38.57,
+    "n_abstained": 2,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_777d6de6a78bc804e6888db36027",
+    "error_code": ""
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution trigger สำเร็จ ไม่มี error execution"
+   },
+   {
+    "ok": true,
+    "check": "runs.stage = delivered"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว"
+   },
+   {
+    "ok": true,
+    "check": "decisions 30 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแนบ PDF 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "ocr engine = google_document_ai"
+   },
+   {
+    "ok": true,
+    "check": "model_calls C: [(1, '429'), (2, '429'), (3, '429')]"
+   },
+   {
+    "ok": true,
+    "check": "ช่วงรอก่อนเรียกซ้ำ [5.0, 15.0] วินาที (retry_backoff_ms 5000/15000)"
+   },
+   {
+    "ok": true,
+    "check": "model_status m=2;A:ok;B:ok;C:call_failed"
+   },
+   {
+    "ok": true,
+    "check": "R = 38.57 (ตรง run_local 38.57)"
+   }
+  ]
+ },
+ {
+  "no": 4,
+  "title": "สองแถวในการ poll เดียว",
+  "elapsed_s": 44.5,
+  "executions": [
+   {
+    "id": "77",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 106,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 2,
+   "ocr_results": 2,
+   "model_calls": 6,
+   "findings": 180,
+   "decisions": 60,
+   "plan_items": 19,
+   "deliveries": 2,
+   "audit_log": 4,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 2,
+   "evaluation_responses": 0,
+   "mail": 2,
+   "models": 6,
+   "docai": 0,
+   "files": 4
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001144736-35270d13",
+    "stage": "delivered",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=3;A:ok;B:ok;C:ok",
+    "readiness_pct": 66.25,
+    "n_abstained": 0,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_20950ab56e6becd8d1e4332a147e",
+    "error_code": ""
+   },
+   {
+    "run_id": "RUN-20261001144736-f9984a6a",
+    "stage": "delivered",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=3;A:ok;B:ok;C:ok",
+    "readiness_pct": 19.63,
+    "n_abstained": 0,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_ec3ce7da29cd97f312337eaad367",
+    "error_code": ""
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution เดียวทำครบสองงาน"
+   },
+   {
+    "ok": true,
+    "check": "runs [('35270d13', 'delivered'), ('f9984a6a', 'delivered')]"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 2 · decisions 60"
+   },
+   {
+    "ok": true,
+    "check": "R ของสองงาน [66.25, 19.63] (ไม่ปนกัน)"
+   }
+  ]
+ },
+ {
+  "no": 5,
+  "title": "ไม่ให้ความยินยอม",
+  "elapsed_s": 53.3,
+  "executions": [
+   {
+    "id": "78",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Log Skipped Request",
+    "nodes_run": 5,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 0,
+   "ocr_results": 0,
+   "model_calls": 0,
+   "findings": 0,
+   "decisions": 0,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 1,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 0,
+   "models": 0,
+   "docai": 0,
+   "files": 0
+  },
+  "runs": [],
+  "checks": [
+   {
+    "ok": true,
+    "check": "ไม่มีแถว runs (0)"
+   },
+   {
+    "ok": true,
+    "check": "audit ['rejected_input']"
+   },
+   {
+    "ok": true,
+    "check": "ไม่ส่งอีเมล"
+   }
+  ]
+ },
+ {
+  "no": 6,
+  "title": "ไฟล์ 6 หน้า",
+  "elapsed_s": 58.3,
+  "executions": [
+   {
+    "id": "79",
+    "mode": "trigger",
+    "status": "error",
+    "error": "[run_id=RUN-20261001144936-6d9c7476] too_many_pages: bytes=4096 pages=6 [line 723]",
+    "lastNode": "Check PDF File",
+    "nodes_run": 9,
+    "non_success": [
+     "Check PDF File#0 error items=0 [run_id=RUN-20261001144936-6d9c7476] too_many_pages: bytes=4096 pages=6 [line 723]"
+    ]
+   },
+   {
+    "id": "80",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Build Aborted Rows",
+    "nodes_run": 9,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 0,
+   "model_calls": 0,
+   "findings": 0,
+   "decisions": 0,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 1,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 0,
+   "docai": 0,
+   "files": 0
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001144936-6d9c7476",
+    "stage": "failed",
+    "ocr_engine": "",
+    "model_status": "",
+    "readiness_pct": "",
+    "n_abstained": "",
+    "email_status": "",
+    "pdf_file_id": "",
+    "error_code": "too_many_pages"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "trigger=['error'] error=['success']"
+   },
+   {
+    "ok": true,
+    "check": "runs failed / too_many_pages"
+   },
+   {
+    "ok": true,
+    "check": "แจ้งผู้วิจัย 1 ฉบับ"
+   }
+  ]
+ },
+ {
+  "no": 7,
+  "title": "ล้มกลางลูป (สองงาน · อ่าน ref_corpus ไม่ได้)",
+  "elapsed_s": 63.7,
+  "executions": [
+   {
+    "id": "81",
+    "mode": "trigger",
+    "status": "error",
+    "error": "Forbidden - perhaps check your credentials?",
+    "lastNode": "Load Corpus",
+    "nodes_run": 33,
+    "non_success": [
+     "Load Corpus#0 error items=0 Forbidden - perhaps check your credentials?"
+    ]
+   },
+   {
+    "id": "82",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Record Aborted Requests",
+    "nodes_run": 10,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 2,
+   "ocr_results": 1,
+   "model_calls": 3,
+   "findings": 90,
+   "decisions": 30,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 2,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 3,
+   "docai": 0,
+   "files": 1
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145036-aed03536",
+    "stage": "failed",
+    "ocr_engine": "",
+    "model_status": "",
+    "readiness_pct": "",
+    "n_abstained": "",
+    "email_status": "",
+    "pdf_file_id": "",
+    "error_code": "unexpected_error"
+   },
+   {
+    "run_id": "RUN-20261001145036-feab1c47",
+    "stage": "failed",
+    "ocr_engine": "",
+    "model_status": "",
+    "readiness_pct": "",
+    "n_abstained": "",
+    "email_status": "",
+    "pdf_file_id": "",
+    "error_code": "batch_aborted"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "trigger ล้ม · Error Trigger ทำงานสำเร็จ"
+   },
+   {
+    "ok": true,
+    "check": "งานที่ล้ม [('aed03536', 'failed', 'unexpected_error')]"
+   },
+   {
+    "ok": true,
+    "check": "งานที่ยังไม่เริ่ม [('feab1c47', 'failed', 'batch_aborted')]"
+   },
+   {
+    "ok": true,
+    "check": "audit_log workflow_error ระบุ run_id ของงานที่ล้ม"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแจ้งผู้วิจัย 1 ฉบับ"
+   }
+  ]
+ },
+ {
+  "no": 8,
+  "title": "โมเดลล้มครบสามตัว (401)",
+  "elapsed_s": 58.7,
+  "executions": [
+   {
+    "id": "83",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 54,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 3,
+   "findings": 0,
+   "decisions": 30,
+   "plan_items": 0,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 3,
+   "docai": 0,
+   "files": 2
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145136-b324f329",
+    "stage": "delivered",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=0;A:call_failed;B:call_failed;C:call_failed",
+    "readiness_pct": "N/A",
+    "n_abstained": 30,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_679390e20742d29f28b6305c8b61",
+    "error_code": ""
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution trigger สำเร็จ ไม่มี error execution"
+   },
+   {
+    "ok": true,
+    "check": "runs.stage = delivered"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว"
+   },
+   {
+    "ok": true,
+    "check": "decisions 30 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแนบ PDF 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "abstained 30 · R N/A"
+   },
+   {
+    "ok": true,
+    "check": "model_calls 3 (401 ไม่เรียกซ้ำ) · findings 0"
+   }
+  ]
+ },
+ {
+  "no": 9,
+  "title": "อัปโหลด PDF ล้ม (Drive ตอบ 403 quota ที่ขั้นอัปโหลด PDF)",
+  "elapsed_s": 58.9,
+  "executions": [
+   {
+    "id": "84",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 56,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 3,
+   "findings": 90,
+   "decisions": 30,
+   "plan_items": 7,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 3,
+   "docai": 0,
+   "files": 1
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145236-8895d7cc",
+    "stage": "delivered",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=3;A:ok;B:ok;C:ok",
+    "readiness_pct": 66.25,
+    "n_abstained": 0,
+    "email_status": "sent",
+    "pdf_file_id": "",
+    "error_code": "pdf_upload_failed"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution trigger สำเร็จ ไม่มี error execution"
+   },
+   {
+    "ok": true,
+    "check": "runs.stage = delivered"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว"
+   },
+   {
+    "ok": true,
+    "check": "decisions 30 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแนบ PDF 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "error_code pdf_upload_failed email sent"
+   }
+  ]
+ },
+ {
+  "no": 10,
+  "title": "Document AI ล้ม → OCR ในเครื่อง",
+  "elapsed_s": 84.1,
+  "executions": [
+   {
+    "id": "85",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 58,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 5,
+   "findings": 60,
+   "decisions": 30,
+   "plan_items": 9,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 5,
+   "docai": 0,
+   "files": 2
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145336-5e00b99b",
+    "stage": "delivered",
+    "ocr_engine": "local_ocr",
+    "model_status": "m=2;A:ok;B:ok;C:call_failed",
+    "readiness_pct": 38.57,
+    "n_abstained": 2,
+    "email_status": "sent",
+    "pdf_file_id": "mockpdf_0f25144f40e36ae0acb8b85a0629",
+    "error_code": ""
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution trigger สำเร็จ ไม่มี error execution"
+   },
+   {
+    "ok": true,
+    "check": "runs.stage = delivered"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว"
+   },
+   {
+    "ok": true,
+    "check": "decisions 30 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลแนบ PDF 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "ocr engine = local_ocr"
+   }
+  ]
+ },
+ {
+  "no": 11,
+  "title": "OCR ล้มทั้งหลักและสำรอง",
+  "elapsed_s": 33.5,
+  "executions": [
+   {
+    "id": "86",
+    "mode": "trigger",
+    "status": "error",
+    "error": "[run_id=RUN-20261001145436-9bbeb3af] ocr_failed: บริการอ่านข้อความทั้งหลักและสำรองไม่คืนข้อความ [line 725]",
+    "lastNode": "Mask Personal Data",
+    "nodes_run": 15,
+    "non_success": [
+     "Mask Personal Data#0 error items=0 [run_id=RUN-20261001145436-9bbeb3af] ocr_failed: บริการอ่านข้อความทั้งหลักและสำรองไม่คืนข้อความ [line 725]"
+    ]
+   },
+   {
+    "id": "87",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Build Aborted Rows",
+    "nodes_run": 9,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 0,
+   "model_calls": 0,
+   "findings": 0,
+   "decisions": 0,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 1,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 0,
+   "docai": 0,
+   "files": 0
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145436-9bbeb3af",
+    "stage": "failed",
+    "ocr_engine": "",
+    "model_status": "",
+    "readiness_pct": "",
+    "n_abstained": "",
+    "email_status": "",
+    "pdf_file_id": "",
+    "error_code": "ocr_failed"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "runs failed / ocr_failed"
+   }
+  ]
+ },
+ {
+  "no": 13,
+  "title": "โฟลเดอร์รายงานผิด (สร้าง Doc ชั่วคราวไม่ได้ → ไม่มี PDF)",
+  "elapsed_s": 63.8,
+  "executions": [
+   {
+    "id": "88",
+    "mode": "trigger",
+    "status": "success",
+    "error": null,
+    "lastNode": "Loop Over Requests",
+    "nodes_run": 51,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 1,
+   "model_calls": 3,
+   "findings": 90,
+   "decisions": 30,
+   "plan_items": 7,
+   "deliveries": 1,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 3,
+   "docai": 0,
+   "files": 1
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145536-8a28ba2d",
+    "stage": "failed",
+    "ocr_engine": "pdf_text_layer",
+    "model_status": "m=3;A:ok;B:ok;C:ok",
+    "readiness_pct": 66.25,
+    "n_abstained": 0,
+    "email_status": "failed",
+    "pdf_file_id": "",
+    "error_code": "The resource you are requesting could not be found"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "execution สำเร็จ (ส่งไม่สำเร็จไม่ใช่ error ของ n8n)"
+   },
+   {
+    "ok": true,
+    "check": "runs failed / email failed"
+   },
+   {
+    "ok": true,
+    "check": "deliveries 1 แถว (บันทึกครั้งเดียว)"
+   },
+   {
+    "ok": true,
+    "check": "แจ้งผู้วิจัย [('researcher@mail.test', False)]"
+   }
+  ]
+ },
+ {
+  "no": 14,
+  "title": "trigger อ่านชีตไม่ได้ต่อเนื่อง ~3 นาที",
+  "elapsed_s": 190.4,
+  "executions": [
+   {
+    "id": "89",
+    "mode": "trigger",
+    "status": "error",
+    "error": "Forbidden - perhaps check your credentials?",
+    "lastNode": "Watch Form Responses",
+    "nodes_run": 1,
+    "non_success": [
+     "Watch Form Responses#0 None items=0 Forbidden - perhaps check your credentials?"
+    ]
+   },
+   {
+    "id": "90",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Is Alert Due?",
+    "nodes_run": 6,
+    "non_success": []
+   },
+   {
+    "id": "91",
+    "mode": "trigger",
+    "status": "error",
+    "error": "Forbidden - perhaps check your credentials?",
+    "lastNode": "Watch Form Responses",
+    "nodes_run": 1,
+    "non_success": [
+     "Watch Form Responses#0 None items=0 Forbidden - perhaps check your credentials?"
+    ]
+   },
+   {
+    "id": "92",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Is Alert Due?",
+    "nodes_run": 6,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 0,
+   "ocr_results": 0,
+   "model_calls": 0,
+   "findings": 0,
+   "decisions": 0,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 2,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 0,
+   "evaluation_responses": 0,
+   "mail": 0,
+   "models": 0,
+   "docai": 0,
+   "files": 0
+  },
+  "runs": [],
+  "checks": [
+   {
+    "ok": true,
+    "check": "poll ล้ม 2 ครั้ง"
+   },
+   {
+    "ok": true,
+    "check": "Error Trigger ทำงาน 2 ครั้ง สำเร็จทุกครั้ง"
+   },
+   {
+    "ok": true,
+    "check": "ไม่มีแถว runs ปลอม (0)"
+   },
+   {
+    "ok": true,
+    "check": "audit_log 2 แถว"
+   },
+   {
+    "ok": true,
+    "check": "อีเมลถึงผู้วิจัย 0 ฉบับในรอบนี้ — ฉบับแรกส่งไปแล้วในการรันแยก 21:36 น. (case14.out: 3 poll ล้ม → 1 ฉบับ) จึงอยู่ในช่วงพัก 1 ชั่วโมงของ Is Alert Due? (static data คงอยู่ข้าม execution)"
+   }
+  ]
+ },
+ {
+  "no": 12,
+  "title": "PDF 6 หน้าแบบ object stream",
+  "elapsed_s": 48.3,
+  "executions": [
+   {
+    "id": "93",
+    "mode": "trigger",
+    "status": "error",
+    "error": "[run_id=RUN-20261001145936-eea52e7d] too_many_pages: pages=6 (extractFromFile) [line 9]",
+    "lastNode": "Choose Text Source",
+    "nodes_run": 11,
+    "non_success": [
+     "Choose Text Source#0 error items=0 [run_id=RUN-20261001145936-eea52e7d] too_many_pages: pages=6 (extractFromFile) [line 9]"
+    ]
+   },
+   {
+    "id": "94",
+    "mode": "error",
+    "status": "success",
+    "error": null,
+    "lastNode": "Build Aborted Rows",
+    "nodes_run": 9,
+    "non_success": []
+   }
+  ],
+  "delta": {
+   "runs": 1,
+   "ocr_results": 0,
+   "model_calls": 0,
+   "findings": 0,
+   "decisions": 0,
+   "plan_items": 0,
+   "deliveries": 0,
+   "audit_log": 1,
+   "ground_truth": 0,
+   "pathway_review": 0,
+   "form_responses": 1,
+   "evaluation_responses": 0,
+   "mail": 1,
+   "models": 0,
+   "docai": 0,
+   "files": 0
+  },
+  "runs": [
+   {
+    "run_id": "RUN-20261001145936-eea52e7d",
+    "stage": "failed",
+    "ocr_engine": "",
+    "model_status": "",
+    "readiness_pct": "",
+    "n_abstained": "",
+    "email_status": "",
+    "pdf_file_id": "",
+    "error_code": "too_many_pages"
+   }
+  ],
+  "checks": [
+   {
+    "ok": true,
+    "check": "trigger=['error'] error=['success']"
+   },
+   {
+    "ok": true,
+    "check": "runs failed / too_many_pages"
+   },
+   {
+    "ok": true,
+    "check": "แจ้งผู้วิจัย 1 ฉบับ"
+   },
+   {
+    "ok": true,
+    "check": "ตรวจพบที่ Choose Text Source: [run_id=RUN-20261001145936-eea52e7d] too_many_pages: pages=6 (extractFromFile) [line 9]"
+   }
+  ]
+ }
+]
