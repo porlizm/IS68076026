@@ -19,6 +19,10 @@
 
 ## ประวัติ session
 
+### 3 ต.ค. 2569 (ดึก) · Plan_03OCT26_v2: แผนพัฒนางานวิจัยทั้งหมดหลัง PoC
+- **ทำ** `docs/Plan_03OCT26_v2.md` · บทเรียน L1–L7 จาก PoC · ข้อเสนอ S1–S8 (engine 2.1 + R7 · Coding Manual ใช้นิยามเดียวกับระบบ · component analysis เชิงพรรณนา · ความตรงคะแนนก่อน freeze · STAMP ใน runs · EdTech · PDPA) · ระยะ A/B/C/V/W/E · คำถามอาจารย์ D6–D11
+- **ไม่ได้แตะ** โค้ด · เล่ม · **ค้าง** 👤 อ่านแผน → สั่ง A1 (DEC-60) · อีเมลอาจารย์ D0–D11
+
 ### 3 ต.ค. 2569 (ดึก) · DEC-59: WF_Demo v2.1.0 (แก้ตาม Gap_demo + ตราประทับรุ่น)
 - **ทำ** D1 Role-Fit (F = ½R-role + ½T, ป้าย "พร้อมสูง" ต้อง F ≥ 75 และ T ≥ 60) · D2 R-role ถ่วง idf · D3 actor/LV (prompt `verifier_demo_v1.1` + analyst ส่ง `actors`) · D4 cache verdict + batch 30 · D5 quote ซ้ำ ≤ 2 ข้อ · D6 H ตัวส่วนคงที่/ข้อมูลไม่พอ · D7 แผงโทเคน · **ตราประทับรุ่น** STAMP ทุกโหนด + `GET /is-demo-version` + `client_build` + `run_demo_mac.sh` เทียบ build_id และหยุดถ้าไม่ตรง/ฆ่า n8n ค้าง
 - **ผล** WF_Demo 31 → 34 โหนด · tests/demo_workflow 9/9 (เพิ่ม 5: version, stale node, Role-Fit/token/actor, D5, D4 cache) · mock server รุ่นใหม่
