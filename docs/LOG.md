@@ -1,7 +1,7 @@
 # LOG: IS 68076026 (บันทึกความคืบหน้าและจุดทำต่อ)
 
 > ไฟล์นี้คือจุดเริ่มของทุก session ให้อ่านหัวข้อ **ทำต่อจากตรงนี้** ก่อน
-> อัปเดตล่าสุด: 1 ต.ค. 2569 · ระยะปัจจุบัน: **เล่ม Final เสร็จ (gate-book) · รอ G-600 จากการยืนยันรายการของผู้วิจัย + ทดสอบ n8n จริง + จริยธรรม**
+> อัปเดตล่าสุด: 3 ต.ค. 2569 · ระยะปัจจุบัน: **แก้ Gap_03OCT26 ครบ (engine 2.0 · DEC-51–58) · เล่ม 84 หน้า · รอทดสอบกับ Gemini/โมเดลจริง + ผู้ให้ป้ายคนที่ 2 + G-600 + จริยธรรม**
 > ประวัติถึง 23 ก.ย. อยู่ใน Project `claude/LOG_Final_IS.md`
 
 ---
@@ -9,14 +9,26 @@
 ## ▶ ทำต่อจากตรงนี้
 
 0. 👤 ถ้าใช้ MacBook: คัดลอก `.env` + `private/` จากเครื่อง Windows · `python3 -m venv ~/venv_is` ตาม Setup_Guide ข้อ 0
-
-1. 👤 ทำ NEXT_STEPS ขั้น 0 (F1–F3): ยืนยันรายการใหม่ 14 รายการ, URL 28 รายการ, DEC-45
-2. 🤖 F4: รันสร้างข้อมูลและเล่มใหม่ → Gate G-600 → tag `gate-600`
-3. 👤🤖 F5: ทดสอบ workflow ใน n8n จริง แล้วแทน [รอข้อมูล] ในหัวข้อ 3.6.3
+1. 👤🤖 **T1 (DEC-57)** เปิด WF_Demo รุ่นใหม่ (`node demo/build_wf_demo.mjs .` → `bash demo/run_demo_mac.sh`) แล้วรัน `node scripts/validate_scoring.mjs` (ค่าเริ่มต้น `--base http://localhost:5678/webhook`) กับ Gemini จริง → `evidence/scoring_validation_<วันที่>.md` · ลองเรซูเมจริงของผู้วิจัยซ้ำ (R19 ต้องสูงกว่า R15)
+2. 👤 ให้ป้าย Gold-R3 คนที่ 2 (`evidence/r3_gold/gold_pairs_synthetic.csv` + ชุดจริงใน `private/`) → `node scripts/r3_gold.mjs eval`
+3. 👤 อาจารย์ยืนยัน DEC-54 (R6) และเกณฑ์ผ่าน DEC-57 · ทำ NEXT_STEPS ขั้น 0 (F1–F3) → 🤖 F4 Gate G-600
+4. 👤🤖 นำเข้า `WF_IS_68076026_01OCT26.json` รุ่น 79 โหนดใน n8n จริง (บริการจำลอง `evidence/n8n_s6/` ต้องเพิ่ม case D + mock verifier) · สเปรดชีตเพิ่มแท็บ `role_task_decisions` และคอลัมน์ใหม่ (นำเข้า `sheets_import/` ใหม่)
 
 ---
 
 ## ประวัติ session
+
+### 3 ต.ค. 2569 · แก้ Gap_03OCT26 ทั้งระบบ (engine 2.0 · DEC-51–58)
+- **ที่มา** Demo ให้เรซูเมจริงของผู้วิจัย (IT PM) ได้ R19 = 10 แต่ R15 = 11 · วิเคราะห์ใน `docs/Gap_03OCT26.md`: ข้อสรุปจริง 36 ข้อ ถูก R3 ตัด 27 · R3 แบบคำซ้ำมี recall 0.24 (สังเคราะห์ 0.72) เพราะเรซูเมเขียนแบบผลงาน ไม่ใช่ภาษา O*NET · quote ถูกเปลี่ยนรูปคำ · ไม่มีหลักฐานใบรับรอง/ทักษะพื้นฐาน · ข้อกำหนด 30 ข้อซ้ำกันระหว่างอาชีพ 19/30 · แผนแนะนำคอร์ส Beginner ให้คนมีประสบการณ์ · "หลังเรียนจบ → 100" เกินจริง · ไม่มีชุดตรวจความตรง
+- **ทำ (ระบบ)** `engine-2.0.0-03OCT26` · กฎ R0 → R2 (ตรง/ช่องว่าง/ซ่อม LCS ≥ 0.9) → R3a (คำซ้ำ + stemming θ 0.15) → R3b (โมเดลอื่นตรวจความหมาย A→B→C→A · verifier_v1.0 · ไม่มีคำตอบ = unverified ไม่นับ) → R1 → R4 → R5 ใบรับรอง / R6 Essential Skills ผ่าน O*NET → ดัชนี T (งาน Core 8 งาน) และ H (Hot Technology) · ablation (lexical-only, no-R3) · prompt `analyst_v1.1` (+schema, เก่าไป archive) · max output 16,384 / verifier 4,096 · แผนกรองระดับ (≥ 5 ปี ไม่ใช้ Beginner กับ partially) · รายงาน `report-v2.0`
+- **ทำ (ข้อมูล)** `scripts/build_role_signals.py` → `data/role_tasks.csv` 160 · `role_technology.csv` 375 · `skill_links.csv` 232 · manifest 11 ไฟล์ · Sheets 17 แท็บ (+`role_task_decisions`, คอลัมน์ใหม่ใน runs/model_calls/findings/decisions/ref_corpus)
+- **ทำ (workflow)** `WF_IS_68076026_01OCT26.json` 69 → **79 โหนด** (Prepare Relevance Checks → Call Verifier A/B/C → Collect → Apply Rules R0–R6 → task rows) · validator + traceability 39 แถว 79/79
+- **ทำ (Demo · DEC-58)** ฝัง engine ทั้งไฟล์ · Gemini วิเคราะห์ 3 รอบ (โหวต R1) + Gemini Verifier · ป้าย "ยังยืนยันไม่ได้" เมื่อ C < 0.6 · ตัด "หลังเรียนจบ → 100" · การ์ด T/H · Open Learner Model (ผู้ใช้เพิ่มข้อความหลักฐาน) · Playwright ผ่าน
+- **ทำ (ตรวจความตรง · DEC-57)** `scripts/make_validation_resumes.py` (4 อาชีพ × 3 สไตล์) · `scripts/validate_scoring.mjs` (K1 K2 S1 T3) · `scripts/r3_gold.mjs` (82 คู่สังเคราะห์) · `evidence/r3_gold/summary_03OCT26.json` · กรณีสังเคราะห์ D (เรซูเมแบบผลงาน): R 88.14 เทียบ lexical-only 31.48
+- **ทำ (เล่ม)** บท 3 หัวข้อ 3.1.3, 3.3, 3.4.2–3.4.6 (ตาราง 3.12 กฎ 7 ข้อ), 3.5.2, 3.6 (4 กรณี + 3.6.4 ตาราง 3.18 ชุดตรวจความตรง · เลขตารางเดิม 3.18–3.20 → 3.19–3.21), 3.7.4, 3.9 · บทคัดย่อ · ภาคผนวก · fact sheet · รูป 4 รูป → `build/IS_68076026_Final_03OCT26.docx/.pdf` 84 หน้า · format 33/33 · overlap 0 · Source_Trace 118 key · `evidence/QA_Final_03OCT26.md` (QA 01OCT26 ไป archive)
+- **ผล** tests 78/78 · run_all_checks ผ่าน · A 67.72 · B 23.12 · C 43.58 · D 88.14
+- **ไม่ได้ทำ/ค้าง** ทดสอบ workflow 79 โหนดใน n8n จริง (harness `evidence/n8n_s6/` ยังเป็นรุ่น 69 โหนด ต้องใช้ Node 24) · ยังไม่ได้รันกับ Gemini/โมเดลจริง (ต้องใช้ API key บนเครื่องผู้วิจัย) · ป้าย Gold-R3 เป็นของ Claude คนเดียว · ตัวเลขในเล่มเป็นผลจากกรณีสังเคราะห์และ oracle ระบุชัดในเล่มแล้ว
+- **ข้อมูลส่วนบุคคล** ข้อความเรซูเมจริงอยู่ใน `private/gap_03OCT26_sim/` เท่านั้น (ไม่เข้า git)
 
 ### 3 ต.ค. 2569 · คู่มือและสคริปต์เปิด WF_Demo บน n8n ในเครื่อง (macOS)
 - **ทำ** `demo/run_demo_mac.sh` (ตรวจ Node ≥ 24 → หยุด n8n ที่พอร์ต 5678 → สร้าง credential Gemini/Drive เฉพาะที่ยังไม่มี ด้วย id `REPLACE_*_CRED` ที่ workflow อ้าง → import + publish `is68WFDemo000001` → start ที่ 127.0.0.1 → รอ webhook 200 → เปิดเบราว์เซอร์) · `demo/Setup_wf_demo.md` คู่มือ 12 หัวข้อ (Node 24, Gemini key, สคริปต์, owner, Drive OAuth, ทดสอบ, ใช้งานซ้ำ, แก้ค่าตั้ง, PDPA, แก้ปัญหา, Windows) · ชี้จาก `README_Demo.md` · `.gitignore` เพิ่ม `demo/n8n_demo.log`

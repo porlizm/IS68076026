@@ -1,0 +1,4 @@
+run_id,rank,item_id,item_type,title,provider,source_url,estimated_hours,cumulative_hours,covers_requirements,n_new_requirements,new_weight_covered,mapping_status,phase
+RUN-20261001100000-a3fabeef,1,CRS-R19-F1,course,Write Professional Emails in English,Georgia Institute of Technology,https://www.coursera.org/learn/professional-emails-english,20,20,REQ-R19-2.C.7.a,1,0.033331,source_checked_by_script,foundation
+RUN-20261001100000-a3fabeef,2,CRT-R19-06,certification,Scrum Alliance Certified ScrumMaster (CSM),Scrum Alliance,https://www.scrumalliance.org/get-certified/scrum-master-track/certified-scrummaster,25,45,REQ-R19-4.A.4.a.4,1,0.033642,source_checked_by_script,core_gap_closure
+RUN-20261001100000-a3fabeef,3,CRS-R19-05,course,PMI Authorized PMP Exam Preparation,Project Management Institute,https://www.pmi.org/certifications/project-management-pmp,35,80,REQ-R19-2.B.5.a,1,0.031078,source_checked_by_script,advanced_or_cert_prep

@@ -57,9 +57,15 @@ export async function run(wfObj, startNode, startItem, mocks, log = () => {}) {
       }
       case 'n8n-nodes-base.extractFromFile': outs = [[await mocks.extract(items[0])]]; break;
       case 'n8n-nodes-base.httpRequest': {
-        const url = evalExpr(node.parameters.url, ctx);
-        const body = JSON.parse(evalExpr(node.parameters.jsonBody, ctx));
-        outs = [[{ json: await mocks.http(name, url, body) }]];
+        // n8n ส่งคำขอหนึ่งครั้งต่อหนึ่ง item (Gemini Analyst ได้ ANALYST_RUNS items · DEC-58)
+        const res = [];
+        for (const it of items) {
+          const c = { $json: it.json, $ };
+          const url = evalExpr(node.parameters.url, c);
+          const body = JSON.parse(evalExpr(node.parameters.jsonBody, c));
+          res.push({ json: await mocks.http(name, url, body, res.length) });
+        }
+        outs = [res];
         break;
       }
       case 'n8n-nodes-base.googleDrive': outs = [[{ json: await mocks.drive(items[0]) }]]; break;

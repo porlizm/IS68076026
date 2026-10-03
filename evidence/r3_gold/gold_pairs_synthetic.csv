@@ -1,0 +1,83 @@
+pair_id,source,role_id,element_id,target_kind,quote,label_key,rater_1,rater_2,final_label,verifier_verdict
+S001,synthetic_case_A:onet_vocabulary,R01,2.C.3.a,requirement,Maintained operating system images and server hardware inventory for 120 Linux and Windows hosts.,relevant,,,,
+S002,synthetic_case_A:onet_vocabulary,R01,4.A.3.b.1,requirement,Configured Linux servers and set up computer systems networks for the staging and production environments.,relevant,,,,
+S003,synthetic_case_A:onet_vocabulary,R01,4.A.2.a.2,requirement,Designed an ETL pipeline that transformed data from five source systems into a PostgreSQL warehouse.,relevant,,,,
+S004,synthetic_case_A:onet_vocabulary,R01,4.A.2.b.1,requirement,Diagnosed production problems during on-call rotations and applied problem solving to restore service within SLA.,relevant,,,,
+S005,synthetic_case_A:onet_vocabulary,R01,4.A.2.b.2,requirement,Designed databases and REST APIs for a new loyalty application from scratch.,relevant,,,,
+S006,synthetic_case_A:onet_vocabulary,R01,4.A.4.a.2,requirement,Coordinated with product owners and QA peers in daily stand-up meetings to report progress and blockers.,relevant,,,,
+S007,synthetic_case_A:onet_vocabulary,R01,4.A.2.a.4,requirement,"Analyzed API latency data and query plans to identify slow endpoints, improving p95 response time by 35 percent.",relevant,,,,
+S008,synthetic_case_A:onet_vocabulary,R01,4.A.2.b.6,requirement,Organized sprint backlog grooming and prioritized technical debt items with the team lead.,relevant,,,,
+S009,synthetic_case_A:onet_vocabulary,R01,2.B.3.e,requirement,Built and deployed a Python programming service for batch data processing used by 40 internal teams.,relevant,,,,
+S010,synthetic_case_A:onet_vocabulary,R01,4.A.2.a.3,requirement,Familiar with code review checklists and audit logging requirements.,partial,,,,
+S011,synthetic_case_A:onet_vocabulary,R01,2.A.2.a,requirement,"Skills: critical thinking, teamwork, time management.",partial,,,,
+S012,synthetic_case_A:onet_vocabulary,R01,4.A.3.b.6,requirement,Wrote documentation and runbooks for deployment procedures that reduced onboarding time for new engineers.,relevant,,,,
+S013,synthetic_case_A:onet_vocabulary,R01,4.A.1.a.2,requirement,Set up observability dashboards and alerting in Grafana and monitored systems for latency regressions.,relevant,,,,
+S014,synthetic_case_A:onet_vocabulary,R01,2.B.4.e,requirement,Participated in architecture meetings where the team selected approach options for caching.,partial,,,,
+S015,synthetic_case_A:onet_vocabulary,R01,2.C.4.a,requirement,Coursework in statistics and linear algebra during the B.Eng. program.,partial,,,,
+S016,synthetic_case_A:onet_vocabulary,R01,2.A.1.a,requirement,Read specifications and RFC documents to implement OAuth 2.0 and OpenID Connect correctly.,relevant,,,,
+S017,synthetic_case_A:onet_vocabulary,R01,2.A.2.b,requirement,"Completed course: AWS Cloud Practitioner Essentials (online, 2025).",partial,,,,
+S018,synthetic_case_A:onet_vocabulary,R01,2.B.4.g,requirement,Performed impact analysis and data flow modelling before migrating the monolith billing module.,relevant,,,,
+S019,synthetic_case_A:onet_vocabulary,R01,2.B.2.i,requirement,Debugged memory leaks in a Java microservice and resolved the incident by performing root cause analysis with heap dumps.,relevant,,,,
+S020,synthetic_case_A:onet_vocabulary,R01,2.B.3.b,requirement,Led the system design of an event-driven order service and wrote the technical design document reviewed by architects.,relevant,,,,
+S021,synthetic_case_A:onet_vocabulary,R01,2.B.4.h,requirement,Ran benchmarking and load tests to measure system performance before each quarterly release.,relevant,,,,
+S022,synthetic_case_A:onet_vocabulary,R01,4.A.2.b.5,requirement,Helped maintain the release schedule calendar for the platform team.,partial,,,,
+S023,synthetic_case_A:onet_vocabulary,R01,4.A.2.b.4,requirement,"Software Engineer, Example Commerce Co., Ltd., 2021-present",unrelated,,,,unrelated
+S024,synthetic_case_A:onet_vocabulary,R01,4.A.4.a.1,requirement,"Software Engineer, Example Commerce Co., Ltd., 2021-present",unrelated,,,,unrelated
+S025,synthetic_case_B:onet_vocabulary,R06,4.A.2.a.4,requirement,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,relevant,,,,
+S026,synthetic_case_B:onet_vocabulary,R06,4.A.2.a.2,requirement,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,relevant,,,,
+S027,synthetic_case_B:onet_vocabulary,R06,2.C.4.a,requirement,"Relevant courses: Probability, Statistics for Business, Calculus I.",partial,,,,
+S028,synthetic_case_B:onet_vocabulary,R06,2.A.1.e,requirement,Background in applied mathematics from undergraduate studies.,partial,,,,
+S029,synthetic_case_B:onet_vocabulary,R06,2.B.3.e,requirement,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,relevant,,,,
+S030,synthetic_case_B:onet_vocabulary,R06,2.A.1.d,requirement,Gave a short presentation of a class project to fellow students.,partial,,,,
+S031,synthetic_case_B:onet_vocabulary,R06,2.A.2.b,requirement,Completed course: Google Data Analytics Certificate (in progress).,partial,,,,
+S032,synthetic_case_B:onet_vocabulary,R06,2.C.7.a,requirement,"Languages: Thai (native), English (TOEIC 785).",partial,,,,
+S033,synthetic_case_B:onet_vocabulary,R06,4.A.2.b.1,requirement,"Data Intern, Example Retail Co., 2024",unrelated,,,,unrelated
+S034,synthetic_case_B:onet_vocabulary,R06,4.A.1.a.1,requirement,"Data Intern, Example Retail Co., 2024",unrelated,,,,
+S035,synthetic_case_C:onet_vocabulary,R18,4.A.1.a.1,requirement,Gathered requirements from finance and procurement users through workshops and translated them into user stories.,relevant,,,,
+S036,synthetic_case_C:onet_vocabulary,R18,4.A.2.a.4,requirement,Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.,relevant,,,,
+S037,synthetic_case_C:onet_vocabulary,R18,4.A.1.a.2,requirement,Monitored systems and job queues on the reporting server during month-end.,partial,,,,
+S038,synthetic_case_C:onet_vocabulary,R18,2.A.1.d,requirement,Presented project status updates at team meetings.,partial,,,,
+S039,synthetic_case_C:onet_vocabulary,R18,2.A.1.a,requirement,Reviewed requirements documents and vendor specifications to confirm scope before sign-off.,relevant,,,,
+S040,synthetic_case_C:onet_vocabulary,R18,2.A.1.b,requirement,Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.,relevant,,,,
+S041,synthetic_case_C:onet_vocabulary,R18,2.B.4.g,requirement,Produced process modeling diagrams and data flow analysis for the ERP procurement module.,relevant,,,,
+S042,synthetic_case_C:onet_vocabulary,R18,2.C.1.e,requirement,Provided user support and handled service desk tickets for the finance system after go-live.,relevant,,,,
+S043,synthetic_case_C:onet_vocabulary,R18,4.A.4.a.1,requirement,Explained technical details of the new workflow to non-technical managers in monthly briefings.,relevant,,,,
+S044,synthetic_case_C:onet_vocabulary,R18,4.A.2.a.3,requirement,Carried out a compliance check of approval workflows against the internal audit policy.,relevant,,,,
+S045,synthetic_case_C:onet_vocabulary,R18,4.A.2.a.1,requirement,Participated in vendor evaluation for a document management system.,partial,,,,
+S046,synthetic_case_C:onet_vocabulary,R18,4.A.2.b.6,requirement,Planned and prioritized the backlog for two release cycles with the project manager.,relevant,,,,
+S047,synthetic_case_C:onet_vocabulary,R18,2.A.2.b,requirement,Completed course: IIBA ECBA preparation (self-study).,partial,,,,
+S048,synthetic_case_C:onet_vocabulary,R18,4.A.3.b.6,requirement,Documented functional specifications and test scenarios for three ERP change requests.,relevant,,,,supports
+S049,synthetic_case_C:onet_vocabulary,R18,2.C.7.a,requirement,"English: good command, IELTS 6.5.",partial,,,,
+S050,synthetic_case_C:onet_vocabulary,R18,2.A.1.c,requirement,Contributed to user guide drafts reviewed by the documentation team.,partial,,,,
+S051,synthetic_case_C:onet_vocabulary,R18,4.A.2.b.2,requirement,"IT Business Analyst, Example Manufacturing Co., 2020-present",unrelated,,,,unrelated
+S052,synthetic_case_D:achievement_metrics,R19,4.A.4.b.1,requirement,Cuts purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,unrelated,,,,supports
+S053,synthetic_case_D:achievement_metrics,R19,4.A.4.a.2,requirement,"Presented weekly status, risks and budget variance to the steering committee and escalated scope changes for approval.",relevant,,,,supports
+S054,synthetic_case_D:achievement_metrics,R19,4.A.1.a.1,requirement,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,relevant,,,,supports
+S055,synthetic_case_D:achievement_metrics,R19,4.A.2.b.6,requirement,"Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.",relevant,,,,
+S056,synthetic_case_D:achievement_metrics,R19,4.A.3.b.1,requirement,Integrated SAP Business One with the e-procurement platform through a nightly reconciliation job.,relevant,,,,supports
+S057,synthetic_case_D:achievement_metrics,R19,4.A.2.b.5,requirement,"Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.",relevant,,,,
+S058,synthetic_case_D:achievement_metrics,R19,4.A.4.b.2,requirement,Grew and mentored a delivery team from 6 to 18 people with no regretted attrition.,relevant,,,,
+S059,synthetic_case_D:achievement_metrics,R19,4.A.2.b.1,requirement,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,relevant,,,,supports
+S060,synthetic_case_D:achievement_metrics,R19,4.A.2.b.3,requirement,"M.Sc. Information Technology Management, Example Institute, 2016",partial,,,,partially_supports
+S061,synthetic_case_D:achievement_metrics,R19,4.A.4.c.3,requirement,Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.,relevant,,,,supports
+S062,synthetic_case_D:achievement_metrics,R19,4.A.2.b.4,requirement,Defined the 3-year roadmap for the procurement platform and aligned it with group finance objectives.,relevant,,,,
+S063,synthetic_case_D:achievement_metrics,R19,4.A.4.a.1,requirement,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,relevant,,,,supports
+S064,synthetic_case_D:achievement_metrics,R19,4.A.4.a.4,requirement,Acted as the single point of contact between client stakeholders and engineering across 5 regulated industries.,partial,,,,partially_supports
+S065,synthetic_case_D:achievement_metrics,R19,4.A.1.b.1,requirement,Tracked incident queues and service dashboards daily to spot delivery risks early.,relevant,,,,supports
+S066,synthetic_case_D:achievement_metrics,R19,4.A.4.b.4,requirement,"Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.",relevant,,,,supports
+S067,synthetic_case_D:achievement_metrics,R19,2.C.1.e,requirement,Hosted fortnightly customer advisory sessions to collect feedback and reprioritise features.,relevant,,,,supports
+S068,synthetic_case_D:achievement_metrics,R19,4.A.4.a.7,requirement,"Negotiated change requests and payment milestones with three vendors, keeping the programme within contract value.",relevant,,,,
+S069,synthetic_case_D:achievement_metrics,R19,2.C.3.a,requirement,"Tools: Jira, Confluence, Microsoft Project, SQL, Excel",partial,,,,partially_supports
+S070,synthetic_case_D:achievement_metrics,R19,4.A.3.b.6,requirement,Wrote SRS documents and kept a requirements traceability matrix for every release.,relevant,,,,
+S071,synthetic_case_D:achievement_metrics,R19,4.A.2.a.4,requirement,Built a demand forecasting dashboard with SQL that reduced forecast error from 35% to 9% for 120 branches.,relevant,,,,supports
+S072,synthetic_case_D:achievement_metrics,R19,4.A.2.a.2,requirement,Integrated SAP Business One with the e-procurement platform through a nightly reconciliation job.,relevant,,,,supports
+S073,synthetic_case_D:achievement_metrics,R19,4.A.4.a.3,requirement,Acted as the single point of contact between client stakeholders and engineering across 5 regulated industries.,relevant,,,,
+S074,synthetic_case_D:achievement_metrics,R19,2.A.2.a,requirement,Facilitated root cause analysis sessions after production incidents and tracked corrective actions to closure.,relevant,,,,
+S075,synthetic_case_D:achievement_metrics,R19,4.A.1.a.2,requirement,Tracked incident queues and service dashboards daily to spot delivery risks early.,relevant,,,,supports
+S076,synthetic_case_D:achievement_metrics,R19,2.A.1.a,requirement,Wrote SRS documents and kept a requirements traceability matrix for every release.,partial,,,,
+S077,synthetic_case_D:achievement_metrics,R19,2.A.1.b,requirement,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,relevant,,,,
+S078,synthetic_case_D:achievement_metrics,R19,2.B.1.b,requirement,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,relevant,,,,supports
+S079,synthetic_case_D:achievement_metrics,R19,2.B.5.d,requirement,"Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.",relevant,,,,supports
+S080,synthetic_case_D:achievement_metrics,R19,4.A.4.b.1,requirement,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,relevant,,,,
+S081,synthetic_case_D:achievement_metrics,R19,2.C.7.a,requirement,"Senior IT Project Manager, Example Retail Group, 2019-present",unrelated,,,,
+S082,synthetic_case_D:achievement_metrics,R19,2.B.5.a,requirement,Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.,partial,,,,

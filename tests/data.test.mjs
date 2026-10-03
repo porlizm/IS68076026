@@ -61,9 +61,9 @@ test('mapping_review: ผ่าน ≥ 90% ของ L1 และทุกข้
   assert.deepEqual(unexplained.map((r) => r.requirement_id), []);
 });
 
-test('manifest: sha256 ครบ 8 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4)', () => {
+test('manifest: sha256 ครบ 11 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4 · DEC-54/55)', () => {
   const m = readJSON('data', 'manifest.json');
-  assert.equal(Object.keys(m.files).length, 8);
+  assert.equal(Object.keys(m.files).length, 11);
   for (const [f, v] of Object.entries(m.files)) {
     const buf = fs.readFileSync(path.join(ROOT, 'data', f));
     assert.equal(E.sha256Hex(new Uint8Array(buf)), v.sha256, 'drift: ' + f);
@@ -71,11 +71,11 @@ test('manifest: sha256 ครบ 8 ไฟล์และตรงกับไฟ
   assert.equal(typeof m.frozen, 'boolean');
 });
 
-test('sheets_import: 16 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11)', () => {
+test('sheets_import: 17 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11 · DEC-51/55)', () => {
   const cfg = refs.sheetsCfg.tabs;
-  assert.equal(Object.keys(cfg).length, 16);
+  assert.equal(Object.keys(cfg).length, 17);
   const cols = Object.fromEntries(Object.entries(cfg).map(([k, v]) => [k, v.columns.length]));
-  assert.deepEqual(cols, { runs: 24, ocr_results: 9, model_calls: 12, findings: 13, decisions: 14, plan_items: 14, deliveries: 9, audit_log: 5, ground_truth: 12, pathway_review: 10, ref_roles: 7, ref_requirements: 10, ref_corpus: 10, ref_mappings: 7, form_responses: 8, evaluation_responses: 6 });
+  assert.deepEqual(cols, { runs: 26, ocr_results: 9, model_calls: 13, findings: 20, decisions: 15, role_task_decisions: 9, plan_items: 14, deliveries: 9, audit_log: 5, ground_truth: 12, pathway_review: 10, ref_roles: 7, ref_requirements: 10, ref_corpus: 12, ref_mappings: 7, form_responses: 8, evaluation_responses: 6 });
   const counts = readJSON('sheets_import', 'sheets_import_counts.json');
   assert.equal(counts.ref_roles.rows, 20); assert.equal(counts.ref_requirements.rows, 600);
   assert.equal(counts.ref_corpus.rows, refs.corpus.length); assert.equal(counts.ref_mappings.rows, refs.rawMappings.length);

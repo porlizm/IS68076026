@@ -1,7 +1,7 @@
 {
   "runs": {
     "rows": 0,
-    "columns": 24
+    "columns": 26
   },
   "ocr_results": {
     "rows": 0,
@@ -9,15 +9,19 @@
   },
   "model_calls": {
     "rows": 0,
-    "columns": 12
+    "columns": 13
   },
   "findings": {
     "rows": 0,
-    "columns": 13
+    "columns": 20
   },
   "decisions": {
     "rows": 0,
-    "columns": 14
+    "columns": 15
+  },
+  "role_task_decisions": {
+    "rows": 0,
+    "columns": 9
   },
   "plan_items": {
     "rows": 0,
@@ -49,7 +53,7 @@
   },
   "ref_corpus": {
     "rows": 602,
-    "columns": 10
+    "columns": 12
   },
   "ref_mappings": {
     "rows": 7012,

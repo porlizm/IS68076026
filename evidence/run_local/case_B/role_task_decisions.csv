@@ -1,0 +1,9 @@
+run_id,task_id,task_text,final_status,agreement_level,n_usable_models,rule_flags,evidence_quote,created_at
+RUN-20261001100000-bad84c85,TASK-R06-21823,"Analyze, manipulate, or process large sets of data using statistical software.",evidenced,1,3,A:R3b_supports|B:R3b_supports|C:R3b_supports,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21828,"Create graphs, charts, or other visualizations to convey the results of data analysis using specialized software.",missing,1,3,,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21837,"Test, validate, and reformulate models to ensure accurate prediction of outcomes of interest.",missing,1,3,,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21829,Deliver oral or written presentations of the results of mathematical modeling and data analysis to management or other end users.,partially,1,3,,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21836,Recommend data-driven solutions to key stakeholders.,missing,1,3,,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21831,Identify business problems or management objectives that can be addressed through data analysis.,missing,1,3,,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21826,Clean and manipulate raw data using statistical software.,evidenced,1,3,,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,TASK-R06-21827,"Compare models using statistical performance metrics, such as loss functions or proportion of explained variance.",missing,1,3,,,2026-10-01T10:00:00+07:00

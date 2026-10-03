@@ -17,12 +17,36 @@
   "theta": 0.15,
   "overlap_denominator_cap": 25,
   "alias_min_length": 4,
+  "r3_mode": "hybrid",
+  "r3_mode_note": "DEC-51 · hybrid = R3a คำซ้ำ (stemming) แล้วจึง R3b ให้โมเดลอีกตัวตรวจความหมาย · lexical = R3a อย่างเดียว (ใช้เป็น ablation)",
+  "r3_stemming": true,
+  "verifier_rotation": {
+    "A": "B",
+    "B": "C",
+    "C": "A"
+  },
+  "allow_self_verification": false,
+  "allow_self_verification_note": "ระบบเต็มห้ามโมเดลตรวจข้อความที่ตัวเองยก · Demo โมเดลเดียวตั้ง true และติดป้าย self-verification",
+  "r2_repair_min_similarity": 0.9,
+  "r2_repair_min_tokens": 5,
+  "r2_repair_note": "DEC-52 · ถ้าไม่พบ quote ตรงตัว ให้หาช่วงในเรซูเมที่คำ (หลังตัดคำต่อท้าย) ตรงกัน ≥ 90% แล้วใช้ข้อความจริงจากเรซูเมแทน",
+  "max_quotes_per_claim": 2,
   "quote_length_prompt": {
     "min": 20,
-    "max": 300,
+    "max": 160,
     "enforced_by_R0": false
   },
   "min_usable_models": 2,
+  "evidence_floors": {
+    "credential": true,
+    "linkage": true,
+    "linkage_domains": [
+      "Essential Skills"
+    ],
+    "note": "DEC-54 · R5 ใบรับรองที่พบตรงตัวในเรซูเม + mapping L1 → อย่างน้อย partially · R6 Essential Skill ที่เชื่อมกับกิจกรรมการทำงาน (O*NET F13) ซึ่งได้ evidenced → อย่างน้อย partially"
+  },
+  "role_tasks_per_role": 8,
+  "role_signals_note": "DEC-55 · ดัชนีงานหลัก T (8 งาน Core) และเทคโนโลยีที่ตลาดต้องการ H รายงานแยกจาก R ไม่รวมเป็นตัวเลขเดียว",
   "allowed_months": [
     6,
     12,
@@ -42,10 +66,13 @@
   ],
   "plan_strategy": "weighted_greedy",
   "plan_strategy_note": "DEC-47 · weighted_greedy = สมการ d_k (น้ำหนักช่องว่างใหม่ต่อชั่วโมง) · coverage_first ใช้เทียบเท่านั้น",
+  "plan_level_filter": true,
+  "plan_experienced_years": 5,
+  "plan_level_note": "DEC-56 · ผู้มีประสบการณ์ ≥ 5 ปี: ไม่ใช้รายการระดับ Beginner ปิดข้อที่เป็น partially",
   "coverage_layer_used": "L1_researcher_tagged (กำหนดในโค้ด engine.js ไม่ใช่ค่านี้)",
   "min_approved_share_of_L1": 0.9,
-  "prompt_version": "analyst_v1.0",
-  "rules_version": "RULES-IS68076026-v1.0",
+  "prompt_version": "analyst_v1.1",
+  "rules_version": "RULES-IS68076026-v2.0",
   "retention_days": 90,
   "email_enabled": false,
   "ocr": {
@@ -61,5 +88,6 @@
     "reports_folder_env": "DRIVE_REPORT_FOLDER_ID",
     "masked_text_folder_env": "DRIVE_MASKED_TEXT_FOLDER_ID"
   },
-  "researcher_alert_email_env": "RESEARCHER_EMAIL"
+  "researcher_alert_email_env": "RESEARCHER_EMAIL",
+  "verifier_prompt_version": "verifier_v1.0"
 }

@@ -24,5 +24,7 @@
   },
   "C": "HTTP_429"
  },
- "fictional": true
+ "verifier_invalid_for": [],
+ "fictional": true,
+ "style": "onet_vocabulary"
 }

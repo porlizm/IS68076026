@@ -1,7 +1,26 @@
-# NEXT STEPS: ลำดับงาน IS 68076026 (อัปเดต 1 ต.ค. 2569 · Final_IS)
+# NEXT STEPS: ลำดับงาน IS 68076026 (อัปเดต 3 ต.ค. 2569 · Final_IS · Gap_03OCT26)
 
 > ติ๊ก `[x]` เมื่อเสร็จ และเขียนหลักฐานสั้น ๆ ต่อท้าย · รหัสระยะตาม `docs/Plan_IS_30SEP26.md`
 > 👤 = ผู้วิจัยทำ · 🤖 = Claude ทำได้ · ⛔ = ต้องรอสิ่งอื่นก่อน
+
+---
+
+## ขั้น 0A: แก้ Gap_03OCT26 (คะแนน Demo ต่ำกับเรซูเมจริง) · DEC-51–58
+
+- [x] G1. 🤖 วิเคราะห์สาเหตุ → `docs/Gap_03OCT26.md` (ข้อสรุปจริง 36 ข้อ · R3 recall 0.24)
+- [x] G2. 🤖 engine 2.0: R2 ซ่อม quote (DEC-52) · R3a/R3b (DEC-51) · R5/R6 (DEC-54) · T/H (DEC-55) · แผนตามระดับ (DEC-56) · prompt analyst_v1.1 + verifier_v1.0 (DEC-53) · tests 78/78
+- [x] G3. 🤖 ข้อมูลสัญญาณอาชีพ `role_tasks` / `role_technology` / `skill_links` · manifest 11 · Sheets 17 แท็บ
+- [x] G4. 🤖 workflow 79 โหนด (verifier A/B/C) · validator + traceability ผ่าน
+- [x] G5. 🤖 WF_Demo รุ่นใหม่ (DEC-58) · harness + Playwright ผ่าน
+- [x] G6. 🤖 ชุดตรวจความตรง (DEC-57): เรซูเมสมมติ 12 ไฟล์ · `validate_scoring.mjs` · `r3_gold.mjs`
+- [x] G7. 🤖 เล่มบท 3/บทคัดย่อ/ภาคผนวก → `build/IS_68076026_Final_03OCT26.docx/.pdf` 84 หน้า · format 33/33 · overlap 0
+- [ ] G8. 👤🤖 รัน `node scripts/validate_scoring.mjs` กับ WF_Demo + Gemini จริง → `evidence/scoring_validation_<วันที่>.md` · ถ้าไม่ผ่าน K1/K2/S1/T3 ส่งผลให้ Claude ปรับ (เกณฑ์ใน DEC-57)
+- [ ] G9. 👤 ทดสอบเรซูเมจริงของตัวเองใน Demo อีกครั้ง (R19 vs R15) แล้วบันทึกเลขใน LOG
+- [ ] G10. 👤 ผู้ให้ป้ายคนที่ 2 สำหรับ Gold-R3 → `node scripts/r3_gold.mjs eval` (κ) · ใส่ผลในตาราง 3.18
+- [ ] G11. 👤 อาจารย์ยืนยัน R6 (DEC-54) และเกณฑ์ผ่าน DEC-57
+- [ ] G12. 👤🤖 ทดสอบ workflow 79 โหนดใน n8n 2.39.9 จริง (ปรับ `evidence/n8n_s6/` ให้มี case D + mock verifier) → แทน `evidence/n8n_test_01OCT26.md`
+- [ ] G13. 👤 สเปรดชีตจริง: เพิ่มแท็บ `role_task_decisions` + คอลัมน์ใหม่ (หรือสร้างใหม่จาก `sheets_import/IS68076026_Sheets_Template.xlsx` 17 แท็บ)
+- [ ] G14. 👤 เปิด `build/IS_68076026_Final_03OCT26.docx` ใน Word → อัปเดตฟิลด์ สารบัญ เลขตาราง 3.18–3.21
 
 ---
 
@@ -13,7 +32,7 @@
 - [ ] F4. 🤖 หลัง F1–F3: `python scripts/build_data_all.py && bash scripts/run_all_checks.sh && python scripts/build_book.py && python scripts/export_pdf.py && python scripts/check_docx_format.py && python scripts/check_overlap.py` → Gate G-600 · commit + tag `gate-600`
 - [x] F5. 🤖 ทดสอบใน n8n 2.39.9 จริงกับบริการจำลอง → `WF_IS_68076026_01OCT26.json` (DEC-48) · ผลใน `evidence/n8n_test_01OCT26.md` · 3.6.3 ใส่ผลแล้ว
 - [ ] F5b. 👤 นำเข้า `workflows/WF_IS_68076026_01OCT26.json` ใน n8n บนเครื่อง (ทับรุ่นเดิมได้ เพราะ id เดียวกัน) · credential googleApi เปิด "Set up for use in HTTP Request node" + scope · env `N8N_CONCURRENCY_PRODUCTION_LIMIT=1`, `N8N_API_URL` · ทดสอบกับบัญชี Google จริง (Setup Guide ข้อ 5)
-- [ ] F6. 👤 เปิด `build/IS_68076026_Final_01OCT26.docx` ใน Word → ยืนยันอัปเดตฟิลด์ → ตรวจสารบัญ เลขหน้า สมการ
+- [ ] F6. 👤 (แทนด้วย G14 · ฉบับ 03OCT26) เปิด `build/IS_68076026_Final_01OCT26.docx` ใน Word → ยืนยันอัปเดตฟิลด์ → ตรวจสารบัญ เลขหน้า สมการ
 - [ ] F7. 👤 หาผู้เชี่ยวชาญ IOC 3 คน (ภาคผนวก ช) · ยื่นจริยธรรม · remote backup (ข้อ 2–3)
 
 ---

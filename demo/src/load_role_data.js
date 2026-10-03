@@ -9,4 +9,4 @@ const DEMO_DATA = /*@@DEMO_DATA@@*/null;
 const v = $('Config & Validate').first().json;
 const role = DEMO_DATA.roles[v.input.role_id];
 if (!role) throw new Error('ไม่พบข้อมูลอาชีพ ' + v.input.role_id);
-return [{ json: { data_meta: DEMO_DATA.meta, role } }];
+return [{ json: { data_meta: DEMO_DATA.meta, role, skill_links: DEMO_DATA.skill_links || [] } }];

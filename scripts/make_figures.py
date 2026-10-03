@@ -65,7 +65,7 @@ def fig_workflow():
     show = {"S1": ["Watch Form Responses", "Validate Form Rows", "Loop Over Requests", "Check PDF File"],
             "S2": ["Extract Text Layer", "Run Document AI OCR", "Mask Personal Data", "Save Masked Text"],
             "S3": ["Load Requirements", "Build Prompt", "Call Model A · B · C", "Record Model Calls"],
-            "S4": ["Apply Rules R0-R4", "Record Findings", "Record Decisions"],
+            "S4": ["Prepare Relevance Checks", "Call Verifier A · B · C", "Apply Rules R0-R6", "Record Decisions"],
             "S5": ["Build Learning Plan", "Record Plan Items", "Freeze Report Payload"],
             "S6": ["Render Thai Report", "Export Report PDF", "Send Report Email", "Record Delivery"],
             "S7": ["Catch Workflow Error", "Classify Error", "Mark Run Failed", "Notify Researcher"]}
@@ -86,23 +86,24 @@ def fig_workflow():
 
 
 def fig_rules():
-    d = head("TB", 'ranksep=0.32;')
+    d = head("TB", 'ranksep=0.30;')
     d += f'm [label="ผลตอบกลับของโมเดลหนึ่งชุด", fillcolor="{C["e"]}"];\n'
-    d += 'r0 [label="1  R0  JSON ตรงรูปแบบ\\nรหัสอาชีพและรหัสข้อกำหนดอ้างอิงตรง"]; r2 [label="2  R2  ข้อความที่ยกมา\\nปรากฏจริงในเอกสาร"];\n'
-    d += 'r3 [label="3  R3  เกี่ยวข้องกับข้อกำหนดอ้างอิง\\nคะแนน ov ≥ 0.15"]; r1 [label="4  R1  อย่างน้อย\\nสองเสียงตรงกัน", fillcolor="#e1ebf8"];\n'
-    d += f'r4 [label="5  R4  บันทึกสัดส่วน\\nความเห็นตรงกัน", fillcolor="#e1ebf8"]; out [label="สถานะสุดท้าย\\nevidenced · partially · missing", fillcolor="{C["b"]}"];\n'
-    d += f'x0 [label="ผลของโมเดลนี้\\nใช้ไม่ได้ทั้งชุด", fillcolor="{C["r"]}"]; x2 [label="เสียงนี้เป็น missing\\nนับใน U", fillcolor="{C["r"]}"]; x1 [label="ระบบยังสรุปไม่ได้\\n(abstained)", fillcolor="{C["c"]}"];\n'
-    d += 'm -> r0; r0 -> r2 [label="ผ่าน"]; r2 -> r3 [label="ผ่าน"]; r3 -> r1 [label="รวมเสียงทุกโมเดล"]; r1 -> r4 [label="ผ่าน"]; r4 -> out;\n'
-    d += 'r0 -> x0 [label="ไม่ผ่าน"]; r2 -> x2 [label="ไม่ผ่าน"]; r3 -> x2 [label="ไม่ผ่าน"]; x2 -> r1 [style=dashed]; r1 -> x1 [label="ไม่ผ่าน"];\n'
-    d += '{rank=same; r0; x0;} {rank=same; r3; x2;} {rank=same; r1; x1;}\n}'
-    render("fig_rules", d, "ลำดับการตรวจหลักฐานด้วยกฎ R0 ถึง R4", "ลำดับห้าขั้นจากบนลงล่าง R0 R2 R3 R1 R4 ด้านขวาแสดงผลเมื่อไม่ผ่าน: ผลทั้งชุดใช้ไม่ได้ เสียงเปลี่ยนเป็น missing หรือข้อกำหนดอ้างอิงได้สถานะระบบยังสรุปไม่ได้")
+    d += 'r0 [label="1  R0  JSON ตรงรูปแบบ\\nรหัสอาชีพและรหัสข้อกำหนดอ้างอิงตรง"]; r2 [label="2  R2  ข้อความที่ยกมาปรากฏจริง\\n(ตรงตัว · ยุบช่องว่าง · ซ่อมรูปคำ)"];\n'
+    d += 'r3a [label="3  R3a  คำตรงกับข้อกำหนดอ้างอิง\\nคะแนน ov ≥ 0.15"]; r3b [label="4  R3b  โมเดลอื่นตรวจความหมาย\\nรองรับ · บางส่วน · ไม่เกี่ยว"];\n'
+    d += 'r1 [label="5  R1  อย่างน้อยสองเสียงตรงกัน\\n(ไม่นับเสียงที่ตรวจไม่ได้)", fillcolor="#e1ebf8"]; r4 [label="6  R4  บันทึกสัดส่วน\\nความเห็นตรงกัน", fillcolor="#e1ebf8"];\n'
+    d += f'r5 [label="7  R5 R6  ใบรับรองในเรซูเม ·\\nทักษะพื้นฐานจากกิจกรรม → partially", fillcolor="#e1ebf8"]; out [label="สถานะสุดท้าย\\nevidenced · partially · missing · abstained", fillcolor="{C["b"]}"];\n'
+    d += f'x0 [label="ผลของโมเดลนี้\\nใช้ไม่ได้ทั้งชุด", fillcolor="{C["r"]}"]; x2 [label="เสียงนี้เป็น missing\\nนับใน U", fillcolor="{C["r"]}"]; xu [label="เสียงที่ตรวจไม่ได้\\nไม่นับ", fillcolor="{C["c"]}"]; x1 [label="ระบบยังสรุปไม่ได้\\n(abstained)", fillcolor="{C["c"]}"];\n'
+    d += 'm -> r0; r0 -> r2 [label="ผ่าน"]; r2 -> r3a [label="ผ่าน"]; r3a -> r1 [label="ผ่าน · รวมเสียง"]; r3a -> r3b [label="คำไม่ตรง"]; r3b -> r1 [label="รองรับ"]; r1 -> r4 [label="ผ่าน"]; r4 -> r5; r5 -> out;\n'
+    d += 'r0 -> x0 [label="ไม่ผ่าน"]; r2 -> x2 [label="ไม่ผ่าน"]; r3b -> x2 [label="ไม่เกี่ยว"]; r3b -> xu [label="ไม่ตอบ"]; x2 -> r1 [style=dashed]; r1 -> x1 [label="ไม่ผ่าน"]; x1 -> r5 [style=dashed];\n'
+    d += '{rank=same; r0; x0;} {rank=same; r2; x2;} {rank=same; r3b; xu;} {rank=same; r1; x1;}\n}'
+    render("fig_rules", d, "ลำดับการตรวจหลักฐานด้วยกฎ R0 ถึง R6", "ลำดับจากบนลงล่าง R0 R2 R3a R3b R1 R4 R5 R6 ด้านขวาแสดงผลเมื่อไม่ผ่าน: ผลทั้งชุดใช้ไม่ได้ เสียงเปลี่ยนเป็น missing เสียงที่ตรวจไม่ได้ไม่ถูกนับ หรือข้อกำหนดอ้างอิงได้สถานะระบบยังสรุปไม่ได้ ข้อที่ยัง missing หรือ abstained อาจได้ partially จาก R5 R6")
 
 
 def fig_framework():
     d = head("TB", 'ranksep=0.35;')
     d += f'i [label="ข้อมูลเข้า\\nเรซูเม PDF\\nอาชีพเป้าหมาย\\nเวลาที่เรียนได้", fillcolor="{C["e"]}"];\n'
     d += 'a [label="วิเคราะห์หลักฐาน\\nโมเดล 3 ตัวอ่านแยกกัน\\nยกข้อความจากเอกสาร"];\n'
-    d += 'v [label="ตรวจด้วยกฎ R0–R4\\nรวมเสียง ≥ 2\\nแยกสถานะยังสรุปไม่ได้"];\n'
+    d += 'v [label="ตรวจด้วยกฎ R0–R6\\nคำ + ความหมาย · รวมเสียง ≥ 2\\nแยกสถานะยังสรุปไม่ได้"];\n'
     d += f'p [label="จัดแผนการเรียนรู้\\nคลังที่ตรึงไว้\\nภายใน Hmax", fillcolor="{C["c"]}"];\n'
     d += f'o [label="รายงานรายบุคคล\\nสถานะรายข้อ + หลักฐาน\\nแผนและเหตุผล", fillcolor="{C["b"]}"];\n'
     d += f'q1 [shape=note, fillcolor="{C["d"]}", label="RQ1 ความถูกต้อง\\nของสถานะ"]; q2 [shape=note, fillcolor="{C["d"]}", label="RQ2 ความเหมาะสม\\nของแผน 5 มิติ"];\n'

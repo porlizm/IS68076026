@@ -146,3 +146,6 @@ date,action,from,to,reason
 2026-10-01,move,build/IS_68076026_latest.docx,archive/01OCT26/book_draft_v0/build/IS_68076026_latest.docx,DEC-44 เก็บ docx ร่างเดิม (ไม่อยู่ใน git)
 2026-10-01,move,workflows/WF_Final_IS.json,archive/01OCT26/WF_Final_IS_DEC-37/WF_Final_IS.json,DEC-42 ใช้ WF_IS68076026 ไฟล์เดียว
 2026-10-01,move,workflows/WF_IS68076026.json,archive/01OCT26/WF_IS68076026_DEC-42/WF_IS68076026.json,DEC-48 ใช้ WF_IS_68076026_01OCT26 ไฟล์เดียว (ทดสอบใน n8n 2.39.9 จริง)
+2026-10-03,move,prompts/analyst_v1.0.txt,archive/03OCT26/prompts/analyst_v1.0.txt,DEC-53 prompt v1.1 แทน (R0 ยังรับ v1.0 · ย้อนกลับได้)
+2026-10-03,move,prompts/analyst_v1.0.schema.json,archive/03OCT26/prompts/analyst_v1.0.schema.json,DEC-53
+2026-10-03,move,evidence/QA_Final_01OCT26.md,archive/03OCT26/evidence/QA_Final_01OCT26.md,QA ฉบับปัจจุบัน evidence/QA_Final_03OCT26.md

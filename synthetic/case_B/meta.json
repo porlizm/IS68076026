@@ -26,5 +26,7 @@
    "4.A.1.a.1": "generic:partially"
   }
  },
- "fictional": true
+ "verifier_invalid_for": [],
+ "fictional": true,
+ "style": "onet_vocabulary"
 }

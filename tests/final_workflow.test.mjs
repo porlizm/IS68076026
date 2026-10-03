@@ -59,7 +59,7 @@ test('ไหลครบทุกช่วงในไฟล์เดียว: 
   for (const cid of ['A', 'B', 'C']) {
     const caseDir = path.join(ROOT, 'synthetic', 'case_' + cid);
     const meta = JSON.parse(fs.readFileSync(path.join(caseDir, 'meta.json'), 'utf8'));
-    const local = await runCase(caseDir, refs);
+    const local = await runCase(caseDir, refs, { legacy: true });
     const ctx = { ...local.ctx, ocr_engine: 'fixture', ocr_engine_version: 'fixture' };
     const prep = { ctx, gap_input: { ctx, text: local.prep.text, text_sha256: local.prep.text_sha256 } };
     const sheetReqs = refs.requirements.filter((r) => r.role_id === meta.role_id).map((r) => Object.fromEntries(refs.sheetsCfg.tabs.ref_requirements.columns.map((c) => [c, r[c]])));

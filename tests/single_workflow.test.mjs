@@ -6,7 +6,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { ROOT, loadRefs } from '../scripts/lib/refs.mjs';
 import { loadSingle, validateSingle, EXPECTED_SINGLE_NODES, SINGLE_NAME } from '../scripts/validate_workflows.mjs';
-import { runCase } from '../scripts/run_local.mjs';
+import { runCase, oracleVerifierText } from '../scripts/run_local.mjs';
 
 const refs = loadRefs();
 const one = loadSingle();
@@ -50,7 +50,7 @@ test('ตัวตรวจจับข้อผิดพลาดหลัง�
   assert.ok(validateSingle(b).some((e) => /Mark Run Delivered/.test(e)));
   const c = clone(one); c.nodes.find((n) => n.name === 'Build Prompt').parameters.jsCode += "\n$('When Called by Main');";
   assert.ok(validateSingle(c).some((e) => /When Called by Main/.test(e)));
-  const d = clone(one); const ar = d.nodes.find((n) => n.name === 'Apply Rules R0-R4'); ar.parameters.jsCode = ar.parameters.jsCode.replace('"theta":0.15', '"theta":0.3');
+  const d = clone(one); const ar = d.nodes.find((n) => n.name === 'Apply Rules R0-R6'); ar.parameters.jsCode = ar.parameters.jsCode.replace('"theta":0.15', '"theta":0.3');
   assert.ok(validateSingle(d).some((e) => /CFG.project ไม่ตรง/.test(e)));
   const e = clone(one); e.nodes.push({ ...clone(one.nodes[0]), name: 'Call Sub', type: 'n8n-nodes-base.executeWorkflow', parameters: { mode: 'each', options: { waitForSubWorkflow: true }, workflowId: { value: 'x' } } });
   assert.ok(validateSingle(e).some((x) => /เรียกข้าม workflow/.test(x)));
@@ -68,6 +68,17 @@ function httpFor(caseDir, k, failAll = false) {
     if (/anthropic/.test(opts.url)) return wrap({ content: [{ type: 'text', text: txt }], usage: { input_tokens: 1, output_tokens: 1 }, stop_reason: 'end_turn', model: 'mock-b' });
     return wrap({ candidates: [{ content: { parts: [{ text: txt }] }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: 1, candidatesTokenCount: 1 }, modelVersion: 'mock-c' }); };
 }
+// DEC-51: ผู้ตรวจจำลองแบบ oracle ตอบผ่าน response เต็มของผู้ให้บริการแต่ละราย
+function verifierHttpFor(caseDir, k) {
+  return async (opts) => {
+    const prompt = opts.body.messages ? opts.body.messages[0].content : opts.body.contents[0].parts[0].text;
+    const txt = oracleVerifierText(caseDir, k, prompt);
+    const wrap = (body) => ({ statusCode: 200, headers: { 'content-type': 'application/json' }, body });
+    if (/openai/.test(opts.url)) return wrap({ choices: [{ message: { content: txt }, finish_reason: 'stop' }], usage: { prompt_tokens: 1, completion_tokens: 1 }, model: 'mock-a' });
+    if (/anthropic/.test(opts.url)) return wrap({ content: [{ type: 'text', text: txt }], usage: { input_tokens: 1, output_tokens: 1 }, stop_reason: 'end_turn', model: 'mock-b' });
+    return wrap({ candidates: [{ content: { parts: [{ text: txt }] }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: 1, candidatesTokenCount: 1 }, modelVersion: 'mock-c' });
+  };
+}
 // เดินช่วง 3 → 6 ด้วยโค้ดจริงของโหนด
 async function flow(cid, { failAll = false } = {}) {
   const caseDir = path.join(ROOT, 'synthetic', 'case_' + cid);
@@ -83,19 +94,25 @@ async function flow(cid, { failAll = false } = {}) {
   const calls = await runNode(one, 'Build Model Call Rows', { nodes: { 'Wait for All Models': merged } });
   const col = await runNode(one, 'Collect Model Results', { nodes: { 'Build Prompt': built, 'Wait for All Models': merged } });
   const eIn = await runNode(one, 'Start Evidence Check', { input: col });
-  const rules = await runNode(one, 'Apply Rules R0-R4', { nodes: { 'Start Evidence Check': eIn } });
-  const fRows = await runNode(one, 'Build Finding Rows', { nodes: { 'Apply Rules R0-R4': rules } });
-  const dRows = await runNode(one, 'Build Decision Rows', { nodes: { 'Apply Rules R0-R4': rules } });
-  const plan = await runNode(one, 'Build Learning Plan', { nodes: { 'Apply Rules R0-R4': rules, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
+  const prepC = await runNode(one, 'Prepare Relevance Checks', { nodes: { 'Start Evidence Check': eIn } });
+  const vmerged = [];
+  for (const k of ['A', 'B', 'C']) vmerged.push(J(await runNode(one, 'Call Verifier ' + k, { nodes: { 'Prepare Relevance Checks': prepC }, env: ENV, helpers: { httpRequest: verifierHttpFor(caseDir, k) } })));
+  const vRows = await runNode(one, 'Build Verifier Call Rows', { nodes: { 'Wait for All Verifiers': vmerged } });
+  const vcol = await runNode(one, 'Collect Verifier Results', { nodes: { 'Wait for All Verifiers': vmerged } });
+  const rules = await runNode(one, 'Apply Rules R0-R6', { nodes: { 'Start Evidence Check': eIn, 'Collect Verifier Results': vcol, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
+  const fRows = await runNode(one, 'Build Finding Rows', { nodes: { 'Apply Rules R0-R6': rules } });
+  const tRows = await runNode(one, 'Build Task Rows', { nodes: { 'Apply Rules R0-R6': rules } });
+  const dRows = await runNode(one, 'Build Decision Rows', { nodes: { 'Apply Rules R0-R6': rules } });
+  const plan = await runNode(one, 'Build Learning Plan', { nodes: { 'Apply Rules R0-R6': rules, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
   const pRows = await runNode(one, 'Build Plan Rows', { nodes: { 'Build Learning Plan': plan } });
   const frz = await runNode(one, 'Freeze Report Payload', { nodes: { 'Build Learning Plan': plan } });
   const dIn = await runNode(one, 'Start Delivery', { input: frz });
   const ren = await runNode(one, 'Render Thai Report', { nodes: { 'Start Delivery': dIn, 'Read Deliveries Sheet': [{}] }, env: ENV });
-  return { local, calls, rules: J(rules), fRows, dRows, plan: J(plan), pRows, frz: J(frz), ren: J(ren) };
+  return { local, calls, vRows, vmerged, prepC: J(prepC), rules: J(rules), fRows, tRows, dRows, plan: J(plan), pRows, frz: J(frz), ren: J(ren) };
 }
 
-test('เรซูเมสังเคราะห์ A B C: ผลของ workflow เดียวตรงกับ engine (run_local) ทุกข้อ', async () => {
-  for (const cid of ['A', 'B', 'C']) {
+test('เรซูเมสังเคราะห์ A B C D: ผลของ workflow เดียว (รวมผู้ตรวจ R3b) ตรงกับ engine (run_local) ทุกข้อ', async () => {
+  for (const cid of ['A', 'B', 'C', 'D']) {
     const r = await flow(cid);
     const o = r.local.out;
     assert.deepEqual(r.dRows.map((x) => [x.json.requirement_id, x.json.final_status, x.json.evidence_char_start]), o.eval.decisions.map((d) => [d.requirement_id, d.final_status, d.evidence_char_start]), cid + ': decisions');
@@ -103,7 +120,12 @@ test('เรซูเมสังเคราะห์ A B C: ผลของ wo
     assert.deepEqual(r.pRows.map((x) => x.json.item_id), o.planRows.map((p) => p.item_id), cid + ': แผน');
     assert.equal(r.plan.run_row.readiness_pct, o.eval.scores.readiness_pct, cid + ': R');
     assert.equal(r.plan.run_row.stage, 'ready');
-    assert.deepEqual(r.frz.report_payload.versions, { dataset: refs.manifest.dataset_version, corpus: refs.manifest.corpus_version, prompt: 'analyst_v1.0', rules: 'RULES-IS68076026-v1.0' }, cid + ': freezeReport.versions');
+    assert.deepEqual(r.frz.report_payload.versions, { dataset: refs.manifest.dataset_version, corpus: refs.manifest.corpus_version, prompt: 'analyst_v1.1+verifier_v1.0', rules: 'RULES-IS68076026-v2.0' }, cid + ': freezeReport.versions');
+    assert.equal(r.prepC.n_checks, r.local.summary.verifier_checks, cid + ': จำนวนข้อที่ส่งให้ผู้ตรวจ');
+    assert.deepEqual(r.tRows.map((x) => [x.json.task_id, x.json.final_status]), o.eval.task_decisions.map((t) => [t.task_id, t.final_status]), cid + ': งานหลัก');
+    assert.equal(r.plan.run_row.role_task_index, o.eval.scores.role_task_index, cid + ': T');
+    assert.ok(r.vRows.every((x) => x.json.call_purpose === 'verifier'), cid + ': แถวผู้ตรวจ');
+    assert.ok(r.calls.every((x) => x.json.call_purpose === 'analyst'), cid + ': แถวผู้วิเคราะห์');
     assert.equal(r.ren.not_yet_delivered, true);
     assert.ok(r.calls.length >= 3, cid + ': model_calls ทุกครั้ง');
   }
@@ -120,6 +142,18 @@ test('โมเดลล้มครบสามตัว: ทุกข้อ ab
   assert.ok(r.calls.every((c) => c.json.error_code === '429'), 'รหัส 429 มาจาก statusCode ของ response เต็ม');
   assert.ok(/ไม่พบช่องว่าง/.test(r.frz.report_payload.plan.notice));
   assert.equal(r.ren.not_yet_delivered, true);
+});
+
+test('DEC-51 ผู้ตรวจความหมาย: ไม่มีข้อให้ตรวจ = ไม่เรียก · ผู้ตรวจตอบผิดรูปแบบ = เสียง unverified (ไม่นับใน R1) · ไม่ตรวจข้อความของตัวเอง', async () => {
+  const none = J(await runNode(one, 'Call Verifier B', { nodes: { 'Prepare Relevance Checks': [{ ctx: { run_id: 'RUN-x' }, requests: {} }] }, env: ENV, helpers: { httpRequest: async () => { throw new Error('ต้องไม่เรียก'); } } }));
+  assert.equal(none.result.status, 'skipped'); assert.deepEqual(none.result.calls, []);
+  const r = await flow('D');
+  const ev = r.rules.eval;
+  assert.equal(ev.verification.C.reason, 'invalid_json', 'ผู้ตรวจ C ของกรณี D ตอบผิดรูปแบบ');
+  assert.ok(ev.scores.n_unverified_votes > 0);
+  assert.ok(ev.findings.filter((f) => f.verifier_key).every((f) => f.verifier_key !== f.model_key), 'ไม่ตรวจข้อความของตัวเอง');
+  assert.ok(ev.findings.some((f) => /R2_repaired/.test(f.rule_flags)), 'ซ่อม quote ที่เปลี่ยนรูปกริยา (DEC-52)');
+  assert.ok(ev.scores.ablation.r3_lexical_only < ev.scores.readiness_pct - 30, 'R3 คำซ้ำอย่างเดียวให้คะแนนต่ำกว่ามากกับเรซูเมแบบเน้นผลงาน');
 });
 
 test('ฟอร์มสองแถวในการ poll เดียว: ได้สองงานแยก run_id · แถวซ้ำในรอบเดียวกันถูกกัน · ไม่ให้ความยินยอมถูกปฏิเสธ', async () => {

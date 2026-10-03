@@ -1,0 +1,47 @@
+{
+ "purpose": "DEC-57 known-group + style-invariance",
+ "fictional": true,
+ "personas": {
+  "pm": {
+   "role_id": "R19",
+   "title": "IT Project Manager",
+   "files": {
+    "onet": "pm_onet.pdf",
+    "star": "pm_star.pdf",
+    "list": "pm_list.pdf"
+   }
+  },
+  "net": {
+   "role_id": "R15",
+   "title": "Network Engineer",
+   "files": {
+    "onet": "net_onet.pdf",
+    "star": "net_star.pdf",
+    "list": "net_list.pdf"
+   }
+  },
+  "ml": {
+   "role_id": "R07",
+   "title": "Machine Learning Engineer",
+   "files": {
+    "onet": "ml_onet.pdf",
+    "star": "ml_star.pdf",
+    "list": "ml_list.pdf"
+   }
+  },
+  "mgr": {
+   "role_id": "R20",
+   "title": "IT Manager",
+   "files": {
+    "onet": "mgr_onet.pdf",
+    "star": "mgr_star.pdf",
+    "list": "mgr_list.pdf"
+   }
+  }
+ },
+ "style_th": {
+  "onet": "ภาษาใกล้ O*NET",
+  "star": "เน้นผลงานและตัวเลข",
+  "list": "รายการทักษะ"
+ }
+}

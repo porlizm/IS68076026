@@ -6,7 +6,7 @@ Workflow เดียวบน **n8n ในเครื่อง** ทำงา�
 
 ```
 หน้าเว็บ (n8n)  →  อัปโหลดเรซูเม  →  OCR  →  ปิดบัง PII  →  Gemini วิเคราะห์ 30 ข้อกำหนด O*NET
-               →  ตรวจหลักฐาน R0·R2·R3  →  จัดแผนคอร์ส/ใบรับรอง (สมการ 3.7–3.8)  →  รายงานบนหน้าเว็บ
+               →  Gemini Verifier  →  ตรวจหลักฐาน R0–R6 + ดัชนี T/H  →  จัดแผนคอร์ส/ใบรับรอง (สมการ 3.7–3.8)  →  รายงานบนหน้าเว็บ
                →  ดาวน์โหลด PDF / บันทึกลง Google Drive
 ```
 
@@ -40,7 +40,7 @@ node   demo/build_wf_demo.mjs            # สร้าง demo/WF_Demo.json ใ
 1. **นำเข้า** — n8n → *Workflows* → *Import from File* → `demo/WF_Demo.json` (หรือ `n8n import:workflow --input=demo/WF_Demo.json` · id `is68WFDemo000001`)
 2. **Gemini API key** — *Credentials* → *New* → **Header Auth**
    - Name: `x-goog-api-key` · Value: API key จาก Google AI Studio
-   - ตั้งชื่อ credential ว่า `Gemini API Key (x-goog-api-key)` แล้วเลือกในโหนด **Gemini OCR** และ **Gemini Analyst**
+   - ตั้งชื่อ credential ว่า `Gemini API Key (x-goog-api-key)` แล้วเลือกในโหนด **Gemini OCR** **Gemini Analyst** และ **Gemini Verifier**
 3. **Google Drive** — *Credentials* → **Google Drive OAuth2 API** (ใช้ตัวเดิมของ `WF_Final_IS` ได้) → เลือกในโหนด **Upload PDF to Drive**
    - ช่อง *Folder* ตั้งไว้ `root` (My Drive) → เปลี่ยนเป็น Folder ID ของโฟลเดอร์รายงาน เช่น ค่า `DRIVE_REPORT_FOLDER_ID`
 4. **Publish** workflow (ปุ่มขวาบน) → เปิด **http://localhost:5678/webhook/is-demo**
@@ -81,8 +81,8 @@ node   demo/build_wf_demo.mjs            # สร้าง demo/WF_Demo.json ใ
 | OCR | Is PDF? → **Extract PDF Text** (≤ 5 หน้า) → **Text Layer Check** → Need OCR? → **Gemini OCR** | ข้อความ < 300 ตัวอักษร หรือเป็นรูป → OCR |
 | เตรียมข้อความ | **Clean Text & Mask PII** → Text OK? | 3.5.1 (normalize 5 กฎ · PII 4 รูปแบบ) — ฟังก์ชันจาก `engine.js` |
 | ข้อมูลจริง | **Load Role Data (O*NET 31.0)** | Top-30 · น้ำหนักสมการ 3.1 · คลัง verified · mapping L1 ผ่านตรวจ |
-| วิเคราะห์ | **Build Analyst Prompt** → Use Gemini? → **Gemini Analyst** | prompt `analyst_v1.0` (ไม่แก้) + ส่วนเสริม `profile` สำหรับแสดงผล |
-| ตรวจหลักฐาน | **Verify Evidence (R0·R2·R3)** | 3.5.4 · สมการ 3.2, 3.4–3.6 — `ruleR0/ruleR2/overlapScore` จาก `engine.js` |
+| วิเคราะห์ | **Build Analyst Prompt** → Use Gemini? → **Gemini Analyst** × `ANALYST_RUNS` | prompt `analyst_v1.1` (ข้อกำหนด 30 + งานหลัก 8) + ส่วนเสริม `profile` สำหรับแสดงผล |
+| ตรวจหลักฐาน | **Prepare Relevance Checks** → Need Verification? → **Gemini Verifier** → **Verify Evidence (R0–R6)** | 3.4.4–3.4.6 · `evaluateRun` จาก `engine.js` ทั้งไฟล์ (R2 ซ่อม quote · R3a/R3b · R1 โหวตระหว่างรอบ · R5/R6 · T/H) |
 | วางแผน | **Plan Pathway (Eq 3.7–3.8)** → **Build Report** → Respond Report | 3.6 · ตรรกะเดียวกับ `engine.buildPlan` |
 | บันทึก PDF | `POST /is-demo-save-pdf` → Check PDF → **Upload PDF to Drive** → Drive Result | — |
 
@@ -95,7 +95,7 @@ node   demo/build_wf_demo.mjs            # สร้าง demo/WF_Demo.json ใ
 | IT Project Manager | R19 · 15-1299.09 | 4 | 22 |
 | IT Manager | R20 · 11-3021.00 | 4 | 25 |
 
-แต่ละอาชีพมีข้อกำหนด 30 ข้อพร้อมน้ำหนัก/คำพ้อง, งานหลัก 6 ข้อ, Hot Technology 18 รายการ, ชื่อตำแหน่ง, ระดับการศึกษา (จาก `Data_Set.xlsx`)
+แต่ละอาชีพมีข้อกำหนด 30 ข้อพร้อมน้ำหนัก/คำพ้อง, งานหลัก 6 ข้อ (แสดงผล) + งาน Core 8 งาน (ดัชนี T) · Hot Technology 18 รายการ (แสดงผล) + ชุดเทคโนโลยีสำหรับดัชนี H, ชื่อตำแหน่ง, ระดับการศึกษา (จาก `Data_Set.xlsx`)
 และคอร์ส/ใบรับรองจาก `data/corpus.csv` (CORPUS v1.5R) ที่ `verification_status = verified` เท่านั้น — URL ไม่ได้มาจาก AI
 
 ### หน้าเว็บ
@@ -113,10 +113,10 @@ n8n 2.x เสิร์ฟ HTML จาก webhook ภายใต้ CSP `sandbo
 
 ## ข้อจำกัดที่ควรบอกคณะกรรมการ
 
-- Demo รอบนี้ใช้ **Gemini โมเดลเดียว** + กฎ R0/R2/R3 → ยังไม่มี R1 (โหวต ≥ 2 โมเดล) และ R4 ของระบบเต็ม (`WF_Final_IS`)
+- Demo ใช้ **Gemini โมเดลเดียว** วิเคราะห์ 3 รอบแล้วโหวต (แทน R1 ของ 3 โมเดล) และ Gemini ตรวจความหมายเอง (self-verification) ต่างจากระบบเต็มที่ให้โมเดลอื่นตรวจ (`WF_IS_68076026_01OCT26`) → ใช้สาธิต ไม่ใช่ผลวิจัย
 - Gemini 3 แนะนำให้คง temperature ค่าเริ่มต้น จึงไม่ได้ส่ง temperature = 0 ตามตาราง 3.10 (ระบบเต็มรอ smoke test อยู่แล้ว)
 - ส่วน `profile` (สรุปภาษาไทย ตำแหน่ง ปีประสบการณ์) เป็นข้อความจาก AI เพื่อแสดงผล **ไม่ใช้คำนวณคะแนน** · ชื่อใบรับรองที่ AI อ้างถูกตรวจแบบตรงตัวอักษร (ไม่พบ = ขีดฆ่า)
-- เกณฑ์ป้าย "พร้อมสูง ≥ 75 / ใกล้พร้อม 50–74 / ต้องพัฒนาเพิ่ม < 50" และ "คะแนนหลังเรียนจบแผน" เป็นค่าสำหรับแสดงผลใน Demo ไม่ใช่เกณฑ์ของงานวิจัย
+- เกณฑ์ป้าย "พร้อมสูง ≥ 75 / ใกล้พร้อม 50–74 / ต้องพัฒนาเพิ่ม < 50" เป็นค่าสำหรับแสดงผลใน Demo ไม่ใช่เกณฑ์ของงานวิจัย · ไม่แสดง "คะแนนหลังเรียนจบแผน" แล้ว (DEC-56/58)
 - ไม่บันทึกเรซูเมลง Google Sheets/Drive (ต่างจาก `WF_Final_IS`) · แต่ execution log ของ n8n เก็บข้อมูลที่ส่งเข้าไว้ ลบได้ที่แท็บ *Executions*
 - ต้องต่ออินเทอร์เน็ต (Gemini · Google Fonts · cdnjs) — ถ้าไม่มีเน็ต ตั้ง `USE_GEMINI_ANALYST: false` และใช้ PDF ที่มีข้อความ
 

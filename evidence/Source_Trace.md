@@ -1,9 +1,9 @@
 # Source Trace · เล่ม IS 68076026 (Final)
 
-> สร้างโดย `scripts/source_trace.py` เมื่อ 2026-10-01 · ใช้แทน Change Log เทียบเล่มเดิม (Prompt_Report หัวข้อ 1)
+> สร้างโดย `scripts/source_trace.py` เมื่อ 2026-10-03 · ใช้แทน Change Log เทียบเล่มเดิม (Prompt_Report หัวข้อ 1)
 > ตัวเลขผลลัพธ์ทุกค่าในเล่มมาจาก `{{key}}` ใน `book/numbers.json` ซึ่ง `scripts/book_numbers.py` อ่านจากไฟล์ด้านล่าง
 
-## 1 · ตัวเลขและตารางที่สร้างจากข้อมูล (91 key)
+## 1 · ตัวเลขและตารางที่สร้างจากข้อมูล (118 key)
 
 | key | ค่าในเล่ม | ใช้ในไฟล์ | แหล่งข้อมูล | คำนวณโดย | DEC |
 |---|---|---|---|---|---|
@@ -15,28 +15,30 @@
 | `additions_table` | ตาราง 14 แถว | 05_appendix.md | `data/corpus_additions.csv` | scripts/book_numbers.py (นับ researcher_result) | DEC-46 |
 | `cA_C` | 1.000 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_Hmax` | 259.8 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_R` | 66.25 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_R` | 67.72 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_U` | 4 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_claims` | 67 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_decided` | 30 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_ev` | 17 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_gapcov` | 0.92 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_gapcov` | 0.69 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_gaps` | 13 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_hours` | 185 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_items` | 7 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_mi` | 8 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_hours` | 186 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_items` | 5 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_mi` | 7 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_overcap` | 1 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_pa` | 5 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_pa` | 6 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_pii` | 3 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `cA_plan_table` | ตาราง 7 แถว | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cA_plan_table` | ตาราง 5 แถว | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_prog_agree` | 1.00 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_prog_e` | 475 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cA_prog_s` | 375 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cC_abstained` | 2 | 05_appendix.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cD_R` | 88.14 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `cD_Rlex` | 31.48 | 03_chapter3.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
 | `cause_hours` | 43 | 03_chapter3.md | `evidence/coverage_diagnostics.json` | scripts/coverage_diagnostics.py (PuLP/CBC · ilp_min_*, ilp_max_cov, cause_* ใช้ฉาก before_track) | DEC-41 · DEC-47 |
 | `cause_no_item` | 2 | 03_chapter3.md | `evidence/coverage_diagnostics.json` | scripts/coverage_diagnostics.py (PuLP/CBC · ilp_min_*, ilp_max_cov, cause_* ใช้ฉาก before_track) | DEC-41 · DEC-47 |
 | `cause_selection` | 17 | 03_chapter3.md | `evidence/coverage_diagnostics.json` | scripts/coverage_diagnostics.py (PuLP/CBC · ilp_min_*, ilp_max_cov, cause_* ใช้ฉาก before_track) | DEC-41 · DEC-47 |
-| `config_table` | ตาราง 19 แถว | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
+| `config_table` | ตาราง 26 แถว | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
 | `corpus_certs` | 218 | 03_chapter3.md | `data/corpus.csv · data/manifest.json` | scripts/build_corpus.py | DEC-43 |
 | `corpus_courses` | 384 | 03_chapter3.md | `data/corpus.csv · data/manifest.json` | scripts/build_corpus.py | DEC-43 |
 | `corpus_items` | 602 | 00_front.md, 03_chapter3.md | `data/corpus.csv · data/manifest.json` | scripts/build_corpus.py | DEC-43 |
@@ -52,7 +54,7 @@
 | `data_dictionary` | **แท็บ runs** (ผลการทำงาน · เขียนแบบ upsert:run_id) คอลัม… | 05_appendix.md | `config/sheets.json` | scripts/book_numbers.py | — |
 | `deletion_contact` | 68076026@kmitl.ac.th | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
 | `domain_table` | ตาราง 5 แถว | 03_chapter3.md | `data/requirements.csv` | scripts/build_reference_data.py | — |
-| `engine_version` | engine-1.1.0-01OCT26 | 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
+| `engine_version` | engine-2.0.0-03OCT26 | 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
 | `foundation_ext_maps` | 129 | 03_chapter3.md | `data/corpus.csv · data/mappings.csv · data/corpus_change_log.csv` | scripts/build_corpus.py (foundation track) | DEC-45 |
 | `hours_max` | 800 | 03_chapter3.md | `data/corpus.csv · data/manifest.json` | scripts/build_corpus.py | DEC-43 |
 | `hours_median` | 60 | 03_chapter3.md | `data/corpus.csv · data/manifest.json` | scripts/build_corpus.py | DEC-43 |
@@ -64,37 +66,62 @@
 | `ilp_min_lo` | 285 | 03_chapter3.md | `evidence/coverage_diagnostics.json` | scripts/coverage_diagnostics.py (PuLP/CBC · ilp_min_*, ilp_max_cov, cause_* ใช้ฉาก before_track) | DEC-41 · DEC-47 |
 | `ilp_min_lo_add` | 166 | 03_chapter3.md | `evidence/coverage_diagnostics.json` | scripts/coverage_diagnostics.py (PuLP/CBC · ilp_min_*, ilp_max_cov, cause_* ใช้ฉาก before_track) | DEC-41 · DEC-47 |
 | `manifest_frozen` | ยังไม่ตรึง (ตรึงหลังการทดสอบนำร่องตามหัวข้อ 3.7) | 05_appendix.md | `data/manifest.json` | scripts/update_manifest.py | — |
-| `manifest_table` | ตาราง 8 แถว | 05_appendix.md | `data/manifest.json` | scripts/update_manifest.py | — |
+| `manifest_table` | ตาราง 11 แถว | 05_appendix.md | `data/manifest.json` | scripts/update_manifest.py | — |
 | `map_L1` | 2,205 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
 | `map_L2` | 4,807 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
 | `map_failed_L1_other` | 134 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
 | `map_failed_not_L1` | 4,807 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
 | `map_passed` | 2,071 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
 | `map_total` | 7,012 | 03_chapter3.md | `evidence/mapping_review_summary.json · data/mappings.csv` | scripts/review_mappings.py (เกณฑ์ C1–C5) | DEC-11 · DEC-21 |
+| `max_output_tokens` | 16,384 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
 | `n8n_cases` | 14 | 03_chapter3.md | `evidence/n8n_test_summary.json · evidence/n8n_test_01OCT26.md` | evidence/n8n_s6/s6_suite.py + make_report.py (n8n 2.39.9 จริง · บริการจำลอง) | DEC-48 |
 | `n8n_pass` | 14 | 03_chapter3.md | `evidence/n8n_test_summary.json · evidence/n8n_test_01OCT26.md` | evidence/n8n_s6/s6_suite.py + make_report.py (n8n 2.39.9 จริง · บริการจำลอง) | DEC-48 |
 | `n8n_version` | 2.39.9 | 03_chapter3.md, 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
+| `plan_experienced_years` | 5 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
+| `prompt_version` | analyst_v1.1 | 03_chapter3.md, 05_appendix.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
+| `r2_repair_pct` | 90 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
+| `real_R15` | 11 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_R15_r2only` | 56.0 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_R19` | 10 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_R19_r2only` | 47.0 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_claims` | 36 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_r3_rejected` | 27 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_rec_lex` | 0.24 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `real_rec_stem` | 0.33 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
 | `req_r01_table` | ตาราง 8 แถว | 03_chapter3.md | `data/requirements.csv` | scripts/build_reference_data.py | — |
 | `retention_days` | 90 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
 | `retry_backoff_text` | 5 และ 15 วินาที | 03_chapter3.md | `config/models.json (defaults.retry_backoff_ms)` | scripts/book_numbers.py | DEC-48 |
+| `role_shared_19_15` | 19 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `role_shared_mean_pct` | 76 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `role_tasks_per_role` | 8 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
+| `role_tasks_total` | 160 | 03_chapter3.md | `data/role_tasks.csv · data/role_technology.csv · data/skill_links.csv` | scripts/build_role_signals.py | DEC-54 · DEC-55 |
+| `role_tech_total` | 375 | 03_chapter3.md | `data/role_tasks.csv · data/role_technology.csv · data/skill_links.csv` | scripts/build_role_signals.py | DEC-54 · DEC-55 |
 | `roles_proxy` | 5 | 03_chapter3.md, 05_appendix.md | `data/roles.json` | scripts/build_reference_data.py | — |
 | `roles_proxy_ids` | R03 R07 R08 R16 R17 | 03_chapter3.md | `data/roles.json` | scripts/build_reference_data.py | — |
 | `roles_table` | ตาราง 20 แถว | 03_chapter3.md | `data/roles.json` | scripts/build_reference_data.py | — |
+| `rules_version` | RULES-IS68076026-v2.0 | 03_chapter3.md, 05_appendix.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
 | `sim_cert_6m10h` | 195 | 03_chapter3.md | `evidence/coverage_simulation.json` | scripts/simulate_coverage.mjs → engine.buildPlan (กรณีเลวร้ายที่สุด) | DEC-41 · DEC-47 |
 | `sim_course_6m10h` | 526 | 03_chapter3.md | `evidence/coverage_simulation.json` | scripts/simulate_coverage.mjs → engine.buildPlan (กรณีเลวร้ายที่สุด) | DEC-41 · DEC-47 |
+| `skill_links_total` | 232 | 03_chapter3.md | `data/role_tasks.csv · data/role_technology.csv · data/skill_links.csv` | scripts/build_role_signals.py | DEC-54 · DEC-55 |
 | `soc_proxy_table` | ตาราง 5 แถว | 05_appendix.md | `data/roles.json` | scripts/build_reference_data.py | — |
-| `synthetic_table` | ตาราง 10 แถว | 03_chapter3.md, 05_appendix.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
-| `tabs_table` | ตาราง 16 แถว | 03_chapter3.md | `config/sheets.json` | scripts/book_numbers.py | — |
-| `tabs_total` | 16 | 03_chapter3.md | `config/sheets.json` | scripts/book_numbers.py | — |
-| `tests_pass` | 65 | 00_front.md, 03_chapter3.md | `evidence/test_summary.json` | bash scripts/run_all_checks.sh (node --test) | — |
-| `tests_total` | 65 | 00_front.md, 03_chapter3.md | `evidence/test_summary.json` | bash scripts/run_all_checks.sh (node --test) | — |
+| `syn_pairs` | 82 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `syn_prec_hyb` | 0.97 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `syn_rec_hyb` | 0.97 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `syn_rec_lex` | 0.72 | 03_chapter3.md | `evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)` | scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md | DEC-51 · DEC-57 |
+| `synthetic_table` | ตาราง 17 แถว | 03_chapter3.md, 05_appendix.md | `evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv` | scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง) | — |
+| `tabs_table` | ตาราง 17 แถว | 03_chapter3.md | `config/sheets.json` | scripts/book_numbers.py | — |
+| `tabs_total` | 17 | 03_chapter3.md | `config/sheets.json` | scripts/book_numbers.py | — |
+| `tests_pass` | 77 | 00_front.md, 03_chapter3.md | `evidence/test_summary.json` | bash scripts/run_all_checks.sh (node --test) | — |
+| `tests_total` | 77 | 00_front.md, 03_chapter3.md | `evidence/test_summary.json` | bash scripts/run_all_checks.sh (node --test) | — |
 | `text_layer_min_chars` | 200 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
 | `theta` | 0.15 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | — |
-| `trace_rows` | 35 | 03_chapter3.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
+| `trace_rows` | 39 | 03_chapter3.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
 | `url_pending_urls` | 28 | 03_chapter3.md | `data/url_manual_check.csv` | นับแถวที่ researcher_result ยังว่าง | DEC-16 |
+| `verifier_max_tokens` | 4,096 | 03_chapter3.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
+| `verifier_prompt_version` | verifier_v1.0 | 03_chapter3.md, 05_appendix.md | `config/project.json · config/models.json` | scripts/book_numbers.py | DEC-51 · DEC-52 · DEC-53 · DEC-56 |
 | `wf_name` | WF_IS_68076026_01OCT26 | 03_chapter3.md, 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
-| `wf_node_table` | ตาราง 69 แถว | 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
-| `wf_nodes` | 69 | 03_chapter3.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
+| `wf_node_table` | ตาราง 79 แถว | 05_appendix.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
+| `wf_nodes` | 79 | 03_chapter3.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
 | `wf_sections` | 7 | 03_chapter3.md | `workflows/manifest.json · workflows/WF_IS_68076026_01OCT26.json · evidence/WF_analysis.md` | scripts/build_workflows.mjs · scripts/validate_workflows.mjs | DEC-42 · DEC-48 |
 | `wsp_max` | 0.9749 | 03_chapter3.md | `data/requirements.csv` | scripts/build_reference_data.py | — |
 | `wsp_min` | 0.5128 | 03_chapter3.md | `data/requirements.csv` | scripts/build_reference_data.py | — |
@@ -150,4 +177,4 @@
 | แผนจำลอง 6 เดือน 10 ชม. | Prompt_Report: 489 | numbers.json: 538 | numbers.json | ขยายรายการพื้นฐานไปทุกอาชีพ (DEC-45) · ยังไม่รวมรายการใหม่ที่รอผู้วิจัยยืนยัน (DEC-46) |
 | ความครอบคลุมของคลัง | เป้า 600 (DEC-41) | numbers.json: 598 | numbers.json | ห้ามนับรายการที่ยังไม่ยืนยัน (กติกาข้อ 2–3) · เล่มรายงานตามจริงผ่าน cov_status_note |
 | ผลของ de Quadros et al. | fact sheet F2: ต่างกันอย่างมีนัยสำคัญ | — | เขียนว่า ให้ผลต่างกัน | ไม่ได้ตรวจการทดสอบสถิติในต้นฉบับ จึงไม่ใช้คำว่ามีนัยสำคัญ (Prompt_Report 8.2) |
-| เลขเทสต์ | Prompt_Report: 51 ผ่าน (รุ่น WF_Final_IS) | numbers.json: 65/65 | numbers.json | เพิ่มเทสต์ workflow เดียวและ plan_strategy ใน Phase 2 |
+| เลขเทสต์ | Prompt_Report: 51 ผ่าน (รุ่น WF_Final_IS) | numbers.json: 77/77 | numbers.json | เพิ่มเทสต์ workflow เดียวและ plan_strategy ใน Phase 2 |

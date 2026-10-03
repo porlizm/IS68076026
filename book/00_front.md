@@ -24,11 +24,11 @@ term_en: "SEMESTER 1, ACADEMIC YEAR 2026"
 
 # บทคัดย่อ
 
-เรซูเมบอกได้ว่าผู้เรียนบันทึกหลักฐานของทักษะใดไว้แล้ว แต่เมื่อให้โมเดลภาษาขนาดใหญ่อ่าน โมเดลอาจสรุปทักษะที่เอกสารไม่มีข้อความรองรับ และระบบส่วนใหญ่ไม่แยกข้อที่ยังตัดสินไม่ได้ออกจากข้อที่ไม่พบหลักฐาน การศึกษานี้พัฒนาระบบที่ให้โมเดลปัญญาประดิษฐ์เชิงสร้างสรรค์ (Generative AI) สามโมเดลอ่านเรซูเมฉบับเดียวกันแยกจากกัน แต่ละข้อสรุปต้องมีข้อความที่ยกจากเรซูเม แล้วกฎที่ตรึงไว้ล่วงหน้าตรวจว่าข้อความนั้นมีอยู่จริงและเกี่ยวข้องกับข้อกำหนดอ้างอิง ข้อความที่ไม่ผ่านการตรวจไม่ถูกนับเป็นหลักฐาน จากนั้นระบบรวมผลเมื่อโมเดลอย่างน้อยสองโมเดลเห็นตรงกัน ข้อที่ไม่ถึงเกณฑ์นี้ได้สถานะระบบยังสรุปไม่ได้ 
+เรซูเมบอกได้ว่าผู้เรียนบันทึกหลักฐานของทักษะใดไว้แล้ว แต่เมื่อให้โมเดลภาษาขนาดใหญ่อ่าน โมเดลอาจสรุปทักษะที่เอกสารไม่มีข้อความรองรับ และระบบส่วนใหญ่ไม่แยกข้อที่ยังตัดสินไม่ได้ออกจากข้อที่ไม่พบหลักฐาน การศึกษานี้พัฒนาระบบที่ให้โมเดลปัญญาประดิษฐ์เชิงสร้างสรรค์ (Generative AI) สามโมเดลอ่านเรซูเมฉบับเดียวกันแยกจากกัน แต่ละข้อสรุปต้องมีข้อความที่ยกจากเรซูเม แล้วกฎที่ตรึงไว้ล่วงหน้าตรวจว่าข้อความนั้นมีอยู่จริงและเกี่ยวข้องกับข้อกำหนดอ้างอิง โดยให้โมเดลอีกตัวตรวจความหมายเมื่อคำไม่ตรง จากนั้นระบบรวมผลเมื่อโมเดลอย่างน้อยสองโมเดลเห็นตรงกัน ข้อที่ไม่ถึงเกณฑ์นี้ได้สถานะระบบยังสรุปไม่ได้ 
 
 ระบบใช้ข้อกำหนดอ้างอิงจาก O*NET 31.0 จำนวน 20 อาชีพ อาชีพละ 30 ข้อ และจัดแผนการเรียนรู้จากคลังรายการเรียนรู้ {{corpus_items}} รายการภายในเวลาที่ผู้เรียนมี ทั้งหมดทำงานใน workflow เดียวบน n8n
 
-ผลที่มีแล้วมาจากข้อมูลสังเคราะห์และการจำลอง ชุดทดสอบผ่าน {{tests_pass}} จาก {{tests_total}} ชุด การรันกับเรซูเมสังเคราะห์สามกรณีด้วยผลตอบกลับจำลองของโมเดลยืนยันว่าระบบคำนวณสถานะ คะแนน และแผนตามนิยาม คลังรองรับข้อกำหนดอ้างอิง {{cov_corpus}} จาก 600 ข้อ และแผนจำลองที่ 6 เดือน 10 ชั่วโมงต่อสัปดาห์ครอบคลุม {{cov_plan}} ข้อ การวินิจฉัยด้วยกำหนดการเชิงเส้นจำนวนเต็มพบว่าข้อที่ขาดส่วนใหญ่เกิดจากชั่วโมงไม่พอ
+ผลที่มีแล้วมาจากข้อมูลสังเคราะห์และการจำลอง ชุดทดสอบผ่าน {{tests_pass}} จาก {{tests_total}} ชุด การรันกับเรซูเมสังเคราะห์สี่กรณีด้วยผลตอบกลับจำลองของโมเดลยืนยันว่าระบบคำนวณสถานะ คะแนน และแผนตามนิยาม คลังรองรับข้อกำหนดอ้างอิง {{cov_corpus}} จาก 600 ข้อ และแผนจำลองที่ 6 เดือน 10 ชั่วโมงต่อสัปดาห์ครอบคลุม {{cov_plan}} ข้อ การวินิจฉัยด้วยกำหนดการเชิงเส้นจำนวนเต็มพบว่าข้อที่ขาดส่วนใหญ่เกิดจากชั่วโมงไม่พอ
 
 ผู้เข้าร่วมในการประเมินจะเป็นนักศึกษาระดับปริญญาโทสาขาเทคโนโลยีสารสนเทศกลุ่มหลัก 30 คน และกลุ่มนำร่อง 5 คน คำถามแรกวัดความถูกต้องของสถานะเทียบกับชุดคำตอบอ้างอิงที่ให้รหัสโดยไม่เห็นผลของระบบ คำถามที่สองวัดความเหมาะสมของแผนห้ามิติ
 
@@ -36,11 +36,11 @@ term_en: "SEMESTER 1, ACADEMIC YEAR 2026"
 
 # ABSTRACT
 
-A resume shows which skills a learner has already documented, yet a large language model reading it may report skills that no sentence in the document supports, and most systems do not separate requirements that cannot yet be decided from those with no evidence. This study builds a system in which three generative AI models read the same resume independently. Every claim must quote the resume, and fixed rules check that the quote exists and relates to the reference requirement before the results are combined. Quotes that fail are not counted as evidence, and requirements without agreement from at least two models are marked as undecided.
+A resume shows which skills a learner has already documented, yet a large language model reading it may report skills that no sentence in the document supports, and most systems do not separate requirements that cannot yet be decided from those with no evidence. This study builds a system in which three generative AI models read the same resume independently. Every claim must quote the resume, and fixed rules check that the quote exists and relates to the reference requirement before the results are combined; a second model checks relevance when wording differs. Quotes that fail are not counted as evidence, and requirements without agreement from at least two models are marked as undecided.
 
 The system uses 30 reference requirements for each of 20 occupations from O*NET 31.0 and orders items from a catalogue of {{corpus_items}} learning resources within the time the learner has, all inside a single n8n workflow.
 
-Current results come from synthetic data and simulation. The test suite passes {{tests_pass}} of {{tests_total}} tests, and runs on three synthetic resumes with simulated model responses confirm that statuses, scores and plans follow their definitions. The catalogue supports {{cov_corpus}} of 600 requirements, and simulated plans for six months at ten hours a week cover {{cov_plan}}. An integer linear programming diagnosis shows that most missing requirements are limited by hours rather than by the selection method.
+Current results come from synthetic data and simulation. The test suite passes {{tests_pass}} of {{tests_total}} tests, and runs on four synthetic resumes with simulated model responses confirm that statuses, scores and plans follow their definitions. The catalogue supports {{cov_corpus}} of 600 requirements, and simulated plans for six months at ten hours a week cover {{cov_plan}}. An integer linear programming diagnosis shows that most missing requirements are limited by hours rather than by the selection method.
 
 The planned evaluation involves 30 master's students in information technology and a pilot group of five. The first research question measures status accuracy against a reference set coded without seeing system output; the second rates plan appropriateness on five dimensions.
 

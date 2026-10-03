@@ -1,0 +1,376 @@
+role_id,technology,category,hot_technology,in_demand,match_keys
+R01,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R01,Apache Kafka,Development environment software,Y,Y,Apache Kafka|Kafka
+R01,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R01,C,Development environment software,Y,Y,
+R01,C#,Object or component oriented development software,Y,Y,C#
+R01,C++,Object or component oriented development software,Y,Y,C++
+R01,Cascading style sheets CSS,Web platform development software,Y,Y,Cascading style sheets CSS|CSS
+R01,Docker,Application server software,Y,Y,Docker
+R01,Git,File versioning software,Y,Y,Git
+R01,GitHub,Application server software,Y,Y,GitHub
+R01,Go,Development environment software,Y,Y,Go
+R01,Google Angular,Web platform development software,Y,Y,Google Angular|Angular
+R01,Hypertext markup language HTML,Web platform development software,Y,Y,Hypertext markup language HTML|HTML
+R01,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R01,JavaScript,Web platform development software,Y,Y,JavaScript
+R01,Jenkins CI,Enterprise application integration software,Y,Y,Jenkins CI|CI
+R01,Kubernetes,Application server software,Y,Y,Kubernetes
+R01,Linux,Operating system software,Y,Y,Linux
+R01,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R01,NoSQL,Data base management system software,Y,Y,NoSQL
+R01,Node.js,Web platform development software,Y,Y,Node.js
+R01,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R01,PostgreSQL,Object oriented data base management software,Y,Y,PostgreSQL
+R01,Python,Object or component oriented development software,Y,Y,Python
+R01,RESTful API,Web platform development software,N,Y,RESTful API|API
+R01,React,Web platform development software,Y,Y,React
+R01,Spring Boot,Application server software,Y,Y,Spring Boot
+R01,Spring Framework,Web platform development software,Y,Y,Spring Framework
+R01,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R01,TypeScript,Object or component oriented development software,Y,Y,TypeScript
+R02,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R02,Apache Kafka,Development environment software,Y,Y,Apache Kafka|Kafka
+R02,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R02,C#,Object or component oriented development software,Y,Y,C#
+R02,Cascading style sheets CSS,Web platform development software,Y,Y,Cascading style sheets CSS|CSS
+R02,Docker,Application server software,Y,Y,Docker
+R02,Git,File versioning software,Y,Y,Git
+R02,GitHub,Application server software,Y,Y,GitHub
+R02,Go,Development environment software,Y,Y,Go
+R02,Google Angular,Web platform development software,Y,Y,Google Angular|Angular
+R02,GraphQL,Data base user interface and query software,Y,Y,GraphQL
+R02,Hypertext markup language HTML,Web platform development software,Y,Y,Hypertext markup language HTML|HTML
+R02,JavaScript,Web platform development software,Y,Y,JavaScript
+R02,JavaScript Object Notation JSON,Web platform development software,Y,Y,JavaScript Object Notation JSON|JSON
+R02,JavaScript framework software,Web platform development software,N,Y,JavaScript framework software|JavaScript framework
+R02,Jenkins CI,Enterprise application integration software,Y,Y,Jenkins CI|CI
+R02,Kubernetes,Application server software,Y,Y,Kubernetes
+R02,Linux,Operating system software,Y,Y,Linux
+R02,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R02,MongoDB,Data base management system software,Y,Y,MongoDB
+R02,MySQL,Data base management system software,Y,Y,MySQL
+R02,NoSQL,Data base management system software,Y,Y,NoSQL
+R02,Node.js,Web platform development software,Y,Y,Node.js
+R02,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R02,PHP,Web platform development software,Y,Y,PHP
+R02,PostgreSQL,Object oriented data base management software,Y,Y,PostgreSQL
+R02,Python,Object or component oriented development software,Y,Y,Python
+R02,RESTful API,Web platform development software,N,Y,RESTful API|API
+R02,React,Web platform development software,Y,Y,React
+R02,Spring Boot,Application server software,Y,Y,Spring Boot
+R02,Spring Framework,Web platform development software,Y,Y,Spring Framework
+R02,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R02,TypeScript,Object or component oriented development software,Y,Y,TypeScript
+R02,Vue.js,Web platform development software,Y,Y,Vue.js
+R02,Web application software,Development environment software,N,Y,Web application software|Web application
+R02,WordPress,Web page creation and editing software,Y,Y,WordPress
+R02,jQuery,Object or component oriented development software,Y,Y,jQuery
+R03,C#,Object or component oriented development software,Y,Y,C#
+R03,C++,Object or component oriented development software,Y,Y,C++
+R03,Cascading style sheets CSS,Web platform development software,Y,Y,Cascading style sheets CSS|CSS
+R03,Extensible markup language XML,Enterprise application integration software,Y,Y,Extensible markup language XML|XML
+R03,Git,File versioning software,Y,Y,Git
+R03,Hypertext markup language HTML,Web platform development software,Y,Y,Hypertext markup language HTML|HTML
+R03,JavaScript,Web platform development software,Y,Y,JavaScript
+R03,Linux,Operating system software,Y,Y,Linux
+R03,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R03,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R03,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R03,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R03,Microsoft SQL Server,Data base user interface and query software,Y,Y,Microsoft SQL Server|SQL Server|SQL
+R03,Microsoft Visual Studio,Development environment software,Y,Y,Microsoft Visual Studio|Visual Studio
+R03,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R03,Python,Object or component oriented development software,Y,Y,Python
+R03,R,Object or component oriented development software,Y,Y,
+R03,SAS,Analytical or scientific software,Y,Y,SAS
+R03,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R04,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R04,Apache JMeter,Object or component oriented development software,N,Y,Apache JMeter|JMeter
+R04,Appium,Program testing software,N,Y,Appium
+R04,Atlassian JIRA,Project management software,Y,Y,Atlassian JIRA|JIRA
+R04,C#,Object or component oriented development software,Y,Y,C#
+R04,C++,Object or component oriented development software,Y,Y,C++
+R04,Git,File versioning software,Y,Y,Git
+R04,GitHub,Application server software,Y,Y,GitHub
+R04,JavaScript,Web platform development software,Y,Y,JavaScript
+R04,Jenkins CI,Enterprise application integration software,Y,Y,Jenkins CI|CI
+R04,Linux,Operating system software,Y,Y,Linux
+R04,Microsoft Azure DevOps Services,Development environment software,N,Y,Microsoft Azure DevOps Services|Azure DevOps Services
+R04,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R04,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R04,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R04,Microsoft Playwright,Program testing software,N,Y,Microsoft Playwright|Playwright
+R04,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R04,Postman,Operating system software,N,Y,Postman
+R04,Python,Object or component oriented development software,Y,Y,Python
+R04,REST Assured,Program testing software,N,Y,REST Assured|REST
+R04,RESTful API,Web platform development software,N,Y,RESTful API|API
+R04,Selenium,Program testing software,Y,Y,Selenium
+R04,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R04,TestNG,Program testing software,N,Y,TestNG
+R05,Adobe Creative Cloud software,Graphics or photo imaging software,Y,Y,Adobe Creative Cloud software|Adobe Creative Cloud|Creative Cloud
+R05,Adobe Illustrator,Graphics or photo imaging software,Y,Y,Adobe Illustrator|Illustrator
+R05,Adobe Photoshop,Graphics or photo imaging software,Y,Y,Adobe Photoshop|Photoshop
+R05,Adobe XD,Graphics or photo imaging software,N,Y,Adobe XD|XD
+R05,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R05,Cascading style sheets CSS,Web platform development software,Y,Y,Cascading style sheets CSS|CSS
+R05,Figma,Graphical user interface development software,Y,Y,Figma
+R05,Google Angular,Web platform development software,Y,Y,Google Angular|Angular
+R05,Hypertext markup language HTML,Web platform development software,Y,Y,Hypertext markup language HTML|HTML
+R05,JavaScript,Web platform development software,Y,Y,JavaScript
+R05,React,Web platform development software,Y,Y,React
+R05,TypeScript,Object or component oriented development software,Y,Y,TypeScript
+R06,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R06,Apache Hadoop,Data base management system software,Y,Y,Apache Hadoop|Hadoop
+R06,Apache Spark,Business intelligence and data analysis software,Y,Y,Apache Spark|Spark
+R06,C++,Object or component oriented development software,Y,Y,C++
+R06,Git,File versioning software,Y,Y,Git
+R06,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R06,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R06,Microsoft Power BI,Business intelligence and data analysis software,Y,Y,Microsoft Power BI|Power BI|BI
+R06,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R06,NumPy,Data base user interface and query software,N,Y,NumPy
+R06,PyTorch,Data base user interface and query software,Y,Y,PyTorch
+R06,Python,Object or component oriented development software,Y,Y,Python
+R06,R,Object or component oriented development software,Y,Y,
+R06,SAS,Analytical or scientific software,Y,Y,SAS
+R06,Scikit-learn,Development environment software,N,Y,Scikit-learn
+R06,Snowflake,Data mining software,Y,Y,Snowflake
+R06,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R06,Tableau,Business intelligence and data analysis software,Y,Y,Tableau
+R06,TensorFlow,Analytical or scientific software,Y,Y,TensorFlow
+R06,The MathWorks MATLAB,Analytical or scientific software,Y,Y,The MathWorks MATLAB|MathWorks MATLAB|MATLAB
+R06,pandas,Data base user interface and query software,N,Y,pandas
+R07,Amazon Web Services AWS SageMaker,Cloud-based management software,N,Y,Amazon Web Services AWS SageMaker|Web Services AWS SageMaker|AWS
+R07,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R07,Ansible software,Expert system software,Y,Y,Ansible software|Ansible
+R07,Apache Hadoop,Data base management system software,Y,Y,Apache Hadoop|Hadoop
+R07,Apache Kafka,Development environment software,Y,Y,Apache Kafka|Kafka
+R07,Apache Spark,Business intelligence and data analysis software,Y,Y,Apache Spark|Spark
+R07,Bash,Operating system software,Y,Y,Bash
+R07,C,Development environment software,Y,Y,
+R07,C++,Object or component oriented development software,Y,Y,C++
+R07,Docker,Application server software,Y,Y,Docker
+R07,Git,File versioning software,Y,Y,Git
+R07,GitHub,Application server software,Y,Y,GitHub
+R07,Go,Development environment software,Y,Y,Go
+R07,Grafana Labs Grafana Cloud,Graphical user interface development software,Y,Y,Grafana Labs Grafana Cloud
+R07,Hugging Face,Development environment software,N,Y,Hugging Face
+R07,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R07,JavaScript,Web platform development software,Y,Y,JavaScript
+R07,Jenkins CI,Enterprise application integration software,Y,Y,Jenkins CI|CI
+R07,Kubernetes,Application server software,Y,Y,Kubernetes
+R07,LangChain,Object or component oriented development software,N,Y,LangChain
+R07,Linux,Operating system software,Y,Y,Linux
+R07,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R07,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R07,Prometheus,Data base user interface and query software,Y,Y,Prometheus
+R07,PyTorch,Data base user interface and query software,Y,Y,PyTorch
+R07,Python,Object or component oriented development software,Y,Y,Python
+R07,R,Object or component oriented development software,Y,Y,
+R07,Scala,Object or component oriented development software,Y,Y,Scala
+R07,Scikit-learn,Development environment software,N,Y,Scikit-learn
+R07,Snowflake,Data mining software,Y,Y,Snowflake
+R07,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R07,TensorFlow,Analytical or scientific software,Y,Y,TensorFlow
+R07,Vector database software,Data base management system software,N,Y,Vector database software|Vector database
+R07,pandas,Data base user interface and query software,N,Y,pandas
+R08,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R08,Apache Kafka,Development environment software,Y,Y,Apache Kafka|Kafka
+R08,Apache Spark,Object or component oriented development software,Y,Y,Apache Spark|Spark
+R08,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R08,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R08,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R08,Microsoft Power BI,Business intelligence and data analysis software,Y,Y,Microsoft Power BI|Power BI|BI
+R08,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R08,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R08,Python,Object or component oriented development software,Y,Y,Python
+R08,Snowflake,Data mining software,Y,Y,Snowflake
+R08,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R08,Tableau,Business intelligence and data analysis software,Y,Y,Tableau
+R09,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R09,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R09,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R09,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R09,Microsoft Power BI,Business intelligence and data analysis software,Y,Y,Microsoft Power BI|Power BI|BI
+R09,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R09,Python,Object or component oriented development software,Y,Y,Python
+R09,R,Object or component oriented development software,Y,Y,
+R09,SAP software,Enterprise resource planning ERP software,Y,Y,SAP software|SAP
+R09,SAS,Analytical or scientific software,Y,Y,SAS
+R09,Salesforce software,Customer relationship management CRM software,Y,Y,Salesforce software|Salesforce
+R09,Snowflake,Data mining software,Y,Y,Snowflake
+R09,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R09,Tableau,Business intelligence and data analysis software,Y,Y,Tableau
+R10,Amazon Redshift,Data base user interface and query software,Y,Y,Amazon Redshift|Redshift
+R10,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R10,Apache Airflow,Procedure management software,Y,Y,Apache Airflow|Airflow
+R10,Apache Hadoop,Data base management system software,Y,Y,Apache Hadoop|Hadoop
+R10,Apache Kafka,Development environment software,Y,Y,Apache Kafka|Kafka
+R10,Apache Spark,Business intelligence and data analysis software,Y,Y,Apache Spark|Spark
+R10,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R10,Git,File versioning software,Y,Y,Git
+R10,GitHub,Application server software,Y,Y,GitHub
+R10,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R10,Informatica software,Metadata management software,Y,Y,Informatica software|Informatica
+R10,Kubernetes,Application server software,Y,Y,Kubernetes
+R10,Linux,Operating system software,Y,Y,Linux
+R10,Microsoft Access,Data base user interface and query software,Y,Y,Microsoft Access|Access
+R10,Microsoft Azure Data Factory,Cloud-based management software,N,Y,Microsoft Azure Data Factory|Azure Data Factory
+R10,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R10,Microsoft Power BI,Business intelligence and data analysis software,Y,Y,Microsoft Power BI|Power BI|BI
+R10,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R10,Microsoft SQL Server,Data base user interface and query software,Y,Y,Microsoft SQL Server|SQL Server|SQL
+R10,Microsoft SQL Server Integration Services SSIS,Enterprise application integration software,Y,Y,Microsoft SQL Server Integration Services SSIS|SQL Server Integration Services SSIS|SQL|SSIS
+R10,MongoDB,Data base management system software,Y,Y,MongoDB
+R10,MySQL,Data base user interface and query software,Y,Y,MySQL
+R10,NoSQL,Data base management system software,Y,Y,NoSQL
+R10,Oracle Database,Data base user interface and query software,Y,Y,Oracle Database
+R10,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R10,Oracle PL/SQL,Data base management system software,Y,Y,Oracle PL/SQL|PL/SQL
+R10,PostgreSQL,Object oriented data base management software,Y,Y,PostgreSQL
+R10,PySpark,Data base user interface and query software,N,Y,PySpark
+R10,Python,Object or component oriented development software,Y,Y,Python
+R10,Relational database management system software,Data base management system software,N,Y,Relational database management system software|Relational database management system
+R10,Salesforce software,Customer relationship management CRM software,Y,Y,Salesforce software|Salesforce
+R10,Scala,Object or component oriented development software,Y,Y,Scala
+R10,Shell script,Operating system software,Y,Y,Shell script
+R10,Snowflake,Data mining software,Y,Y,Snowflake
+R10,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R10,Tableau,Business intelligence and data analysis software,Y,Y,Tableau
+R10,Transact-SQL,Object oriented data base management software,Y,Y,Transact-SQL
+R10,UNIX,Operating system software,Y,Y,UNIX
+R11,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R11,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R11,Linux,Operating system software,Y,Y,Linux
+R11,MITRE ATT&CK software,Program testing software,N,Y,MITRE ATT&CK software|MITRE ATT&CK|MITRE
+R11,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R11,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R11,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R11,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R11,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R11,Python,Object or component oriented development software,Y,Y,Python
+R11,Splunk Enterprise,Cloud-based management software,Y,Y,Splunk Enterprise
+R11,Tenable Nessus,Transaction security and virus protection software,N,Y,Tenable Nessus
+R11,UNIX,Operating system software,Y,Y,UNIX
+R11,eMASS,Risk management data and analysis software,N,Y,eMASS
+R12,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R12,Bash,Operating system software,Y,Y,Bash
+R12,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R12,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R12,Kubernetes,Application server software,Y,Y,Kubernetes
+R12,Linux,Operating system software,Y,Y,Linux
+R12,Microsoft Active Directory,Internet directory services software,Y,Y,Microsoft Active Directory|Active Directory
+R12,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R12,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R12,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R12,Python,Object or component oriented development software,Y,Y,Python
+R12,Single sign-on SSO,Authentication server software,N,Y,Single sign-on SSO|SSO
+R12,Splunk Enterprise,Enterprise system management software,Y,Y,Splunk Enterprise
+R13,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R13,Bash,Operating system software,Y,Y,Bash
+R13,C,Development environment software,Y,Y,
+R13,C#,Object or component oriented development software,Y,Y,C#
+R13,C++,Object or component oriented development software,Y,Y,C++
+R13,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R13,JavaScript,Web platform development software,Y,Y,JavaScript
+R13,Kali Linux,Program testing software,N,Y,Kali Linux
+R13,Linux,Operating system software,Y,Y,Linux
+R13,MITRE ATT&CK software,Program testing software,N,Y,MITRE ATT&CK software|MITRE ATT&CK|MITRE
+R13,Metasploit,Transaction security and virus protection software,N,Y,Metasploit
+R13,Microsoft Active Directory,Internet directory services software,Y,Y,Microsoft Active Directory|Active Directory
+R13,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R13,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R13,Nmap,Transaction security and virus protection software,N,Y,Nmap
+R13,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R13,Portswigger BurP Suite,Transaction security and virus protection software,N,Y,Portswigger BurP Suite
+R13,Python,Object or component oriented development software,Y,Y,Python
+R13,Qualys Cloud Platform,Cloud-based protection or security software,N,Y,Qualys Cloud Platform
+R13,Splunk Enterprise,Enterprise system management software,Y,Y,Splunk Enterprise
+R13,Tenable Nessus,Transaction security and virus protection software,N,Y,Tenable Nessus
+R13,UNIX,Operating system software,Y,Y,UNIX
+R14,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R14,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R14,Linux,Operating system software,Y,Y,Linux
+R14,MITRE ATT&CK software,Program testing software,N,Y,MITRE ATT&CK software|MITRE ATT&CK|MITRE
+R14,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R14,Python,Object or component oriented development software,Y,Y,Python
+R14,Splunk Enterprise,Enterprise system management software,Y,Y,Splunk Enterprise
+R14,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R15,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R15,Ansible software,Expert system software,Y,Y,Ansible software|Ansible
+R15,Border Gateway Protocol BGP,Switch or router software,Y,Y,Border Gateway Protocol BGP|BGP
+R15,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R15,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R15,Linux,Operating system software,Y,Y,Linux
+R15,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R15,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R15,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R15,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R15,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R15,Python,Object or component oriented development software,Y,Y,Python
+R15,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R16,Amazon Web Services AWS CloudFormation,Cloud-based management software,Y,Y,Amazon Web Services AWS CloudFormation|Web Services AWS CloudFormation|AWS
+R16,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R16,Ansible software,Expert system software,Y,Y,Ansible software|Ansible
+R16,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R16,Bash,Operating system software,Y,Y,Bash
+R16,C++,Object or component oriented development software,Y,Y,C++
+R16,Docker,Application server software,Y,Y,Docker
+R16,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R16,Git,File versioning software,Y,Y,Git
+R16,GitHub,Application server software,Y,Y,GitHub
+R16,Go,Development environment software,Y,Y,Go
+R16,IBM Terraform,Configuration management software,Y,Y,IBM Terraform|Terraform|IBM
+R16,JavaScript,Web platform development software,Y,Y,JavaScript
+R16,Jenkins CI,Enterprise application integration software,Y,Y,Jenkins CI|CI
+R16,Kubernetes,Application server software,Y,Y,Kubernetes
+R16,Linux,Operating system software,Y,Y,Linux
+R16,Microsoft Active Directory,Internet directory services software,Y,Y,Microsoft Active Directory|Active Directory
+R16,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R16,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R16,Oracle Java,Object or component oriented development software,Y,Y,Oracle Java|Java
+R16,Python,Object or component oriented development software,Y,Y,Python
+R16,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R17,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R17,Ansible software,Expert system software,Y,Y,Ansible software|Ansible
+R17,Bash,Operating system software,Y,Y,Bash
+R17,Firewall software,Network security and virtual private network VPN equipment software,N,Y,Firewall software|Firewall
+R17,Linux,Operating system software,Y,Y,Linux
+R17,Microsoft Active Directory,Internet directory services software,Y,Y,Microsoft Active Directory|Active Directory
+R17,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R17,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R17,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R17,Microsoft Outlook,Electronic mail software,Y,Y,Microsoft Outlook|Outlook
+R17,Microsoft PowerShell,Development environment software,Y,Y,Microsoft PowerShell|PowerShell
+R17,Microsoft SharePoint,Document management software,Y,Y,Microsoft SharePoint|SharePoint
+R17,Microsoft Windows Server,Operating system software,Y,Y,Microsoft Windows Server|Windows Server
+R17,Python,Object or component oriented development software,Y,Y,Python
+R17,Red Hat Enterprise Linux,Operating system software,Y,Y,Red Hat Enterprise Linux|Hat Enterprise Linux
+R17,ServiceNow,Data base user interface and query software,Y,Y,ServiceNow
+R17,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R17,UNIX,Operating system software,Y,Y,UNIX
+R18,Atlassian JIRA,Content workflow software,Y,Y,Atlassian JIRA|JIRA
+R18,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R18,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R18,Microsoft Power BI,Business intelligence and data analysis software,Y,Y,Microsoft Power BI|Power BI|BI
+R18,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R18,Microsoft SharePoint,Document management software,Y,Y,Microsoft SharePoint|SharePoint
+R18,Python,Object or component oriented development software,Y,Y,Python
+R18,SAP software,Enterprise resource planning ERP software,Y,Y,SAP software|SAP
+R18,ServiceNow,Data base user interface and query software,Y,Y,ServiceNow
+R18,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R19,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R19,Atlassian Confluence,Project management software,Y,Y,Atlassian Confluence|Confluence
+R19,Atlassian JIRA,Project management software,Y,Y,Atlassian JIRA|JIRA
+R19,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure
+R19,Microsoft Excel,Spreadsheet software,Y,Y,Microsoft Excel|Excel
+R19,Microsoft Office software,Office suite software,Y,Y,Microsoft Office software|Microsoft Office
+R19,Microsoft PowerPoint,Presentation software,Y,Y,Microsoft PowerPoint|PowerPoint
+R19,SAP software,Enterprise resource planning ERP software,Y,Y,SAP software|SAP
+R19,ServiceNow,Data base user interface and query software,Y,Y,ServiceNow
+R19,Structured query language SQL,Data base user interface and query software,Y,Y,Structured query language SQL|SQL
+R20,Amazon Web Services AWS software,Data base user interface and query software,Y,Y,Amazon Web Services AWS software|Amazon Web Services AWS|Web Services AWS|AWS
+R20,Enterprise application integration EAI software,Enterprise application integration software,N,Y,Enterprise application integration EAI software|Enterprise application integration EAI|EAI
+R20,Microsoft Azure software,Development environment software,Y,Y,Microsoft Azure software|Microsoft Azure|Azure

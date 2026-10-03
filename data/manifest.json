@@ -2,9 +2,9 @@
   "project": "IS 68076026",
   "dataset_version": "ONET31.0-IS68076026-v1.0",
   "corpus_version": "CORPUS_IS68076026-v1.5-01OCT26",
-  "rules_version": "RULES-IS68076026-v1.0",
-  "prompt_version": "analyst_v1.0",
-  "updated_at": "2026-10-01T14:53:42+07:00",
+  "rules_version": "RULES-IS68076026-v2.0",
+  "prompt_version": "analyst_v1.1",
+  "updated_at": "2026-10-03T12:25:12+07:00",
   "frozen": false,
   "freeze_blockers": [
     "รายการรอตรวจ URL 36 รายการ (data/url_manual_check.csv)",
@@ -44,6 +44,18 @@
     "url_manual_check.csv": {
       "sha256": "e5958fc7b3017925c9df4b95007a3a91fbbe973264c0ec61a957a6e37f3dc97a",
       "rows": 28
+    },
+    "role_tasks.csv": {
+      "sha256": "cca94c6279839866e4598d18e4ce4fa400c35a601ec99e79e5b41a82de4e6017",
+      "rows": 160
+    },
+    "role_technology.csv": {
+      "sha256": "540b2b6a13c8174cd0b12b63ac9e21398d1e2d6c2eb22a1689228c3f14c15cc1",
+      "rows": 375
+    },
+    "skill_links.csv": {
+      "sha256": "70cfa688fcf7c3cbcbd2a375fe615e27e5521fa45c1eee765e2f5d90c7b0719d",
+      "rows": 232
     }
   }
 }

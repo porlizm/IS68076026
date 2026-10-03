@@ -1,0 +1,9 @@
+task_id,task_text,expected_status,evidence_sentence,char_start,char_end
+TASK-R06-21823,"Analyze, manipulate, or process large sets of data using statistical software.",evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371
+TASK-R06-21828,"Create graphs, charts, or other visualizations to convey the results of data analysis using specialized software.",missing,,-1,-1
+TASK-R06-21837,"Test, validate, and reformulate models to ensure accurate prediction of outcomes of interest.",missing,,-1,-1
+TASK-R06-21829,Deliver oral or written presentations of the results of mathematical modeling and data analysis to management or other end users.,partially,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462
+TASK-R06-21836,Recommend data-driven solutions to key stakeholders.,missing,,-1,-1
+TASK-R06-21831,Identify business problems or management objectives that can be addressed through data analysis.,missing,,-1,-1
+TASK-R06-21826,Clean and manipulate raw data using statistical software.,evidenced,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371
+TASK-R06-21827,"Compare models using statistical performance metrics, such as loss functions or proportion of explained variance.",missing,,-1,-1

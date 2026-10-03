@@ -57,7 +57,7 @@ node -v        # ต้องได้ v24.x.x
 
 ## 2. สร้าง Gemini API key
 
-Demo เรียก Gemini สองจุด: **Gemini Analyst** (วิเคราะห์ 30 ข้อกำหนด) และ **Gemini OCR** (อ่านไฟล์สแกน/รูป)
+Demo เรียก Gemini สามจุด: **Gemini Analyst** (วิเคราะห์ 30 ข้อกำหนด + งานหลัก 8 งาน · `ANALYST_RUNS` = 3 รอบ) · **Gemini Verifier** (ตรวจความหมายของข้อความที่คำไม่ตรง · R3b · DEC-51/58) และ **Gemini OCR** (อ่านไฟล์สแกน/รูป) · หนึ่งเรซูเมใช้ราว 4 คำขอ
 
 1. เปิด https://aistudio.google.com/apikey → ล็อกอินบัญชี Google
 2. กด **Create API key** → เลือกหรือสร้าง Google Cloud project → คัดลอกคีย์
@@ -140,7 +140,7 @@ N8N_LISTEN_ADDRESS=127.0.0.1 GENERIC_TIMEZONE=Asia/Bangkok npx -y n8n@2.39.9 sta
 
 1. เมนูซ้าย **Overview → Credentials** → เปิด **Gemini API Key (x-goog-api-key)**
 2. ต้องเป็นชนิด *Header Auth* · Name = `x-goog-api-key` · Value = คีย์ของคุณ (ถ้าข้ามตอนรันสคริปต์ ใส่คีย์ที่นี่แล้ว Save)
-3. เปิด workflow → ดับเบิลคลิกโหนด **Gemini Analyst** และ **Gemini OCR** → ช่อง *Credential for Header Auth* ต้องเป็นตัวนี้ (สคริปต์ผูกไว้ให้แล้วด้วย id)
+3. เปิด workflow → ดับเบิลคลิกโหนด **Gemini Analyst** **Gemini Verifier** และ **Gemini OCR** → ช่อง *Credential for Header Auth* ต้องเป็นตัวนี้ (สคริปต์ผูกไว้ให้แล้วด้วย id)
 
 > ห้ามแก้โค้ดในโหนด Code ของ n8n โดยตรง (CLAUDE.md) · การเลือก credential และค่าในโหนดที่ไม่ใช่ Code ทำใน UI ได้ แต่จะหายเมื่อรันสคริปต์นำเข้าใหม่ ค่าที่ต้องคงอยู่ให้แก้ที่ต้นฉบับตามหัวข้อ 8
 
@@ -246,8 +246,10 @@ curl -s -X POST http://localhost:5678/webhook/is-demo-analyze \
 | ค่า | ตั้งต้น | ใช้เมื่อ |
 |---|---|---|
 | `GEMINI_MODEL_ANALYST` / `GEMINI_MODEL_OCR` | `gemini-3.8-flash` | บัญชีใช้รุ่นนี้ไม่ได้ (404) |
-| `GEMINI_THINKING_LEVEL` | `low` | ห้ามใช้ `minimal` กับ 3.8 Flash |
+| `GEMINI_THINKING_LEVEL` | `medium` | ห้ามใช้ `minimal` กับ 3.8 Flash · `low` = เร็วขึ้นแต่พิจารณาทักษะพื้นฐานจากกิจกรรมน้อยลง |
 | `USE_GEMINI_ANALYST` | `true` | `false` = ไม่เรียก LLM เลย (ไม่มีเน็ต) |
+| `ANALYST_RUNS` | 3 | จำนวนรอบวิเคราะห์ที่นำมาโหวต (R1) · 1 = เร็ว/ประหยัดโควตา แต่ไม่มีการโหวต |
+| `USE_GEMINI_VERIFIER` / `GEMINI_MODEL_VERIFIER` | `true` / `gemini-3.8-flash` | `false` = ข้อที่คำไม่ตรงขึ้นเป็น "ยังยืนยันไม่ได้" แทนการตรวจความหมาย |
 | `OCR_MIN_CHARS` | 300 | ข้อความใน PDF น้อยกว่านี้ → ส่ง OCR |
 
 ขั้นตอน (จากโฟลเดอร์ `Final_IS` · ใช้ venv ตาม `docs/Setup_Guide.md` ข้อ 0)
@@ -305,7 +307,7 @@ npx -y n8n@2.39.9 publish:workflow --id=is68WFDemo000001
 $env:N8N_LISTEN_ADDRESS="127.0.0.1"; $env:GENERIC_TIMEZONE="Asia/Bangkok"; npx -y n8n@2.39.9 start
 ```
 
-แล้วสร้าง credential **Header Auth** ชื่อ `Gemini API Key (x-goog-api-key)` (Name `x-goog-api-key`) และ **Google Drive OAuth2 API** ใน UI → เลือกในโหนด Gemini Analyst · Gemini OCR · Upload PDF to Drive → Publish
+แล้วสร้าง credential **Header Auth** ชื่อ `Gemini API Key (x-goog-api-key)` (Name `x-goog-api-key`) และ **Google Drive OAuth2 API** ใน UI → เลือกในโหนด Gemini Analyst · Gemini Verifier · Gemini OCR · Upload PDF to Drive → Publish
 
 ---
 
@@ -326,3 +328,9 @@ $env:N8N_LISTEN_ADDRESS="127.0.0.1"; $env:GENERIC_TIMEZONE="Asia/Bangkok"; npx -
 - Gemini 3.8 Flash (model id · thinking level · temperature): https://ai.google.dev/gemini-api/docs/generate-content/latest-model
 - n8n Google OAuth (self-hosted · redirect URL · Testing 7 วัน): https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/
 - Gemini API key: https://aistudio.google.com/apikey
+
+## รุ่น 3 ต.ค. 2569 (DEC-58 · หลัง Gap_03OCT26)
+- ถ้าแก้ `engine/engine.js` หรือ `demo/src/` ให้สร้างใหม่ด้วย `node demo/build_wf_demo.mjs .` แล้วรันสคริปต์ import ซ้ำ (id เดิม ทับรุ่นเก่า)
+- รายงานแสดง R · C · U · **T** (งานหลักของอาชีพ) · **H** (เทคโนโลยีที่ตลาดต้องการ) · ป้าย "ยังยืนยันไม่ได้" เมื่อความครอบคลุมการตรวจ C < 0.6 · ไม่มี "หลังเรียนจบ → 100" แล้ว
+- ส่วน **เพิ่มหลักฐานด้วยตัวเอง** (Open Learner Model): พิมพ์ข้อความเพิ่ม (เช่น ใบรับรองที่ไม่ได้อยู่ในเรซูเม) แล้วกดวิเคราะห์ใหม่ · ข้อความผ่านกฎ R0–R6 เหมือนเรซูเม
+- ตรวจความตรงของคะแนน: เปิด Demo ไว้แล้วรัน `node scripts/validate_scoring.mjs` (ใช้ `synthetic/validation/`) → `evidence/scoring_validation_<วันที่>.md`

@@ -1,0 +1,5 @@
+{
+ "mode": "oracle",
+ "rule": "quote ตรงกับประโยคเฉลยของข้อนั้น → supports (evidenced) / partially_supports (partially) · ไม่ตรง → unrelated",
+ "invalid_for": []
+}

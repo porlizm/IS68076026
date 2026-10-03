@@ -1,0 +1,38 @@
+Napat Sample
+Senior IT Project Manager
+Email: napat.sample@mail.test | Phone: +66 86 555 0199 | linkedin.com/in/napat-sample
+
+SUMMARY
+Senior IT Project Manager seeking growth in the R19 target occupation.
+
+EDUCATION
+B.Sc. Computer Science, Example University, 2012
+
+EXPERIENCE
+Senior IT Project Manager, Example Retail Group, 2019-present
+IT Project Manager, Example Software House, 2014-2019
+
+KEY ACHIEVEMENTS AND SKILLS
+- Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.
+- Presented weekly status, risks and budget variance to the steering committee and escalated scope changes for approval.
+- Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.
+- Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.
+- Integrated SAP Business One with the e-procurement platform through a nightly reconciliation job.
+- Grew and mentored a delivery team from 6 to 18 people with no regretted attrition.
+- M.Sc. Information Technology Management, Example Institute, 2016
+- Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.
+- Defined the 3-year roadmap for the procurement platform and aligned it with group finance objectives.
+- Acted as the single point of contact between client stakeholders and engineering across 5 regulated industries.
+- Tracked incident queues and service dashboards daily to spot delivery risks early.
+- Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.
+- Hosted fortnightly customer advisory sessions to collect feedback and reprioritise features.
+- Negotiated change requests and payment milestones with three vendors, keeping the programme within contract value.
+- Tools: Jira, Confluence, Microsoft Project, SQL, Excel
+- Wrote SRS documents and kept a requirements traceability matrix for every release.
+- Built a demand forecasting dashboard with SQL that reduced forecast error from 35% to 9% for 120 branches.
+- Facilitated root cause analysis sessions after production incidents and tracked corrective actions to closure.
+- Set up UAT sign-off checklists so every deliverable met the agreed acceptance criteria before release.
+
+CERTIFICATIONS
+Project Management Professional (PMP), PMI, 2023
+Professional Scrum Master I (PSM I), 2021

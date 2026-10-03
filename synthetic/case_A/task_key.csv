@@ -1,0 +1,9 @@
+task_id,task_text,expected_status,evidence_sentence,char_start,char_end
+TASK-R01-21662,Analyze user needs and software requirements to determine feasibility of design within time and cost constraints.,missing,,-1,-1
+TASK-R01-21669,"Develop or direct software system testing or validation procedures, programming, or documentation.",evidenced,Wrote documentation and runbooks for deployment procedures that reduced onboarding time for new engineers.,1230,1336
+TASK-R01-21664,"Confer with systems analysts, engineers, programmers and others to design systems and to obtain information on project limitations and capabilities, performance requirements and interfaces.",partially,Coordinated with product owners and QA peers in daily stand-up meetings to report progress and blockers.,1654,1758
+TASK-R01-21670,"Modify existing software to correct errors, adapt it to new hardware, or upgrade interfaces and improve performance.",evidenced,Debugged memory leaks in a Java microservice and resolved the incident by performing root cause analysis with heap dumps.,906,1027
+TASK-R01-21673,"Prepare reports or correspondence concerning project specifications, activities, or status.",missing,,-1,-1
+TASK-R01-21661,"Analyze information to determine, recommend, and plan installation of a new system or modification of an existing system.",missing,,-1,-1
+TASK-R01-21676,"Store, retrieve, and manipulate data for analysis of system capabilities and requirements.",evidenced,Designed an ETL pipeline that transformed data from five source systems into a PostgreSQL warehouse.,687,787
+TASK-R01-21667,"Design, develop and modify software systems, using scientific analysis and mathematical models to predict and measure outcomes and consequences of design.",partially,Led the system design of an event-driven order service and wrote the technical design document reviewed by architects.,1030,1148

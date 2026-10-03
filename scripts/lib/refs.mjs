@@ -46,15 +46,24 @@ export function loadRefs() {
   const review = parseCSV(fs.readFileSync(rvPath, 'utf8'));
   const mappings = ENGINE.mergeMappingReview(rawMappings, review, projectCfg.min_approved_share_of_L1);
   const manifest = readJSON('data', 'manifest.json');
-  const prompt = fs.readFileSync(path.join(ROOT, 'prompts', 'analyst_v1.0.txt'), 'utf8');
-  return { projectCfg, modelsCfg, sheetsCfg, roles, requirements, corpus, mappings, rawMappings, review, manifest, prompt,
-    promptSha: ENGINE.sha256Hex(prompt) };
+  const prompt = fs.readFileSync(path.join(ROOT, 'prompts', projectCfg.prompt_version + '.txt'), 'utf8');
+  const verifierPrompt = fs.readFileSync(path.join(ROOT, 'prompts', projectCfg.verifier_prompt_version + '.txt'), 'utf8');
+  // DEC-54/55: ข้อมูลชุดที่ 3 (scripts/build_role_signals.py)
+  const roleTasks = readCSV('data', 'role_tasks.csv');
+  const roleTech = readCSV('data', 'role_technology.csv');
+  const skillLinks = readCSV('data', 'skill_links.csv');
+  return { projectCfg, modelsCfg, sheetsCfg, roles, requirements, corpus, mappings, rawMappings, review, manifest, prompt, verifierPrompt,
+    roleTasks, roleTech, skillLinks, promptSha: ENGINE.sha256Hex(prompt), verifierPromptSha: ENGINE.sha256Hex(verifierPrompt) };
+}
+// ข้อมูลเฉพาะอาชีพสำหรับ evaluateRun (DEC-54/55)
+export function signalsFor(refs, roleId) {
+  return { roleTasks: refs.roleTasks.filter((t) => t.role_id === roleId), roleTech: refs.roleTech.filter((t) => t.role_id === roleId), skillLinks: refs.skillLinks };
 }
 export function refsForRun(refs, roleId) {
   const role = refs.roles.find((r) => r.role_id === roleId);
   return {
-    role_name_th: role ? role.role_name_th : '', manifest_files: refs.manifest.files, prompt_sha256: refs.promptSha,
+    role_name_th: role ? role.role_name_th : '', manifest_files: refs.manifest.files, prompt_sha256: refs.promptSha, verifier_prompt_sha256: refs.verifierPromptSha,
     dataset_version: refs.manifest.dataset_version, corpus_version: refs.manifest.corpus_version,
-    prompt_version: refs.projectCfg.prompt_version, rules_version: refs.projectCfg.rules_version,
+    prompt_version: refs.projectCfg.prompt_version + '+' + refs.projectCfg.verifier_prompt_version, rules_version: refs.projectCfg.rules_version,
   };
 }

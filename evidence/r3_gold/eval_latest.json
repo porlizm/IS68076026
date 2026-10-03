@@ -1,0 +1,117 @@
+[
+ {
+  "file": "evidence/r3_gold/gold_pairs_synthetic.csv",
+  "n_pairs": 82,
+  "n_double_rated": 0,
+  "kappa": null,
+  "methods": {
+   "r3_lexical_v1": {
+    "tp": 54,
+    "fp": 1,
+    "fn": 21,
+    "tn": 6,
+    "precision": 0.982,
+    "recall": 0.72,
+    "f1": 0.831
+   },
+   "r3a_stemmed": {
+    "tp": 55,
+    "fp": 1,
+    "fn": 20,
+    "tn": 6,
+    "precision": 0.982,
+    "recall": 0.733,
+    "f1": 0.84
+   },
+   "r3_hybrid": {
+    "tp": 73,
+    "fp": 2,
+    "fn": 2,
+    "tn": 5,
+    "precision": 0.973,
+    "recall": 0.973,
+    "f1": 0.973
+   }
+  },
+  "theta_sweep": [
+   {
+    "theta": 0.05,
+    "precision": 0.97,
+    "recall": 0.867
+   },
+   {
+    "theta": 0.1,
+    "precision": 0.969,
+    "recall": 0.827
+   },
+   {
+    "theta": 0.15,
+    "precision": 0.982,
+    "recall": 0.733
+   },
+   {
+    "theta": 0.2,
+    "precision": 1,
+    "recall": 0.72
+   },
+   {
+    "theta": 0.3,
+    "precision": 1,
+    "recall": 0.653
+   }
+  ]
+ },
+ {
+  "file": "private/gap_03OCT26_sim/gold_pairs_real_03OCT26.csv",
+  "n_pairs": 36,
+  "n_double_rated": 0,
+  "kappa": null,
+  "methods": {
+   "r3_lexical_v1": {
+    "tp": 8,
+    "fp": 1,
+    "fn": 25,
+    "tn": 2,
+    "precision": 0.889,
+    "recall": 0.242,
+    "f1": 0.381
+   },
+   "r3a_stemmed": {
+    "tp": 11,
+    "fp": 1,
+    "fn": 22,
+    "tn": 2,
+    "precision": 0.917,
+    "recall": 0.333,
+    "f1": 0.489
+   }
+  },
+  "theta_sweep": [
+   {
+    "theta": 0.05,
+    "precision": 0.955,
+    "recall": 0.636
+   },
+   {
+    "theta": 0.1,
+    "precision": 0.938,
+    "recall": 0.455
+   },
+   {
+    "theta": 0.15,
+    "precision": 0.917,
+    "recall": 0.333
+   },
+   {
+    "theta": 0.2,
+    "precision": 0.875,
+    "recall": 0.212
+   },
+   {
+    "theta": 0.3,
+    "precision": 1,
+    "recall": 0.182
+   }
+  ]
+ }
+]

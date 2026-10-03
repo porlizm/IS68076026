@@ -4,6 +4,8 @@
 //   d_k  = Σ w(ข้อกำหนดช่องว่างใหม่ที่ k ปิดได้) / ชั่วโมง_k   (3.8)  เลือกมากสุดทีละรายการจนเต็ม Hmax
 //   ใช้เฉพาะคลังที่ verified + ความเชื่อมโยง L1 ที่ผ่านตรวจ (DEC-16, DEC-21) → ไม่มี URL ที่โมเดลแต่งขึ้น
 //   Demo เพิ่ม: ตัดใบรับรองที่ผู้สมัครมีแล้ว · จัดตารางเรียนรายสัปดาห์ตามลำดับ phase
+//   DEC-56: ผู้มีประสบการณ์ ≥ plan_experienced_years ปี ไม่ใช้รายการระดับ Beginner กับข้อที่มีหลักฐานบางส่วนแล้ว
+//   ข้อ "ยังยืนยันไม่ได้" (abstained) ไม่ใส่ในแผน — ผู้เรียนเพิ่มหลักฐานแล้ววิเคราะห์ใหม่ได้ (DEC-58)
 // ─────────────────────────────────────────────────────────────────────────────
 const round = (x, d) => (x === null || x === undefined || Number.isNaN(x) ? null : Math.round(x * 10 ** d) / 10 ** d);
 const v = $('Config & Validate').first().json;
@@ -19,6 +21,11 @@ const w = Object.fromEntries(rows.map((r) => [r.id, r.w]));
 const nameOf = Object.fromEntries(rows.map((r) => [r.id, r.name]));
 const gaps = rows.filter((r) => r.status === 'missing' || r.status === 'partially').map((r) => r.id);
 const gapSet = new Set(gaps);
+const statusOf = Object.fromEntries(rows.map((r) => [r.id, r.status]));
+const pc = v.project_cfg || {};
+const years = ev.candidate ? ev.candidate.years_experience : null;
+const experienced = pc.plan_level_filter === true && typeof years === 'number' && years >= (pc.plan_experienced_years || 5);
+const levelFiltered = new Set();
 
 // ใบรับรองที่มีอยู่แล้ว (ค้นในเรซูเมแบบตรงคำ)
 const lines = text.toLowerCase().split(/\n|,|;|\||•/).map((l) => ' ' + l.replace(/\s+/g, ' ') + ' ');
@@ -41,7 +48,11 @@ function owned(it) {
 const ownedItems = [];
 const Gk = {}; const candByReq = {};
 for (const it of role.items) {
-  const cov = (it.covers_l1 || []).filter((r) => gapSet.has(r));
+  let cov = (it.covers_l1 || []).filter((r) => gapSet.has(r));
+  if (experienced && String(it.level || '').toLowerCase() === 'beginner') {
+    cov.filter((r) => statusOf[r] === 'partially').forEach((r) => levelFiltered.add(r));
+    cov = cov.filter((r) => statusOf[r] !== 'partially');
+  }
   const o = owned(it);
   if (o) { ownedItems.push({ id: it.id, title: it.title, matched: o }); continue; }
   if (!cov.length) continue;
@@ -88,10 +99,8 @@ const planItems = ordered.map((c, i) => {
   };
 });
 
-// คะแนนคาดการณ์หลังเรียนจบแผน (สมมติว่าช่องว่างที่แผนครอบคลุมกลายเป็น evidenced)
-const D = rows.filter((r) => r.status !== 'abstained');
-const wD = D.reduce((s, r) => s + r.w, 0);
-const after = D.reduce((s, r) => s + r.w * (covered.has(r.id) ? 1 : ({ evidenced: 1, partially: 0.5, missing: 0 })[r.status]), 0);
+// DEC-58: ไม่คาดการณ์คะแนนหลังเรียนจบ (การเรียนจบไม่ใช่หลักฐานการทำงาน · ตามนิยามของงานวิจัยคอร์ส/ใบรับรองได้อย่างมาก "บางส่วน")
+// รายงานเฉพาะสัดส่วนช่องว่างที่แผนครอบคลุม และน้ำหนักของช่องว่างเหล่านั้น
 const withCand = gaps.filter((g) => candByReq[g]);
 let notice = '';
 if (!gaps.length) notice = 'ไม่พบช่องว่างทักษะจากข้อกำหนดที่ระบบสรุปได้ จึงไม่มีรายการเรียนรู้ในแผน';
@@ -106,13 +115,16 @@ return [{
       gap_coverage: gaps.length ? round(covered.size / gaps.length, 4) : null,
       gap_coverage_with_candidate: withCand.length ? round(covered.size / withCand.length, 4) : null,
       uncovered_no_candidate: gaps.filter((g) => !candByReq[g]).map((r) => ({ id: r, name: nameOf[r] })),
-      uncovered_over_capacity: gaps.filter((g) => candByReq[g] && !covered.has(g)).map((r) => ({ id: r, name: nameOf[r] })),
+      uncovered_over_capacity: gaps.filter((g) => candByReq[g] && !covered.has(g) && !levelFiltered.has(g)).map((r) => ({ id: r, name: nameOf[r] })),
+      uncovered_level_filtered: gaps.filter((g) => levelFiltered.has(g) && !covered.has(g)).map((r) => ({ id: r, name: nameOf[r] })),
+      learner: { years_experience: typeof years === 'number' ? years : null, level_filter_applied: experienced },
+      n_unverified: rows.filter((r) => r.status === 'abstained').length,
       owned: ownedItems,
       items: planItems,
       n_courses: planItems.filter((p) => p.type === 'course').length,
       n_certs: planItems.filter((p) => p.type === 'certification').length,
       cost_usd: planItems.reduce((s, p) => s + (p.cost_usd || 0), 0),
-      projected_readiness_pct: wD ? round((after / wD) * 100, 2) : null,
+      covered_gap_weight: round([...covered].reduce((s, r) => s + w[r], 0), 6), gap_weight: round(gaps.reduce((s, r) => s + w[r], 0), 6),
       notice,
     },
   },

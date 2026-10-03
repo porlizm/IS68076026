@@ -1,0 +1,23 @@
+Arisa Example
+IT Project Manager
+arisa.example@mail.test | +66 81 000 1919
+
+EXPERIENCE
+IT Project Manager, Example Retail Group, 2019 - present
+Business Analyst, Example Software House, 2016 - 2019
+
+KEY ACHIEVEMENTS
+- Managed project scope, schedule and budget for ERP and e-commerce projects.
+- Coordinated the work of developers, testers and vendors on four concurrent projects.
+- Communicated project status and risks to executives and stakeholders every week.
+- Gathered requirements from business users and documented specifications.
+- Monitored project milestones and deliverables using Jira and Microsoft Project.
+- Negotiated contracts and change requests with vendors.
+- Guided and mentored team members and resolved conflicts within the team.
+- Analyzed data to identify project risks and solve problems.
+
+EDUCATION
+M.Sc. Information Technology Management, Example Institute, 2018
+
+CERTIFICATIONS
+Project Management Professional (PMP), 2022

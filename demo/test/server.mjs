@@ -29,10 +29,10 @@ function mockAnalyst(body) {
     const T = new Set([...tok(r.name + ' ' + r.desc + ' ' + r.aliases.split('|').join(' '))].filter((x) => !STOP.has(x)));
     let best = null, bs = 0;
     for (const l of lines) { const L = tok(l); let s = 0; L.forEach((x) => { if (T.has(x)) s++; }); if (s > bs) { bs = s; best = l; } }
-    if (bs >= 2) return { requirement_id: r.id, status: /\d/.test(best) ? 'evidenced' : 'partially', quote: best.slice(0, 280), confidence: 0.8 };
-    if (hallucinated === 0) { hallucinated++; return { requirement_id: r.id, status: 'evidenced', quote: 'Led a national research lab and published twelve peer-reviewed papers on this topic.', confidence: 0.7 }; }
-    if (hallucinated === 1 && lines.length) { hallucinated++; return { requirement_id: r.id, status: 'partially', quote: lines.find((l) => /University|Institute/.test(l)) || lines[0], confidence: 0.5 }; }
-    return { requirement_id: r.id, status: 'missing', quote: '', confidence: 0.6 };
+    if (bs >= 2) return { requirement_id: r.id, status: /\d/.test(best) ? 'evidenced' : 'partially', quotes: [best.slice(0, 160)], evidence_type: 'action', confidence: 0.8 };
+    if (hallucinated === 0) { hallucinated++; return { requirement_id: r.id, status: 'evidenced', quotes: ['Led a national research lab and published twelve peer-reviewed papers on this topic.'], confidence: 0.7 }; }
+    if (hallucinated === 1 && lines.length) { hallucinated++; return { requirement_id: r.id, status: 'partially', quotes: [lines.find((l) => /University|Institute/.test(l)) || lines[0]], confidence: 0.5 }; }
+    return { requirement_id: r.id, status: 'missing', quotes: [], confidence: 0.6 };
   });
   const certLine = resume.split('\n').map((l) => l.replace(/^-\s*/, '').trim()).filter((l) => /Certified|Certificate|PSM|ITIL|CCNA|NSE/.test(l));
   const profile = {
@@ -42,7 +42,8 @@ function mockAnalyst(body) {
     headline_th: 'ผู้สมัครมีประสบการณ์ทำงานจริงที่เกี่ยวข้องกับอาชีพเป้าหมายบางส่วน และมีจุดที่ต้องพัฒนาเพิ่มเติม',
     summary_th: 'ผู้สมัครมีจุดแข็งด้านการทำงานจริงและการใช้เครื่องมือที่เกี่ยวข้อง มีผลงานที่วัดผลได้ชัดเจน แต่ยังขาดหลักฐานในบางองค์ความรู้หลักของอาชีพเป้าหมาย ควรเสริมด้วยคอร์สและใบรับรองตามแผนด้านล่าง',
   };
-  const text = JSON.stringify({ schema_version: 'analyst_v1.0', role_id: roleId, assessments, profile });
+  const task_assessments = (role.signal_tasks || []).map((t, i) => ({ task_id: t.task_id, status: i < 3 && lines[i] ? 'partially' : 'missing', quotes: i < 3 && lines[i] ? [lines[i].slice(0, 160)] : [], confidence: 0.6 }));
+  const text = JSON.stringify({ schema_version: 'analyst_v1.1', role_id: roleId, assessments, task_assessments, profile });
   return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: prompt.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0 }, modelVersion: 'gemini-3.8-flash (mock)' };
 }
 const mocks = {
@@ -54,6 +55,13 @@ const mocks = {
     if (name === 'Gemini OCR') {
       if (!body.contents[0].parts[0].inlineData.data) throw new Error('OCR no data');
       return { candidates: [{ content: { parts: [{ text: pdfText(fs.readFileSync(OCR_SOURCE)).text }] }, finishReason: 'STOP' }] };
+    }
+    if (name === 'Gemini Verifier') {
+      // ผู้ตรวจจำลอง: ข้อความที่มีตัวเลข = supports · มีชื่อสถาบัน = unrelated · อื่น ๆ = partially_supports
+      const p = body.contents[0].parts[0].text;
+      const list = JSON.parse(p.slice(p.indexOf('CHECKS (JSON):') + 14).trim());
+      const text = JSON.stringify({ schema_version: 'verifier_v1.0', checks: list.map((c) => ({ check_id: c.check_id, verdict: /University|Institute|research lab/.test(c.quote) ? 'unrelated' : /\d/.test(c.quote) ? 'supports' : 'partially_supports' })) });
+      return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], modelVersion: 'gemini-3.8-flash (mock)' };
     }
     return mockAnalyst(body);
   },

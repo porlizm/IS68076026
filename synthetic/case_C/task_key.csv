@@ -1,0 +1,9 @@
+task_id,task_text,expected_status,evidence_sentence,char_start,char_end
+TASK-R18-20950,Troubleshoot program and system malfunctions to restore normal functioning.,missing,,-1,-1
+TASK-R18-3464,"Provide staff and users with assistance solving computer-related problems, such as malfunctions and program problems.",evidenced,Provided user support and handled service desk tickets for the finance system after go-live.,788,880
+TASK-R18-3465,"Test, maintain, and monitor computer programs and systems, including coordinating the installation of computer programs and systems.",partially,Monitored systems and job queues on the reporting server during month-end.,1640,1714
+TASK-R18-3482,"Use the computer in the analysis and solution of business problems, such as development of integrated production and inventory control and cost analysis systems.",missing,,-1,-1
+TASK-R18-3468,Coordinate and link the computer systems within an organization to increase compatibility so that information can be shared.,missing,,-1,-1
+TASK-R18-3466,"Use object-oriented programming languages, as well as client and server applications development processes and multimedia and Internet technology.",missing,,-1,-1
+TASK-R18-3474,"Analyze information processing or computation needs and plan and design computer systems, using techniques such as structured analysis, data modeling, and information engineering.",evidenced,Produced process modeling diagrams and data flow analysis for the ERP procurement module.,607,696
+TASK-R18-3469,Consult with management to ensure agreement on system principles.,partially,Explained technical details of the new workflow to non-technical managers in monthly briefings.,883,978

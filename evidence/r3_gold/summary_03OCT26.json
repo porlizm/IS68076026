@@ -1,0 +1,75 @@
+{
+ "_note": "สรุปตัวเลขจากข้อสรุปจริง 36 ข้อของเรซูเมผู้วิจัย (ทดลอง WF_Demo 3 ต.ค. 2569) · ข้อความต้นฉบับอยู่ใน private/ ไม่เข้า git · ป้ายเป็นป้ายเบื้องต้นของ Claude รอผู้ให้ป้ายสองคน (DEC-57)",
+ "demo_scores_03OCT26": {
+  "R19_it_pm": 10,
+  "R15_network": 11
+ },
+ "claims_total": 36,
+ "r3_rejected_in_demo": 27,
+ "real": {
+  "r3_lexical_v1": {
+   "tp": 8,
+   "fp": 1,
+   "fn": 25,
+   "tn": 2,
+   "precision": 0.889,
+   "recall": 0.242,
+   "f1": 0.381
+  },
+  "r3a_stemmed": {
+   "tp": 11,
+   "fp": 1,
+   "fn": 22,
+   "tn": 2,
+   "precision": 0.917,
+   "recall": 0.333,
+   "f1": 0.489
+  }
+ },
+ "synthetic": {
+  "r3_lexical_v1": {
+   "tp": 54,
+   "fp": 1,
+   "fn": 21,
+   "tn": 6,
+   "precision": 0.982,
+   "recall": 0.72,
+   "f1": 0.831
+  },
+  "r3a_stemmed": {
+   "tp": 55,
+   "fp": 1,
+   "fn": 20,
+   "tn": 6,
+   "precision": 0.982,
+   "recall": 0.733,
+   "f1": 0.84
+  },
+  "r3_hybrid": {
+   "tp": 73,
+   "fp": 2,
+   "fn": 2,
+   "tn": 5,
+   "precision": 0.973,
+   "recall": 0.973,
+   "f1": 0.973
+  }
+ },
+ "synthetic_pairs": 82,
+ "replay_R": {
+  "R19": {
+   "demo": 10.3,
+   "r2_only": 47.0,
+   "r2_plus_judged_r3": 45.4
+  },
+  "R15": {
+   "demo": 10.9,
+   "r2_only": 56.0,
+   "r2_plus_judged_r3": 48.9
+  }
+ },
+ "role_overlap": {
+  "R19_R15_shared": 19,
+  "mean_shared_fraction_all_pairs": 0.759
+ }
+}

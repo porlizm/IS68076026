@@ -29,7 +29,7 @@ python scripts/build_book.py             # เล่ม -> build/IS_68076026_lat
 1. สร้าง GCP project → เปิด Document AI API, Google Sheets API, Google Drive API, Gmail API
 2. Document AI → สร้าง processor ชนิด **Document OCR** → จด `GCP_PROJECT_ID`, `DOCAI_LOCATION`, `DOCAI_PROCESSOR_ID`
 3. สร้าง service account + JSON key (เก็บใน `private/`, ห้าม commit) · แชร์ให้ service account: สเปรดชีตฐานข้อมูล (Editor) และโฟลเดอร์รับไฟล์ของแบบฟอร์ม (Viewer)
-4. สร้างสเปรดชีตจาก `sheets_import/IS68076026_Sheets_Template.xlsx` (16 แท็บ) → จด `SHEET_ID` · ตรวจแท็บ `ref_mappings` ต้องมีแถว `source_checked_by_script` ≥ ค่า `approved_rows` ใน `data/manifest.json`
+4. สร้างสเปรดชีตจาก `sheets_import/IS68076026_Sheets_Template.xlsx` (17 แท็บ) → จด `SHEET_ID` · ตรวจแท็บ `ref_mappings` ต้องมีแถว `source_checked_by_script` ≥ ค่า `approved_rows` ใน `data/manifest.json` · **ถ้าสร้างสเปรดชีตไว้ก่อน 3 ต.ค. 2569** (engine 2.0 · DEC-51–55) ให้เพิ่มแท็บ `role_task_decisions` และคอลัมน์ใหม่ตามหัวตารางใน `sheets_import/headers/` (runs: `role_task_index`, `tech_match_pct` · model_calls: `call_purpose` · findings: `target_kind` … `final_vote` · decisions: `evidence_source` · ref_corpus: `level`, `exam_code`) หรือสร้างใหม่จากไฟล์แม่แบบแล้วนำเข้าแท็บอ้างอิงซ้ำ
 5. Google Forms: เปิด "Collect verified email" + แนบไฟล์ (PDF, 10 MB, 1 ไฟล์) + คำถามตาม `config/sheets.json → form_responses` (ชื่อคอลัมน์ต้องตรงทุกตัวอักษร) · ตัวเลือกอาชีพขึ้นต้นด้วยรหัส เช่น "R01 วิศวกรซอฟต์แวร์…" · ตัวเลือกประเภท "หลักสูตร / ใบรับรอง / ทั้งสองประเภท" · ความยินยอมใช้ข้อความ "ข้าพเจ้ายินยอมตามข้อ 1 และข้อ 2" · ผูกคำตอบกับแท็บ `form_responses`
 6. แบบประเมินแยกอีกฟอร์ม ผูกกับแท็บ `evaluation_responses` (ไม่เก็บอีเมล)
 7. Drive: สร้างโฟลเดอร์ `reports` และ `masked_text` (ส่วนตัว) → จด id

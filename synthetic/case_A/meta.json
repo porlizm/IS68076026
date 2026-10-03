@@ -30,5 +30,7 @@
    "2.B.4.g": "paraphrase"
   }
  },
- "fictional": true
+ "verifier_invalid_for": [],
+ "fictional": true,
+ "style": "onet_vocabulary"
 }

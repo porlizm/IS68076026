@@ -5,7 +5,7 @@ build_data_all.py — สร้างข้อมูลอ้างอิงท�
   python scripts/build_data_all.py            (ค่าเริ่มต้นอ่านต้นทางจาก source/)
   python scripts/build_data_all.py --corpus-version v1.4   (ถ้าอาจารย์เลือก D1 = ก.)
 
-ลำดับ: requirements/roles/aliases → corpus/mappings → mapping_review → sheets_import → manifest
+ลำดับ: requirements/roles/aliases → corpus/mappings → mapping_review → role_tasks/role_technology/skill_links (DEC-54/55) → sheets_import → manifest
 """
 import argparse, os, subprocess, sys
 
@@ -23,6 +23,7 @@ steps = [
     [py, "scripts/build_corpus.py", "--src-dir", a.corpus_dir, "--version", a.corpus_version]
     + (["--close-r14-repair"] if a.close_r14_repair else []),
     [py, "scripts/review_mappings.py"],
+    [py, "scripts/build_role_signals.py", "--src", a.dataset],
     [py, "scripts/build_sheets_import.py"],
     [py, "scripts/update_manifest.py"],
 ]

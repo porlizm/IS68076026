@@ -1,0 +1,23 @@
+Krit Example
+Network Engineer
+krit.example@mail.test | +66 82 000 1515
+
+EXPERIENCE
+Network Engineer, Example Telecom, 2018 - present
+System Administrator, Example Hospital, 2015 - 2018
+
+KEY ACHIEVEMENTS
+- Redesigned a 60-site WAN with BGP and OSPF, cutting average latency from 48 ms to 19 ms.
+- Rolled out FortiGate firewalls and site-to-site VPN for 60 branches with zero security incidents in two years.
+- Cut mean time to repair for network incidents from 4 hours to 50 minutes with PRTG alerting and runbooks.
+- Automated configuration backups for 800 devices with Python and Ansible, saving 30 hours a month.
+- Wrote and tested the disaster recovery plan for the core data centre, restoring service in 35 minutes during the annual drill.
+- Led the core switch upgrade with two vendors over three weekends without unplanned downtime.
+- Produced up-to-date diagrams and 40 procedures in Confluence used by the 24x7 operations desk.
+- Ran a capacity study that justified a THB 6M bandwidth upgrade approved by the CTO.
+
+EDUCATION
+B.Eng. Computer Engineering, Example University, 2015
+
+CERTIFICATIONS
+Cisco Certified Network Associate (CCNA), 2019

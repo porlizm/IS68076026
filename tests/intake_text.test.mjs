@@ -59,14 +59,15 @@ test('runs.stage: running → ready → delivered หรือ failed เท่�
   assert.throws(() => E.nextStage('delivered', 'failed'));
 });
 
-test('buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 4,096 token · temperature 0 (A6)', () => {
+test('buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 16,384 token (DEC-53) · temperature 0 (A6)', () => {
   const env = { MODEL_A_ID: 'a1', MODEL_B_ID: 'b1', MODEL_C_ID: 'c1' };
   const a = E.buildProviderRequest('A', refs.modelsCfg, 'P', env);
   const b = E.buildProviderRequest('B', refs.modelsCfg, 'P', env);
   const c = E.buildProviderRequest('C', refs.modelsCfg, 'P', env);
-  assert.equal(a.url, 'https://api.openai.com/v1/chat/completions'); assert.equal(a.body.model, 'a1'); assert.equal(a.body.temperature, 0); assert.equal(a.body.max_completion_tokens, 4096);
-  assert.equal(b.url, 'https://api.anthropic.com/v1/messages'); assert.equal(b.body.max_tokens, 4096); assert.equal(b.body.temperature, 0);
-  assert.equal(c.url, 'https://generativelanguage.googleapis.com/v1beta/models/c1:generateContent'); assert.equal(c.body.generationConfig.maxOutputTokens, 4096);
+  assert.equal(a.url, 'https://api.openai.com/v1/chat/completions'); assert.equal(a.body.model, 'a1'); assert.equal(a.body.temperature, 0); assert.equal(a.body.max_completion_tokens, 16384);
+  assert.equal(b.url, 'https://api.anthropic.com/v1/messages'); assert.equal(b.body.max_tokens, 16384); assert.equal(b.body.temperature, 0);
+  assert.equal(c.url, 'https://generativelanguage.googleapis.com/v1beta/models/c1:generateContent'); assert.equal(c.body.generationConfig.maxOutputTokens, 16384);
+  assert.equal(E.buildProviderRequest('A', refs.modelsCfg, 'P', env, { maxTokens: 4096 }).body.max_completion_tokens, 4096, 'ผู้ตรวจใช้เพดานของตัวเอง');
   assert.equal(new Set([a.url, b.url, c.url].map((u) => new URL(u).host)).size, 3, 'ห้ามเรียกผู้ให้บริการรายเดียวสามครั้ง');
   const noT = JSON.parse(JSON.stringify(refs.modelsCfg)); noT.models.B.send_temperature = false;
   assert.equal(E.buildProviderRequest('B', noT, 'P', env).body.temperature, undefined);

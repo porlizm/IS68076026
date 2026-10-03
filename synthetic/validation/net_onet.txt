@@ -1,0 +1,23 @@
+Krit Example
+Network Engineer
+krit.example@mail.test | +66 82 000 1515
+
+EXPERIENCE
+Network Engineer, Example Telecom, 2018 - present
+System Administrator, Example Hospital, 2015 - 2018
+
+KEY ACHIEVEMENTS
+- Designed and configured LAN and WAN networks with routing and switching.
+- Implemented firewall rules, VPN and network security measures.
+- Monitored network performance and troubleshot network problems.
+- Automated network configuration with Python and Ansible.
+- Developed disaster recovery plans for network infrastructure.
+- Coordinated network installation and upgrades with vendors.
+- Documented network diagrams and procedures.
+- Evaluated network capacity and recommended equipment.
+
+EDUCATION
+B.Eng. Computer Engineering, Example University, 2015
+
+CERTIFICATIONS
+Cisco Certified Network Associate (CCNA), 2019

@@ -229,7 +229,7 @@ export function validateFinal(w, wfs) {
 // ------------------------------------------------------------------ WF_IS_68076026_01OCT26 (DEC-48 · ต่อยอด DEC-42)
 export const SINGLE_NAME = 'WF_IS_68076026_01OCT26';
 export const SINGLE_FILE = SINGLE_NAME + '.json';
-export const EXPECTED_SINGLE_NODES = 69;
+export const EXPECTED_SINGLE_NODES = 79;
 export function loadSingle() { return JSON.parse(fs.readFileSync(path.join(ROOT, 'workflows', SINGLE_FILE), 'utf8')); }
 export function validateSingle(w) {
   const errors = [];
@@ -252,7 +252,7 @@ export function validateSingle(w) {
   const inSec = secs.flatMap((s) => s.nodes);
   if (inSec.length !== real.length || new Set(inSec).size !== real.length || inSec.some((x) => !byName[x])) E('ทุกโหนดต้องอยู่ในช่วงเดียวพอดี');
   // ชื่อโหนดเป็นกริยา + กรรม (คำแรกเป็นคำกริยาภาษาอังกฤษ หรือคำถามของ IF)
-  const VERBS = /^(Watch|Read|Validate|Is|Has|Log|Loop|Create|Download|Check|Extract|Choose|Run|Mask|Save|Record|Start|Load|Build|Call|Wait|Collect|Apply|Mark|Freeze|Render|Upload|Export|Send|Delete|Catch|Get|Classify|Notify)\b/;
+  const VERBS = /^(Watch|Read|Validate|Is|Has|Log|Loop|Create|Download|Check|Extract|Choose|Run|Mask|Save|Record|Start|Load|Build|Call|Wait|Collect|Apply|Mark|Freeze|Render|Upload|Export|Send|Delete|Catch|Get|Classify|Notify|Prepare)\b/;
   for (const n of real) if (!VERBS.test(n.name)) E(`${n.name}: ชื่อโหนดควรขึ้นต้นด้วยคำกริยา`);
   // connections + fan-in
   const incoming = {}; const succ = {};
@@ -320,6 +320,14 @@ export function validateSingle(w) {
     const js = (byName['Call Model ' + k] || { parameters: {} }).parameters.jsCode || '';
     if (!/returnFullResponse: true, ignoreHttpStatusErrors: true/.test(js) || !js.includes(`const KEY = '${k}';`) || js.includes('__KEY__')) E(`Call Model ${k}: ต้องอ่านรหัส HTTP จาก response เต็ม (task runner ไม่ส่งรหัส HTTP ของ error ข้าม RPC) และ KEY = ${k}`);
   }
+  // DEC-51: ผู้ตรวจความหมาย (R3b) ใช้กลไกเรียกเดียวกับ Call Model และไม่เรียกเมื่อไม่มีข้อให้ตรวจ · Apply Rules ต้องรับผลผู้ตรวจ + คลัง (R5)
+  for (const k of ['A', 'B', 'C']) {
+    const js = (byName['Call Verifier ' + k] || { parameters: {} }).parameters.jsCode || '';
+    if (!/returnFullResponse: true, ignoreHttpStatusErrors: true/.test(js) || !js.includes(`const KEY = '${k}';`) || js.includes('__KEY__') || !/status: 'skipped'/.test(js)) E(`Call Verifier ${k}: ต้องใช้กลไกเรียกแบบ Call Model · KEY = ${k} · ข้ามเมื่อไม่มีข้อให้ตรวจ`);
+  }
+  const preRules = (incoming['Apply Rules R0-R6'] || []).map((x) => x.from).join();
+  if (preRules !== 'Load Mappings') E(`Apply Rules R0-R6 ต้องรับจาก Load Mappings (ได้ ${preRules})`);
+  for (const nm of ['Apply Rules R0-R6', 'Prepare Relevance Checks', 'Build Prompt']) if (!/const SIGNALS_FOR = /.test((byName[nm] || { parameters: {} }).parameters.jsCode || '')) E(`${nm}: ต้องฝัง SIGNALS (data/role_tasks.csv ฯลฯ · DEC-54/55)`);
   if (!byName['Run Local OCR'] || byName['Run Local OCR'].onError !== 'continueRegularOutput') E('Run Local OCR: ต้องเป็น continueRegularOutput ให้ Mask Personal Data แจ้ง ocr_failed พร้อม run_id');
   for (const n of real) if (n.type === 'n8n-nodes-base.googleSheets' && /^append/.test(n.parameters.operation) && !(n.parameters.options && n.parameters.options.useAppend === true)) E(`${n.name}: append ต้องตั้ง useAppend (values:append) กันเขียนทับแถวเมื่อมีหลาย execution`);
   const ab = (w.connections['Notify Researcher'] || { main: [] }).main;

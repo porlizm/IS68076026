@@ -26,6 +26,17 @@ if (tl.need_ocr) {
 
 const norm = normalizeText(raw);
 const m = maskPII(norm);
+// DEC-58 Open Learner Model: หลักฐานที่ผู้เรียนพิมพ์เพิ่ม ต่อท้ายข้อความเรซูเม (ปิดบัง PII เหมือนกัน) · ตำแหน่งเริ่มใช้แยกที่มาในรายงาน
+const sup = String($('Config & Validate').first().json.supplement || '').trim();
+let supplementOffset = -1;
+if (sup) {
+  const sm = maskPII(normalizeText(sup));
+  const head = m.text + '\n\nADDITIONAL EVIDENCE PROVIDED BY THE LEARNER (self-reported)\n';
+  supplementOffset = head.length;
+  m.text = head + sm.text;
+  for (const k of Object.keys(m.counts)) m.counts[k] += sm.counts[k];
+  m.total += sm.total;
+}
 const meaningful = (m.text.match(/[A-Za-z0-9฀-๿]/g) || []).length;
 const errors = [];
 if (ocrError) errors.push('อ่านเอกสารไม่สำเร็จ: ' + ocrError + ' — ตรวจ Gemini API Key หรือใช้ PDF ที่มีข้อความ');
@@ -39,6 +50,7 @@ return [{
     errors,
     text: m.text,
     char_count: m.text.length,
+    supplement_offset: supplementOffset,
     pii_masked_count: m.total,
     pii_counts: m.counts,
     ocr: { method, reason: tl.ocr_reason || '', pages: tl.pages, text_layer_chars: tl.text_layer_chars, usage: ocrTokens },

@@ -65,7 +65,7 @@
   var ROLE_ICON = { brain: 'cpu', network: 'network', kanban: 'kanban', building: 'building' };
   var STATUS = {
     evidenced: { th: 'มีหลักฐาน', icon: 'check' }, partially: { th: 'บางส่วน', icon: 'half' },
-    missing: { th: 'ช่องว่าง', icon: 'minus' }, abstained: { th: 'ไม่ได้ประเมิน', icon: 'info' }
+    missing: { th: 'ช่องว่าง', icon: 'minus' }, abstained: { th: 'ยังยืนยันไม่ได้', icon: 'info' }
   };
   var DOMAIN_TH = { 'Essential Skills': 'ทักษะพื้นฐาน', 'Transferable Skills': 'ทักษะถ่ายโอนได้', 'Knowledge': 'องค์ความรู้', 'Work Activities': 'กิจกรรมการทำงาน' };
   var PHASE_COLOR = { foundation: 'var(--series-1)', core_gap_closure: 'var(--series-2)', advanced_or_cert_prep: 'var(--series-3)' };
@@ -204,16 +204,17 @@
     { k: 'up', t: 'อัปโหลดไปยัง n8n', s: 'Webhook รับไฟล์ + ตรวจชนิด/ขนาด', d: 1.2, i: 'upload' },
     { k: 'ocr', t: 'อ่านข้อความ (OCR)', s: 'text layer หรือ Gemini OCR', d: 3, i: 'file' },
     { k: 'pii', t: 'ปิดบังข้อมูลส่วนบุคคล', s: 'EMAIL · PHONE · URL · ID', d: 1, i: 'lock' },
-    { k: 'ai', t: 'Gemini วิเคราะห์หลักฐาน', s: '30 ข้อกำหนด O*NET + ข้อความอ้างอิง', d: 26, i: 'spark' },
-    { k: 'guard', t: 'ตรวจ R0 · R2 · R3', s: 'ตัดคำกล่าวอ้างที่ไม่มีหลักฐานจริง', d: 1.2, i: 'shield' },
+    { k: 'ai', t: 'Gemini วิเคราะห์หลักฐาน', s: '30 ข้อกำหนด + 8 งานหลักของอาชีพ · หลายรอบแล้วโหวต', d: 40, i: 'spark' },
+    { k: 'guard', t: 'ตรวจ R2 · R3 คำ + ความหมาย', s: 'ข้อความที่คำไม่ตรงส่งให้ Gemini อีกรอบตรวจความหมาย', d: 12, i: 'shield' },
     { k: 'plan', t: 'จัดแผนการเรียนรู้', s: 'Greedy d_k ภายใน Hmax', d: 1.2, i: 'route' }
   ];
   var TIPS = [
     'R2 ตรวจว่า “ข้อความอ้างอิง” ที่ AI คัดมา มีอยู่ในเรซูเมจริงทุกตัวอักษร ถ้าไม่พบ ระบบจะไม่นับเป็นหลักฐาน',
-    'R3 ตรวจว่าข้อความอ้างอิงเกี่ยวกับข้อกำหนดนั้นจริง โดยใช้คำพ้องจาก O*NET และค่าเกณฑ์ θ = 0.15',
+    'R3 ตรวจสองชั้น: คำตรงกับ O*NET (θ = 0.15) ก่อน ถ้าคำไม่ตรง (เช่นเขียนแบบเน้นผลงาน) ให้ Gemini อีกรอบตรวจความหมาย',
+    'ใบรับรองที่พบในเรซูเมนับเป็นหลักฐาน "บางส่วน" ของข้อกำหนดที่ใบรับรองนั้นครอบคลุม (R5)',
     'น้ำหนักของแต่ละข้อกำหนดมาจากค่าความสำคัญ (IM) ของ O*NET ตามสมการ 3.1',
     'คอร์สและใบรับรองทุกรายการมาจากคลังที่ผู้วิจัยตรวจ URL แล้ว AI ไม่สามารถแต่งลิงก์ขึ้นเองได้',
-    'ระบบเต็มของงานวิจัยใช้ 3 โมเดลโหวตกัน (R1) Demo รอบนี้ใช้ Gemini ตัวเดียว + กฎตรวจหลักฐาน'
+    'ระบบเต็มของงานวิจัยใช้ 3 โมเดลคนละผู้ให้บริการโหวตกัน (R1) และให้โมเดลอื่นตรวจกัน Demo ใช้ Gemini ตัวเดียวหลายรอบ'
   ];
   var procTimer = null, tipTimer = null, t0 = 0;
   function startProc() {
@@ -247,9 +248,14 @@
 
   Q('#mainForm').addEventListener('submit', function (e) {
     e.preventDefault(); if (Q('#submitBtn').disabled) return;
+    analyze('');
+  });
+  // DEC-58 Open Learner Model: ส่งเรซูเมเดิม + หลักฐานที่ผู้เรียนพิมพ์เพิ่ม แล้วให้ระบบตรวจด้วยกฎเดียวกัน
+  function analyze(supplement) {
     var fd = new FormData();
     fd.append('role_id', state.role); fd.append('months', state.months); fd.append('hours_per_week', state.hours);
     fd.append('mode', state.mode); fd.append('consent', state.consent ? 'true' : 'false');
+    if (supplement) fd.append('supplement', supplement);
     fd.append('resume', state.file, state.file.name);
     show('vProc'); startProc();
     Q('#procRun').textContent = 'POST ' + EP_ANALYZE;
@@ -275,7 +281,7 @@
         clearTimeout(to); stopProc(); show('vForm');
         toast('<b>วิเคราะห์ไม่สำเร็จ</b><br>' + (err.name === 'AbortError' ? 'หมดเวลารอ (5 นาที)' : (err.message || 'เชื่อมต่อ n8n ไม่ได้')), 'err', 9000);
       });
-  });
+  }
 
   /* ---------------- REPORT ---------------- */
   function ring(v, size, stroke, id) {
@@ -305,16 +311,16 @@
       '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px"><span class="verdict ' + r.verdict.key + '">' + ic(r.verdict.key === 'high' ? 'check' : r.verdict.key === 'mid' ? 'half' : 'alert', 14, 2.4) + r.verdict.th + '</span>' +
       '<span class="src-note">' + ic('file', 13) + esc(r.input.file_name) + ' · ' + (r.ocr.method === 'gemini_ocr' ? 'Gemini OCR' : 'PDF text layer') + '</span></div>' +
       (C.headline_th ? '<p class="headline">' + esc(C.headline_th) + '</p>' : '') + '</div>' +
-      '<div class="proj" data-tip="คาดการณ์โดยสมมติว่าเรียนจบทุกรายการในแผน และช่องว่างที่แผนครอบคลุมกลายเป็น “มีหลักฐาน”"><small style="margin:0 0 4px">หลังเรียนจบแผน</small><div class="from-to"><span class="a num">' + fmt(S.readiness_pct, 0) + '</span>' + ic('arrow', 18) + '<span class="b num">' + fmt(P.projected_readiness_pct, 0) + '</span></div><small>ปิดช่องว่าง ' + P.n_covered + '/' + P.n_gaps + ' ข้อ<br>ใน ' + fmt(P.weeks_needed, 0) + ' สัปดาห์</small></div>' +
+      '<div class="proj" data-tip="ดัชนีงานหลักของอาชีพ (T) วัดหลักฐานของงาน Core 8 งานที่ O*NET ระบุสำหรับอาชีพนี้โดยเฉพาะ อ่านแยกจากคะแนนความพร้อม"><small style="margin:0 0 4px">งานหลักของอาชีพ (T)</small><div class="from-to"><span class="b num">' + fmt(S.role_task_index, 0) + '</span></div><small>สรุปได้ ' + (S.n_role_tasks_decided || 0) + '/' + (S.n_role_tasks || 0) + ' งาน<br>สรุปข้อกำหนดได้ ' + pct(S.weighted_coverage) + ' ของน้ำหนัก</small></div>' +
       '</div>';
 
     // KPIs
     var segW = function (n) { return (n / 30 * 100).toFixed(2) + '%'; };
     h += '<div class="kpis">' +
-      kpi('target', 'ข้อกำหนดที่มีหลักฐาน', '<span class="num" data-count="' + S.n_evidenced + '">0</span><small> / 30</small>', 'บางส่วน ' + S.n_partially + ' · ช่องว่าง ' + S.n_missing,
-        '<div class="mini-bar" data-tip="มีหลักฐาน ' + S.n_evidenced + ' · บางส่วน ' + S.n_partially + ' · ช่องว่าง ' + S.n_missing + '"><i style="width:' + segW(S.n_evidenced) + ';background:var(--good)"></i><i style="width:' + segW(S.n_partially) + ';background:var(--warn)"></i><i style="width:' + segW(S.n_missing) + ';background:var(--bad)"></i></div>') +
+      kpi('target', 'ข้อกำหนดที่มีหลักฐาน', '<span class="num" data-count="' + S.n_evidenced + '">0</span><small> / 30</small>', 'บางส่วน ' + S.n_partially + ' · ช่องว่าง ' + S.n_missing + (S.n_abstained ? ' · ยังยืนยันไม่ได้ ' + S.n_abstained : ''),
+        '<div class="mini-bar" data-tip="มีหลักฐาน ' + S.n_evidenced + ' · บางส่วน ' + S.n_partially + ' · ช่องว่าง ' + S.n_missing + ' · ยังยืนยันไม่ได้ ' + S.n_abstained + '"><i style="width:' + segW(S.n_evidenced) + ';background:var(--good)"></i><i style="width:' + segW(S.n_partially) + ';background:var(--warn)"></i><i style="width:' + segW(S.n_missing) + ';background:var(--bad)"></i><i style="width:' + segW(S.n_abstained) + ';background:var(--ink-3);opacity:.35"></i></div>') +
       kpi('layers', 'ช่องว่างที่ต้องปิด', '<span class="num" data-count="' + gaps + '">0</span><small> ข้อ</small>', 'แผนครอบคลุม ' + P.n_covered + ' ข้อ (' + pct(P.gap_coverage) + ')', '') +
-      kpi('shield', 'หลักฐานผ่านการตรวจ', '<span class="num" data-count="' + G.n_passed + '">0</span><small> / ' + G.n_claims + '</small>', 'ตัดทิ้ง ' + G.n_rejected + ' ข้อ · U = ' + (G.U == null ? '—' : fmt(G.U * 100, 1) + '%'), '') +
+      kpi('shield', 'หลักฐานผ่านการตรวจ', '<span class="num" data-count="' + G.n_passed + '">0</span><small> / ' + G.n_claims + '</small>', 'ตัดทิ้ง ' + G.n_rejected + ' · ยังยืนยันไม่ได้ ' + G.n_unverified + ' · U = ' + (G.U == null ? '—' : fmt(G.U * 100, 1) + '%'), '') +
       kpi('route', 'ชั่วโมงในแผน', '<span class="num" data-count="' + P.total_hours + '">0</span><small> / ' + fmt(P.Hmax, 0) + '</small>', P.items.length + ' รายการ · ใช้ ' + pct(P.utilization) + ' ของเวลา', '') +
       '</div>';
 
@@ -341,20 +347,30 @@
       '<button class="fbtn" data-f="all" aria-pressed="true">ทั้งหมด <span class="c">30</span></button>' +
       '<button class="fbtn" data-f="evidenced" aria-pressed="false">มีหลักฐาน <span class="c">' + cnt('evidenced') + '</span></button>' +
       '<button class="fbtn" data-f="partially" aria-pressed="false">บางส่วน <span class="c">' + cnt('partially') + '</span></button>' +
-      '<button class="fbtn" data-f="missing" aria-pressed="false">ช่องว่าง <span class="c">' + cnt('missing') + '</span></button></div></div>' +
+      '<button class="fbtn" data-f="missing" aria-pressed="false">ช่องว่าง <span class="c">' + cnt('missing') + '</span></button>' +
+      (cnt('abstained') ? '<button class="fbtn" data-f="abstained" aria-pressed="false">ยังยืนยันไม่ได้ <span class="c">' + cnt('abstained') + '</span></button>' : '') + '</div></div>' +
       '<div class="reqs" id="reqList">' + r.requirements.slice().sort(function (a, b) { return a.rank - b.rank; }).map(function (q, i) { return reqRow(q, i + 1); }).join('') + '</div></div>';
 
     // guard
-    h += '<div class="card glass section reveal"><div class="sec-h"><h3><span class="hi">' + ic('shield') + '</span>ตัวกรอง Hallucination (R0 · R2 · R3)</h3><p>' + (isOffline ? 'กฎสำรอง' : esc(A.model)) + ' · prompt ' + esc(A.prompt_version) + '</p></div>' +
+    var V = r.verifier || {};
+    h += '<div class="card glass section reveal"><div class="sec-h"><h3><span class="hi">' + ic('shield') + '</span>ตัวกรอง Hallucination (R0 · R2 · R3 คำ + ความหมาย · R1)</h3><p>' + (isOffline ? 'กฎสำรอง' : esc(A.model) + ' × ' + A.runs_usable + ' รอบ') + ' · prompt ' + esc(A.prompt_version) + '</p></div>' +
       '<div class="guard-flow">' +
-      '<div class="gnode"><b class="num">' + G.n_claims + '</b><small>คำกล่าวอ้างว่ามีหลักฐาน<br>(evidenced/partially)</small></div><div class="garrow">' + ic('arrow') + '</div>' +
+      '<div class="gnode"><b class="num">' + G.n_claims + '</b><small>คำกล่าวอ้างว่ามีหลักฐาน<br>(ทุกรอบรวมกัน)</small></div><div class="garrow">' + ic('arrow') + '</div>' +
       '<div class="gnode bad"><b class="num">' + G.n_rejected_r2 + '</b><small>R2 ตัดทิ้ง<br>quote ไม่มีในเรซูเม</small></div><div class="garrow">' + ic('arrow') + '</div>' +
-      '<div class="gnode bad"><b class="num">' + G.n_rejected_r3 + '</b><small>R3 ตัดทิ้ง<br>ไม่เกี่ยวกับข้อกำหนด</small></div><div class="garrow">' + ic('arrow') + '</div>' +
-      '<div class="gnode good"><b class="num">' + G.n_passed + '</b><small>ผ่านการตรวจ<br>นับเป็นหลักฐาน</small></div></div>' +
+      '<div class="gnode bad"><b class="num">' + G.n_rejected_r3 + '</b><small>R3 ตัดทิ้ง<br>ตรวจแล้วไม่เกี่ยว</small></div><div class="garrow">' + ic('arrow') + '</div>' +
+      '<div class="gnode good"><b class="num">' + G.n_passed + '</b><small>ผ่านการตรวจ<br>(ด้วยความหมาย ' + G.n_semantic_pass + ')</small></div></div>' +
+      '<div class="note info">' + ic('info', 18) + '<div>' + (V.called ? 'ข้อความที่ผ่าน R2 แต่คำไม่ตรงกับ O*NET ' + V.n_checks + ' ชิ้น ส่งให้ ' + esc(V.model) + ' ตรวจความหมายอีกรอบ' + (V.error ? ' — <b>ผู้ตรวจไม่ตอบ (' + esc(V.error) + ') ข้อเหล่านั้นจึง “ยังยืนยันไม่ได้”</b>' : '') + ' · Demo ใช้โมเดลเดียวจึงเป็นการตรวจตัวเอง ระบบเต็มให้โมเดลคนละผู้ให้บริการตรวจกัน' : 'รอบนี้ไม่มีข้อความที่ต้องตรวจความหมาย') +
+      (G.n_repaired ? ' · ซ่อมรูปคำ (R2) ' + G.n_repaired + ' ชิ้น' : '') +
+      (S.ablation && S.ablation.r3_lexical_only != null ? '<br>ถ้าใช้ R3 แบบคำซ้ำอย่างเดียว (รุ่นเดิม) คะแนนจะเป็น <b>' + fmt(S.ablation.r3_lexical_only, 0) + '</b> แทน ' + fmt(S.readiness_pct, 0) : '') + '</div></div>' +
       (G.rejected.length ? '<div class="label">คำกล่าวอ้างที่ถูกตัดทิ้ง</div>' + G.rejected.map(function (x) {
-        return '<div class="rej-item"><div class="rh"><b>' + esc(x.name) + '</b><span class="st missing">' + ic('x', 12, 2.6) + x.rule + ' · ' + esc(x.reason) + '</span></div><div class="quote rej">' + esc(x.quote || '(ว่าง)') + '</div><small class="src-note">โมเดลบอกว่า “' + (STATUS[x.claimed] || {}).th + '” → ระบบปรับเป็น “ช่องว่าง”</small></div>';
+        return '<div class="rej-item"><div class="rh"><b>' + esc(x.name) + '</b><span class="st missing">' + ic('x', 12, 2.6) + x.rule + ' · ' + esc(x.reason) + '</span></div><div class="quote rej">' + esc(x.quote || '(ว่าง)') + '</div><small class="src-note">รอบ ' + esc(x.run || '') + ' โมเดลบอกว่า “' + (STATUS[x.claimed] || {}).th + '” → เสียงนี้นับเป็น “ช่องว่าง”</small></div>';
       }).join('') : '<div class="empty">' + ic('check', 16) + ' ไม่มีคำกล่าวอ้างถูกตัดทิ้งในรอบนี้ — ทุกข้อความอ้างอิงพบในเรซูเมตรงตัวอักษรและเกี่ยวข้องกับข้อกำหนด</div>') +
       '</div>';
+
+    // role tasks (T · DEC-55)
+    var TK = r.tasks || [];
+    if (TK.length) h += '<div class="card glass section reveal"><div class="sec-h"><h3><span class="hi">' + ic('briefcase') + '</span>งานหลักของอาชีพ (O*NET Core Tasks)</h3><p>ดัชนี T = ' + fmt(S.role_task_index, 0) + ' · อ่านแยกจากคะแนนความพร้อม</p></div><div class="reqs">' +
+      TK.map(function (t, i) { return '<div class="req open" data-s="' + t.status + '"><div class="req-h"><span class="rk">' + (i + 1) + '</span><div class="rn"><b>' + esc(t.task) + '</b></div>' + stPill(t.status) + '</div>' + (t.quote ? '<div class="req-b"><div><div class="inner"><div class="quote">“' + esc(t.quote) + '”</div></div></div></div>' : '') + '</div>'; }).join('') + '</div></div>';
 
     // plan
     var M = P.months, step = M <= 12 ? 1 : M <= 18 ? 2 : 3, ticks = '';
@@ -378,18 +394,28 @@
     if (P.notice) h += '<div class="note">' + ic('alert', 18) + '<div>' + esc(P.notice) + '</div></div>';
     if (P.owned.length) h += '<div class="note info">' + ic('award', 18) + '<div><b>ใบรับรองที่มีอยู่แล้ว (ไม่ใส่ในแผน):</b> ' + P.owned.map(function (o) { return esc(o.title); }).join(', ') + '</div></div>';
     if (P.uncovered_over_capacity.length) h += '<div class="note">' + ic('clock', 18) + '<div><b>มีคอร์สรองรับแต่เกินเวลาที่มี (' + P.uncovered_over_capacity.length + ' ข้อ):</b> ' + P.uncovered_over_capacity.map(function (o) { return esc(o.name); }).join(', ') + ' — เพิ่มชั่วโมงต่อสัปดาห์หรือระยะเวลาเพื่อครอบคลุม</div></div>';
+    if ((P.uncovered_level_filtered || []).length) h += '<div class="note info">' + ic('info', 18) + '<div><b>มีหลักฐานบางส่วนแล้ว และคลังมีเฉพาะรายการระดับเริ่มต้น (' + P.uncovered_level_filtered.length + ' ข้อ · ไม่ใส่ในแผนเพราะมีประสบการณ์ ' + fmt(P.learner.years_experience, 0) + ' ปี):</b> ' + P.uncovered_level_filtered.map(function (o) { return esc(o.name); }).join(', ') + '</div></div>';
+    if (P.n_unverified) h += '<div class="note info">' + ic('info', 18) + '<div><b>ข้อที่ยังยืนยันไม่ได้ ' + P.n_unverified + ' ข้อไม่ใส่ในแผน</b> — ถ้ามีประสบการณ์ข้อเหล่านี้ เพิ่มหลักฐานในหัวข้อด้านล่างแล้ววิเคราะห์ใหม่</div></div>';
     if (P.uncovered_no_candidate.length) h += '<div class="note info">' + ic('info', 18) + '<div><b>ยังไม่มีคอร์สในคลังที่เชื่อมโยงผ่านการตรวจ (' + P.uncovered_no_candidate.length + ' ข้อ):</b> ' + P.uncovered_no_candidate.map(function (o) { return esc(o.name); }).join(', ') + '</div></div>';
     h += '</div>';
 
     // role context
-    var tech = RO.hot_tech.map(function (t) { return '<span class="tech" data-tip="' + esc(t.category) + (t.in_demand ? '<br>In Demand (O*NET)' : '') + '">' + (t.in_demand ? '<span class="fire"></span>' : '') + esc(t.name) + '</span>'; }).join('');
+    var found = (r.tech && r.tech.found) || [];
+    var tech = RO.hot_tech.map(function (t) { var got = found.indexOf(t.name) >= 0; return '<span class="tech' + (got ? ' got' : '') + '" data-tip="' + esc(t.category) + (t.in_demand ? '<br>In Demand (O*NET)' : '') + (got ? '<br>พบในเรซูเม' : '') + '">' + (t.in_demand ? '<span class="fire"></span>' : '') + (got ? ic('check', 11, 3) : '') + esc(t.name) + '</span>'; }).join('');
     h += '<div class="card glass section reveal"><div class="sec-h"><h3><span class="hi">' + ic('briefcase') + '</span>บริบทอาชีพจาก O*NET 31.0</h3><p>' + esc(RO.onet_title) + '</p></div>' +
       '<p class="summary-text">' + esc(RO.description) + '</p>' +
-      '<h5 style="margin:0 0 6px;font-size:13px;color:var(--ink-3)">เทคโนโลยีที่ตลาดใช้ (Hot Technology · จุดส้ม = In Demand)</h5>' +
+      '<h5 style="margin:0 0 6px;font-size:13px;color:var(--ink-3)">เทคโนโลยีที่ตลาดใช้ (Hot Technology · จุดส้ม = In Demand · ✓ = พบในเรซูเม · ที่ตลาดต้องการพบ ' + (r.tech ? r.tech.n_found + '/' + r.tech.n_total : '—') + ')</h5>' +
       '<div class="marquee"><div class="mt">' + tech + '<span class="dup" style="display:contents">' + tech + '</span></div></div>' +
       '<div class="ctx"><div><h5>งานหลักของอาชีพ (Task IM สูงสุด)</h5><ol>' + RO.tasks.map(function (t) { return '<li>' + esc(t.task) + ' <span class="tag num">IM ' + fmt(t.im, 2) + '</span></li>'; }).join('') + '</ol></div>' +
       '<div><h5>ระดับการศึกษาของผู้ทำงานจริง</h5>' + RO.education.map(function (e) { return '<div class="edu"><span>' + esc(e.level) + '</span><b class="num">' + fmt(e.pct, 0) + '%</b><div class="tr"><i style="width:' + e.pct + '%"></i></div></div>'; }).join('') +
       '<h5 style="margin-top:16px">ชื่อตำแหน่งที่พบในตลาด</h5><div class="cert-list">' + RO.job_titles.slice(0, 8).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div></div></div></div>';
+
+    // Open Learner Model (DEC-58)
+    var olmRows = r.requirements.filter(function (q) { return q.status !== 'evidenced'; }).sort(function (a, b) { return b.w - a.w; });
+    if (olmRows.length) h += '<div class="card glass section reveal no-pdf" id="olm"><div class="sec-h"><h3><span class="hi">' + ic('user') + '</span>ระบบยังไม่เห็นหลักฐานของคุณ?</h3><p>เพิ่มเป็นประโยคที่บอกสิ่งที่ทำจริง แล้ววิเคราะห์ใหม่ด้วยกฎเดียวกัน</p></div>' +
+      '<p class="src-note" style="margin:0 0 10px">หลักฐานที่พิมพ์เพิ่มจะถูกต่อท้ายเรซูเม ตรวจด้วย R2/R3 เหมือนข้อความในเรซูเม และติดป้าย “หลักฐานที่คุณเพิ่ม” ในรายงาน — ไม่ใช่การแก้ผลด้วยมือ</p>' +
+      '<div class="olm-list">' + olmRows.slice(0, 12).map(function (q) { return '<label class="olm-row"><span>' + stPill(q.status) + ' <b>' + esc(q.name) + '</b></span><textarea rows="2" maxlength="400" data-name="' + esc(q.name) + '" placeholder="เช่น สิ่งที่ทำ · เครื่องมือ · ผลลัพธ์ (ภาษาอังกฤษหรือไทย)"></textarea></label>'; }).join('') + '</div>' +
+      '<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn btn-primary btn-sm" id="olmGo" type="button">' + ic('spark', 15) + 'วิเคราะห์ใหม่พร้อมหลักฐานเพิ่มเติม</button></div></div>';
 
     // provenance
     var pv = r.provenance;
@@ -399,6 +425,12 @@
 
     var root = Q('#report'); root.innerHTML = h;
     observe(root);
+    var og = Q('#olmGo', root);
+    if (og) og.addEventListener('click', function () {
+      var lines = QA('#olm textarea', root).map(function (t) { var v = t.value.trim(); return v ? '- ' + t.getAttribute('data-name') + ': ' + v : ''; }).filter(Boolean);
+      if (!lines.length) { toast('พิมพ์หลักฐานอย่างน้อย 1 ข้อก่อน', 'err', 4000); return; }
+      Q('#dock').classList.remove('on'); analyze(lines.join('\n'));
+    });
     // animations
     setTimeout(function () {
       QA('.ring .val', root).forEach(function (c) { c.style.strokeDashoffset = c.getAttribute('data-off'); });
@@ -423,11 +455,20 @@
     body += '<div style="color:var(--ink-3);font-size:12.5px">' + esc(q.desc) + '</div>';
     if (q.quote) body += '<div class="quote">“' + esc(q.quote) + '”</div>';
     var fl = [];
-    if (q.verified === true) fl.push('<span class="tag" style="background:var(--good-bg);color:var(--good-ink)">' + ic('check', 11, 3) + ' R2 พบตรงตัวอักษร</span>');
-    if (q.overlap != null) fl.push('<span class="tag">R3 overlap ' + fmt(q.overlap, 2) + (q.alias ? ' · คำพ้อง “' + esc(q.alias) + '”' : '') + '</span>');
-    if (q.flags.indexOf('R2_quote_not_found') >= 0) fl.push('<span class="tag" style="background:var(--bad-bg);color:var(--bad-ink)">R2 ไม่พบ quote → ปรับเป็นช่องว่าง</span>');
-    if (q.flags.indexOf('R3_low_overlap') >= 0) fl.push('<span class="tag" style="background:var(--bad-bg);color:var(--bad-ink)">R3 ต่ำกว่า θ → ปรับเป็นช่องว่าง</span>');
-    if (q.status === 'missing' && q.flags.indexOf('model_missing') >= 0) fl.push('<span class="tag">โมเดลไม่พบหลักฐานในเรซูเม</span>');
+    var has = function (f) { return q.flags.indexOf(f) >= 0; };
+    var GOOD = 'style="background:var(--good-bg);color:var(--good-ink)"', BAD = 'style="background:var(--bad-bg);color:var(--bad-ink)"';
+    var SRC = { credential: 'จากใบรับรองในเรซูเม (R5)', linkage: 'อนุมานจากกิจกรรมที่มีหลักฐาน (R6 · O*NET)', learner: 'หลักฐานที่คุณเพิ่ม' };
+    if (q.source && SRC[q.source]) fl.push('<span class="tag" ' + GOOD + '>' + ic('award', 11) + ' ' + SRC[q.source] + '</span>');
+    if (q.verified === true) fl.push('<span class="tag" ' + GOOD + '>' + ic('check', 11, 3) + (has('R2_repaired') ? ' R2 พบในเรซูเม (ซ่อมรูปคำ)' : ' R2 พบตรงตัวอักษร') + '</span>');
+    if (q.r3_layer === 'lexical') fl.push('<span class="tag">R3 คำตรง overlap ' + fmt(q.overlap, 2) + '</span>');
+    if (has('R3b_supports') || has('R3b_partial')) fl.push('<span class="tag" ' + GOOD + '>R3 ผ่านด้วยความหมาย (Gemini ตรวจ)' + (has('R3b_partial') ? ' · บางส่วน' : '') + '</span>');
+    if (has('R2_quote_not_found')) fl.push('<span class="tag" ' + BAD + '>R2 ไม่พบ quote ในเรซูเม</span>');
+    if (has('R3b_unrelated')) fl.push('<span class="tag" ' + BAD + '>R3 ตรวจความหมายแล้วไม่เกี่ยว</span>');
+    if (has('R3_low_overlap')) fl.push('<span class="tag" ' + BAD + '>R3 คำไม่ตรง (กฎสำรอง)</span>');
+    if (has('R3b_unavailable')) fl.push('<span class="tag">ผู้ตรวจความหมายไม่ตอบ</span>');
+    if (q.status === 'abstained') fl.push('<span class="tag">รอบวิเคราะห์เห็นตรงกันไม่พอ (' + (q.n_votes || 0) + ' เสียงที่นับได้) → ยังยืนยันไม่ได้</span>');
+    if (q.status === 'missing' && q.claimed === 'missing') fl.push('<span class="tag">โมเดลไม่พบหลักฐานในเรซูเม</span>');
+    if (q.n_runs > 1 && q.status !== 'abstained') fl.push('<span class="tag">เห็นตรงกัน ' + fmt((q.agreement || 0) * 100, 0) + '% ของ ' + q.n_votes + ' รอบ</span>');
     if (q.confidence != null) fl.push('<span class="tag">ความมั่นใจของโมเดล ' + fmt(q.confidence, 2) + '</span>');
     fl.push('<span class="tag mono">' + esc(q.element_id) + '</span><span class="tag">IM ' + fmt(q.im, 2) + '</span>');
     body += '<div class="flags">' + fl.join('') + '</div>';

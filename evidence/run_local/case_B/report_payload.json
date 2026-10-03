@@ -1,6 +1,6 @@
 {
- "schema": "report-v1.0",
- "engine_version": "engine-1.1.0-01OCT26",
+ "schema": "report-v2.0",
+ "engine_version": "engine-2.0.0-03OCT26",
  "run_id": "RUN-20261001100000-bad84c85",
  "role_id": "R06",
  "role_name_th": "นักวิทยาศาสตร์ข้อมูล",
@@ -11,12 +11,12 @@
  "ocr_engine_version": "fixture",
  "m": 3,
  "scores": {
-  "readiness_pct": 19.63,
+  "readiness_pct": 23.12,
   "weighted_coverage": 1,
   "n_decided": 30,
   "n_evidenced": 3,
-  "n_partially": 5,
-  "n_missing": 22,
+  "n_partially": 7,
+  "n_missing": 20,
   "n_abstained": 0,
   "unsupported_claims": 2,
   "n_claims": 25,
@@ -27,23 +27,44 @@
     "n_rejected": 0,
     "U": 0,
     "n_missing_direct": 22,
-    "n_downgraded": 0
+    "n_downgraded": 0,
+    "n_unverified": 0,
+    "n_repaired": 0
    },
    "B": {
     "n_claims": 8,
     "n_rejected": 1,
     "U": 0.125,
     "n_missing_direct": 22,
-    "n_downgraded": 1
+    "n_downgraded": 1,
+    "n_unverified": 0,
+    "n_repaired": 0
    },
    "C": {
     "n_claims": 9,
     "n_rejected": 1,
     "U": 0.1111,
     "n_missing_direct": 21,
-    "n_downgraded": 1
+    "n_downgraded": 1,
+    "n_unverified": 0,
+    "n_repaired": 0
    }
-  }
+  },
+  "n_unverified_votes": 0,
+  "n_repaired_quotes": 0,
+  "role_task_index": 31.25,
+  "n_role_tasks": 8,
+  "n_role_tasks_decided": 8,
+  "tech_match_pct": 14.29,
+  "n_tech_found": 3,
+  "n_tech_total": 21,
+  "ablation": {
+   "r3_hybrid_no_floors": 19.63,
+   "r3_lexical_only": 19.63,
+   "no_r3": 19.63
+  },
+  "n_floor_credential": 0,
+  "n_floor_linkage": 2
  },
  "decisions": [
   {
@@ -60,6 +81,7 @@
    "evidence_quote": "Analyzed customer churn data in SQL and presented the findings to the marketing manager.",
    "evidence_char_start": 374,
    "evidence_char_end": 462,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -76,6 +98,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -92,6 +115,7 @@
    "evidence_quote": "Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.",
    "evidence_char_start": 465,
    "evidence_char_end": 563,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -108,6 +132,7 @@
    "evidence_quote": "Relevant courses: Probability, Statistics for Business, Calculus I.",
    "evidence_char_start": 566,
    "evidence_char_end": 633,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -124,6 +149,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -140,6 +166,7 @@
    "evidence_quote": "Background in applied mathematics from undergraduate studies.",
    "evidence_char_start": 636,
    "evidence_char_end": 697,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -156,6 +183,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -168,10 +196,11 @@
    "final_status": "missing",
    "agreement_level": 1,
    "n_usable_models": 3,
-   "rule_flags": "B:R3_low_overlap",
+   "rule_flags": "B:R3b_unrelated",
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -188,6 +217,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -197,13 +227,14 @@
    "element_name": "Critical Thinking",
    "domain": "Essential Skills",
    "weight": 0.03649,
-   "final_status": "missing",
+   "final_status": "partially",
    "agreement_level": 1,
    "n_usable_models": 3,
-   "rule_flags": "",
-   "evidence_quote": "",
-   "evidence_char_start": -1,
-   "evidence_char_end": -1,
+   "rule_flags": "R6_linkage:4.A.2.a.4",
+   "evidence_quote": "Analyzed customer churn data in SQL and presented the findings to the marketing manager.",
+   "evidence_char_start": 374,
+   "evidence_char_end": 462,
+   "evidence_source": "linkage",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -220,6 +251,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -236,6 +268,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -245,13 +278,14 @@
    "element_name": "Reading Comprehension",
    "domain": "Essential Skills",
    "weight": 0.033313,
-   "final_status": "missing",
+   "final_status": "partially",
    "agreement_level": 1,
    "n_usable_models": 3,
-   "rule_flags": "",
-   "evidence_quote": "",
-   "evidence_char_start": -1,
-   "evidence_char_end": -1,
+   "rule_flags": "R6_linkage:4.A.2.a.2+4.A.2.a.4",
+   "evidence_quote": "Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.",
+   "evidence_char_start": 465,
+   "evidence_char_end": 563,
+   "evidence_source": "linkage",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -268,6 +302,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -284,6 +319,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -300,6 +336,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -316,6 +353,7 @@
    "evidence_quote": "Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.",
    "evidence_char_start": 283,
    "evidence_char_end": 371,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -332,6 +370,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -348,6 +387,7 @@
    "evidence_quote": "Gave a short presentation of a class project to fellow students.",
    "evidence_char_start": 818,
    "evidence_char_end": 882,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -364,6 +404,7 @@
    "evidence_quote": "Completed course: Google Data Analytics Certificate (in progress).",
    "evidence_char_start": 700,
    "evidence_char_end": 766,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -380,6 +421,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -396,6 +438,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -412,6 +455,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -428,6 +472,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -444,6 +489,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -460,6 +506,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -476,6 +523,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -492,6 +540,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -508,6 +557,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -524,6 +574,7 @@
    "evidence_quote": "Languages: Thai (native), English (TOEIC 785).",
    "evidence_char_start": 769,
    "evidence_char_end": 815,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   }
  ],
@@ -739,20 +790,177 @@
   "total_hours": 230,
   "notice": "",
   "reference_data_error": false,
+  "learner": {
+   "years_experience": null,
+   "level_filter_applied": false
+  },
   "strategy": "weighted_greedy",
   "n_gap_requirements_with_candidate": 27,
   "n_covered": 25,
   "gap_coverage": 0.9259,
   "gap_coverage_with_candidate": 0.9259,
   "uncovered_no_candidate": [],
+  "uncovered_level_filtered": [],
   "uncovered_over_capacity": [
    "REQ-R06-2.B.4.e",
    "REQ-R06-4.A.2.b.2"
   ]
  },
+ "role_tasks": [
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21823",
+   "task_text": "Analyze, manipulate, or process large sets of data using statistical software.",
+   "final_status": "evidenced",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "A:R3b_supports|B:R3b_supports|C:R3b_supports",
+   "evidence_quote": "Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.",
+   "evidence_char_start": 283,
+   "evidence_char_end": 371,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21828",
+   "task_text": "Create graphs, charts, or other visualizations to convey the results of data analysis using specialized software.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21837",
+   "task_text": "Test, validate, and reformulate models to ensure accurate prediction of outcomes of interest.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21829",
+   "task_text": "Deliver oral or written presentations of the results of mathematical modeling and data analysis to management or other end users.",
+   "final_status": "partially",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "Analyzed customer churn data in SQL and presented the findings to the marketing manager.",
+   "evidence_char_start": 374,
+   "evidence_char_end": 462,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21836",
+   "task_text": "Recommend data-driven solutions to key stakeholders.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21831",
+   "task_text": "Identify business problems or management objectives that can be addressed through data analysis.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21826",
+   "task_text": "Clean and manipulate raw data using statistical software.",
+   "final_status": "evidenced",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.",
+   "evidence_char_start": 283,
+   "evidence_char_end": 371,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-bad84c85",
+   "task_id": "TASK-R06-21827",
+   "task_text": "Compare models using statistical performance metrics, such as loss functions or proportion of explained variance.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 3,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  }
+ ],
+ "technology": {
+  "n_total": 21,
+  "n_found": 3,
+  "pct": 14.29,
+  "found": [
+   {
+    "technology": "Python",
+    "key": "Python",
+    "start": 289,
+    "end": 295
+   },
+   {
+    "technology": "Structured query language SQL",
+    "key": "SQL",
+    "start": 406,
+    "end": 409
+   },
+   {
+    "technology": "pandas",
+    "key": "pandas",
+    "start": 309,
+    "end": 315
+   }
+  ]
+ },
+ "verification": {
+  "A": {
+   "n_checks": 1,
+   "n_answered": 1,
+   "call_status": "ok",
+   "reason": ""
+  },
+  "B": {
+   "n_checks": 1,
+   "n_answered": 1,
+   "call_status": "ok",
+   "reason": ""
+  },
+  "C": {
+   "n_checks": 2,
+   "n_answered": 2,
+   "call_status": "ok",
+   "reason": ""
+  }
+ },
  "model_calls": [
   {
    "model_key": "A",
+   "call_purpose": "analyst",
    "provider": "OpenAI",
    "model_id": "mock-model",
    "attempt": 1,
@@ -764,6 +972,7 @@
   },
   {
    "model_key": "B",
+   "call_purpose": "analyst",
    "provider": "Anthropic",
    "model_id": "mock-model",
    "attempt": 1,
@@ -775,6 +984,7 @@
   },
   {
    "model_key": "C",
+   "call_purpose": "analyst",
    "provider": "Google",
    "model_id": "mock-model",
    "attempt": 1,
@@ -783,20 +993,56 @@
    "latency_ms": 1001,
    "input_tokens": 8220,
    "output_tokens": 2500
+  },
+  {
+   "model_key": "A",
+   "call_purpose": "verifier",
+   "provider": "OpenAI",
+   "model_id": "mock-verifier",
+   "attempt": 1,
+   "status": "ok",
+   "error_code": "",
+   "latency_ms": 800,
+   "input_tokens": 900,
+   "output_tokens": 200
+  },
+  {
+   "model_key": "B",
+   "call_purpose": "verifier",
+   "provider": "Anthropic",
+   "model_id": "mock-verifier",
+   "attempt": 1,
+   "status": "ok",
+   "error_code": "",
+   "latency_ms": 800,
+   "input_tokens": 900,
+   "output_tokens": 200
+  },
+  {
+   "model_key": "C",
+   "call_purpose": "verifier",
+   "provider": "Google",
+   "model_id": "mock-verifier",
+   "attempt": 1,
+   "status": "ok",
+   "error_code": "",
+   "latency_ms": 800,
+   "input_tokens": 900,
+   "output_tokens": 200
   }
  ],
  "versions": {
   "dataset": "ONET31.0-IS68076026-v1.0",
   "corpus": "CORPUS_IS68076026-v1.5-01OCT26",
-  "prompt": "analyst_v1.0",
-  "rules": "RULES-IS68076026-v1.0"
+  "prompt": "analyst_v1.1+verifier_v1.0",
+  "rules": "RULES-IS68076026-v2.0"
  },
  "hashes": {
   "text_sha256": "658a2b291d2de641a7928fcaa021dd47b8fae80ad1f7c78d8bd66ab60eec1378",
-  "reference_manifest_sha256": "f093a5f67de4f25d55a01d9e283e338103de25816a1efa71114f744340d5d9b7",
-  "prompt_sha256": "032719788ff8cb4e556853a81295e5c2d087551a660144cdc00aac6b8b8f35aa",
-  "decisions_sha256": "2f1cc1992f13c1a497f3937432cb08246f4ccf1cace2d2722a5b555bfea08a6e",
+  "reference_manifest_sha256": "ecd5a4294ce646cb04478944d7ac3ac7d48444dfc6909f0fda03d15fb6ff93d9",
+  "prompt_sha256": "1f103102c448d350a8f777339cdac1e7072d5c714692a5ba12fd6b3483f53180",
+  "decisions_sha256": "cedabf2b5f0fb6d9fd5366afda61a498330199d20107cdea1c15330e5d60e401",
   "plan_sha256": "fe3e6326a2f0fa0e5d20f92d9a95fa56f40b264e83b960fe3937e4a96638b24f"
  },
- "report_hash": "80f91ec017e6f1adf5d9c210ccca8ab7c1234255bb6602166604d9a8ac454a2a"
+ "report_hash": "39e1f6cc0297f8ffe3c7fcca168f059628b1d121d4ba5f38751f0de4355e9175"
 }

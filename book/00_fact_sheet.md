@@ -106,108 +106,39 @@
 - บริการอ่านข้อความได้ไฟล์ PDF ต้นฉบับทั้งไฟล์ (ก่อนปิดบัง) [PDF 3.10]
 
 ## F12 prompt และโมเดล
-- prompt `analyst_v1.0` ชุดเดียวทั้ง 3 โมเดล · กฎ 9 ข้อ · quote 20–300 ตัวอักษร (R0 ไม่ตรวจความยาว) [prompts/analyst_v1.0.txt · P.quote_length_prompt]
-- ห้ามอนุมานจากชื่อตำแหน่ง บริษัท สถาบัน หรือจำนวนปี [prompt rule 2]
+- prompt `analyst_v1.1` ชุดเดียวทั้ง 3 โมเดล · กฎ 10 ข้อ · quote 1–2 ช่วง ช่วงละ 20–160 ตัวอักษร (R0 ไม่ตรวจความยาว) · evidence_type · task_assessments [prompts/analyst_v1.1.txt · P.quote_length_prompt · DEC-53]
+- ห้ามอนุมานจากชื่อตำแหน่ง บริษัท สถาบัน หรือจำนวนปี · ใช้กิจกรรม/ผลงาน/เครื่องมือ/คอร์ส/ใบรับรอง/วุฒิเป็นหลักฐานได้ รวมทักษะพื้นฐาน [prompt rule 2 · DEC-53]
+- prompt ผู้ตรวจ `verifier_v1.0` · 6 กฎ · supports / partially_supports / unrelated · เห็นเฉพาะ quote กับข้อกำหนด [prompts/verifier_v1.0.txt · DEC-51]
 - confidence เป็นค่าที่โมเดลรายงานเอง ไม่ลบล้างการตรวจข้อความ [prompt rule 7]
 - โมเดล A OpenAI chat completions · B Anthropic messages · C Google generative language [M.models]
 - รหัสรุ่นอ่านจาก env MODEL_A/B/C_ID · verified = false จนผ่าน smoke test [M]
-- temperature 0 (รอ smoke test) · max output 4,096 · timeout 90 วินาที · เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา [M.defaults · DEC-35]
+- temperature 0 (รอ smoke test) · max output 16,384 (ผู้ตรวจ 4,096) · timeout 90 วินาที · เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา [M.defaults · DEC-35]
 - บันทึก model_calls ทุกครั้งรวมครั้งที่ล้ม [E.callModelWithRetry · DEC-35]
 - ห้ามเรียกผู้ให้บริการรายเดียว 3 ครั้งแล้วรายงานว่าเป็น 3 โมเดล [M._comment]
 - 3 ผู้ให้บริการ: เลขคี่ให้เสียงข้างมาก · ลดโอกาสผิดพร้อมกัน · ไม่พิสูจน์ว่าความผิดพลาดอิสระทางสถิติ [PDF 3.3.3]
 
-## F13 กฎ R0–R4 (`RULES-IS68076026-v1.0`)
-- ลำดับจริง R0 → R2 → R3 → R1 → R4 [E.evaluateRun · CLAUDE.md]
-- R0 ระดับผลตอบกลับ: JSON · schema_version · role_id · requirement_id ในชุด · ตอบ ≥ ครึ่ง [E.ruleR0]
+## F13 กฎ R0–R6 (`RULES-IS68076026-v2.0` · DEC-51–54)
+- ลำดับจริง R0 → R2 → R3 (R3a → R3b) → R1 → R4 → R5 → R6 [E.evaluateRun]
+- R0 ระดับผลตอบกลับ: JSON · schema_version (v1.1 หรือ v1.0) · role_id · requirement_id ในชุด · ตอบ ≥ ครึ่ง · task_assessments ผิดรูปแบบไม่ทำให้ทั้งชุดใช้ไม่ได้ [E.ruleR0]
 - รหัส R0: no_output, invalid_json, schema_mismatch, role_mismatch, incomplete_coverage [E.R0_CODES]
-- R2 ระดับข้อสรุป: ค้นแบบตรงตัวก่อน ไม่พบ → ยุบช่องว่างแล้วค้นซ้ำ · บันทึก [start, end) และ quote_text_version [E.ruleR2 · DEC-34]
-- R3 ระดับข้อสรุป: คำพ้องยาว ≥ 4 ตัวอักษรปรากฏ → ov = 1 · มิฉะนั้นใช้สมการ ov [E.overlapScore · P.alias_min_length]
-- R3 ผ่านเมื่อ ov ≥ θ = 0.15 [P.theta]
-- ไม่ผ่าน R2/R3 → เสียงของโมเดลนั้นเป็น missing และนับใน U [E.evaluateRun]
-- R1 ระดับข้อกำหนด: ≥ 2 เสียงตรงกัน · m < 2 ทั้งรอบ abstained (min_usable_models = 2) [E.evaluateRun · P.min_usable_models]
+- R2: ตรงตัว → ยุบช่องว่าง → ซ่อมรูปคำ (LCS ของรากคำ ≥ 0.90 · ≥ 5 คำ) ใช้ข้อความจริงจากเรซูเม · quote_text_version normalized / whitespace_collapsed / repaired [E.ruleR2 · E.repairQuote · DEC-34 · DEC-52]
+- R3a: ตัดคำต่อท้าย (stem) · คำพ้อง ≥ 4 ตัวอักษรปรากฏทั้งคำหรือรากคำ → ov = 1 · มิฉะนั้นสมการ ov · ผ่านเมื่อ ov ≥ θ = 0.15 [E.overlapScore · P.r3_stemming · P.theta]
+- R3b: ไม่ผ่าน R3a → ผู้ตรวจหมุนเวียน A→B · B→C · C→A (ข้ามผู้ล้ม · ห้ามตรวจตัวเอง) · supports คงสถานะ · partially_supports ลดเป็น partially · unrelated → missing นับใน U · ไม่ตอบ → unverified ไม่นับใน R1 และไม่นับใน U [E.collectClaims · E.voteFor · DEC-51]
+- R1 ระดับข้อกำหนด: ≥ 2 เสียงตรงกัน (ไม่นับ unverified) · m < 2 ทั้งรอบ abstained (min_usable_models = 2) [E.aggregate]
 - ลำดับสำรองเมื่อเสมอ missing → partially → evidenced (ไม่เกิดเมื่อ 3 โมเดล) [E.TIE_ORDER]
-- R4 บันทึกสัดส่วนความเห็นตรงกัน ไม่ปฏิเสธ [E.evaluateRun agreement_level]
-- หลักฐานที่แสดง: จากโมเดลที่ตรงข้อสรุปและผ่าน R2 · ov สูงสุด → quote สั้นกว่า → รหัสโมเดล [E.evaluateRun]
-- stop words และการตัดคำเป็นกฎคงที่ ตัดคำยาว ≤ 1 [E.tokenize, STOP_WORDS]
-
-## F14 สมการ (เลขในเล่มใหม่กำหนดตอนเขียน)
-- น้ำหนัก w_i = IM_i / Σ IM_j (30 ข้อ) [build_reference_data.py บรรทัด 80]
-- ov(q,r) = |T(q) ∩ T(r)| / min(|T(q)|, 25) · ไม่ตัดเพดานที่ 1 · เซตว่าง → 0 [E.overlapScore · P.overlap_denominator_cap]
-- a_i = n_i^agree / m_i [E.evaluateRun agreement_level]
-- R = Σ_{i∈D} s_i w_i / Σ_{i∈D} w_i × 100 · s = 1 / 0.5 / 0 · D ว่าง → N/A [E.computeScores]
-- C = Σ_{i∈D} w_i / Σ_{i∈A} w_i [E.computeScores]
-- U = n_rejected / n_claims (นับเฉพาะข้อสรุปที่ไม่ใช่ missing) [E.computeScores]
-- Hmax = M × 4.33 × h [E.capacityHours · P.weeks_per_month]
-- d_k = Σ w_i ของช่องว่างใหม่ที่รายการ k ครอบคลุม / h_k [E.buildPlan] (อาจเปลี่ยนวิธีเลือกใน Phase 1 → ดู DEC ใหม่)
-
-## F15 จัดแผน
-- candidate: L1 + ผ่านตรวจ + เป็นช่องว่าง + item verified + ชั่วโมง > 0 + mode ตรง [E.buildPlan]
-- ไม่เลือกรายการที่ทำให้ชั่วโมงสะสมเกิน Hmax แต่เลือกรายการที่สั้นกว่าต่อได้ · ตัดสินเท่ากันด้วย item_id [E.buildPlan]
-- รายงานช่องว่างที่ไม่มีรายการ (uncovered_no_candidate) และเกินเวลา (uncovered_over_capacity) แยกกัน [E.buildPlan · DEC-20]
-- gap_coverage สองค่า: เทียบทุกช่องว่าง และเทียบช่องว่างที่มี candidate [DEC-20]
-- missing และ partially ใช้น้ำหนักเต็มใน d_k [PDF 3.6.2]
-
-## F16 รายงานและการส่ง
-- รายงาน 5 ส่วน: สรุปตัวเลข · ผลรายข้อ · แผน · การเรียกโมเดล · ข้อจำกัดและค่าแฮช [E.renderReportHTML]
-- ชุดข้อมูลรายงานรุ่นคงที่ report-v1.0 + ค่าแฮช 5 ค่า + report_hash + versions 4 รุ่น [E.freezeReport]
-- escape HTML ทุกข้อความ · ลิงก์ต้อง https [E.escapeHtml, safeHttpsUrl]
-- HTML → Google Docs (แปลงตอนอัปโหลด) → export application/pdf → เก็บ PDF → ลบเอกสารกลาง [PDF 3.6.3 · ref Drive export]
-- Gmail OAuth2 ส่งรายบุคคลไปอีเมลที่ Google ยืนยัน · ข้อผิดพลาดเทคนิคส่งผู้วิจัยเท่านั้น [PDF 3.6.3, 3.10]
-- บันทึกการส่งครั้งเดียวแม้อัปโหลดหรืออีเมลบางขั้นล้ม [DEC-37 ข้อ 5]
-
-## F17 การทดสอบระบบ
-- เทสต์อัตโนมัติ `{{tests_total}}` กรณี (node) + analysis 8 กรณี [evidence/test_summary.json · analysis/tests]
-- บั๊กรุ่นก่อน B1–B11 เป็นเทสต์ [DEC-30]
-- เรซูเมสังเคราะห์ A (R01 หลักฐานชัด) · B (สายข้อมูล หลักฐานน้อย) · C (PDF สแกน + โมเดล C ตอบ 429 × 3) [synthetic/ · scripts/make_synthetic_cases.py]
-- สร้างสังเคราะห์: กำหนดเฉลย → ประกอบประโยค → บันทึกตำแหน่ง → PDF ข้อความและสแกน [PDF 3.7]
-- ผลสังเคราะห์ `{{cA_R}}` ฯลฯ มาจาก evidence/run_local ด้วยผลตอบกลับจำลอง ไม่ใช่บริการจริง [book_numbers.py]
-- ทดสอบใน n8n จริง: ⏳ ผู้วิจัย (NEXT_STEPS ข้อ 25) [DEC-42]
-
-## F18 การประเมิน (แผน)
-- DSR ตาม Hevner et al. [PDF 3.1.1]
-- 5 ขั้น: นิยาม/ตัวชี้วัดก่อน → พัฒนา + ทดสอบ → นำร่อง 5 คน → ตรึงรุ่น → เก็บหลัก 30 คน [PDF 3.1.2]
-- กลุ่มหลัก 30 คน นักศึกษา ป.โท ไอที เรซูเมภาษาอังกฤษ สมัครใจ คัดแบบเจาะจง · นำร่อง 5 คนแยกกลุ่ม [PDF 3.2.1]
-- เหตุผล 30: ประเมินต้นแบบ · 900 รายการตรวจพอสร้างตารางความสับสน · ให้รหัสมือได้ทัน [PDF 3.2.1]
-- หน่วย RQ1 = ข้อกำหนด 1 ข้อของผู้เข้าร่วม 1 คน (≤ 900) · หน่วยสรุป = ผู้เข้าร่วม [PDF 3.2.2]
-- หน่วย RQ2 = แผน 1 แผนต่อคน นับรายการไม่ซ้ำ [PDF 3.2.2]
-- ผู้ให้รหัส 1 = ผู้วิจัย · ผู้ตรวจ 2 = พื้นความรู้เท่ากันไม่ได้พัฒนาระบบ · ไม่เห็นผลระบบ [PDF 3.8.2]
-- ผู้ตรวจ 2 ให้รหัส ≥ 20% = 6 คน 180 รายการ สุ่มแบบเป็นระบบ + ทุกกรณีที่ผู้เข้าร่วมทักท้วง [PDF 3.8.2]
-- κ ≥ 0.61 (Cohen 1960 · Landis & Koch 1977) [DEC-32]
-- ให้รหัสจาก PDF ต้นฉบับ จึงรวมความผิดพลาดของการอ่านข้อความ [PDF 3.8.2]
-- Macro-F1 ค่าหลัก = เฉลี่ยรายผู้เข้าร่วม บนข้อที่สรุปได้ + อัตราการไม่สรุปคู่กันเสมอ [PDF 3.9.3–3.9.4]
-- ค่าประกอบนับ abstained เป็นผิด · ตาราง 3 × 4 · F1 = 0 เมื่อระบบไม่เคยให้สถานะที่มีจริง [PDF 3.9.3]
-- bootstrap ระดับผู้เข้าร่วม 2,000 รอบ ช่วงเปอร์เซ็นไทล์ 2.5–97.5 [PDF 3.9.4 · analysis/bootstrap.py]
-- RQ2: ความตรงประเด็น · ความครอบคลุมช่องว่าง · ความถูกต้องข้อมูลรายการ · ความเป็นไปได้ด้านเวลา + แบบประเมิน 3 ข้อ + ปลายเปิด [PDF ตาราง 3.27]
-- กรณีพิเศษ 5 กรณีรายงานแยก (ไม่มีช่องว่าง · ไม่มีรายการ · ไม่ทราบชั่วโมง · ส่งไม่สำเร็จ · ไม่ตอบแบบประเมิน) [PDF 3.9.2]
-- ผู้ประเมินจำแนกสาเหตุคำแนะนำไม่เหมาะ 4 ประเภท [PDF 3.8.3]
-- ประโยชน์ที่รับรู้ใช้แนวคิด Davis (TAM) แต่ไม่ทดสอบแบบจำลอง [PDF 2.6]
-- ห้ามเปลี่ยนเกณฑ์ ตัวชี้วัด θ prompt คลัง หลังตรึงรุ่น (P3) [CLAUDE.md]
-- เครื่องมือ: Coding Manual · Analysis Plan · Questionnaire + IOC (v1.0-draft) [docs/research_tools/]
-
-## F19 จริยธรรมและ PDPA
-- เก็บข้อมูลคนจริงหลังได้หนังสือรับรองจริยธรรมเท่านั้น ⏳ ยังไม่ยื่น [PDF 3.10 · NEXT_STEPS 13]
-- ยินยอมเป็นข้อบังคับในฟอร์ม · ไม่ยินยอม → ปฏิเสธที่ขั้นตรวจข้อมูลเข้า [E.validateIntake consent_not_given]
-- ข้อมูลไปผู้รับ 3 กลุ่ม: บริการอ่านข้อความ (PDF ทั้งไฟล์) · ผู้ให้บริการโมเดล (ข้อความหลังปิดบัง) · ผู้เข้าร่วม [PDF 3.10]
-- เก็บ 90 วันหลังส่งผล แล้วลบไฟล์และแถวที่ระบุตัว · ขอลบก่อนได้ที่ 68076026@kmitl.ac.th [P.retention_days, deletion_contact]
-- PDPA พ.ศ. 2562: ม.19 ยินยอม · ม.23 แจ้ง · ม.28 ส่งต่างประเทศ · ม.37(4) แจ้งเหตุละเมิด [DEC-32 · docs/ethics/03]
-- ไม่จัดอันดับหรือคัดเลือกบุคคล ผลให้เจ้าของเรซูเมใช้วางแผนเอง [PDF 3.10]
-- ห้าม commit `.env`, `private/` หรือข้อมูลผู้เข้าร่วม [CLAUDE.md · .gitignore]
-
-## F20 ข้อจำกัด
-- อ่านได้เฉพาะสิ่งที่เขียนในเรซูเม [PDF 1.7]
-- กฎตรวจระดับข้อความ ไม่ตัดสินความหมาย · คำที่ไม่อยู่ในคำพ้องอาจถูกปฏิเสธ [PDF 1.7, 3.11]
-- เกณฑ์ 2 เสียงเพิ่มอัตราการไม่สรุปเมื่อโมเดลเห็นต่าง [PDF 3.11]
-- คุณภาพแผนขึ้นกับคลังและเวลา (ตัวเลขจำลองจาก numbers.json) [DEC-41]
-- ชั่วโมงเป็นค่าประมาณ [PDF 1.7]
-- 30 คนสถาบันเดียว ไม่พอเปรียบเทียบรายอาชีพ [PDF 1.7]
-- O*NET เป็นบริบทสหรัฐ ไม่ใช่เงื่อนไขรับสมัครในไทย [PDF 2.5]
-- ไม่มีเงื่อนไขเทียบโมเดลเดี่ยว [PDF 1.7]
+- R4 บันทึกสัดส่วนความเห็นตรงกัน ไม่ปฏิเสธ [E.aggregate agreement_level]
+- R5: ใบรับรองในคลัง (L1 ผ่านตรวจของอาชีพ) พบในเรซูเม ไม่ใช่บรรทัดเตรียมสอบ → ข้อที่ยัง missing/abstained ได้ partially [E.credentialEvidence · DEC-54]
+- R6: Essential Skill ที่เชื่อมกับกิจกรรม (O*NET F13) ซึ่งได้ evidenced จากโมเดลในอาชีพเดียวกัน → partially · evidence_source = linkage [E.applyFloors · DEC-54]
+- หลักฐานที่แสดง: จากโมเดลที่ตรงข้อสรุปและผ่าน R2 · ov สูงสุด → quote สั้นกว่า → รหัสโมเดล · ระบุ evidence_source [E.aggregate]
+- ดัชนี T (งาน Core 8 งาน · ไม่มีฐานขั้นต่ำ) และ H (เทคโนโลยี In Demand ที่พบทั้งคำ) รายงานแยกจาก R [E.evaluateRun · E.techMatch · DEC-55]
+- ablation: R ภายใต้ R3 คำซ้ำอย่างเดียว / ไม่มี R3 / ไม่มีฐานขั้นต่ำ จากการเรียกชุดเดียวกัน [scores.ablation]
+- ผลทดลองกับเรซูเมจริงของผู้วิจัย 3 ต.ค.: R19 = 10 · R15 = 11 · R3 คำซ้ำตัด 27/36 [docs/Gap_03OCT26.md · evidence/r3_gold/summary_03OCT26.json]
 - PII นอก 4 รูปแบบยังอาจคงอยู่ [PDF 3.5.1]
 - เล่มนี้บทที่ 1–3 ผลผู้เข้าร่วมเป็นแผน [Prompt_Report §3]
 
 ## F21 ชื่อรุ่น
-- ข้อกำหนด `ONET31.0-IS68076026-v1.0` · คลัง `CORPUS_IS68076026-v1.5-01OCT26` · กฎ `RULES-IS68076026-v1.0` · prompt `analyst_v1.0` [DEC-43]
-- engine `engine-1.0.0-01OCT26` · ชีต `sheets-v1.1-01OCT26` · รายงาน `report-v1.0` [E.ENGINE_VERSION · S.schema_version]
+- ข้อกำหนด `ONET31.0-IS68076026-v1.0` · คลัง `CORPUS_IS68076026-v1.5-01OCT26` · กฎ `RULES-IS68076026-v2.0` · prompt `analyst_v1.1` + `verifier_v1.0` [DEC-43 · DEC-51/53]
+- engine `engine-2.0.0-03OCT26` · ชีต `sheets-v1.1-01OCT26` (+ role_task_decisions) · รายงาน `report-v2.0` [E.ENGINE_VERSION · S.schema_version]
 
 ## F22 เอกสารอ้างอิงที่ใช้ (ตรวจมีจริงใน Phase 3.4)
 - Vaishampayan et al. 2025 NAACL Findings doi 10.18653/v1/2025.findings-naacl.270 [PDF รายการอ้างอิง · DEC-32]

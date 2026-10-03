@@ -17,21 +17,21 @@ Final_IS/
 ├─ CLAUDE.md · README.md · NEXT_STEPS.md · package.json · requirements.txt · .gitignore
 ├─ docs/
 │  ├─ baseline/          PDF ฉบับขอสอบ (read-only) + SHA256.txt
-│  ├─ DECISIONS.md       ทะเบียน DEC-01–36
+│  ├─ DECISIONS.md       ทะเบียน DEC-01–58
 │  ├─ LOG.md · Plan_IS_30SEP26.md · Spec_Acceptance_Checklist.md · Setup_Guide.md
 │  ├─ Advisor_Email_D0-D5.md · Project_Docs_Index.md · session_end_checklist.md
 │  ├─ ethics/            เอกสารจริยธรรม 6 ไฟล์ (ร่าง v1.0)
 │  ├─ research_tools/    Coding Manual · Analysis Plan · Questionnaire+IOC (ร่าง v1.0)
 │  └─ reference/         เอกสารเดิมที่ใช้อ้างอิง (DECISIONS_31AUG26, START_HERE)
 ├─ source/               ต้นทางที่ห้ามแก้ (project_files/ + recovered_31AUG-09SEP/)
-├─ data/                 requirements 600 · roles 20 · aliases · corpus 571 · mappings 6,883 · mapping_review · manifest (8 ไฟล์ sha256)
-├─ sheets_import/        CSV + XLSX 16 แท็บสำหรับสเปรดชีตฐานข้อมูล
-├─ engine/engine.js      ตรรกะเดียว (R0–R4, สมการ 3.1–3.8, จัดแผน, รายงาน, อีเมล)
-├─ prompts/              analyst_v1.0 + JSON schema
+├─ data/                 requirements 600 · roles 20 · aliases · corpus 571 · mappings 6,883 · mapping_review · role_tasks · role_technology · skill_links · manifest (11 ไฟล์ sha256)
+├─ sheets_import/        CSV + XLSX 17 แท็บสำหรับสเปรดชีตฐานข้อมูล
+├─ engine/engine.js      ตรรกะเดียว engine 2.0 (R0–R6 · R3a/R3b · ดัชนี T/H · สมการ 3.1–3.8 · จัดแผน · รายงาน · อีเมล)
+├─ prompts/              analyst_v1.1 + verifier_v1.0 + JSON schema
 ├─ config/               project · models · sheets · pricing · env_template.env
-├─ workflows/            WF_Final_IS.json (59 node · ไฟล์เดียวที่ใช้ · DEC-37) + src/ (โค้ดต่อโหนด) + manifest · ชุด 5 ไฟล์เดิมอยู่ archive/01OCT26/workflows_5wf_DEC-30/ (DEC-38)
-├─ synthetic/            เรซูเมสังเคราะห์ 3 กรณี (เฉลย · PDF ข้อความ/สแกน · ผลตอบกลับจำลอง)
-├─ tests/                Node test 51 กรณี (engine · data · pipeline · workflow sandbox บั๊ก B1–B11)
+├─ workflows/            WF_IS_68076026_01OCT26.json (79 โหนด · ไฟล์เดียวที่ใช้ · DEC-48/51) + src/ (โค้ดต่อโหนด) + manifest · ชุด 5 ไฟล์เดิมอยู่ archive/01OCT26/workflows_5wf_DEC-30/ (DEC-38)
+├─ synthetic/            เรซูเมสังเคราะห์ 4 กรณี A–D + validation/ 12 ไฟล์ (DEC-57) (เฉลย · PDF ข้อความ/สแกน · ผลตอบกลับจำลอง)
+├─ tests/                Node test 78 กรณี (engine · data · pipeline · workflow sandbox บั๊ก B1–B11)
 ├─ analysis/             metrics · bootstrap · coding_sheets · run_analysis · ข้อมูลซ้อม 30+5 · tests 8 กรณี
 ├─ book/                 เล่มเป็น Markdown (ต้นฉบับ) + figures 24 รูป + baseline_21SEP26 (ฉบับถอดเทียบ)
 ├─ scripts/              สร้างข้อมูล · คลัง · manifest · workflow · validator · เล่ม · ตรวจทั้งหมด
@@ -51,13 +51,13 @@ python scripts/export_pdf.py           # PDF (อัปเดตสารบั�
 python scripts/check_docx_format.py && python scripts/check_overlap.py   # QA เล่ม
 ```
 
-## สถานะ (1 ต.ค. 2569)
+## สถานะ (3 ต.ค. 2569)
 | ส่วน | สถานะ |
 |---|---|
 | ข้อมูลอ้างอิง | ✅ สร้างแล้ว · ⏳ URL 28 รายการ (36 แถว) รอผู้วิจัยตรวจด้วยตา |
-| engine + tests | ✅ 65/65 · analysis 8/8 |
-| workflow | ✅ `WF_IS_68076026_01OCT26.json` 69 โหนด (DEC-48) · ผ่านใน n8n 2.39.9 จริงกับบริการจำลอง (`evidence/n8n_test_01OCT26.md`) · ⏳ บัญชี Google/โมเดลจริง |
+| engine + tests | ✅ engine 2.0 (Gap_03OCT26 · DEC-51–58) · 78/78 · analysis 8/8 · ⏳ ตรวจความตรงกับ Gemini จริง (DEC-57) |
+| workflow | ✅ `WF_IS_68076026_01OCT26.json` 79 โหนด (DEC-48/51) · validator + sandbox ผ่าน · ⏳ ทดสอบซ้ำใน n8n จริง (ผลเดิม 69 โหนดใน `evidence/n8n_test_01OCT26.md`) · ⏳ บัญชี Google/โมเดลจริง |
 | ความครอบคลุม 600 | ⏳ คลัง 598/600 · แผนจำลอง 538/600 · รอผู้วิจัยยืนยันรายการใหม่ 14 รายการ (DEC-46) → จำลองได้ 600/600 |
-| เล่ม Final | ✅ เขียนใหม่ทั้งเล่ม · `build/IS_68076026_Final_01OCT26.docx/.pdf` 74 หน้า · QA ผ่าน (`evidence/QA_Final_01OCT26.md`) |
+| เล่ม Final | ✅ เขียนใหม่ทั้งเล่ม · `build/IS_68076026_Final_03OCT26.docx/.pdf` 84 หน้า · QA ผ่าน (`evidence/QA_Final_03OCT26.md`) |
 | จริยธรรม | ✅ ร่าง 6 ไฟล์ · ⏳ ผู้วิจัยกรอกช่อง ⚠ → อาจารย์ตรวจ → ยื่น |
 | backup | ✅ GitHub `porlizm/IS68076026` push แล้ว (03OCT26) · ⏳ สำเนา OneDrive/ไดรฟ์ภายนอก |

@@ -58,8 +58,12 @@ def main():
     mode = {s["mode"]: s for s in sim["by_mode_6m10h"]}
     n["sim_both_6m10h"] = fmt(cap[(6, 10)]["covered"]); n["sim_both_6m5h"] = fmt(cap[(6, 5)]["covered"])
     n["sim_cert_6m10h"] = fmt(mode["certification_only"]["covered"]); n["sim_course_6m10h"] = fmt(mode["course_only"]["covered"])
-    for k in "ABC":
+    for k in "ABCD":
         s = J("evidence", "run_local", f"case_{k}", "summary.json")
+        fx = lambda v: v if isinstance(v, str) else f"{v:.2f}"
+        n.update({f"c{k}_Rlex": fx(s["R_lexical_only"]), f"c{k}_Rnor3": fx(s["R_no_r3"]), f"c{k}_checks": fmt(s["verifier_checks"]), f"c{k}_unverified": fmt(s["unverified_votes"]),
+                  f"c{k}_repaired": fmt(s["repaired_quotes"]), f"c{k}_floors": f"{s['floor_credential']}/{s['floor_linkage']}", f"c{k}_T": fx(s["T"]),
+                  f"c{k}_H": f"{s['H_found']}/{s['H_total']}", f"c{k}_accd": f"{s['accuracy_direct']:.3f}", f"c{k}_years": fmt(s["years_experience"]) if s["years_experience"] is not None else "N/A"})
         R = s["R"]
         n.update({f"c{k}_m": fmt(s["usable_models"]), f"c{k}_decided": fmt(s["decided"]), f"c{k}_correct": fmt(s["correct_on_decided"]),
                   f"c{k}_acc": f"{s['accuracy_on_decided']:.3f}", f"c{k}_R": R if isinstance(R, str) else f"{R:.2f}",
@@ -141,12 +145,15 @@ def main():
     t = ["| ลำดับ | รายการเรียนรู้ | ชั่วโมง | ชั่วโมงสะสม | ช่องว่างที่ครอบคลุมเพิ่ม |", "|---|---|---|---|---|"]
     for r in pa.itertuples(): t.append(f"| {r.rank} | {r.title} ({r.item_id}) | {r.estimated_hours:,.0f} | {r.cumulative_hours:,.0f} | {r.n_new_requirements} |")
     n["cA_plan_table"] = "\n".join(t)
-    t = ["| รายการ | กรณี A | กรณี B | กรณี C |", "|---|---|---|---|"]
+    t = ["| รายการ | กรณี A | กรณี B | กรณี C | กรณี D |", "|---|---|---|---|---|"]
     lab = [("อาชีพเป้าหมาย", None), ("โมเดลที่ใช้ได้ (m)", "m"), ("ข้อที่ระบบสรุปได้ จาก 30", "decided"), ("ข้อที่ตรงเฉลย จากข้อที่สรุปได้", "correct"),
-           ("คะแนน R", "R"), ("สัดส่วน C", "C"), ("ข้อสรุปที่ไม่ผ่านเกณฑ์ตรวจหลักฐาน", "U"), ("รายการในแผน", "items"), ("ชั่วโมงของแผน", "hours"), ("ความครอบคลุมช่องว่างของแผน", "gapcov")]
-    roles_ = {k: J("synthetic", f"case_{k}", "meta.json")["role_id"] for k in "ABC"}
+           ("คะแนน R", "R"), ("R ถ้า R3 ใช้คำซ้ำอย่างเดียว", "Rlex"), ("สัดส่วน C", "C"), ("ข้อสรุปที่ไม่ผ่านเกณฑ์ตรวจหลักฐาน", "U"),
+           ("ข้อความที่ส่งให้โมเดลอื่นตรวจความหมาย", "checks"), ("เสียงที่ตรวจความหมายไม่ได้", "unverified"), ("quote ที่ซ่อมรูปคำ", "repaired"),
+           ("ฐานขั้นต่ำ R5/R6", "floors"), ("ดัชนีงานหลัก T", "T"), ("เทคโนโลยีที่ตลาดต้องการ H", "H"),
+           ("รายการในแผน", "items"), ("ชั่วโมงของแผน", "hours"), ("ความครอบคลุมช่องว่างของแผน", "gapcov")]
+    roles_ = {k: J("synthetic", f"case_{k}", "meta.json")["role_id"] for k in "ABCD"}
     for th, key in lab:
-        t.append(f"| {th} | " + " | ".join(roles_[k] if key is None else n[f"c{k}_{key}"] for k in "ABC") + " |")
+        t.append(f"| {th} | " + " | ".join(roles_[k] if key is None else n[f"c{k}_{key}"] for k in "ABCD") + " |")
     n["synthetic_table"] = "\n".join(t)
     # ---------- ตารางที่สร้างจากไฟล์ข้อมูล ----------
     R = J("data", "roles.json")["roles"]; rq = pd.read_csv(os.path.join(ROOT, "data", "requirements.csv"), dtype=str, keep_default_na=False)
@@ -173,7 +180,7 @@ def main():
     SH = J("config", "sheets.json")["tabs"]
     GRP = {"operational": "ผลการทำงาน", "evaluation": "การประเมิน", "reference": "ข้อมูลอ้างอิง", "google_forms": "Google Forms เขียน"}
     USE = {"runs": "หนึ่งแถวต่องาน สถานะและสรุปผล", "ocr_results": "บริการอ่านข้อความ จำนวนจุดที่ปิดบัง ค่าแฮช", "model_calls": "การเรียกโมเดลทุกครั้งรวมครั้งที่ล้ม",
-           "findings": "ข้อสรุปรายโมเดลและผลกฎ R2 R3", "decisions": "สถานะสุดท้ายรายข้อกำหนดอ้างอิงและหลักฐาน", "plan_items": "รายการในแผนตามลำดับ", "deliveries": "ผลการส่งรายงาน",
+           "findings": "ข้อสรุปรายโมเดลและผลกฎ R2 R3 (ชั้นคำซ้ำและผู้ตรวจ)", "decisions": "สถานะสุดท้ายรายข้อกำหนดอ้างอิงและหลักฐาน", "role_task_decisions": "สถานะของงานหลักของอาชีพ 8 งาน", "plan_items": "รายการในแผนตามลำดับ", "deliveries": "ผลการส่งรายงาน",
            "audit_log": "เหตุการณ์ของระบบ", "ground_truth": "ชุดคำตอบอ้างอิงของผู้ให้รหัสสองคน", "pathway_review": "ผลตรวจแผนของผู้ประเมิน",
            "ref_roles": "อาชีพ 20 อาชีพ", "ref_requirements": "ข้อกำหนดอ้างอิง 600 ข้อพร้อมคำพ้อง", "ref_corpus": "คลังรายการเรียนรู้", "ref_mappings": "ความเชื่อมโยงพร้อมสถานะการตรวจ",
            "form_responses": "คำตอบแบบฟอร์มรับเรซูเม", "evaluation_responses": "คำตอบแบบประเมินของผู้เข้าร่วม"}
@@ -187,13 +194,29 @@ def main():
     PC = J("config", "project.json"); MC = J("config", "models.json")["defaults"]
     rowsC = [("requirements_per_role", PC["requirements_per_role"], "ข้อกำหนดอ้างอิงต่ออาชีพ"), ("max_file_bytes", f"{PC['max_file_bytes']:,}", "ขนาดไฟล์สูงสุด (ไบต์)"), ("max_pages", PC["max_pages"], "จำนวนหน้าสูงสุด"),
              ("text_layer_min_chars", PC["text_layer_min_chars"], "อักขระขั้นต่ำที่ถือว่า PDF มีชั้นข้อความ"), ("theta", PC["theta"], "เกณฑ์คะแนน ov ของกฎ R3"), ("overlap_denominator_cap", PC["overlap_denominator_cap"], "เพดานตัวหารของ ov"),
-             ("alias_min_length", PC["alias_min_length"], "ความยาวคำพ้องขั้นต่ำ (อักขระ)"), ("min_usable_models", PC["min_usable_models"], "โมเดลที่ใช้ได้ขั้นต่ำ"), ("weeks_per_month", PC["weeks_per_month"], "สัปดาห์ต่อเดือนในสมการ Hmax"),
+             ("alias_min_length", PC["alias_min_length"], "ความยาวคำพ้องขั้นต่ำ (อักขระ)"), ("r3_mode", PC["r3_mode"], "R3 สองชั้น: คำซ้ำแล้วจึงให้โมเดลอื่นตรวจความหมาย"),
+             ("r3_stemming", "true" if PC["r3_stemming"] else "false", "ตัดคำต่อท้ายก่อนนับคำซ้ำ"), ("r2_repair_min_similarity", PC["r2_repair_min_similarity"], "สัดส่วนคำที่ต้องตรงเมื่อซ่อม quote"),
+             ("max_quotes_per_claim", PC["max_quotes_per_claim"], "ข้อความอ้างอิงสูงสุดต่อข้อ"), ("role_tasks_per_role", PC["role_tasks_per_role"], "งานหลักต่ออาชีพสำหรับดัชนี T"),
+             ("plan_experienced_years", PC["plan_experienced_years"], "ปีประสบการณ์ที่ไม่ใช้รายการระดับเริ่มต้นกับข้อที่มีหลักฐานบางส่วน"), ("min_usable_models", PC["min_usable_models"], "โมเดลที่ใช้ได้ขั้นต่ำ"), ("weeks_per_month", PC["weeks_per_month"], "สัปดาห์ต่อเดือนในสมการ Hmax"),
              ("allowed_months", " / ".join(map(str, PC["allowed_months"])), "กรอบเวลาที่เลือกได้ (เดือน)"), ("max_hours_per_week", PC["max_hours_per_week"], "ชั่วโมงต่อสัปดาห์สูงสุด"), ("plan_strategy", PC["plan_strategy"], "วิธีเลือกรายการเรียนรู้"),
              ("min_approved_share_of_L1", PC["min_approved_share_of_L1"], "สัดส่วน L1 ที่ต้องผ่านตรวจขั้นต่ำ"), ("retention_days", PC["retention_days"], "วันเก็บข้อมูลหลังส่งผล"),
-             ("temperature", MC["temperature"], "ค่าความสุ่มของโมเดล (รอทดสอบเชื่อมต่อ)"), ("max_output_tokens", f"{MC['max_output_tokens']:,}", "ความยาวผลตอบกลับสูงสุด (token)"), ("timeout_ms", f"{MC['timeout_ms']:,}", "เวลารอต่อการเรียก (มิลลิวินาที)"),
+             ("temperature", MC["temperature"], "ค่าความสุ่มของโมเดล (รอทดสอบเชื่อมต่อ)"), ("max_output_tokens", f"{MC['max_output_tokens']:,}", "ความยาวผลตอบกลับสูงสุดของการวิเคราะห์ (token)"),
+             ("verifier_max_output_tokens", f"{MC['verifier_max_output_tokens']:,}", "ความยาวผลตอบกลับสูงสุดของการตรวจความหมาย (token)"), ("timeout_ms", f"{MC['timeout_ms']:,}", "เวลารอต่อการเรียก (มิลลิวินาที)"),
              ("max_attempts", MC["max_attempts"], "จำนวนครั้งที่เรียกซ้ำเมื่อ 429 หรือหมดเวลา"), ("retry_backoff_ms", " / ".join(f"{x:,}" for x in MC["retry_backoff_ms"]), "เวลารอก่อนเรียกซ้ำครั้งที่ 1 และ 2 (มิลลิวินาที)")]
     t = ["| พารามิเตอร์ | ค่า | ความหมาย |", "|---|---|---|"] + [f"| {a} | {b} | {c} |" for a, b, c in rowsC]
     n["config_table"] = "\n".join(t)
+    n["max_output_tokens"] = f"{MC['max_output_tokens']:,}"; n["verifier_max_tokens"] = f"{MC['verifier_max_output_tokens']:,}"
+    n["prompt_version"] = PC["prompt_version"]; n["verifier_prompt_version"] = PC["verifier_prompt_version"]; n["rules_version"] = PC["rules_version"]
+    n["r2_repair_pct"] = fmt(PC["r2_repair_min_similarity"] * 100); n["plan_experienced_years"] = fmt(PC["plan_experienced_years"])
+    n["role_tasks_total"] = fmt(len(pd.read_csv(os.path.join(ROOT, "data", "role_tasks.csv")))); n["role_tasks_per_role"] = fmt(PC["role_tasks_per_role"])
+    n["role_tech_total"] = fmt(len(pd.read_csv(os.path.join(ROOT, "data", "role_technology.csv")))); n["skill_links_total"] = fmt(len(pd.read_csv(os.path.join(ROOT, "data", "skill_links.csv"))))
+    gs = J("evidence", "r3_gold", "summary_03OCT26.json")
+    n["real_claims"] = fmt(gs["claims_total"]); n["real_r3_rejected"] = fmt(gs["r3_rejected_in_demo"])
+    n["real_rec_lex"] = f"{gs['real']['r3_lexical_v1']['recall']:.2f}"; n["real_rec_stem"] = f"{gs['real']['r3a_stemmed']['recall']:.2f}"; n["real_prec_lex"] = f"{gs['real']['r3_lexical_v1']['precision']:.2f}"
+    n["real_R19"] = fmt(gs["demo_scores_03OCT26"]["R19_it_pm"]); n["real_R15"] = fmt(gs["demo_scores_03OCT26"]["R15_network"])
+    n["real_R19_r2only"] = f"{gs['replay_R']['R19']['r2_only']:.1f}"; n["real_R15_r2only"] = f"{gs['replay_R']['R15']['r2_only']:.1f}"
+    n["syn_pairs"] = fmt(gs["synthetic_pairs"]); n["syn_rec_lex"] = f"{gs['synthetic']['r3_lexical_v1']['recall']:.2f}"; n["syn_rec_hyb"] = f"{gs['synthetic']['r3_hybrid']['recall']:.2f}"
+    n["syn_prec_hyb"] = f"{gs['synthetic']['r3_hybrid']['precision']:.2f}"; n["role_shared_19_15"] = fmt(gs["role_overlap"]["R19_R15_shared"]); n["role_shared_mean_pct"] = fmt(gs["role_overlap"]["mean_shared_fraction_all_pairs"] * 100)
     n["theta"] = str(PC["theta"]); n["retention_days"] = fmt(PC["retention_days"]); n["deletion_contact"] = PC["deletion_contact"]
     wfj = J("workflows", J("workflows", "manifest.json")["import"]); secn = {}
     for i, s_ in enumerate(wfj["meta"]["is68"]["sections"], 1):

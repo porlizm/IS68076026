@@ -1,6 +1,6 @@
 {
- "schema": "report-v1.0",
- "engine_version": "engine-1.1.0-01OCT26",
+ "schema": "report-v2.0",
+ "engine_version": "engine-2.0.0-03OCT26",
  "run_id": "RUN-20261001100000-90a83f11",
  "role_id": "R18",
  "role_name_th": "นักวิเคราะห์ระบบและนักวิเคราะห์ธุรกิจสายไอที",
@@ -11,32 +11,51 @@
  "ocr_engine_version": "fixture",
  "m": 2,
  "scores": {
-  "readiness_pct": 38.57,
+  "readiness_pct": 43.58,
   "weighted_coverage": 0.9343,
   "n_decided": 28,
-  "n_evidenced": 9,
-  "n_partially": 4,
-  "n_missing": 15,
+  "n_evidenced": 10,
+  "n_partially": 5,
+  "n_missing": 13,
   "n_abstained": 2,
-  "unsupported_claims": 3,
+  "unsupported_claims": 1,
   "n_claims": 33,
-  "U": 0.0909,
+  "U": 0.0303,
   "U_per_model": {
    "A": {
     "n_claims": 16,
-    "n_rejected": 1,
-    "U": 0.0625,
+    "n_rejected": 0,
+    "U": 0,
     "n_missing_direct": 14,
-    "n_downgraded": 1
+    "n_downgraded": 0,
+    "n_unverified": 0,
+    "n_repaired": 0
    },
    "B": {
     "n_claims": 17,
-    "n_rejected": 2,
-    "U": 0.1176,
+    "n_rejected": 1,
+    "U": 0.0588,
     "n_missing_direct": 13,
-    "n_downgraded": 2
+    "n_downgraded": 1,
+    "n_unverified": 0,
+    "n_repaired": 0
    }
-  }
+  },
+  "n_unverified_votes": 0,
+  "n_repaired_quotes": 0,
+  "role_task_index": 37.5,
+  "n_role_tasks": 8,
+  "n_role_tasks_decided": 8,
+  "tech_match_pct": 10,
+  "n_tech_found": 1,
+  "n_tech_total": 10,
+  "ablation": {
+   "r3_hybrid_no_floors": 41.86,
+   "r3_lexical_only": 38.57,
+   "no_r3": 43.3
+  },
+  "n_floor_credential": 0,
+  "n_floor_linkage": 1
  },
  "decisions": [
   {
@@ -53,6 +72,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -69,6 +89,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -85,6 +106,7 @@
    "evidence_quote": "Gathered requirements from finance and procurement users through workshops and translated them into user stories.",
    "evidence_char_start": 385,
    "evidence_char_end": 498,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -101,6 +123,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -117,6 +140,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -133,6 +157,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -149,6 +174,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -165,6 +191,7 @@
    "evidence_quote": "Analyzed transaction logs in Excel to find duplicate invoices and reported a 12 percent error rate.",
    "evidence_char_start": 1165,
    "evidence_char_end": 1264,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -181,6 +208,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -197,6 +225,7 @@
    "evidence_quote": "Presented project status updates at team meetings.",
    "evidence_char_start": 1354,
    "evidence_char_end": 1404,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -213,6 +242,7 @@
    "evidence_quote": "Reviewed requirements documents and vendor specifications to confirm scope before sign-off.",
    "evidence_char_start": 981,
    "evidence_char_end": 1072,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -229,6 +259,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -245,6 +276,7 @@
    "evidence_quote": "Conducted stakeholder interviews with 25 end users to understand pain points in the purchasing process.",
    "evidence_char_start": 501,
    "evidence_char_end": 604,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -254,13 +286,14 @@
    "element_name": "Critical Thinking",
    "domain": "Essential Skills",
    "weight": 0.032123,
-   "final_status": "missing",
+   "final_status": "partially",
    "agreement_level": 1,
    "n_usable_models": 2,
-   "rule_flags": "",
-   "evidence_quote": "",
-   "evidence_char_start": -1,
-   "evidence_char_end": -1,
+   "rule_flags": "R6_linkage:4.A.1.a.1+4.A.2.a.3+4.A.2.a.4+4.A.2.b.6+4.A.4.a.1",
+   "evidence_quote": "Gathered requirements from finance and procurement users through workshops and translated them into user stories.",
+   "evidence_char_start": 385,
+   "evidence_char_end": 498,
+   "evidence_source": "linkage",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -277,6 +310,7 @@
    "evidence_quote": "Produced process modeling diagrams and data flow analysis for the ERP procurement module.",
    "evidence_char_start": 607,
    "evidence_char_end": 696,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -293,6 +327,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -309,6 +344,7 @@
    "evidence_quote": "Provided user support and handled service desk tickets for the finance system after go-live.",
    "evidence_char_start": 788,
    "evidence_char_end": 880,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -325,6 +361,7 @@
    "evidence_quote": "Explained technical details of the new workflow to non-technical managers in monthly briefings.",
    "evidence_char_start": 883,
    "evidence_char_end": 978,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -341,6 +378,7 @@
    "evidence_quote": "Carried out a compliance check of approval workflows against the internal audit policy.",
    "evidence_char_start": 1075,
    "evidence_char_end": 1162,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -357,6 +395,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -373,6 +412,7 @@
    "evidence_quote": "Planned and prioritized the backlog for two release cycles with the project manager.",
    "evidence_char_start": 1267,
    "evidence_char_end": 1351,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -385,10 +425,11 @@
    "final_status": "missing",
    "agreement_level": 1,
    "n_usable_models": 2,
-   "rule_flags": "B:R3_low_overlap",
+   "rule_flags": "B:R3b_unrelated",
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -405,6 +446,7 @@
    "evidence_quote": "Completed course: IIBA ECBA preparation (self-study).",
    "evidence_char_start": 1548,
    "evidence_char_end": 1601,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -421,6 +463,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -430,13 +473,14 @@
    "element_name": "Documenting/Recording Information",
    "domain": "Work Activities",
    "weight": 0.030752,
-   "final_status": "missing",
+   "final_status": "evidenced",
    "agreement_level": 1,
    "n_usable_models": 2,
-   "rule_flags": "A:R3_low_overlap|B:R3_low_overlap",
-   "evidence_quote": "",
-   "evidence_char_start": -1,
-   "evidence_char_end": -1,
+   "rule_flags": "A:R3b_supports|B:R3b_supports",
+   "evidence_quote": "Documented functional specifications and test scenarios for three ERP change requests.",
+   "evidence_char_start": 699,
+   "evidence_char_end": 785,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -453,6 +497,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -469,6 +514,7 @@
    "evidence_quote": "English: good command, IELTS 6.5.",
    "evidence_char_start": 1604,
    "evidence_char_end": 1637,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -485,6 +531,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -501,6 +548,7 @@
    "evidence_quote": "",
    "evidence_char_start": -1,
    "evidence_char_end": -1,
+   "evidence_source": "",
    "created_at": "2026-10-01T10:00:00+07:00"
   },
   {
@@ -517,12 +565,13 @@
    "evidence_quote": "Contributed to user guide drafts reviewed by the documentation team.",
    "evidence_char_start": 1407,
    "evidence_char_end": 1475,
+   "evidence_source": "models",
    "created_at": "2026-10-01T10:00:00+07:00"
   }
  ],
  "plan": {
   "Hmax": 259.8,
-  "n_gaps": 19,
+  "n_gaps": 18,
   "items": [
    {
     "rank": 1,
@@ -550,11 +599,11 @@
     "source_url": "https://www.coursera.org/learn/wharton-communication-skills",
     "estimated_hours": 10,
     "cumulative_hours": 16,
-    "covers_requirements": "REQ-R18-2.A.1.d|REQ-R18-4.A.4.a.2|REQ-R18-4.A.4.a.4",
-    "n_new_requirements": 3,
-    "new_weight_covered": 0.100565,
-    "d_k": 0.0100565,
-    "c_k": 0.3,
+    "covers_requirements": "REQ-R18-4.A.4.a.2|REQ-R18-4.A.4.a.4",
+    "n_new_requirements": 2,
+    "new_weight_covered": 0.066301,
+    "d_k": 0.0066301,
+    "c_k": 0.2,
     "mapping_status": "source_checked_by_script",
     "phase": "core_gap_closure"
    },
@@ -567,11 +616,11 @@
     "source_url": "https://www.coursera.org/learn/critical-thinking-skills-for-professionals",
     "estimated_hours": 9,
     "cumulative_hours": 25,
-    "covers_requirements": "REQ-R18-2.A.2.a|REQ-R18-4.A.2.b.1",
-    "n_new_requirements": 2,
-    "new_weight_covered": 0.071441,
-    "d_k": 0.00793789,
-    "c_k": 0.22222222,
+    "covers_requirements": "REQ-R18-4.A.2.b.1",
+    "n_new_requirements": 1,
+    "new_weight_covered": 0.039318,
+    "d_k": 0.00436867,
+    "c_k": 0.11111111,
     "mapping_status": "source_checked_by_script",
     "phase": "foundation"
    },
@@ -594,20 +643,20 @@
    },
    {
     "rank": 5,
-    "item_id": "CRS-R18-F3",
+    "item_id": "CRS-R18-10",
     "item_type": "course",
-    "title": "Learning How to Learn: Powerful mental tools to help you master tough subjects",
-    "provider": "Deep Teaching Solutions",
-    "source_url": "https://www.coursera.org/learn/learning-how-to-learn",
+    "title": "Communicating Business Analytics Results",
+    "provider": "University of Colorado Boulder",
+    "source_url": "https://www.coursera.org/learn/communicating-business-analytics-results",
     "estimated_hours": 20,
     "cumulative_hours": 60,
-    "covers_requirements": "REQ-R18-2.A.2.b|REQ-R18-4.A.2.b.3",
+    "covers_requirements": "REQ-R18-2.A.1.c|REQ-R18-2.A.1.d",
     "n_new_requirements": 2,
-    "new_weight_covered": 0.069042,
-    "d_k": 0.0034521,
+    "new_weight_covered": 0.063217,
+    "d_k": 0.00316085,
     "c_k": 0.1,
     "mapping_status": "source_checked_by_script",
-    "phase": "foundation"
+    "phase": "core_gap_closure"
    },
    {
     "rank": 6,
@@ -628,37 +677,37 @@
    },
    {
     "rank": 7,
-    "item_id": "CRS-R18-07",
+    "item_id": "CRS-R18-F3",
     "item_type": "course",
-    "title": "Requirements Elicitation and Analysis",
-    "provider": "University of Alberta",
-    "source_url": "https://www.coursera.org/learn/client-needs-and-software-requirements",
-    "estimated_hours": 25,
-    "cumulative_hours": 110,
-    "covers_requirements": "REQ-R18-2.A.1.c|REQ-R18-4.A.3.b.6",
-    "n_new_requirements": 2,
-    "new_weight_covered": 0.059705,
-    "d_k": 0.0023882,
-    "c_k": 0.08,
-    "mapping_status": "source_checked_by_script",
-    "phase": "core_gap_closure"
-   },
-   {
-    "rank": 8,
-    "item_id": "CRS-R18-F1",
-    "item_type": "course",
-    "title": "Write Professional Emails in English",
-    "provider": "Georgia Institute of Technology",
-    "source_url": "https://www.coursera.org/learn/professional-emails-english",
+    "title": "Learning How to Learn: Powerful mental tools to help you master tough subjects",
+    "provider": "Deep Teaching Solutions",
+    "source_url": "https://www.coursera.org/learn/learning-how-to-learn",
     "estimated_hours": 20,
-    "cumulative_hours": 130,
-    "covers_requirements": "REQ-R18-2.C.7.a",
+    "cumulative_hours": 105,
+    "covers_requirements": "REQ-R18-4.A.2.b.3",
     "n_new_requirements": 1,
-    "new_weight_covered": 0.02981,
-    "d_k": 0.0014905,
+    "new_weight_covered": 0.038033,
+    "d_k": 0.00190165,
     "c_k": 0.05,
     "mapping_status": "source_checked_by_script",
     "phase": "foundation"
+   },
+   {
+    "rank": 8,
+    "item_id": "CRS-R18-02",
+    "item_type": "course",
+    "title": "Object-Oriented Design",
+    "provider": "University of Alberta",
+    "source_url": "https://www.coursera.org/learn/object-oriented-design",
+    "estimated_hours": 25,
+    "cumulative_hours": 130,
+    "covers_requirements": "REQ-R18-2.A.2.a",
+    "n_new_requirements": 1,
+    "new_weight_covered": 0.032123,
+    "d_k": 0.00128492,
+    "c_k": 0.04,
+    "mapping_status": "source_checked_by_script",
+    "phase": "core_gap_closure"
    },
    {
     "rank": 9,
@@ -681,17 +730,159 @@
   "total_hours": 250,
   "notice": "",
   "reference_data_error": false,
+  "learner": {
+   "years_experience": 8,
+   "level_filter_applied": true
+  },
   "strategy": "weighted_greedy",
-  "n_gap_requirements_with_candidate": 19,
-  "n_covered": 19,
-  "gap_coverage": 1,
-  "gap_coverage_with_candidate": 1,
+  "n_gap_requirements_with_candidate": 18,
+  "n_covered": 16,
+  "gap_coverage": 0.8889,
+  "gap_coverage_with_candidate": 0.8889,
   "uncovered_no_candidate": [],
+  "uncovered_level_filtered": [
+   "REQ-R18-2.A.2.b",
+   "REQ-R18-2.C.7.a"
+  ],
   "uncovered_over_capacity": []
+ },
+ "role_tasks": [
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-20950",
+   "task_text": "Troubleshoot program and system malfunctions to restore normal functioning.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3464",
+   "task_text": "Provide staff and users with assistance solving computer-related problems, such as malfunctions and program problems.",
+   "final_status": "evidenced",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "Provided user support and handled service desk tickets for the finance system after go-live.",
+   "evidence_char_start": 788,
+   "evidence_char_end": 880,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3465",
+   "task_text": "Test, maintain, and monitor computer programs and systems, including coordinating the installation of computer programs and systems.",
+   "final_status": "partially",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "Monitored systems and job queues on the reporting server during month-end.",
+   "evidence_char_start": 1640,
+   "evidence_char_end": 1714,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3482",
+   "task_text": "Use the computer in the analysis and solution of business problems, such as development of integrated production and inventory control and cost analysis systems.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3468",
+   "task_text": "Coordinate and link the computer systems within an organization to increase compatibility so that information can be shared.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3466",
+   "task_text": "Use object-oriented programming languages, as well as client and server applications development processes and multimedia and Internet technology.",
+   "final_status": "missing",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "",
+   "evidence_char_start": -1,
+   "evidence_char_end": -1,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3474",
+   "task_text": "Analyze information processing or computation needs and plan and design computer systems, using techniques such as structured analysis, data modeling, and information engineering.",
+   "final_status": "evidenced",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "",
+   "evidence_quote": "Produced process modeling diagrams and data flow analysis for the ERP procurement module.",
+   "evidence_char_start": 607,
+   "evidence_char_end": 696,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  },
+  {
+   "run_id": "RUN-20261001100000-90a83f11",
+   "task_id": "TASK-R18-3469",
+   "task_text": "Consult with management to ensure agreement on system principles.",
+   "final_status": "partially",
+   "agreement_level": 1,
+   "n_usable_models": 2,
+   "rule_flags": "A:R3b_partial|B:R3b_partial",
+   "evidence_quote": "Explained technical details of the new workflow to non-technical managers in monthly briefings.",
+   "evidence_char_start": 883,
+   "evidence_char_end": 978,
+   "created_at": "2026-10-01T10:00:00+07:00"
+  }
+ ],
+ "technology": {
+  "n_total": 10,
+  "n_found": 1,
+  "pct": 10,
+  "found": [
+   {
+    "technology": "Microsoft Excel",
+    "key": "Excel",
+    "start": 1194,
+    "end": 1199
+   }
+  ]
+ },
+ "verification": {
+  "A": {
+   "n_checks": 3,
+   "n_answered": 3,
+   "call_status": "ok",
+   "reason": ""
+  },
+  "B": {
+   "n_checks": 2,
+   "n_answered": 2,
+   "call_status": "ok",
+   "reason": ""
+  }
  },
  "model_calls": [
   {
    "model_key": "A",
+   "call_purpose": "analyst",
    "provider": "OpenAI",
    "model_id": "mock-model",
    "attempt": 1,
@@ -703,6 +894,7 @@
   },
   {
    "model_key": "B",
+   "call_purpose": "analyst",
    "provider": "Anthropic",
    "model_id": "mock-model",
    "attempt": 1,
@@ -714,6 +906,7 @@
   },
   {
    "model_key": "C",
+   "call_purpose": "analyst",
    "provider": "Google",
    "model_id": "mock-c",
    "attempt": 1,
@@ -725,6 +918,7 @@
   },
   {
    "model_key": "C",
+   "call_purpose": "analyst",
    "provider": "Google",
    "model_id": "mock-c",
    "attempt": 2,
@@ -736,6 +930,7 @@
   },
   {
    "model_key": "C",
+   "call_purpose": "analyst",
    "provider": "Google",
    "model_id": "mock-c",
    "attempt": 3,
@@ -744,20 +939,44 @@
    "latency_ms": 0,
    "input_tokens": 0,
    "output_tokens": 0
+  },
+  {
+   "model_key": "A",
+   "call_purpose": "verifier",
+   "provider": "OpenAI",
+   "model_id": "mock-verifier",
+   "attempt": 1,
+   "status": "ok",
+   "error_code": "",
+   "latency_ms": 800,
+   "input_tokens": 900,
+   "output_tokens": 200
+  },
+  {
+   "model_key": "B",
+   "call_purpose": "verifier",
+   "provider": "Anthropic",
+   "model_id": "mock-verifier",
+   "attempt": 1,
+   "status": "ok",
+   "error_code": "",
+   "latency_ms": 800,
+   "input_tokens": 900,
+   "output_tokens": 200
   }
  ],
  "versions": {
   "dataset": "ONET31.0-IS68076026-v1.0",
   "corpus": "CORPUS_IS68076026-v1.5-01OCT26",
-  "prompt": "analyst_v1.0",
-  "rules": "RULES-IS68076026-v1.0"
+  "prompt": "analyst_v1.1+verifier_v1.0",
+  "rules": "RULES-IS68076026-v2.0"
  },
  "hashes": {
   "text_sha256": "567ce57e1bf156d7fc5e52046425e653cd44d79fd84717a8429047d061fccc5d",
-  "reference_manifest_sha256": "f093a5f67de4f25d55a01d9e283e338103de25816a1efa71114f744340d5d9b7",
-  "prompt_sha256": "032719788ff8cb4e556853a81295e5c2d087551a660144cdc00aac6b8b8f35aa",
-  "decisions_sha256": "a7d59ce949b675f4cacfc10b745bc208817c95144c5538a61ad135e95bbc9a34",
-  "plan_sha256": "da2624623566302a81b6f18189d6bf2278ba4fc57b4219baa35fc962b359f958"
+  "reference_manifest_sha256": "ecd5a4294ce646cb04478944d7ac3ac7d48444dfc6909f0fda03d15fb6ff93d9",
+  "prompt_sha256": "1f103102c448d350a8f777339cdac1e7072d5c714692a5ba12fd6b3483f53180",
+  "decisions_sha256": "d4111d8f3f3287f6d5b776167068f8dcba38818fc7c0413fb20a43d5d94bd27e",
+  "plan_sha256": "5d549398dd5ee5eb979439d87264a1e95035f08bab83b9a2f97c34a8ef5f22a6"
  },
- "report_hash": "238f6bbd1795a170a8f7f7d55862359b73622c1d1dae4f1e9f4e4f35a7951eff"
+ "report_hash": "aa3235afa60e78c9dea410c9d89064fceb363cdf16de2f2117f3775e2999b154"
 }

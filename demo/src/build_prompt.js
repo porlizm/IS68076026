@@ -1,9 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Build Analyst Prompt · prompt analyst_v1.0 ของงานวิจัย (ไม่แก้ข้อความ)
+// Build Analyst Prompt · prompt ของงานวิจัย (config/project.json prompt_version · ไม่แก้ข้อความ) + งานหลัก 8 งานของอาชีพ (DEC-55)
 //   + DEMO ADDENDUM ขอ "profile" สำหรับแสดงผลเท่านั้น (ไม่ใช้คำนวณคะแนน)
-//   ไม่ส่งคำพ้องและน้ำหนักเข้า prompt (3.5.2)
+//   ไม่ส่งคำพ้องและน้ำหนักเข้า prompt (3.5.2) · DEC-58: ส่ง ANALYST_RUNS รายการ (Gemini วิเคราะห์หลายรอบแล้วโหวต)
 // ─────────────────────────────────────────────────────────────────────────────
+//@@ENGINE_ALL@@
 const TEMPLATE = /*@@PROMPT_ANALYST@@*/'';
+const PROMPT_VERSION = /*@@PROMPT_VERSION@@*/'';
 const ADDENDUM = [
   '',
   'DEMO ADDENDUM (display only, never used for scoring):',
@@ -18,23 +20,22 @@ const ADDENDUM = [
 
 const role = $('Load Role Data (O*NET 31.0)').first().json.role;
 const text = $('Clean Text & Mask PII').first().json.text;
-const cfg = $('Config & Validate').first().json.cfg;
+const v = $('Config & Validate').first().json;
+const cfg = v.cfg;
 
 const reqList = role.requirements.map((r) => ({ requirement_id: r.id, element_name: r.name, element_description: r.desc }));
-const prompt = String(TEMPLATE)
-  .split('{{ROLE_ID}}').join(role.role_id)
-  .split('{{REQUIREMENTS_JSON}}').join(JSON.stringify(reqList, null, 1))
-  .split('{{RESUME_TEXT}}').join(text) + '\n' + ADDENDUM;
+const prompt = ENGINE.buildPrompt(TEMPLATE, role.role_id, reqList, text, role.signal_tasks || []) + '\n' + ADDENDUM;
 
 const generationConfig = { maxOutputTokens: cfg.GEMINI_MAX_OUTPUT_TOKENS, responseMimeType: 'application/json' };
 if (cfg.GEMINI_THINKING_LEVEL) generationConfig.thinkingConfig = { thinkingLevel: cfg.GEMINI_THINKING_LEVEL };
-
-return [{
+const KEYS = ['A', 'B', 'C'];
+return KEYS.slice(0, v.runs).map((k) => ({
   json: {
+    run_key: k,
     use_gemini: cfg.USE_GEMINI_ANALYST !== false,
     model: cfg.GEMINI_MODEL_ANALYST,
-    prompt_version: 'analyst_v1.0+demo_profile',
+    prompt_version: PROMPT_VERSION + '+demo_profile',
     prompt_chars: prompt.length,
     gemini_request: { contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig },
   },
-}];
+}));

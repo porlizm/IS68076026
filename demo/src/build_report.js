@@ -7,7 +7,10 @@ const prep = $('Clean Text & Mask PII').first().json;
 const p = $input.first().json;
 const role = rd.role;
 const R = p.scores.readiness_pct;
+const Cw = p.scores.weighted_coverage;
+// ป้ายสำหรับแสดงผลใน Demo เท่านั้น (ไม่ใช่เกณฑ์ของงานวิจัย) · ถ้าสรุปได้ไม่ถึง 60% ของน้ำหนัก ไม่ติดป้ายระดับ
 const band = R === null ? { key: 'na', th: 'ประเมินไม่ได้' }
+  : (Cw !== null && Cw < 0.6) ? { key: 'na', th: 'หลักฐานยังไม่พอสรุป' }
   : R >= 75 ? { key: 'high', th: 'พร้อมสูง' }
   : R >= 50 ? { key: 'mid', th: 'ใกล้พร้อม' }
   : { key: 'low', th: 'ต้องพัฒนาเพิ่ม' };
@@ -30,6 +33,9 @@ const report = {
   analyst: p.analyst,
   scores: p.scores,
   guard: p.guard,
+  verifier: p.verifier,
+  tasks: p.tasks,
+  tech: p.tech,
   candidate: p.candidate,
   requirements: p.requirements.map(({ desc, ...r }) => ({ ...r, desc })),
   plan: p.plan,
@@ -37,8 +43,8 @@ const report = {
     onet: rd.data_meta.onet_version, snapshot: rd.data_meta.snapshot_version, corpus: rd.data_meta.corpus_version,
     dataset_sha256: (rd.data_meta.sha256['Data_Set.xlsx'] || '').slice(0, 12),
     policy: rd.data_meta.policy, built_at: rd.data_meta.built_at,
-    rules: 'R0 → R2 → R3 (Demo: โมเดลเดียว ไม่มี R1/R4) · θ = ' + v.cfg.THETA,
-    note: 'Demo รอบแรกสำหรับคณะกรรมการ · ข้อมูลอ้างอิงเป็นของจริงแบบ hardcode · ไม่บันทึกเรซูเมลงฐานข้อมูล',
+    rules: 'R0 → R2 (ซ่อมรูปคำ) → R3a คำซ้ำ θ = ' + v.cfg.THETA + ' → R3b Gemini ตรวจความหมาย → R1 โหวต ' + p.analyst.runs_usable + ' รอบ → R5/R6 · ' + (v.project_cfg.rules_version || ''),
+    note: 'Demo ใช้ Gemini ตัวเดียวหลายรอบ (ระบบเต็มใช้ 3 โมเดลคนละผู้ให้บริการและให้โมเดลอื่นตรวจกัน) · ข้อมูลอ้างอิงเป็นของจริงแบบ hardcode · ไม่บันทึกเรซูเมลงฐานข้อมูล',
   },
 };
 return [{ json: report }];

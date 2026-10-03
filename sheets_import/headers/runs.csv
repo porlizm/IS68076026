@@ -1,1 +1,1 @@
-run_id,response_id,created_at,updated_at,email,role_id,mode,timeline_months,hours_per_week,file_id,stage,ocr_engine,model_status,readiness_pct,weighted_coverage,n_evidenced,n_partially,n_missing,n_abstained,unsupported_claims,report_hash,pdf_file_id,email_status,error_code
+run_id,response_id,created_at,updated_at,email,role_id,mode,timeline_months,hours_per_week,file_id,stage,ocr_engine,model_status,readiness_pct,weighted_coverage,n_evidenced,n_partially,n_missing,n_abstained,unsupported_claims,role_task_index,tech_match_pct,report_hash,pdf_file_id,email_status,error_code

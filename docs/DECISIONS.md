@@ -45,6 +45,16 @@
 | 46 | 1 ต.ค. | coverage track: รายการเรียนรู้ใหม่ 14 รายการใน `data/corpus_additions.csv` เข้าคลังเมื่อผู้วิจัยยืนยัน | ⏳ รอผู้วิจัยยืนยันทุกรายการ |
 | 47 | 1 ต.ค. | วิธีเลือกรายการคง weighted_greedy (สมการ d_k) หลังเทียบ coverage_first และ ILP | ✅ |
 | 48 | 1 ต.ค. | workflow ใช้งานจริง `WF_IS_68076026_01OCT26` (ต่อยอด DEC-42) หลังทดสอบใน n8n 2.39.9 จริงกับบริการจำลอง | ✅ ผ่านใน n8n จริง (บริการจำลอง) · ⏳ บัญชี Google/โมเดลจริง |
+| 49 | (จอง) | temperature ของโมเดลที่ไม่รับค่า 0 (รอ smoke test T1 · Plan_03OCT26) | ⏳ |
+| 50 | (จอง) | ผลทดสอบกับบริการจริง P1 (Plan_03OCT26) | ⏳ |
+| 51 | 3 ต.ค. | R3 สองชั้น: R3a คำซ้ำแบบตัดคำต่อท้าย → R3b ให้โมเดลอื่นตรวจความหมาย (verifier_v1.0) · เสียงที่ตรวจไม่ได้ = unverified ไม่นับใน R1 | ✅ engine 2.0 · ⏳ ยืนยันกับโมเดลจริง (T1–T2) |
+| 52 | 3 ต.ค. | R2 ซ่อม quote: ใช้ข้อความจริงจากเรซูเมเมื่อคำตรงกัน ≥ 90% | ✅ |
+| 53 | 3 ต.ค. | prompt analyst_v1.1 (quote ≤ 2 ชิ้น ≤ 160 ตัวอักษร · evidence_type · ทักษะพื้นฐานจากกิจกรรม · งานหลัก) · เพดาน output 16,384 | ✅ · ⏳ smoke test |
+| 54 | 3 ต.ค. | ฐานขั้นต่ำ R5 ใบรับรองในคลังที่พบในเรซูเม · R6 Essential Skill จากกิจกรรมที่เชื่อมกันตาม O*NET → อย่างน้อย partially | ✅ · 👤 อาจารย์ยืนยัน R6 |
+| 55 | 3 ต.ค. | ดัชนีเฉพาะอาชีพ T (งาน Core 8 งาน) และ H (เทคโนโลยีที่ตลาดต้องการ) รายงานแยกจาก R | ✅ |
+| 56 | 3 ต.ค. | แผนตามระดับผู้เรียน: ประสบการณ์ ≥ 5 ปี ไม่ใช้รายการ Beginner กับข้อ partially | ✅ |
+| 57 | 3 ต.ค. | ชุดตรวจความตรงของคะแนน: Gold-R3 · known-group · style-invariance · stability · เกณฑ์ผ่าน | ✅ เครื่องมือ · ⏳ รันกับ Gemini จริง + ผู้ให้ป้ายคนที่ 2 |
+| 58 | 3 ต.ค. | WF_Demo: engine.js ทั้งไฟล์ · วิเคราะห์ 3 รอบ + Gemini Verifier · ป้าย "ยังยืนยันไม่ได้" · ตัด "หลังเรียนจบ → 100" · Open Learner Model | ✅ |
 
 ---
 
@@ -238,3 +248,86 @@
 **ผลต่อเล่ม** {{wf_name}} {{wf_nodes}} {{wf_s6_nodes}} {{wf_s7_nodes}} {{tests_total}} อัปเดตเอง · ตาราง 3.1 แยกแถว "ทดสอบใน n8n กับบริการจำลอง" (ทำแล้ว) กับ "เชื่อมบริการจริง" (ยังไม่ทำ) · 3.3.2 ช่วง 6 แจ้งผู้วิจัยเมื่อส่งไม่สำเร็จ · ช่วง 7 batch_aborted · 3.3.5 เวลารอก่อนเรียกซ้ำ {{retry_backoff_text}} · ตาราง 3.9 แถว retry_backoff_ms · 3.6.3 แทน ⏳ ด้วยผล {{n8n_pass}}/{{n8n_cases}} กรณี
 **หมายเหตุ** config/models.json เปลี่ยน จึง sha ของชุด 5 ไฟล์/WF_Final_IS ที่สร้างในหน่วยความจำต่างจากไฟล์ใน archive (ไม่กระทบการใช้งาน)
 **วิธีย้อนกลับ** นำ `archive/01OCT26/WF_IS68076026_DEC-42/WF_IS68076026.json` กลับไป `workflows/` · `git revert` commit ของ DEC-48 · ลบ retry_backoff_ms ใน config/models.json แล้ว build ใหม่
+
+
+## DEC-51 · R3 สองชั้น: คำซ้ำ (R3a) แล้วจึงให้โมเดลอื่นตรวจความหมาย (R3b)
+**วันที่** 3 ต.ค. 2569 · ผู้วิจัยสั่ง ("ดำเนินการแก้ไขจาก Gap ที่พบให้สมบูรณ์ที่สุด · ยังไม่เคยส่งเล่ม แก้ได้เหมือนเริ่มใหม่")
+**ปัญหา** (`docs/Gap_03OCT26.md`) ทดลอง WF_Demo กับเรซูเมจริงของผู้วิจัย (ผู้จัดการโครงการไอที 8 ปี) ได้ R19 = 10 และ R15 = 11 · R3 แบบ lexical overlap ตัด 27 จาก 36 ข้อสรุปที่ผ่าน R2 ทั้งที่ราว 23 ข้อเป็นหลักฐานจริง (recall 0.24 บนป้ายเบื้องต้น) · เรซูเมจริงเขียนแบบเน้นผลงาน คำไม่ตรงคำอธิบาย O*NET · θ = 0.15 ปรับจากเรซูเมสังเคราะห์ที่เขียนด้วยคำของ O*NET (วงจรปิด) · ทดลองเพิ่มคำพ้อง/ตัดคำต่อท้าย/ปรับ θ แล้ว recall เกิน 0.6 ไม่ได้โดยไม่ให้คู่ที่ไม่เกี่ยวผ่าน ≥ 22%
+**การตัดสินใจ**
+1. R3a = สมการ 3.2 เดิมแต่ตัดคำต่อท้ายทั้งสองฝั่ง (`engine.stem`) และคำพ้องตรงได้แบบรากคำ (`r3_stemming = true`) · θ = 0.15 · เพดาน 25 คงเดิม
+2. ข้อความที่ผ่าน R2 แต่ไม่ผ่าน R3a ส่งให้โมเดลอื่นตรวจ (`prompts/verifier_v1.0.txt` · หมุนเวียน A→B · B→C · C→A · ถ้าผู้ตรวจล้มตอนวิเคราะห์ใช้โมเดลที่เหลือ · ห้ามตรวจตัวเองในระบบเต็ม) · ผู้ตรวจเห็นเฉพาะข้อความที่ยกมาและข้อกำหนด ไม่เห็นเรซูเมทั้งฉบับ
+3. คำตัดสิน supports = คงสถานะ · partially_supports = ลดเป็น partially · unrelated = missing (นับใน U) · ไม่มีคำตอบที่ถูกต้อง = เสียง **unverified** ไม่นับใน R1 (ข้อนั้นอาจเป็น abstained) และไม่นับเป็น hallucination
+4. `r3_mode = lexical` ใช้เป็นเงื่อนไขเปรียบเทียบ (ablation) · `scores.ablation` รายงาน R ภายใต้ R3 คำซ้ำอย่างเดียว / ไม่มี R3 / ไม่มีฐานขั้นต่ำ จากการเรียกโมเดลชุดเดียวกัน
+5. workflow: ช่วง 4 เพิ่ม Prepare Relevance Checks → Call Verifier A/B/C → Wait for All Verifiers → Collect Verifier Results (+ Build Verifier Call Rows → Record Verifier Calls · `model_calls.call_purpose`) · Apply Rules R0-R4 → **Apply Rules R0-R6** · 69 → 79 โหนด
+**หลักฐาน** กรณีสังเคราะห์ D (R19 เรซูมแบบเน้นผลงาน): R = 88.14 · ถ้า R3 คำซ้ำอย่างเดียว 31.48 · Gold-R3 สังเคราะห์ 82 คู่ (ผู้ตรวจจำลองจากเฉลย · ไม่ใช่ผลของโมเดลจริง) recall 0.72 → 0.97 · ข้อสรุปจริง 36 ข้อ R3a ตัดคำต่อท้าย recall 0.24 → 0.33 (ส่วนที่เหลือต้องพึ่ง R3b)
+**ไฟล์ที่กระทบ** `engine/engine.js` (2.0.0) · `prompts/verifier_v1.0.txt` + schema · `config/project.json` · `config/models.json` · `config/sheets.json` · `scripts/build_workflows.mjs` · `scripts/validate_workflows.mjs` · `workflows/src/single_prepare_checks.js` `single_call_verifier.js` `single_verifier_rows.js` `single_collect_verifiers.js` `single_apply_rules.js` `single_task_rows.js` `single_build_plan.js` · `scripts/run_local.mjs` · `tests/*`
+**ผลต่อเล่ม** 3.3.2 ช่วง 4 · 3.4.4 (R3 สองชั้น · สมการ 3.2 ใช้กับ R3a) · ตาราง 3.10/3.12 · รูป 3.6 · 3.8 เงื่อนไขเปรียบเทียบ · 3.11 ข้อจำกัด (ผู้ตรวจเป็น LLM)
+**วิธีย้อนกลับ** `r3_mode = lexical` และ `r3_stemming = false` ใน config/project.json แล้ว build ใหม่ (ได้พฤติกรรม engine 1.1 ยกเว้นการซ่อม quote)
+
+## DEC-52 · R2 ซ่อม quote ที่โมเดลเปลี่ยนรูปคำ
+**วันที่** 3 ต.ค. 2569
+**ปัญหา** โมเดลเปลี่ยน "directing cross-functional teams…" เป็น "Directed cross-functional teams…" R2 จึงตัดหลักฐานจริงทั้งข้อ
+**การตัดสินใจ** ถ้าไม่พบแบบตรงตัวและแบบยุบช่องว่าง ให้หาช่วงในเรซูเมที่คำ (หลังตัดคำต่อท้าย) ตรงกับ quote ด้วย LCS ≥ 0.90 (`r2_repair_min_similarity`) และ quote ยาว ≥ 5 คำ (`r2_repair_min_tokens`) · **ใช้ข้อความจริงจากเรซูเมแทน quote ของโมเดล** (`quote_text_version = repaired` · flag `R2_repaired`) ข้อความในรายงานจึงตรงกับเรซูเมเสมอ · ข้อความที่ไม่มีจริงยังไม่ผ่าน
+**ไฟล์ที่กระทบ** `engine/engine.js` (`repairQuote`, `ruleR2`) · `config/project.json` · `tests/rules_v2.test.mjs`
+**ผลต่อเล่ม** 3.4.4 ย่อหน้า R2 · ตาราง 3.10
+**วิธีย้อนกลับ** `r2_repair_min_similarity = 0`
+
+## DEC-53 · prompt analyst_v1.1 และเพดาน output
+**วันที่** 3 ต.ค. 2569
+**ปัญหา** prompt v1.0 ขอ quote 20–300 ตัวอักษร (ยาวยิ่งตกสมการ 3.2) · ข้อ 2 ทำให้โมเดลไม่ให้ทักษะพื้นฐานจากกิจกรรมที่บรรยายไว้ (Essential Skills ได้ 0% ทุกคน) · quote ได้ชิ้นเดียว · ผลไม่คงที่ (Coordination ได้ evidenced ในรอบหนึ่ง missing ในอีกรอบ)
+**การตัดสินใจ** `prompts/analyst_v1.1.txt`: quote 1–2 ชิ้น ยาว 20–160 ตัวอักษร เลือกช่วงที่สั้นที่สุด · ห้ามเปลี่ยนรูปกริยา · อนุญาตให้ใช้กิจกรรม/ผลลัพธ์/เครื่องมือ/คอร์ส/ใบรับรอง/วุฒิเป็นหลักฐาน รวมทักษะพื้นฐาน (ยังห้ามอนุมานจากชื่อตำแหน่ง ชื่อหน่วยงาน หรือจำนวนปี) · `evidence_type` · `task_assessments` สำหรับงานหลัก (DEC-55) · R0 รับ analyst_v1.0 ได้ (ย้อนกลับ) · เพดาน output 16,384 (token การคิดของโมเดลรุ่นใหม่นับรวม) · ผู้ตรวจ 4,096 · structured output (responseSchema) เลื่อนไปทดสอบใน T1
+**ไฟล์ที่กระทบ** `prompts/analyst_v1.1.txt` + schema · `config/project.json` prompt_version · `config/models.json` · `engine.buildPrompt` · `scripts/make_synthetic_cases.py` (ผลจำลองเป็น v1.1)
+**ผลต่อเล่ม** 3.4.2–3.4.3 · ภาคผนวก prompt · ตาราง 3.7/3.10 (เพดาน)
+**วิธีย้อนกลับ** prompt_version = analyst_v1.0 · max_output_tokens = 4096
+
+## DEC-54 · ฐานขั้นต่ำจากหลักฐานที่โปรแกรมตรวจได้เอง (R5 · R6)
+**วันที่** 3 ต.ค. 2569 · 👤 ให้อาจารย์ยืนยัน R6 (เป็นการอนุมานจากความเชื่อมโยงของ O*NET ไม่ใช่ข้อความ)
+**ปัญหา** ใบรับรอง 6 ใบที่ตรวจพบไม่ถูกนับเป็นหลักฐาน · Essential Skills แทบไม่เคยเขียนตรง ๆ ในเรซูเม
+**การตัดสินใจ** หลัง R1 สำหรับข้อที่ยัง missing/abstained (ไม่ใช้เมื่อหยุดสรุปทั้งฉบับ):
+- **R5** ใบรับรองในคลัง (mapping L1 ที่ผ่านตรวจของอาชีพนั้น) ที่ชื่อ/รหัสสอบ/ตัวย่อปรากฏแบบทั้งคำในเรซูเม และบรรทัดนั้นไม่ใช่ "เตรียมสอบ/กำลังเรียน" → ข้อกำหนดที่ mapping ระบุได้ `partially` · หลักฐาน = บรรทัดนั้น (`evidence_source = credential`)
+- **R6** Essential Skill ที่ O*NET (F13) เชื่อมกับกิจกรรมการทำงานซึ่งอยู่ใน 30 ข้อของอาชีพเดียวกันและได้ `evidenced` จากโมเดล → `partially` · หลักฐาน = ข้อความของกิจกรรมนั้น (`evidence_source = linkage`)
+- ห้ามยกขึ้นเป็น evidenced · รายงานจำนวนแยก (`n_floor_credential`, `n_floor_linkage`) · run_local รายงานความถูกต้องแบบไม่นับข้อที่อนุมาน (accuracy_direct)
+**ไฟล์ที่กระทบ** `scripts/build_role_signals.py` → `data/skill_links.csv` · `engine` (`credentialEvidence`, `applyFloors`) · `config/project.json evidence_floors` · `config/sheets.json` (`decisions.evidence_source` · `ref_corpus` + level, exam_code) · workflow โหลดคลังก่อน Apply Rules
+**ผลต่อเล่ม** 3.4.4–3.4.5 (กฎ R5 R6) · ตาราง 3.12 · 3.11
+**วิธีย้อนกลับ** `evidence_floors.credential = false` / `linkage = false`
+
+## DEC-55 · ดัชนีเฉพาะอาชีพ T และ H
+**วันที่** 3 ต.ค. 2569
+**ปัญหา** ข้อกำหนด 30 ข้อของแต่ละอาชีพเป็นองค์ประกอบทั่วไปของ O*NET ที่ใช้ร่วมกันมาก (R19 กับ R15 ใช้ร่วมกัน 19/30 · ทุกคู่เฉลี่ย 76%) · R จึงแยกอาชีพในกลุ่มไอทีได้น้อย · เรซูเม PM ได้ R15 สูงกว่า R19 แม้ตัด R3 ออก (56 กับ 47)
+**การตัดสินใจ** ไม่เปลี่ยนวิธีเลือก 30 ข้อ (DEC-03 · G-600 คงเดิม) แต่เพิ่มดัชนีแยกที่รายงานคู่กับ R ไม่รวมเป็นตัวเลขเดียว:
+- **T** งาน Core 8 งานแรกตาม IM ของงาน (O*NET 31.0 Task Statements) ประเมินใน prompt เดียวกัน (`task_assessments`) ด้วยกฎเดียวกัน (R2 · R3 สองชั้น · R1) ไม่มีฐานขั้นต่ำ · T = ค่าเฉลี่ยคะแนนสถานะของงานที่สรุปได้ × 100
+- **H** เทคโนโลยีที่ O*NET ระบุว่าตลาดต้องการ (In Demand) ของอาชีพ นับแบบทั้งคำในเรซูเม (ไม่ใช้โมเดล) · รายงาน "พบ x จาก y"
+- แท็บใหม่ `role_task_decisions` · `runs.role_task_index`, `runs.tech_match_pct`
+**ไฟล์ที่กระทบ** `scripts/build_role_signals.py` → `data/role_tasks.csv` (160) · `data/role_technology.csv` (375) · `engine` (`techMatch`, `evaluateRun`) · workflow (SIGNALS ฝังในโหนดที่ใช้) · `config/sheets.json` · WF_Demo
+**ผลต่อเล่ม** 3.2 (ข้อมูลอ้างอิงชุดที่ 3) · 3.4.6 (ตัวชี้วัด T และ H) · 3.6 รายงาน · ตารางแท็บ
+**วิธีย้อนกลับ** ส่ง roleTasks/roleTech ว่าง (T, H = N/A)
+
+## DEC-56 · แผนเรียนตามระดับผู้เรียน และไม่คาดการณ์คะแนนหลังเรียนจบ
+**วันที่** 3 ต.ค. 2569
+**ปัญหา** PM 8 ปีได้แผน Research Methods, Write Professional Emails in English, CAPM สำหรับ Reading Comprehension · Demo แสดง "หลังเรียนจบแผน 10 → 100" ซึ่งขัดนิยามของงานวิจัย (คอร์ส/ใบรับรอง = อย่างมาก partially)
+**การตัดสินใจ** (1) `estimateYearsExperience` จากช่วงปีในเรซูเม (ใช้เลือกระดับเท่านั้น) · ถ้า ≥ 5 ปี (`plan_experienced_years`) ไม่ใช้รายการระดับ Beginner ปิดข้อที่เป็น partially (`uncovered_level_filtered` รายงานแยก) · ข้อ missing ยังใช้รายการทุกระดับ (2) ข้อ abstained ไม่ใส่ในแผน (3) Demo ตัดคะแนนคาดการณ์ เหลือ "แผนครอบคลุมช่องว่าง x/y ข้อ"
+**ผลจำลอง** case A (7 ปี) gap coverage 0.92 → 0.69 เพราะ partially 6 ข้อไม่ใช้รายการเริ่มต้น · G-600 (simulate_coverage) ไม่กระทบ (ใช้ทุกข้อเป็น missing)
+**ไฟล์ที่กระทบ** `engine.buildPlan` · `config/project.json` · `demo/src/plan_pathway.js` · `app.js`
+**ผลต่อเล่ม** 3.5 การจัดแผน (ย่อหน้าระดับผู้เรียน)
+**วิธีย้อนกลับ** `plan_level_filter = false`
+
+## DEC-57 · ชุดตรวจความตรงของคะแนน
+**วันที่** 3 ต.ค. 2569 · 👤 ยืนยันเกณฑ์กับอาจารย์ · ผู้ให้ป้ายคนที่ 2
+**ปัญหา** ชุดทดสอบเดิมตรวจว่าสูตรถูกตามสเปก (tests 65) และ workflow เดินครบ (n8n 14/14 กับบริการจำลอง) แต่ไม่เคยตรวจว่าคะแนนสมเหตุสมผลกับเรซูเมจริง
+**การตัดสินใจ**
+| ชุด | เครื่องมือ | เกณฑ์ผ่าน (เสนอ) |
+|---|---|---|
+| Gold-R3 | `scripts/r3_gold.mjs build/eval` · `evidence/r3_gold/gold_pairs_synthetic.csv` (82 คู่) · ข้อสรุปจริง 36 คู่ใน `private/` (ไม่เข้า git) · ผู้ให้ป้าย 2 คน (rater_1/rater_2) | κ ≥ 0.61 · precision ≥ 0.90 · recall ≥ 0.75 บนคู่ที่ไม่ได้ใช้ปรับเกณฑ์ |
+| Known-group | `scripts/make_validation_resumes.py` (4 บุคคลสมมติ × 3 สไตล์) + `scripts/validate_scoring.mjs` กับ WF_Demo + Gemini จริง | K1 T ของอาชีพตัวเองสูงสุด · K2 R ของอาชีพตัวเอง ≥ มัธยฐานอาชีพอื่น + 10 |
+| Style-invariance | ชุดเดียวกัน | S1 \|R(onet) − R(star)\| ≤ 10 |
+| Stability | ชุดเดียวกัน `--repeat 3` | T3 สถานะตรงกันทุกรอบ ≥ 85% |
+| Regression | กรณี D + `tests/rules_v2.test.mjs` + `tests/demo_workflow.test.mjs` | ผ่านทุกครั้งก่อน commit |
+**ผลต่อเล่ม** 3.7 (ชุดทดสอบระบบ) · 3.8 (เงื่อนไขเปรียบเทียบ R3) · ตาราง 3.1
+**วิธีย้อนกลับ** —
+
+## DEC-58 · WF_Demo รุ่น 3 ต.ค.
+**วันที่** 3 ต.ค. 2569
+**การตัดสินใจ** (1) ฝัง `engine/engine.js` ทั้งไฟล์ (`//@@ENGINE_ALL@@`) แล้วตัดสินด้วย `evaluateRun` ตัวเดียวกับระบบเต็ม · ค่ากฎจาก `config/project.json` (2) Gemini วิเคราะห์ `ANALYST_RUNS = 3` รอบแล้วโหวต (R1 · ถ้าเหลือรอบเดียวใช้ 1 เสียง) (3) โหนด Prepare Relevance Checks → Need Verification? → Gemini Verifier (R3b · self-verification ติดป้าย) → Verify Evidence (R0–R6) (4) ป้ายสถานะ "ยังยืนยันไม่ได้" (5) ตัด "หลังเรียนจบ → 100" แทนด้วยดัชนี T (6) Open Learner Model: ผู้เรียนพิมพ์หลักฐานเพิ่มรายข้อแล้ววิเคราะห์ใหม่ ข้อความต่อท้ายเรซูเม (ปิดบัง PII) ตรวจด้วยกฎเดียวกัน ติดที่มา "หลักฐานที่คุณเพิ่ม" (7) thinking = medium · ป้ายระดับไม่แสดงเมื่อ C < 0.6
+**ไฟล์ที่กระทบ** `demo/src/*` · `demo/build_wf_demo.mjs` · `demo/build_demo_data.py` · `demo/test/harness.mjs` `server.mjs` · `tests/demo_workflow.test.mjs` · 27 → 31 โหนด
+**ผลต่อเล่ม** ไม่มี (DEC-44 Demo อยู่นอกเล่ม)
+**วิธีย้อนกลับ** `git checkout` รุ่นก่อน 3 ต.ค. ของ `demo/` แล้ว build

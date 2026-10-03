@@ -1,31 +1,31 @@
-run_id,requirement_id,element_id,element_name,domain,weight,final_status,agreement_level,n_usable_models,rule_flags,evidence_quote,evidence_char_start,evidence_char_end,created_at
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,Work Activities,0.04147,evidenced,1,3,,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.1,4.A.3.b.1,Working with Computers,Work Activities,0.040783,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.2,4.A.2.a.2,Processing Information,Work Activities,0.04044,evidenced,1,3,,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.C.4.a,2.C.4.a,Mathematics,Knowledge,0.038808,partially,0.6667,3,,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,Work Activities,0.038465,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.1.e,2.A.1.e,Mathematics,Essential Skills,0.037606,partially,0.6667,3,C:R2_quote_not_found,Background in applied mathematics from undergraduate studies.,636,697,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.1.a.1,4.A.1.a.1,Getting Information,Work Activities,0.037177,missing,0.6667,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,Work Activities,0.037177,missing,1,3,B:R3_low_overlap,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,Work Activities,0.037177,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.2.a,2.A.2.a,Critical Thinking,Essential Skills,0.03649,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.C.3.a,2.C.3.a,Computers and Electronics,Knowledge,0.036404,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",Work Activities,0.034344,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.1.a,2.A.1.a,Reading Comprehension,Essential Skills,0.033313,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,Work Activities,0.033313,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.2,4.A.2.b.2,Thinking Creatively,Work Activities,0.032884,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.B.2.i,2.B.2.i,Complex Problem Solving,Transferable Skills,0.032197,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.B.3.e,2.B.3.e,Programming,Transferable Skills,0.032197,evidenced,1,3,,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",Work Activities,0.031854,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.1.d,2.A.1.d,Speaking,Essential Skills,0.031081,partially,0.6667,3,,Gave a short presentation of a class project to fellow students.,818,882,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.2.b,2.A.2.b,Active Learning,Essential Skills,0.031081,partially,1,3,,Completed course: Google Data Analytics Certificate (in progress).,700,766,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.4.b.6,4.A.4.b.6,Providing Consultation and Advice to Others,Work Activities,0.030909,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",Work Activities,0.030394,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.1.b,2.A.1.b,Active Listening,Essential Skills,0.030051,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.1.c,2.A.1.c,Writing,Essential Skills,0.030051,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.B.4.e,2.B.4.e,Judgment and Decision Making,Transferable Skills,0.02902,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.A.2.d,2.A.2.d,Monitoring,Essential Skills,0.027904,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.3,4.A.1.b.3,"Estimating the Quantifiable Characteristics of Products, Events, or Information",Work Activities,0.027647,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,Work Activities,0.027561,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,Work Activities,0.026445,missing,1,3,,,-1,-1,2026-10-01T10:00:00+07:00
-RUN-20261001100000-bad84c85,REQ-R06-2.C.7.a,2.C.7.a,English Language,Knowledge,0.025758,partially,1,3,,"Languages: Thai (native), English (TOEIC 785).",769,815,2026-10-01T10:00:00+07:00
+run_id,requirement_id,element_id,element_name,domain,weight,final_status,agreement_level,n_usable_models,rule_flags,evidence_quote,evidence_char_start,evidence_char_end,evidence_source,created_at
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,Work Activities,0.04147,evidenced,1,3,,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.1,4.A.3.b.1,Working with Computers,Work Activities,0.040783,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.a.2,4.A.2.a.2,Processing Information,Work Activities,0.04044,evidenced,1,3,,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.4.a,2.C.4.a,Mathematics,Knowledge,0.038808,partially,0.6667,3,,"Relevant courses: Probability, Statistics for Business, Calculus I.",566,633,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,Work Activities,0.038465,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.e,2.A.1.e,Mathematics,Essential Skills,0.037606,partially,0.6667,3,C:R2_quote_not_found,Background in applied mathematics from undergraduate studies.,636,697,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.a.1,4.A.1.a.1,Getting Information,Work Activities,0.037177,missing,0.6667,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,Work Activities,0.037177,missing,1,3,B:R3b_unrelated,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,Work Activities,0.037177,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.a,2.A.2.a,Critical Thinking,Essential Skills,0.03649,partially,1,3,R6_linkage:4.A.2.a.4,Analyzed customer churn data in SQL and presented the findings to the marketing manager.,374,462,linkage,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.3.a,2.C.3.a,Computers and Electronics,Knowledge,0.036404,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",Work Activities,0.034344,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.a,2.A.1.a,Reading Comprehension,Essential Skills,0.033313,partially,1,3,R6_linkage:4.A.2.a.2+4.A.2.a.4,Performed data cleaning and aggregated data from three spreadsheets into a single reporting table.,465,563,linkage,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,Work Activities,0.033313,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.2,4.A.2.b.2,Thinking Creatively,Work Activities,0.032884,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.2.i,2.B.2.i,Complex Problem Solving,Transferable Skills,0.032197,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.3.e,2.B.3.e,Programming,Transferable Skills,0.032197,evidenced,1,3,,Wrote Python scripts with pandas to clean survey data and automate weekly sales reports.,283,371,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",Work Activities,0.031854,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.d,2.A.1.d,Speaking,Essential Skills,0.031081,partially,0.6667,3,,Gave a short presentation of a class project to fellow students.,818,882,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.b,2.A.2.b,Active Learning,Essential Skills,0.031081,partially,1,3,,Completed course: Google Data Analytics Certificate (in progress).,700,766,models,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.b.6,4.A.4.b.6,Providing Consultation and Advice to Others,Work Activities,0.030909,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",Work Activities,0.030394,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.b,2.A.1.b,Active Listening,Essential Skills,0.030051,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.1.c,2.A.1.c,Writing,Essential Skills,0.030051,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.B.4.e,2.B.4.e,Judgment and Decision Making,Transferable Skills,0.02902,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.A.2.d,2.A.2.d,Monitoring,Essential Skills,0.027904,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.1.b.3,4.A.1.b.3,"Estimating the Quantifiable Characteristics of Products, Events, or Information",Work Activities,0.027647,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,Work Activities,0.027561,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,Work Activities,0.026445,missing,1,3,,,-1,-1,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-bad84c85,REQ-R06-2.C.7.a,2.C.7.a,English Language,Knowledge,0.025758,partially,1,3,,"Languages: Thai (native), English (TOEIC 785).",769,815,models,2026-10-01T10:00:00+07:00

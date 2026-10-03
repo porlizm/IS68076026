@@ -1,0 +1,16 @@
+Krit Example
+Network Engineer
+krit.example@mail.test | +66 82 000 1515
+
+EXPERIENCE
+Network Engineer, Example Telecom, 2018 - present
+System Administrator, Example Hospital, 2015 - 2018
+
+SKILLS
+LAN, WAN, BGP, OSPF, routing, switching, Firewall, VPN, network security, Network monitoring, troubleshooting, PRTG, Python, Ansible, automation, Disaster recovery, Vendor coordination, upgrades, Documentation, Visio, Confluence, Capacity planning
+
+EDUCATION
+B.Eng. Computer Engineering, Example University, 2015
+
+CERTIFICATIONS
+Cisco Certified Network Associate (CCNA), 2019

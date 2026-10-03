@@ -6,6 +6,7 @@
   - data/requirements.csv   : 30 ข้อกำหนดต่ออาชีพ + น้ำหนัก (สมการ 3.1) + คำพ้อง (สร้างจาก Data_Set.xlsx แล้ว)
   - data/corpus.csv         : คอร์ส/ใบรับรองที่ verified (DEC-16 ห้ามเดา URL)
   - data/mappings.csv + data/mapping_review.csv : ความเชื่อมโยง L1 ที่ผ่านตรวจ (DEC-21)
+  - data/role_tasks.csv · role_technology.csv · skill_links.csv : งานหลัก 8 งาน · เทคโนโลยีที่ตลาดต้องการ · ทักษะ→กิจกรรม (DEC-54/55)
 
 ใช้:  python demo/build_demo_data.py  (รันจากโฟลเดอร์ Final_IS)  → demo/build/demo_data.json
 """
@@ -50,6 +51,8 @@ def num(x, d=0.0):
 
 def main():
     wb = openpyxl.load_workbook(DATASET, read_only=True, data_only=True)
+    rd = lambda n: list(csv.DictReader(open(os.path.join(ROOT, 'data', n), encoding='utf-8')))
+    rtasks, rtech, links = rd('role_tasks.csv'), rd('role_technology.csv'), rd('skill_links.csv')
     master = {r['role_id']: r for r in sheet(wb, '01_Role_Master')}
     tasks = sheet(wb, '05_Role_Tasks')
     tech = sheet(wb, '04_Role_Technology')
@@ -136,13 +139,17 @@ def main():
             'job_titles': jt[:10],
             'education': [{'level': x['education_level'], 'pct': num(x['percent_of_respondents'])} for x in ed[:4]],
             'items': items,
+            # DEC-55: งานหลัก 8 งาน (ใช้ประเมิน T) และเทคโนโลยีที่ตลาดต้องการพร้อมคำค้น (ใช้นับ H)
+            'signal_tasks': [{'task_id': x['task_id'], 'task_text': x['task_text']} for x in rtasks if x['role_id'] == rid],
+            'signal_tech': [{'technology': x['technology'], 'match_keys': x['match_keys']} for x in rtech if x['role_id'] == rid],
         }
+    out['skill_links'] = [{'skill_element_id': x['skill_element_id'], 'activity_element_id': x['activity_element_id']} for x in links]
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(out, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=None, separators=(',', ':'))
     for rid, r in out['roles'].items():
         n_cov = sum(1 for i in r['items'] if i['covers_l1'])
         print(rid, r['name_en'], '| req', len(r['requirements']), '| items', len(r['items']), '(with L1', n_cov, ')',
-              '| tasks', len(r['tasks']), '| hot', len(r['hot_tech']))
+              '| tasks', len(r['tasks']), '| hot', len(r['hot_tech']), '| T', len(r['signal_tasks']), '| H', len(r['signal_tech']))
     print('->', OUT, os.path.getsize(OUT), 'bytes')
 
 

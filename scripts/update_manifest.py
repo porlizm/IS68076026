@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-update_manifest.py — ทะเบียน sha256 ของไฟล์อ้างอิง 8 ไฟล์ (DEC-21 ข้อ 4)
+update_manifest.py — ทะเบียน sha256 ของไฟล์อ้างอิง 11 ไฟล์ (DEC-21 ข้อ 4 · +3 ไฟล์ DEC-54/55)
 
   python scripts/update_manifest.py            เขียน data/manifest.json ใหม่ (frozen ต้องเป็น false)
   python scripts/update_manifest.py --check    ตรวจว่า sha ตรงทุกไฟล์ (exit 1 ถ้าไม่ตรง)
@@ -14,7 +14,8 @@ import pandas as pd
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data")
 FILES = ["requirements.csv", "roles.json", "aliases.csv", "corpus.csv", "mappings.csv",
-         "mapping_review.csv", "corpus_gap_request.csv", "url_manual_check.csv"]
+         "mapping_review.csv", "corpus_gap_request.csv", "url_manual_check.csv",
+         "role_tasks.csv", "role_technology.csv", "skill_links.csv"]
 MAN = os.path.join(DATA, "manifest.json")
 
 
@@ -43,8 +44,8 @@ def build(frozen=False):
         "project": "IS 68076026",
         "dataset_version": "ONET31.0-IS68076026-v1.0",
         "corpus_version": corpus.corpus_version.iloc[0],
-        "rules_version": "RULES-IS68076026-v1.0",
-        "prompt_version": "analyst_v1.0",
+        "rules_version": json.load(open(os.path.join(ROOT, "config", "project.json"), encoding="utf-8"))["rules_version"],
+        "prompt_version": json.load(open(os.path.join(ROOT, "config", "project.json"), encoding="utf-8"))["prompt_version"],
         "updated_at": datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=7))).isoformat(timespec="seconds"),
         "frozen": frozen,
         "freeze_blockers": [] if frozen else blockers,

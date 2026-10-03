@@ -486,3 +486,12 @@ html.pdf-mode .ring .trk { stroke: #e9ecf3; }
   .reveal { opacity: 1 !important; transform: none !important; } .req-b { grid-template-rows: 1fr !important; }
   .req, .item, .kpi, .hero-card, .rej-item, .g-row { break-inside: avoid; }
 }
+
+/* DEC-58 · Open Learner Model + เทคโนโลยีที่พบ */
+.olm-list { display: grid; gap: 10px; }
+.olm-row { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 12px; align-items: start; font-size: 13px; }
+.olm-row > span { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.olm-row textarea { width: 100%; box-sizing: border-box; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--field); color: var(--ink); padding: 9px 11px; font: inherit; font-size: 13px; resize: vertical; }
+.olm-row textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent-ink); }
+.tech.got { border-color: var(--good-ink); background: var(--good-bg); color: var(--good-ink); }
+@media (max-width: 720px) { .olm-row { grid-template-columns: 1fr; } }

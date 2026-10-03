@@ -20,10 +20,14 @@
 | สเปกระบบและเล่มฉบับขอสอบ | `docs/baseline/IS_68076026_ExamSubmission_21SEP26.pdf` (read-only · sha256 ใน `docs/baseline/SHA256.txt`) |
 | เล่ม Final (DEC-44) | `book/*.md` (ต้นฉบับ · เขียนใหม่ 1 ต.ค. 2569) → `scripts/build_book.py` → `build/IS_68076026_Final_<DDMMMYY>.docx` → `scripts/export_pdf.py` → `.pdf` |
 | ข้อมูลอ้างอิง | `data/` สร้างด้วย `scripts/build_data_all.py` จาก `source/` เท่านั้น |
-| ตรรกะ | `engine/engine.js` (ไฟล์เดียว ฝังลง workflow) |
+| ตรรกะ | `engine/engine.js` (ไฟล์เดียว ฝังลง workflow และ WF_Demo) · `engine-2.0.0-03OCT26` |
 | ค่าควบคุม | `config/project.json`, `config/models.json`, `config/sheets.json` |
 | การตัดสินใจ | `docs/DECISIONS.md` |
 | แผน | `docs/Plan_IS_30SEP26.md` + `NEXT_STEPS.md` |
+
+## หมายเหตุ
+- `run_all_checks.sh` เขียน `evidence/test_report.tap` และ `evidence/coverage_diagnostics.json` ใหม่ทุกครั้ง → `git checkout` สองไฟล์นี้ก่อน commit ถ้าไม่ได้ตั้งใจเปลี่ยน
+- ข้อความเรซูเมจริงของผู้วิจัยใช้ได้เฉพาะใน `private/` (ไม่เข้า git) · ในเล่มใช้ตัวเลขสรุปเท่านั้น
 
 ## ห้ามทำ
 - ห้ามแก้หรือย้าย `docs/baseline/` และ `source/` (ของต้นฉบับ)
@@ -41,18 +45,21 @@
 รูปแบบ: **ปัญหา → การตัดสินใจ → ไฟล์ที่กระทบ → ผลต่อเล่ม → วิธีย้อนกลับ**
 
 ## ค่าคงที่ตามเล่ม (อย่าเปลี่ยนเงียบ ๆ)
-600 = 20 × 30 · IM ≥ 3.0 · 4 โดเมน 343/104/77/76 · θ = 0.15 · cap 25 · คำพ้อง ≥ 4 ตัวอักษร · โมเดลที่ใช้ได้ขั้นต่ำ 2 · ลำดับกฎ R0 → R2 → R3 → R1 → R4 · max output 4,096 · timeout 90 s · retry ≤ 2 (429/timeout) · temperature 0 (รอ smoke test) · Hmax = M × 4.33 × h · L1 ที่ผ่านตรวจเท่านั้น · PDF ≤ 10,485,760 ไบต์ ≤ 5 หน้า · เก็บ 90 วัน · n8n 2.39.9 / Node 24
+600 = 20 × 30 · IM ≥ 3.0 · 4 โดเมน 343/104/77/76 · θ = 0.15 · cap 25 · คำพ้อง ≥ 4 ตัวอักษร · โมเดลที่ใช้ได้ขั้นต่ำ 2 · ลำดับกฎ R0 → R2 → R3a/R3b → R1 → R4 → R5/R6 (DEC-51–54) · ซ่อม quote ≥ 0.9 · prompt analyst_v1.1 + verifier_v1.0 · max output 16,384 (verifier 4,096) · timeout 90 s · retry ≤ 2 (429/timeout) · temperature 0 (รอ smoke test) · Hmax = M × 4.33 × h · L1 ที่ผ่านตรวจเท่านั้น · PDF ≤ 10,485,760 ไบต์ ≤ 5 หน้า · เก็บ 90 วัน · n8n 2.39.9 / Node 24
 
 ## คำสั่งตรวจ
 ```
 bash scripts/run_all_checks.sh                 # ทั้งหมด
-node --test tests/*.test.mjs                   # engine + data + workflow เดียว (65)
-node scripts/validate_workflows.mjs            # WF_IS_68076026_01OCT26 (DEC-48) · 69 โหนด
+node --test tests/*.test.mjs                   # engine + data + workflow เดียว + demo (78)
+node scripts/validate_workflows.mjs            # WF_IS_68076026_01OCT26 (DEC-48/51) · 79 โหนด
 python -m unittest discover -s analysis/tests -t .   # analysis (8)
 python scripts/build_book.py --check           # เล่ม: ไม่มี {{key}}/[@key] ค้าง ภาพ/สมการ/อ้างอิงครบ
 python scripts/check_docx_format.py            # รูปแบบตาม Prompt_Report หัวข้อ 9–10 (33 ข้อ)
 python scripts/check_overlap.py                # ความซ้ำกับเล่มเดิม ≥ 40 อักขระ ต้อง 0
 python scripts/source_trace.py                 # evidence/Source_Trace.md
+node demo/build_wf_demo.mjs .                  # demo/WF_Demo.json (engine ทั้งไฟล์ · DEC-58)
+node scripts/r3_gold.mjs eval                  # Gold-R3 (DEC-57)
+node scripts/validate_scoring.mjs              # ความตรงของคะแนนกับ WF_Demo + Gemini จริง (DEC-57)
 ```
 
 ## สไตล์เอกสาร

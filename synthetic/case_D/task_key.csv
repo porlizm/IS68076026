@@ -1,0 +1,9 @@
+task_id,task_text,expected_status,evidence_sentence,char_start,char_end
+TASK-R19-16169,"Manage project execution to ensure adherence to budget, schedule, and scope.",evidenced,Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.,1134,1262
+TASK-R19-16154,Confer with project personnel to identify and resolve problems.,evidenced,Facilitated root cause analysis sessions after production incidents and tracked corrective actions to closure.,2162,2272
+TASK-R19-16157,Monitor or track project milestones and deliverables.,evidenced,"Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.",758,879
+TASK-R19-16152,"Submit project deliverables, ensuring adherence to quality standards.",evidenced,Set up UAT sign-off checklists so every deliverable met the agreed acceptance criteria before release.,2275,2377
+TASK-R19-16155,"Assess current or future customer needs and priorities by communicating directly with customers, conducting surveys, or other methods.",evidenced,Hosted fortnightly customer advisory sessions to collect feedback and reprioritise features.,1699,1791
+TASK-R19-16159,"Initiate, review, or approve modifications to project plans.",evidenced,"Presented weekly status, risks and budget variance to the steering committee and escalated scope changes for approval.",512,630
+TASK-R19-16156,Schedule and facilitate meetings related to information technology projects.,partially,"Presented weekly status, risks and budget variance to the steering committee and escalated scope changes for approval.",512,630
+TASK-R19-16163,Direct or coordinate activities of project personnel.,evidenced,"Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.",1568,1696

@@ -18,7 +18,7 @@ SOURCES = [  # (regex ของ key, แหล่งข้อมูล, สค�
     (r"^(cov_status_note|cov_24m_note|coverage_role_table)$", "evidence/coverage_simulation.json + coverage_diagnostics.json", "scripts/book_numbers.py (ประโยคที่สร้างจากตัวเลข)", "DEC-41"),
     (r"^(add_\w+|additions_table)$", "data/corpus_additions.csv", "scripts/book_numbers.py (นับ researcher_result)", "DEC-46"),
     (r"^(foundation_\w+)$", "data/corpus.csv · data/mappings.csv · data/corpus_change_log.csv", "scripts/build_corpus.py (foundation track)", "DEC-45"),
-    (r"^(c[ABC]_\w+|synthetic_table)$", "evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv", "scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง)", "—"),
+    (r"^(c[ABCD]_\w+|synthetic_table)$", "evidence/run_local/case_*/summary.json · decisions.csv · plan_items.csv", "scripts/run_local.mjs (engine.js กับผลตอบกลับจำลอง)", "—"),
     (r"^(map_\w+|items_in_passed|req_covered|req_uncovered\w*|per_role_\w+|promoted|review_date_th)$",
      "evidence/mapping_review_summary.json · data/mappings.csv", "scripts/review_mappings.py (เกณฑ์ C1–C5)", "DEC-11 · DEC-21"),
     (r"^(corpus_\w+|hours_\w+|course_hours_mean|cert_hours_mean|url_pending_items)$", "data/corpus.csv · data/manifest.json", "scripts/build_corpus.py", "DEC-43"),
@@ -33,6 +33,11 @@ SOURCES = [  # (regex ของ key, แหล่งข้อมูล, สค�
     (r"^(tabs_\w+|data_dictionary)$", "config/sheets.json", "scripts/book_numbers.py", "—"),
     (r"^(config_table|theta|retention_days|deletion_contact|text_layer_min_chars)$", "config/project.json · config/models.json", "scripts/book_numbers.py", "—"),
     (r"^(manifest_\w+)$", "data/manifest.json", "scripts/update_manifest.py", "—"),
+    (r"^(rules_version|prompt_version|verifier_prompt_version|max_output_tokens|verifier_max_tokens|r2_repair_pct|plan_experienced_years|role_tasks_per_role)$",
+     "config/project.json · config/models.json", "scripts/book_numbers.py", "DEC-51 · DEC-52 · DEC-53 · DEC-56"),
+    (r"^(role_tasks_total|role_tech_total|skill_links_total)$", "data/role_tasks.csv · data/role_technology.csv · data/skill_links.csv", "scripts/build_role_signals.py", "DEC-54 · DEC-55"),
+    (r"^(real_\w+|syn_\w+|role_shared_\w+)$", "evidence/r3_gold/summary_03OCT26.json (ข้อความต้นฉบับของเรซูเมผู้วิจัยอยู่ใน private/ ไม่เข้า git)",
+     "scripts/r3_gold.mjs eval · docs/Gap_03OCT26.md", "DEC-51 · DEC-57"),
 ]
 
 

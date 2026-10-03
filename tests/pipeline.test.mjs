@@ -14,7 +14,8 @@ test('กรณี A: 3 โมเดลใช้ได้ · สรุปได�
   assert.equal(r.summary.decided, 30);
   assert.ok(r.summary.accuracy_on_decided >= 0.9);
   assert.ok(r.summary.plan_hours <= r.summary.Hmax);
-  assert.equal(r.summary.send_calls, 3, 'บั๊ก B5: 1 งานต้องเรียกแต่ละโมเดลครั้งเดียวเมื่อไม่มีข้อผิดพลาด');
+  assert.equal(r.summary.send_calls - r.summary.verifier_calls, 3, 'บั๊ก B5: 1 งานต้องเรียกแต่ละโมเดลวิเคราะห์ครั้งเดียวเมื่อไม่มีข้อผิดพลาด');
+  assert.ok(r.summary.verifier_calls <= 3, 'DEC-51: ผู้ตรวจแต่ละโมเดลเรียกได้ครั้งเดียว');
   assert.equal(r.summary.pii_masked, 3);
 });
 

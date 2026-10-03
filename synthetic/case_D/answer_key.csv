@@ -1,0 +1,31 @@
+requirement_id,element_id,element_name,expected_status,evidence_sentence,char_start,char_end
+REQ-R19-4.A.4.b.1,4.A.4.b.1,Coordinating the Work and Activities of Others,evidenced,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,378,509
+REQ-R19-4.A.4.a.2,4.A.4.a.2,"Communicating with Supervisors, Peers, or Subordinates",evidenced,"Presented weekly status, risks and budget variance to the steering committee and escalated scope changes for approval.",512,630
+REQ-R19-4.A.1.a.1,4.A.1.a.1,Getting Information,evidenced,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,633,755
+REQ-R19-4.A.2.b.6,4.A.2.b.6,"Organizing, Planning, and Prioritizing Work",evidenced,"Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.",758,879
+REQ-R19-4.A.3.b.1,4.A.3.b.1,Working with Computers,evidenced,Integrated SAP Business One with the e-procurement platform through a nightly reconciliation job.,882,979
+REQ-R19-4.A.2.b.5,4.A.2.b.5,Scheduling Work and Activities,evidenced,"Ran the Agile delivery cycle for 4 concurrent client projects, owning the backlog, sprint cadence and release milestones.",758,879
+REQ-R19-4.A.4.b.2,4.A.4.b.2,Developing and Building Teams,evidenced,Grew and mentored a delivery team from 6 to 18 people with no regretted attrition.,982,1064
+REQ-R19-4.A.2.b.1,4.A.2.b.1,Making Decisions and Solving Problems,evidenced,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,378,509
+REQ-R19-4.A.2.b.3,4.A.2.b.3,Updating and Using Relevant Knowledge,partially,"M.Sc. Information Technology Management, Example Institute, 2016",1067,1131
+REQ-R19-4.A.4.c.3,4.A.4.c.3,Monitoring and Controlling Resources,evidenced,Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.,1134,1262
+REQ-R19-4.A.2.b.4,4.A.2.b.4,Developing Objectives and Strategies,evidenced,Defined the 3-year roadmap for the procurement platform and aligned it with group finance objectives.,1265,1366
+REQ-R19-4.A.4.a.1,4.A.4.a.1,Interpreting the Meaning of Information for Others,evidenced,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,633,755
+REQ-R19-4.A.4.a.4,4.A.4.a.4,Establishing and Maintaining Interpersonal Relationships,partially,Acted as the single point of contact between client stakeholders and engineering across 5 regulated industries.,1369,1480
+REQ-R19-2.C.7.a,2.C.7.a,English Language,missing,,-1,-1
+REQ-R19-4.A.1.b.1,4.A.1.b.1,"Identifying Objects, Actions, and Events",evidenced,Tracked incident queues and service dashboards daily to spot delivery risks early.,1483,1565
+REQ-R19-4.A.4.b.4,4.A.4.b.4,"Guiding, Directing, and Motivating Subordinates",evidenced,"Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.",1568,1696
+REQ-R19-2.C.1.e,2.C.1.e,Customer and Personal Service,evidenced,Hosted fortnightly customer advisory sessions to collect feedback and reprioritise features.,1699,1791
+REQ-R19-4.A.4.a.7,4.A.4.a.7,Resolving Conflicts and Negotiating with Others,evidenced,"Negotiated change requests and payment milestones with three vendors, keeping the programme within contract value.",1794,1908
+REQ-R19-2.C.3.a,2.C.3.a,Computers and Electronics,partially,"Tools: Jira, Confluence, Microsoft Project, SQL, Excel",1911,1965
+REQ-R19-4.A.3.b.6,4.A.3.b.6,Documenting/Recording Information,evidenced,Wrote SRS documents and kept a requirements traceability matrix for every release.,1968,2050
+REQ-R19-4.A.2.a.4,4.A.2.a.4,Analyzing Data or Information,evidenced,Built a demand forecasting dashboard with SQL that reduced forecast error from 35% to 9% for 120 branches.,2053,2159
+REQ-R19-4.A.2.a.2,4.A.2.a.2,Processing Information,evidenced,Integrated SAP Business One with the e-procurement platform through a nightly reconciliation job.,882,979
+REQ-R19-4.A.4.a.3,4.A.4.a.3,Communicating with People Outside the Organization,evidenced,Acted as the single point of contact between client stakeholders and engineering across 5 regulated industries.,1369,1480
+REQ-R19-2.A.2.a,2.A.2.a,Critical Thinking,evidenced,Facilitated root cause analysis sessions after production incidents and tracked corrective actions to closure.,2162,2272
+REQ-R19-4.A.1.a.2,4.A.1.a.2,"Monitoring Processes, Materials, or Surroundings",evidenced,Tracked incident queues and service dashboards daily to spot delivery risks early.,1483,1565
+REQ-R19-2.A.1.a,2.A.1.a,Reading Comprehension,partially,Wrote SRS documents and kept a requirements traceability matrix for every release.,1968,2050
+REQ-R19-2.A.1.b,2.A.1.b,Active Listening,evidenced,Ran requirement elicitation workshops with 40 business users and turned ambiguous requests into signed-off specifications.,633,755
+REQ-R19-2.B.1.b,2.B.1.b,Coordination,evidenced,Cut purchase-order cycle time from 30 days to 9 by redesigning the requisition-to-payment process with finance and warehouse leads.,378,509
+REQ-R19-2.B.5.a,2.B.5.a,Time Management,partially,Delivered a THB 8M e-procurement platform for a retail group one month ahead of go-live at 22% under the agreed delivery budget.,1134,1262
+REQ-R19-2.B.5.d,2.B.5.d,Management of Personnel Resources,evidenced,"Directed 5 system analysts, 10 developers and 3 QA engineers, running quarterly performance reviews and training needs analysis.",1568,1696

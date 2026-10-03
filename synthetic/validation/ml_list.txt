@@ -1,0 +1,16 @@
+Ploy Example
+Machine Learning Engineer
+ploy.example@mail.test | +66 83 000 0707
+
+EXPERIENCE
+Machine Learning Engineer, Example Fintech, 2021 - present
+Data Scientist, Example Bank, 2019 - 2021
+
+SKILLS
+Python, scikit-learn, XGBoost, AWS, SageMaker, Docker, Spark, SQL, data pipelines, Model evaluation, monitoring, PyTorch, NLP, transformers, Stakeholder communication, LLM, RAG, research, Testing, code review, Git
+
+EDUCATION
+M.Sc. Computer Science, Example University, 2019
+
+CERTIFICATIONS
+AWS Certified Machine Learning - Specialty, 2023

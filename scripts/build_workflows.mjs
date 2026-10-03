@@ -1,5 +1,5 @@
 // build_workflows.mjs — สร้าง workflow จากแหล่งเดียว (ห้ามแก้ JSON ด้วยมือ)
-//   node scripts/build_workflows.mjs  -> workflows/WF_IS_68076026_01OCT26.json (DEC-48 ไฟล์เดียวที่ใช้งาน · ต่อยอด DEC-42) + workflows/manifest.json
+//   node scripts/build_workflows.mjs  -> workflows/WF_IS_68076026_01OCT26.json (DEC-48 ไฟล์เดียวที่ใช้งาน · ต่อยอด DEC-42 · DEC-51 เพิ่มโหนดตรวจความหมาย) + workflows/manifest.json
 //   buildAll (ชุด 5 ไฟล์ DEC-30) และ buildFinal (WF_Final_IS DEC-37) สร้างในหน่วยความจำเพื่อเทสต์เทียบ
 //   ชุด 5 ไฟล์เดิม (DEC-30) สร้างในหน่วยความจำเพื่อตรวจเทียบ · เขียนไฟล์เฉพาะเมื่อสั่ง --legacy <โฟลเดอร์> (DEC-38)
 // Code node ที่ต้องใช้ตรรกะฝัง engine/engine.js ทั้งไฟล์ระหว่างเครื่องหมาย ENGINE BEGIN/END (ตรวจทีละไบต์ใน validate_workflows.mjs)
@@ -20,12 +20,19 @@ const CRED = {
 };
 const roleRefs = refsForRun(refs, 'R01');
 const CFG = {
-  project: refs.projectCfg, models: refs.modelsCfg, sheets: refs.sheetsCfg, prompt: refs.prompt,
+  project: refs.projectCfg, models: refs.modelsCfg, sheets: refs.sheetsCfg, prompt: refs.prompt, verifierPrompt: refs.verifierPrompt,
   roleIds: refs.roles.map((r) => r.role_id), roleNames: Object.fromEntries(refs.roles.map((r) => [r.role_id, r.role_name_th])),
-  refs: { manifest_files: roleRefs.manifest_files, prompt_sha256: roleRefs.prompt_sha256, dataset_version: roleRefs.dataset_version, corpus_version: roleRefs.corpus_version, prompt_version: roleRefs.prompt_version, rules_version: roleRefs.rules_version },
+  refs: { manifest_files: roleRefs.manifest_files, prompt_sha256: roleRefs.prompt_sha256, verifier_prompt_sha256: roleRefs.verifier_prompt_sha256, dataset_version: roleRefs.dataset_version, corpus_version: roleRefs.corpus_version, prompt_version: roleRefs.prompt_version, rules_version: roleRefs.rules_version },
   expected: { corpus_rows: refs.corpus.length, mapping_rows: refs.rawMappings.length },
 };
 const CFG_JSON = JSON.stringify(CFG);
+// DEC-54/55: ข้อมูลเฉพาะอาชีพ (data/role_tasks.csv · role_technology.csv · skill_links.csv) ฝังเฉพาะโหนดที่ใช้ ไม่ใส่ใน CFG (ไฟล์ workflow จะใหญ่เกิน)
+const SIGNALS_SRC = 'const SIGNALS = ' + JSON.stringify({
+  roleTasks: refs.roleTasks.map((t) => ({ task_id: t.task_id, role_id: t.role_id, task_text: t.task_text })),
+  roleTech: refs.roleTech.map((t) => ({ role_id: t.role_id, technology: t.technology, match_keys: t.match_keys })),
+  skillLinks: refs.skillLinks.map((l) => ({ skill_element_id: l.skill_element_id, activity_element_id: l.activity_element_id })),
+}) + ';\nconst SIGNALS_FOR = (rid) => ({ roleTasks: SIGNALS.roleTasks.filter((t) => t.role_id === rid), roleTech: SIGNALS.roleTech.filter((t) => t.role_id === rid), skillLinks: SIGNALS.skillLinks });\n';
+export const SIGNALS_SHA = ENGINE.sha256Hex(SIGNALS_SRC);
 export const ENGINE_BEGIN = '// ==== ENGINE BEGIN (engine/engine.js · ห้ามแก้ในนี้ แก้ที่ไฟล์ต้นทางแล้ว build ใหม่) ====\n';
 export const ENGINE_END = '\n// ==== ENGINE END ====\n';
 const code = (glueFile, withEngine = true) =>
@@ -321,9 +328,9 @@ export const SINGLE = { name: 'WF_IS_68076026_01OCT26', id: 'is68Single000001', 
 export const SECTIONS = [
   { key: 'S1', th: 'รับข้อมูล', color: 7, body: 'Google Sheets Trigger ตรวจคำตอบใหม่ของฟอร์ม → ตรวจความยินยอมและข้อมูลเข้า → กันงานซ้ำ (response_id) → ทำทีละงาน (Loop) → สร้างแถว runs (running) → ดาวน์โหลดและตรวจไฟล์ PDF ≤ 10 MB ≤ 5 หน้า · ตั้ง N8N_CONCURRENCY_PRODUCTION_LIMIT=1 ให้ทำทีละ execution' },
   { key: 'S2', th: 'อ่านและปิดบังข้อมูล', color: 6, body: 'ใช้ชั้นข้อความของ PDF ถ้ามี (text_layer_min_chars · นับหน้าซ้ำด้วย numpages) ไม่เช่นนั้น Document AI → สำรอง OCR ในเครื่อง (ล้มทั้งคู่ = ocr_failed) · ปรับรูปข้อความ 5 กฎ · ปิดบัง EMAIL URL ID PHONE · เก็บข้อความหลังปิดบังใน Drive ส่วนตัว + sha256 ใน ocr_results' },
-  { key: 'S3', th: 'วิเคราะห์ 3 โมเดล', color: 4, body: 'โหลดข้อกำหนด 30 ข้อของอาชีพ → prompt analyst_v1.0 ชุดเดียว → เรียกโมเดล A B C แยกกัน (เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา · รอ retry_backoff_ms หรือ Retry-After) → บันทึก model_calls ทุกครั้ง' },
-  { key: 'S4', th: 'ตรวจและรวมผล', color: 5, body: 'R0 → R2 → R3 (θ 0.15) → R1 (≥ 2 เสียง · min_usable_models 2) → R4 · คะแนน R C U · findings เป็นสาขาข้าง (ว่างได้เมื่อโมเดลล้มครบ) → decisions' },
-  { key: 'S5', th: 'จัดแผน', color: 3, body: 'ช่องว่าง = missing/partially · Hmax = M × 4.33 × h · เลือกจาก mapping L1 ที่ผ่านตรวจ (plan_strategy) · course_only / certification_only / both → plan_items · runs (ready) · ตรึงชุดข้อมูลรายงาน' },
+  { key: 'S3', th: 'วิเคราะห์ 3 โมเดล', color: 4, body: 'โหลดข้อกำหนด 30 ข้อ + งานหลัก 8 งานของอาชีพ → prompt analyst_v1.1 ชุดเดียว → เรียกโมเดล A B C แยกกัน (เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา · รอ retry_backoff_ms หรือ Retry-After) → บันทึก model_calls ทุกครั้ง (call_purpose = analyst)' },
+  { key: 'S4', th: 'ตรวจและรวมผล', color: 5, body: 'R0 → R2 (ตรงตัว · ยุบช่องว่าง · ซ่อม quote ≥ 90%) → R3a คำซ้ำ (θ 0.15 · ตัดคำต่อท้าย) → ข้อที่ไม่ผ่าน R3a ส่งให้โมเดลอื่นตรวจความหมาย R3b (A→B · B→C · C→A · prompt verifier_v1.0) → R1 (≥ 2 เสียง · unverified ไม่นับ) → R4 → R5 ใบรับรอง / R6 ทักษะพื้นฐาน → คะแนน R C U + ดัชนี T H · findings / role_task_decisions / decisions' },
+  { key: 'S5', th: 'จัดแผน', color: 3, body: 'ช่องว่าง = missing/partially · Hmax = M × 4.33 × h · เลือกจาก mapping L1 ที่ผ่านตรวจ (plan_strategy) · ผู้มีประสบการณ์ ≥ 5 ปีไม่ใช้รายการ Beginner กับข้อ partially · course_only / certification_only / both → plan_items · runs (ready) · ตรึงชุดข้อมูลรายงาน' },
   { key: 'S6', th: 'ส่งรายงาน', color: 2, body: 'รายงานภาษาไทย HTML → Google Doc → PDF → อัปโหลด Drive + Gmail รายบุคคล → ลบไฟล์ชั่วคราว → บันทึกการส่งครั้งเดียว → runs (delivered/failed) → ส่งไม่สำเร็จแจ้งผู้วิจัย → งานถัดไป' },
   { key: 'S7', th: 'บันทึกและข้อผิดพลาด', color: 1, body: 'Error Trigger ในไฟล์เดียวกัน → หา run_id (งานล่าสุดของลูป) → runs = failed → audit_log → แจ้งผู้วิจัย → งานที่ยังไม่ได้เริ่มในรอบเดียวกันบันทึก failed/batch_aborted · ล้มก่อนมีงาน (trigger) ไม่เขียน runs และแจ้งไม่เกินชั่วโมงละครั้ง · ผู้เข้าร่วมไม่เห็นข้อผิดพลาดทางเทคนิค' },
 ];
@@ -331,10 +338,12 @@ function buildSingle() {
   const W = SINGLE.name; const c = {}; let k = 0;
   const id = () => `${SINGLE.id}-${String(++k).padStart(3, '0')}`;
   const ren = (txt, m) => { for (const [a, b] of Object.entries(m)) txt = txt.split(`$('${a}')`).join(`$('${b}')`).split(`['${a}']`).join(`['${b}']`); return txt; };
-  const G = (file, m = {}, withEngine = true) => (withEngine ? ENGINE_BEGIN + ENGINE_SRC + ENGINE_END : '') + 'const CFG = ' + CFG_JSON + ';\n// ==== NODE GLUE: workflows/src/' + file + ' ====\n' + ren(SRC(file), m);
+  const G = (file, m = {}, withEngine = true, sig = false) => (withEngine ? ENGINE_BEGIN + ENGINE_SRC + ENGINE_END : '') + (sig ? SIGNALS_SRC : '') + 'const CFG = ' + CFG_JSON + ';\n// ==== NODE GLUE: workflows/src/' + file + ' ====\n' + ren(SRC(file), m);
   const sec = {};
   const C = (s, name, file, pos, m = {}, extra = {}) => { sec[name] = s; return { id: id(), name, type: 'n8n-nodes-base.code', typeVersion: 2, position: pos,
-    parameters: { mode: extra.each ? 'runOnceForEachItem' : 'runOnceForAllItems', jsCode: G(file, m, extra.engine !== false) }, ...(extra.each ? {} : { executeOnce: true }) }; };
+    parameters: { mode: extra.each ? 'runOnceForEachItem' : 'runOnceForAllItems', jsCode: G(file, m, extra.engine !== false, extra.sig === true) }, ...(extra.each ? {} : { executeOnce: true }) }; };
+  // DEC-51: Call Verifier A/B/C ใช้โค้ดชุดเดียว (workflows/src/single_call_verifier.js) ต่างกันเฉพาะ KEY
+  const CV = (name, key, pos) => { const nd = C('S4', name, 'single_call_verifier.js', pos); nd.parameters.jsCode = nd.parameters.jsCode.split('__KEY__').join(key); return nd; };
   const T = (s, node) => { sec[node.name] = s; node.id = id(); return node; };
   // DEC-48: Call Model A/B/C ใช้โค้ดชุดเดียว (workflows/src/single_call_model.js) ต่างกันเฉพาะ KEY
   const CM = (name, key, pos) => { const nd = C('S3', name, 'single_call_model.js', pos); nd.parameters.jsCode = nd.parameters.jsCode.split('__KEY__').join(key); return nd; };
@@ -367,7 +376,7 @@ function buildSingle() {
     // ---- S3 วิเคราะห์ 3 โมเดล
     C('S3', 'Start Analysis', 'final_gap_input.js', [3940, 200], { 'Prepare Text & Mask PII': 'Mask Personal Data' }, { engine: false }),
     RD('S3', 'Load Requirements', 'ref_requirements', [4160, 200], { lookupColumn: 'role_id', lookupValue: '={{ $json.payload.ctx.role_id }}' }),
-    C('S3', 'Build Prompt', 'gap_build_prompt.js', [4380, 200], { 'When Called by Main': 'Start Analysis', 'Read Requirements': 'Load Requirements' }),
+    C('S3', 'Build Prompt', 'gap_build_prompt.js', [4380, 200], { 'When Called by Main': 'Start Analysis', 'Read Requirements': 'Load Requirements' }, { sig: true }),
     CM('Call Model A', 'A', [4600, 0]),
     CM('Call Model B', 'B', [4600, 200]),
     CM('Call Model C', 'C', [4600, 400]),
@@ -376,17 +385,27 @@ function buildSingle() {
     WR('S3', 'Record Model Calls', 'model_calls', 'append', '$json', [5260, 200]),
     WR('S3', 'Log Models Called', 'audit_log', 'append', '$json.audit', [5480, 200], { executeOnce: true }),
     C('S3', 'Collect Model Results', 'gap_assemble.js', [5700, 200], {}, { engine: false }),
-    // ---- S4 ตรวจและรวมผล
+    // ---- S4 ตรวจและรวมผล (DEC-51: R3b ให้โมเดลอื่นตรวจความหมาย · DEC-54: โหลดคลังก่อนตัดสินเพื่อกฎ R5)
     C('S4', 'Start Evidence Check', 'final_decide_input.js', [6020, 200], {}, { engine: false }),
-    C('S4', 'Apply Rules R0-R4', 'single_apply_rules.js', [6240, 200]),
-    C('S4', 'Build Finding Rows', 'decide_rows_findings.js', [6460, 40], {}, { engine: false }),
-    WR('S4', 'Record Findings', 'findings', 'append', '$json', [6680, 40]),
-    C('S4', 'Build Decision Rows', 'decide_rows_decisions.js', [6460, 200], {}, { engine: false }),
-    WR('S4', 'Record Decisions', 'decisions', 'append', '$json', [6680, 200]),
+    C('S4', 'Prepare Relevance Checks', 'single_prepare_checks.js', [6240, 200], {}, { sig: true }),
+    CV('Call Verifier A', 'A', [6460, 0]),
+    CV('Call Verifier B', 'B', [6460, 200]),
+    CV('Call Verifier C', 'C', [6460, 400]),
+    T('S4', { id: '', name: 'Wait for All Verifiers', type: 'n8n-nodes-base.merge', typeVersion: 3, position: [6680, 200], parameters: { numberInputs: 3 } }),
+    C('S4', 'Build Verifier Call Rows', 'single_verifier_rows.js', [6900, 420], {}, { engine: false }),
+    WR('S4', 'Record Verifier Calls', 'model_calls', 'append', '$json', [7120, 420]),
+    C('S4', 'Collect Verifier Results', 'single_collect_verifiers.js', [6900, 200], {}, { engine: false }),
+    RD('S4', 'Load Corpus', 'ref_corpus', [7120, 200]),
+    RD('S4', 'Load Mappings', 'ref_mappings', [7340, 200]),
+    C('S4', 'Apply Rules R0-R6', 'single_apply_rules.js', [7560, 200], {}, { sig: true }),
+    C('S4', 'Build Finding Rows', 'decide_rows_findings.js', [7780, -120], {}, { engine: false }),
+    WR('S4', 'Record Findings', 'findings', 'append', '$json', [8000, -120]),
+    C('S4', 'Build Task Rows', 'single_task_rows.js', [7780, 40], {}, { engine: false }),
+    WR('S4', 'Record Role Task Decisions', 'role_task_decisions', 'append', '$json', [8000, 40]),
+    C('S4', 'Build Decision Rows', 'decide_rows_decisions.js', [7780, 200], {}, { engine: false }),
+    WR('S4', 'Record Decisions', 'decisions', 'append', '$json', [8000, 200]),
     // ---- S5 จัดแผน
-    RD('S5', 'Load Corpus', 'ref_corpus', [7000, 200]),
-    RD('S5', 'Load Mappings', 'ref_mappings', [7220, 200]),
-    C('S5', 'Build Learning Plan', 'single_build_plan.js', [7440, 200]),
+    C('S5', 'Build Learning Plan', 'single_build_plan.js', [8320, 200]),
     C('S5', 'Build Plan Rows', 'decide_rows_plan.js', [7660, 40], { 'Decide & Plan': 'Build Learning Plan' }, { engine: false }),
     WR('S5', 'Record Plan Items', 'plan_items', 'append', '$json', [7880, 40]),
     WR('S5', 'Mark Run Ready', 'runs', 'appendOrUpdate', "$('Build Learning Plan').first().json.run_row", [7660, 200], { executeOnce: true }),
@@ -429,8 +448,10 @@ function buildSingle() {
   // DEC-48: append แบบ values:append ของ Google (ไม่คำนวณแถวสุดท้ายเองแล้ว PUT) กันสอง execution เขียนทับแถวเดียวกัน
   for (const x of n) if (x.type === 'n8n-nodes-base.googleSheets' && /^append/.test(x.parameters.operation)) x.parameters.options = { ...x.parameters.options, useAppend: true };
   by('Log Models Called').parameters.columns.value = { ts: '={{ $now.toISO() }}', actor: SINGLE.name, run_id: "={{ $('Build Prompt').first().json.ctx.run_id }}", event: 'models_called', detail: "={{ JSON.stringify($('Wait for All Models').all().map(i => ({ k: i.json.model_key, s: i.json.result.status, n: i.json.result.calls.length }))) }}" };
-  // แถว findings/decisions อ่านจากผลของ Apply Rules R0-R4 ({ eval: { findings, decisions } })
-  for (const nm of ['Build Finding Rows', 'Build Decision Rows']) by(nm).parameters.jsCode = by(nm).parameters.jsCode.replace("$('Decide & Plan').first().json.", "$('Apply Rules R0-R4').first().json.eval.");
+  // แถว findings/decisions อ่านจากผลของ Apply Rules R0-R6 ({ eval: { findings, decisions } })
+  for (const nm of ['Build Finding Rows', 'Build Decision Rows']) by(nm).parameters.jsCode = by(nm).parameters.jsCode.replace("$('Decide & Plan').first().json.", "$('Apply Rules R0-R6').first().json.eval.");
+  // DEC-51: ช่วง 5–6 เลื่อนไปทางขวาเพื่อให้ช่วง 4 มีที่สำหรับโหนดตรวจความหมาย
+  for (const x of n) if (['S5', 'S6'].includes(sec[x.name])) x.position = [x.position[0] + (sec[x.name] === 'S5' && x.name === 'Build Learning Plan' ? 0 : 880), x.position[1]];
   const L = (a, b, o, i) => link(c, a, b, o, i);
   L('Watch Form Responses', 'Read Runs Sheet'); L('Read Runs Sheet', 'Validate Form Rows'); L('Validate Form Rows', 'Is Input Valid?');
   L('Is Input Valid?', 'Is New Request?', 0); L('Is Input Valid?', 'Log Skipped Request', 1);
@@ -444,10 +465,14 @@ function buildSingle() {
   L('Build Prompt', 'Call Model A'); L('Build Prompt', 'Call Model B'); L('Build Prompt', 'Call Model C');
   L('Call Model A', 'Wait for All Models', 0, 0); L('Call Model B', 'Wait for All Models', 0, 1); L('Call Model C', 'Wait for All Models', 0, 2);
   L('Wait for All Models', 'Build Model Call Rows'); L('Build Model Call Rows', 'Record Model Calls'); L('Record Model Calls', 'Log Models Called'); L('Log Models Called', 'Collect Model Results');
-  L('Collect Model Results', 'Start Evidence Check'); L('Start Evidence Check', 'Apply Rules R0-R4');
-  L('Apply Rules R0-R4', 'Build Finding Rows'); L('Build Finding Rows', 'Record Findings');
-  L('Apply Rules R0-R4', 'Build Decision Rows'); L('Build Decision Rows', 'Record Decisions'); L('Record Decisions', 'Load Corpus');
-  L('Load Corpus', 'Load Mappings'); L('Load Mappings', 'Build Learning Plan');
+  L('Collect Model Results', 'Start Evidence Check'); L('Start Evidence Check', 'Prepare Relevance Checks');
+  L('Prepare Relevance Checks', 'Call Verifier A'); L('Prepare Relevance Checks', 'Call Verifier B'); L('Prepare Relevance Checks', 'Call Verifier C');
+  L('Call Verifier A', 'Wait for All Verifiers', 0, 0); L('Call Verifier B', 'Wait for All Verifiers', 0, 1); L('Call Verifier C', 'Wait for All Verifiers', 0, 2);
+  L('Wait for All Verifiers', 'Build Verifier Call Rows'); L('Build Verifier Call Rows', 'Record Verifier Calls');
+  L('Wait for All Verifiers', 'Collect Verifier Results'); L('Collect Verifier Results', 'Load Corpus'); L('Load Corpus', 'Load Mappings'); L('Load Mappings', 'Apply Rules R0-R6');
+  L('Apply Rules R0-R6', 'Build Finding Rows'); L('Build Finding Rows', 'Record Findings');
+  L('Apply Rules R0-R6', 'Build Task Rows'); L('Build Task Rows', 'Record Role Task Decisions');
+  L('Apply Rules R0-R6', 'Build Decision Rows'); L('Build Decision Rows', 'Record Decisions'); L('Record Decisions', 'Build Learning Plan');
   L('Build Learning Plan', 'Build Plan Rows'); L('Build Plan Rows', 'Record Plan Items');
   L('Build Learning Plan', 'Mark Run Ready'); L('Mark Run Ready', 'Log Decision'); L('Log Decision', 'Freeze Report Payload');
   L('Freeze Report Payload', 'Start Delivery'); L('Start Delivery', 'Read Deliveries Sheet'); L('Read Deliveries Sheet', 'Render Thai Report'); L('Render Thai Report', 'Is Not Yet Delivered?');

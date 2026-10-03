@@ -1,0 +1,7 @@
+run_id,model_key,call_purpose,provider,model_id,attempt,status,latency_ms,input_tokens,output_tokens,finish_reason,error_code,created_at
+RUN-20261001100000-a3fabeef,A,analyst,OpenAI,mock-model,1,ok,1001,8621,2500,stop,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-a3fabeef,B,analyst,Anthropic,mock-model,1,ok,1001,8621,2500,stop,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-a3fabeef,C,analyst,Google,mock-model,1,ok,1001,8621,2500,stop,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-a3fabeef,A,verifier,OpenAI,mock-verifier,1,ok,800,900,200,stop,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-a3fabeef,B,verifier,Anthropic,mock-verifier,1,ok,800,900,200,stop,,2026-10-01T10:00:00+07:00
+RUN-20261001100000-a3fabeef,C,verifier,Google,mock-verifier,1,ok,800,900,200,stop,,2026-10-01T10:00:00+07:00

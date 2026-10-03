@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * build_wf_demo.mjs — ประกอบ demo/WF_Demo.json จากไฟล์ต้นฉบับใน demo/src/
- *   1) ฝังฟังก์ชันจาก engine/engine.js แบบตรงทุกไบต์ (marker //@@ENGINE:a,b,c@@)
+ *   1) ฝังฟังก์ชันจาก engine/engine.js แบบตรงทุกไบต์ (marker //@@ENGINE:a,b,c@@) หรือทั้งไฟล์ (//@@ENGINE_ALL@@ · DEC-51 ใช้ evaluateRun ตัวเดียวกับระบบเต็ม)
  *   2) ฝัง demo_data.json (ข้อมูลจริงจาก Data_Set.xlsx + data/*.csv) ลงโหนด Load Role Data
  *   3) ฝังหน้าเว็บ app.html + app.css + app.js ลงโหนด Render App HTML
  *   4) ตรวจ: syntax ของ Code node ทุกตัว · $('ชื่อโหนด') ที่อ้างถึงมีจริง · connection ครบ
@@ -38,6 +38,7 @@ function extract(name) {
   return out.map((l) => l.slice(2)).join('\n');
 }
 function withEngine(src) {
+  src = src.replace('//@@ENGINE_ALL@@', () => '// ---- engine/engine.js ทั้งไฟล์ (sha256 ' + sha(engine).slice(0, 12) + ' · ' + (engine.match(/ENGINE_VERSION = '([^']+)'/) || [])[1] + ') ----\n' + engine + '\n// ---- จบ engine ----');
   return src.replace(/\/\/@@ENGINE:([^@]+)@@/g, (_, list) =>
     '// ---- คัดลอกจาก engine/engine.js (' + path.basename(ENGINE_PATH) + ' sha256 ' + sha(engine).slice(0, 12) + ') ----\n' +
     list.split(',').map((n) => extract(n.trim())).join('\n') + '\n// ---- จบส่วนที่คัดลอก ----');
@@ -47,7 +48,9 @@ function uuid(seed) { const h = sha('IS68-WF_Demo-' + seed); return `${h.slice(0
 
 // ── data + html ────────────────────────────────────────────────────────────
 const DATA = JSON.parse(rd(path.join(DEMO, 'build/demo_data.json')));
-const PROMPT = rd(fs.existsSync(path.join(ROOT, 'prompts/analyst_v1.0.txt')) ? path.join(ROOT, 'prompts/analyst_v1.0.txt') : path.join(DEMO, 'src_in/prompts/analyst_v1.0.txt'));
+const PROJECT = JSON.parse(rd(path.join(ROOT, 'config/project.json')));
+const PROMPT = rd(path.join(ROOT, 'prompts', PROJECT.prompt_version + '.txt'));
+const PROMPT_VERIFIER = rd(path.join(ROOT, 'prompts', PROJECT.verifier_prompt_version + '.txt'));
 const BUILD_ID = 'WF_Demo-' + new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 16).replace(/[-:T]/g, ''); // เวลาไทย
 const appHtml = rd(path.join(SRC, 'app.html'))
   .replace('/*@@APP_CSS@@*/', () => rd(path.join(SRC, 'app.css')))
@@ -58,11 +61,12 @@ const roleCards = Object.values(DATA.roles).map((r) => ({
 }));
 
 const code = {
-  config: rd(path.join(SRC, 'config_validate.js')),
+  config: rd(path.join(SRC, 'config_validate.js')).replace('/*@@PROJECT_CFG@@*/{}', () => JSON.stringify(PROJECT)),
   textcheck: rd(path.join(SRC, 'text_layer_check.js')),
   clean: withEngine(rd(path.join(SRC, 'clean_text.js'))),
   load: rd(path.join(SRC, 'load_role_data.js')).replace('/*@@DEMO_DATA@@*/null', () => JSON.stringify(DATA)),
-  prompt: rd(path.join(SRC, 'build_prompt.js')).replace("/*@@PROMPT_ANALYST@@*/''", () => JSON.stringify(PROMPT)),
+  prompt: withEngine(rd(path.join(SRC, 'build_prompt.js')).replace("/*@@PROMPT_ANALYST@@*/''", () => JSON.stringify(PROMPT)).replace("/*@@PROMPT_VERSION@@*/''", () => JSON.stringify(PROJECT.prompt_version))),
+  prepare: withEngine(rd(path.join(SRC, 'verify_prepare.js')).replace("/*@@PROMPT_VERIFIER@@*/''", () => JSON.stringify(PROMPT_VERIFIER))),
   verify: withEngine(rd(path.join(SRC, 'verify_evidence.js'))),
   plan: rd(path.join(SRC, 'plan_pathway.js')),
   report: rd(path.join(SRC, 'build_report.js')),
@@ -125,10 +129,15 @@ const nUseG = ifNode('Use Gemini?', '={{ $json.use_gemini }}', [X(12), Y_A]);
 const nAnalyst = geminiHttp('Gemini Analyst',
   '=https://generativelanguage.googleapis.com/v1beta/models/{{ $json.model }}:generateContent',
   '={{ JSON.stringify($json.gemini_request) }}', [X(13), Y_A - 120]);
-const nVerify = codeNode('Verify Evidence (R0·R2·R3)', code.verify, [X(14), Y_A]);
-const nPlan = codeNode('Plan Pathway (Eq 3.7–3.8)', code.plan, [X(15), Y_A]);
-const nReport = codeNode('Build Report', code.report, [X(16), Y_A]);
-const nRespRep = respond('Respond Report', { respondWith: 'firstIncomingItem', options: { responseCode: 200, responseHeaders: { entries: [{ name: 'Cache-Control', value: 'no-store' }] } } }, [X(17), Y_A]);
+const nPrep = codeNode('Prepare Relevance Checks', code.prepare, [X(14), Y_A]);
+const nNeedV = ifNode('Need Verification?', '={{ $json.use_verifier }}', [X(15), Y_A]);
+const nVerifier = geminiHttp('Gemini Verifier',
+  '=https://generativelanguage.googleapis.com/v1beta/models/{{ $json.model }}:generateContent',
+  '={{ JSON.stringify($json.gemini_request) }}', [X(16), Y_A - 120]);
+const nVerify = codeNode('Verify Evidence (R0–R6)', code.verify, [X(17), Y_A]);
+const nPlan = codeNode('Plan Pathway (Eq 3.7–3.8)', code.plan, [X(18), Y_A]);
+const nReport = codeNode('Build Report', code.report, [X(19), Y_A]);
+const nRespRep = respond('Respond Report', { respondWith: 'firstIncomingItem', options: { responseCode: 200, responseHeaders: { entries: [{ name: 'Cache-Control', value: 'no-store' }] } } }, [X(20), Y_A]);
 const nRespErr = respond('Respond Error', { respondWith: 'json',
   responseBody: '={{ JSON.stringify({ ok: false, stage: $json.stage, errors: $json.errors }) }}',
   options: { responseCode: '={{ $json.http_status || 400 }}' } }, [X(10), Y_A + 260]);
@@ -152,7 +161,7 @@ sticky('Note · Overview', [
   'Demo รอบที่ 1 สำหรับคณะกรรมการ · ฟอร์ม → OCR → วิเคราะห์ → ตรวจหลักฐาน → วางแผน → แสดงผลบน n8n',
   '',
   '**ตั้งค่า (ครั้งเดียว)**',
-  '1. Credential **Header Auth** ชื่อ `Gemini API Key (x-goog-api-key)` · Name = `x-goog-api-key` · Value = API key → เลือกในโหนด *Gemini OCR* และ *Gemini Analyst*',
+  '1. Credential **Header Auth** ชื่อ `Gemini API Key (x-goog-api-key)` · Name = `x-goog-api-key` · Value = API key → เลือกในโหนด *Gemini OCR* *Gemini Analyst* และ *Gemini Verifier*',
   '2. Credential **Google Drive OAuth2** → เลือกในโหนด *Upload PDF to Drive* และใส่ Folder ID ปลายทาง',
   '3. กด **Publish** แล้วเปิด `http://localhost:5678/webhook/is-demo`',
   '',
@@ -164,8 +173,8 @@ sticky('Note · Overview', [
 ].join('\n'), [X(4) - 40, Y_UI - 220], 900, 380, 5);
 sticky('Note · UI', '## 🎨 หน้าเว็บ\nGET `/webhook/is-demo` → HTML (glassmorphism · Light/Dark · ฟอร์ม + รายงาน + Export PDF)', [X(0) - 40, Y_UI - 120], 700, 300, 7);
 sticky('Note · Intake', '## 1 · รับไฟล์ + OCR\nตรวจข้อมูล (ตาราง 3.10) → PDF text layer ก่อน → ข้อความน้อย/รูปภาพ → **Gemini OCR** → ปิดบัง PII (3.5.1)', [X(0) - 40, Y_A - 240], 2020, 560, 7);
-sticky('Note · Analyze', '## 2 · วิเคราะห์ + ตรวจหลักฐาน\nO*NET Top-30 ของอาชีพ → prompt **analyst_v1.0** → Gemini → **R0** (JSON) · **R2** (quote ตรงตัวอักษร) · **R3** (overlap ≥ θ) → R · C · U (สมการ 3.4–3.6)', [X(9) + 180, Y_A - 240], 1140, 560, 4);
-sticky('Note · Plan', '## 3 · วางแผน + รายงาน\nHmax = M × 4.33 × h (3.7) · greedy d_k (3.8) · เฉพาะคลัง verified + L1 ผ่านตรวจ → JSON → หน้าเว็บ', [X(14) + 180, Y_A - 240], 940, 560, 6);
+sticky('Note · Analyze', '## 2 · วิเคราะห์ + ตรวจหลักฐาน (engine.js ตัวเดียวกับระบบเต็ม)\nO*NET Top-30 + งานหลัก 8 งาน → prompt **' + PROJECT.prompt_version + '** × ANALYST_RUNS รอบ → **R0** · **R2** (ตรงตัว/ซ่อมรูปคำ) · **R3a** คำซ้ำ (θ) → ข้อที่คำไม่ตรงส่ง **Gemini Verifier** ตรวจความหมาย (**R3b** · ' + PROJECT.verifier_prompt_version + ') → **R1** โหวตระหว่างรอบ → **R5** ใบรับรอง · **R6** ทักษะพื้นฐาน → R · C · U · T · H', [X(9) + 180, Y_A - 240], 1800, 560, 4);
+sticky('Note · Plan', '## 3 · วางแผน + รายงาน\nHmax = M × 4.33 × h (3.7) · greedy d_k (3.8) · เฉพาะคลัง verified + L1 ผ่านตรวจ · ผู้มีประสบการณ์ ≥ 5 ปีไม่ใช้รายการ Beginner กับข้อ partially → JSON → หน้าเว็บ', [X(17) + 180, Y_A - 240], 940, 560, 6);
 sticky('Note · Drive', '## ☁️ บันทึก PDF ลง Google Drive\nหน้าเว็บสร้าง PDF (html2pdf) → POST `/webhook/is-demo-save-pdf` → Google Drive → ลิงก์กลับไปที่หน้าเว็บ', [X(0) - 40, Y_S - 220], 1360, 400, 3);
 
 // connections
@@ -176,7 +185,8 @@ link(nPost, nCfg); link(nCfg, nOk1); link(nOk1, nIsPdf, 0); link(nOk1, nRespErr,
 link(nIsPdf, nExtract, 0); link(nIsPdf, nTl, 1); link(nExtract, nTl);
 link(nTl, nNeedOcr); link(nNeedOcr, nOcr, 0); link(nNeedOcr, nClean, 1); link(nOcr, nClean);
 link(nClean, nOk2); link(nOk2, nLoad, 0); link(nOk2, nRespErr, 1);
-link(nLoad, nPrompt); link(nPrompt, nUseG); link(nUseG, nAnalyst, 0); link(nUseG, nVerify, 1); link(nAnalyst, nVerify);
+link(nLoad, nPrompt); link(nPrompt, nUseG); link(nUseG, nAnalyst, 0); link(nUseG, nPrep, 1); link(nAnalyst, nPrep);
+link(nPrep, nNeedV); link(nNeedV, nVerifier, 0); link(nNeedV, nVerify, 1); link(nVerifier, nVerify);
 link(nVerify, nPlan); link(nPlan, nReport); link(nReport, nRespRep);
 link(nSave, nChk); link(nChk, nOk3); link(nOk3, nDrive, 0); link(nOk3, nRespDrive, 1); link(nDrive, nDres); link(nDres, nRespDrive);
 

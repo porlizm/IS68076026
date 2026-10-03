@@ -1,13 +1,19 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Config & Validate · ค่าตั้งของ Demo + ตรวจข้อมูลจากฟอร์ม (UC-01 · ตาราง 3.10)
-// แก้ค่าได้ที่ CONFIG ด้านล่างเท่านั้น
+// แก้ค่าได้ที่ CONFIG ด้านล่างเท่านั้น · ค่ากฎตรวจหลักฐานมาจาก config/project.json (PROJECT · ฝังตอน build)
 // ─────────────────────────────────────────────────────────────────────────────
+const PROJECT = /*@@PROJECT_CFG@@*/{};
 const CONFIG = {
   GEMINI_MODEL_ANALYST: 'gemini-3.8-flash',   // โมเดลวิเคราะห์หลักฐาน (เปลี่ยนได้ เช่น gemini-3.5-flash)
   GEMINI_MODEL_OCR: 'gemini-3.8-flash',       // โมเดลอ่านเอกสารสแกน/รูปภาพ
-  GEMINI_THINKING_LEVEL: 'low',               // minimal | low | medium | high | '' (ไม่ส่งค่า)
+  GEMINI_THINKING_LEVEL: 'medium',            // low | medium | high | '' (ไม่ส่งค่า) · DEC-53 ใช้ medium ให้พิจารณาทักษะพื้นฐานจากกิจกรรม
   GEMINI_MAX_OUTPUT_TOKENS: 16384,
+  ANALYST_RUNS: 3,                            // DEC-58 · เรียก Gemini วิเคราะห์ 3 รอบแล้วโหวต (แทน R1 ของ 3 โมเดล) · 1 = เร็ว/ประหยัดโควตา
   USE_GEMINI_ANALYST: true,                   // false = ใช้กฎสำรอง (ไม่เรียก LLM) — ใช้ตอนอินเทอร์เน็ตมีปัญหา
+  USE_GEMINI_VERIFIER: true,                  // DEC-51 · R3b ให้ Gemini อีกรอบตรวจความหมายของข้อความที่คำไม่ตรง (false = ข้อเหล่านั้นเป็น "ยังยืนยันไม่ได้")
+  GEMINI_MODEL_VERIFIER: 'gemini-3.8-flash',
+  GEMINI_VERIFIER_THINKING_LEVEL: 'low',
+  SUPPLEMENT_MAX_CHARS: 4000,                 // DEC-58 · หลักฐานเพิ่มเติมที่ผู้เรียนพิมพ์เอง (Open Learner Model)
   OCR_MIN_CHARS: 300,                         // ข้อความจาก text layer น้อยกว่านี้ → ส่ง OCR
   MAX_FILE_BYTES: 10485760,                   // 10 MB (ตาราง 3.10)
   MAX_PAGES: 5,
@@ -33,6 +39,7 @@ const months = Number(body.months);
 const hours = Number(body.hours_per_week);
 const mode = String(body.mode || 'both').trim();
 const consent = ['true', 'on', '1', 'yes'].includes(String(body.consent || '').toLowerCase());
+const supplement = String(body.supplement || '').replace(/\r\n?/g, '\n').trim().slice(0, CONFIG.SUPPLEMENT_MAX_CHARS);
 
 if (!CONFIG.ROLES.includes(roleId)) errors.push('กรุณาเลือกอาชีพเป้าหมาย 1 ใน 4 อาชีพ');
 if (!CONFIG.ALLOWED_MONTHS.includes(months)) errors.push('ระยะเวลาเรียนต้องเป็น 6, 12, 18 หรือ 24 เดือน');
@@ -62,6 +69,12 @@ if (!file) {
   if (!errors.length) b64 = buf.toString('base64');
 }
 
+const runs = Math.max(1, Math.min(3, Number(CONFIG.ANALYST_RUNS) || 1));
+// ค่ากฎของงานวิจัย (config/project.json) + ค่าที่ Demo ปรับ: θ/เพดาน/คำพ้องจาก CONFIG · ตรวจตัวเองได้ (โมเดลเดียว) · จำนวนเสียงตามจำนวนรอบ
+const projectCfg = Object.assign({}, PROJECT, {
+  theta: CONFIG.THETA, overlap_denominator_cap: CONFIG.OVERLAP_CAP, alias_min_length: CONFIG.ALIAS_MIN_LEN,
+  allow_self_verification: true, min_usable_models: runs >= 2 ? 2 : 1, min_agreeing_votes: runs >= 2 ? 2 : 1,
+});
 const now = new Date();
 const runId = 'DEMO-' + now.toISOString().replace(/[-:TZ.]/g, '').slice(0, 14) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
 
@@ -74,7 +87,10 @@ const out = {
     run_id: runId,
     received_at: now.toISOString(),
     cfg: CONFIG,
-    input: { role_id: roleId, months, hours_per_week: hours, mode, consent },
+    project_cfg: projectCfg,
+    runs,
+    supplement,
+    input: { role_id: roleId, months, hours_per_week: hours, mode, consent, supplement_chars: supplement.length },
     file: { name, mime, size, is_pdf: isPdf, is_image: isImage, binary_key: fileKey || '' },
     file_b64: b64,
   },
