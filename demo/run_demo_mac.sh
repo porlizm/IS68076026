@@ -39,6 +39,8 @@ else
   say "ใช้ npx n8n@$N8N_VERSION (ครั้งแรกดาวน์โหลดและคอมไพล์นานราว 3–8 นาที)"
   "${N8N[@]}" --version >/dev/null 2>&1 || fail "ติดตั้ง n8n ไม่สำเร็จ → ถ้าข้อความมี gyp/isolated-vm ให้รัน  xcode-select --install  แล้วรันสคริปต์นี้ใหม่"
 fi
+# เก็บข้อมูล n8n (credential · workflow · ประวัติรัน) ไว้ที่เดียวเสมอ → รันซ้ำไม่ต้องตั้งค่าใหม่
+export N8N_USER_FOLDER="${N8N_USER_FOLDER:-$HOME}"
 export N8N_DIAGNOSTICS_ENABLED=false N8N_PERSONALIZATION_ENABLED=false GENERIC_TIMEZONE=Asia/Bangkok N8N_PORT="$PORT" N8N_LISTEN_ADDRESS="${N8N_LISTEN_ADDRESS:-127.0.0.1}"
 
 # รุ่นของไฟล์ workflow ที่กำลังจะนำเข้า (DEC-59)
@@ -76,12 +78,24 @@ if [ "${SKIP_CREDS:-0}" != "1" ]; then
 
   GEMINI_KEY=""
   if [ "$NEED_GEMINI" = "1" ]; then
-    printf '\nวาง Gemini API key (จาก https://aistudio.google.com/apikey) แล้วกด Enter\n'
-    printf 'กด Enter เฉย ๆ = ไม่ใช้ Gemini (วิเคราะห์ด้วยกฎสำรอง · ใช้ได้เฉพาะ PDF ที่มีข้อความ)\n> '
-    IFS= read -rs GEMINI_KEY || GEMINI_KEY=""
-    echo
+    # หาคีย์ตามลำดับ: ตัวแปรสภาพแวดล้อม → Keychain (macOS) → ไฟล์ ~/.is68/gemini_key → .env ของโปรเจกต์ → ถามครั้งเดียวแล้วจำไว้ใน Keychain
+    GEMINI_KEY="${GEMINI_API_KEY:-}"
+    [ -z "$GEMINI_KEY" ] && command -v security >/dev/null 2>&1 && GEMINI_KEY="$(security find-generic-password -a "$USER" -s is68-gemini-key -w 2>/dev/null || true)"
+    [ -z "$GEMINI_KEY" ] && [ -f "$HOME/.is68/gemini_key" ] && GEMINI_KEY="$(head -n1 "$HOME/.is68/gemini_key" | tr -d '[:space:]')"
+    [ -z "$GEMINI_KEY" ] && [ -f "$DEMO_DIR/../.env" ] && GEMINI_KEY="$(grep -E '^(export )?(GEMINI_API_KEY|GOOGLE_API_KEY)=' "$DEMO_DIR/../.env" | head -n1 | cut -d= -f2- | tr -d "\"' \r")"
+    if [ -n "$GEMINI_KEY" ]; then
+      ok "พบ Gemini API key ในเครื่อง (ไม่ต้องกรอก)"
+    else
+      printf '\nวาง Gemini API key (จาก https://aistudio.google.com/apikey) แล้วกด Enter\n'
+      printf 'กด Enter เฉย ๆ = ไม่ใช้ Gemini (วิเคราะห์ด้วยกฎสำรอง · ใช้ได้เฉพาะ PDF ที่มีข้อความ)\n> '
+      IFS= read -rs GEMINI_KEY || GEMINI_KEY=""
+      echo
+      if [ -n "$GEMINI_KEY" ] && command -v security >/dev/null 2>&1; then
+        security add-generic-password -U -a "$USER" -s is68-gemini-key -w "$GEMINI_KEY" >/dev/null 2>&1 && ok "จำคีย์ไว้ใน Keychain แล้ว (รันครั้งหน้าไม่ต้องกรอก)"
+      fi
+    fi
   else
-    ok "มี credential Gemini อยู่แล้ว (เปลี่ยนคีย์: RESET_GEMINI_KEY=1 bash $0)"
+    ok "มี credential Gemini อยู่ใน n8n แล้ว (เปลี่ยนคีย์: RESET_GEMINI_KEY=1 bash $0)"
   fi
   [ "$NEED_DRIVE" = "0" ] && ok "มี credential Google Drive อยู่แล้ว (ไม่แตะ)"
 

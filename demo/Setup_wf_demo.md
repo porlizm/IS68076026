@@ -338,3 +338,13 @@ $env:N8N_LISTEN_ADDRESS="127.0.0.1"; $env:GENERIC_TIMEZONE="Asia/Bangkok"; npx -
 
 ## ตรวจรุ่นหลังเปิด (DEC-59)
 `run_demo_mac.sh` จะพิมพ์รุ่นของไฟล์ก่อนนำเข้า และเทียบกับ `http://localhost:5678/webhook/is-demo-version` หลังเริ่ม n8n — ถ้าไม่ตรงสคริปต์หยุดพร้อมวิธีแก้ (ลบ/Unpublish workflow เก่าใน editor แล้วรันใหม่)
+
+## ดูโหนดวิ่งบน canvas (โหมดทดสอบ) — ทำตามลำดับนี้
+ปุ่ม *Execute workflow* ฟังได้ **ครั้งเดียวต่อหนึ่ง webhook** และจะขึ้น "Waiting for you to call the Test URL" ไปเรื่อย ๆ จนกว่าจะมีคนเรียก — ไม่ใช่ค้าง
+1. เปิดหน้าเว็บจาก production: `http://localhost:5678/webhook/is-demo?test=1` (หน้านี้ไม่ต้องกด Execute)
+2. กลับมาที่ editor → เลือก **Execute workflow from POST /is-demo-analyze** (เลือกจากเมนูลูกศรข้างปุ่ม)
+3. กลับหน้าเว็บ → อัปโหลดเรซูเม → วิเคราะห์ → โหนดจะวิ่งทีละตัวบน canvas · รันรอบใหม่ต้องกด Execute ใหม่ทุกครั้ง
+
+## ตั้งค่า credential ครั้งเดียว
+- Gemini: สคริปต์หาคีย์เองตามลำดับ ตัวแปร `GEMINI_API_KEY` → Keychain (`is68-gemini-key`) → `~/.is68/gemini_key` → `.env` → ถามครั้งเดียวแล้วจำใน Keychain · credential อยู่ในฐานข้อมูล n8n (`~/.n8n`) รันครั้งต่อไปไม่ถามอีก (`RESET_GEMINI_KEY=1` เมื่อต้องการเปลี่ยน)
+- Google Drive: ต้อง Sign in OAuth ใน n8n เองครั้งเดียว (ทำอัตโนมัติไม่ได้) หลังจากนั้นถูกเก็บถาวร
