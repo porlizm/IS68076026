@@ -18,6 +18,13 @@
 
 ## ประวัติ session
 
+### 3 ต.ค. 2569 · คู่มือและสคริปต์เปิด WF_Demo บน n8n ในเครื่อง (macOS)
+- **ทำ** `demo/run_demo_mac.sh` (ตรวจ Node ≥ 24 → หยุด n8n ที่พอร์ต 5678 → สร้าง credential Gemini/Drive เฉพาะที่ยังไม่มี ด้วย id `REPLACE_*_CRED` ที่ workflow อ้าง → import + publish `is68WFDemo000001` → start ที่ 127.0.0.1 → รอ webhook 200 → เปิดเบราว์เซอร์) · `demo/Setup_wf_demo.md` คู่มือ 12 หัวข้อ (Node 24, Gemini key, สคริปต์, owner, Drive OAuth, ทดสอบ, ใช้งานซ้ำ, แก้ค่าตั้ง, PDPA, แก้ปัญหา, Windows) · ชี้จาก `README_Demo.md` · `.gitignore` เพิ่ม `demo/n8n_demo.log`
+- **พบ** n8n 2.39.9 ต้องการ Node **≥ 24** (Node 22 ไม่เริ่ม) · webhook ลงทะเบียนหลัง `/healthz` ตอบ ok ราว 2–10 วินาที (ต้องรอหน้า Demo 200 ไม่ใช่แค่ healthz) · isolated-vm มีไฟล์สำเร็จรูป darwin-arm64 สำหรับ Node 24 · `gemini-3.8-flash` เป็น GA รับ thinkingLevel low/medium/high (ไม่รับ minimal) และไม่ควรส่ง temperature (ตรงกับ Demo)
+- **ทดสอบ** บนคลาวด์ (Linux · Node 24.21 · n8n 2.39.9 · `~/.n8n` ว่าง): รันครั้งแรก → หน้า 200 · POST analyze R19/12/10 → 200 (กฎสำรอง: readiness 29.38 · แผน 12) · รันซ้ำไม่ทับ credential
+- **ไม่ได้แตะ** engine · workflow · เล่ม · ข้อมูล (ไม่ต้องมี DEC)
+- **ค้าง** 👤 ติดตั้ง Node 24 บน Mac → รันสคริปต์ → ซ้อมตาม `Setup_wf_demo.md` หัวข้อ 6.2 กับ Gemini จริง (+ Drive OAuth ถ้าจะโชว์) แล้วบันทึกผล
+
 ### 3 ต.ค. 2569 · ย้ายมาทำงานบน MacBook (Cowork)
 - **ทำ** push ขึ้น GitHub `porlizm/IS68076026` จาก Windows สำเร็จ · clone (HTTPS) ลง MacBook · `run_all_checks.sh` ผ่านทั้งหมด (manifest 8 · tests 65 · analysis 8 · coverage 598/600) · เพิ่ม `pulp` ใน `requirements.txt` (สคริปต์ `coverage_diagnostics.py` ใช้แต่ไม่ได้ประกาศ) · เพิ่มหมายเหตุ macOS/virtualenv ใน `docs/Setup_Guide.md` · ติ๊ก NEXT_STEPS ข้อ 2–3
 - **พบ** `evidence/test_report.tap` ถูกเขียนทับทุกครั้งที่รันเช็ก (เปลี่ยนเฉพาะ duration_ms) ทำให้ `git status` ไม่สะอาด · ใช้ `git checkout evidence/test_report.tap` ก่อน commit

@@ -20,6 +20,7 @@ Workflow เดียวบน **n8n ในเครื่อง** ทำงา�
 | `src/` | ต้นฉบับโค้ดทุกโหนด + หน้าเว็บ (`app.html` `app.css` `app.js`) |
 | `build_demo_data.py` | ดึงข้อมูลจริงของ 4 อาชีพจาก `Data_Set.xlsx` + `data/*.csv` → `build/demo_data.json` |
 | `build_wf_demo.mjs` | ประกอบ `WF_Demo.json` (ฝังฟังก์ชันจาก `engine/engine.js` ตรงทุกไบต์ + ตรวจ syntax/การอ้างโหนด) |
+| `Setup_wf_demo.md` · `run_demo_mac.sh` | คู่มือติดตั้งจนรันได้ · สคริปต์เปิด Demo บน macOS (Node 24 + n8n 2.39.9) |
 | `make_sample_resumes.py` | สร้างเรซูเมสมมติใน `samples/` |
 | `test/` | ตัวจำลอง n8n + Playwright ที่ใช้ทดสอบก่อนส่ง (ไม่จำเป็นต่อการโชว์) |
 
@@ -33,6 +34,8 @@ node   demo/build_wf_demo.mjs            # สร้าง demo/WF_Demo.json ใ
 ---
 
 ## ตั้งค่าครั้งแรก (ประมาณ 10 นาที)
+
+> **คู่มือละเอียดทีละขั้น (ติดตั้ง Node 24 → n8n → credential → Drive OAuth → ทดสอบ → แก้ปัญหา): `demo/Setup_wf_demo.md`** · บน macOS ใช้สคริปต์ `bash demo/run_demo_mac.sh` ทำข้อ 1–4 ให้อัตโนมัติ
 
 1. **นำเข้า** — n8n → *Workflows* → *Import from File* → `demo/WF_Demo.json` (หรือ `n8n import:workflow --input=demo/WF_Demo.json` · id `is68WFDemo000001`)
 2. **Gemini API key** — *Credentials* → *New* → **Header Auth**
