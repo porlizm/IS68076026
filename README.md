@@ -60,4 +60,4 @@ python scripts/check_docx_format.py && python scripts/check_overlap.py   # QA �
 | ความครอบคลุม 600 | ⏳ คลัง 598/600 · แผนจำลอง 538/600 · รอผู้วิจัยยืนยันรายการใหม่ 14 รายการ (DEC-46) → จำลองได้ 600/600 |
 | เล่ม Final | ✅ เขียนใหม่ทั้งเล่ม · `build/IS_68076026_Final_01OCT26.docx/.pdf` 74 หน้า · QA ผ่าน (`evidence/QA_Final_01OCT26.md`) |
 | จริยธรรม | ✅ ร่าง 6 ไฟล์ · ⏳ ผู้วิจัยกรอกช่อง ⚠ → อาจารย์ตรวจ → ยื่น |
-| backup | ⏳ ต้องสร้าง GitHub private + push (NEXT_STEPS ข้อ 2–3) |
+| backup | ✅ GitHub `porlizm/IS68076026` push แล้ว (03OCT26) · ⏳ สำเนา OneDrive/ไดรฟ์ภายนอก |

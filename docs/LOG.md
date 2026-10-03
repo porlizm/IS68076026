@@ -8,6 +8,8 @@
 
 ## ▶ ทำต่อจากตรงนี้
 
+0. 👤 ถ้าใช้ MacBook: คัดลอก `.env` + `private/` จากเครื่อง Windows · `python3 -m venv ~/venv_is` ตาม Setup_Guide ข้อ 0
+
 1. 👤 ทำ NEXT_STEPS ขั้น 0 (F1–F3): ยืนยันรายการใหม่ 14 รายการ, URL 28 รายการ, DEC-45
 2. 🤖 F4: รันสร้างข้อมูลและเล่มใหม่ → Gate G-600 → tag `gate-600`
 3. 👤🤖 F5: ทดสอบ workflow ใน n8n จริง แล้วแทน [รอข้อมูล] ในหัวข้อ 3.6.3
@@ -15,6 +17,12 @@
 ---
 
 ## ประวัติ session
+
+### 3 ต.ค. 2569 · ย้ายมาทำงานบน MacBook (Cowork)
+- **ทำ** push ขึ้น GitHub `porlizm/IS68076026` จาก Windows สำเร็จ · clone (HTTPS) ลง MacBook · `run_all_checks.sh` ผ่านทั้งหมด (manifest 8 · tests 65 · analysis 8 · coverage 598/600) · เพิ่ม `pulp` ใน `requirements.txt` (สคริปต์ `coverage_diagnostics.py` ใช้แต่ไม่ได้ประกาศ) · เพิ่มหมายเหตุ macOS/virtualenv ใน `docs/Setup_Guide.md` · ติ๊ก NEXT_STEPS ข้อ 2–3
+- **พบ** `evidence/test_report.tap` ถูกเขียนทับทุกครั้งที่รันเช็ก (เปลี่ยนเฉพาะ duration_ms) ทำให้ `git status` ไม่สะอาด · ใช้ `git checkout evidence/test_report.tap` ก่อน commit
+- **ไม่ได้แตะ** เนื้อหาเล่ม ข้อมูล engine workflow (ไม่ต้องมี DEC)
+- **ค้าง** remote เป็น HTTPS บน Mac ต้องล็อกอิน GitHub ตอน push ครั้งแรก · สำเนาสำรอง OneDrive/ไดรฟ์ภายนอก
 
 ### 1 ต.ค. 2569 · Phase 3–5 Final_IS (Prompt_Report v2.0)
 

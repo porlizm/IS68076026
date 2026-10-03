@@ -6,10 +6,12 @@
 | เครื่องมือ | ใช้ทำ | ตรวจ |
 |---|---|---|
 | Node.js ≥ 22 (แนะนำ 24) | เทสต์ engine/workflow · n8n | `node -v` |
-| Python ≥ 3.10 + `pandas openpyxl python-docx pymupdf reportlab pythainlp` | สร้างข้อมูล เล่ม และวิเคราะห์ | `pip install -r requirements.txt` |
+| Python ≥ 3.10 + `pandas openpyxl python-docx pymupdf reportlab pythainlp pulp` | สร้างข้อมูล เล่ม และวิเคราะห์ | `pip install -r requirements.txt` |
 | pandoc ≥ 3 | สร้างเล่ม docx | `pandoc --version` |
 | ฟอนต์ TH Sarabun New | เปิดเล่มใน Word | — |
 | git + GitHub private repo | backup (บังคับ) | `git remote -v` |
+
+**macOS / Linux:** ใช้ virtualenv แทนการติดตั้งลงระบบ · `python3 -m venv ~/venv_is && . ~/venv_is/bin/activate && pip install -r requirements.txt` · ต้องเปิด venv ก่อนรัน `bash scripts/run_all_checks.sh` ทุกครั้ง (สคริปต์เรียก `python3`) · `.env` และ `private/` ไม่อยู่ใน git ต้องคัดลอกจากเครื่องเดิมเอง · `build/` สร้างใหม่ด้วย `scripts/build_book.py`
 
 ## 1. ตรวจว่าทุกอย่างสร้างซ้ำได้
 ```powershell

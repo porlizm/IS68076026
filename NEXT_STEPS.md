@@ -21,13 +21,13 @@
 ## ขั้น 1: กันไฟล์หายซ้ำ (R0) · ต้องเสร็จก่อนงานอื่น
 
 - [ ] 1. 👤 zip โฟลเดอร์ที่กู้มา + `Final_IS` เก็บ 2 แห่ง (OneDrive + ไดรฟ์ภายนอก)
-- [ ] 2. 👤 สร้าง GitHub private repo `IS68076026` (ไม่ต้องใส่ README)
-- [x] 3. 🤖 สร้าง `Final_IS/` + git init + `.gitignore` + PDF ฐานที่ `docs/baseline/` (sha256 `216d76be…99be6`, read-only) + `source/` + `archive/MOVE_LOG.csv` + commit แรก + tag `r0-01OCT26` — *เหลือ 👤* `git remote add origin https://github.com/<user>/IS68076026.git` แล้ว `git push -u origin main --tags`
+- [x] 2. 👤 สร้าง GitHub repo `IS68076026` · `porlizm/IS68076026` (02OCT26)
+- [x] 3. 🤖 สร้าง `Final_IS/` + git init + `.gitignore` + PDF ฐานที่ `docs/baseline/` (sha256 `216d76be…99be6`, read-only) + `source/` + `archive/MOVE_LOG.csv` + commit แรก + tag `r0-01OCT26` — push ขึ้น `git@github.com:porlizm/IS68076026.git` แล้ว (HEAD `7d3ee99` ตรงกับเครื่องเดิม) · clone บน MacBook ที่ `~/Documents/Final_IS` แล้ว (03OCT26)
 - [x] 4. 🤖 ตรวจ corpus v1.3: 499 / 6,780 / L1 1,956 / 479 ข้อ ✔ (DEC-27)
 - [ ] 5. 👤 ใช้ `docs/session_end_checklist.md` ทุกครั้งที่จบ session
 - [ ] 6. 👤 ตั้ง Claude Desktop ให้เปิดงานใน Project "Research ITM" แล้วลิงก์โฟลเดอร์ `Final_IS`
 
-**Gate G0′** remote backup ✗ · PDF เป็นฐาน ✔
+**Gate G0′** remote backup ✔ (GitHub) · PDF เป็นฐาน ✔ · ⏳ ยังเหลือสำเนา OneDrive + ไดรฟ์ภายนอก (ข้อ 1)
 
 ---
 
