@@ -10,7 +10,7 @@
 
 ใช้:  python demo/build_demo_data.py  (รันจากโฟลเดอร์ Final_IS)  → demo/build/demo_data.json
 """
-import csv, json, os, sys, hashlib, datetime
+import csv, json, os, sys, hashlib, datetime, math, collections
 import openpyxl
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else '.'
@@ -25,6 +25,10 @@ ROLES = {  # ตัวเลือกบนฟอร์ม → role_id ใน Da
     'R19': {'key': 'it_pm', 'label_th': 'ผู้จัดการโครงการไอที', 'icon': 'kanban'},
     'R20': {'key': 'it_mgr', 'label_th': 'ผู้จัดการฝ่ายไอที', 'icon': 'building'},
 }
+# DEC-59 · ข้อกำหนดเชิงปฏิบัติ (hands-on): ต้องเห็นว่าผู้สมัคร "ลงมือทำเอง" จึงนับเป็นหลักฐานเต็ม · คำนำหน้า element_id ตามโครงสร้าง O*NET
+HANDS_ON_PREFIX = ('2.C.3.', '2.C.4.', '2.C.9.', '2.A.1.e', '2.B.3.', '2.B.4.g', '2.B.4.h', '4.A.1.b.2', '4.A.3.b.1', '4.A.3.b.5')
+TASK_MIN_ACTOR = {'R07': 'performed', 'R15': 'performed', 'R19': 'led', 'R20': 'led'}  # อาชีพเชิงเทคนิคต้อง performed · อาชีพบริหารรับ led
+H_TECH_N = 10   # H ใช้เทคโนโลยีที่ตลาดต้องการ 10 รายการแรก · ถ้าอาชีพมีน้อยกว่านี้ → "ข้อมูลไม่พอ"
 APPROVED = {'source_checked_by_script', 'expert_reviewed'}
 L1 = 'L1_researcher_tagged'
 
@@ -61,6 +65,9 @@ def main():
 
     req_path = os.path.join(ROOT, 'data/requirements.csv')
     reqs = [r for r in csv.DictReader(open(req_path, encoding='utf-8')) if r['role_id'] in ROLES]
+    all_reqs = list(csv.DictReader(open(req_path, encoding='utf-8')))
+    n_roles = len({r['role_id'] for r in all_reqs})
+    df = collections.Counter(r['element_id'] for r in all_reqs)  # จำนวนอาชีพที่มีองค์ประกอบนี้ใน Top-30 (ความเฉพาะ · D2)
     corpus = [r for r in csv.DictReader(open(os.path.join(ROOT, 'data/corpus.csv'), encoding='utf-8')) if r['role_id'] in ROLES]
     review = {r['map_id']: r for r in csv.DictReader(open(os.path.join(ROOT, 'data/mapping_review.csv'), encoding='utf-8'))}
     maps = [m for m in csv.DictReader(open(os.path.join(ROOT, 'data/mappings.csv'), encoding='utf-8')) if m['role_id'] in ROLES]
@@ -133,7 +140,10 @@ def main():
                 'name': r['element_name'], 'desc': r['element_description'], 'im': num(r['importance_im']),
                 'lv': num(r['level_lv']), 'rank': int(r['rank_in_role']), 'w': num(r['weight_renormalized']),
                 'aliases': r['element_aliases'],
+                'df': df[r['element_id']], 'idf': round(math.log((n_roles + 1) / (df[r['element_id']] + 0.5)), 4),
+                'hands_on': r['element_id'].startswith(HANDS_ON_PREFIX),
             } for r in rq],
+            'n_roles': n_roles, 'task_min_actor': TASK_MIN_ACTOR[rid],
             'tasks': [{'task': x['task'], 'im': num(x['task_importance_im']), 'type': x['task_type']} for x in t[:6]],
             'hot_tech': hot[:18],
             'job_titles': jt[:10],
@@ -141,7 +151,8 @@ def main():
             'items': items,
             # DEC-55: งานหลัก 8 งาน (ใช้ประเมิน T) และเทคโนโลยีที่ตลาดต้องการพร้อมคำค้น (ใช้นับ H)
             'signal_tasks': [{'task_id': x['task_id'], 'task_text': x['task_text']} for x in rtasks if x['role_id'] == rid],
-            'signal_tech': [{'technology': x['technology'], 'match_keys': x['match_keys']} for x in rtech if x['role_id'] == rid],
+            'signal_tech': [{'technology': x['technology'], 'match_keys': x['match_keys']} for x in rtech if x['role_id'] == rid][:H_TECH_N],
+            'signal_tech_available': len([x for x in rtech if x['role_id'] == rid]),
         }
     out['skill_links'] = [{'skill_element_id': x['skill_element_id'], 'activity_element_id': x['activity_element_id']} for x in links]
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

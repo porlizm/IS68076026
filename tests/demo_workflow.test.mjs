@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT } from '../scripts/lib/refs.mjs';
-import { loadWf, run } from '../demo/test/harness.mjs';
+import { loadWf, run, staticData } from '../demo/test/harness.mjs';
 import { oracleVerifierText } from '../scripts/run_local.mjs';
 
 const wfo = loadWf(path.join(ROOT, 'demo', 'WF_Demo.json'));
@@ -72,4 +72,61 @@ test('WF_Demo ฝัง engine.js รุ่นปัจจุบัน (ต้�
   const { createHash } = await import('node:crypto');
   const eng = fs.readFileSync(path.join(ROOT, 'engine', 'engine.js'), 'utf8');
   assert.equal(wfo.wf.meta.is68.engine_sha256, createHash('sha256').update(eng).digest('hex'), 'รัน node demo/build_wf_demo.mjs .');
+});
+
+// ── DEC-59 ───────────────────────────────────────────────────────────────────
+test('DEC-59 version: ทุกโหนดฝังตราเดียวกับ WF_Demo.json · client_build ตรง/ไม่ตรง · endpoint /is-demo-version', async () => {
+  const meta = wfo.wf.meta.is68;
+  assert.ok(meta.wf_version && meta.build_id && meta.engine_version);
+  const out = await run(wfo, 'POST /is-demo-analyze', post({ client_build: meta.build_id }), mocks());
+  const r = JSON.parse(out.response.body);
+  assert.equal(r.version.build_id, meta.build_id); assert.equal(r.version.wf_version, meta.wf_version);
+  assert.equal(r.version.client_match, true); assert.deepEqual(r.ver_issues, []);
+  const bad = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({ client_build: 'WF_Demo-OLD' }), mocks())).response.body);
+  assert.equal(bad.version.client_match, false);
+  const v = JSON.parse((await run(wfo, 'GET /is-demo-version', { json: { query: {} } }, mocks())).response.body);
+  assert.equal(v.build_id, meta.build_id); assert.equal(v.engine_version, meta.engine_version);
+});
+
+test('DEC-59 version: โหนดที่ฝังตราต่างรุ่นถูกจับได้ (ver_issues)', async () => {
+  const stale = JSON.parse(JSON.stringify(wfo.wf));
+  const n = stale.nodes.find((x) => x.name === 'Plan Pathway (Eq 3.7–3.8)');
+  n.parameters.jsCode = n.parameters.jsCode.replace(/"build_id":"[^"]+"/, '"build_id":"WF_Demo-STALE"');
+  const out = await run(loadWfObj(stale), 'POST /is-demo-analyze', post({}), mocks());
+  const r = JSON.parse(out.response.body);
+  assert.ok(r.ver_issues.some((x) => /STALE/.test(x)), JSON.stringify(r.ver_issues));
+});
+function loadWfObj(wf) { return { wf, byName: Object.fromEntries(wf.nodes.map((n) => [n.name, n])) }; }
+
+test('DEC-59 Role-Fit + token + actor: รายงานมี F/R_role/T · tokens รวมถูก · actor "led" ทำให้ข้อ hands-on เหลือบางส่วน', async () => {
+  delete staticData.global;
+  const r = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), mocks())).response.body);
+  const S = r.scores;
+  assert.ok(typeof S.role_fit === 'number' && typeof S.r_role === 'number');
+  assert.ok(Math.abs(S.role_fit - (0.5 * S.r_role + 0.5 * S.role_task_index)) < 0.02);
+  assert.ok(r.tokens.total.calls >= 4); assert.equal(r.tokens.stages.reduce((a, x) => a + x.input, 0), r.tokens.total.input);
+  // บังคับ actor = oversaw ทุกข้อ → ไม่มีข้อ hands-on ที่เป็น evidenced
+  const patch = (t) => { const o = JSON.parse(t); o.actors = [...o.assessments.map((a) => ({ id: a.requirement_id, actor: 'oversaw' })), ...(o.task_assessments || []).map((a) => ({ id: a.task_id, actor: 'oversaw' }))]; return JSON.stringify(o); };
+  const r2 = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), mocks({ patch }))).response.body);
+  assert.equal(r2.requirements.filter((q) => q.hands_on && q.status === 'evidenced').length, 0);
+  assert.ok(r2.scores.adjust.n_actor >= 1 || r2.requirements.filter((q) => q.hands_on).length === 0);
+  assert.ok(r2.scores.role_fit <= S.role_fit);
+});
+
+test('DEC-59 D5: ข้อความเดียวเป็นหลักฐานเต็มได้ไม่เกิน QUOTE_REUSE_CAP ข้อ', async () => {
+  const r = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), mocks())).response.body);
+  const full = r.requirements.filter((q) => q.status === 'evidenced' && q.quote && q.source !== 'learner');
+  const cnt = {}; full.forEach((q) => { cnt[q.quote] = (cnt[q.quote] || 0) + 1; });
+  assert.ok(Math.max(0, ...Object.values(cnt)) <= 2, JSON.stringify(cnt).slice(0, 300));
+});
+
+test('DEC-59 D4: verifier cache — รันซ้ำด้วยเรซูเมเดิมไม่เรียกผู้ตรวจซ้ำ และผลเท่าเดิม', async () => {
+  delete staticData.global;
+  const m1 = mocks(); const a = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), m1)).response.body);
+  const m2 = mocks(); const b = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), m2)).response.body);
+  assert.ok(m1.calls.includes('Gemini Verifier'));
+  assert.equal(m2.calls.filter((x) => x === 'Gemini Verifier').length, 0);
+  assert.equal(b.tokens.fresh_checks, 0); assert.ok(b.tokens.cached_checks > 0);
+  assert.deepEqual(a.requirements.map((q) => q.status), b.requirements.map((q) => q.status));
+  assert.equal(a.scores.role_fit, b.scores.role_fit);
 });

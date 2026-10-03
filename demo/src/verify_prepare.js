@@ -5,8 +5,13 @@
 //   ตรรกะทั้งหมดมาจาก engine/engine.js (ฝังทั้งไฟล์ตอน build) — ตรงกับระบบเต็มทุกบรรทัด
 // ─────────────────────────────────────────────────────────────────────────────
 //@@ENGINE_ALL@@
-const VERIFIER_TEMPLATE = /*@@PROMPT_VERIFIER@@*/'';
+const VERIFIER_TEMPLATE = /*@@PROMPT_VERIFIER@@*/'';   // demo/prompts/verifier_demo_v1.1.txt (เพิ่มกฎ actor + ระดับ LV · schema ยังเป็น verifier_v1.0)
+const STAMP = /*@@STAMP@@*/{};
 const v = $('Config & Validate').first().json;
+const verIssue = (() => { const c = v.version || {}; const bad = [];
+  if (STAMP.build_id !== c.build_id) bad.push('build ' + STAMP.build_id + ' ≠ ' + c.build_id);
+  if (ENGINE.ENGINE_VERSION !== STAMP.engine_version) bad.push('engine ' + ENGINE.ENGINE_VERSION + ' ≠ ' + STAMP.engine_version);
+  return bad.length ? 'Prepare Relevance Checks: ' + bad.join(' · ') : ''; })();
 const cfg = v.cfg;
 const role = $('Load Role Data (O*NET 31.0)').first().json.role;
 const text = $('Clean Text & Mask PII').first().json.text;
@@ -60,16 +65,40 @@ if (!usable.length) {
   projectCfg = Object.assign({}, projectCfg, { r3_mode: 'lexical', min_usable_models: 1, min_agreeing_votes: 1 });
 }
 
-// ── 3) ข้อที่ต้องให้ Gemini ตรวจความหมาย (R3b) ────────────────────────────
+// ── 3) ข้อที่ต้องให้ Gemini ตรวจความหมาย (R3b) · cache + แบ่ง batch (DEC-59 D4) ─────────────────
 const pv = ENGINE.prepareVerification({ roleId: role.role_id, requirements: reqs, text, modelResults, projectCfg, verifierTemplate: VERIFIER_TEMPLATE, roleTasks: tasks });
 const checks = pv.checks.filter((c) => c.verifier);
-const useVerifier = source === 'gemini' && cfg.USE_GEMINI_VERIFIER !== false && checks.length > 0;
+const reqById = Object.fromEntries(role.requirements.map((r) => [r.id, r]));
+const taskHands = role.task_min_actor === 'performed';
+const hash = (str) => { let h1 = 0xdeadbeef, h2 = 0x41c6ce57; for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909); h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36); };
+const cacheOn = cfg.VERIFIER_CACHE !== false;
+let sd = null; try { sd = $getWorkflowStaticData('global'); } catch (e) { sd = null; }
+const cache = (cacheOn && sd && sd.verifierCache) || {};
+const keyOf = (c) => [STAMP.verifier_prompt, cfg.GEMINI_MODEL_VERIFIER, c.target_id, hash(c.quote)].join('|');
+const cacheKeys = {}; const cached = {}; const fresh = [];
+for (const c of checks) {
+  const k = keyOf(c); cacheKeys[c.check_id] = k;
+  if (cacheOn && cache[k] && cache[k].v) cached[c.check_id] = cache[k].v; else fresh.push(c);
+}
+const useVerifier = source === 'gemini' && cfg.USE_GEMINI_VERIFIER !== false && fresh.length > 0;
 const gen = { maxOutputTokens: 8192, responseMimeType: 'application/json' };
 if (cfg.GEMINI_VERIFIER_THINKING_LEVEL) gen.thinkingConfig = { thinkingLevel: cfg.GEMINI_VERIFIER_THINKING_LEVEL };
-return [{
-  json: {
-    source, fallback_reason: fallbackReason, run_info: runInfo, model_results: modelResults, project_cfg: projectCfg,
-    n_checks: checks.length, verifier_keys: Object.keys(pv.requests), use_verifier: useVerifier, model: cfg.GEMINI_MODEL_VERIFIER,
-    gemini_request: useVerifier ? { contents: [{ role: 'user', parts: [{ text: ENGINE.buildVerifierPrompt(VERIFIER_TEMPLATE, checks) }] }], generationConfig: gen } : null,
-  },
-}];
+// prompt ของ Demo ส่ง level (LV ของ O*NET) และ hands_on ไปด้วย เพื่อให้ผู้ตรวจแยก "ลงมือทำเอง" ออกจาก "กำกับ/ส่งมอบ"
+const promptOf = (batch) => String(VERIFIER_TEMPLATE).split('{{CHECKS_JSON}}').join(JSON.stringify(batch.map((c) => {
+  const r = reqById[c.target_id];
+  return { check_id: c.check_id, target: c.target_text, level: r ? r.lv : null, hands_on: r ? !!r.hands_on : taskHands, quote: c.quote };
+}), null, 1));
+const size = Math.max(5, Number(cfg.VERIFIER_BATCH) || 30);
+const batches = []; if (useVerifier) for (let i = 0; i < fresh.length; i += size) batches.push(fresh.slice(i, i + size));
+const common = {
+  source, fallback_reason: fallbackReason, run_info: runInfo, model_results: modelResults, project_cfg: projectCfg,
+  n_checks: checks.length, n_cached: Object.keys(cached).length, n_fresh: fresh.length, cached, cache_keys: cacheKeys, cache_enabled: cacheOn && !!sd,
+  batches: batches.map((b, i) => ({ index: i, check_ids: b.map((c) => c.check_id) })),
+  verifier_keys: Object.keys(pv.requests), use_verifier: useVerifier, model: cfg.GEMINI_MODEL_VERIFIER, ver_issue: verIssue,
+};
+if (!useVerifier) return [{ json: Object.assign({}, common, { gemini_request: null }) }];
+return batches.map((b, i) => ({ json: i === 0
+  ? Object.assign({}, common, { batch_index: 0, gemini_request: { contents: [{ role: 'user', parts: [{ text: promptOf(b) }] }], generationConfig: gen } })
+  : { use_verifier: true, batch_index: i, model: cfg.GEMINI_MODEL_VERIFIER, gemini_request: { contents: [{ role: 'user', parts: [{ text: promptOf(b) }] }], generationConfig: gen } } }));

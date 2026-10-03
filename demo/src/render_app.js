@@ -10,8 +10,9 @@ const q = ($input.first().json && $input.first().json.query) || {};
 const boot = {
   roles: ROLES,
   test: Object.prototype.hasOwnProperty.call(q, 'test'),
-  paths: { analyze: 'is-demo-analyze', save: 'is-demo-save-pdf' },
+  paths: { analyze: 'is-demo-analyze', save: 'is-demo-save-pdf', version: 'is-demo-version' },
   build: /*@@BUILD_ID@@*/'',
+  version: /*@@STAMP_JSON@@*/{},
 };
 const json = JSON.stringify(boot).replace(/</g, '\\u003c');
 return [{ json: { html: HTML.replace('"__BOOT__"', () => json) } }];

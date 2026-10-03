@@ -331,3 +331,12 @@
 **ไฟล์ที่กระทบ** `demo/src/*` · `demo/build_wf_demo.mjs` · `demo/build_demo_data.py` · `demo/test/harness.mjs` `server.mjs` · `tests/demo_workflow.test.mjs` · 27 → 31 โหนด
 **ผลต่อเล่ม** ไม่มี (DEC-44 Demo อยู่นอกเล่ม)
 **วิธีย้อนกลับ** `git checkout` รุ่นก่อน 3 ต.ค. ของ `demo/` แล้ว build
+
+## DEC-59 · WF_Demo v2.1.0 — Role-Fit, actor, verifier cache, token panel, ตราประทับรุ่น
+**วันที่** 3 ต.ค. 2569 · อ้าง `docs/Gap_demo_03OCT26.md`
+**ปัญหา** ทดสอบ 4 อาชีพ (R07/R15/R19/R20) ด้วยเรซูเมสมัคร PM: R15 (Network Engineer, T=0) ได้ 87 ใกล้ PM (R19 84) เพราะ Top-30 ทักษะของหลายอาชีพซ้ำกัน (ทักษะกว้างน้ำหนัก 58–69%), ผู้ตรวจไม่ดูว่าใครเป็นผู้ลงมือ, verdict ไม่นิ่ง, ข้อความเดียวถูกใช้ซ้ำ 6–7 ข้อ, headline ใช้ R อย่างเดียว, ตัวส่วน H ต่างกัน, ไม่เห็นจำนวนโทเคน
+**การตัดสินใจ** (D1) Role-Fit F = ½·R-role + ½·T · ป้าย "พร้อมสูง" ต้อง F ≥ 75 และ T ≥ 60 (D2) R-role ถ่วงน้ำหนักด้วย idf = ln((N+1)/(df+0.5)), N=20 (D3) analyst ระบุ actor (performed/led/oversaw/mentioned) · ข้อกำหนดแนวลงมือทำ (hands_on) และงานหลักต้องเป็น performed (อาชีพบริหาร R19/R20 รับ led ในงานหลัก) ไม่งั้นลดเป็นบางส่วน · verifier prompt `verifier_demo_v1.1` (กฎ managing ≠ doing, LV ≥ 5.0 ต้องมี hands-on) (D4) cache verdict ใน `$getWorkflowStaticData` (ใช้เมื่อ Publish) + แบ่ง batch ละ 30 ข้อ (D5) ข้อความเดียว/ที่ซ้อนทับ ≥ 60% เป็นหลักฐานเต็มได้ ≤ 2 ข้อ (เก็บข้อเฉพาะอาชีพ df ต่ำก่อน) (D6) H แสดง "ข้อมูลไม่พอ" ถ้าอาชีพมีเทคโนโลยี < 10 รายการ ตัวส่วนคงที่ 10 (D7) แผงโทเคนรายขั้น (OCR / วิเคราะห์ / ตรวจความหมาย) (D8 โหมดเปรียบเทียบอาชีพ = P2 ยังไม่ทำ)
+**ตราประทับรุ่น** `STAMP` {wf_version, build_id, built_at, commit, engine_version/sha, prompt ids, rules_version, data_sha} ฝังในโหนด Config/Prompt/Prepare/Verify/Plan ตอน build · ทุกโหนดตรวจเทียบกับ Config → `ver_issues` · หน้าเว็บส่ง `client_build` · endpoint `GET /webhook/is-demo-version` · `run_demo_mac.sh` เทียบ build_id ที่ n8n เสิร์ฟกับไฟล์ ถ้าไม่ตรงหยุดทำงาน
+**ไฟล์ที่กระทบ** `demo/src/*` · `demo/build_wf_demo.mjs` · `demo/build_demo_data.py` · `demo/prompts/verifier_demo_v1.1.txt` · `demo/version.json` · `demo/run_demo_mac.sh` · `demo/test/*` · `tests/demo_workflow.test.mjs` · 31 → 34 โหนด · ไม่แตะ `engine/engine.js` และ prompt ของระบบเต็ม
+**ผลต่อเล่ม** ไม่มี (Demo อยู่นอกเล่ม · DEC-44) · ผลจริงต้องยืนยันด้วย Gemini บนเครื่องผู้ใช้ตามเกณฑ์ P1–P6 ใน Gap_demo
+**วิธีย้อนกลับ** `git checkout a47c5a7 -- demo/` แล้ว build

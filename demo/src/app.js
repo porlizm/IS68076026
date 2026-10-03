@@ -254,7 +254,7 @@
   function analyze(supplement) {
     var fd = new FormData();
     fd.append('role_id', state.role); fd.append('months', state.months); fd.append('hours_per_week', state.hours);
-    fd.append('mode', state.mode); fd.append('consent', state.consent ? 'true' : 'false');
+    fd.append('mode', state.mode); fd.append('client_build', BOOT.build || ''); fd.append('consent', state.consent ? 'true' : 'false');
     if (supplement) fd.append('supplement', supplement);
     fd.append('resume', state.file, state.file.name);
     show('vProc'); startProc();
@@ -300,18 +300,24 @@
     h += '<div class="pdf-only pdf-head"><b>รายงานความพร้อมสู่อาชีพเป้าหมาย · Skill-Gap Navigator</b><span>' + esc(r.run_id) + ' · ' + dt.toLocaleString('th-TH') + '</span></div>';
     h += '<div class="rep-top no-pdf"><h2>ผลการวิเคราะห์ · <span class="mono">' + esc(r.run_id) + '</span></h2><span class="chip">' + ic('clock', 13) + ' ' + fmt(r.elapsed_ms / 1000, 1) + ' วินาที</span></div>';
 
+
+    // DEC-59 · ตรวจรุ่น workflow ที่ตอบกลับ เทียบกับหน้าเว็บที่โหลดมา
+    var VR = r.version || {}; var vIssues = (r.ver_issues || []).slice();
+    if (VR.client_match === false) vIssues.push('หน้าเว็บ (build ' + esc(VR.client_build) + ') ไม่ตรงกับ workflow ที่ตอบ (build ' + esc(VR.build_id) + ') — กด Refresh แล้ววิเคราะห์ใหม่');
+    if (vIssues.length) h += '<div class="note reveal" style="margin-bottom:14px;border-color:#e0a030">' + ic('alert', 18) + '<div><b>รุ่นของ workflow ไม่สอดคล้องกัน:</b> ' + vIssues.map(esc).join(' · ') + '<br>อาจมี session/โหนดเก่าค้างอยู่ — Unpublish → Import WF_Demo.json ใหม่ → Publish แล้วลองอีกครั้ง</div></div>';
+    else if (VR.build_id) h += '<div class="src-note" style="margin-bottom:10px">' + ic('check', 13) + ' workflow v' + esc(VR.wf_version) + ' · ' + esc(VR.build_id) + ' · engine ' + esc(VR.engine_version) + (VR.commit ? ' · ' + esc(VR.commit) : '') + ' — รุ่นตรงกับหน้าเว็บ</div>';
     if (isOffline) h += '<div class="note reveal" style="margin-bottom:14px">' + ic('alert', 18) + '<div><b>โหมดสำรอง:</b> ใช้กฎจับคู่คำพ้อง (ไม่ใช้ LLM) เพราะ ' + esc(A.fallback_reason || '-') + '</div></div>';
 
     // hero
     h += '<div class="hero-card glass reveal spot">' +
-      '<div class="ring" id="ringMain">' + ring(S.readiness_pct, 168, 14, 'gR') + '<div class="lbl"><div><b class="num" data-count="' + (S.readiness_pct || 0) + '">0</b><span>คะแนนความพร้อม / 100</span></div></div></div>' +
+      '<div class="ring" id="ringMain">' + ring(S.role_fit, 168, 14, 'gR') + '<div class="lbl"><div><b class="num" data-count="' + (S.role_fit || 0) + '">0</b><span>Role-Fit / 100</span></div></div></div>' +
       '<div class="hc-main"><div class="kicker"><span class="tag mono">' + esc(RO.role_id) + ' · SOC ' + esc(RO.soc) + '</span><span class="tag">Job Zone ' + RO.job_zone + '</span>' +
       (RO.mapping_type === 'proxy' ? '<span class="tag warn" data-tip="' + esc(RO.mapping_note_th) + '">' + ic('alert', 12) + ' proxy · ' + esc(RO.onet_title) + '</span>' : '') + '</div>' +
       '<h1>' + esc(RO.name_en) + '</h1><div class="th">' + esc(RO.name_th) + '</div>' +
       '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px"><span class="verdict ' + r.verdict.key + '">' + ic(r.verdict.key === 'high' ? 'check' : r.verdict.key === 'mid' ? 'half' : 'alert', 14, 2.4) + r.verdict.th + '</span>' +
       '<span class="src-note">' + ic('file', 13) + esc(r.input.file_name) + ' · ' + (r.ocr.method === 'gemini_ocr' ? 'Gemini OCR' : 'PDF text layer') + '</span></div>' +
       (C.headline_th ? '<p class="headline">' + esc(C.headline_th) + '</p>' : '') + '</div>' +
-      '<div class="proj" data-tip="ดัชนีงานหลักของอาชีพ (T) วัดหลักฐานของงาน Core 8 งานที่ O*NET ระบุสำหรับอาชีพนี้โดยเฉพาะ อ่านแยกจากคะแนนความพร้อม"><small style="margin:0 0 4px">งานหลักของอาชีพ (T)</small><div class="from-to"><span class="b num">' + fmt(S.role_task_index, 0) + '</span></div><small>สรุปได้ ' + (S.n_role_tasks_decided || 0) + '/' + (S.n_role_tasks || 0) + ' งาน<br>สรุปข้อกำหนดได้ ' + pct(S.weighted_coverage) + ' ของน้ำหนัก</small></div>' +
+      '<div class="proj" data-tip="ดัชนีงานหลักของอาชีพ (T) วัดหลักฐานของงาน Core 8 งานที่ O*NET ระบุสำหรับอาชีพนี้โดยเฉพาะ อ่านแยกจากคะแนนความพร้อม"><small style="margin:0 0 4px">งานหลัก (T) · ความตรงอาชีพ (R-role) ' + fmt(S.r_role, 0) + ' · ความพร้อมรวม (R) ' + fmt(S.readiness_pct, 0) + '</small><div class="from-to"><span class="b num">' + fmt(S.role_task_index, 0) + '</span></div><small>สรุปได้ ' + (S.n_role_tasks_decided || 0) + '/' + (S.n_role_tasks || 0) + ' งาน<br>สรุปข้อกำหนดได้ ' + pct(S.weighted_coverage) + ' ของน้ำหนัก</small></div>' +
       '</div>';
 
     // KPIs
@@ -417,11 +423,26 @@
       '<div class="olm-list">' + olmRows.slice(0, 12).map(function (q) { return '<label class="olm-row"><span>' + stPill(q.status) + ' <b>' + esc(q.name) + '</b></span><textarea rows="2" maxlength="400" data-name="' + esc(q.name) + '" placeholder="เช่น สิ่งที่ทำ · เครื่องมือ · ผลลัพธ์ (ภาษาอังกฤษหรือไทย)"></textarea></label>'; }).join('') + '</div>' +
       '<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn btn-primary btn-sm" id="olmGo" type="button">' + ic('spark', 15) + 'วิเคราะห์ใหม่พร้อมหลักฐานเพิ่มเติม</button></div></div>';
 
+
+    // D6/D7 · H + ตารางโทเคน
+    var TKN = r.tokens;
+    h += '<div class="card glass section reveal"><div class="sec-h"><h3><span class="hi">' + ic('cpu') + '</span>ตัวชี้วัดเสริมและโทเคนที่ใช้</h3><p>Role-Fit F = ½·R-role + ½·T · R-role ถ่วงด้วย idf (ทักษะที่เฉพาะอาชีพมีน้ำหนักมากกว่าทักษะที่ทุกอาชีพมี)</p></div>' +
+      '<div class="src-note">Role-Fit ' + fmt(S.role_fit, 1) + ' · R-role ' + fmt(S.r_role, 1) + ' · T ' + fmt(S.role_task_index, 1) + ' · R ' + fmt(S.readiness_pct, 1) + ' · เทคโนโลยี (H) ' +
+      (S.h_sufficient ? S.n_tech_found + '/' + S.n_tech_total : 'ข้อมูลไม่พอ (ตลาดระบุเพียง ' + S.n_tech_total + ' รายการ)') +
+      (S.adjust ? ' · ปรับด้วยกฎผู้ลงมือ ' + S.adjust.n_actor + ' ข้อ · จำกัดข้อความซ้ำ ' + S.adjust.n_reuse + ' ข้อ' : '') + '</div>';
+    if (TKN) {
+      h += '<table class="tbl"><tr><th>ขั้นตอน</th><th>เรียก</th><th>Input</th><th>Output</th><th>Thinking</th><th>รวม</th></tr>' +
+        TKN.stages.map(function (x) { return '<tr><td>' + esc(x.stage) + '</td><td>' + x.calls + '</td><td>' + fmt(x.input) + '</td><td>' + fmt(x.output) + '</td><td>' + fmt(x.thinking) + '</td><td>' + fmt(x.total) + '</td></tr>'; }).join('') +
+        '<tr><th>รวม</th><th>' + TKN.total.calls + '</th><th>' + fmt(TKN.total.input) + '</th><th>' + fmt(TKN.total.output) + '</th><th>' + fmt(TKN.total.thinking) + '</th><th>' + fmt(TKN.total.total) + '</th></tr></table>' +
+        '<p class="src-note">ตรวจความหมายจาก cache ' + (TKN.cached_checks || 0) + ' ข้อ · เรียกใหม่ ' + (TKN.fresh_checks || 0) + ' ข้อ' + (TKN.cost_usd != null ? ' · ประมาณ $' + TKN.cost_usd : '') + '</p>';
+    }
+    h += '</div>';
+
     // provenance
     var pv = r.provenance;
     h += '<div class="prov-foot glass reveal"><div><b>แหล่งข้อมูล</b>' + esc(pv.onet) + '<br>' + esc(pv.snapshot) + ' · ' + esc(pv.corpus) + '<br>Data_Set.xlsx sha256 ' + esc(pv.dataset_sha256) + '…</div>' +
       '<div><b>วิธีการ</b>' + esc(pv.policy) + '<br>' + esc(pv.rules) + '</div>' +
-      '<div><b>การประมวลผล</b>' + esc(r.run_id) + ' · ' + dt.toLocaleString('th-TH') + '<br>' + (r.ocr.method === 'gemini_ocr' ? 'OCR: Gemini' : 'OCR: PDF text layer') + ' · โมเดล: ' + esc(A.model) + '<br>' + esc(pv.note) + '</div></div>';
+      '<div><b>การประมวลผล</b>' + esc(r.run_id) + ' · ' + dt.toLocaleString('th-TH') + '<br>' + (r.ocr.method === 'gemini_ocr' ? 'OCR: Gemini' : 'OCR: PDF text layer') + ' · โมเดล: ' + esc(A.model) + '<br>' + esc(pv.note) + '<br>workflow v' + esc(VR.wf_version || '') + ' · ' + esc(VR.build_id || '') + '</div></div>';
 
     var root = Q('#report'); root.innerHTML = h;
     observe(root);

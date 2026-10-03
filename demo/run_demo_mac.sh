@@ -41,7 +41,14 @@ else
 fi
 export N8N_DIAGNOSTICS_ENABLED=false N8N_PERSONALIZATION_ENABLED=false GENERIC_TIMEZONE=Asia/Bangkok N8N_PORT="$PORT" N8N_LISTEN_ADDRESS="${N8N_LISTEN_ADDRESS:-127.0.0.1}"
 
+# รุ่นของไฟล์ workflow ที่กำลังจะนำเข้า (DEC-59)
+EXPECT="$(node -e 'try{const m=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).meta.is68;process.stdout.write([m.build_id,m.wf_version,m.engine_version,m.commit||"-"].join("|"))}catch(e){}' "$WF_FILE")"
+EXPECT_BUILD="${EXPECT%%|*}"
+say "WF_Demo.json รุ่น: $(echo "$EXPECT" | tr '|' ' · ')  (build · workflow · engine · commit)"
+
 # ---------- 2. หยุด n8n ที่เปิดอยู่ ----------
+# เผื่อมี session ค้าง: หยุด n8n ที่ยังรันอยู่ (ทั้งที่ใช้พอร์ตและที่ไม่ใช้) ก่อนนำเข้า
+if pgrep -f "n8n start" >/dev/null 2>&1; then say "พบ n8n start ค้างอยู่ → หยุด"; pkill -f "n8n start" 2>/dev/null || true; sleep 2; fi
 PIDS="$(lsof -t -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null || true)"
 if [ -n "$PIDS" ]; then
   say "พบโปรแกรมใช้พอร์ต $PORT อยู่ (pid $PIDS) → หยุดก่อนนำเข้า"
@@ -123,6 +130,17 @@ for _ in $(seq 1 30); do
   [ "$CODE" = "200" ] && break; sleep 2
 done
 [ "$CODE" = "200" ] || { tail -20 "$LOG"; fail "หน้า Demo ตอบ HTTP $CODE (คาดว่า 200)"; }
+
+# ตรวจรุ่นที่ n8n เสิร์ฟจริง เทียบกับไฟล์ที่นำเข้า (DEC-59)
+GOT="$(curl -s "http://127.0.0.1:$PORT/webhook/is-demo-version" || true)"
+GOT_BUILD="$(printf '%s' "$GOT" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{process.stdout.write(JSON.parse(d).build_id||"")}catch(e){}})')"
+if [ -n "$EXPECT_BUILD" ] && [ "$GOT_BUILD" = "$EXPECT_BUILD" ]; then
+  ok "รุ่น workflow ที่รันอยู่ตรงกับไฟล์: $GOT_BUILD"
+else
+  printf '\033[1;31m✗ รุ่นไม่ตรง: ไฟล์ = %s · ที่ n8n เสิร์ฟ = %s\033[0m\n' "$EXPECT_BUILD" "${GOT_BUILD:-ไม่ตอบ}"
+  echo "   อาจมี workflow รุ่นเก่าค้างในฐานข้อมูล n8n → เปิด editor แล้ว Unpublish/ลบ WF_Demo เก่า จากนั้นรันสคริปต์นี้ใหม่"
+  fail "ยกเลิก (กันการทดสอบด้วยรุ่นเก่า)"
+fi
 
 URL="http://localhost:$PORT/webhook/is-demo"
 ok "พร้อมแล้ว → $URL"

@@ -42,9 +42,12 @@ function mockAnalyst(body) {
     headline_th: 'ผู้สมัครมีประสบการณ์ทำงานจริงที่เกี่ยวข้องกับอาชีพเป้าหมายบางส่วน และมีจุดที่ต้องพัฒนาเพิ่มเติม',
     summary_th: 'ผู้สมัครมีจุดแข็งด้านการทำงานจริงและการใช้เครื่องมือที่เกี่ยวข้อง มีผลงานที่วัดผลได้ชัดเจน แต่ยังขาดหลักฐานในบางองค์ความรู้หลักของอาชีพเป้าหมาย ควรเสริมด้วยคอร์สและใบรับรองตามแผนด้านล่าง',
   };
+  // DEC-59: actor จำลอง — บรรทัดที่ขึ้นต้นด้วย Led/Managed/Oversaw ฯลฯ = led · อื่น ๆ = performed
+  const actorOfLine = (q) => (/^(led|managed|oversaw|directed|supervised)/i.test(q || '') ? 'led' : 'performed');
+  const actors = assessments.filter((a) => a.quotes && a.quotes.length).map((a) => ({ id: a.requirement_id, actor: actorOfLine(a.quotes[0]) }));
   const task_assessments = (role.signal_tasks || []).map((t, i) => ({ task_id: t.task_id, status: i < 3 && lines[i] ? 'partially' : 'missing', quotes: i < 3 && lines[i] ? [lines[i].slice(0, 160)] : [], confidence: 0.6 }));
-  const text = JSON.stringify({ schema_version: 'analyst_v1.1', role_id: roleId, assessments, task_assessments, profile });
-  return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: prompt.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0 }, modelVersion: 'gemini-3.8-flash (mock)' };
+  const text = JSON.stringify({ schema_version: 'analyst_v1.1', role_id: roleId, assessments, task_assessments, actors: actors.concat((role.signal_tasks || []).map((t, i) => (i < 3 && lines[i] ? { id: t.task_id, actor: actorOfLine(lines[i]) } : null)).filter(Boolean)), profile });
+  return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: prompt.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0, thoughtsTokenCount: 120, totalTokenCount: (prompt.length / 4 | 0) + (text.length / 4 | 0) + 120 }, modelVersion: 'gemini-3.8-flash (mock)' };
 }
 const mocks = {
   extract: async (item) => { const b = Buffer.from(item.binary.resume.data, 'base64'); const t = pdfText(b); return { json: { ...item.json, ...t }, binary: item.binary }; },
@@ -61,7 +64,7 @@ const mocks = {
       const p = body.contents[0].parts[0].text;
       const list = JSON.parse(p.slice(p.indexOf('CHECKS (JSON):') + 14).trim());
       const text = JSON.stringify({ schema_version: 'verifier_v1.0', checks: list.map((c) => ({ check_id: c.check_id, verdict: /University|Institute|research lab/.test(c.quote) ? 'unrelated' : /\d/.test(c.quote) ? 'supports' : 'partially_supports' })) });
-      return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], modelVersion: 'gemini-3.8-flash (mock)' };
+      return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: p.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0, totalTokenCount: (p.length / 4 | 0) + (text.length / 4 | 0) }, modelVersion: 'gemini-3.8-flash (mock)' };
     }
     return mockAnalyst(body);
   },
@@ -88,6 +91,7 @@ http.createServer(async (req, res) => {
   try {
     let start, item;
     if (req.method === 'GET' && u.pathname === '/webhook/is-demo') { start = 'GET /is-demo'; item = { json: { query: Object.fromEntries(u.searchParams), headers: req.headers } }; }
+    else if (req.method === 'GET' && u.pathname === '/webhook/is-demo-version') { start = 'GET /is-demo-version'; item = { json: { query: {} } }; }
     else if (req.method === 'POST' && /^\/webhook(-test)?\/is-demo-analyze$/.test(u.pathname)) { const m = await parseMultipart(req); start = 'POST /is-demo-analyze'; item = { json: { body: m.body }, binary: m.binary }; }
     else if (req.method === 'POST' && u.pathname === '/webhook/is-demo-save-pdf') { const m = await parseMultipart(req); start = 'POST /is-demo-save-pdf'; item = { json: { body: m.body }, binary: m.binary }; }
     else { res.statusCode = 404; res.end('{"code":404,"message":"not registered"}'); return; }

@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execSync } from 'node:child_process';
 
 const ROOT = process.argv[2] || '.';
 const DEMO = path.join(ROOT, 'demo');
@@ -50,8 +51,16 @@ function uuid(seed) { const h = sha('IS68-WF_Demo-' + seed); return `${h.slice(0
 const DATA = JSON.parse(rd(path.join(DEMO, 'build/demo_data.json')));
 const PROJECT = JSON.parse(rd(path.join(ROOT, 'config/project.json')));
 const PROMPT = rd(path.join(ROOT, 'prompts', PROJECT.prompt_version + '.txt'));
-const PROMPT_VERIFIER = rd(path.join(ROOT, 'prompts', PROJECT.verifier_prompt_version + '.txt'));
+const VERDEMO = JSON.parse(rd(path.join(DEMO, 'version.json')));
+const PROMPT_VERIFIER = rd(path.join(DEMO, 'prompts', 'verifier_demo_v1.1.txt'));   // DEC-59 · เพิ่มกฎ actor + ระดับ LV (schema ยังเป็น verifier_v1.0)
 const BUILD_ID = 'WF_Demo-' + new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 16).replace(/[-:T]/g, ''); // เวลาไทย
+const engineVersion = (engine.match(/ENGINE_VERSION = '([^']+)'/) || [])[1] || '';
+let commit = ''; try { commit = execSync('git rev-parse --short HEAD', { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch (e) { commit = ''; }
+const STAMP = { wf_version: VERDEMO.demo_version, dec: VERDEMO.dec, build_id: BUILD_ID, built_at: new Date().toISOString(), commit,
+  engine_version: engineVersion, engine_sha: sha(engine).slice(0, 12), analyst_prompt: PROJECT.prompt_version + '+demo_profile+actors',
+  verifier_prompt: 'verifier_demo_v1.1', rules_version: PROJECT.rules_version || '', data_sha: (DATA.meta.sha256['Data_Set.xlsx'] || '').slice(0, 12) };
+const STAMP_JSON = JSON.stringify(STAMP);
+const stampIn = (src) => src.replace('/*@@STAMP@@*/{}', () => STAMP_JSON);
 const appHtml = rd(path.join(SRC, 'app.html'))
   .replace('/*@@APP_CSS@@*/', () => rd(path.join(SRC, 'app.css')))
   .replace('/*@@APP_JS@@*/', () => rd(path.join(SRC, 'app.js')));
@@ -73,12 +82,15 @@ const code = {
   render: rd(path.join(SRC, 'render_app.js'))
     .replace("/*@@APP_HTML@@*/''", () => JSON.stringify(appHtml))
     .replace('/*@@ROLE_CARDS@@*/[]', () => JSON.stringify(roleCards))
-    .replace("/*@@BUILD_ID@@*/''", () => JSON.stringify(BUILD_ID)),
+    .replace("/*@@BUILD_ID@@*/''", () => JSON.stringify(BUILD_ID))
+    .replace("/*@@STAMP_JSON@@*/{}", () => STAMP_JSON),
   checkpdf: rd(path.join(SRC, 'check_pdf.js')),
   driveres: rd(path.join(SRC, 'drive_result.js')),
 };
 
 // ── node factories ─────────────────────────────────────────────────────────
+for (const k of ['config', 'prompt', 'prepare', 'verify', 'plan']) code[k] = stampIn(code[k]);
+code.version = "const S = " + STAMP_JSON + ";\nreturn [{ json: Object.assign({ ok: true, served_at: new Date().toISOString() }, S) }];";
 const nodes = [];
 const add = (n) => { nodes.push({ id: uuid(n.name), ...n }); return n.name; };
 const codeNode = (name, js, pos, extra = {}) => add({ name, type: 'n8n-nodes-base.code', typeVersion: 2, position: pos, parameters: { jsCode: js }, ...extra });
@@ -108,6 +120,9 @@ const nGet = webhook('GET /is-demo', 'GET', 'is-demo', [X(0), Y_UI]);
 const nRender = codeNode('Render App HTML', code.render, [X(1), Y_UI]);
 const nRespHtml = respond('Respond HTML', { respondWith: 'text', responseBody: '={{ $json.html }}',
   options: { responseHeaders: { entries: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Cache-Control', value: 'no-store' }] } } }, [X(2), Y_UI]);
+const nVerGet = webhook('GET /is-demo-version', 'GET', 'is-demo-version', [X(0), Y_UI - 160]);
+const nVerCode = codeNode('Version Info', code.version, [X(1), Y_UI - 160]);
+const nVerResp = respond('Respond Version', { respondWith: 'json', responseBody: '={{ JSON.stringify($json) }}', options: { responseHeaders: { entries: [{ name: 'Cache-Control', value: 'no-store' }] } } }, [X(2), Y_UI - 160]);
 // Analyze
 const nPost = webhook('POST /is-demo-analyze', 'POST', 'is-demo-analyze', [X(0), Y_A]);
 const nCfg = codeNode('Config & Validate', code.config, [X(1), Y_A]);
@@ -187,6 +202,7 @@ link(nTl, nNeedOcr); link(nNeedOcr, nOcr, 0); link(nNeedOcr, nClean, 1); link(nO
 link(nClean, nOk2); link(nOk2, nLoad, 0); link(nOk2, nRespErr, 1);
 link(nLoad, nPrompt); link(nPrompt, nUseG); link(nUseG, nAnalyst, 0); link(nUseG, nPrep, 1); link(nAnalyst, nPrep);
 link(nPrep, nNeedV); link(nNeedV, nVerifier, 0); link(nNeedV, nVerify, 1); link(nVerifier, nVerify);
+link(nVerGet, nVerCode); link(nVerCode, nVerResp);
 link(nVerify, nPlan); link(nPlan, nReport); link(nReport, nRespRep);
 link(nSave, nChk); link(nChk, nOk3); link(nOk3, nDrive, 0); link(nOk3, nRespDrive, 1); link(nDrive, nDres); link(nDres, nRespDrive);
 
@@ -196,7 +212,7 @@ const wf = {
   nodes, connections: conns, active: false, pinData: {},
   settings: { executionOrder: 'v1', saveDataSuccessExecution: 'all', saveDataErrorExecution: 'all', saveManualExecutions: true, timezone: 'Asia/Bangkok' },
   tags: [{ name: 'IS68076026' }, { name: 'demo' }],
-  meta: { is68: { build_id: BUILD_ID, built_by: 'demo/build_wf_demo.mjs', engine_sha256: sha(engine), data_sha256: DATA.meta.sha256, onet: DATA.meta.onet_version, corpus: DATA.meta.corpus_version, n8n_target: '2.39.x' } },
+  meta: { is68: { build_id: BUILD_ID, wf_version: STAMP.wf_version, commit, engine_version: engineVersion, stamp: STAMP, built_by: 'demo/build_wf_demo.mjs', engine_sha256: sha(engine), data_sha256: DATA.meta.sha256, onet: DATA.meta.onet_version, corpus: DATA.meta.corpus_version, n8n_target: '2.39.x' } },
 };
 
 // ── validation ─────────────────────────────────────────────────────────────
@@ -218,6 +234,6 @@ if (errs.length) { console.error('✗ validation\n  ' + errs.join('\n  ')); proc
 const OUT = path.join(DEMO, 'WF_Demo.json');
 fs.writeFileSync(OUT, JSON.stringify(wf, null, 2));
 fs.mkdirSync(path.join(DEMO, 'build'), { recursive: true });
-fs.writeFileSync(path.join(DEMO, 'build/app_preview.html'), appHtml.replace('"__BOOT__"', () => JSON.stringify({ roles: roleCards, test: false, paths: { analyze: 'is-demo-analyze', save: 'is-demo-save-pdf' }, build: BUILD_ID }).replace(/</g, '\\u003c')));
+fs.writeFileSync(path.join(DEMO, 'build/app_preview.html'), appHtml.replace('"__BOOT__"', () => JSON.stringify({ roles: roleCards, test: false, paths: { analyze: 'is-demo-analyze', save: 'is-demo-save-pdf', version: 'is-demo-version' }, build: BUILD_ID, version: STAMP }).replace(/</g, '\\u003c')));
 const nNodes = nodes.filter((n) => n.type !== 'n8n-nodes-base.stickyNote').length;
-console.log('✓ ' + OUT + ' · ' + nNodes + ' nodes + ' + (nodes.length - nNodes) + ' notes · ' + (fs.statSync(OUT).size / 1024).toFixed(0) + ' KB · ' + BUILD_ID);
+console.log('✓ ' + OUT + ' · ' + nNodes + ' nodes + ' + (nodes.length - nNodes) + ' notes · v' + STAMP.wf_version + ' · ' + (fs.statSync(OUT).size / 1024).toFixed(0) + ' KB · ' + BUILD_ID);

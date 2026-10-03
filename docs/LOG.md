@@ -9,7 +9,7 @@
 ## ▶ ทำต่อจากตรงนี้
 
 0. 👤 ถ้าใช้ MacBook: คัดลอก `.env` + `private/` จากเครื่อง Windows · `python3 -m venv ~/venv_is` ตาม Setup_Guide ข้อ 0
-1. 👤 อ่าน `docs/Gap_demo_03OCT26.md` แล้วสั่งทำ PoC (DEC-59: Role-Fit · actor/LV · cache verifier · แผง token) ก่อนรัน T1
+1. 👤 **PoC DEC-59 พร้อมแล้ว (WF_Demo v2.1.0)** → `git push` (ค้าง 3 commits) → `node demo/build_wf_demo.mjs .` → `bash demo/run_demo_mac.sh` (สคริปต์เทียบรุ่นให้อัตโนมัติ) → รันเรซูเมจริง 4 อาชีพ เทียบเกณฑ์ P1–P6 ใน Gap_demo ข้อ 7
 1. 👤🤖 **T1 (DEC-57)** เปิด WF_Demo รุ่นใหม่ (`node demo/build_wf_demo.mjs .` → `bash demo/run_demo_mac.sh`) แล้วรัน `node scripts/validate_scoring.mjs` (ค่าเริ่มต้น `--base http://localhost:5678/webhook`) กับ Gemini จริง → `evidence/scoring_validation_<วันที่>.md` · ลองเรซูเมจริงของผู้วิจัยซ้ำ (R19 ต้องสูงกว่า R15)
 2. 👤 ให้ป้าย Gold-R3 คนที่ 2 (`evidence/r3_gold/gold_pairs_synthetic.csv` + ชุดจริงใน `private/`) → `node scripts/r3_gold.mjs eval`
 3. 👤 อาจารย์ยืนยัน DEC-54 (R6) และเกณฑ์ผ่าน DEC-57 · ทำ NEXT_STEPS ขั้น 0 (F1–F3) → 🤖 F4 Gate G-600
@@ -18,6 +18,12 @@
 ---
 
 ## ประวัติ session
+
+### 3 ต.ค. 2569 (ดึก) · DEC-59: WF_Demo v2.1.0 (แก้ตาม Gap_demo + ตราประทับรุ่น)
+- **ทำ** D1 Role-Fit (F = ½R-role + ½T, ป้าย "พร้อมสูง" ต้อง F ≥ 75 และ T ≥ 60) · D2 R-role ถ่วง idf · D3 actor/LV (prompt `verifier_demo_v1.1` + analyst ส่ง `actors`) · D4 cache verdict + batch 30 · D5 quote ซ้ำ ≤ 2 ข้อ · D6 H ตัวส่วนคงที่/ข้อมูลไม่พอ · D7 แผงโทเคน · **ตราประทับรุ่น** STAMP ทุกโหนด + `GET /is-demo-version` + `client_build` + `run_demo_mac.sh` เทียบ build_id และหยุดถ้าไม่ตรง/ฆ่า n8n ค้าง
+- **ผล** WF_Demo 31 → 34 โหนด · tests/demo_workflow 9/9 (เพิ่ม 5: version, stale node, Role-Fit/token/actor, D5, D4 cache) · mock server รุ่นใหม่
+- **ไม่ได้แตะ** engine.js · prompt ระบบเต็ม · เล่ม · D8 (เปรียบเทียบอาชีพ) เลื่อนเป็น P2
+- **ค้าง** 👤 รัน Gemini จริงบน Mac เทียบ P1–P6 · `git push` (commit 9e58c80, a47c5a7 และ DEC-59 ยังไม่ push) · cache ใช้ได้เมื่อ Publish เท่านั้น
 
 ### 3 ต.ค. 2569 (ค่ำ) · Gap_demo_03OCT26: เรซูเม PM ได้คะแนนอาชีพอื่นสูงกว่า PM
 - **ที่มา** ผู้วิจัยรัน WF_Demo รุ่น DEC-58 กับเรซูเมตัวเอง 4 อาชีพ: R07 92 · R15 87 (T = 0 แต่ "พร้อมสูง") · R20 85 · R19 84

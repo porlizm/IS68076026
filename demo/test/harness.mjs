@@ -21,6 +21,8 @@ function evalExpr(expr, ctx) {
   return s.replace(/\{\{([\s\S]*?)\}\}/g, (_, c) => String(f(c)));
 }
 
+const STATIC = {};
+export const staticData = STATIC;
 export async function run(wfObj, startNode, startItem, mocks, log = () => {}) {
   const { wf, byName } = wfObj;
   const outputs = {};
@@ -41,11 +43,11 @@ export async function run(wfObj, startNode, startItem, mocks, log = () => {}) {
     switch (node.type) {
       case 'n8n-nodes-base.webhook': outs = [items]; break;
       case 'n8n-nodes-base.code': {
-        const fn = new AsyncFunction('$input', '$', '$json', node.parameters.jsCode);
+        const fn = new AsyncFunction('$input', '$', '$json', '$getWorkflowStaticData', node.parameters.jsCode);
         const thisCtx = { helpers: { getBinaryDataBuffer: async (i, k) => {
           const b = items[i].binary && items[i].binary[k]; if (!b) throw new Error('no binary ' + k);
           return Buffer.from(b.data, 'base64'); } } };
-        const res = await fn.call(thisCtx, { first: () => items[0], all: () => items, item: items[0] }, $, items[0].json);
+        const res = await fn.call(thisCtx, { first: () => items[0], all: () => items, item: items[0] }, $, items[0].json, (kind) => (STATIC[kind || 'global'] = STATIC[kind || 'global'] || {}));
         outs = [res];
         break;
       }

@@ -6,13 +6,13 @@ const rd = $('Load Role Data (O*NET 31.0)').first().json;
 const prep = $('Clean Text & Mask PII').first().json;
 const p = $input.first().json;
 const role = rd.role;
-const R = p.scores.readiness_pct;
+const F = p.scores.role_fit;
 const Cw = p.scores.weighted_coverage;
-// ป้ายสำหรับแสดงผลใน Demo เท่านั้น (ไม่ใช่เกณฑ์ของงานวิจัย) · ถ้าสรุปได้ไม่ถึง 60% ของน้ำหนัก ไม่ติดป้ายระดับ
-const band = R === null ? { key: 'na', th: 'ประเมินไม่ได้' }
+// ป้ายสำหรับแสดงผลใน Demo เท่านั้น (ไม่ใช่เกณฑ์ของงานวิจัย) · DEC-59: ใช้ Role-Fit (F) · "พร้อมสูง" ต้อง F ≥ 75 และ T ≥ 60 (คำนวณใน Verify Evidence)
+const band = F === null || F === undefined ? { key: 'na', th: 'ประเมินไม่ได้' }
   : (Cw !== null && Cw < 0.6) ? { key: 'na', th: 'หลักฐานยังไม่พอสรุป' }
-  : R >= 75 ? { key: 'high', th: 'พร้อมสูง' }
-  : R >= 50 ? { key: 'mid', th: 'ใกล้พร้อม' }
+  : p.scores.fit_band === 'high' ? { key: 'high', th: 'พร้อมสูง' }
+  : p.scores.fit_band === 'mid' ? { key: 'mid', th: 'ใกล้พร้อม' }
   : { key: 'low', th: 'ต้องพัฒนาเพิ่ม' };
 
 const report = {
@@ -39,6 +39,9 @@ const report = {
   candidate: p.candidate,
   requirements: p.requirements.map(({ desc, ...r }) => ({ ...r, desc })),
   plan: p.plan,
+  tokens: p.tokens,
+  version: Object.assign({}, p.version, v.version || {}),
+  ver_issues: p.ver_issues || [],
   provenance: {
     onet: rd.data_meta.onet_version, snapshot: rd.data_meta.snapshot_version, corpus: rd.data_meta.corpus_version,
     dataset_sha256: (rd.data_meta.sha256['Data_Set.xlsx'] || '').slice(0, 12),

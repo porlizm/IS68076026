@@ -495,3 +495,8 @@ html.pdf-mode .ring .trk { stroke: #e9ecf3; }
 .olm-row textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent-ink); }
 .tech.got { border-color: var(--good-ink); background: var(--good-bg); color: var(--good-ink); }
 @media (max-width: 720px) { .olm-row { grid-template-columns: 1fr; } }
+
+/* DEC-59 · ตารางโทเคน */
+.tbl { width: 100%; border-collapse: collapse; margin: 10px 0 6px; font-size: 12.5px; }
+.tbl th, .tbl td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--line, rgba(128,128,128,.25)); }
+.tbl th:first-child, .tbl td:first-child { text-align: left; }

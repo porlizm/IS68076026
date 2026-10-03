@@ -15,7 +15,8 @@
 - [x] G6. 🤖 ชุดตรวจความตรง (DEC-57): เรซูเมสมมติ 12 ไฟล์ · `validate_scoring.mjs` · `r3_gold.mjs`
 - [x] G7. 🤖 เล่มบท 3/บทคัดย่อ/ภาคผนวก → `build/IS_68076026_Final_03OCT26.docx/.pdf` 84 หน้า · format 33/33 · overlap 0
 - [x] G7b. 🤖 วิเคราะห์ผล Demo 4 อาชีพ → `docs/Gap_demo_03OCT26.md` (Role-Fit · actor/LV · token)
-- [ ] G7c. 👤🤖 PoC ใน WF_Demo ตาม Gap_demo (DEC-59) → รันเรซูเมจริง 4 อาชีพ เกณฑ์ P1–P6
+- [x] G7c-1. 🤖 สร้าง PoC ใน WF_Demo v2.1.0 (DEC-59) + ตราประทับรุ่น · tests 9/9
+- [ ] G7c-2. 👤🤖 รัน Gemini จริง 4 อาชีพ (`bash demo/run_demo_mac.sh`) เทียบเกณฑ์ P1–P6 แล้วบันทึกเลขใน LOG
 - [ ] G8. 👤🤖 รัน `node scripts/validate_scoring.mjs` กับ WF_Demo + Gemini จริง → `evidence/scoring_validation_<วันที่>.md` · ถ้าไม่ผ่าน K1/K2/S1/T3 ส่งผลให้ Claude ปรับ (เกณฑ์ใน DEC-57)
 - [ ] G9. 👤 ทดสอบเรซูเมจริงของตัวเองใน Demo อีกครั้ง (R19 vs R15) แล้วบันทึกเลขใน LOG
 - [ ] G10. 👤 ผู้ให้ป้ายคนที่ 2 สำหรับ Gold-R3 → `node scripts/r3_gold.mjs eval` (κ) · ใส่ผลในตาราง 3.18

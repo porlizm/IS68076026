@@ -111,6 +111,11 @@ n8n 2.x เสิร์ฟ HTML จาก webhook ภายใต้ CSP `sandbo
 (ทดสอบแล้วพบ *Blocked a frame with origin "null"*) Demo นี้จึงใช้ **html-to-image + jsPDF** (โหลดจาก cdnjs สำรองด้วย jsDelivr) และตัดหน้า A4 เองโดยไม่ตัดกลางการ์ดหรือแถว
 ถ้าโหลดไลบรารีไม่ได้ จะเปิดหน้าพิมพ์ของเบราว์เซอร์ (Save as PDF) แทน — ปุ่ม Drive ส่งไฟล์ PDF เดียวกันไปที่ webhook `is-demo-save-pdf`
 
+## รุ่นของ workflow (DEC-59 · v2.1.0)
+- ตราประทับรุ่นฝังตอน build: `demo/version.json` + build_id + engine + prompt ids · ดูได้ที่ `http://localhost:5678/webhook/is-demo-version` และบรรทัดหัวรายงาน ("workflow v… รุ่นตรงกับหน้าเว็บ")
+- ถ้ารายงานขึ้นแถบเหลือง "รุ่นของ workflow ไม่สอดคล้องกัน" = มีโหนด/หน้าเว็บรุ่นเก่าค้าง → Unpublish/ลบ WF_Demo เก่า → `bash demo/run_demo_mac.sh` ใหม่
+- คะแนนหลักคือ **Role-Fit** (½ R-role ถ่วง idf + ½ T) · แผงโทเคนอยู่ท้ายรายงาน · cache ผู้ตรวจทำงานเมื่อ Publish แล้วเท่านั้น
+
 ## ข้อจำกัดที่ควรบอกคณะกรรมการ
 
 - Demo ใช้ **Gemini โมเดลเดียว** วิเคราะห์ 3 รอบแล้วโหวต (แทน R1 ของ 3 โมเดล) และ Gemini ตรวจความหมายเอง (self-verification) ต่างจากระบบเต็มที่ให้โมเดลอื่นตรวจ (`WF_IS_68076026_01OCT26`) → ใช้สาธิต ไม่ใช่ผลวิจัย

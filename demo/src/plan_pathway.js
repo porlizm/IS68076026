@@ -7,6 +7,11 @@
 //   DEC-56: ผู้มีประสบการณ์ ≥ plan_experienced_years ปี ไม่ใช้รายการระดับ Beginner กับข้อที่มีหลักฐานบางส่วนแล้ว
 //   ข้อ "ยังยืนยันไม่ได้" (abstained) ไม่ใส่ในแผน — ผู้เรียนเพิ่มหลักฐานแล้ววิเคราะห์ใหม่ได้ (DEC-58)
 // ─────────────────────────────────────────────────────────────────────────────
+const STAMP = /*@@STAMP@@*/{};   // DEC-59 · ตราประทับรุ่น ฝังตอน build ตรวจกับโหนด Config & Validate ตอน run
+const verIssue = (() => { const c = ($('Config & Validate').first().json.version) || {}; const bad = [];
+  if (STAMP.build_id !== c.build_id) bad.push('build ' + STAMP.build_id + ' ≠ ' + c.build_id);
+  
+  return bad.length ? 'Plan Pathway: ' + bad.join(' · ') : ''; })();
 const round = (x, d) => (x === null || x === undefined || Number.isNaN(x) ? null : Math.round(x * 10 ** d) / 10 ** d);
 const v = $('Config & Validate').first().json;
 const cfg = v.cfg;
@@ -109,6 +114,7 @@ else if (!planItems.length) notice = 'ยังไม่มีรายการ
 return [{
   json: {
     ...ev,
+    ver_issues: (ev.ver_issues || []).concat(verIssue ? [verIssue] : []),
     plan: {
       months, hours_per_week: h, mode, Hmax, total_hours: round(cum, 2), utilization: Hmax ? round(cum / Hmax, 4) : null,
       weeks_needed: round(cum / h, 1), n_gaps: gaps.length, n_covered: covered.size,
