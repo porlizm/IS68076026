@@ -1,6 +1,6 @@
 {
  "note": "สถานการณ์สมมติเพื่อวางแผน (ห้ามรายงานเป็นผลในเล่ม)",
- "corpus_version": "CORPUS_IS68076026-v1.5-01OCT26",
+ "corpus_version": "CORPUS_IS68076026-v1.6-03OCT26",
  "scenarios": {
   "before_track": {
    "weighted_greedy": {
@@ -10,10 +10,10 @@
       "months": 6,
       "hours_per_week": 5,
       "Hmax": 129.9,
-      "covered": 460,
-      "with_candidate": 598,
+      "covered": 461,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 76.7,
+      "pct": 76.8,
       "mean_items_per_plan": 8.3,
       "mean_hours_per_plan": 119.7
      },
@@ -21,63 +21,63 @@
       "months": 6,
       "hours_per_week": 10,
       "Hmax": 259.8,
-      "covered": 538,
-      "with_candidate": 598,
+      "covered": 539,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 89.7,
+      "pct": 89.8,
       "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 219.1
+      "mean_hours_per_plan": 218.6
      },
      {
       "months": 6,
       "hours_per_week": 15,
       "Hmax": 389.7,
-      "covered": 577,
-      "with_candidate": 598,
+      "covered": 579,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 96.2,
+      "pct": 96.5,
       "mean_items_per_plan": 12.3,
-      "mean_hours_per_plan": 325.6
+      "mean_hours_per_plan": 331.1
      },
      {
       "months": 6,
       "hours_per_week": 20,
       "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
+      "covered": 590,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 98.2,
+      "pct": 98.3,
       "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 393.6
+      "mean_hours_per_plan": 390.1
      }
     ],
     "by_mode_6m10h": [
      {
       "mode": "both",
-      "covered": 538,
-      "with_candidate": 598,
+      "covered": 539,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 89.7,
+      "pct": 89.8,
       "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 219.1
+      "mean_hours_per_plan": 218.6
      },
      {
       "mode": "course_only",
-      "covered": 526,
-      "with_candidate": 598,
+      "covered": 527,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 87.7,
+      "pct": 87.8,
       "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 222.6
+      "mean_hours_per_plan": 219.3
      },
      {
       "mode": "certification_only",
-      "covered": 195,
-      "with_candidate": 598,
+      "covered": 198,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
      }
     ],
     "by_months_10h": [
@@ -85,43 +85,43 @@
       "months": 12,
       "hours_per_week": 10,
       "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
+      "covered": 590,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 98.2,
+      "pct": 98.3,
       "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 393.6
+      "mean_hours_per_plan": 390.1
      },
      {
       "months": 18,
       "hours_per_week": 10,
       "Hmax": 779.4,
-      "covered": 598,
-      "with_candidate": 598,
+      "covered": 599,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 99.7,
+      "pct": 99.8,
       "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 462.6
+      "mean_hours_per_plan": 458.1
      },
      {
       "months": 24,
       "hours_per_week": 10,
       "Hmax": 1039.2,
-      "covered": 598,
-      "with_candidate": 598,
+      "covered": 599,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 99.7,
+      "pct": 99.8,
       "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 462.6
+      "mean_hours_per_plan": 458.1
      }
     ],
     "primary_6m10h_both": {
-     "covered": 538,
-     "with_candidate": 598,
+     "covered": 539,
+     "with_candidate": 599,
      "total": 600,
-     "pct": 89.7,
+     "pct": 89.8,
      "mean_items_per_plan": 11.2,
-     "mean_hours_per_plan": 219.1,
+     "mean_hours_per_plan": 218.6,
      "per_role": [
       {
        "role_id": "R01",
@@ -488,20 +488,20 @@
        "role_id": "R15",
        "covered": 29,
        "with_candidate": 30,
-       "hours": 252,
+       "hours": 242,
        "items": [
         "CRS-R15-F2",
         "CRS-R15-14",
         "CRS-R15-F4",
-        "CRS-R15-08",
+        "CRS-R15-05",
         "CRS-R15-13",
         "CRS-R15-11",
         "CRS-R15-F3",
         "CRS-R15-12",
         "CRS-R15-F5",
+        "CRS-R15-08",
         "CRS-R15-F1",
-        "CRS-R15-07",
-        "CRS-R15-06"
+        "CRS-R15-07"
        ],
        "uncovered_no_candidate": [],
        "uncovered_over_capacity": [
@@ -606,8 +606,8 @@
       },
       {
        "role_id": "R20",
-       "covered": 26,
-       "with_candidate": 29,
+       "covered": 27,
+       "with_candidate": 30,
        "hours": 201,
        "items": [
         "CRS-R20-F2",
@@ -617,13 +617,11 @@
         "CRS-R20-11",
         "CRS-R20-F5",
         "CRS-R20-09",
-        "CRT-R20-04",
+        "CRS-R20-06",
         "CRS-R20-13",
         "CRS-R20-02"
        ],
-       "uncovered_no_candidate": [
-        "REQ-R20-4.A.2.a.1"
-       ],
+       "uncovered_no_candidate": [],
        "uncovered_over_capacity": [
         "REQ-R20-2.B.1.b",
         "REQ-R20-4.A.3.b.1",
@@ -640,10 +638,10 @@
       "months": 6,
       "hours_per_week": 5,
       "Hmax": 129.9,
-      "covered": 461,
-      "with_candidate": 598,
+      "covered": 462,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 76.8,
+      "pct": 77,
       "mean_items_per_plan": 8.3,
       "mean_hours_per_plan": 119.8
      },
@@ -651,63 +649,63 @@
       "months": 6,
       "hours_per_week": 10,
       "Hmax": 259.8,
-      "covered": 539,
-      "with_candidate": 598,
+      "covered": 540,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 89.8,
+      "pct": 90,
       "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 220.6
+      "mean_hours_per_plan": 220.1
      },
      {
       "months": 6,
       "hours_per_week": 15,
       "Hmax": 389.7,
-      "covered": 577,
-      "with_candidate": 598,
+      "covered": 579,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 96.2,
+      "pct": 96.5,
       "mean_items_per_plan": 12.3,
-      "mean_hours_per_plan": 326.1
+      "mean_hours_per_plan": 331.6
      },
      {
       "months": 6,
       "hours_per_week": 20,
       "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
+      "covered": 590,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 98.2,
+      "pct": 98.3,
       "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 394.1
+      "mean_hours_per_plan": 390.6
      }
     ],
     "by_mode_6m10h": [
      {
       "mode": "both",
-      "covered": 539,
-      "with_candidate": 598,
+      "covered": 540,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 89.8,
+      "pct": 90,
       "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 220.6
+      "mean_hours_per_plan": 220.1
      },
      {
       "mode": "course_only",
-      "covered": 526,
-      "with_candidate": 598,
+      "covered": 527,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 87.7,
+      "pct": 87.8,
       "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 222.6
+      "mean_hours_per_plan": 219.3
      },
      {
       "mode": "certification_only",
-      "covered": 195,
-      "with_candidate": 598,
+      "covered": 198,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
      }
     ],
     "by_months_10h": [
@@ -715,43 +713,43 @@
       "months": 12,
       "hours_per_week": 10,
       "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
+      "covered": 590,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 98.2,
+      "pct": 98.3,
       "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 394.1
+      "mean_hours_per_plan": 390.6
      },
      {
       "months": 18,
       "hours_per_week": 10,
       "Hmax": 779.4,
-      "covered": 598,
-      "with_candidate": 598,
+      "covered": 599,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 99.7,
+      "pct": 99.8,
       "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 464.1
+      "mean_hours_per_plan": 459.6
      },
      {
       "months": 24,
       "hours_per_week": 10,
       "Hmax": 1039.2,
-      "covered": 598,
-      "with_candidate": 598,
+      "covered": 599,
+      "with_candidate": 599,
       "total": 600,
-      "pct": 99.7,
+      "pct": 99.8,
       "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 464.1
+      "mean_hours_per_plan": 459.6
      }
     ],
     "primary_6m10h_both": {
-     "covered": 539,
-     "with_candidate": 598,
+     "covered": 540,
+     "with_candidate": 599,
      "total": 600,
-     "pct": 89.8,
+     "pct": 90,
      "mean_items_per_plan": 11.2,
-     "mean_hours_per_plan": 220.6,
+     "mean_hours_per_plan": 220.1,
      "per_role": [
       {
        "role_id": "R01",
@@ -1117,20 +1115,20 @@
        "role_id": "R15",
        "covered": 29,
        "with_candidate": 30,
-       "hours": 252,
+       "hours": 242,
        "items": [
         "CRS-R15-F2",
         "CRS-R15-14",
         "CRS-R15-F4",
-        "CRS-R15-08",
+        "CRS-R15-05",
         "CRS-R15-13",
         "CRS-R15-11",
         "CRS-R15-12",
         "CRS-R15-F3",
         "CRS-R15-F5",
+        "CRS-R15-08",
         "CRS-R15-F1",
-        "CRS-R15-07",
-        "CRS-R15-06"
+        "CRS-R15-07"
        ],
        "uncovered_no_candidate": [],
        "uncovered_over_capacity": [
@@ -1235,8 +1233,8 @@
       },
       {
        "role_id": "R20",
-       "covered": 26,
-       "with_candidate": 29,
+       "covered": 27,
+       "with_candidate": 30,
        "hours": 201,
        "items": [
         "CRS-R20-F2",
@@ -1246,13 +1244,11 @@
         "CRS-R20-11",
         "CRS-R20-F5",
         "CRS-R20-09",
-        "CRT-R20-04",
+        "CRS-R20-06",
         "CRS-R20-13",
         "CRS-R20-02"
        ],
-       "uncovered_no_candidate": [
-        "REQ-R20-4.A.2.a.1"
-       ],
+       "uncovered_no_candidate": [],
        "uncovered_over_capacity": [
         "REQ-R20-2.B.1.b",
         "REQ-R20-4.A.3.b.1",
@@ -1271,2534 +1267,12 @@
       "months": 6,
       "hours_per_week": 5,
       "Hmax": 129.9,
-      "covered": 460,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 76.7,
-      "mean_items_per_plan": 8.3,
-      "mean_hours_per_plan": 119.7
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 538,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 89.7,
-      "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 219.1
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 577,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 96.2,
-      "mean_items_per_plan": 12.3,
-      "mean_hours_per_plan": 325.6
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 98.2,
-      "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 393.6
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 538,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 89.7,
-      "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 219.1
-     },
-     {
-      "mode": "course_only",
-      "covered": 526,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 87.7,
-      "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 222.6
-     },
-     {
-      "mode": "certification_only",
-      "covered": 195,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 98.2,
-      "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 393.6
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 598,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 99.7,
-      "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 462.6
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 598,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 99.7,
-      "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 462.6
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 538,
-     "with_candidate": 598,
-     "total": 600,
-     "pct": 89.7,
-     "mean_items_per_plan": 11.2,
-     "mean_hours_per_plan": 219.1,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 210,
-       "items": [
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-F4",
-        "CRS-R01-10",
-        "CRS-R01-F3",
-        "CRS-R01-07",
-        "CRT-R01-11",
-        "CRS-R01-F5",
-        "CRT-R01-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R01-2.B.3.b",
-        "REQ-R01-2.B.4.e",
-        "REQ-R01-2.B.4.h",
-        "REQ-R01-2.C.4.a",
-        "REQ-R01-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R02",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-F4",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-11",
-        "CRS-R02-06",
-        "CRT-R02-07",
-        "CRS-R02-F1",
-        "CRS-R02-F6",
-        "CRS-R02-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R02-2.B.3.a",
-        "REQ-R02-2.C.4.a"
-       ]
-      },
-      {
-       "role_id": "R03",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-F4",
-        "CRS-R03-10",
-        "CRS-R03-F3",
-        "CRS-R03-F5",
-        "CRS-R03-11",
-        "CRS-R03-15",
-        "CRS-R03-12",
-        "CRS-R03-F6",
-        "CRS-R03-F1",
-        "CRS-R03-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R03-2.B.3.m",
-        "REQ-R03-2.C.4.a",
-        "REQ-R03-4.A.2.a.3",
-        "REQ-R03-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R04",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-F4",
-        "CRS-R04-08",
-        "CRS-R04-10",
-        "CRS-R04-14",
-        "CRS-R04-F3",
-        "CRS-R04-15",
-        "CRS-R04-13",
-        "CRS-R04-12",
-        "CRS-R04-F1",
-        "CRS-R04-16",
-        "CRS-R04-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R04-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R05",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 180,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-F4",
-        "CRS-R05-F3",
-        "CRS-R05-05",
-        "CRS-R05-F5",
-        "CRS-R05-13",
-        "CRS-R05-06",
-        "CRS-R05-F1",
-        "CRS-R05-11",
-        "CRS-R05-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R05-2.B.3.e",
-        "REQ-R05-2.B.4.e",
-        "REQ-R05-2.C.1.e",
-        "REQ-R05-2.C.3.a",
-        "REQ-R05-4.A.2.a.1"
-       ]
-      },
-      {
-       "role_id": "R06",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 230,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-F2",
-        "CRS-R06-F4",
-        "CRS-R06-F3",
-        "CRS-R06-12",
-        "CRS-R06-17",
-        "CRS-R06-F5",
-        "CRS-R06-F6",
-        "CRS-R06-F1",
-        "CRS-R06-04",
-        "CRT-R06-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R06-2.B.4.e",
-        "REQ-R06-4.A.2.b.2"
-       ]
-      },
-      {
-       "role_id": "R07",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 182,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-12",
-        "CRS-R07-F4",
-        "CRS-R07-10",
-        "CRS-R07-F5",
-        "CRS-R07-F6",
-        "CRS-R07-F1",
-        "CRS-R07-F3",
-        "CRT-R07-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R07-2.B.4.g",
-        "REQ-R07-2.B.4.h",
-        "REQ-R07-4.A.2.a.3",
-        "REQ-R07-4.A.2.b.2",
-        "REQ-R07-4.A.2.b.4",
-        "REQ-R07-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R08",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-F4",
-        "CRS-R08-07",
-        "CRS-R08-12",
-        "CRS-R08-F3",
-        "CRS-R08-13",
-        "CRT-R08-10",
-        "CRS-R08-F6",
-        "CRS-R08-05",
-        "CRT-R08-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R08-2.C.3.b",
-        "REQ-R08-2.C.3.c"
-       ]
-      },
-      {
-       "role_id": "R09",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-F4",
-        "CRS-R09-F3",
-        "CRS-R09-13",
-        "CRS-R09-11",
-        "CRS-R09-14",
-        "CRS-R09-F1",
-        "CRS-R09-F6",
-        "CRT-R09-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R09-2.A.1.e",
-        "REQ-R09-2.C.1.a",
-        "REQ-R09-4.A.2.a.3",
-        "REQ-R09-4.A.2.b.2",
-        "REQ-R09-4.A.3.b.1"
-       ]
-      },
-      {
-       "role_id": "R10",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-F4",
-        "CRS-R10-F3",
-        "CRS-R10-06",
-        "CRS-R10-F5",
-        "CRS-R10-14",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRT-R10-11",
-        "CRS-R10-05",
-        "CRS-R10-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R10-2.B.4.e",
-        "REQ-R10-2.C.9.a",
-        "REQ-R10-4.A.2.b.2",
-        "REQ-R10-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R11",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-F4",
-        "CRS-R11-08",
-        "CRS-R11-12",
-        "CRS-R11-F5",
-        "CRS-R11-05",
-        "CRS-R11-13",
-        "CRS-R11-F1",
-        "CRT-R11-11",
-        "CRT-R11-03"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R11-2.A.2.d",
-        "REQ-R11-2.B.4.g",
-        "REQ-R11-2.C.1.a",
-        "REQ-R11-2.C.3.b",
-        "REQ-R11-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R12",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-F4",
-        "CRS-R12-07",
-        "CRS-R12-06",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-F5",
-        "CRS-R12-14",
-        "CRS-R12-F3",
-        "CRS-R12-F1",
-        "CRS-R12-15",
-        "CRS-R12-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R12-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R13",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 216,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-F4",
-        "CRS-R13-F3",
-        "CRS-R13-F5",
-        "CRT-R13-12",
-        "CRS-R13-01",
-        "CRS-R13-14",
-        "CRS-R13-F1",
-        "CRS-R13-13"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R13-2.B.4.h",
-        "REQ-R13-2.C.3.b",
-        "REQ-R13-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R14",
-       "covered": 27,
-       "with_candidate": 29,
-       "hours": 241,
-       "items": [
-        "CRS-R14-F2",
-        "CRS-R14-11",
-        "CRS-R14-F4",
-        "CRS-R14-05",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-08",
-        "CRS-R14-12",
-        "CRS-R14-F1",
-        "CRS-R14-03",
-        "CRS-R14-01",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R14-4.A.3.b.5"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R14-2.B.4.g",
-        "REQ-R14-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R15",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-F4",
-        "CRS-R15-08",
-        "CRS-R15-13",
-        "CRS-R15-11",
-        "CRS-R15-F3",
-        "CRS-R15-12",
-        "CRS-R15-F5",
-        "CRS-R15-F1",
-        "CRS-R15-07",
-        "CRS-R15-06"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R15-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R16",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 231,
-       "items": [
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-09",
-        "CRS-R16-13",
-        "CRS-R16-F5",
-        "CRT-R16-11",
-        "CRS-R16-14",
-        "CRS-R16-15",
-        "CRS-R16-F1",
-        "CRS-R16-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R16-2.B.3.a",
-        "REQ-R16-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R17",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R17-F2",
-        "CRS-R17-F4",
-        "CRS-R17-02",
-        "CRS-R17-07",
-        "CRS-R17-12",
-        "CRS-R17-F3",
-        "CRS-R17-F5",
-        "CRS-R17-13",
-        "CRS-R17-11",
-        "CRT-R17-11",
-        "CRS-R17-06",
-        "CRS-R17-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R17-2.B.4.h",
-        "REQ-R17-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R18",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 170,
-       "items": [
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-F4",
-        "CRS-R18-11",
-        "CRS-R18-08",
-        "CRS-R18-F3",
-        "CRS-R18-04",
-        "CRT-R18-06",
-        "CRS-R18-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R18-2.B.4.e",
-        "REQ-R18-2.B.4.h",
-        "REQ-R18-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R19",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-10",
-        "CRS-R19-F4",
-        "CRS-R19-09",
-        "CRS-R19-F3",
-        "CRS-R19-05",
-        "CRS-R19-F1",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R19-2.C.3.a",
-        "REQ-R19-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R20",
-       "covered": 26,
-       "with_candidate": 29,
-       "hours": 201,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-12",
-        "CRS-R20-F4",
-        "CRS-R20-03",
-        "CRS-R20-11",
-        "CRS-R20-F5",
-        "CRS-R20-09",
-        "CRT-R20-04",
-        "CRS-R20-13",
-        "CRS-R20-02"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R20-4.A.2.a.1"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R20-2.B.1.b",
-        "REQ-R20-4.A.3.b.1",
-        "REQ-R20-4.A.4.b.1"
-       ]
-      }
-     ]
-    }
-   },
-   "coverage_first": {
-    "strategy": "coverage_first",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 461,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 76.8,
-      "mean_items_per_plan": 8.3,
-      "mean_hours_per_plan": 119.8
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 539,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 89.8,
-      "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 220.6
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 577,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 96.2,
-      "mean_items_per_plan": 12.3,
-      "mean_hours_per_plan": 326.1
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 98.2,
-      "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 394.1
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 539,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 89.8,
-      "mean_items_per_plan": 11.2,
-      "mean_hours_per_plan": 220.6
-     },
-     {
-      "mode": "course_only",
-      "covered": 526,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 87.7,
-      "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 222.6
-     },
-     {
-      "mode": "certification_only",
-      "covered": 195,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 589,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 98.2,
-      "mean_items_per_plan": 12.8,
-      "mean_hours_per_plan": 394.1
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 598,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 99.7,
-      "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 464.1
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 598,
-      "with_candidate": 598,
-      "total": 600,
-      "pct": 99.7,
-      "mean_items_per_plan": 13.3,
-      "mean_hours_per_plan": 464.1
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 539,
-     "with_candidate": 598,
-     "total": 600,
-     "pct": 89.8,
-     "mean_items_per_plan": 11.2,
-     "mean_hours_per_plan": 220.6,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 240,
-       "items": [
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-F4",
-        "CRS-R01-10",
-        "CRS-R01-F3",
-        "CRS-R01-07",
-        "CRT-R01-11",
-        "CRS-R01-F5",
-        "CRS-R01-05"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R01-2.B.3.e",
-        "REQ-R01-2.B.4.e",
-        "REQ-R01-2.C.4.a",
-        "REQ-R01-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R02",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-F4",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-11",
-        "CRS-R02-06",
-        "CRT-R02-07",
-        "CRS-R02-F1",
-        "CRS-R02-F6",
-        "CRS-R02-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R02-2.B.3.a",
-        "REQ-R02-2.C.4.a"
-       ]
-      },
-      {
-       "role_id": "R03",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-F4",
-        "CRS-R03-10",
-        "CRS-R03-F3",
-        "CRS-R03-F5",
-        "CRS-R03-11",
-        "CRS-R03-15",
-        "CRS-R03-12",
-        "CRS-R03-F1",
-        "CRS-R03-F6",
-        "CRS-R03-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R03-2.B.3.m",
-        "REQ-R03-2.C.4.a",
-        "REQ-R03-4.A.2.a.3",
-        "REQ-R03-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R04",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-F4",
-        "CRS-R04-08",
-        "CRS-R04-10",
-        "CRS-R04-14",
-        "CRS-R04-F3",
-        "CRS-R04-13",
-        "CRS-R04-12",
-        "CRS-R04-15",
-        "CRS-R04-F1",
-        "CRS-R04-16",
-        "CRS-R04-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R04-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R05",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 180,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-F4",
-        "CRS-R05-F3",
-        "CRS-R05-05",
-        "CRS-R05-13",
-        "CRS-R05-F5",
-        "CRS-R05-06",
-        "CRS-R05-F1",
-        "CRS-R05-11",
-        "CRS-R05-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R05-2.B.3.e",
-        "REQ-R05-2.B.4.e",
-        "REQ-R05-2.C.1.e",
-        "REQ-R05-2.C.3.a",
-        "REQ-R05-4.A.2.a.1"
-       ]
-      },
-      {
-       "role_id": "R06",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 230,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-F2",
-        "CRS-R06-F4",
-        "CRS-R06-F3",
-        "CRS-R06-17",
-        "CRS-R06-12",
-        "CRS-R06-F5",
-        "CRS-R06-F1",
-        "CRS-R06-F6",
-        "CRS-R06-04",
-        "CRT-R06-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R06-2.B.4.e",
-        "REQ-R06-4.A.2.b.2"
-       ]
-      },
-      {
-       "role_id": "R07",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 182,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-12",
-        "CRS-R07-F4",
-        "CRS-R07-10",
-        "CRS-R07-F5",
-        "CRS-R07-F1",
-        "CRS-R07-F3",
-        "CRS-R07-F6",
-        "CRT-R07-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R07-2.B.4.g",
-        "REQ-R07-2.B.4.h",
-        "REQ-R07-4.A.2.a.3",
-        "REQ-R07-4.A.2.b.2",
-        "REQ-R07-4.A.2.b.4",
-        "REQ-R07-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R08",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-F4",
-        "CRS-R08-07",
-        "CRS-R08-12",
-        "CRS-R08-F3",
-        "CRS-R08-13",
-        "CRT-R08-10",
-        "CRS-R08-F6",
-        "CRS-R08-05",
-        "CRT-R08-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R08-2.C.3.b",
-        "REQ-R08-2.C.3.c"
-       ]
-      },
-      {
-       "role_id": "R09",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-F4",
-        "CRS-R09-F3",
-        "CRS-R09-13",
-        "CRS-R09-11",
-        "CRS-R09-14",
-        "CRS-R09-F1",
-        "CRS-R09-F6",
-        "CRT-R09-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R09-2.A.1.e",
-        "REQ-R09-2.C.1.a",
-        "REQ-R09-4.A.2.a.3",
-        "REQ-R09-4.A.2.b.2",
-        "REQ-R09-4.A.3.b.1"
-       ]
-      },
-      {
-       "role_id": "R10",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-F4",
-        "CRS-R10-F3",
-        "CRS-R10-06",
-        "CRS-R10-F5",
-        "CRS-R10-14",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRT-R10-11",
-        "CRS-R10-05",
-        "CRS-R10-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R10-2.B.4.e",
-        "REQ-R10-2.C.9.a",
-        "REQ-R10-4.A.2.b.2",
-        "REQ-R10-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R11",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-F4",
-        "CRS-R11-08",
-        "CRS-R11-12",
-        "CRS-R11-F5",
-        "CRS-R11-05",
-        "CRS-R11-13",
-        "CRS-R11-F1",
-        "CRT-R11-11",
-        "CRT-R11-03"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R11-2.A.2.d",
-        "REQ-R11-2.B.4.g",
-        "REQ-R11-2.C.1.a",
-        "REQ-R11-2.C.3.b",
-        "REQ-R11-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R12",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-F4",
-        "CRS-R12-07",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-06",
-        "CRS-R12-F5",
-        "CRS-R12-14",
-        "CRS-R12-F3",
-        "CRS-R12-F1",
-        "CRS-R12-15",
-        "CRS-R12-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R12-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R13",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 216,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-F4",
-        "CRS-R13-F3",
-        "CRS-R13-F5",
-        "CRT-R13-12",
-        "CRS-R13-01",
-        "CRS-R13-14",
-        "CRS-R13-F1",
-        "CRS-R13-13"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R13-2.B.4.h",
-        "REQ-R13-2.C.3.b",
-        "REQ-R13-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R14",
-       "covered": 27,
-       "with_candidate": 29,
-       "hours": 241,
-       "items": [
-        "CRS-R14-11",
-        "CRS-R14-F2",
-        "CRS-R14-F4",
-        "CRS-R14-05",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-12",
-        "CRS-R14-08",
-        "CRS-R14-F1",
-        "CRS-R14-01",
-        "CRS-R14-03",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R14-4.A.3.b.5"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R14-2.B.4.g",
-        "REQ-R14-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R15",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-F4",
-        "CRS-R15-08",
-        "CRS-R15-13",
-        "CRS-R15-11",
-        "CRS-R15-12",
-        "CRS-R15-F3",
-        "CRS-R15-F5",
-        "CRS-R15-F1",
-        "CRS-R15-07",
-        "CRS-R15-06"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R15-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R16",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 231,
-       "items": [
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-13",
-        "CRS-R16-09",
-        "CRS-R16-F5",
-        "CRT-R16-11",
-        "CRS-R16-14",
-        "CRS-R16-15",
-        "CRS-R16-F1",
-        "CRS-R16-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R16-2.B.3.a",
-        "REQ-R16-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R17",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R17-F2",
-        "CRS-R17-F4",
-        "CRS-R17-02",
-        "CRS-R17-07",
-        "CRS-R17-12",
-        "CRS-R17-F3",
-        "CRS-R17-F5",
-        "CRS-R17-13",
-        "CRT-R17-11",
-        "CRS-R17-06",
-        "CRS-R17-11",
-        "CRS-R17-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R17-2.B.4.h",
-        "REQ-R17-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R18",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 170,
-       "items": [
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-F4",
-        "CRS-R18-11",
-        "CRS-R18-08",
-        "CRS-R18-F3",
-        "CRS-R18-04",
-        "CRT-R18-06",
-        "CRS-R18-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R18-2.B.4.e",
-        "REQ-R18-2.B.4.h",
-        "REQ-R18-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R19",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-10",
-        "CRS-R19-F4",
-        "CRS-R19-09",
-        "CRS-R19-F3",
-        "CRS-R19-05",
-        "CRS-R19-F1",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R19-2.C.3.a",
-        "REQ-R19-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R20",
-       "covered": 26,
-       "with_candidate": 29,
-       "hours": 201,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-12",
-        "CRS-R20-F4",
-        "CRS-R20-03",
-        "CRS-R20-11",
-        "CRS-R20-F5",
-        "CRS-R20-09",
-        "CRT-R20-04",
-        "CRS-R20-13",
-        "CRS-R20-02"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R20-4.A.2.a.1"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R20-2.B.1.b",
-        "REQ-R20-4.A.3.b.1",
-        "REQ-R20-4.A.4.b.1"
-       ]
-      }
-     ]
-    }
-   }
-  },
-  "url_verified": {
-   "weighted_greedy": {
-    "strategy": "weighted_greedy",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 462,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 77,
-      "mean_items_per_plan": 8.3,
-      "mean_hours_per_plan": 119.3
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 540,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 90,
-      "mean_items_per_plan": 11.3,
-      "mean_hours_per_plan": 220.3
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 578,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 96.3,
-      "mean_items_per_plan": 12.4,
-      "mean_hours_per_plan": 329.3
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 590,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 98.3,
-      "mean_items_per_plan": 13,
-      "mean_hours_per_plan": 393.8
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 540,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 90,
-      "mean_items_per_plan": 11.3,
-      "mean_hours_per_plan": 220.3
-     },
-     {
-      "mode": "course_only",
-      "covered": 529,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 88.2,
-      "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 220.1
-     },
-     {
-      "mode": "certification_only",
-      "covered": 209,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 34.8,
-      "mean_items_per_plan": 3.4,
-      "mean_hours_per_plan": 209.3
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 590,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 98.3,
-      "mean_items_per_plan": 13,
-      "mean_hours_per_plan": 393.8
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 599,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 99.8,
-      "mean_items_per_plan": 13.4,
-      "mean_hours_per_plan": 461.8
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 599,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 99.8,
-      "mean_items_per_plan": 13.4,
-      "mean_hours_per_plan": 461.8
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 540,
-     "with_candidate": 599,
-     "total": 600,
-     "pct": 90,
-     "mean_items_per_plan": 11.3,
-     "mean_hours_per_plan": 220.3,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 210,
-       "items": [
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-F4",
-        "CRS-R01-10",
-        "CRS-R01-F3",
-        "CRS-R01-07",
-        "CRT-R01-11",
-        "CRS-R01-F5",
-        "CRT-R01-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R01-2.B.3.b",
-        "REQ-R01-2.B.4.e",
-        "REQ-R01-2.B.4.h",
-        "REQ-R01-2.C.4.a",
-        "REQ-R01-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R02",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-F4",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-11",
-        "CRS-R02-06",
-        "CRT-R02-07",
-        "CRS-R02-F1",
-        "CRS-R02-F6",
-        "CRS-R02-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R02-2.B.3.a",
-        "REQ-R02-2.C.4.a"
-       ]
-      },
-      {
-       "role_id": "R03",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-F4",
-        "CRS-R03-10",
-        "CRS-R03-F3",
-        "CRS-R03-F5",
-        "CRS-R03-11",
-        "CRS-R03-15",
-        "CRS-R03-12",
-        "CRS-R03-F6",
-        "CRS-R03-F1",
-        "CRS-R03-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R03-2.B.3.m",
-        "REQ-R03-2.C.4.a",
-        "REQ-R03-4.A.2.a.3",
-        "REQ-R03-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R04",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-F4",
-        "CRS-R04-08",
-        "CRS-R04-10",
-        "CRS-R04-14",
-        "CRS-R04-F3",
-        "CRS-R04-15",
-        "CRS-R04-13",
-        "CRS-R04-12",
-        "CRS-R04-F1",
-        "CRS-R04-16",
-        "CRS-R04-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R04-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R05",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 210,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-F4",
-        "CRS-R05-F3",
-        "CRS-R05-05",
-        "CRS-R05-F5",
-        "CRS-R05-13",
-        "CRS-R05-06",
-        "CRS-R05-F1",
-        "CRS-R05-11",
-        "CRS-R05-08",
-        "CRT-R05-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R05-2.B.3.e",
-        "REQ-R05-2.C.1.e",
-        "REQ-R05-2.C.3.a",
-        "REQ-R05-4.A.2.a.1"
-       ]
-      },
-      {
-       "role_id": "R06",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 230,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-F2",
-        "CRS-R06-F4",
-        "CRS-R06-F3",
-        "CRS-R06-12",
-        "CRS-R06-17",
-        "CRS-R06-F5",
-        "CRS-R06-F6",
-        "CRS-R06-F1",
-        "CRS-R06-04",
-        "CRT-R06-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R06-2.B.4.e",
-        "REQ-R06-4.A.2.b.2"
-       ]
-      },
-      {
-       "role_id": "R07",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 182,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-12",
-        "CRS-R07-F4",
-        "CRS-R07-10",
-        "CRS-R07-F5",
-        "CRS-R07-F6",
-        "CRS-R07-F1",
-        "CRS-R07-F3",
-        "CRT-R07-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R07-2.B.4.g",
-        "REQ-R07-2.B.4.h",
-        "REQ-R07-4.A.2.a.3",
-        "REQ-R07-4.A.2.b.2",
-        "REQ-R07-4.A.2.b.4",
-        "REQ-R07-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R08",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 227,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-F4",
-        "CRS-R08-08",
-        "CRS-R08-07",
-        "CRS-R08-12",
-        "CRS-R08-F3",
-        "CRS-R08-13",
-        "CRS-R08-F6",
-        "CRS-R08-05",
-        "CRT-R08-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R08-2.C.3.b",
-        "REQ-R08-2.C.3.c"
-       ]
-      },
-      {
-       "role_id": "R09",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-F4",
-        "CRS-R09-F3",
-        "CRS-R09-13",
-        "CRS-R09-11",
-        "CRS-R09-14",
-        "CRS-R09-F1",
-        "CRS-R09-F6",
-        "CRT-R09-04",
-        "CRS-R09-05"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R09-2.A.1.e",
-        "REQ-R09-2.B.4.e",
-        "REQ-R09-2.B.4.g",
-        "REQ-R09-2.C.1.a",
-        "REQ-R09-2.C.3.a",
-        "REQ-R09-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R10",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-F4",
-        "CRS-R10-F3",
-        "CRS-R10-06",
-        "CRS-R10-F5",
-        "CRS-R10-14",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRT-R10-11",
-        "CRS-R10-05",
-        "CRS-R10-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R10-2.B.4.e",
-        "REQ-R10-2.C.9.a",
-        "REQ-R10-4.A.2.b.2",
-        "REQ-R10-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R11",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-F4",
-        "CRS-R11-08",
-        "CRS-R11-12",
-        "CRS-R11-F5",
-        "CRS-R11-05",
-        "CRS-R11-13",
-        "CRS-R11-F1",
-        "CRT-R11-11",
-        "CRT-R11-03"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R11-2.A.2.d",
-        "REQ-R11-2.B.4.g",
-        "REQ-R11-2.C.1.a",
-        "REQ-R11-2.C.3.b",
-        "REQ-R11-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R12",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-F4",
-        "CRS-R12-07",
-        "CRS-R12-06",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-F5",
-        "CRS-R12-14",
-        "CRS-R12-F3",
-        "CRS-R12-F1",
-        "CRS-R12-15",
-        "CRS-R12-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R12-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R13",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 216,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-F4",
-        "CRS-R13-F3",
-        "CRS-R13-F5",
-        "CRT-R13-12",
-        "CRS-R13-01",
-        "CRS-R13-14",
-        "CRS-R13-F1",
-        "CRS-R13-13"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R13-2.B.4.h",
-        "REQ-R13-2.C.3.b",
-        "REQ-R13-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R14",
-       "covered": 27,
-       "with_candidate": 29,
-       "hours": 241,
-       "items": [
-        "CRS-R14-F2",
-        "CRS-R14-11",
-        "CRS-R14-F4",
-        "CRS-R14-05",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-08",
-        "CRS-R14-12",
-        "CRS-R14-F1",
-        "CRS-R14-03",
-        "CRS-R14-01",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R14-4.A.3.b.5"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R14-2.B.4.g",
-        "REQ-R14-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R15",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 242,
-       "items": [
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-F4",
-        "CRS-R15-05",
-        "CRS-R15-13",
-        "CRS-R15-11",
-        "CRS-R15-F3",
-        "CRS-R15-12",
-        "CRS-R15-F5",
-        "CRS-R15-08",
-        "CRS-R15-F1",
-        "CRS-R15-07"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R15-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R16",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 231,
-       "items": [
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-09",
-        "CRS-R16-13",
-        "CRS-R16-F5",
-        "CRT-R16-11",
-        "CRS-R16-14",
-        "CRS-R16-15",
-        "CRS-R16-F1",
-        "CRS-R16-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R16-2.B.3.a",
-        "REQ-R16-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R17",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R17-F2",
-        "CRS-R17-F4",
-        "CRS-R17-02",
-        "CRS-R17-07",
-        "CRS-R17-12",
-        "CRS-R17-F3",
-        "CRS-R17-F5",
-        "CRS-R17-13",
-        "CRS-R17-11",
-        "CRT-R17-11",
-        "CRS-R17-06",
-        "CRS-R17-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R17-2.B.4.h",
-        "REQ-R17-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R18",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 200,
-       "items": [
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-F4",
-        "CRS-R18-11",
-        "CRS-R18-08",
-        "CRS-R18-F3",
-        "CRS-R18-04",
-        "CRT-R18-06",
-        "CRS-R18-F1",
-        "CRT-R18-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R18-2.B.4.h",
-        "REQ-R18-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R19",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-10",
-        "CRS-R19-F4",
-        "CRS-R19-09",
-        "CRS-R19-F3",
-        "CRS-R19-05",
-        "CRS-R19-F1",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R19-2.C.3.a",
-        "REQ-R19-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R20",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 201,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-12",
-        "CRS-R20-F4",
-        "CRS-R20-03",
-        "CRS-R20-11",
-        "CRS-R20-F5",
-        "CRS-R20-09",
-        "CRS-R20-06",
-        "CRS-R20-13",
-        "CRS-R20-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R20-2.B.1.b",
-        "REQ-R20-4.A.3.b.1",
-        "REQ-R20-4.A.4.b.1"
-       ]
-      }
-     ]
-    }
-   },
-   "coverage_first": {
-    "strategy": "coverage_first",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 463,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 77.2,
-      "mean_items_per_plan": 8.3,
-      "mean_hours_per_plan": 119.5
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 541,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 90.2,
-      "mean_items_per_plan": 11.3,
-      "mean_hours_per_plan": 221.8
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 578,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 96.3,
-      "mean_items_per_plan": 12.4,
-      "mean_hours_per_plan": 329.8
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 590,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 98.3,
-      "mean_items_per_plan": 13,
-      "mean_hours_per_plan": 394.3
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 541,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 90.2,
-      "mean_items_per_plan": 11.3,
-      "mean_hours_per_plan": 221.8
-     },
-     {
-      "mode": "course_only",
-      "covered": 529,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 88.2,
-      "mean_items_per_plan": 10.8,
-      "mean_hours_per_plan": 220.1
-     },
-     {
-      "mode": "certification_only",
-      "covered": 209,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 34.8,
-      "mean_items_per_plan": 3.4,
-      "mean_hours_per_plan": 209.3
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 590,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 98.3,
-      "mean_items_per_plan": 13,
-      "mean_hours_per_plan": 394.3
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 599,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 99.8,
-      "mean_items_per_plan": 13.4,
-      "mean_hours_per_plan": 463.3
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 599,
-      "with_candidate": 599,
-      "total": 600,
-      "pct": 99.8,
-      "mean_items_per_plan": 13.4,
-      "mean_hours_per_plan": 463.3
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 541,
-     "with_candidate": 599,
-     "total": 600,
-     "pct": 90.2,
-     "mean_items_per_plan": 11.3,
-     "mean_hours_per_plan": 221.8,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 240,
-       "items": [
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-F4",
-        "CRS-R01-10",
-        "CRS-R01-F3",
-        "CRS-R01-07",
-        "CRT-R01-11",
-        "CRS-R01-F5",
-        "CRS-R01-05"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R01-2.B.3.e",
-        "REQ-R01-2.B.4.e",
-        "REQ-R01-2.C.4.a",
-        "REQ-R01-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R02",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-F4",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-11",
-        "CRS-R02-06",
-        "CRT-R02-07",
-        "CRS-R02-F1",
-        "CRS-R02-F6",
-        "CRS-R02-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R02-2.B.3.a",
-        "REQ-R02-2.C.4.a"
-       ]
-      },
-      {
-       "role_id": "R03",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-F4",
-        "CRS-R03-10",
-        "CRS-R03-F3",
-        "CRS-R03-F5",
-        "CRS-R03-11",
-        "CRS-R03-15",
-        "CRS-R03-12",
-        "CRS-R03-F1",
-        "CRS-R03-F6",
-        "CRS-R03-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R03-2.B.3.m",
-        "REQ-R03-2.C.4.a",
-        "REQ-R03-4.A.2.a.3",
-        "REQ-R03-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R04",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-F4",
-        "CRS-R04-08",
-        "CRS-R04-10",
-        "CRS-R04-14",
-        "CRS-R04-F3",
-        "CRS-R04-13",
-        "CRS-R04-12",
-        "CRS-R04-15",
-        "CRS-R04-F1",
-        "CRS-R04-16",
-        "CRS-R04-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R04-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R05",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 210,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-F4",
-        "CRS-R05-F3",
-        "CRS-R05-05",
-        "CRS-R05-13",
-        "CRS-R05-F5",
-        "CRS-R05-06",
-        "CRS-R05-F1",
-        "CRS-R05-11",
-        "CRS-R05-08",
-        "CRT-R05-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R05-2.B.3.e",
-        "REQ-R05-2.C.1.e",
-        "REQ-R05-2.C.3.a",
-        "REQ-R05-4.A.2.a.1"
-       ]
-      },
-      {
-       "role_id": "R06",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 230,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-F2",
-        "CRS-R06-F4",
-        "CRS-R06-F3",
-        "CRS-R06-17",
-        "CRS-R06-12",
-        "CRS-R06-F5",
-        "CRS-R06-F1",
-        "CRS-R06-F6",
-        "CRS-R06-04",
-        "CRT-R06-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R06-2.B.4.e",
-        "REQ-R06-4.A.2.b.2"
-       ]
-      },
-      {
-       "role_id": "R07",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 182,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-12",
-        "CRS-R07-F4",
-        "CRS-R07-10",
-        "CRS-R07-F5",
-        "CRS-R07-F1",
-        "CRS-R07-F3",
-        "CRS-R07-F6",
-        "CRT-R07-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R07-2.B.4.g",
-        "REQ-R07-2.B.4.h",
-        "REQ-R07-4.A.2.a.3",
-        "REQ-R07-4.A.2.b.2",
-        "REQ-R07-4.A.2.b.4",
-        "REQ-R07-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R08",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 227,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-F4",
-        "CRS-R08-08",
-        "CRS-R08-07",
-        "CRS-R08-12",
-        "CRS-R08-F3",
-        "CRS-R08-13",
-        "CRS-R08-F6",
-        "CRS-R08-05",
-        "CRT-R08-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R08-2.C.3.b",
-        "REQ-R08-2.C.3.c"
-       ]
-      },
-      {
-       "role_id": "R09",
-       "covered": 24,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-F4",
-        "CRS-R09-F3",
-        "CRS-R09-13",
-        "CRS-R09-11",
-        "CRS-R09-14",
-        "CRS-R09-F1",
-        "CRS-R09-F6",
-        "CRT-R09-04",
-        "CRS-R09-05"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R09-2.A.1.e",
-        "REQ-R09-2.B.4.e",
-        "REQ-R09-2.B.4.g",
-        "REQ-R09-2.C.1.a",
-        "REQ-R09-2.C.3.a",
-        "REQ-R09-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R10",
-       "covered": 26,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-F4",
-        "CRS-R10-F3",
-        "CRS-R10-06",
-        "CRS-R10-F5",
-        "CRS-R10-14",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRT-R10-11",
-        "CRS-R10-05",
-        "CRS-R10-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R10-2.B.4.e",
-        "REQ-R10-2.C.9.a",
-        "REQ-R10-4.A.2.b.2",
-        "REQ-R10-4.A.3.b.6"
-       ]
-      },
-      {
-       "role_id": "R11",
-       "covered": 25,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-F4",
-        "CRS-R11-08",
-        "CRS-R11-12",
-        "CRS-R11-F5",
-        "CRS-R11-05",
-        "CRS-R11-13",
-        "CRS-R11-F1",
-        "CRT-R11-11",
-        "CRT-R11-03"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R11-2.A.2.d",
-        "REQ-R11-2.B.4.g",
-        "REQ-R11-2.C.1.a",
-        "REQ-R11-2.C.3.b",
-        "REQ-R11-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R12",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 252,
-       "items": [
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-F4",
-        "CRS-R12-07",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-06",
-        "CRS-R12-F5",
-        "CRS-R12-14",
-        "CRS-R12-F3",
-        "CRS-R12-F1",
-        "CRS-R12-15",
-        "CRS-R12-16"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R12-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R13",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 216,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-F4",
-        "CRS-R13-F3",
-        "CRS-R13-F5",
-        "CRT-R13-12",
-        "CRS-R13-01",
-        "CRS-R13-14",
-        "CRS-R13-F1",
-        "CRS-R13-13"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R13-2.B.4.h",
-        "REQ-R13-2.C.3.b",
-        "REQ-R13-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R14",
-       "covered": 27,
-       "with_candidate": 29,
-       "hours": 241,
-       "items": [
-        "CRS-R14-11",
-        "CRS-R14-F2",
-        "CRS-R14-F4",
-        "CRS-R14-05",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-12",
-        "CRS-R14-08",
-        "CRS-R14-F1",
-        "CRS-R14-01",
-        "CRS-R14-03",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [
-        "REQ-R14-4.A.3.b.5"
-       ],
-       "uncovered_over_capacity": [
-        "REQ-R14-2.B.4.g",
-        "REQ-R14-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R15",
-       "covered": 29,
-       "with_candidate": 30,
-       "hours": 242,
-       "items": [
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-F4",
-        "CRS-R15-05",
-        "CRS-R15-13",
-        "CRS-R15-11",
-        "CRS-R15-12",
-        "CRS-R15-F3",
-        "CRS-R15-F5",
-        "CRS-R15-08",
-        "CRS-R15-F1",
-        "CRS-R15-07"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R15-4.A.2.a.3"
-       ]
-      },
-      {
-       "role_id": "R16",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 231,
-       "items": [
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-13",
-        "CRS-R16-09",
-        "CRS-R16-F5",
-        "CRT-R16-11",
-        "CRS-R16-14",
-        "CRS-R16-15",
-        "CRS-R16-F1",
-        "CRS-R16-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R16-2.B.3.a",
-        "REQ-R16-2.B.4.h"
-       ]
-      },
-      {
-       "role_id": "R17",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 212,
-       "items": [
-        "CRS-R17-F2",
-        "CRS-R17-F4",
-        "CRS-R17-02",
-        "CRS-R17-07",
-        "CRS-R17-12",
-        "CRS-R17-F3",
-        "CRS-R17-F5",
-        "CRS-R17-13",
-        "CRT-R17-11",
-        "CRS-R17-06",
-        "CRS-R17-11",
-        "CRS-R17-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R17-2.B.4.h",
-        "REQ-R17-2.C.9.a"
-       ]
-      },
-      {
-       "role_id": "R18",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 200,
-       "items": [
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-F4",
-        "CRS-R18-11",
-        "CRS-R18-08",
-        "CRS-R18-F3",
-        "CRS-R18-04",
-        "CRT-R18-06",
-        "CRS-R18-F1",
-        "CRT-R18-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R18-2.B.4.h",
-        "REQ-R18-2.C.3.a"
-       ]
-      },
-      {
-       "role_id": "R19",
-       "covered": 28,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-10",
-        "CRS-R19-F4",
-        "CRS-R19-09",
-        "CRS-R19-F3",
-        "CRS-R19-05",
-        "CRS-R19-F1",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R19-2.C.3.a",
-        "REQ-R19-4.A.1.a.2"
-       ]
-      },
-      {
-       "role_id": "R20",
-       "covered": 27,
-       "with_candidate": 30,
-       "hours": 201,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-12",
-        "CRS-R20-F4",
-        "CRS-R20-03",
-        "CRS-R20-11",
-        "CRS-R20-F5",
-        "CRS-R20-09",
-        "CRS-R20-06",
-        "CRS-R20-13",
-        "CRS-R20-02"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": [
-        "REQ-R20-2.B.1.b",
-        "REQ-R20-4.A.3.b.1",
-        "REQ-R20-4.A.4.b.1"
-       ]
-      }
-     ]
-    }
-   }
-  },
-  "additions_confirmed": {
-   "weighted_greedy": {
-    "strategy": "weighted_greedy",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 526,
+      "covered": 528,
       "with_candidate": 600,
       "total": 600,
-      "pct": 87.7,
+      "pct": 88,
       "mean_items_per_plan": 10.7,
-      "mean_hours_per_plan": 120.8
+      "mean_hours_per_plan": 121.2
      },
      {
       "months": 6,
@@ -3809,7 +1283,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      },
      {
       "months": 6,
@@ -3820,7 +1294,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      },
      {
       "months": 6,
@@ -3831,7 +1305,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      }
     ],
     "by_mode_6m10h": [
@@ -3842,25 +1316,25 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      },
      {
       "mode": "course_only",
-      "covered": 591,
+      "covered": 592,
       "with_candidate": 600,
       "total": 600,
-      "pct": 98.5,
-      "mean_items_per_plan": 13.6,
-      "mean_hours_per_plan": 186.6
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 186.1
      },
      {
       "mode": "certification_only",
-      "covered": 195,
+      "covered": 198,
       "with_candidate": 600,
       "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
      }
     ],
     "by_months_10h": [
@@ -3873,7 +1347,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      },
      {
       "months": 18,
@@ -3884,7 +1358,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      },
      {
       "months": 24,
@@ -3895,7 +1369,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
+      "mean_hours_per_plan": 199.1
      }
     ],
     "primary_6m10h_both": {
@@ -3904,13 +1378,13 @@
      "total": 600,
      "pct": 100,
      "mean_items_per_plan": 14.1,
-     "mean_hours_per_plan": 201.1,
+     "mean_hours_per_plan": 199.1,
      "per_role": [
       {
        "role_id": "R01",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 193,
+       "hours": 188,
        "items": [
         "CRS-R01-N04",
         "CRS-R01-F2",
@@ -3924,8 +1398,8 @@
         "CRS-R01-F5",
         "CRS-R01-N13",
         "CRS-R01-N06",
+        "CRS-R01-N12",
         "CRS-R01-07",
-        "CRS-R01-N11",
         "CRT-R01-11"
        ],
        "uncovered_no_candidate": [],
@@ -3935,7 +1409,7 @@
        "role_id": "R02",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 199,
+       "hours": 196,
        "items": [
         "CRS-R02-F2",
         "CRS-R02-12",
@@ -3943,13 +1417,13 @@
         "CRS-R02-N03",
         "CRS-R02-F5",
         "CRS-R02-F3",
-        "CRS-R02-N10",
+        "CRS-R02-N11",
         "CRS-R02-F4",
         "CRS-R02-N07",
         "CRS-R02-N08",
         "CRS-R02-N13",
         "CRS-R02-N06",
-        "CRS-R02-N11",
+        "CRS-R02-N10",
         "CRS-R02-F1",
         "CRS-R02-F6"
        ],
@@ -3960,7 +1434,7 @@
        "role_id": "R03",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 198,
+       "hours": 193,
        "items": [
         "CRS-R03-F2",
         "CRS-R03-13",
@@ -3974,8 +1448,8 @@
         "CRS-R03-N08",
         "CRS-R03-N06",
         "CRS-R03-15",
-        "CRS-R03-F6",
         "CRS-R03-N12",
+        "CRS-R03-F6",
         "CRS-R03-F1"
        ],
        "uncovered_no_candidate": [],
@@ -4008,7 +1482,7 @@
        "role_id": "R05",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 249,
+       "hours": 246,
        "items": [
         "CRS-R05-F2",
         "CRS-R05-12",
@@ -4017,11 +1491,11 @@
         "CRS-R05-N03",
         "CRS-R05-N13",
         "CRS-R05-F3",
-        "CRS-R05-N10",
+        "CRS-R05-N11",
         "CRS-R05-13",
         "CRS-R05-F4",
+        "CRS-R05-N10",
         "CRS-R05-F1",
-        "CRS-R05-N11",
         "CRS-R05-10"
        ],
        "uncovered_no_candidate": [],
@@ -4054,7 +1528,7 @@
        "role_id": "R07",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 175,
+       "hours": 170,
        "items": [
         "CRS-R07-14",
         "CRS-R07-N04",
@@ -4067,9 +1541,9 @@
         "CRS-R07-N13",
         "CRS-R07-F3",
         "CRS-R07-N08",
+        "CRS-R07-N12",
         "CRS-R07-N10",
         "CRS-R07-F6",
-        "CRS-R07-N12",
         "CRS-R07-F1"
        ],
        "uncovered_no_candidate": [],
@@ -4079,7 +1553,7 @@
        "role_id": "R08",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 191,
+       "hours": 183,
        "items": [
         "CRS-R08-F2",
         "CRS-R08-11",
@@ -4088,614 +1562,10 @@
         "CRS-R08-N07",
         "CRS-R08-N13",
         "CRS-R08-N03",
+        "CRS-R08-N12",
         "CRS-R08-N10",
         "CRS-R08-F4",
         "CRS-R08-F3",
-        "CRS-R08-N12",
-        "CRS-R08-N08",
-        "CRS-R08-N06",
-        "CRS-R08-F6",
-        "CRS-R08-N14"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R09",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 175,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-N04",
-        "CRS-R09-N01",
-        "CRS-R09-F3",
-        "CRS-R09-N13",
-        "CRS-R09-N06",
-        "CRS-R09-N03",
-        "CRS-R09-14",
-        "CRS-R09-N10",
-        "CRS-R09-F4",
-        "CRS-R09-N07",
-        "CRS-R09-F1",
-        "CRS-R09-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R10",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 241,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-N01",
-        "CRS-R10-N07",
-        "CRS-R10-F3",
-        "CRS-R10-N03",
-        "CRS-R10-06",
-        "CRS-R10-F4",
-        "CRS-R10-F5",
-        "CRS-R10-N08",
-        "CRS-R10-N06",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRS-R10-N12",
-        "CRS-R10-N09",
-        "CRT-R10-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R11",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 214,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-N04",
-        "CRS-R11-N01",
-        "CRS-R11-N07",
-        "CRS-R11-N13",
-        "CRS-R11-N03",
-        "CRS-R11-12",
-        "CRS-R11-N10",
-        "CRS-R11-F4",
-        "CRS-R11-08",
-        "CRS-R11-F1",
-        "CRS-R11-N12",
-        "CRS-R11-N09",
-        "CRT-R11-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R12",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 171,
-       "items": [
-        "CRS-R12-N04",
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-N07",
-        "CRS-R12-F4",
-        "CRS-R12-N03",
-        "CRS-R12-06",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-F5",
-        "CRS-R12-N10",
-        "CRS-R12-F3",
-        "CRS-R12-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R13",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 227,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-N04",
-        "CRS-R13-F4",
-        "CRS-R13-N07",
-        "CRS-R13-N13",
-        "CRS-R13-N03",
-        "CRS-R13-F3",
-        "CRS-R13-N10",
-        "CRS-R13-N12",
-        "CRS-R13-N08",
-        "CRS-R13-F1",
-        "CRS-R13-N09",
-        "CRS-R13-01",
-        "CRT-R13-12"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R14",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 209,
-       "items": [
-        "CRS-R14-F2",
-        "CRS-R14-11",
-        "CRS-R14-N04",
-        "CRS-R14-N01",
-        "CRS-R14-05",
-        "CRS-R14-N10",
-        "CRS-R14-N03",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-N07",
-        "CRS-R14-F1",
-        "CRS-R14-01",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R15",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 179,
-       "items": [
-        "CRS-R15-N04",
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-N01",
-        "CRS-R15-N13",
-        "CRS-R15-N07",
-        "CRS-R15-N10",
-        "CRS-R15-11",
-        "CRS-R15-F4",
-        "CRS-R15-F3",
-        "CRS-R15-08",
-        "CRS-R15-13",
-        "CRS-R15-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R16",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 199,
-       "items": [
-        "CRS-R16-N04",
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-N07",
-        "CRS-R16-N03",
-        "CRS-R16-13",
-        "CRS-R16-F5",
-        "CRS-R16-09",
-        "CRS-R16-14",
-        "CRS-R16-F1",
-        "CRS-R16-N09",
-        "CRT-R16-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R17",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R17-N04",
-        "CRS-R17-F2",
-        "CRS-R17-N01",
-        "CRS-R17-N07",
-        "CRS-R17-12",
-        "CRS-R17-07",
-        "CRS-R17-N13",
-        "CRS-R17-N03",
-        "CRS-R17-F4",
-        "CRS-R17-F3",
-        "CRS-R17-N08",
-        "CRS-R17-02",
-        "CRS-R17-N11",
-        "CRS-R17-F1",
-        "CRS-R17-N09",
-        "CRT-R17-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R18",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R18-N04",
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-N07",
-        "CRS-R18-N01",
-        "CRS-R18-F3",
-        "CRS-R18-N13",
-        "CRS-R18-N03",
-        "CRS-R18-N10",
-        "CRS-R18-F4",
-        "CRS-R18-N08",
-        "CRS-R18-11",
-        "CRS-R18-F1",
-        "CRS-R18-10",
-        "CRS-R18-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R19",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 233,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-N13",
-        "CRS-R19-F4",
-        "CRS-R19-10",
-        "CRS-R19-F3",
-        "CRS-R19-N07",
-        "CRS-R19-09",
-        "CRS-R19-F1",
-        "CRS-R19-N10",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R20",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-N13",
-        "CRS-R20-12",
-        "CRS-R20-N01",
-        "CRS-R20-N07",
-        "CRS-R20-N10",
-        "CRS-R20-F4",
-        "CRS-R20-F3",
-        "CRS-R20-13",
-        "CRS-R20-02",
-        "CRT-R20-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      }
-     ]
-    }
-   },
-   "coverage_first": {
-    "strategy": "coverage_first",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 526,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 87.7,
-      "mean_items_per_plan": 10.7,
-      "mean_hours_per_plan": 120.8
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     },
-     {
-      "mode": "course_only",
-      "covered": 591,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 98.5,
-      "mean_items_per_plan": 13.6,
-      "mean_hours_per_plan": 186.6
-     },
-     {
-      "mode": "certification_only",
-      "covered": 195,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 32.5,
-      "mean_items_per_plan": 3,
-      "mean_hours_per_plan": 210.8
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.1
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 600,
-     "with_candidate": 600,
-     "total": 600,
-     "pct": 100,
-     "mean_items_per_plan": 14.1,
-     "mean_hours_per_plan": 201.1,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 193,
-       "items": [
-        "CRS-R01-N04",
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-N01",
-        "CRS-R01-N03",
-        "CRS-R01-10",
-        "CRS-R01-N07",
-        "CRS-R01-F3",
-        "CRS-R01-F4",
-        "CRS-R01-F5",
-        "CRS-R01-N13",
-        "CRS-R01-N06",
-        "CRS-R01-07",
-        "CRS-R01-N11",
-        "CRT-R01-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R02",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 199,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-N01",
-        "CRS-R02-N03",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-F4",
-        "CRS-R02-N10",
-        "CRS-R02-N07",
-        "CRS-R02-N08",
-        "CRS-R02-N13",
-        "CRS-R02-N06",
-        "CRS-R02-N11",
-        "CRS-R02-F1",
-        "CRS-R02-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R03",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 198,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-N04",
-        "CRS-R03-F4",
-        "CRS-R03-N07",
-        "CRS-R03-N13",
-        "CRS-R03-10",
-        "CRS-R03-N03",
-        "CRS-R03-F3",
-        "CRS-R03-N08",
-        "CRS-R03-N06",
-        "CRS-R03-15",
-        "CRS-R03-N12",
-        "CRS-R03-F1",
-        "CRS-R03-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R04",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 177,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-N07",
-        "CRS-R04-F4",
-        "CRS-R04-10",
-        "CRS-R04-N03",
-        "CRS-R04-08",
-        "CRS-R04-F3",
-        "CRS-R04-N06",
-        "CRS-R04-13",
-        "CRS-R04-15",
-        "CRS-R04-N10",
-        "CRS-R04-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R05",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 249,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-N01",
-        "CRS-R05-N07",
-        "CRS-R05-N13",
-        "CRS-R05-F3",
-        "CRS-R05-N03",
-        "CRS-R05-13",
-        "CRS-R05-F4",
-        "CRS-R05-N10",
-        "CRS-R05-F1",
-        "CRS-R05-N11",
-        "CRS-R05-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R06",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 167,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-N01",
-        "CRS-R06-F2",
-        "CRS-R06-N13",
-        "CRS-R06-F3",
-        "CRS-R06-N03",
-        "CRS-R06-12",
-        "CRS-R06-N07",
-        "CRS-R06-N06",
-        "CRS-R06-N10",
-        "CRS-R06-F1",
-        "CRS-R06-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R07",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 175,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-N04",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-N01",
-        "CRS-R07-12",
-        "CRS-R07-N07",
-        "CRS-R07-N13",
-        "CRS-R07-N03",
-        "CRS-R07-F3",
-        "CRS-R07-N08",
-        "CRS-R07-N10",
-        "CRS-R07-N12",
-        "CRS-R07-F1",
-        "CRS-R07-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R08",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 191,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-N04",
-        "CRS-R08-N01",
-        "CRS-R08-N07",
-        "CRS-R08-N13",
-        "CRS-R08-N03",
-        "CRS-R08-F4",
-        "CRS-R08-N10",
-        "CRS-R08-F3",
-        "CRS-R08-N12",
         "CRS-R08-N08",
         "CRS-R08-N06",
         "CRS-R08-N14",
@@ -4714,13 +1584,13 @@
         "CRS-R09-12",
         "CRS-R09-N04",
         "CRS-R09-N01",
+        "CRS-R09-F3",
         "CRS-R09-N13",
         "CRS-R09-N06",
-        "CRS-R09-F3",
         "CRS-R09-N03",
         "CRS-R09-14",
-        "CRS-R09-F4",
         "CRS-R09-N10",
+        "CRS-R09-F4",
         "CRS-R09-N07",
         "CRS-R09-F1",
         "CRS-R09-F6"
@@ -4732,7 +1602,7 @@
        "role_id": "R10",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 241,
+       "hours": 236,
        "items": [
         "CRS-R10-F2",
         "CRS-R10-11",
@@ -4745,9 +1615,9 @@
         "CRS-R10-F5",
         "CRS-R10-N08",
         "CRS-R10-N06",
+        "CRS-R10-N12",
         "CRS-R10-12",
         "CRS-R10-F1",
-        "CRS-R10-N12",
         "CRS-R10-N09",
         "CRT-R10-11"
        ],
@@ -4756,616 +1626,10 @@
       },
       {
        "role_id": "R11",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 214,
-       "items": [
-        "CRS-R11-F2",
-        "CRS-R11-11",
-        "CRS-R11-N04",
-        "CRS-R11-N01",
-        "CRS-R11-N07",
-        "CRS-R11-N13",
-        "CRS-R11-N03",
-        "CRS-R11-12",
-        "CRS-R11-F4",
-        "CRS-R11-N10",
-        "CRS-R11-08",
-        "CRS-R11-F1",
-        "CRS-R11-N12",
-        "CRS-R11-N09",
-        "CRT-R11-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R12",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 171,
-       "items": [
-        "CRS-R12-N04",
-        "CRS-R12-F2",
-        "CRS-R12-11",
-        "CRS-R12-N07",
-        "CRS-R12-F4",
-        "CRS-R12-N03",
-        "CRS-R12-13",
-        "CRS-R12-12",
-        "CRS-R12-06",
-        "CRS-R12-F5",
-        "CRS-R12-N10",
-        "CRS-R12-F3",
-        "CRS-R12-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R13",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 227,
-       "items": [
-        "CRS-R13-F2",
-        "CRS-R13-11",
-        "CRS-R13-N04",
-        "CRS-R13-F4",
-        "CRS-R13-N07",
-        "CRS-R13-N13",
-        "CRS-R13-F3",
-        "CRS-R13-N03",
-        "CRS-R13-N10",
-        "CRS-R13-N12",
-        "CRS-R13-N08",
-        "CRS-R13-F1",
-        "CRS-R13-N09",
-        "CRS-R13-01",
-        "CRT-R13-12"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R14",
        "covered": 30,
        "with_candidate": 30,
        "hours": 209,
        "items": [
-        "CRS-R14-11",
-        "CRS-R14-F2",
-        "CRS-R14-N04",
-        "CRS-R14-N01",
-        "CRS-R14-05",
-        "CRS-R14-N10",
-        "CRS-R14-N03",
-        "CRS-R14-F3",
-        "CRS-R14-F5",
-        "CRS-R14-N07",
-        "CRS-R14-F1",
-        "CRS-R14-01",
-        "CRT-R14-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R15",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 179,
-       "items": [
-        "CRS-R15-N04",
-        "CRS-R15-F2",
-        "CRS-R15-14",
-        "CRS-R15-N01",
-        "CRS-R15-N13",
-        "CRS-R15-N07",
-        "CRS-R15-11",
-        "CRS-R15-F4",
-        "CRS-R15-N10",
-        "CRS-R15-F3",
-        "CRS-R15-08",
-        "CRS-R15-13",
-        "CRS-R15-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R16",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 199,
-       "items": [
-        "CRS-R16-N04",
-        "CRS-R16-F2",
-        "CRS-R16-11",
-        "CRS-R16-F4",
-        "CRS-R16-04",
-        "CRS-R16-N07",
-        "CRS-R16-N03",
-        "CRS-R16-13",
-        "CRS-R16-F5",
-        "CRS-R16-09",
-        "CRS-R16-14",
-        "CRS-R16-F1",
-        "CRS-R16-N09",
-        "CRT-R16-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R17",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 225,
-       "items": [
-        "CRS-R17-N04",
-        "CRS-R17-F2",
-        "CRS-R17-N01",
-        "CRS-R17-N07",
-        "CRS-R17-12",
-        "CRS-R17-N13",
-        "CRS-R17-07",
-        "CRS-R17-N03",
-        "CRS-R17-F4",
-        "CRS-R17-F3",
-        "CRS-R17-N08",
-        "CRS-R17-02",
-        "CRS-R17-N11",
-        "CRS-R17-F1",
-        "CRS-R17-N09",
-        "CRT-R17-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R18",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 197,
-       "items": [
-        "CRS-R18-N04",
-        "CRS-R18-F2",
-        "CRS-R18-12",
-        "CRS-R18-N07",
-        "CRS-R18-N01",
-        "CRS-R18-N13",
-        "CRS-R18-F3",
-        "CRS-R18-N03",
-        "CRS-R18-F4",
-        "CRS-R18-N10",
-        "CRS-R18-N08",
-        "CRS-R18-11",
-        "CRS-R18-F1",
-        "CRS-R18-10",
-        "CRS-R18-08"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R19",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 233,
-       "items": [
-        "CRS-R19-F2",
-        "CRS-R19-12",
-        "CRS-R19-N13",
-        "CRS-R19-F4",
-        "CRS-R19-10",
-        "CRS-R19-F3",
-        "CRS-R19-N07",
-        "CRS-R19-09",
-        "CRS-R19-F1",
-        "CRS-R19-N10",
-        "CRS-R19-07",
-        "CRT-R19-09"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R20",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 202,
-       "items": [
-        "CRS-R20-F2",
-        "CRS-R20-N13",
-        "CRS-R20-12",
-        "CRS-R20-N01",
-        "CRS-R20-N07",
-        "CRS-R20-F4",
-        "CRS-R20-N10",
-        "CRS-R20-F3",
-        "CRS-R20-13",
-        "CRS-R20-02",
-        "CRT-R20-04"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      }
-     ]
-    }
-   }
-  },
-  "url_and_additions": {
-   "weighted_greedy": {
-    "strategy": "weighted_greedy",
-    "by_capacity": [
-     {
-      "months": 6,
-      "hours_per_week": 5,
-      "Hmax": 129.9,
-      "covered": 527,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 87.8,
-      "mean_items_per_plan": 10.6,
-      "mean_hours_per_plan": 120.3
-     },
-     {
-      "months": 6,
-      "hours_per_week": 10,
-      "Hmax": 259.8,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     },
-     {
-      "months": 6,
-      "hours_per_week": 15,
-      "Hmax": 389.7,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     },
-     {
-      "months": 6,
-      "hours_per_week": 20,
-      "Hmax": 519.6,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     }
-    ],
-    "by_mode_6m10h": [
-     {
-      "mode": "both",
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     },
-     {
-      "mode": "course_only",
-      "covered": 592,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 98.7,
-      "mean_items_per_plan": 13.7,
-      "mean_hours_per_plan": 188.2
-     },
-     {
-      "mode": "certification_only",
-      "covered": 209,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 34.8,
-      "mean_items_per_plan": 3.4,
-      "mean_hours_per_plan": 209.3
-     }
-    ],
-    "by_months_10h": [
-     {
-      "months": 12,
-      "hours_per_week": 10,
-      "Hmax": 519.6,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     },
-     {
-      "months": 18,
-      "hours_per_week": 10,
-      "Hmax": 779.4,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     },
-     {
-      "months": 24,
-      "hours_per_week": 10,
-      "Hmax": 1039.2,
-      "covered": 600,
-      "with_candidate": 600,
-      "total": 600,
-      "pct": 100,
-      "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
-     }
-    ],
-    "primary_6m10h_both": {
-     "covered": 600,
-     "with_candidate": 600,
-     "total": 600,
-     "pct": 100,
-     "mean_items_per_plan": 14.1,
-     "mean_hours_per_plan": 201.2,
-     "per_role": [
-      {
-       "role_id": "R01",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 193,
-       "items": [
-        "CRS-R01-N04",
-        "CRS-R01-F2",
-        "CRS-R01-11",
-        "CRS-R01-N01",
-        "CRS-R01-N03",
-        "CRS-R01-10",
-        "CRS-R01-N07",
-        "CRS-R01-F3",
-        "CRS-R01-F4",
-        "CRS-R01-F5",
-        "CRS-R01-N13",
-        "CRS-R01-N06",
-        "CRS-R01-07",
-        "CRS-R01-N11",
-        "CRT-R01-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R02",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 199,
-       "items": [
-        "CRS-R02-F2",
-        "CRS-R02-12",
-        "CRS-R02-N01",
-        "CRS-R02-N03",
-        "CRS-R02-F5",
-        "CRS-R02-F3",
-        "CRS-R02-N10",
-        "CRS-R02-F4",
-        "CRS-R02-N07",
-        "CRS-R02-N08",
-        "CRS-R02-N13",
-        "CRS-R02-N06",
-        "CRS-R02-N11",
-        "CRS-R02-F1",
-        "CRS-R02-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R03",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 198,
-       "items": [
-        "CRS-R03-F2",
-        "CRS-R03-13",
-        "CRS-R03-N04",
-        "CRS-R03-F4",
-        "CRS-R03-N07",
-        "CRS-R03-10",
-        "CRS-R03-N03",
-        "CRS-R03-N13",
-        "CRS-R03-F3",
-        "CRS-R03-N08",
-        "CRS-R03-N06",
-        "CRS-R03-15",
-        "CRS-R03-F6",
-        "CRS-R03-N12",
-        "CRS-R03-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R04",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 177,
-       "items": [
-        "CRS-R04-F2",
-        "CRS-R04-11",
-        "CRS-R04-N07",
-        "CRS-R04-F4",
-        "CRS-R04-10",
-        "CRS-R04-08",
-        "CRS-R04-N03",
-        "CRS-R04-F3",
-        "CRS-R04-N06",
-        "CRS-R04-15",
-        "CRS-R04-13",
-        "CRS-R04-N10",
-        "CRS-R04-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R05",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 249,
-       "items": [
-        "CRS-R05-F2",
-        "CRS-R05-12",
-        "CRS-R05-N01",
-        "CRS-R05-N07",
-        "CRS-R05-N03",
-        "CRS-R05-N13",
-        "CRS-R05-F3",
-        "CRS-R05-N10",
-        "CRS-R05-13",
-        "CRS-R05-F4",
-        "CRS-R05-F1",
-        "CRS-R05-N11",
-        "CRS-R05-10"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R06",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 167,
-       "items": [
-        "CRS-R06-13",
-        "CRS-R06-16",
-        "CRS-R06-N01",
-        "CRS-R06-F2",
-        "CRS-R06-F3",
-        "CRS-R06-N13",
-        "CRS-R06-N03",
-        "CRS-R06-12",
-        "CRS-R06-N06",
-        "CRS-R06-N07",
-        "CRS-R06-N10",
-        "CRS-R06-F6",
-        "CRS-R06-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R07",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 175,
-       "items": [
-        "CRS-R07-14",
-        "CRS-R07-N04",
-        "CRS-R07-F2",
-        "CRS-R07-11",
-        "CRS-R07-N01",
-        "CRS-R07-12",
-        "CRS-R07-N03",
-        "CRS-R07-N07",
-        "CRS-R07-N13",
-        "CRS-R07-F3",
-        "CRS-R07-N08",
-        "CRS-R07-N10",
-        "CRS-R07-F6",
-        "CRS-R07-N12",
-        "CRS-R07-F1"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R08",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 194,
-       "items": [
-        "CRS-R08-F2",
-        "CRS-R08-11",
-        "CRS-R08-N04",
-        "CRS-R08-N01",
-        "CRS-R08-08",
-        "CRS-R08-N13",
-        "CRS-R08-N03",
-        "CRS-R08-N10",
-        "CRS-R08-F4",
-        "CRS-R08-F3",
-        "CRS-R08-N07",
-        "CRS-R08-N06",
-        "CRS-R08-N12",
-        "CRS-R08-F6",
-        "CRS-R08-N14"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R09",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 175,
-       "items": [
-        "CRS-R09-F2",
-        "CRS-R09-12",
-        "CRS-R09-N04",
-        "CRS-R09-N01",
-        "CRS-R09-F3",
-        "CRS-R09-N13",
-        "CRS-R09-N06",
-        "CRS-R09-N03",
-        "CRS-R09-14",
-        "CRS-R09-N10",
-        "CRS-R09-F4",
-        "CRS-R09-N07",
-        "CRS-R09-F1",
-        "CRS-R09-F6"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R10",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 241,
-       "items": [
-        "CRS-R10-F2",
-        "CRS-R10-11",
-        "CRS-R10-N01",
-        "CRS-R10-N07",
-        "CRS-R10-F3",
-        "CRS-R10-N03",
-        "CRS-R10-06",
-        "CRS-R10-F4",
-        "CRS-R10-F5",
-        "CRS-R10-N08",
-        "CRS-R10-N06",
-        "CRS-R10-12",
-        "CRS-R10-F1",
-        "CRS-R10-N12",
-        "CRS-R10-N09",
-        "CRT-R10-11"
-       ],
-       "uncovered_no_candidate": [],
-       "uncovered_over_capacity": []
-      },
-      {
-       "role_id": "R11",
-       "covered": 30,
-       "with_candidate": 30,
-       "hours": 214,
-       "items": [
         "CRS-R11-F2",
         "CRS-R11-11",
         "CRS-R11-N04",
@@ -5377,8 +1641,8 @@
         "CRS-R11-N10",
         "CRS-R11-F4",
         "CRS-R11-08",
-        "CRS-R11-F1",
         "CRS-R11-N12",
+        "CRS-R11-F1",
         "CRS-R11-N09",
         "CRT-R11-11"
        ],
@@ -5389,7 +1653,7 @@
        "role_id": "R12",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 171,
+       "hours": 168,
        "items": [
         "CRS-R12-N04",
         "CRS-R12-F2",
@@ -5401,7 +1665,7 @@
         "CRS-R12-13",
         "CRS-R12-12",
         "CRS-R12-F5",
-        "CRS-R12-N10",
+        "CRS-R12-N11",
         "CRS-R12-F3",
         "CRS-R12-F1"
        ],
@@ -5412,7 +1676,7 @@
        "role_id": "R13",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 227,
+       "hours": 239,
        "items": [
         "CRS-R13-F2",
         "CRS-R13-11",
@@ -5422,9 +1686,10 @@
         "CRS-R13-N13",
         "CRS-R13-N03",
         "CRS-R13-F3",
-        "CRS-R13-N10",
-        "CRS-R13-N12",
+        "CRS-R13-N11",
         "CRS-R13-N08",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
         "CRS-R13-F1",
         "CRS-R13-N09",
         "CRS-R13-01",
@@ -5460,7 +1725,7 @@
        "role_id": "R15",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 179,
+       "hours": 174,
        "items": [
         "CRS-R15-N04",
         "CRS-R15-F2",
@@ -5472,8 +1737,8 @@
         "CRS-R15-11",
         "CRS-R15-F4",
         "CRS-R15-F3",
+        "CRS-R15-N12",
         "CRS-R15-13",
-        "CRS-R15-N11",
         "CRS-R15-F1"
        ],
        "uncovered_no_candidate": [],
@@ -5507,7 +1772,7 @@
        "role_id": "R17",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 225,
+       "hours": 220,
        "items": [
         "CRS-R17-N04",
         "CRS-R17-F2",
@@ -5521,7 +1786,7 @@
         "CRS-R17-F3",
         "CRS-R17-N08",
         "CRS-R17-02",
-        "CRS-R17-N11",
+        "CRS-R17-N12",
         "CRS-R17-F1",
         "CRS-R17-N09",
         "CRT-R17-11"
@@ -5607,12 +1872,12 @@
       "months": 6,
       "hours_per_week": 5,
       "Hmax": 129.9,
-      "covered": 527,
+      "covered": 530,
       "with_candidate": 600,
       "total": 600,
-      "pct": 87.8,
-      "mean_items_per_plan": 10.6,
-      "mean_hours_per_plan": 120.3
+      "pct": 88.3,
+      "mean_items_per_plan": 10.8,
+      "mean_hours_per_plan": 121.8
      },
      {
       "months": 6,
@@ -5623,7 +1888,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      },
      {
       "months": 6,
@@ -5634,7 +1899,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      },
      {
       "months": 6,
@@ -5645,7 +1910,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      }
     ],
     "by_mode_6m10h": [
@@ -5656,7 +1921,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      },
      {
       "mode": "course_only",
@@ -5665,16 +1930,16 @@
       "total": 600,
       "pct": 98.7,
       "mean_items_per_plan": 13.7,
-      "mean_hours_per_plan": 188.2
+      "mean_hours_per_plan": 184.9
      },
      {
       "mode": "certification_only",
-      "covered": 209,
+      "covered": 198,
       "with_candidate": 600,
       "total": 600,
-      "pct": 34.8,
-      "mean_items_per_plan": 3.4,
-      "mean_hours_per_plan": 209.3
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
      }
     ],
     "by_months_10h": [
@@ -5687,7 +1952,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      },
      {
       "months": 18,
@@ -5698,7 +1963,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      },
      {
       "months": 24,
@@ -5709,7 +1974,7 @@
       "total": 600,
       "pct": 100,
       "mean_items_per_plan": 14.1,
-      "mean_hours_per_plan": 201.2
+      "mean_hours_per_plan": 197.9
      }
     ],
     "primary_6m10h_both": {
@@ -5718,13 +1983,13 @@
      "total": 600,
      "pct": 100,
      "mean_items_per_plan": 14.1,
-     "mean_hours_per_plan": 201.2,
+     "mean_hours_per_plan": 197.9,
      "per_role": [
       {
        "role_id": "R01",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 193,
+       "hours": 188,
        "items": [
         "CRS-R01-N04",
         "CRS-R01-F2",
@@ -5738,8 +2003,8 @@
         "CRS-R01-F5",
         "CRS-R01-N13",
         "CRS-R01-N06",
+        "CRS-R01-N12",
         "CRS-R01-07",
-        "CRS-R01-N11",
         "CRT-R01-11"
        ],
        "uncovered_no_candidate": [],
@@ -5749,7 +2014,7 @@
        "role_id": "R02",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 199,
+       "hours": 196,
        "items": [
         "CRS-R02-F2",
         "CRS-R02-12",
@@ -5757,13 +2022,13 @@
         "CRS-R02-N03",
         "CRS-R02-F5",
         "CRS-R02-F3",
+        "CRS-R02-N11",
         "CRS-R02-F4",
-        "CRS-R02-N10",
         "CRS-R02-N07",
         "CRS-R02-N08",
         "CRS-R02-N13",
         "CRS-R02-N06",
-        "CRS-R02-N11",
+        "CRS-R02-N10",
         "CRS-R02-F1",
         "CRS-R02-F6"
        ],
@@ -5774,7 +2039,7 @@
        "role_id": "R03",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 198,
+       "hours": 193,
        "items": [
         "CRS-R03-F2",
         "CRS-R03-13",
@@ -5822,7 +2087,7 @@
        "role_id": "R05",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 249,
+       "hours": 246,
        "items": [
         "CRS-R05-F2",
         "CRS-R05-12",
@@ -5832,10 +2097,10 @@
         "CRS-R05-F3",
         "CRS-R05-N03",
         "CRS-R05-13",
+        "CRS-R05-N11",
         "CRS-R05-F4",
         "CRS-R05-N10",
         "CRS-R05-F1",
-        "CRS-R05-N11",
         "CRS-R05-10"
        ],
        "uncovered_no_candidate": [],
@@ -5868,7 +2133,7 @@
        "role_id": "R07",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 175,
+       "hours": 170,
        "items": [
         "CRS-R07-14",
         "CRS-R07-N04",
@@ -5881,8 +2146,8 @@
         "CRS-R07-N03",
         "CRS-R07-F3",
         "CRS-R07-N08",
-        "CRS-R07-N10",
         "CRS-R07-N12",
+        "CRS-R07-N10",
         "CRS-R07-F1",
         "CRS-R07-F6"
        ],
@@ -5893,7 +2158,1218 @@
        "role_id": "R08",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 194,
+       "hours": 183,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-N07",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-N12",
+        "CRS-R08-F4",
+        "CRS-R08-N10",
+        "CRS-R08-F3",
+        "CRS-R08-N08",
+        "CRS-R08-N06",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-F3",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-F4",
+        "CRS-R09-N10",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 231,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-N12",
+        "CRS-R10-F4",
+        "CRS-R10-N10",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-F4",
+        "CRS-R11-N10",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-06",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 222,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-F3",
+        "CRS-R13-N03",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-N08",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-11",
+        "CRS-R14-F2",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-N13",
+        "CRS-R17-07",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-N13",
+        "CRS-R18-F3",
+        "CRS-R18-N03",
+        "CRS-R18-F4",
+        "CRS-R18-N10",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-F4",
+        "CRS-R20-N10",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   }
+  },
+  "url_verified": {
+   "weighted_greedy": {
+    "strategy": "weighted_greedy",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 528,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88,
+      "mean_items_per_plan": 10.7,
+      "mean_hours_per_plan": 121.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 186.2
+     },
+     {
+      "mode": "certification_only",
+      "covered": 209,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 34.8,
+      "mean_items_per_plan": 3.4,
+      "mean_hours_per_plan": 209.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 199.2,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-N13",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F6",
+        "CRS-R03-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-08",
+        "CRS-R04-N03",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-15",
+        "CRS-R04-13",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N03",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N11",
+        "CRS-R05-13",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-F3",
+        "CRS-R06-N13",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N06",
+        "CRS-R06-N07",
+        "CRS-R06-N10",
+        "CRS-R06-F6",
+        "CRS-R06-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N03",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F6",
+        "CRS-R07-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 186,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-08",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-N10",
+        "CRS-R08-F4",
+        "CRS-R08-F3",
+        "CRS-R08-N07",
+        "CRS-R08-N06",
+        "CRS-R08-N12",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-F3",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-N10",
+        "CRS-R09-F4",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 236,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-06",
+        "CRS-R10-F4",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-N12",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-N10",
+        "CRS-R11-F4",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-06",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 239,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-N03",
+        "CRS-R13-F3",
+        "CRS-R13-N11",
+        "CRS-R13-N08",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-F2",
+        "CRS-R14-11",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-07",
+        "CRS-R17-N13",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-F3",
+        "CRS-R18-N13",
+        "CRS-R18-N03",
+        "CRS-R18-N10",
+        "CRS-R18-F4",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-N10",
+        "CRS-R20-F4",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   },
+   "coverage_first": {
+    "strategy": "coverage_first",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 530,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88.3,
+      "mean_items_per_plan": 10.8,
+      "mean_hours_per_plan": 121.8
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 185.1
+     },
+     {
+      "mode": "certification_only",
+      "covered": 209,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 34.8,
+      "mean_items_per_plan": 3.4,
+      "mean_hours_per_plan": 209.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 198.1,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-N13",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F1",
+        "CRS-R03-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-N03",
+        "CRS-R04-08",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-13",
+        "CRS-R04-15",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N03",
+        "CRS-R05-13",
+        "CRS-R05-N11",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-N13",
+        "CRS-R06-F3",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N07",
+        "CRS-R06-N06",
+        "CRS-R06-N10",
+        "CRS-R06-F1",
+        "CRS-R06-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-N03",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F1",
+        "CRS-R07-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 186,
        "items": [
         "CRS-R08-F2",
         "CRS-R08-11",
@@ -5942,7 +3418,7 @@
        "role_id": "R10",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 241,
+       "hours": 231,
        "items": [
         "CRS-R10-F2",
         "CRS-R10-11",
@@ -5950,14 +3426,14 @@
         "CRS-R10-N07",
         "CRS-R10-F3",
         "CRS-R10-N03",
-        "CRS-R10-06",
+        "CRS-R10-N12",
         "CRS-R10-F4",
+        "CRS-R10-N10",
         "CRS-R10-F5",
         "CRS-R10-N08",
         "CRS-R10-N06",
         "CRS-R10-12",
         "CRS-R10-F1",
-        "CRS-R10-N12",
         "CRS-R10-N09",
         "CRT-R10-11"
        ],
@@ -5968,7 +3444,7 @@
        "role_id": "R11",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 214,
+       "hours": 209,
        "items": [
         "CRS-R11-F2",
         "CRS-R11-11",
@@ -5981,8 +3457,8 @@
         "CRS-R11-F4",
         "CRS-R11-N10",
         "CRS-R11-08",
-        "CRS-R11-F1",
         "CRS-R11-N12",
+        "CRS-R11-F1",
         "CRS-R11-N09",
         "CRT-R11-11"
        ],
@@ -5993,7 +3469,7 @@
        "role_id": "R12",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 171,
+       "hours": 168,
        "items": [
         "CRS-R12-N04",
         "CRS-R12-F2",
@@ -6005,7 +3481,7 @@
         "CRS-R12-12",
         "CRS-R12-06",
         "CRS-R12-F5",
-        "CRS-R12-N10",
+        "CRS-R12-N11",
         "CRS-R12-F3",
         "CRS-R12-F1"
        ],
@@ -6016,7 +3492,7 @@
        "role_id": "R13",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 227,
+       "hours": 222,
        "items": [
         "CRS-R13-F2",
         "CRS-R13-11",
@@ -6026,8 +3502,8 @@
         "CRS-R13-N13",
         "CRS-R13-F3",
         "CRS-R13-N03",
-        "CRS-R13-N10",
         "CRS-R13-N12",
+        "CRS-R13-N10",
         "CRS-R13-N08",
         "CRS-R13-F1",
         "CRS-R13-N09",
@@ -6064,7 +3540,7 @@
        "role_id": "R15",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 179,
+       "hours": 174,
        "items": [
         "CRS-R15-N04",
         "CRS-R15-F2",
@@ -6076,8 +3552,8 @@
         "CRS-R15-11",
         "CRS-R15-F4",
         "CRS-R15-F3",
+        "CRS-R15-N12",
         "CRS-R15-13",
-        "CRS-R15-N11",
         "CRS-R15-F1"
        ],
        "uncovered_no_candidate": [],
@@ -6111,7 +3587,7 @@
        "role_id": "R17",
        "covered": 30,
        "with_candidate": 30,
-       "hours": 225,
+       "hours": 220,
        "items": [
         "CRS-R17-N04",
         "CRS-R17-F2",
@@ -6125,7 +3601,2429 @@
         "CRS-R17-F3",
         "CRS-R17-N08",
         "CRS-R17-02",
-        "CRS-R17-N11",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-N13",
+        "CRS-R18-F3",
+        "CRS-R18-N03",
+        "CRS-R18-F4",
+        "CRS-R18-N10",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-F4",
+        "CRS-R20-N10",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   }
+  },
+  "additions_confirmed": {
+   "weighted_greedy": {
+    "strategy": "weighted_greedy",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 528,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88,
+      "mean_items_per_plan": 10.7,
+      "mean_hours_per_plan": 121.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 186.1
+     },
+     {
+      "mode": "certification_only",
+      "covered": 198,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.1
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 199.1,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-N13",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F6",
+        "CRS-R03-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-08",
+        "CRS-R04-N03",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-15",
+        "CRS-R04-13",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N03",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N11",
+        "CRS-R05-13",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-F3",
+        "CRS-R06-N13",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N06",
+        "CRS-R06-N07",
+        "CRS-R06-N10",
+        "CRS-R06-F6",
+        "CRS-R06-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N03",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F6",
+        "CRS-R07-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 183,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-N07",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-N12",
+        "CRS-R08-N10",
+        "CRS-R08-F4",
+        "CRS-R08-F3",
+        "CRS-R08-N08",
+        "CRS-R08-N06",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-F3",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-N10",
+        "CRS-R09-F4",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 236,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-06",
+        "CRS-R10-F4",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-N12",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-N10",
+        "CRS-R11-F4",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-06",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 239,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-N03",
+        "CRS-R13-F3",
+        "CRS-R13-N11",
+        "CRS-R13-N08",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-F2",
+        "CRS-R14-11",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-07",
+        "CRS-R17-N13",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-F3",
+        "CRS-R18-N13",
+        "CRS-R18-N03",
+        "CRS-R18-N10",
+        "CRS-R18-F4",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-N10",
+        "CRS-R20-F4",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   },
+   "coverage_first": {
+    "strategy": "coverage_first",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 530,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88.3,
+      "mean_items_per_plan": 10.8,
+      "mean_hours_per_plan": 121.8
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 184.9
+     },
+     {
+      "mode": "certification_only",
+      "covered": 198,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 33,
+      "mean_items_per_plan": 3.2,
+      "mean_hours_per_plan": 214.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 197.9
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 197.9,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-N13",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F1",
+        "CRS-R03-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-N03",
+        "CRS-R04-08",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-13",
+        "CRS-R04-15",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N03",
+        "CRS-R05-13",
+        "CRS-R05-N11",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-N13",
+        "CRS-R06-F3",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N07",
+        "CRS-R06-N06",
+        "CRS-R06-N10",
+        "CRS-R06-F1",
+        "CRS-R06-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-N03",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F1",
+        "CRS-R07-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 183,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-N07",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-N12",
+        "CRS-R08-F4",
+        "CRS-R08-N10",
+        "CRS-R08-F3",
+        "CRS-R08-N08",
+        "CRS-R08-N06",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-F3",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-F4",
+        "CRS-R09-N10",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 231,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-N12",
+        "CRS-R10-F4",
+        "CRS-R10-N10",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-F4",
+        "CRS-R11-N10",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-06",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 222,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-F3",
+        "CRS-R13-N03",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-N08",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-11",
+        "CRS-R14-F2",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-N13",
+        "CRS-R17-07",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-N13",
+        "CRS-R18-F3",
+        "CRS-R18-N03",
+        "CRS-R18-F4",
+        "CRS-R18-N10",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-F4",
+        "CRS-R20-N10",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   }
+  },
+  "url_and_additions": {
+   "weighted_greedy": {
+    "strategy": "weighted_greedy",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 528,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88,
+      "mean_items_per_plan": 10.7,
+      "mean_hours_per_plan": 121.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 186.2
+     },
+     {
+      "mode": "certification_only",
+      "covered": 209,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 34.8,
+      "mean_items_per_plan": 3.4,
+      "mean_hours_per_plan": 209.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 199.2
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 199.2,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-N13",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F6",
+        "CRS-R03-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-08",
+        "CRS-R04-N03",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-15",
+        "CRS-R04-13",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N03",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N11",
+        "CRS-R05-13",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-F3",
+        "CRS-R06-N13",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N06",
+        "CRS-R06-N07",
+        "CRS-R06-N10",
+        "CRS-R06-F6",
+        "CRS-R06-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N03",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F6",
+        "CRS-R07-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 186,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-08",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-N10",
+        "CRS-R08-F4",
+        "CRS-R08-F3",
+        "CRS-R08-N07",
+        "CRS-R08-N06",
+        "CRS-R08-N12",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-F3",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-N10",
+        "CRS-R09-F4",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 236,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-06",
+        "CRS-R10-F4",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-N12",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-N10",
+        "CRS-R11-F4",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-06",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 239,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-N03",
+        "CRS-R13-F3",
+        "CRS-R13-N11",
+        "CRS-R13-N08",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-F2",
+        "CRS-R14-11",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-07",
+        "CRS-R17-N13",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
+        "CRS-R17-F1",
+        "CRS-R17-N09",
+        "CRT-R17-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R18",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 197,
+       "items": [
+        "CRS-R18-N04",
+        "CRS-R18-F2",
+        "CRS-R18-12",
+        "CRS-R18-N07",
+        "CRS-R18-N01",
+        "CRS-R18-F3",
+        "CRS-R18-N13",
+        "CRS-R18-N03",
+        "CRS-R18-N10",
+        "CRS-R18-F4",
+        "CRS-R18-N08",
+        "CRS-R18-11",
+        "CRS-R18-F1",
+        "CRS-R18-10",
+        "CRS-R18-08"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R19",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 233,
+       "items": [
+        "CRS-R19-F2",
+        "CRS-R19-12",
+        "CRS-R19-N13",
+        "CRS-R19-F4",
+        "CRS-R19-10",
+        "CRS-R19-F3",
+        "CRS-R19-N07",
+        "CRS-R19-09",
+        "CRS-R19-F1",
+        "CRS-R19-N10",
+        "CRS-R19-07",
+        "CRT-R19-09"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R20",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 202,
+       "items": [
+        "CRS-R20-F2",
+        "CRS-R20-N13",
+        "CRS-R20-12",
+        "CRS-R20-N01",
+        "CRS-R20-N07",
+        "CRS-R20-N10",
+        "CRS-R20-F4",
+        "CRS-R20-F3",
+        "CRS-R20-13",
+        "CRS-R20-02",
+        "CRS-R20-06"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      }
+     ]
+    }
+   },
+   "coverage_first": {
+    "strategy": "coverage_first",
+    "by_capacity": [
+     {
+      "months": 6,
+      "hours_per_week": 5,
+      "Hmax": 129.9,
+      "covered": 530,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 88.3,
+      "mean_items_per_plan": 10.8,
+      "mean_hours_per_plan": 121.8
+     },
+     {
+      "months": 6,
+      "hours_per_week": 10,
+      "Hmax": 259.8,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 15,
+      "Hmax": 389.7,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 6,
+      "hours_per_week": 20,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     }
+    ],
+    "by_mode_6m10h": [
+     {
+      "mode": "both",
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "mode": "course_only",
+      "covered": 592,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 98.7,
+      "mean_items_per_plan": 13.7,
+      "mean_hours_per_plan": 185.1
+     },
+     {
+      "mode": "certification_only",
+      "covered": 209,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 34.8,
+      "mean_items_per_plan": 3.4,
+      "mean_hours_per_plan": 209.3
+     }
+    ],
+    "by_months_10h": [
+     {
+      "months": 12,
+      "hours_per_week": 10,
+      "Hmax": 519.6,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 18,
+      "hours_per_week": 10,
+      "Hmax": 779.4,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     },
+     {
+      "months": 24,
+      "hours_per_week": 10,
+      "Hmax": 1039.2,
+      "covered": 600,
+      "with_candidate": 600,
+      "total": 600,
+      "pct": 100,
+      "mean_items_per_plan": 14.1,
+      "mean_hours_per_plan": 198.1
+     }
+    ],
+    "primary_6m10h_both": {
+     "covered": 600,
+     "with_candidate": 600,
+     "total": 600,
+     "pct": 100,
+     "mean_items_per_plan": 14.1,
+     "mean_hours_per_plan": 198.1,
+     "per_role": [
+      {
+       "role_id": "R01",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 188,
+       "items": [
+        "CRS-R01-N04",
+        "CRS-R01-F2",
+        "CRS-R01-11",
+        "CRS-R01-N01",
+        "CRS-R01-N03",
+        "CRS-R01-10",
+        "CRS-R01-N07",
+        "CRS-R01-F3",
+        "CRS-R01-F4",
+        "CRS-R01-F5",
+        "CRS-R01-N13",
+        "CRS-R01-N06",
+        "CRS-R01-N12",
+        "CRS-R01-07",
+        "CRT-R01-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R02",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 196,
+       "items": [
+        "CRS-R02-F2",
+        "CRS-R02-12",
+        "CRS-R02-N01",
+        "CRS-R02-N03",
+        "CRS-R02-F5",
+        "CRS-R02-F3",
+        "CRS-R02-N11",
+        "CRS-R02-F4",
+        "CRS-R02-N07",
+        "CRS-R02-N08",
+        "CRS-R02-N13",
+        "CRS-R02-N06",
+        "CRS-R02-N10",
+        "CRS-R02-F1",
+        "CRS-R02-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R03",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 193,
+       "items": [
+        "CRS-R03-F2",
+        "CRS-R03-13",
+        "CRS-R03-N04",
+        "CRS-R03-F4",
+        "CRS-R03-N07",
+        "CRS-R03-N13",
+        "CRS-R03-10",
+        "CRS-R03-N03",
+        "CRS-R03-F3",
+        "CRS-R03-N08",
+        "CRS-R03-N06",
+        "CRS-R03-15",
+        "CRS-R03-N12",
+        "CRS-R03-F1",
+        "CRS-R03-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R04",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 177,
+       "items": [
+        "CRS-R04-F2",
+        "CRS-R04-11",
+        "CRS-R04-N07",
+        "CRS-R04-F4",
+        "CRS-R04-10",
+        "CRS-R04-N03",
+        "CRS-R04-08",
+        "CRS-R04-F3",
+        "CRS-R04-N06",
+        "CRS-R04-13",
+        "CRS-R04-15",
+        "CRS-R04-N10",
+        "CRS-R04-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R05",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 246,
+       "items": [
+        "CRS-R05-F2",
+        "CRS-R05-12",
+        "CRS-R05-N01",
+        "CRS-R05-N07",
+        "CRS-R05-N13",
+        "CRS-R05-F3",
+        "CRS-R05-N03",
+        "CRS-R05-13",
+        "CRS-R05-N11",
+        "CRS-R05-F4",
+        "CRS-R05-N10",
+        "CRS-R05-F1",
+        "CRS-R05-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R06",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 167,
+       "items": [
+        "CRS-R06-13",
+        "CRS-R06-16",
+        "CRS-R06-N01",
+        "CRS-R06-F2",
+        "CRS-R06-N13",
+        "CRS-R06-F3",
+        "CRS-R06-N03",
+        "CRS-R06-12",
+        "CRS-R06-N07",
+        "CRS-R06-N06",
+        "CRS-R06-N10",
+        "CRS-R06-F1",
+        "CRS-R06-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R07",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 170,
+       "items": [
+        "CRS-R07-14",
+        "CRS-R07-N04",
+        "CRS-R07-F2",
+        "CRS-R07-11",
+        "CRS-R07-N01",
+        "CRS-R07-12",
+        "CRS-R07-N07",
+        "CRS-R07-N13",
+        "CRS-R07-N03",
+        "CRS-R07-F3",
+        "CRS-R07-N08",
+        "CRS-R07-N12",
+        "CRS-R07-N10",
+        "CRS-R07-F1",
+        "CRS-R07-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R08",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 186,
+       "items": [
+        "CRS-R08-F2",
+        "CRS-R08-11",
+        "CRS-R08-N04",
+        "CRS-R08-N01",
+        "CRS-R08-08",
+        "CRS-R08-N13",
+        "CRS-R08-N03",
+        "CRS-R08-F4",
+        "CRS-R08-N10",
+        "CRS-R08-F3",
+        "CRS-R08-N07",
+        "CRS-R08-N06",
+        "CRS-R08-N12",
+        "CRS-R08-N14",
+        "CRS-R08-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R09",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 175,
+       "items": [
+        "CRS-R09-F2",
+        "CRS-R09-12",
+        "CRS-R09-N04",
+        "CRS-R09-N01",
+        "CRS-R09-N13",
+        "CRS-R09-N06",
+        "CRS-R09-F3",
+        "CRS-R09-N03",
+        "CRS-R09-14",
+        "CRS-R09-F4",
+        "CRS-R09-N10",
+        "CRS-R09-N07",
+        "CRS-R09-F1",
+        "CRS-R09-F6"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R10",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 231,
+       "items": [
+        "CRS-R10-F2",
+        "CRS-R10-11",
+        "CRS-R10-N01",
+        "CRS-R10-N07",
+        "CRS-R10-F3",
+        "CRS-R10-N03",
+        "CRS-R10-N12",
+        "CRS-R10-F4",
+        "CRS-R10-N10",
+        "CRS-R10-F5",
+        "CRS-R10-N08",
+        "CRS-R10-N06",
+        "CRS-R10-12",
+        "CRS-R10-F1",
+        "CRS-R10-N09",
+        "CRT-R10-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R11",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R11-F2",
+        "CRS-R11-11",
+        "CRS-R11-N04",
+        "CRS-R11-N01",
+        "CRS-R11-N07",
+        "CRS-R11-N13",
+        "CRS-R11-N03",
+        "CRS-R11-12",
+        "CRS-R11-F4",
+        "CRS-R11-N10",
+        "CRS-R11-08",
+        "CRS-R11-N12",
+        "CRS-R11-F1",
+        "CRS-R11-N09",
+        "CRT-R11-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R12",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 168,
+       "items": [
+        "CRS-R12-N04",
+        "CRS-R12-F2",
+        "CRS-R12-11",
+        "CRS-R12-N07",
+        "CRS-R12-F4",
+        "CRS-R12-N03",
+        "CRS-R12-13",
+        "CRS-R12-12",
+        "CRS-R12-06",
+        "CRS-R12-F5",
+        "CRS-R12-N11",
+        "CRS-R12-F3",
+        "CRS-R12-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R13",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 222,
+       "items": [
+        "CRS-R13-F2",
+        "CRS-R13-11",
+        "CRS-R13-N04",
+        "CRS-R13-F4",
+        "CRS-R13-N07",
+        "CRS-R13-N13",
+        "CRS-R13-F3",
+        "CRS-R13-N03",
+        "CRS-R13-N12",
+        "CRS-R13-N10",
+        "CRS-R13-N08",
+        "CRS-R13-F1",
+        "CRS-R13-N09",
+        "CRS-R13-01",
+        "CRT-R13-12"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R14",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 209,
+       "items": [
+        "CRS-R14-11",
+        "CRS-R14-F2",
+        "CRS-R14-N04",
+        "CRS-R14-N01",
+        "CRS-R14-05",
+        "CRS-R14-N10",
+        "CRS-R14-N03",
+        "CRS-R14-F3",
+        "CRS-R14-F5",
+        "CRS-R14-N07",
+        "CRS-R14-F1",
+        "CRS-R14-01",
+        "CRT-R14-10"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R15",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 174,
+       "items": [
+        "CRS-R15-N04",
+        "CRS-R15-F2",
+        "CRS-R15-14",
+        "CRS-R15-N01",
+        "CRS-R15-N13",
+        "CRS-R15-N07",
+        "CRS-R15-05",
+        "CRS-R15-11",
+        "CRS-R15-F4",
+        "CRS-R15-F3",
+        "CRS-R15-N12",
+        "CRS-R15-13",
+        "CRS-R15-F1"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R16",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 199,
+       "items": [
+        "CRS-R16-N04",
+        "CRS-R16-F2",
+        "CRS-R16-11",
+        "CRS-R16-F4",
+        "CRS-R16-04",
+        "CRS-R16-N07",
+        "CRS-R16-N03",
+        "CRS-R16-13",
+        "CRS-R16-F5",
+        "CRS-R16-09",
+        "CRS-R16-14",
+        "CRS-R16-F1",
+        "CRS-R16-N09",
+        "CRT-R16-11"
+       ],
+       "uncovered_no_candidate": [],
+       "uncovered_over_capacity": []
+      },
+      {
+       "role_id": "R17",
+       "covered": 30,
+       "with_candidate": 30,
+       "hours": 220,
+       "items": [
+        "CRS-R17-N04",
+        "CRS-R17-F2",
+        "CRS-R17-N01",
+        "CRS-R17-N07",
+        "CRS-R17-12",
+        "CRS-R17-N13",
+        "CRS-R17-07",
+        "CRS-R17-N03",
+        "CRS-R17-F4",
+        "CRS-R17-F3",
+        "CRS-R17-N08",
+        "CRS-R17-02",
+        "CRS-R17-N12",
         "CRS-R17-F1",
         "CRS-R17-N09",
         "CRT-R17-11"

@@ -1,1 +1,1 @@
-requirement_id,role_id,domain,element_id,element_name,element_description,importance_im,rank_in_role,weight_renormalized,element_aliases
+requirement_id,role_id,domain,element_id,element_name,element_description,importance_im,level_lv,rank_in_role,weight_renormalized,element_aliases

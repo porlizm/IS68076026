@@ -25,9 +25,8 @@ ROLES = {  # ตัวเลือกบนฟอร์ม → role_id ใน Da
     'R19': {'key': 'it_pm', 'label_th': 'ผู้จัดการโครงการไอที', 'icon': 'kanban'},
     'R20': {'key': 'it_mgr', 'label_th': 'ผู้จัดการฝ่ายไอที', 'icon': 'building'},
 }
-# DEC-59 · ข้อกำหนดเชิงปฏิบัติ (hands-on): ต้องเห็นว่าผู้สมัคร "ลงมือทำเอง" จึงนับเป็นหลักฐานเต็ม · คำนำหน้า element_id ตามโครงสร้าง O*NET
+# ข้อกำหนดเชิงปฏิบัติ (hands-on) ใช้แสดงผลใน Demo เท่านั้น · กฎ R7 อ่านค่าจริงจาก config/project.json actor_rules (DEC-60) ต้องตรงกัน
 HANDS_ON_PREFIX = ('2.C.3.', '2.C.4.', '2.C.9.', '2.A.1.e', '2.B.3.', '2.B.4.g', '2.B.4.h', '4.A.1.b.2', '4.A.3.b.1', '4.A.3.b.5')
-TASK_MIN_ACTOR = {'R07': 'performed', 'R15': 'performed', 'R19': 'led', 'R20': 'led'}  # อาชีพเชิงเทคนิคต้อง performed · อาชีพบริหารรับ led
 H_TECH_N = 10   # H ใช้เทคโนโลยีที่ตลาดต้องการ 10 รายการแรก · ถ้าอาชีพมีน้อยกว่านี้ → "ข้อมูลไม่พอ"
 APPROVED = {'source_checked_by_script', 'expert_reviewed'}
 L1 = 'L1_researcher_tagged'
@@ -143,7 +142,7 @@ def main():
                 'df': df[r['element_id']], 'idf': round(math.log((n_roles + 1) / (df[r['element_id']] + 0.5)), 4),
                 'hands_on': r['element_id'].startswith(HANDS_ON_PREFIX),
             } for r in rq],
-            'n_roles': n_roles, 'task_min_actor': TASK_MIN_ACTOR[rid],
+            'n_roles': n_roles,
             'tasks': [{'task': x['task'], 'im': num(x['task_importance_im']), 'type': x['task_type']} for x in t[:6]],
             'hot_tech': hot[:18],
             'job_titles': jt[:10],

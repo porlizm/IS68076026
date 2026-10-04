@@ -106,7 +106,7 @@ test('DEC-59 Role-Fit + token + actor: รายงานมี F/R_role/T · to
   assert.ok(Math.abs(S.role_fit - (0.5 * S.r_role + 0.5 * S.role_task_index)) < 0.02);
   assert.ok(r.tokens.total.calls >= 4); assert.equal(r.tokens.stages.reduce((a, x) => a + x.input, 0), r.tokens.total.input);
   // บังคับ actor = oversaw ทุกข้อ → ไม่มีข้อ hands-on ที่เป็น evidenced
-  const patch = (t) => { const o = JSON.parse(t); o.actors = [...o.assessments.map((a) => ({ id: a.requirement_id, actor: 'oversaw' })), ...(o.task_assessments || []).map((a) => ({ id: a.task_id, actor: 'oversaw' }))]; return JSON.stringify(o); };
+  const patch = (t) => { const o = JSON.parse(t); o.assessments.forEach((a) => { a.actor = 'oversaw'; }); (o.task_assessments || []).forEach((a) => { a.actor = 'oversaw'; }); return JSON.stringify(o); };
   const r2 = JSON.parse((await run(wfo, 'POST /is-demo-analyze', post({}), mocks({ patch }))).response.body);
   assert.equal(r2.requirements.filter((q) => q.hands_on && q.status === 'evidenced').length, 0);
   assert.ok(r2.scores.adjust.n_actor >= 1 || r2.requirements.filter((q) => q.hands_on).length === 0);

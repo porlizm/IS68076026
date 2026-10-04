@@ -63,7 +63,7 @@ def main(only=None):
     real = [n for n in wf['nodes'] if n['type'] != 'n8n-nodes-base.stickyNote']
     r1 = {'no': 1, 'title': 'นำเข้าและเปิดใช้งาน (import:workflow + activate)', 'executions': [], 'runs': []}
     check(r1, wf['name'] == 'WF_IS_68076026_01OCT26', f"ชื่อ {wf['name']}")
-    check(r1, len(real) == 69 and len(wf['nodes']) - len(real) == 7, f'{len(real)} โหนด + {len(wf["nodes"]) - len(real)} sticky note')
+    check(r1, len(real) == 79 and len(wf['nodes']) - len(real) == 7, f'{len(real)} โหนด + {len(wf["nodes"]) - len(real)} sticky note')
     check(r1, wf['active'] is True, 'active=true (n8n ตรวจพารามิเตอร์ trigger ผ่าน)')
     results.append(r1)
 
@@ -79,6 +79,7 @@ def main(only=None):
         (10, 'Document AI ล้ม → OCR ในเครื่อง', lambda: case(10, 'Document AI ล้ม → OCR ในเครื่อง', [h.form_row('C', email='docai.down@mail.test')], faults={'docai_fail': True})),
         (11, 'OCR ล้มทั้งหลักและสำรอง', lambda: case(11, 'OCR ล้มทั้งหลักและสำรอง', [h.form_row('C', email='ocr.down@mail.test')], faults={'docai_fail': True, 'local_ocr_fail': True}, want_exec=2)),
         (13, 'โฟลเดอร์รายงานผิด (สร้าง Doc ชั่วคราวไม่ได้ → ไม่มี PDF)', lambda: case(13, 'โฟลเดอร์รายงานผิด (สร้าง Doc ชั่วคราวไม่ได้ → ไม่มี PDF)', [h.form_row('A', email='badfolder@mail.test')], faults={'drive_bad_folder': 'REPORT_FOLDER'})),
+        (15, 'เรซูเม D ผู้จัดการโครงการ (R7 · ผู้ตรวจ C ตอบผิดรูปแบบ)', lambda: case(15, 'เรซูเม D ผู้จัดการโครงการ (R7 · ผู้ตรวจ C ตอบผิดรูปแบบ)', [h.form_row('D', months='12 เดือน')])),
         (14, 'trigger อ่านชีตไม่ได้ต่อเนื่อง ~3 นาที', lambda: trigger_outage()),
         (12, 'PDF 6 หน้าแบบ object stream (นับด้วย regex ไม่ได้)', lambda: case(12, 'PDF 6 หน้าแบบ object stream', [h.form_row('SIXOBJ', email='objstm@mail.test')], want_exec=2)),
     ]
@@ -89,7 +90,7 @@ def main(only=None):
         r = fn(); d = r['delta']; ex = r['executions']
         trig = [e for e in ex if e['mode'] == 'trigger']; err = [e for e in ex if e['mode'] == 'error']
         R = r['runs']
-        if no in (2, 3, 8, 9, 10):
+        if no in (2, 3, 8, 9, 10, 15):
             run = R[0] if R else {}
             check(r, len(trig) == 1 and trig[0]['status'] == 'success' and not err, 'execution trigger สำเร็จ ไม่มี error execution')
             check(r, run.get('stage') == 'delivered', f"runs.stage = {run.get('stage')}")
@@ -99,23 +100,30 @@ def main(only=None):
         if no == 2:
             check(r, d['ocr_results'][0]['engine'] == 'pdf_text_layer', 'ocr_results.engine = pdf_text_layer')
             check(r, run.get('pdf_file_id', '').startswith('mockpdf_') and run.get('error_code') == '', f"pdf_file_id={run.get('pdf_file_id')} error_code='{run.get('error_code')}'")
-            check(r, run.get('readiness_pct') == 66.25, f"R = {run.get('readiness_pct')} (ตรง run_local 66.25)")
-            check(r, len(d['plan_items']) == 7, f"plan_items {len(d['plan_items'])} (ตรง run_local 7)")
+            check(r, run.get('readiness_pct') == 67.72, f"R = {run.get('readiness_pct')} (ตรง run_local 67.72)")
+            check(r, len(d['plan_items']) == 5, f"plan_items {len(d['plan_items'])} (ตรง run_local 5)")
             check(r, not [f for f in r['state']['files'] if f['mimeType'] == 'application/vnd.google-apps.document'], 'ลบ Google Doc ชั่วคราวแล้ว')
         if no == 3:
-            c_calls = [c for c in d['model_calls'] if c['model_key'] == 'C']
+            c_calls = [c for c in d['model_calls'] if c['model_key'] == 'C' and c.get('call_purpose', 'analyst') != 'verifier']
             check(r, d['ocr_results'][0]['engine'] == 'google_document_ai', f"ocr engine = {d['ocr_results'][0]['engine']}")
             check(r, [c['attempt'] for c in c_calls] == [1, 2, 3] and all(c['error_code'] == '429' for c in c_calls), f"model_calls C: {[(c['attempt'], c['error_code']) for c in c_calls]}")
             ts = [datetime.datetime.fromisoformat(c['created_at'].replace('Z', '+00:00')) for c in c_calls]
             gaps = [round((ts[i + 1] - ts[i]).total_seconds(), 1) for i in range(len(ts) - 1)]
             check(r, len(gaps) == 2 and gaps[0] >= 5 and gaps[1] >= 15, f'ช่วงรอก่อนเรียกซ้ำ {gaps} วินาที (retry_backoff_ms 5000/15000)')
             check(r, str(run.get('model_status', '')).startswith('m=2'), f"model_status {run.get('model_status')}")
-            check(r, run.get('readiness_pct') == 38.57, f"R = {run.get('readiness_pct')} (ตรง run_local 38.57)")
+            check(r, run.get('readiness_pct') == 43.58, f"R = {run.get('readiness_pct')} (ตรง run_local 43.58)")
+        if no in (2, 15):
+            vc = [c for c in d['model_calls'] if c.get('call_purpose') == 'verifier']
+            check(r, len(vc) >= 1, f"เรียกผู้ตรวจความหมาย (R3b) {len(vc)} ครั้ง")
+            check(r, bool(run.get('build_id')) and bool(run.get('engine_version')), f"ตราประทับรุ่น build_id={run.get('build_id')} engine={run.get('engine_version')}")
+            check(r, len(d['role_task_decisions']) > 0, f"role_task_decisions {len(d['role_task_decisions'])} แถว (ดัชนี T)")
+        if no == 15:
+            check(r, run.get('readiness_pct') == 84.77, f"R = {run.get('readiness_pct')} (ตรง run_local 84.77)")
         if no == 4:
             check(r, len(trig) == 1 and trig[0]['status'] == 'success', 'execution เดียวทำครบสองงาน')
             check(r, len(R) == 2 and len({x['run_id'] for x in R}) == 2 and all(x['stage'] == 'delivered' for x in R), f"runs {[(x['run_id'][-8:], x['stage']) for x in R]}")
             check(r, len(d['deliveries']) == 2 and len(d['decisions']) == 60, f"deliveries {len(d['deliveries'])} · decisions {len(d['decisions'])}")
-            check(r, sorted(x['readiness_pct'] for x in R) == [19.63, 66.25], f"R ของสองงาน {[x['readiness_pct'] for x in R]} (ไม่ปนกัน)")
+            check(r, sorted(x['readiness_pct'] for x in R) == [23.12, 67.72], f"R ของสองงาน {[x['readiness_pct'] for x in R]} (ไม่ปนกัน)")
         if no == 5:
             check(r, len(d['runs']) == 0, f"ไม่มีแถว runs ({len(d['runs'])})")
             check(r, [a['event'] for a in d['audit_log']] == ['rejected_input'] and 'consent_not_given' in d['audit_log'][0]['detail'], f"audit {[a['event'] for a in d['audit_log']]}")
@@ -137,7 +145,7 @@ def main(only=None):
             check(r, len(d['mail']) == 1, f"อีเมลแจ้งผู้วิจัย {len(d['mail'])} ฉบับ")
         if no == 8:
             check(r, run.get('n_abstained') == 30 and run.get('readiness_pct') == 'N/A', f"abstained {run.get('n_abstained')} · R {run.get('readiness_pct')}")
-            check(r, len(d['model_calls']) == 3 and len(d['findings']) == 0, f"model_calls {len(d['model_calls'])} (401 ไม่เรียกซ้ำ) · findings {len(d['findings'])}")
+            check(r, len([c for c in d['model_calls'] if c.get('call_purpose','analyst') != 'verifier']) == 3 and len(d['findings']) == 0, f"model_calls {len(d['model_calls'])} (401 ไม่เรียกซ้ำ) · findings {len(d['findings'])}")
         if no == 9:
             check(r, run.get('error_code') == 'pdf_upload_failed' and run.get('email_status') == 'sent', f"error_code {run.get('error_code')} email {run.get('email_status')}")
         if no == 13:

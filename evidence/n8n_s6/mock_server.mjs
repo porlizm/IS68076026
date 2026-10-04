@@ -38,7 +38,7 @@ function reset() {
     S.sheets[tab] = { sheetId: sid++, rows, rowCount: Math.max(1000, rows.length + 10), colCount: Math.max(26, def.columns.length) };
   }
   // ไฟล์เรซูเมสังเคราะห์ใน "Drive" (โฟลเดอร์รับไฟล์ของแบบฟอร์ม)
-  for (const c of ['A', 'B', 'C']) {
+  for (const c of ['A', 'B', 'C', 'D']) {
     const meta = JSON.parse(fs.readFileSync(path.join(ROOT, `synthetic/case_${c}/meta.json`), 'utf8'));
     const pdf = c === 'C' ? 'resume_scanned.pdf' : 'resume_text.pdf';
     addFile(meta.file_id, `resume_${c}.pdf`, 'application/pdf', fs.readFileSync(path.join(ROOT, `synthetic/case_${c}/${pdf}`)), ['FORM_FOLDER']);
@@ -139,10 +139,26 @@ function tinyPdf(label) {
   return Buffer.from(out, 'latin1');
 }
 function caseOf(text) {
-  for (const c of ['A', 'B', 'C']) { const m = JSON.parse(fs.readFileSync(path.join(ROOT, `synthetic/case_${c}/meta.json`), 'utf8')); if (text.includes(`REQ-${m.role_id}-`)) return c; }
+  for (const c of ['A', 'B', 'C', 'D']) { const m = JSON.parse(fs.readFileSync(path.join(ROOT, `synthetic/case_${c}/meta.json`), 'utf8')); if (text.includes(`REQ-${m.role_id}-`)) return c; }
   return 'A';
 }
+// DEC-51/60 · ผู้ตรวจความหมาย (R3b): ตอบตามเฉลยของกรณี เหมือน scripts/run_local.mjs oracleVerifierText
+function textOf(o) { if (typeof o === 'string') return o; if (Array.isArray(o)) return o.map(textOf).join('\n'); if (o && typeof o === 'object') return Object.values(o).map(textOf).join('\n'); return ''; }
+function rowsOf(file) { if (!fs.existsSync(file)) return []; const r = parseCSV(fs.readFileSync(file, 'utf8')); const h = r[0]; return r.slice(1).map((x) => Object.fromEntries(h.map((k, i) => [k, x[i]]))); }
+function mockVerifier(key, text) {
+  const list = JSON.parse(text.slice(text.indexOf('CHECKS (JSON):') + 'CHECKS (JSON):'.length).trim());
+  let c = 'A';
+  for (const cc of ['A', 'B', 'C', 'D']) { const rt = fs.readFileSync(path.join(ROOT, `synthetic/case_${cc}/resume.txt`), 'utf8'); if (list.length && list.every((x) => rt.replace(/\s+/g, ' ').includes(String(x.quote).replace(/\s+/g, ' ').slice(0, 40)))) { c = cc; break; } }
+  if (S.faults.models_all_fail) return { status: 401, text: null, c, verifier: true };
+  const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, `synthetic/case_${c}/mock_responses/verifier.json`), 'utf8'));
+  if ((cfg.invalid_for || []).includes(key)) return { status: 200, text: 'I think most quotes are fine.', c, verifier: true };
+  const k = [...rowsOf(path.join(ROOT, `synthetic/case_${c}/answer_key.csv`)), ...rowsOf(path.join(ROOT, `synthetic/case_${c}/task_key.csv`))];
+  const out = { schema_version: 'verifier_v1.0', checks: list.map((x) => { const ws = (t) => String(t).replace(/\s+/g, ' ').trim(); const r = k.find((r) => r.evidence_sentence && (ws(x.quote).includes(ws(r.evidence_sentence)) || ws(r.evidence_sentence).includes(ws(x.quote))) && (r.element_name ? String(x.target).startsWith(r.element_name + ':') : x.target === r.task_text));
+    return { check_id: x.check_id, verdict: !r ? 'unrelated' : (r.expected_status === 'evidenced' ? 'supports' : r.expected_status === 'partially' ? 'partially_supports' : 'unrelated') }; }) };
+  return { status: 200, text: JSON.stringify(out), c, verifier: true };
+}
 function mockModel(key, promptText) {
+  if (promptText.includes('CHECKS (JSON):')) return mockVerifier(key, promptText);
   const c = caseOf(promptText);
   const f = path.join(ROOT, `synthetic/case_${c}/mock_responses/${key}.json`);
   const mock = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : { simulate: 'http_error', status: 500 };
@@ -275,20 +291,20 @@ async function handle(req, res) {
     }
     // ---- Models
     if (host === 'api.openai.com' && p === '/v1/chat/completions') {
-      const b = JSON.parse(body.toString()); const r = mockModel('A', JSON.stringify(b.messages));
-      S.models.push({ key: 'A', case: r.c, status: r.status, temperature: b.temperature, model: b.model });
+      const b = JSON.parse(body.toString()); const r = mockModel('A', textOf(b.messages));
+      S.models.push({ key: 'A', purpose: r.verifier ? 'verifier' : 'analyst', case: r.c, status: r.status, temperature: b.temperature, model: b.model });
       if (r.status !== 200) return send(res, r.status, { error: { message: 'mock error', type: 'mock', code: r.status } });
       return send(res, 200, { id: 'chatcmpl-mock', object: 'chat.completion', model: (b.model || 'gpt-mock') + '-2026-mock', choices: [{ index: 0, message: { role: 'assistant', content: r.text }, finish_reason: 'stop' }], usage: { prompt_tokens: 3000, completion_tokens: 900, total_tokens: 3900 } });
     }
     if (host === 'api.anthropic.com' && p === '/v1/messages') {
-      const b = JSON.parse(body.toString()); const r = mockModel('B', JSON.stringify(b.messages) + (b.system || ''));
-      S.models.push({ key: 'B', case: r.c, status: r.status, temperature: b.temperature, model: b.model, has_version: !!req.headers['anthropic-version'] });
+      const b = JSON.parse(body.toString()); const r = mockModel('B', (b.system ? textOf(b.system) + '\n' : '') + textOf(b.messages));
+      S.models.push({ key: 'B', purpose: r.verifier ? 'verifier' : 'analyst', case: r.c, status: r.status, temperature: b.temperature, model: b.model, has_version: !!req.headers['anthropic-version'] });
       if (r.status !== 200) return send(res, r.status, { type: 'error', error: { type: 'mock_error', message: 'mock' } });
       return send(res, 200, { id: 'msg_mock', type: 'message', role: 'assistant', model: b.model, content: [{ type: 'text', text: r.text }], stop_reason: 'end_turn', usage: { input_tokens: 3100, output_tokens: 950 } });
     }
     if (host === 'generativelanguage.googleapis.com' && /:generateContent$/.test(p)) {
-      const b = JSON.parse(body.toString()); const r = mockModel('C', JSON.stringify(b.contents) + JSON.stringify(b.systemInstruction || ''));
-      S.models.push({ key: 'C', case: r.c, status: r.status, temperature: b.generationConfig && b.generationConfig.temperature, model: p });
+      const b = JSON.parse(body.toString()); const r = mockModel('C', textOf(b.systemInstruction || '') + '\n' + textOf(b.contents));
+      S.models.push({ key: 'C', purpose: r.verifier ? 'verifier' : 'analyst', case: r.c, status: r.status, temperature: b.generationConfig && b.generationConfig.temperature, model: p });
       if (r.status !== 200) return send(res, r.status, { error: { code: r.status, message: 'Resource has been exhausted (mock)', status: 'RESOURCE_EXHAUSTED' } });
       return send(res, 200, { candidates: [{ content: { parts: [{ text: r.text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: 3050, candidatesTokenCount: 920 }, modelVersion: p.split('/').pop().replace(':generateContent', '') });
     }

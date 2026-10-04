@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-metrics.py — ตัวชี้วัดของ RQ1/RQ2 ตามหัวข้อ 3.9 ของเล่มและ docs/research_tools/Analysis_Plan_v1.0.md
+metrics.py — ตัวชี้วัดของ RQ1/RQ2 ตาม docs/research_tools/Analysis_Plan.md
 ไม่มี dependency นอก standard library · ทุกฟังก์ชันคืนตัวเศษและตัวหารดิบพร้อมค่า
 
 RQ1: confusion 3×4 · P/R/F1 รายสถานะ · Macro-F1 หลัก (บนข้อที่สรุปได้) · Macro-F1 ประกอบ (abstained = ผิด)
-     · อัตราการไม่สรุป · Cohen's kappa (รหัสก่อนหาข้อยุติ)
+     · อัตราการไม่สรุป · Cohen's kappa (รหัสรอบที่ 1 เทียบรอบที่ 2 ก่อนหาข้อยุติ)
 RQ2: ความตรงประเด็น · ความครอบคลุมช่องว่าง · ความถูกต้องข้อมูลรายการ · ความเป็นไปได้ด้านเวลา · สถิติรายข้อของแบบประเมิน
 """
 from collections import Counter, defaultdict
@@ -76,7 +76,7 @@ def rq1(rows):
 
 
 def cohen_kappa(a, b, labels=REF):
-    """a, b: รหัสก่อนหาข้อยุติของผู้ให้รหัสสองคน (ความยาวเท่ากัน)"""
+    """a, b: รหัสรอบที่ 1 และรอบที่ 2 ของผู้ให้รหัสคนเดียวก่อนหาข้อยุติ (ความยาวเท่ากัน)"""
     if len(a) != len(b) or not a: raise ValueError("ต้องมีรหัสคู่กันอย่างน้อยหนึ่งคู่")
     n = len(a)
     po = sum(1 for x, y in zip(a, b) if x == y) / n

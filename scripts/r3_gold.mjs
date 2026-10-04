@@ -1,15 +1,16 @@
 // r3_gold.mjs — ชุดคู่ (ข้อความอ้างอิง, ข้อกำหนด) สำหรับเลือกและตรวจเกณฑ์ R3 (DEC-57 · 3 ต.ค. 2569)
 //   node scripts/r3_gold.mjs build                 สร้าง evidence/r3_gold/gold_pairs_synthetic.csv จากกรณีสังเคราะห์ A–D (ป้าย = เฉลยของกรณี)
-//   node scripts/r3_gold.mjs eval <file.csv> [...]  precision/recall/F1 ของ R3 แบบต่าง ๆ + κ ระหว่างผู้ให้ป้าย + θ sweep
-// คอลัมน์: pair_id,source,role_id,element_id,target_kind,quote,label_key,rater_1,rater_2,final_label,verifier_verdict
-//   ป้าย relevant | partial | unrelated · final_label ว่าง → ใช้ rater_1 = rater_2 ถ้าตรงกัน ไม่เช่นนั้นใช้ label_key
+//   node scripts/r3_gold.mjs eval <file.csv> [...]  precision/recall/F1 ของ R3 แบบต่าง ๆ + κ จากการให้ป้ายซ้ำของผู้วิจัยคนเดียว + θ sweep
+// คอลัมน์: pair_id,source,role_id,element_id,target_kind,quote,label_key,label_1,label_2,final_label,verifier_verdict
+//   ป้าย relevant | partial | unrelated · label_1 = ป้ายรอบที่ 1 · label_2 = ป้ายซ้ำของผู้วิจัยคนเดียวหลังผ่านไป ≥ 14 วัน (ไม่เปิดดูรอบที่ 1)
+//   final_label ว่าง → ใช้ label_1 ถ้าตรงกับ label_2 ไม่เช่นนั้นใช้ label_key
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, ENGINE as E, loadRefs, readCSV, toCSV } from './lib/refs.mjs';
 
 const refs = loadRefs();
 const cfg = refs.projectCfg;
-const COLS = ['pair_id', 'source', 'role_id', 'element_id', 'target_kind', 'quote', 'label_key', 'rater_1', 'rater_2', 'final_label', 'verifier_verdict'];
+const COLS = ['pair_id', 'source', 'role_id', 'element_id', 'target_kind', 'quote', 'label_key', 'label_1', 'label_2', 'final_label', 'verifier_verdict'];
 const reqOf = (rid, el) => refs.requirements.find((r) => r.role_id === rid && r.element_id === el);
 
 function build() {
@@ -24,7 +25,7 @@ function build() {
       const sig = el + '|' + x.quote; if (seen.has(sig)) continue; seen.add(sig);
       const k = key[el]; const exact = k && k.evidence_sentence && (x.quote.includes(k.evidence_sentence) || k.evidence_sentence.includes(x.quote));
       const lab = !exact ? 'unrelated' : k.expected_status === 'evidenced' ? 'relevant' : k.expected_status === 'partially' ? 'partial' : 'unrelated';
-      rows.push({ pair_id: 'S' + String(++n).padStart(3, '0'), source: 'synthetic_case_' + c + (meta.style ? ':' + meta.style : ''), role_id: meta.role_id, element_id: el, target_kind: 'requirement', quote: x.quote, label_key: lab, rater_1: '', rater_2: '', final_label: '', verifier_verdict: x.verifier_verdict || '' });
+      rows.push({ pair_id: 'S' + String(++n).padStart(3, '0'), source: 'synthetic_case_' + c + (meta.style ? ':' + meta.style : ''), role_id: meta.role_id, element_id: el, target_kind: 'requirement', quote: x.quote, label_key: lab, label_1: '', label_2: '', final_label: '', verifier_verdict: x.verifier_verdict || '' });
     }
   }
   const out = path.join(ROOT, 'evidence', 'r3_gold', 'gold_pairs_synthetic.csv');
@@ -40,9 +41,9 @@ function kappa(a, b) {
 }
 function evalFile(file) {
   const rows = readCSV(path.relative(ROOT, path.resolve(file)));
-  const lab = (r) => r.final_label || (r.rater_1 && r.rater_1 === r.rater_2 ? r.rater_1 : '') || r.label_key;
-  const rated = rows.filter((r) => r.rater_1 && r.rater_2);
-  const res = { file: path.relative(ROOT, path.resolve(file)), n_pairs: rows.length, n_double_rated: rated.length, kappa: rated.length ? +kappa(rated.map((r) => r.rater_1), rated.map((r) => r.rater_2)).toFixed(3) : null, methods: {} };
+  const lab = (r) => r.final_label || (r.label_1 && r.label_1 === r.label_2 ? r.label_1 : '') || r.label_key;
+  const rated = rows.filter((r) => r.label_1 && r.label_2);
+  const res = { file: path.relative(ROOT, path.resolve(file)), n_pairs: rows.length, n_double_labeled: rated.length, kappa_intra_rater: rated.length ? +kappa(rated.map((r) => r.label_1), rated.map((r) => r.label_2)).toFixed(3) : null, methods: {} };
   const score = (r, stem) => E.overlapScore(r.quote, reqOf(r.role_id, r.element_id), { ...cfg, r3_stemming: stem }).score;
   const methods = {
     r3_lexical_v1: (r) => score(r, false) >= cfg.theta,

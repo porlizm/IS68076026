@@ -1,6 +1,6 @@
 {
-  "demo_version": "2.1.0",
+  "demo_version": "2.2.0",
   "released": "2026-10-03",
-  "dec": "DEC-59",
-  "notes": "Role-Fit (R_role ถ่วงความเฉพาะ + T) · actor/LV · cache ผลตรวจความหมาย · จำกัด quote ซ้ำ · H คงที่ 10 รายการ · แผง token · ตราประทับรุ่น"
+  "dec": "DEC-60",
+  "notes": "ใช้ engine 2.1 ตัวเดียวกับระบบเต็ม: กฎ R7 (ผู้ลงมือทำ · ระดับ LV · ข้อความซ้ำ) · Role-Fit · H คงที่ 10 รายการ · prompt analyst_v1.2 และ verifier_v1.1 ชุดเดียวกับระบบเต็ม"
 }

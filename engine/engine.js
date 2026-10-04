@@ -11,20 +11,24 @@
  *              3.5.5 รวมผล · 3.5.6 สมการ 3.2–3.6 · 3.6 สมการ 3.7–3.8 และรายงาน · ตาราง 3.22 ข้อผิดพลาด
  * การตัดสินใจ: DEC-20 (gap coverage สองค่า) · DEC-21 (ข้อผิดพลาดของข้อมูลอ้างอิง) · DEC-34 (quote_text_version)
  *             DEC-51 (R3 สองชั้น) · DEC-52 (ซ่อม quote) · DEC-53 (analyst_v1.1) · DEC-54 (R5/R6) · DEC-55 (T/H) · DEC-56 (แผนตามระดับ)
+ *             DEC-60 (R7 ผู้ลงมือทำ · ระดับ LV · quote ซ้ำ · Role-Fit · H คงที่ · ตราประทับรุ่น · cache · token)
  * ========================================================================== */
 const ENGINE = (function () {
   'use strict';
 
-  const ENGINE_VERSION = 'engine-2.0.0-03OCT26'; // 2.0: R3 สองชั้น + ซ่อม quote + analyst_v1.1 + ฐานขั้นต่ำ R5/R6 + ดัชนี T/H + แผนตามระดับผู้เรียน (DEC-51–56) · 1.1: plan_strategy (DEC-47)
+  const ENGINE_VERSION = 'engine-2.1.0-03OCT26'; // 2.1: R7 ผู้ลงมือทำ/ระดับ LV/quote ซ้ำ + Role-Fit + H ตัวส่วนคงที่ + ตราประทับรุ่น + cache ผู้ตรวจ + token (DEC-60) · 2.0: R3 สองชั้น + ซ่อม quote + analyst_v1.1 + ฐานขั้นต่ำ R5/R6 + ดัชนี T/H + แผนตามระดับผู้เรียน (DEC-51–56) · 1.1: plan_strategy (DEC-47)
   const STATUSES = ['evidenced', 'partially', 'missing'];
   const FINAL_STATUSES = ['evidenced', 'partially', 'missing', 'abstained'];
   const STATUS_SCORE = { evidenced: 1, partially: 0.5, missing: 0 };
   const TIE_ORDER = ['missing', 'partially', 'evidenced']; // ลำดับสำรองเมื่อเสียงเท่ากัน (3.5.5)
   const R0_CODES = ['no_output', 'invalid_json', 'schema_mismatch', 'role_mismatch', 'incomplete_coverage'];
   const L1_LAYER = 'L1_researcher_tagged'; // กำหนดในโค้ดโดยตั้งใจ ไม่ให้แก้ผ่าน config
-  const SCHEMA_VERSION = 'analyst_v1.1';
-  const SCHEMA_VERSIONS = ['analyst_v1.1', 'analyst_v1.0']; // รับรุ่นเดิมได้เพื่อย้อนกลับ (DEC-53)
-  const VERIFIER_SCHEMA = 'verifier_v1.0';
+  const SCHEMA_VERSION = 'analyst_v1.2';
+  const SCHEMA_VERSIONS = ['analyst_v1.2', 'analyst_v1.1', 'analyst_v1.0']; // รับรุ่นก่อนหน้าได้เพื่อย้อนกลับ (DEC-53 · DEC-60)
+  const VERIFIER_SCHEMA = 'verifier_v1.1';
+  const VERIFIER_SCHEMAS = ['verifier_v1.1', 'verifier_v1.0'];
+  const ACTORS = ['performed', 'led', 'oversaw', 'mentioned'];
+  const ACTOR_RANK = { performed: 3, led: 2, oversaw: 1, mentioned: 0 };
   const VERDICTS = ['supports', 'partially_supports', 'unrelated'];
   const EVIDENCE_TYPES = ['action', 'result', 'tool_list', 'credential', 'education', 'other'];
   const MAX_QUOTES = 2;
@@ -315,7 +319,8 @@ const ENGINE = (function () {
       seen.add(a[idKey]);
       const qs = (quotes || []).filter((q) => q.trim() !== '').slice(0, MAX_QUOTES);
       const conf = typeof a.confidence === 'number' && a.confidence >= 0 && a.confidence <= 1 ? a.confidence : null;
-      out.push({ id: a[idKey], status: a.status, quotes: a.status === 'missing' ? [] : qs, evidence_type: EVIDENCE_TYPES.includes(a.evidence_type) ? a.evidence_type : '', confidence: conf });
+      out.push({ id: a[idKey], status: a.status, quotes: a.status === 'missing' ? [] : qs, evidence_type: EVIDENCE_TYPES.includes(a.evidence_type) ? a.evidence_type : '',
+        actor: a.status !== 'missing' && ACTORS.includes(a.actor) ? a.actor : '', confidence: conf });
     }
     return out;
   }
@@ -520,7 +525,9 @@ const ENGINE = (function () {
             const vk = chooseVerifier(k, available, cfg);
             for (const q of qs.filter((x) => x.r2.verified)) {
               const c = { check_id: '', claimant: k, verifier: vk, kind, target_id: a.id, qi: q.qi, quote: q.matched,
-                target_text: kind === 'task' ? target.task_text : target.element_name + ': ' + target.element_description };
+                target_text: kind === 'task' ? target.task_text : target.element_name + ': ' + target.element_description,
+                level: kind === 'task' ? null : (Number.isFinite(Number(target.level_lv)) && target.level_lv !== '' ? Number(target.level_lv) : null),
+                hands_on: kind === 'task' ? taskNeedsPerformed(input.roleId, cfg) : needsPerformed(target, cfg) };
               checks.push(c); claim.checks.push(c);
             }
           }
@@ -532,25 +539,35 @@ const ENGINE = (function () {
     return { perModel, checks, available };
   }
   function buildVerifierPrompt(template, checks) {
-    const list = checks.map((c) => ({ check_id: c.check_id, target: c.target_text, quote: c.quote }));
+    // verifier_v1.1 ส่ง level (LV ของ O*NET) และ hands_on ให้ผู้ตรวจแยก "ลงมือทำเอง" ออกจาก "กำกับ/ส่งมอบ" (DEC-60)
+    const list = checks.map((c) => ({ check_id: c.check_id, target: c.target_text, level: c.level === undefined ? null : c.level, hands_on: !!c.hands_on, quote: c.quote }));
     return String(template).split('{{CHECKS_JSON}}').join(JSON.stringify(list, null, 1));
   }
   // คืนคำขอตรวจแยกตามโมเดลผู้ตรวจ { A: {check_ids, prompt}, ... } · ไม่มีข้อให้ตรวจ = ไม่มี key นั้น
   function prepareVerification(input) {
     const col = collectClaims(input);
+    const cc = cacheCfg(input.projectCfg); const cin = input.cache || {};
+    const on = cc.enabled === true && cin.enabled !== false && !!cin.entries;
+    const keys = {}; const cached = {};
+    for (const c of col.checks) {
+      if (!c.verifier) continue;
+      const key = verifierCacheKey({ prompt: cin.prompt_id || VERIFIER_SCHEMA, model: (cin.model_ids || {})[c.verifier] || '', target_id: c.target_id, quote: c.quote });
+      keys[c.check_id] = key;
+      if (on && cin.entries[key] && VERDICTS.includes(cin.entries[key].v)) { cached[c.check_id] = cin.entries[key].v; c.cached = true; }
+    }
     const requests = {};
     for (const vk of MODEL_KEYS) {
-      const cs = col.checks.filter((c) => c.verifier === vk);
+      const cs = col.checks.filter((c) => c.verifier === vk && !c.cached);
       if (cs.length) requests[vk] = { check_ids: cs.map((c) => c.check_id), n_checks: cs.length, prompt: buildVerifierPrompt(input.verifierTemplate, cs) };
     }
-    return { checks: col.checks, requests, n_unassigned: col.checks.filter((c) => !c.verifier).length };
+    return { checks: col.checks, requests, n_unassigned: col.checks.filter((c) => !c.verifier).length, cached, cache_keys: keys, cache_on: on, n_cached: Object.keys(cached).length };
   }
   function parseVerifierOutput(rawText, expectedIds) {
     const res = { ok: false, reason: '', verdicts: {} };
     if (rawText === null || rawText === undefined || String(rawText).trim() === '') { res.reason = 'no_output'; return res; }
     let obj;
     try { obj = JSON.parse(stripFences(rawText)); } catch (e) { res.reason = 'invalid_json'; return res; }
-    if (!obj || obj.schema_version !== VERIFIER_SCHEMA || !Array.isArray(obj.checks)) { res.reason = 'schema_mismatch'; return res; }
+    if (!obj || !VERIFIER_SCHEMAS.includes(obj.schema_version) || !Array.isArray(obj.checks)) { res.reason = 'schema_mismatch'; return res; }
     const allowed = new Set(expectedIds);
     for (const c of obj.checks) {
       if (c && allowed.has(c.check_id) && VERDICTS.includes(c.verdict) && !(c.check_id in res.verdicts)) res.verdicts[c.check_id] = c.verdict;
@@ -558,6 +575,140 @@ const ENGINE = (function () {
     res.ok = true;
     if (Object.keys(res.verdicts).length < expectedIds.length) res.reason = 'incomplete';
     return res;
+  }
+
+  // ---- R7 ผู้ลงมือทำ · ระดับ LV · ข้อความซ้ำ (DEC-60) ----
+  function actorCfg(cfg) {
+    return Object.assign({ enabled: true, hands_on_prefixes: [], expert_lv_min: 5, expert_min_actor: 'led', task_min_actor_default: 'performed', task_min_actor_by_role: {} }, (cfg && cfg.actor_rules) || {});
+  }
+  function reuseCfg(cfg) { return Object.assign({ enabled: true, max_full_evidence_per_quote: 2, overlap_min: 0.6 }, (cfg && cfg.quote_reuse) || {}); }
+  function needsPerformed(req, cfg) {
+    const a = actorCfg(cfg);
+    return a.enabled !== false && (a.hands_on_prefixes || []).some((p) => String((req && req.element_id) || '').startsWith(p));
+  }
+  // ระดับต่ำสุดของผู้ลงมือทำที่ยอมให้เป็นหลักฐานเต็ม: ข้อเชิงปฏิบัติ = performed · ข้อที่ LV ≥ expert_lv_min = expert_min_actor · อื่น ๆ ไม่จำกัด
+  function requirementMinActor(req, cfg) {
+    const a = actorCfg(cfg);
+    if (a.enabled === false) return 0;
+    if (needsPerformed(req, cfg)) return ACTOR_RANK.performed;
+    const lv = Number(req && req.level_lv);
+    if (req && req.level_lv !== '' && req.level_lv !== null && req.level_lv !== undefined && Number.isFinite(lv) && lv >= a.expert_lv_min) return ACTOR_RANK[a.expert_min_actor];
+    return 0;
+  }
+  function taskMinActor(roleId, cfg) {
+    const a = actorCfg(cfg);
+    return ACTOR_RANK[(a.task_min_actor_by_role || {})[roleId] || a.task_min_actor_default];
+  }
+  function taskNeedsPerformed(roleId, cfg) { return actorCfg(cfg).enabled !== false && taskMinActor(roleId, cfg) === ACTOR_RANK.performed; }
+  // ผู้ลงมือทำของข้อหนึ่ง = ค่าที่พบมากที่สุดในโมเดลที่ลงคะแนนตรงกับสถานะสุดท้าย (เท่ากันใช้ค่าที่อ่อนกว่า)
+  function majorityActor(entries, finalStatus) {
+    const cnt = {};
+    for (const x of entries) if (x.v.vote === finalStatus && x.actor) cnt[x.actor] = (cnt[x.actor] || 0) + 1;
+    const ks = Object.keys(cnt);
+    if (!ks.length) return '';
+    return ks.sort((a, b) => (cnt[b] - cnt[a]) || (ACTOR_RANK[a] - ACTOR_RANK[b]))[0];
+  }
+  function specOf(spec, elementId) {
+    const e = spec && spec.by_element && spec.by_element[elementId];
+    return e || { df: 1, idf: 1 };
+  }
+  // ความเฉพาะอาชีพของแต่ละองค์ประกอบ: df = จำนวนอาชีพที่มีองค์ประกอบนี้ในข้อกำหนด · idf = ln((N+1)/(df+0.5))
+  function buildSpecificity(requirementRows) {
+    const roles = new Set(); const per = {};
+    for (const r of requirementRows) { roles.add(r.role_id); (per[r.element_id] = per[r.element_id] || new Set()).add(r.role_id); }
+    const n = roles.size; const by = {};
+    for (const el of Object.keys(per).sort()) by[el] = { df: per[el].size, idf: round(Math.log((n + 1) / (per[el].size + 0.5)), 4) };
+    return { n_roles: n, by_element: by };
+  }
+  function applyR7(rows, ctx) {
+    const { reqById, votesById, cfg, spec } = ctx;
+    const stats = { n_actor: 0, n_reuse: 0, n_actor_unknown: 0 };
+    for (const r of rows) {
+      r.actor = '';
+      if ((r.final !== 'evidenced' && r.final !== 'partially') || r.ev.source !== 'models') continue;
+      r.actor = majorityActor(votesById[r.id] || [], r.final);
+      if (r.final !== 'evidenced') continue;
+      const need = requirementMinActor(reqById[r.id], cfg);
+      if (!need) continue;
+      if (!r.actor) { r.flags.push('R7_actor_unknown'); stats.n_actor_unknown++; continue; }
+      if (ACTOR_RANK[r.actor] < need) { r.final = 'partially'; r.flags.push('R7_actor:' + r.actor); stats.n_actor++; }
+    }
+    const rc = reuseCfg(cfg);
+    if (rc.enabled !== false) {
+      const cand = rows.filter((r) => r.final === 'evidenced' && r.ev.source === 'models' && r.ev.start >= 0);
+      const par = cand.map((_, i) => i); const find = (i) => (par[i] === i ? i : (par[i] = find(par[i])));
+      const ovl = (a, b) => Math.max(0, Math.min(a.ev.end, b.ev.end) - Math.max(a.ev.start, b.ev.start)) / Math.max(1, Math.min(a.ev.end - a.ev.start, b.ev.end - b.ev.start));
+      for (let i = 0; i < cand.length; i++) for (let j = i + 1; j < cand.length; j++) if (ovl(cand[i], cand[j]) >= rc.overlap_min) par[find(j)] = find(i);
+      const groups = {}; cand.forEach((r, i) => { (groups[find(i)] = groups[find(i)] || []).push(r); });
+      for (const g of Object.values(groups)) {
+        if (g.length <= rc.max_full_evidence_per_quote) continue;
+        g.sort((a, b) => (specOf(spec, reqById[a.id].element_id).df - specOf(spec, reqById[b.id].element_id).df)
+          || (Number(reqById[b.id].weight_renormalized) - Number(reqById[a.id].weight_renormalized)) || (a.id < b.id ? -1 : 1));
+        g.slice(rc.max_full_evidence_per_quote).forEach((r) => { r.final = 'partially'; r.flags.push('R7_reuse'); stats.n_reuse++; });
+      }
+    }
+    return stats;
+  }
+  // Role-Fit (DEC-60 · ตัวชี้วัดเสริมในรายงานผู้เรียน ไม่ใช่ตัวชี้วัดของคำถามวิจัย): R_role ถ่วงน้ำหนักด้วย idf แล้วผสมกับ T
+  function roleFitCfg(cfg) { return Object.assign({ weight_task: 0.5, high_min: 75, high_task_min: 60, mid_min: 50 }, (cfg && cfg.role_fit) || {}); }
+  function computeRoleFit(items, taskIndex, cfg) {
+    const rf = roleFitCfg(cfg);
+    const D = items.filter((d) => d.final_status !== 'abstained');
+    const den = D.reduce((s0, d) => s0 + d.weight * d.idf, 0);
+    if (!D.length || den === 0) return { readiness_role_pct: 'N/A', role_fit: 'N/A', role_fit_band: 'N/A' };
+    const rRole = (D.reduce((s0, d) => s0 + d.weight * d.idf * STATUS_SCORE[d.final_status], 0) / den) * 100;
+    const t = typeof taskIndex === 'number' ? taskIndex : null;
+    const f = t === null ? rRole : (1 - rf.weight_task) * rRole + rf.weight_task * t;
+    let band = 'low';
+    if (f >= rf.high_min && t !== null && t >= rf.high_task_min) band = 'high'; else if (f >= rf.mid_min) band = 'mid';
+    return { readiness_role_pct: round(rRole, 2), role_fit: round(f, 2), role_fit_band: band };
+  }
+
+  // ---- ตราประทับรุ่น (DEC-60 · ข้อ S5) ----
+  function buildStamp(p) {
+    const x = p || {};
+    return { wf_version: x.wf_version || '', build_id: x.build_id || '', engine_version: ENGINE_VERSION, analyst_prompt: x.analyst_prompt || '', verifier_prompt: x.verifier_prompt || '',
+      rules_version: x.rules_version || '', data_sha: x.data_sha || '' };
+  }
+  // คืนรายการเหตุที่ต้องปฏิเสธรอบ: engine ในโหนดไม่ตรงกับตราประทับ · โหนดต่างรุ่นกัน · build ไม่ตรงกับรุ่นที่ freeze
+  function versionIssues(local, others, freeze) {
+    const bad = []; const l = local || {};
+    if (l.engine_version !== ENGINE_VERSION) bad.push('engine ' + ENGINE_VERSION + ' ≠ ' + l.engine_version);
+    for (const o of others || []) if (o && o.build_id !== l.build_id) bad.push('build ' + l.build_id + ' ≠ ' + o.build_id);
+    if (freeze && freeze.frozen === true && l.build_id !== freeze.build_id) bad.push('build ' + l.build_id + ' ไม่ตรงกับรุ่นที่ freeze (' + freeze.build_id + ')');
+    return bad;
+  }
+  // ---- token รายขั้น (DEC-60) ----
+  function tokenSummary(calls, pricing) {
+    const by = {}; const tot = { calls: 0, input: 0, output: 0 }; let cost = 0; let costOk = !!pricing;
+    for (const c of calls || []) {
+      const key = c.call_purpose === 'verifier' ? 'verifier' : 'analyst';
+      const b = by[key] = by[key] || { calls: 0, input: 0, output: 0 };
+      const i = Number(c.input_tokens) || 0; const o = Number(c.output_tokens) || 0;
+      b.calls++; b.input += i; b.output += o; tot.calls++; tot.input += i; tot.output += o;
+      const pr = pricing && pricing.models && pricing.models[c.model_key];
+      if (pr && typeof pr.input_per_1m === 'number' && typeof pr.output_per_1m === 'number') cost += (i * pr.input_per_1m + o * pr.output_per_1m) / 1e6; else costOk = false;
+    }
+    return { by_purpose: by, total: tot, cost_usd: costOk && tot.calls ? round(cost, 4) : null };
+  }
+  function modelIdsSummary(calls) {
+    const seen = {};
+    for (const c of calls || []) if (c.status === 'ok' && c.model_id) (seen[c.model_key] = seen[c.model_key] || new Set()).add(c.model_id);
+    return Object.keys(seen).sort().map((k) => k + ':' + [...seen[k]].sort().join('/')).join(';');
+  }
+  // ---- cache คำตัดสินของผู้ตรวจ (DEC-60 · เก็บเฉพาะ hash ไม่เก็บข้อความ) ----
+  function cacheCfg(cfg) { return Object.assign({ enabled: false, max_entries: 3000 }, (cfg && cfg.verifier_cache) || {}); }
+  function verifierCacheKey(p) { return sha256Hex([p.prompt || '', p.model || '', p.target_id || '', sha256Hex(p.quote || '')].join('|')); }
+  function mergeVerifierCache(old, additions, maxEntries) {
+    const merged = Object.assign({}, old || {}, additions || {});
+    const keys = Object.keys(merged);
+    if (keys.length > maxEntries) keys.sort((a, b) => merged[a].t - merged[b].t).slice(0, keys.length - maxEntries).forEach((k) => delete merged[k]);
+    return merged;
+  }
+  function newCacheEntries(freshVerdicts, cacheKeys, nowMs) {
+    const out = {};
+    for (const id of Object.keys(freshVerdicts || {})) if (cacheKeys && cacheKeys[id]) out[cacheKeys[id]] = { v: freshVerdicts[id], t: nowMs };
+    return out;
   }
 
   // ---- ฐานขั้นต่ำจากหลักฐานที่โปรแกรมตรวจได้เอง (DEC-54) ----
@@ -604,8 +755,10 @@ const ENGINE = (function () {
     return out;
   }
   // H (DEC-55): เทคโนโลยีที่ตลาดต้องการของอาชีพที่พบแบบทั้งคำในเรซูเม (ไม่ใช้โมเดล)
-  function techMatch(text, techRows) {
-    const rows = techRows || [];
+  function techMatch(text, techRows, nFixed) {
+    // DEC-60: ตัวส่วนคงที่ (nFixed รายการแรกของอาชีพ) ให้ H เทียบข้ามอาชีพได้ · อาชีพที่มีน้อยกว่า nFixed → N/A
+    const all = techRows || [];
+    const rows = nFixed ? all.slice(0, nFixed) : all;
     const found = [];
     for (const r of rows) {
       for (const k of splitList(r.match_keys)) {
@@ -615,7 +768,8 @@ const ENGINE = (function () {
         if (m) { const s = m.index + m[1].length; found.push({ technology: r.technology, key: k, start: s, end: s + k.length }); break; }
       }
     }
-    return { n_total: rows.length, n_found: found.length, pct: rows.length ? round((found.length / rows.length) * 100, 2) : 'N/A', found };
+    const sufficient = !nFixed || all.length >= nFixed;
+    return { n_total: rows.length, n_found: found.length, sufficient, pct: rows.length && sufficient ? round((found.length / rows.length) * 100, 2) : 'N/A', found };
   }
 
   // ---- เสียงของโมเดลหนึ่งต่อข้อหนึ่ง (3 แบบ: กฎหลัก · R3 คำซ้ำอย่างเดียว · ไม่มี R3 → ใช้ทำ ablation) ----
@@ -719,15 +873,19 @@ const ENGINE = (function () {
     const reqById = Object.fromEntries(requirements.map((r) => [r.requirement_id, r]));
     const col = collectClaims(input);
     // คำตอบของโมเดลผู้ตรวจ
-    const verdicts = {}; const verification = {};
+    const verdicts = {}; const verification = {}; const freshVerdicts = {}; const cachedV = input.cachedVerdicts || {};
     for (const vk of MODEL_KEYS) {
       const ids = col.checks.filter((c) => c.verifier === vk).map((c) => c.check_id);
       if (!ids.length) continue;
+      const cachedIds = ids.filter((id) => VERDICTS.includes(cachedV[id]));
+      const freshIds = ids.filter((id) => !cachedIds.includes(id));
+      cachedIds.forEach((id) => { verdicts[id] = cachedV[id]; });
+      if (!freshIds.length) { verification[vk] = { n_checks: ids.length, n_answered: ids.length, n_cached: cachedIds.length, call_status: 'cached', reason: '' }; continue; }
       const vr = (input.verifierResults || {})[vk];
       const raw = vr && vr.status === 'ok' && vr.output ? vr.output.text : null;
-      const p = parseVerifierOutput(raw, ids);
-      Object.assign(verdicts, p.verdicts);
-      verification[vk] = { n_checks: ids.length, n_answered: Object.keys(p.verdicts).length, call_status: vr ? vr.status : 'not_called', reason: p.reason };
+      const p = parseVerifierOutput(raw, freshIds);
+      Object.assign(verdicts, p.verdicts); Object.assign(freshVerdicts, p.verdicts);
+      verification[vk] = { n_checks: ids.length, n_answered: cachedIds.length + Object.keys(p.verdicts).length, n_cached: cachedIds.length, call_status: vr ? vr.status : 'not_called', reason: p.reason };
     }
     const perModel = {}; const findings = [];
     const reqVotes = {}; const taskVotes = {};
@@ -750,14 +908,14 @@ const ENGINE = (function () {
             if (v.unverified) pm.n_unverified++;
             if (v.repaired) pm.n_repaired++;
           }
-          (reqVotes[claim.id] = reqVotes[claim.id] || []).push({ k, v });
-        } else (taskVotes[claim.id] = taskVotes[claim.id] || []).push({ k, v });
+          (reqVotes[claim.id] = reqVotes[claim.id] || []).push({ k, v, actor: claim.a.actor || '' });
+        } else (taskVotes[claim.id] = taskVotes[claim.id] || []).push({ k, v, actor: claim.a.actor || '' });
         const q = v.best || (claim.qs[0] || null);
         findings.push({ run_id: runId, requirement_id: claim.id, model_key: k, claimed_status: claim.a.status, quote: q ? q.raw : '',
           quote_char_start: q && q.r2.verified ? q.r2.start : -1, quote_char_end: q && q.r2.verified ? q.r2.end : -1, quote_text_version: q ? q.r2.text_version : '',
           quote_verified: claim.a.status === 'missing' ? '' : !!(q && q.r2.verified), overlap_score: v.score === null || v.score === undefined ? '' : round(v.score, 4),
           model_confidence: claim.a.confidence === null ? '' : claim.a.confidence, rule_flags: v.flags.join('|'), created_at: nowIso,
-          target_kind: claim.kind, quote_index: q ? q.qi : '', evidence_type: claim.a.evidence_type || '', r3_layer: v.r3_layer, verifier_key: v.verifier_key, verifier_verdict: v.verdict, final_vote: v.vote });
+          target_kind: claim.kind, quote_index: q ? q.qi : '', evidence_type: claim.a.evidence_type || '', actor: claim.a.actor || '', r3_layer: v.r3_layer, verifier_key: v.verifier_key, verifier_verdict: v.verdict, final_vote: v.vote });
       }
     }
     const usable = MODEL_KEYS.filter((k) => perModel[k] && perModel[k].r0_usable);
@@ -768,18 +926,30 @@ const ENGINE = (function () {
     const floorCtx = { cred, links: input.skillLinks, reqById, cfg: projectCfg };
     const need = projectCfg.min_agreeing_votes || 2;
     const rows = applyFloors(aggregate(reqIds, reqVotes, haltAll, 'vote', need), floorCtx);
+    const spec = input.specificity || null;
+    const rBeforeR7 = computeScores(rows.map((r) => ({ final_status: r.final, weight: Number(reqById[r.id].weight_renormalized) })), {}).readiness_pct;
+    const r7 = haltAll ? { n_actor: 0, n_reuse: 0, n_actor_unknown: 0 } : applyR7(rows, { reqById, votesById: reqVotes, cfg: projectCfg, spec });
     const decisions = rows.map((r) => {
       const req = reqById[r.id];
       return { run_id: runId, requirement_id: r.id, element_id: req.element_id, element_name: req.element_name, domain: req.domain, weight: Number(req.weight_renormalized),
+        idf: specOf(spec, req.element_id).idf, df: specOf(spec, req.element_id).df, actor: r.actor || '',
         final_status: r.final, agreement_level: round(r.ai, 4), n_usable_models: r.mi, rule_flags: r.flags.join('|'), evidence_quote: r.ev.quote,
         evidence_char_start: r.ev.start, evidence_char_end: r.ev.end, evidence_source: r.final === 'evidenced' || r.final === 'partially' ? r.ev.source : '', created_at: nowIso };
     });
     // งานหลักของอาชีพ (DEC-55) · กฎเดียวกันแต่ไม่มีฐานขั้นต่ำ · ไม่รวมใน R
     const taskHalt = haltAll || usable.filter((k) => perModel[k].tasks_ok).length < projectCfg.min_usable_models;
-    const taskRows = aggregate(roleTasks.map((t) => t.task_id), taskVotes, taskHalt, 'vote', need).map((r, i) => ({ run_id: runId, task_id: r.id, task_text: roleTasks[i].task_text,
+    const taskAgg = aggregate(roleTasks.map((t) => t.task_id), taskVotes, taskHalt, 'vote', need);
+    const tMin = taskMinActor(roleId, projectCfg); let nTaskActor = 0;
+    for (const r of taskAgg) {
+      r.actor = '';
+      if (r.final !== 'evidenced' && r.final !== 'partially') continue;
+      r.actor = majorityActor(taskVotes[r.id] || [], r.final);
+      if (actorCfg(projectCfg).enabled !== false && r.final === 'evidenced' && r.actor && ACTOR_RANK[r.actor] < tMin) { r.final = 'partially'; r.flags.push('R7_actor:' + r.actor); nTaskActor++; }
+    }
+    const taskRows = taskAgg.map((r, i) => ({ run_id: runId, task_id: r.id, task_text: roleTasks[i].task_text, actor: r.actor,
       final_status: r.final, agreement_level: round(r.ai, 4), n_usable_models: r.mi, rule_flags: r.flags.join('|'), evidence_quote: r.ev.quote,
       evidence_char_start: r.ev.start, evidence_char_end: r.ev.end, created_at: nowIso }));
-    const tech = techMatch(text, input.roleTech);
+    const tech = techMatch(text, input.roleTech, projectCfg.h_tech_n);
     const scores = computeScores(decisions, perModel);
     const T = taskRows.filter((t) => t.final_status !== 'abstained');
     scores.role_task_index = T.length ? round((T.reduce((s, t) => s + STATUS_SCORE[t.final_status], 0) / T.length) * 100, 2) : 'N/A';
@@ -788,9 +958,12 @@ const ENGINE = (function () {
     // ablation (3.8): R ภายใต้กฎ R3 แบบต่าง ๆ จากผลเรียกโมเดลชุดเดียวกัน · ไม่ใช้ฐานขั้นต่ำ
     const rOf = (field) => computeScores(aggregate(reqIds, reqVotes, haltAll, field, need).map((r) => ({ final_status: r.final, weight: Number(reqById[r.id].weight_renormalized) })), {}).readiness_pct;
     scores.ablation = { r3_hybrid_no_floors: rOf('vote'), r3_lexical_only: rOf('vote_lex'), no_r3: rOf('vote_nor3') };
+    scores.ablation.before_r7 = rBeforeR7;
+    scores.n_r7_actor = r7.n_actor; scores.n_r7_reuse = r7.n_reuse; scores.n_r7_task_actor = nTaskActor; scores.n_actor_unknown = r7.n_actor_unknown;
+    Object.assign(scores, computeRoleFit(decisions, scores.role_task_index, projectCfg));
     scores.n_floor_credential = decisions.filter((d) => d.evidence_source === 'credential').length;
     scores.n_floor_linkage = decisions.filter((d) => d.evidence_source === 'linkage').length;
-    return { m, halted: haltAll, per_model: perModel, findings, decisions, task_decisions: taskRows, tech, verification, n_checks: col.checks.length, scores };
+    return { m, halted: haltAll, per_model: perModel, findings, decisions, task_decisions: taskRows, tech, verification, n_checks: col.checks.length, fresh_verdicts: freshVerdicts, scores };
   }
 
   // สมการ 3.4 (R) · 3.5 (C) · 3.6 (U)
@@ -928,13 +1101,14 @@ const ENGINE = (function () {
       plan_sha256: sha256Hex(canonicalJSON(plan.items.map((i) => [i.rank, i.item_id, i.estimated_hours]))),
     };
     const payload = {
-      schema: 'report-v2.0', engine_version: ENGINE_VERSION, run_id: ctx.run_id, role_id: ctx.role_id, role_name_th: refs.role_name_th || '',
+      schema: 'report-v2.1', engine_version: ENGINE_VERSION, run_id: ctx.run_id, role_id: ctx.role_id, role_name_th: refs.role_name_th || '',
       mode: ctx.mode, timeline_months: ctx.timeline_months, hours_per_week: ctx.hours_per_week,
       ocr_engine: ocr.engine, ocr_engine_version: ocr.engine_version || '', m: evalResult.m,
       scores: evalResult.scores, decisions: evalResult.decisions, plan,
       role_tasks: evalResult.task_decisions || [], technology: evalResult.tech || null, verification: evalResult.verification || {},
       model_calls: (modelCalls || []).map((c) => ({ model_key: c.model_key, call_purpose: c.call_purpose || 'analyst', provider: c.provider, model_id: c.model_id, attempt: c.attempt, status: c.status, error_code: c.error_code, latency_ms: c.latency_ms, input_tokens: c.input_tokens, output_tokens: c.output_tokens })),
       versions: { dataset: refs.dataset_version || '', corpus: refs.corpus_version || '', prompt: refs.prompt_version || '', rules: refs.rules_version || '' },
+      stamp: refs.stamp || null, tokens: tokenSummary(modelCalls, refs.pricing || null), model_ids: modelIdsSummary(modelCalls),
       hashes,
     };
     payload.report_hash = sha256Hex(canonicalJSON(payload));
@@ -957,6 +1131,11 @@ const ENGINE = (function () {
     if (s.role_task_index !== undefined) {
       h += '<table><tr><th>ดัชนีงานหลักของอาชีพ (T)</th><th>เทคโนโลยีที่ตลาดต้องการที่พบในเรซูเม (H)</th></tr><tr><td>' + e(fmt(s.role_task_index, 2)) + ' (สรุปได้ ' + e(s.n_role_tasks_decided) + ' จาก ' + e(s.n_role_tasks) + ' งาน)</td><td>' + e(s.n_tech_found) + ' จาก ' + e(s.n_tech_total) + ' รายการ</td></tr></table>';
       h += '<p>T และ H อ่านแยกจาก R และไม่รวมเป็นคะแนนเดียว T วัดหลักฐานของงานหลักเฉพาะอาชีพนี้ H นับชื่อเทคโนโลยีที่ปรากฏตรงตัวในเรซูเม</p>';
+    }
+    if (s.role_fit !== undefined && s.role_fit !== 'N/A') {
+      const BAND_TH = { high: 'สูง', mid: 'ปานกลาง', low: 'ต่ำ' };
+      h += '<table><tr><th>ความตรงกับอาชีพ (Role-Fit)</th><th>ระดับ</th><th>คะแนนหลักฐานเฉพาะอาชีพ (R_role)</th></tr><tr><td>' + e(fmt(s.role_fit, 2)) + '</td><td>' + e(BAND_TH[s.role_fit_band] || s.role_fit_band) + '</td><td>' + e(fmt(s.readiness_role_pct, 2)) + '</td></tr></table>';
+      h += '<p>Role-Fit ให้น้ำหนักข้อกำหนดที่เฉพาะกับอาชีพนี้มากกว่าทักษะที่แทบทุกอาชีพไอทีต้องใช้ และรวมกับ T เป็นภาพรวมอ่านง่ายขึ้น ใช้ประกอบการอ่านเท่านั้น ไม่ใช่ตัวชี้วัดของการศึกษาและไม่ใช่คะแนนความสามารถ</p>';
     }
     // ส่วนที่ 2
     h += '<h2>ส่วนที่ 2 ผลรายข้อกำหนด</h2>';
@@ -1014,6 +1193,7 @@ const ENGINE = (function () {
       'ระบบได้วิเคราะห์เรซูเมของท่านเทียบกับอาชีพเป้าหมาย ' + p.role_id + ' ' + (p.role_name_th || '') + ' แล้ว สรุปดังนี้',
       '- คะแนนหลักฐานตามข้อกำหนดอ้างอิง (R): ' + fmt(s.readiness_pct, 2),
       '- สัดส่วนน้ำหนักของข้อที่สรุปได้ (C): ' + fmt(s.weighted_coverage, 3) + ' (สรุปได้ ' + s.n_decided + ' จาก ' + p.decisions.length + ' ข้อ)',
+      ...(s.role_fit !== undefined && s.role_fit !== 'N/A' ? ['- ความตรงกับอาชีพ (Role-Fit): ' + fmt(s.role_fit, 2)] : []),
       ...(s.role_task_index !== undefined ? ['- ดัชนีงานหลักของอาชีพ (T): ' + fmt(s.role_task_index, 2) + ' · เทคโนโลยีที่ตลาดต้องการที่พบ (H): ' + s.n_tech_found + ' จาก ' + s.n_tech_total + ' รายการ'] : []),
       '- รายการเรียนรู้ในแผน: ' + p.plan.items.length + ' รายการ รวม ' + p.plan.total_hours + ' ชั่วโมง',
       '', 'ผลนี้อ่านจากข้อความในเอกสารเท่านั้น ไม่ใช่การวัดความสามารถของท่าน รายละเอียดอยู่ในไฟล์รายงานที่แนบมา',
@@ -1045,6 +1225,9 @@ const ENGINE = (function () {
       unsupported_claims: x.unsupported_claims === undefined ? '' : x.unsupported_claims,
       role_task_index: x.role_task_index === undefined ? '' : x.role_task_index, tech_match_pct: x.tech_match_pct === undefined ? '' : x.tech_match_pct, report_hash: x.report_hash || '',
       pdf_file_id: x.pdf_file_id || '', email_status: x.email_status || '', error_code: x.error_code || '',
+      wf_version: x.stamp ? x.stamp.wf_version : '', build_id: x.stamp ? x.stamp.build_id : '', engine_version: x.stamp ? x.stamp.engine_version : '',
+      prompt_ids: x.stamp ? (x.stamp.analyst_prompt + '+' + x.stamp.verifier_prompt) : '', rules_version: x.stamp ? x.stamp.rules_version : '', data_sha: x.stamp ? x.stamp.data_sha : '',
+      model_ids: x.model_ids || '', tokens_input: x.tokens ? x.tokens.total.input : '', tokens_output: x.tokens ? x.tokens.total.output : '',
     };
   }
   function modelStatusSummary(evalResult) {
@@ -1074,14 +1257,14 @@ const ENGINE = (function () {
   function decideAndPlan(input) {
     const { ctx, requirements, text, modelResults, corpus, mappings, projectCfg, nowIso } = input;
     const ev = evaluateRun({ runId: ctx.run_id, roleId: ctx.role_id, requirements, text, modelResults, verifierResults: input.verifierResults,
-      roleTasks: input.roleTasks, roleTech: input.roleTech, skillLinks: input.skillLinks, corpus, mappings, projectCfg, nowIso });
+      roleTasks: input.roleTasks, roleTech: input.roleTech, skillLinks: input.skillLinks, specificity: input.specificity, cachedVerdicts: input.cachedVerdicts, corpus, mappings, projectCfg, nowIso });
     const learner = { years_experience: estimateYearsExperience(text, String(nowIso || '').slice(0, 4)) };
     const plan = buildPlan({ decisions: ev.decisions, corpus, mappings, mode: ctx.mode, months: ctx.timeline_months, hoursPerWeek: ctx.hours_per_week, projectCfg, roleId: ctx.role_id, learner });
     return { eval: ev, plan, planRows: planRowsFrom(ctx, plan) };
   }
   // แถว role_task_decisions (DEC-55)
   function taskRowsFrom(ev) {
-    return (ev.task_decisions || []).map((t) => ({ run_id: t.run_id, task_id: t.task_id, task_text: t.task_text, final_status: t.final_status, agreement_level: t.agreement_level, n_usable_models: t.n_usable_models, rule_flags: t.rule_flags, evidence_quote: t.evidence_quote, created_at: t.created_at }));
+    return (ev.task_decisions || []).map((t) => ({ run_id: t.run_id, task_id: t.task_id, task_text: t.task_text, actor: t.actor || '', final_status: t.final_status, agreement_level: t.agreement_level, n_usable_models: t.n_usable_models, rule_flags: t.rule_flags, evidence_quote: t.evidence_quote, created_at: t.created_at }));
   }
   // แถว plan_items ของแผนหนึ่งแผน (ใช้ร่วมกันระหว่าง decideAndPlan และโหนด Build Learning Plan ของ WF_IS68076026)
   function planRowsFrom(ctx, plan) {
@@ -1089,7 +1272,7 @@ const ENGINE = (function () {
   }
 
   return {
-    ENGINE_VERSION, STATUSES, FINAL_STATUSES, PLAN_STRATEGIES, R0_CODES, L1_LAYER, SCHEMA_VERSION, SCHEMA_VERSIONS, VERIFIER_SCHEMA, VERDICTS, MODEL_KEYS,
+    ENGINE_VERSION, STATUSES, FINAL_STATUSES, PLAN_STRATEGIES, R0_CODES, L1_LAYER, SCHEMA_VERSION, SCHEMA_VERSIONS, VERIFIER_SCHEMA, VERIFIER_SCHEMAS, VERDICTS, MODEL_KEYS, ACTORS, ACTOR_RANK,
     sha256Hex, canonicalJSON, escapeHtml, safeHttpsUrl,
     parseFormRow, responseId, makeRunId, validateIntake, checkFile, isDuplicate,
     normalizeText, maskPII, prepareText,
@@ -1098,6 +1281,8 @@ const ENGINE = (function () {
     collectClaims, prepareVerification, buildVerifierPrompt, parseVerifierOutput, credentialEvidence, techMatch, evaluateRun, computeScores,
     estimateYearsExperience, capacityHours, buildPlan, decideAndPlan, planRowsFrom, taskRowsFrom, mergeMappingReview,
     freezeReport, renderReportHTML, buildEmail, nextStage, runRowFrom, modelStatusSummary,
+    needsPerformed, requirementMinActor, taskMinActor, majorityActor, buildSpecificity, applyR7, computeRoleFit, buildStamp, versionIssues, tokenSummary, modelIdsSummary,
+    verifierCacheKey, mergeVerifierCache, newCacheEntries, cacheCfg,
   };
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = ENGINE;

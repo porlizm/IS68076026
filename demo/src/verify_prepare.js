@@ -5,7 +5,7 @@
 //   ตรรกะทั้งหมดมาจาก engine/engine.js (ฝังทั้งไฟล์ตอน build) — ตรงกับระบบเต็มทุกบรรทัด
 // ─────────────────────────────────────────────────────────────────────────────
 //@@ENGINE_ALL@@
-const VERIFIER_TEMPLATE = /*@@PROMPT_VERIFIER@@*/'';   // demo/prompts/verifier_demo_v1.1.txt (เพิ่มกฎ actor + ระดับ LV · schema ยังเป็น verifier_v1.0)
+const VERIFIER_TEMPLATE = /*@@PROMPT_VERIFIER@@*/'';   // prompts/verifier_v1.1.txt (ตัวเดียวกับระบบเต็ม)
 const STAMP = /*@@STAMP@@*/{};
 const v = $('Config & Validate').first().json;
 const verIssue = (() => { const c = v.version || {}; const bad = [];
@@ -16,7 +16,7 @@ const cfg = v.cfg;
 const role = $('Load Role Data (O*NET 31.0)').first().json.role;
 const text = $('Clean Text & Mask PII').first().json.text;
 const prompts = $('Build Analyst Prompt').all().map((i) => i.json);
-const reqs = role.requirements.map((r) => ({ requirement_id: r.id, element_id: r.element_id, element_name: r.name, element_description: r.desc, element_aliases: r.aliases, domain: r.domain, weight_renormalized: r.w }));
+const reqs = role.requirements.map((r) => ({ requirement_id: r.id, element_id: r.element_id, element_name: r.name, element_description: r.desc, element_aliases: r.aliases, domain: r.domain, weight_renormalized: r.w, level_lv: r.lv }));
 const reqIds = reqs.map((r) => r.requirement_id);
 const tasks = role.signal_tasks || [];
 
@@ -68,15 +68,10 @@ if (!usable.length) {
 // ── 3) ข้อที่ต้องให้ Gemini ตรวจความหมาย (R3b) · cache + แบ่ง batch (DEC-59 D4) ─────────────────
 const pv = ENGINE.prepareVerification({ roleId: role.role_id, requirements: reqs, text, modelResults, projectCfg, verifierTemplate: VERIFIER_TEMPLATE, roleTasks: tasks });
 const checks = pv.checks.filter((c) => c.verifier);
-const reqById = Object.fromEntries(role.requirements.map((r) => [r.id, r]));
-const taskHands = role.task_min_actor === 'performed';
-const hash = (str) => { let h1 = 0xdeadbeef, h2 = 0x41c6ce57; for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
-  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909); h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36); };
 const cacheOn = cfg.VERIFIER_CACHE !== false;
 let sd = null; try { sd = $getWorkflowStaticData('global'); } catch (e) { sd = null; }
 const cache = (cacheOn && sd && sd.verifierCache) || {};
-const keyOf = (c) => [STAMP.verifier_prompt, cfg.GEMINI_MODEL_VERIFIER, c.target_id, hash(c.quote)].join('|');
+const keyOf = (c) => ENGINE.verifierCacheKey({ prompt: STAMP.verifier_prompt, model: cfg.GEMINI_MODEL_VERIFIER, target_id: c.target_id, quote: c.quote });
 const cacheKeys = {}; const cached = {}; const fresh = [];
 for (const c of checks) {
   const k = keyOf(c); cacheKeys[c.check_id] = k;
@@ -85,11 +80,8 @@ for (const c of checks) {
 const useVerifier = source === 'gemini' && cfg.USE_GEMINI_VERIFIER !== false && fresh.length > 0;
 const gen = { maxOutputTokens: 8192, responseMimeType: 'application/json' };
 if (cfg.GEMINI_VERIFIER_THINKING_LEVEL) gen.thinkingConfig = { thinkingLevel: cfg.GEMINI_VERIFIER_THINKING_LEVEL };
-// prompt ของ Demo ส่ง level (LV ของ O*NET) และ hands_on ไปด้วย เพื่อให้ผู้ตรวจแยก "ลงมือทำเอง" ออกจาก "กำกับ/ส่งมอบ"
-const promptOf = (batch) => String(VERIFIER_TEMPLATE).split('{{CHECKS_JSON}}').join(JSON.stringify(batch.map((c) => {
-  const r = reqById[c.target_id];
-  return { check_id: c.check_id, target: c.target_text, level: r ? r.lv : null, hands_on: r ? !!r.hands_on : taskHands, quote: c.quote };
-}), null, 1));
+// prompt ผู้ตรวจ: engine ใส่ level (LV ของ O*NET) และ hands_on ไว้ในแต่ละข้อแล้ว (collectClaims) · ผู้ตรวจจึงแยก "ลงมือทำเอง" ออกจาก "กำกับ/ส่งมอบ" ได้
+const promptOf = (batch) => ENGINE.buildVerifierPrompt(VERIFIER_TEMPLATE, batch);
 const size = Math.max(5, Number(cfg.VERIFIER_BATCH) || 30);
 const batches = []; if (useVerifier) for (let i = 0; i < fresh.length; i += size) batches.push(fresh.slice(i, i + size));
 const common = {

@@ -149,3 +149,40 @@ date,action,from,to,reason
 2026-10-03,move,prompts/analyst_v1.0.txt,archive/03OCT26/prompts/analyst_v1.0.txt,DEC-53 prompt v1.1 แทน (R0 ยังรับ v1.0 · ย้อนกลับได้)
 2026-10-03,move,prompts/analyst_v1.0.schema.json,archive/03OCT26/prompts/analyst_v1.0.schema.json,DEC-53
 2026-10-03,move,evidence/QA_Final_01OCT26.md,archive/03OCT26/evidence/QA_Final_01OCT26.md,QA ฉบับปัจจุบัน evidence/QA_Final_03OCT26.md
+2026-10-03,move,prompts/analyst_v1.1.txt,archive/03OCT26/prompts/analyst_v1.1.txt,DEC-60 prompt รุ่นใหม่แทน (R0 ยังรับรุ่นก่อนหน้า)
+2026-10-03,move,prompts/analyst_v1.1.schema.json,archive/03OCT26/prompts/analyst_v1.1.schema.json,DEC-60 prompt รุ่นใหม่แทน (R0 ยังรับรุ่นก่อนหน้า)
+2026-10-03,move,prompts/verifier_v1.0.txt,archive/03OCT26/prompts/verifier_v1.0.txt,DEC-60 prompt รุ่นใหม่แทน (R0 ยังรับรุ่นก่อนหน้า)
+2026-10-03,move,prompts/verifier_v1.0.schema.json,archive/03OCT26/prompts/verifier_v1.0.schema.json,DEC-60 prompt รุ่นใหม่แทน (R0 ยังรับรุ่นก่อนหน้า)
+2026-10-03,move,docs/research_tools/Analysis_Plan_v1.0-draft.md,archive/03OCT26/docs/Analysis_Plan_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/research_tools/Coding_Manual_v1.0-draft.md,archive/03OCT26/docs/Coding_Manual_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/research_tools/Questionnaire_IOC_v1.0-draft.md,archive/03OCT26/docs/Questionnaire_IOC_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/ethics/01_PIS_v1.0-draft.md,archive/03OCT26/docs/01_PIS_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/ethics/02_Consent_v1.0-draft.md,archive/03OCT26/docs/02_Consent_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/ethics/03_Data_Governance_PDPA_v1.0-draft.md,archive/03OCT26/docs/03_Data_Governance_PDPA_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/ethics/04_Data_Flow_Overseas_v1.0-draft.md,archive/03OCT26/docs/04_Data_Flow_Overseas_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/ethics/05_Evaluation_Form_v1.0-draft.md,archive/03OCT26/docs/05_Evaluation_Form_v1.0-draft.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,move,docs/Advisor_Email_D0-D5.md,archive/03OCT26/docs/Advisor_Email_D0-D5.md,เขียนเอกสารใหม่ตามขอบเขตที่ลดลง (ผู้ให้รหัสคนเดียว ไม่มี IOC ไม่มีสัมภาษณ์)
+2026-10-03,copy_then_delete,demo/prompts/verifier_demo_v1.1.txt,archive/03OCT26/prompts/verifier_demo_v1.1.txt,DEC-60 ถูกแทนด้วยกฎใน engine
+2026-10-03,delete_original,prompts/analyst_v1.1.txt,archive/03OCT26/prompts/analyst_v1.1.txt,ลบต้นฉบับหลังตรวจสำเนาตรงกัน
+2026-10-03,delete_original,prompts/analyst_v1.1.schema.json,archive/03OCT26/prompts/analyst_v1.1.schema.json,ลบต้นฉบับหลังตรวจสำเนาตรงกัน
+2026-10-03,delete_original,prompts/verifier_v1.0.txt,archive/03OCT26/prompts/verifier_v1.0.txt,ลบต้นฉบับหลังตรวจสำเนาตรงกัน
+2026-10-03,delete_original,prompts/verifier_v1.0.schema.json,archive/03OCT26/prompts/verifier_v1.0.schema.json,ลบต้นฉบับหลังตรวจสำเนาตรงกัน
+2026-10-03,copy,data/corpus.csv,archive/03OCT26/data/corpus.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/corpus_additions.csv,archive/03OCT26/data/corpus_additions.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/url_manual_check.csv,archive/03OCT26/data/url_manual_check.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/corpus_change_log.csv,archive/03OCT26/data/corpus_change_log.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/mappings.csv,archive/03OCT26/data/mappings.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/mapping_review.csv,archive/03OCT26/data/mapping_review.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/manifest.json,archive/03OCT26/data/manifest.json,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,data/corpus_gap_request.csv,archive/03OCT26/data/corpus_gap_request.csv,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,scripts/build_corpus.py,archive/03OCT26/scripts/build_corpus.py,DEC-62 สำรองก่อนปรับคลังเป็น v1.6 (ต้นฉบับคงอยู่ที่เดิม)
+2026-10-03,copy,workflows/WF_IS_68076026_01OCT26.json,archive/03OCT26/WF_IS_68076026_01OCT26_before_DEC62.json,DEC-62 สำรองก่อน build workflow ใหม่ (จำนวนแถวอ้างอิงเปลี่ยน)
+2026-10-03,copy,book/00_front.md,archive/03OCT26/book/00_front.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-03,copy,book/01_chapter1.md,archive/03OCT26/book/01_chapter1.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-03,copy,book/02_chapter2.md,archive/03OCT26/book/02_chapter2.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-03,copy,book/03_chapter3.md,archive/03OCT26/book/03_chapter3.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-03,copy,book/04_references.md,archive/03OCT26/book/04_references.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-03,copy,book/05_appendix.md,archive/03OCT26/book/05_appendix.md,DEC-60/61/62 สำรองก่อนปรับต้นฉบับเล่มตาม Gap_report_03OCT26 (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)
+2026-10-04,copy,book/figures/*,archive/03OCT26/book/figures/,สำรองรูปเดิมก่อนวาดใหม่ด้วย SVG
+2026-10-04,copy,scripts/make_figures.py,archive/03OCT26/scripts/make_figures.py,สำรองสคริปต์รูปเดิม (Graphviz) ก่อนแทนด้วย SVG
+2026-10-04,copy,book/*.md,archive/04OCT26/book/,Analysis_doc_04OCT26 สำรองก่อนลดความยาวเล่ม (ต้นฉบับคงอยู่ที่เดิมจนกว่าจะเขียนทับ)

@@ -1,3 +1,1 @@
 requirement_id,role_id,element_id,element_name,domain,importance_im,rank_in_role,selected_reason,status,reason,proposed_items,decision
-REQ-R14-4.A.3.b.5,R14,4.A.3.b.5,Repairing and Maintaining Electronic Equipment,Work Activities,3.33,39,top_rank,proposed,มีรายการ coverage track รอผู้วิจัยยืนยันใน data/corpus_additions.csv,N10,DEC-46
-REQ-R20-4.A.2.a.1,R20,4.A.2.a.1,"Judging the Qualities of Objects, Services, or People",Work Activities,3.86,29,top_rank,proposed,มีรายการ coverage track รอผู้วิจัยยืนยันใน data/corpus_additions.csv,N07,DEC-46

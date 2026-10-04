@@ -15,11 +15,6 @@ const ADDENDUM = [
   ' "certifications": ["<each certification or certificate name copied exactly as written in the resume>"],',
   ' "headline_th": "<one Thai sentence (max 160 characters) describing who this candidate is>",',
   ' "summary_th": "<3-4 Thai sentences: main strengths and the most important gaps for the target occupation, based only on the resume>"}',
-  'Also add a top-level field "actors" with one entry for EVERY requirement_id and task_id you rated "evidenced" or "partially":',
-  '{"actors": [{"id": "<requirement_id or task_id>", "actor": "performed|led|oversaw|mentioned"}]}',
-  'actor describes what the quote shows about the candidate: "performed" = the candidate personally did the work or applied the knowledge;',
-  '"led" = the candidate directed or managed people who did the work; "oversaw" = the candidate was accountable for a project, programme, budget, vendor or deliverable but the quote does not show doing or directing the work itself;',
-  '"mentioned" = only a tool, course, certification, degree or job title is named. Judge the quote itself, not the job title. actors is for display and rule checks only.',
   'Do not put personal names, emails, phone numbers or URLs in profile. All other rules above still apply.',
 ].join('\n');
 
@@ -44,7 +39,7 @@ return KEYS.slice(0, v.runs).map((k) => ({
     run_key: k,
     use_gemini: cfg.USE_GEMINI_ANALYST !== false,
     model: cfg.GEMINI_MODEL_ANALYST,
-    prompt_version: PROMPT_VERSION + '+demo_profile+actors',
+    prompt_version: PROMPT_VERSION + '+demo_profile',
     ver_issue: verIssue,
     prompt_chars: prompt.length,
     gemini_request: { contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig },

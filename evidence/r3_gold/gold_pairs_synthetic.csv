@@ -1,4 +1,4 @@
-pair_id,source,role_id,element_id,target_kind,quote,label_key,rater_1,rater_2,final_label,verifier_verdict
+pair_id,source,role_id,element_id,target_kind,quote,label_key,label_1,label_2,final_label,verifier_verdict
 S001,synthetic_case_A:onet_vocabulary,R01,2.C.3.a,requirement,Maintained operating system images and server hardware inventory for 120 Linux and Windows hosts.,relevant,,,,
 S002,synthetic_case_A:onet_vocabulary,R01,4.A.3.b.1,requirement,Configured Linux servers and set up computer systems networks for the staging and production environments.,relevant,,,,
 S003,synthetic_case_A:onet_vocabulary,R01,4.A.2.a.2,requirement,Designed an ETL pipeline that transformed data from five source systems into a PostgreSQL warehouse.,relevant,,,,

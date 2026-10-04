@@ -52,13 +52,13 @@ const DATA = JSON.parse(rd(path.join(DEMO, 'build/demo_data.json')));
 const PROJECT = JSON.parse(rd(path.join(ROOT, 'config/project.json')));
 const PROMPT = rd(path.join(ROOT, 'prompts', PROJECT.prompt_version + '.txt'));
 const VERDEMO = JSON.parse(rd(path.join(DEMO, 'version.json')));
-const PROMPT_VERIFIER = rd(path.join(DEMO, 'prompts', 'verifier_demo_v1.1.txt'));   // DEC-59 · เพิ่มกฎ actor + ระดับ LV (schema ยังเป็น verifier_v1.0)
+const PROMPT_VERIFIER = rd(path.join(ROOT, 'prompts', PROJECT.verifier_prompt_version + '.txt'));   // ตัวเดียวกับระบบเต็ม (DEC-60)
 const BUILD_ID = 'WF_Demo-' + new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 16).replace(/[-:T]/g, ''); // เวลาไทย
 const engineVersion = (engine.match(/ENGINE_VERSION = '([^']+)'/) || [])[1] || '';
 let commit = ''; try { commit = execSync('git rev-parse --short HEAD', { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch (e) { commit = ''; }
 const STAMP = { wf_version: VERDEMO.demo_version, dec: VERDEMO.dec, build_id: BUILD_ID, built_at: new Date().toISOString(), commit,
-  engine_version: engineVersion, engine_sha: sha(engine).slice(0, 12), analyst_prompt: PROJECT.prompt_version + '+demo_profile+actors',
-  verifier_prompt: 'verifier_demo_v1.1', rules_version: PROJECT.rules_version || '', data_sha: (DATA.meta.sha256['Data_Set.xlsx'] || '').slice(0, 12) };
+  engine_version: engineVersion, engine_sha: sha(engine).slice(0, 12), analyst_prompt: PROJECT.prompt_version + '+demo_profile',
+  verifier_prompt: PROJECT.verifier_prompt_version, rules_version: PROJECT.rules_version || '', data_sha: (DATA.meta.sha256['Data_Set.xlsx'] || '').slice(0, 12) };
 const STAMP_JSON = JSON.stringify(STAMP);
 const stampIn = (src) => src.replace('/*@@STAMP@@*/{}', () => STAMP_JSON);
 const appHtml = rd(path.join(SRC, 'app.html'))

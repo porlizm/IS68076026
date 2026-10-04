@@ -25,6 +25,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data")
 TODAY = "2026-10-01"
 V14 = "CORPUS-IS68076026-v1.4R-01OCT26"
+V16 = "CORPUS_IS68076026-v1.6-03OCT26"  # DEC-62 ปรับคลังเป็นรุ่นปัจจุบัน + นับรายการใหม่ 14 รายการ
 V15 = "CORPUS_IS68076026-v1.5-01OCT26"  # DEC-43 (เดิม CORPUS-IS68076026-v1.5R-01OCT26 ตาม DEC-31)
 
 # ---------- DEC-18 foundation track (URL เปิดตรวจแล้ว 19SEP26 และตรวจซ้ำ 01OCT26) ----------
@@ -128,6 +129,7 @@ def main():
     ap.add_argument("--close-r14-repair", action="store_true")
     ap.add_argument("--foundation-uncovered-only", action="store_true",
                     help="ย้อนกลับ DEC-45: map foundation เฉพาะข้อที่ยังไม่มี L1 (แบบ DEC-18 เดิม)")
+    ap.add_argument("--no-updates", action="store_true", help="ย้อนกลับ DEC-62: ไม่อ่าน data/corpus_updates_03OCT26.csv")
     ap.add_argument("--no-additions", action="store_true", help="ย้อนกลับ DEC-46: ไม่อ่าน data/corpus_additions.csv")
     a = ap.parse_args()
 
@@ -246,7 +248,7 @@ def main():
                                    cost_amount_usd=f.cost_amount_usd, prerequisites="ไม่มี", phase="foundation",
                                    recommendation_mode="course_only|both", global_recognition_tier="2",
                                    verification_status="verified", verification_date=f.researcher_checked_at or TODAY,
-                                   verified_by="ผู้วิจัย (DEC-46)",
+                                   verified_by=(f.note or "ผู้วิจัย (DEC-46)"),
                                    researcher_notes=f"coverage track {f.key} (DEC-46) · {f.hours_note} · Claude เปิดหน้า {f.claude_checked_at}: {f.claude_page_evidence}",
                                    corpus_version=V15, snapshot_version="ONET31.0-IS68076026-v1.0",
                                    batch="v1.5_coverage_track"))
@@ -280,6 +282,33 @@ def main():
                             change="L2_to_L1_promoted", detail=why + f" (คง mapping_rule {maps.loc[ix,'mapping_rule']})",
                             decision="DEC-19"))
         corpus["corpus_version"] = V15
+
+        # ---------------- DEC-62: ปรับคลังเป็นรุ่นปัจจุบัน (data/corpus_updates_03OCT26.csv) ----------------
+        # กฎความสดใหม่: ใช้รุ่นที่มีผลถึง 30 พ.ย. 2569 · รุ่นที่มีผลหลังจากนั้นคงรุ่นเดิมและจดวันที่ไว้ใน researcher_notes
+        upd_path = os.path.join(DATA, "corpus_updates_03OCT26.csv")
+        if os.path.exists(upd_path) and not a.no_updates:
+            upd = rd(upd_path)
+            for _, u in upd.iterrows():
+                m = (corpus.title == u.match_title) & (corpus.provider == u.match_provider)
+                assert m.any(), f"DEC-62: ไม่พบรายการ {u.match_title} / {u.match_provider}"
+                ids = list(corpus[m].item_id)
+                old = f"{u.match_title} [{corpus.loc[m, 'exam_code'].iloc[0]}]"
+                for col, val in (("title", u.new_title), ("provider", u.new_provider), ("exam_code", u.new_exam_code),
+                                 ("source_url", u.new_url), ("platform", u.get("new_platform", "")),
+                                 ("estimated_hours", u.get("new_hours", ""))):
+                    if val: corpus.loc[m, col] = val
+                if u.get("new_hours", ""):
+                    corpus.loc[m, ["cost_category", "cost_amount_usd"]] = ["free_audit", "0"]
+                    corpus.loc[m, "provider_type"] = "mooc_platform"
+                tag = f"DEC-62 [{u.group}] " + " · ".join(filter(None, [u.effective, u.note_th])) + f" · ความมั่นใจ {u.confidence or '-'}"
+                corpus.loc[m, "researcher_notes"] = corpus.loc[m, "researcher_notes"].map(lambda t: (t + " | " if t else "") + tag)
+                corpus.loc[m, "verification_date"] = "2026-10-03"
+                if u.group == "ก" and not u.new_title and u.confidence == "low":
+                    corpus.loc[m, "verification_status"] = "pending_verification"
+                for i in ids:
+                    log.append(dict(version=V16, item_id=i, requirement_id="", change=f"update_group_{u.group}",
+                                    detail=f"{old} -> {u.new_title or u.match_title} [{u.new_exam_code or '-'}]", decision="DEC-62"))
+        corpus["corpus_version"] = V16
 
     maps["mapping_status"] = "pending_review"
     corpus = recompute_derived(corpus, maps, req)

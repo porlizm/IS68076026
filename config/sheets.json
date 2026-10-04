@@ -1,9 +1,10 @@
 {
   "_comment": "แหล่งความจริงเดียวของโครงสร้างสเปรดชีต (ตารางที่ 3.20 + ภาคผนวก ง) · workflow, build_sheets_import.py และเทสต์อ่านไฟล์นี้ · เปลี่ยนแล้วต้องมี DEC",
-  "schema_version": "sheets-v1.1-01OCT26",
+  "schema_version": "sheets-v1.2-03OCT26",
   "spreadsheet_env": "SHEET_ID",
   "decision_refs": [
-    "DEC-34 เพิ่ม ocr_results.masked_text_file_id · findings.quote_text_version · ground_truth.coder_1_status/coder_2_status ตามที่เล่มหัวข้อ 3.11 และภาคผนวก ง ระบุว่าต้องเพิ่มก่อนเก็บข้อมูลกลุ่มหลัก"
+    "DEC-34 เพิ่ม ocr_results.masked_text_file_id · findings.quote_text_version · ground_truth.coder_1_status/coder_2_status ตามที่เล่มหัวข้อ 3.11 และภาคผนวก ง ระบุว่าต้องเพิ่มก่อนเก็บข้อมูลกลุ่มหลัก",
+    "DEC-60 เพิ่ม runs (ตราประทับรุ่น · model_ids · token) · findings/decisions/role_task_decisions.actor · ref_requirements.level_lv · ground_truth ใช้ผู้ให้รหัสคนเดียวและรหัสซ้ำ (recode_*) แทน coder_2"
   ],
   "tabs": {
     "runs": {
@@ -35,7 +36,16 @@
         "report_hash",
         "pdf_file_id",
         "email_status",
-        "error_code"
+        "error_code",
+        "wf_version",
+        "build_id",
+        "engine_version",
+        "prompt_ids",
+        "rules_version",
+        "data_sha",
+        "model_ids",
+        "tokens_input",
+        "tokens_output"
       ]
     },
     "ocr_results": {
@@ -91,6 +101,7 @@
         "target_kind",
         "quote_index",
         "evidence_type",
+        "actor",
         "r3_layer",
         "verifier_key",
         "verifier_verdict",
@@ -108,6 +119,7 @@
         "element_name",
         "domain",
         "weight",
+        "actor",
         "final_status",
         "agreement_level",
         "n_usable_models",
@@ -124,6 +136,7 @@
         "run_id",
         "task_id",
         "task_text",
+        "actor",
         "final_status",
         "agreement_level",
         "n_usable_models",
@@ -188,11 +201,10 @@
         "requirement_id",
         "reference_status",
         "evidence_quote",
-        "coder_1",
-        "coder_1_status",
-        "coder_2",
-        "coder_2_status",
-        "agreement",
+        "coder_status",
+        "recode_status",
+        "recode_at",
+        "recode_agreement",
         "resolution_note",
         "participant_disagreed",
         "coded_at"
@@ -240,6 +252,7 @@
         "element_name",
         "element_description",
         "importance_im",
+        "level_lv",
         "rank_in_role",
         "weight_renormalized",
         "element_aliases"
@@ -302,6 +315,8 @@
         "ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน",
         "ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ",
         "ข้อ 3 เหมาะกับเวลาที่จัดสรรได้",
+        "ข้อ 4 รายงานเข้าใจง่าย",
+        "ข้อ 5 เชื่อถือหลักฐานที่แสดง",
         "ส่วนใดของแผนที่ต้องการเปลี่ยน"
       ]
     }

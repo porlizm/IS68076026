@@ -44,9 +44,9 @@ function mockAnalyst(body) {
   };
   // DEC-59: actor จำลอง — บรรทัดที่ขึ้นต้นด้วย Led/Managed/Oversaw ฯลฯ = led · อื่น ๆ = performed
   const actorOfLine = (q) => (/^(led|managed|oversaw|directed|supervised)/i.test(q || '') ? 'led' : 'performed');
-  const actors = assessments.filter((a) => a.quotes && a.quotes.length).map((a) => ({ id: a.requirement_id, actor: actorOfLine(a.quotes[0]) }));
-  const task_assessments = (role.signal_tasks || []).map((t, i) => ({ task_id: t.task_id, status: i < 3 && lines[i] ? 'partially' : 'missing', quotes: i < 3 && lines[i] ? [lines[i].slice(0, 160)] : [], confidence: 0.6 }));
-  const text = JSON.stringify({ schema_version: 'analyst_v1.1', role_id: roleId, assessments, task_assessments, actors: actors.concat((role.signal_tasks || []).map((t, i) => (i < 3 && lines[i] ? { id: t.task_id, actor: actorOfLine(lines[i]) } : null)).filter(Boolean)), profile });
+  assessments.forEach((a) => { if (a.quotes && a.quotes.length) a.actor = actorOfLine(a.quotes[0]); });
+  const task_assessments = (role.signal_tasks || []).map((t, i) => ({ task_id: t.task_id, status: i < 3 && lines[i] ? 'partially' : 'missing', quotes: i < 3 && lines[i] ? [lines[i].slice(0, 160)] : [], actor: i < 3 && lines[i] ? actorOfLine(lines[i]) : undefined, confidence: 0.6 }));
+  const text = JSON.stringify({ schema_version: 'analyst_v1.2', role_id: roleId, assessments, task_assessments, profile });
   return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: prompt.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0, thoughtsTokenCount: 120, totalTokenCount: (prompt.length / 4 | 0) + (text.length / 4 | 0) + 120 }, modelVersion: 'gemini-3.8-flash (mock)' };
 }
 const mocks = {
@@ -63,7 +63,7 @@ const mocks = {
       // ผู้ตรวจจำลอง: ข้อความที่มีตัวเลข = supports · มีชื่อสถาบัน = unrelated · อื่น ๆ = partially_supports
       const p = body.contents[0].parts[0].text;
       const list = JSON.parse(p.slice(p.indexOf('CHECKS (JSON):') + 14).trim());
-      const text = JSON.stringify({ schema_version: 'verifier_v1.0', checks: list.map((c) => ({ check_id: c.check_id, verdict: /University|Institute|research lab/.test(c.quote) ? 'unrelated' : /\d/.test(c.quote) ? 'supports' : 'partially_supports' })) });
+      const text = JSON.stringify({ schema_version: 'verifier_v1.1', checks: list.map((c) => ({ check_id: c.check_id, verdict: /University|Institute|research lab/.test(c.quote) ? 'unrelated' : /\d/.test(c.quote) ? 'supports' : 'partially_supports' })) });
       return { candidates: [{ content: { parts: [{ text }], role: 'model' }, finishReason: 'STOP' }], usageMetadata: { promptTokenCount: p.length / 4 | 0, candidatesTokenCount: text.length / 4 | 0, totalTokenCount: (p.length / 4 | 0) + (text.length / 4 | 0) }, modelVersion: 'gemini-3.8-flash (mock)' };
     }
     return mockAnalyst(body);

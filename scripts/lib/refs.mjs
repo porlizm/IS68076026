@@ -57,7 +57,7 @@ export function loadRefs() {
 }
 // ข้อมูลเฉพาะอาชีพสำหรับ evaluateRun (DEC-54/55)
 export function signalsFor(refs, roleId) {
-  return { roleTasks: refs.roleTasks.filter((t) => t.role_id === roleId), roleTech: refs.roleTech.filter((t) => t.role_id === roleId), skillLinks: refs.skillLinks };
+  return { roleTasks: refs.roleTasks.filter((t) => t.role_id === roleId), roleTech: refs.roleTech.filter((t) => t.role_id === roleId), skillLinks: refs.skillLinks, specificity: ENGINE.buildSpecificity(refs.requirements) };
 }
 export function refsForRun(refs, roleId) {
   const role = refs.roles.find((r) => r.role_id === roleId);

@@ -75,7 +75,7 @@ test('sheets_import: 17 แท็บ · จำนวนคอลัมน์แ�
   const cfg = refs.sheetsCfg.tabs;
   assert.equal(Object.keys(cfg).length, 17);
   const cols = Object.fromEntries(Object.entries(cfg).map(([k, v]) => [k, v.columns.length]));
-  assert.deepEqual(cols, { runs: 26, ocr_results: 9, model_calls: 13, findings: 20, decisions: 15, role_task_decisions: 9, plan_items: 14, deliveries: 9, audit_log: 5, ground_truth: 12, pathway_review: 10, ref_roles: 7, ref_requirements: 10, ref_corpus: 12, ref_mappings: 7, form_responses: 8, evaluation_responses: 6 });
+  assert.deepEqual(cols, { runs: 35, ocr_results: 9, model_calls: 13, findings: 21, decisions: 16, role_task_decisions: 10, plan_items: 14, deliveries: 9, audit_log: 5, ground_truth: 11, pathway_review: 10, ref_roles: 7, ref_requirements: 11, ref_corpus: 12, ref_mappings: 7, form_responses: 8, evaluation_responses: 8 });
   const counts = readJSON('sheets_import', 'sheets_import_counts.json');
   assert.equal(counts.ref_roles.rows, 20); assert.equal(counts.ref_requirements.rows, 600);
   assert.equal(counts.ref_corpus.rows, refs.corpus.length); assert.equal(counts.ref_mappings.rows, refs.rawMappings.length);

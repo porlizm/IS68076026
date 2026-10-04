@@ -1,4 +1,4 @@
-// WF_IS_68076026_01OCT26 · Collect Verifier Results (DEC-51) — รวมคำตอบของผู้ตรวจแยกตามโมเดล ส่งให้ Apply Rules R0-R6
+// WF_IS_68076026_01OCT26 · Collect Verifier Results (DEC-51) — รวมคำตอบของผู้ตรวจแยกตามโมเดล ส่งให้ Apply Rules R0-R7
 const verifier_results = {}; const verifier_calls = []; const summary = {};
 for (const i of $('Wait for All Verifiers').all()) {
   const r = i.json.result;

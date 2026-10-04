@@ -20,8 +20,8 @@ def n8n(path, data=None, method=None):
 def ctl(path, data=None):
     return req(CTL + path, data)
 
-ROLE = {'R01': 'R01 วิศวกรซอฟต์แวร์', 'R06': 'R06 นักวิทยาศาสตร์ข้อมูล', 'R18': 'R18 นักวิเคราะห์ระบบคอมพิวเตอร์'}
-FILE = {'A': ('SYNTH_FILE_A_0000000000000000000000', 'R01'), 'B': ('SYNTH_FILE_B_0000000000000000000000', 'R06'), 'C': ('SYNTH_FILE_C_0000000000000000000000', 'R18'), 'SIX': ('SYNTH_FILE_SIXPAGES_000000000000000', 'R01'), 'SIXOBJ': ('SYNTH_FILE_SIXOBJSTM_00000000000000', 'R01')}
+ROLE = {'R01': 'R01 วิศวกรซอฟต์แวร์', 'R06': 'R06 นักวิทยาศาสตร์ข้อมูล', 'R18': 'R18 นักวิเคราะห์ระบบคอมพิวเตอร์', 'R19': 'R19 ผู้จัดการโครงการไอที'}
+FILE = {'A': ('SYNTH_FILE_A_0000000000000000000000', 'R01'), 'B': ('SYNTH_FILE_B_0000000000000000000000', 'R06'), 'C': ('SYNTH_FILE_C_0000000000000000000000', 'R18'), 'D': ('SYNTH_FILE_D_0000000000000000000000', 'R19'), 'SIX': ('SYNTH_FILE_SIXPAGES_000000000000000', 'R01'), 'SIXOBJ': ('SYNTH_FILE_SIXOBJSTM_00000000000000', 'R01')}
 
 def form_row(case, email=None, consent='ข้าพเจ้ายินยอมตามข้อ 1 และข้อ 2', months='6 เดือน', hours=10, mode='ทั้งสองประเภท'):
     fid, role = FILE[case]

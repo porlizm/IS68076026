@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-run_analysis.py — วิเคราะห์ RQ1/RQ2 จาก CSV ที่ export จากสเปรดชีต (Analysis Plan v1.0 หัวข้อ 7)
+run_analysis.py — วิเคราะห์ RQ1/RQ2 จาก CSV ที่ export จากสเปรดชีต (docs/research_tools/Analysis_Plan.md หัวข้อ 7)
 
   python analysis/run_analysis.py --exports private/exports/<YYYY-MM-DD> --out analysis/output/main --label MAIN
   python analysis/run_analysis.py --synthetic --out analysis/output/rehearsal   (ซ้อมด้วยข้อมูลสังเคราะห์ 30+5)
@@ -12,10 +12,11 @@ sys.path.insert(0, os.path.dirname(__file__))
 from metrics import rq1, rq2, cohen_kappa, likert_items, REF  # noqa: E402
 from bootstrap import bootstrap_ci, mean_of  # noqa: E402
 
-CRITERIA = {  # ต้องตรงกับ Analysis Plan v1.0 หัวข้อ 6 · ห้ามแก้หลังเห็นข้อมูลกลุ่มหลัก
+CRITERIA = {  # ต้องตรงกับ docs/research_tools/Analysis_Plan.md หัวข้อ 6 · ห้ามแก้หลังเห็นข้อมูลกลุ่มหลัก
     "rq1_macro_f1_mean_min": 0.70, "rq1_abstain_rate_max": 0.20, "kappa_min": 0.61,
     "rq2_relevance_min": 0.80, "rq2_item_accuracy_eq": 1.0, "rq2_time_feasibility_eq": 1.0, "rq2_likert_mean_min": 3.5,
 }
+EVAL_EXTRA = ["ข้อ 4 รายงานเข้าใจง่าย", "ข้อ 5 เชื่อถือหลักฐานที่แสดง"]  # อธิบายผล ไม่มีเกณฑ์
 EVAL_KEYS = ["ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน", "ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ", "ข้อ 3 เหมาะกับเวลาที่จัดสรรได้"]
 
 
@@ -32,8 +33,15 @@ def analyse(t, cohort=None):
     units = [dict(run_id=k, **v) for k, v in r1["per_participant"].items()]
     r1["ci_macro_f1_mean"] = bootstrap_ci(units, mean_of("macro_f1"))
     r1["ci_abstain_mean"] = bootstrap_ci(units, mean_of("abstain"))
-    pairs = [(g["coder_1_status"], g["coder_2_status"]) for g in gt if g.get("coder_2_status") in REF and g.get("coder_1_status") in REF]
+    pairs = [(g["coder_status"], g["recode_status"]) for g in gt if g.get("recode_status") in REF and g.get("coder_status") in REF]
     kap = cohen_kappa([a for a, _ in pairs], [b for _, b in pairs]) if pairs else None
+    # สัญญาณอคติ: Macro-F1 ของระบบบนรายการที่ให้รหัสซ้ำ เทียบรหัสรอบที่ 1 กับรอบที่ 2 แยกกัน
+    sub = [g for g in gt if g.get("recode_status") in REF and (g["run_id"], g["requirement_id"]) in dec]
+    def _f1(field):
+        rr = [dict(run_id=g["run_id"], reference_status=g[field], final_status=dec[(g["run_id"], g["requirement_id"])]) for g in sub]
+        return rq1(rr)["pooled"]["macro_f1"] if rr else None
+    f1_a, f1_b = _f1("coder_status"), _f1("recode_status")
+    bias = dict(n=len(sub), f1_round1=f1_a, f1_round2=f1_b, gap=(abs(f1_a - f1_b) if f1_a is not None and f1_b is not None else None))
     corpus = {c["item_id"]: c for c in t["ref_corpus"]}
     plans = {}
     for p in t["plan_items"]:
@@ -47,6 +55,7 @@ def analyse(t, cohort=None):
     r2 = rq2(plans, reviews, ref_gaps, corpus, hmax)
     ev = [e for e in t["evaluation_responses"] if e.get("รหัสงานที่ปรากฏในรายงาน") in main]
     r2["perceived_usefulness"] = likert_items(ev, EVAL_KEYS)
+    r2["clarity_trust"] = likert_items(ev, EVAL_EXTRA)
     r2["non_response"] = len(main) - len({e["รหัสงานที่ปรากฏในรายงาน"] for e in ev})
     crit = {
         "rq1_macro_f1": r1["primary_mean_macro_f1"] is not None and r1["primary_mean_macro_f1"] >= CRITERIA["rq1_macro_f1_mean_min"],
@@ -56,7 +65,7 @@ def analyse(t, cohort=None):
         "rq2_item_accuracy": r2["item_accuracy"]["value"] == 1.0, "rq2_time": r2["time_feasibility"]["value"] == 1.0,
         "rq2_likert": {k: (v["mean"] or 0) >= CRITERIA["rq2_likert_mean_min"] for k, v in r2["perceived_usefulness"].items()},
     }
-    return dict(n_main=len(main), rq1=r1, kappa=kap, rq2=r2, criteria=CRITERIA, criteria_met=crit)
+    return dict(n_main=len(main), rq1=r1, kappa=kap, coder_bias=bias, rq2=r2, criteria=CRITERIA, criteria_met=crit)
 
 
 def report_md(res, label):
@@ -69,12 +78,16 @@ def report_md(res, label):
          "", "| เฉลย \\ ระบบ | evidenced | partially | missing | abstained |", "|---|---|---|---|---|"]
     for r in REF: L.append(f"| {r} | " + " | ".join(str(r1["confusion"][r][s]) for s in ["evidenced", "partially", "missing", "abstained"]) + " |")
     k = res["kappa"]
-    L += ["", f"- Cohen's kappa: {f(k['kappa']) if k else 'N/A'} (n = {k['n'] if k else 0}) · เกณฑ์ ≥ 0.61", "", "## RQ2"]
+    L += ["", f"- Cohen's kappa (ให้รหัสซ้ำโดยผู้วิจัยคนเดียว): {f(k['kappa']) if k else 'N/A'} (n = {k['n'] if k else 0}) · เกณฑ์ ≥ 0.61", "", "## RQ2"]
+    b = res["coder_bias"]
+    L.insert(L.index("## RQ2") - 1, f"- สัญญาณอคติของผู้ให้รหัส (n = {b['n']}): Macro-F1 เทียบรอบที่ 1 = {f(b['f1_round1'])} · เทียบรอบที่ 2 = {f(b['f1_round2'])} · ต่างกัน {f(b['gap'])} (ต่างตั้งแต่ 0.05 ให้อภิปราย)")
     for key in ["relevance", "gap_coverage", "item_accuracy", "time_feasibility"]:
         v = r2[key]; L.append(f"- {key}: {f(v['value'])} ({v['numerator']}/{v['denominator']})")
     L.append(f"- กรณีพิเศษ: {r2['special_cases']} · ไม่ตอบแบบประเมิน {r2['non_response']} คน")
     for q, v in r2["perceived_usefulness"].items():
         L.append(f"- {q}: ค่าเฉลี่ย {f(v['mean'])} SD {f(v['sd'])} n {v['n']} · ประเมินไม่ได้ {v['cannot_assess']}")
+    for q, v in r2["clarity_trust"].items():
+        L.append(f"- {q} (อธิบายผล ไม่มีเกณฑ์): ค่าเฉลี่ย {f(v['mean'])} SD {f(v['sd'])} n {v['n']} · ประเมินไม่ได้ {v['cannot_assess']}")
     L += ["", "## เกณฑ์อ่านผลที่ประกาศล่วงหน้า", "```", json.dumps(res["criteria_met"], ensure_ascii=False, indent=1), "```"]
     return "\n".join(L) + "\n"
 

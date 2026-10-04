@@ -84,6 +84,9 @@ const runs = Math.max(1, Math.min(3, Number(CONFIG.ANALYST_RUNS) || 1));
 const projectCfg = Object.assign({}, PROJECT, {
   theta: CONFIG.THETA, overlap_denominator_cap: CONFIG.OVERLAP_CAP, alias_min_length: CONFIG.ALIAS_MIN_LEN,
   allow_self_verification: true, min_usable_models: runs >= 2 ? 2 : 1, min_agreeing_votes: runs >= 2 ? 2 : 1,
+  quote_reuse: Object.assign({}, PROJECT.quote_reuse, { max_full_evidence_per_quote: Number(CONFIG.QUOTE_REUSE_CAP) || 2 }),
+  role_fit: { weight_task: CONFIG.FIT_WEIGHT_T, high_min: CONFIG.FIT_HIGH_MIN, high_task_min: CONFIG.FIT_HIGH_T_MIN, mid_min: CONFIG.FIT_MID_MIN },
+  h_tech_n: CONFIG.H_MIN_TECH,
 });
 const now = new Date();
 const runId = 'DEMO-' + now.toISOString().replace(/[-:TZ.]/g, '').slice(0, 14) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();

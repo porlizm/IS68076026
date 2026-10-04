@@ -50,7 +50,7 @@ test('ตัวตรวจจับข้อผิดพลาดหลัง�
   assert.ok(validateSingle(b).some((e) => /Mark Run Delivered/.test(e)));
   const c = clone(one); c.nodes.find((n) => n.name === 'Build Prompt').parameters.jsCode += "\n$('When Called by Main');";
   assert.ok(validateSingle(c).some((e) => /When Called by Main/.test(e)));
-  const d = clone(one); const ar = d.nodes.find((n) => n.name === 'Apply Rules R0-R6'); ar.parameters.jsCode = ar.parameters.jsCode.replace('"theta":0.15', '"theta":0.3');
+  const d = clone(one); const ar = d.nodes.find((n) => n.name === 'Apply Rules R0-R7'); ar.parameters.jsCode = ar.parameters.jsCode.replace('"theta":0.15', '"theta":0.3');
   assert.ok(validateSingle(d).some((e) => /CFG.project ไม่ตรง/.test(e)));
   const e = clone(one); e.nodes.push({ ...clone(one.nodes[0]), name: 'Call Sub', type: 'n8n-nodes-base.executeWorkflow', parameters: { mode: 'each', options: { waitForSubWorkflow: true }, workflowId: { value: 'x' } } });
   assert.ok(validateSingle(e).some((x) => /เรียกข้าม workflow/.test(x)));
@@ -99,11 +99,11 @@ async function flow(cid, { failAll = false } = {}) {
   for (const k of ['A', 'B', 'C']) vmerged.push(J(await runNode(one, 'Call Verifier ' + k, { nodes: { 'Prepare Relevance Checks': prepC }, env: ENV, helpers: { httpRequest: verifierHttpFor(caseDir, k) } })));
   const vRows = await runNode(one, 'Build Verifier Call Rows', { nodes: { 'Wait for All Verifiers': vmerged } });
   const vcol = await runNode(one, 'Collect Verifier Results', { nodes: { 'Wait for All Verifiers': vmerged } });
-  const rules = await runNode(one, 'Apply Rules R0-R6', { nodes: { 'Start Evidence Check': eIn, 'Collect Verifier Results': vcol, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
-  const fRows = await runNode(one, 'Build Finding Rows', { nodes: { 'Apply Rules R0-R6': rules } });
-  const tRows = await runNode(one, 'Build Task Rows', { nodes: { 'Apply Rules R0-R6': rules } });
-  const dRows = await runNode(one, 'Build Decision Rows', { nodes: { 'Apply Rules R0-R6': rules } });
-  const plan = await runNode(one, 'Build Learning Plan', { nodes: { 'Apply Rules R0-R6': rules, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
+  const rules = await runNode(one, 'Apply Rules R0-R7', { nodes: { 'Start Evidence Check': eIn, 'Prepare Relevance Checks': prepC, 'Collect Verifier Results': vcol, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
+  const fRows = await runNode(one, 'Build Finding Rows', { nodes: { 'Apply Rules R0-R7': rules } });
+  const tRows = await runNode(one, 'Build Task Rows', { nodes: { 'Apply Rules R0-R7': rules } });
+  const dRows = await runNode(one, 'Build Decision Rows', { nodes: { 'Apply Rules R0-R7': rules } });
+  const plan = await runNode(one, 'Build Learning Plan', { nodes: { 'Apply Rules R0-R7': rules, 'Load Corpus': corpusSheet(), 'Load Mappings': mapsSheet() } });
   const pRows = await runNode(one, 'Build Plan Rows', { nodes: { 'Build Learning Plan': plan } });
   const frz = await runNode(one, 'Freeze Report Payload', { nodes: { 'Build Learning Plan': plan } });
   const dIn = await runNode(one, 'Start Delivery', { input: frz });
@@ -120,7 +120,7 @@ test('เรซูเมสังเคราะห์ A B C D: ผลของ 
     assert.deepEqual(r.pRows.map((x) => x.json.item_id), o.planRows.map((p) => p.item_id), cid + ': แผน');
     assert.equal(r.plan.run_row.readiness_pct, o.eval.scores.readiness_pct, cid + ': R');
     assert.equal(r.plan.run_row.stage, 'ready');
-    assert.deepEqual(r.frz.report_payload.versions, { dataset: refs.manifest.dataset_version, corpus: refs.manifest.corpus_version, prompt: 'analyst_v1.1+verifier_v1.0', rules: 'RULES-IS68076026-v2.0' }, cid + ': freezeReport.versions');
+    assert.deepEqual(r.frz.report_payload.versions, { dataset: refs.manifest.dataset_version, corpus: refs.manifest.corpus_version, prompt: 'analyst_v1.2+verifier_v1.1', rules: 'RULES-IS68076026-v2.1' }, cid + ': freezeReport.versions');
     assert.equal(r.prepC.n_checks, r.local.summary.verifier_checks, cid + ': จำนวนข้อที่ส่งให้ผู้ตรวจ');
     assert.deepEqual(r.tRows.map((x) => [x.json.task_id, x.json.final_status]), o.eval.task_decisions.map((t) => [t.task_id, t.final_status]), cid + ': งานหลัก');
     assert.equal(r.plan.run_row.role_task_index, o.eval.scores.role_task_index, cid + ': T');

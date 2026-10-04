@@ -1,17 +1,17 @@
 {
   "project": "IS 68076026",
   "dataset_version": "ONET31.0-IS68076026-v1.0",
-  "corpus_version": "CORPUS_IS68076026-v1.5-01OCT26",
-  "rules_version": "RULES-IS68076026-v2.0",
-  "prompt_version": "analyst_v1.1",
-  "updated_at": "2026-10-03T12:25:12+07:00",
+  "corpus_version": "CORPUS_IS68076026-v1.6-03OCT26",
+  "rules_version": "RULES-IS68076026-v2.1",
+  "prompt_version": "analyst_v1.2",
+  "updated_at": "2026-10-03T20:12:52+07:00",
   "frozen": false,
   "freeze_blockers": [
-    "รายการรอตรวจ URL 36 รายการ (data/url_manual_check.csv)",
+    "รายการรอตรวจ URL 27 รายการ (data/url_manual_check.csv)",
     "ยังไม่ผ่านการทดสอบนำร่อง 5 คน (P3) และยังไม่ได้หนังสือรับรองจริยธรรม (G2)",
     "ยังไม่ได้ smoke test โมเดลจริงและบันทึกรหัสรุ่นในตารางที่ 3.8"
   ],
-  "approved_rows": 2071,
+  "approved_rows": 2454,
   "files": {
     "requirements.csv": {
       "sha256": "7ab13883eddba28dcae3486aa8df7d9183bd48e7b7d67e02ffd7a76cd4a9abf8",
@@ -26,23 +26,23 @@
       "rows": 61
     },
     "corpus.csv": {
-      "sha256": "13b9486e1e67bf6e53fc1f8ef18e6624936a937d5c7907575e7ba662a2f05098",
-      "rows": 602
+      "sha256": "6eeacae12f24b088b2c6702f7ff7f325d00d5ff7596e9f93f763a86a8254b384",
+      "rows": 812
     },
     "mappings.csv": {
-      "sha256": "c09cf188a03c88f2399b5ee95a84b37c31a3c84a42660013b164dbd90d271463",
-      "rows": 7012
+      "sha256": "319343548f66f3105771f92730cef5b8828f0ce98b26caa9057ff130bfe0a536",
+      "rows": 7364
     },
     "mapping_review.csv": {
-      "sha256": "0b85a34c5f52d84cfc92b61fd6c722108123dd520e76dde36708df53f1c6a4a8",
-      "rows": 7012
+      "sha256": "cfcc86c08bb8ccd5c3f97c08ecf2da9ea9ac2918d9f56cf72bedf49893be58ef",
+      "rows": 7364
     },
     "corpus_gap_request.csv": {
-      "sha256": "414c4796a34a6e0f80c5694897818b44a4f63f6a1411dd5a41f6faca885afbad",
-      "rows": 2
+      "sha256": "20ba94ec1a9138d41a179fb56da334ed259aa000ea49d872b64cd751f467310d",
+      "rows": 0
     },
     "url_manual_check.csv": {
-      "sha256": "e5958fc7b3017925c9df4b95007a3a91fbbe973264c0ec61a957a6e37f3dc97a",
+      "sha256": "ab21b5ef7699af0a0ca6083bfa188704ba3b9b1be02a2da755de7ec043d512f5",
       "rows": 28
     },
     "role_tasks.csv": {

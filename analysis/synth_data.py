@@ -9,7 +9,7 @@ ST = ["evidenced", "partially", "missing"]
 
 def make_tables(n_main=30, n_pilot=5, seed=SEED):
     rnd = random.Random(seed)
-    T = {k: [] for k in ["runs", "decisions", "ground_truth", "plan_items", "pathway_review", "ref_corpus", "evaluation_responses"]}
+    T = {k: [] for k in ["runs", "decisions", "findings", "ground_truth", "plan_items", "pathway_review", "ref_corpus", "evaluation_responses"]}
     for i in range(40):
         T["ref_corpus"].append(dict(item_id=f"ITEM-{i:03d}", title=f"Course {i}", provider="P", source_url=f"https://example.org/{i}", verification_status="verified"))
     cohort = []
@@ -23,10 +23,17 @@ def make_tables(n_main=30, n_pilot=5, seed=SEED):
             req = f"REQ-{p}-{q}"
             ref = rnd.choices(ST, weights=[0.35, 0.25, 0.40])[0]
             sys_ = ref if rnd.random() < 0.8 else rnd.choice(ST + ["abstained"])
-            T["decisions"].append(dict(run_id=rid, requirement_id=req, final_status=sys_))
+            T["decisions"].append(dict(run_id=rid, requirement_id=req, final_status=sys_, rule_flags=""))
+            for mk in ("A", "B", "C"):
+                claimed = ref if rnd.random() < 0.75 else rnd.choice(ST)
+                bad = claimed != "missing" and rnd.random() < 0.12          # quote ไม่ผ่าน R2
+                layer = "" if claimed == "missing" or bad else ("lexical" if rnd.random() < 0.7 else "semantic")
+                vote = "missing" if bad else ("unverified" if layer == "semantic" and rnd.random() < 0.1 else claimed)
+                T["findings"].append(dict(run_id=rid, requirement_id=req, model_key=mk, claimed_status=claimed, target_kind="requirement",
+                                          rule_flags="R2_quote_not_found" if bad else "", r3_layer=layer, final_vote=vote))
             c2 = ref if rnd.random() < 0.85 else rnd.choice(ST)
-            T["ground_truth"].append(dict(run_id=rid, requirement_id=req, reference_status=ref, coder_1_status=ref,
-                                          coder_2_status=c2 if p % 5 == 0 else "", participant_disagreed="false"))
+            T["ground_truth"].append(dict(run_id=rid, requirement_id=req, reference_status=ref, coder_status=ref,
+                                          recode_status=c2 if p % 5 == 0 else "", participant_disagreed="false"))
             if ref != "evidenced": gaps.append(req)
         cum = 0
         for k in range(rnd.randint(0, 6)):
@@ -40,5 +47,6 @@ def make_tables(n_main=30, n_pilot=5, seed=SEED):
         if rnd.random() < 0.9:
             T["evaluation_responses"].append({"รหัสงานที่ปรากฏในรายงาน": rid, "ข้อ 1 ช่วยระบุสิ่งที่ควรเริ่มเรียน": str(rnd.choice([3, 4, 4, 5, 5])),
                                               "ข้อ 2 ช่วยจัดลำดับการพัฒนาทักษะ": rnd.choice(["3", "4", "5", "ประเมินไม่ได้"]),
-                                              "ข้อ 3 เหมาะกับเวลาที่จัดสรรได้": str(rnd.choice([2, 3, 4, 5]))})
+                                              "ข้อ 3 เหมาะกับเวลาที่จัดสรรได้": str(rnd.choice([2, 3, 4, 5])),
+                                              "ข้อ 4 รายงานเข้าใจง่าย": str(rnd.choice([3, 4, 5, 5])), "ข้อ 5 เชื่อถือหลักฐานที่แสดง": str(rnd.choice([3, 4, 4, 5]))})
     return T, cohort

@@ -2,399 +2,567 @@ TAP version 13
 # Subtest: ข้อกำหนด 600 = 20 × 30 · 343/104/77/76 · น้ำหนักรวมอาชีพละ 1 · โควตาโดเมนละ ≥ 3 (ตาราง 3.3)
 ok 1 - ข้อกำหนด 600 = 20 × 30 · 343/104/77/76 · น้ำหนักรวมอาชีพละ 1 · โควตาโดเมนละ ≥ 3 (ตาราง 3.3)
   ---
-  duration_ms: 4.647943
+  duration_ms: 1.367333
   type: 'test'
   ...
 # Subtest: อาชีพ 20 · SOC ตรงตาราง 3.2 · proxy 5 อาชีพ (ภาคผนวก ก)
 ok 2 - อาชีพ 20 · SOC ตรงตาราง 3.2 · proxy 5 อาชีพ (ภาคผนวก ก)
   ---
-  duration_ms: 0.320131
+  duration_ms: 0.092
   type: 'test'
   ...
 # Subtest: คลัง: https ทุกแถว · item_id ไม่ซ้ำ · C5 item.role_id == mapping.role_id · C4 L1 ตรง competency_ids_l1
 ok 3 - คลัง: https ทุกแถว · item_id ไม่ซ้ำ · C5 item.role_id == mapping.role_id · C4 L1 ตรง competency_ids_l1
   ---
-  duration_ms: 31.206552
+  duration_ms: 15.091542
   type: 'test'
   ...
 # Subtest: mapping_review: ผ่าน ≥ 90% ของ L1 และทุกข้อกำหนดมีรายการรองรับ ยกเว้นที่อยู่ใน corpus_gap_request หรือรอตรวจ URL
 ok 4 - mapping_review: ผ่าน ≥ 90% ของ L1 และทุกข้อกำหนดมีรายการรองรับ ยกเว้นที่อยู่ใน corpus_gap_request หรือรอตรวจ URL
   ---
-  duration_ms: 3.619459
+  duration_ms: 1.764084
   type: 'test'
   ...
-# Subtest: manifest: sha256 ครบ 8 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4)
-ok 5 - manifest: sha256 ครบ 8 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4)
+# Subtest: manifest: sha256 ครบ 11 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4 · DEC-54/55)
+ok 5 - manifest: sha256 ครบ 11 ไฟล์และตรงกับไฟล์จริง (DEC-21 ข้อ 4 · DEC-54/55)
   ---
-  duration_ms: 273.072077
+  duration_ms: 191.741708
   type: 'test'
   ...
-# Subtest: sheets_import: 16 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11)
-ok 6 - sheets_import: 16 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11)
+# Subtest: sheets_import: 17 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11 · DEC-51/55)
+ok 6 - sheets_import: 17 แท็บ · จำนวนคอลัมน์และแถวตามตาราง 3.20 (A11 · DEC-51/55)
   ---
-  duration_ms: 0.464954
+  duration_ms: 1.130333
+  type: 'test'
+  ...
+# Subtest: WF_Demo กรณี D (R19): วิเคราะห์ 3 รอบ + ผู้ตรวจความหมาย → คะแนนสูง · มีดัชนี T/H · ไม่มีคะแนนคาดการณ์หลังเรียนจบ
+ok 7 - WF_Demo กรณี D (R19): วิเคราะห์ 3 รอบ + ผู้ตรวจความหมาย → คะแนนสูง · มีดัชนี T/H · ไม่มีคะแนนคาดการณ์หลังเรียนจบ
+  ---
+  duration_ms: 76.970708
+  type: 'test'
+  ...
+# Subtest: WF_Demo: Gemini ล้ม → กฎสำรอง (R3 คำซ้ำ) ยังตอบ 200 และติดป้าย
+ok 8 - WF_Demo: Gemini ล้ม → กฎสำรอง (R3 คำซ้ำ) ยังตอบ 200 และติดป้าย
+  ---
+  duration_ms: 40.755167
+  type: 'test'
+  ...
+# Subtest: WF_Demo Open Learner Model + R5: หลักฐานที่ผู้เรียนพิมพ์เพิ่มติดที่มา "ผู้เรียนเพิ่ม" · ใบรับรองในเรซูเมเป็นฐานขั้นต่ำ
+ok 9 - WF_Demo Open Learner Model + R5: หลักฐานที่ผู้เรียนพิมพ์เพิ่มติดที่มา "ผู้เรียนเพิ่ม" · ใบรับรองในเรซูเมเป็นฐานขั้นต่ำ
+  ---
+  duration_ms: 39.770125
+  type: 'test'
+  ...
+# Subtest: WF_Demo ฝัง engine.js รุ่นปัจจุบัน (ต้อง build demo ใหม่หลังแก้ engine · DEC-58)
+ok 10 - WF_Demo ฝัง engine.js รุ่นปัจจุบัน (ต้อง build demo ใหม่หลังแก้ engine · DEC-58)
+  ---
+  duration_ms: 1.884916
+  type: 'test'
+  ...
+# Subtest: DEC-59 version: ทุกโหนดฝังตราเดียวกับ WF_Demo.json · client_build ตรง/ไม่ตรง · endpoint /is-demo-version
+ok 11 - DEC-59 version: ทุกโหนดฝังตราเดียวกับ WF_Demo.json · client_build ตรง/ไม่ตรง · endpoint /is-demo-version
+  ---
+  duration_ms: 37.267041
+  type: 'test'
+  ...
+# Subtest: DEC-59 version: โหนดที่ฝังตราต่างรุ่นถูกจับได้ (ver_issues)
+ok 12 - DEC-59 version: โหนดที่ฝังตราต่างรุ่นถูกจับได้ (ver_issues)
+  ---
+  duration_ms: 35.613167
+  type: 'test'
+  ...
+# Subtest: DEC-59 Role-Fit + token + actor: รายงานมี F/R_role/T · tokens รวมถูก · actor "led" ทำให้ข้อ hands-on เหลือบางส่วน
+ok 13 - DEC-59 Role-Fit + token + actor: รายงานมี F/R_role/T · tokens รวมถูก · actor "led" ทำให้ข้อ hands-on เหลือบางส่วน
+  ---
+  duration_ms: 56.910417
+  type: 'test'
+  ...
+# Subtest: DEC-59 D5: ข้อความเดียวเป็นหลักฐานเต็มได้ไม่เกิน QUOTE_REUSE_CAP ข้อ
+ok 14 - DEC-59 D5: ข้อความเดียวเป็นหลักฐานเต็มได้ไม่เกิน QUOTE_REUSE_CAP ข้อ
+  ---
+  duration_ms: 46.560333
+  type: 'test'
+  ...
+# Subtest: DEC-59 D4: verifier cache — รันซ้ำด้วยเรซูเมเดิมไม่เรียกผู้ตรวจซ้ำ และผลเท่าเดิม
+ok 15 - DEC-59 D4: verifier cache — รันซ้ำด้วยเรซูเมเดิมไม่เรียกผู้ตรวจซ้ำ และผลเท่าเดิม
+  ---
+  duration_ms: 61.694917
   type: 'test'
   ...
 # Subtest: WF_Final_IS ผ่านตัวตรวจ: 59 node · ไม่มี Execute Workflow · โหนดเดิมตรงชุด 5 ไฟล์ · ไม่อ้างค่าข้ามรอบ
-ok 7 - WF_Final_IS ผ่านตัวตรวจ: 59 node · ไม่มี Execute Workflow · โหนดเดิมตรงชุด 5 ไฟล์ · ไม่อ้างค่าข้ามรอบ
+ok 16 - WF_Final_IS ผ่านตัวตรวจ: 59 node · ไม่มี Execute Workflow · โหนดเดิมตรงชุด 5 ไฟล์ · ไม่อ้างค่าข้ามรอบ
   ---
-  duration_ms: 51.544151
+  duration_ms: 29.410167
   type: 'test'
   ...
 # Subtest: ตัวตรวจจับข้อผิดพลาดที่พบบ่อยหลังรวมไฟล์ได้
-ok 8 - ตัวตรวจจับข้อผิดพลาดที่พบบ่อยหลังรวมไฟล์ได้
+ok 17 - ตัวตรวจจับข้อผิดพลาดที่พบบ่อยหลังรวมไฟล์ได้
   ---
-  duration_ms: 173.477865
+  duration_ms: 148.872459
   type: 'test'
   ...
 # Subtest: ไหลครบทุกช่วงในไฟล์เดียว: Intake → GapEngine → Decide → Deliver ได้ผลเท่ากับชุด 5 ไฟล์ (กรณี A B C)
-ok 9 - ไหลครบทุกช่วงในไฟล์เดียว: Intake → GapEngine → Decide → Deliver ได้ผลเท่ากับชุด 5 ไฟล์ (กรณี A B C)
+ok 18 - ไหลครบทุกช่วงในไฟล์เดียว: Intake → GapEngine → Decide → Deliver ได้ผลเท่ากับชุด 5 ไฟล์ (กรณี A B C)
   ---
-  duration_ms: 442.807172
+  duration_ms: 218.137667
   type: 'test'
   ...
 # Subtest: Record Delivery (ไฟล์เดียว): สำเร็จ / ล้มกลางทาง / เคยส่งแล้ว · ไม่หยิบผลของงานก่อนหน้า
-ok 10 - Record Delivery (ไฟล์เดียว): สำเร็จ / ล้มกลางทาง / เคยส่งแล้ว · ไม่หยิบผลของงานก่อนหน้า
+ok 19 - Record Delivery (ไฟล์เดียว): สำเร็จ / ล้มกลางทาง / เคยส่งแล้ว · ไม่หยิบผลของงานก่อนหน้า
   ---
-  duration_ms: 7.208563
+  duration_ms: 1.896875
   type: 'test'
   ...
 # Subtest: Error (ไฟล์เดียว): execution มีหลายงาน → ใช้งานล่าสุดของ Loop Over Runs ไม่ใช่งานแรก
-ok 11 - Error (ไฟล์เดียว): execution มีหลายงาน → ใช้งานล่าสุดของ Loop Over Runs ไม่ใช่งานแรก
+ok 20 - Error (ไฟล์เดียว): execution มีหลายงาน → ใช้งานล่าสุดของ Loop Over Runs ไม่ใช่งานแรก
   ---
-  duration_ms: 3.101082
+  duration_ms: 0.826209
   type: 'test'
   ...
 # Subtest: normalizeText: กฎคงที่ห้าข้อ (3.5.1)
-ok 12 - normalizeText: กฎคงที่ห้าข้อ (3.5.1)
+ok 21 - normalizeText: กฎคงที่ห้าข้อ (3.5.1)
   ---
-  duration_ms: 1.441759
+  duration_ms: 0.532958
   type: 'test'
   ...
 # Subtest: maskPII: สี่รูปแบบ [EMAIL] [URL] [PHONE] [ID] และนับจำนวน · เลขปีไม่ถูกปิด
-ok 13 - maskPII: สี่รูปแบบ [EMAIL] [URL] [PHONE] [ID] และนับจำนวน · เลขปีไม่ถูกปิด
+ok 22 - maskPII: สี่รูปแบบ [EMAIL] [URL] [PHONE] [ID] และนับจำนวน · เลขปีไม่ถูกปิด
   ---
-  duration_ms: 2.250936
+  duration_ms: 0.667
   type: 'test'
   ...
 # Subtest: parseFormRow + validateIntake: ต้องยินยอม · 20 อาชีพ · โหมด · 6/12/18/24 เดือน (A1, A2)
-ok 14 - parseFormRow + validateIntake: ต้องยินยอม · 20 อาชีพ · โหมด · 6/12/18/24 เดือน (A1, A2)
+ok 23 - parseFormRow + validateIntake: ต้องยินยอม · 20 อาชีพ · โหมด · 6/12/18/24 เดือน (A1, A2)
   ---
-  duration_ms: 0.821784
+  duration_ms: 0.254959
   type: 'test'
   ...
 # Subtest: checkFile: PDF ≤ 10,485,760 ไบต์ · ≤ 5 หน้า (A1)
-ok 15 - checkFile: PDF ≤ 10,485,760 ไบต์ · ≤ 5 หน้า (A1)
+ok 24 - checkFile: PDF ≤ 10,485,760 ไบต์ · ≤ 5 หน้า (A1)
   ---
-  duration_ms: 0.182387
+  duration_ms: 0.071584
   type: 'test'
   ...
 # Subtest: response_id = sha256(เวลาส่ง|อีเมล|รหัสไฟล์) · กันงานซ้ำเมื่อ running/ready/delivered (A12)
-ok 16 - response_id = sha256(เวลาส่ง|อีเมล|รหัสไฟล์) · กันงานซ้ำเมื่อ running/ready/delivered (A12)
+ok 25 - response_id = sha256(เวลาส่ง|อีเมล|รหัสไฟล์) · กันงานซ้ำเมื่อ running/ready/delivered (A12)
   ---
-  duration_ms: 0.476234
+  duration_ms: 0.164209
   type: 'test'
   ...
 # Subtest: runs.stage: running → ready → delivered หรือ failed เท่านั้น (รูป 3.8)
-ok 17 - runs.stage: running → ready → delivered หรือ failed เท่านั้น (รูป 3.8)
+ok 26 - runs.stage: running → ready → delivered หรือ failed เท่านั้น (รูป 3.8)
   ---
-  duration_ms: 0.281222
+  duration_ms: 0.096542
   type: 'test'
   ...
-# Subtest: buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 4,096 token · temperature 0 (A6)
-ok 18 - buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 4,096 token · temperature 0 (A6)
+# Subtest: buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 16,384 token (DEC-53) · temperature 0 (A6)
+ok 27 - buildProviderRequest: 3 ผู้ให้บริการ · รหัสรุ่นจาก env · 16,384 token (DEC-53) · temperature 0 (A6)
   ---
-  duration_ms: 1.039985
+  duration_ms: 0.198167
   type: 'test'
   ...
 # Subtest: parseProviderResponse: แปลงผลของแต่ละผู้ให้บริการ
-ok 19 - parseProviderResponse: แปลงผลของแต่ละผู้ให้บริการ
+ok 28 - parseProviderResponse: แปลงผลของแต่ละผู้ให้บริการ
   ---
-  duration_ms: 0.286387
+  duration_ms: 0.085625
   type: 'test'
   ...
 # Subtest: callModelWithRetry: เรียกซ้ำ ≤ 2 ครั้งเมื่อ 429/timeout · ไม่เรียกซ้ำเมื่อ 400 · บันทึกทุกครั้ง (A6, ตาราง 3.22)
-ok 20 - callModelWithRetry: เรียกซ้ำ ≤ 2 ครั้งเมื่อ 429/timeout · ไม่เรียกซ้ำเมื่อ 400 · บันทึกทุกครั้ง (A6, ตาราง 3.22)
+ok 29 - callModelWithRetry: เรียกซ้ำ ≤ 2 ครั้งเมื่อ 429/timeout · ไม่เรียกซ้ำเมื่อ 400 · บันทึกทุกครั้ง (A6, ตาราง 3.22)
   ---
-  duration_ms: 1.143151
+  duration_ms: 0.4855
   type: 'test'
   ...
 # Subtest: buildPrompt: ไม่ส่งคำพ้องและน้ำหนักเข้า prompt (3.5.2)
-ok 21 - buildPrompt: ไม่ส่งคำพ้องและน้ำหนักเข้า prompt (3.5.2)
+ok 30 - buildPrompt: ไม่ส่งคำพ้องและน้ำหนักเข้า prompt (3.5.2)
   ---
-  duration_ms: 0.905425
+  duration_ms: 0.421833
   type: 'test'
   ...
 # Subtest: กรณี A: 3 โมเดลใช้ได้ · สรุปได้ 30 ข้อ · แผนไม่เกิน Hmax · เรียกโมเดลตัวละ 1 ครั้ง
-ok 22 - กรณี A: 3 โมเดลใช้ได้ · สรุปได้ 30 ข้อ · แผนไม่เกิน Hmax · เรียกโมเดลตัวละ 1 ครั้ง
+ok 31 - กรณี A: 3 โมเดลใช้ได้ · สรุปได้ 30 ข้อ · แผนไม่เกิน Hmax · เรียกโมเดลตัวละ 1 ครั้ง
   ---
-  duration_ms: 47.559747
+  duration_ms: 52.307916
   type: 'test'
   ...
 # Subtest: กรณี B: หลักฐานน้อย → ช่องว่างมาก คะแนน R ต่ำ
-ok 23 - กรณี B: หลักฐานน้อย → ช่องว่างมาก คะแนน R ต่ำ
+ok 32 - กรณี B: หลักฐานน้อย → ช่องว่างมาก คะแนน R ต่ำ
   ---
-  duration_ms: 13.73889
+  duration_ms: 16.573375
   type: 'test'
   ...
 # Subtest: กรณี C: โมเดล C ตอบ 429 ทุกครั้ง → เรียก 3 ครั้งแล้วเหลือ m = 2 · มีข้อ abstained จากเสียงไม่ตรงกัน
-ok 24 - กรณี C: โมเดล C ตอบ 429 ทุกครั้ง → เรียก 3 ครั้งแล้วเหลือ m = 2 · มีข้อ abstained จากเสียงไม่ตรงกัน
+ok 33 - กรณี C: โมเดล C ตอบ 429 ทุกครั้ง → เรียก 3 ครั้งแล้วเหลือ m = 2 · มีข้อ abstained จากเสียงไม่ตรงกัน
   ---
-  duration_ms: 10.903813
+  duration_ms: 23.351334
   type: 'test'
   ...
 # Subtest: ผลเหมือนเดิมทุกครั้งที่ข้อมูลเข้าเหมือนกัน (report_hash คงที่)
-ok 25 - ผลเหมือนเดิมทุกครั้งที่ข้อมูลเข้าเหมือนกัน (report_hash คงที่)
+ok 34 - ผลเหมือนเดิมทุกครั้งที่ข้อมูลเข้าเหมือนกัน (report_hash คงที่)
   ---
-  duration_ms: 9.275334
+  duration_ms: 30.30375
   type: 'test'
   ...
 # Subtest: รายงาน HTML: ห้าส่วน · escape ข้อความ · ลิงก์ https เท่านั้น (3.6.3)
-ok 26 - รายงาน HTML: ห้าส่วน · escape ข้อความ · ลิงก์ https เท่านั้น (3.6.3)
+ok 35 - รายงาน HTML: ห้าส่วน · escape ข้อความ · ลิงก์ https เท่านั้น (3.6.3)
   ---
-  duration_ms: 5.070778
+  duration_ms: 16.047084
   type: 'test'
   ...
 # Subtest: สมการ 3.7: Hmax = M × 4.33 × h
-ok 27 - สมการ 3.7: Hmax = M × 4.33 × h
+ok 36 - สมการ 3.7: Hmax = M × 4.33 × h
   ---
-  duration_ms: 0.874537
+  duration_ms: 0.415667
   type: 'test'
   ...
 # Subtest: ตัวอย่างในเล่ม 3.6.2: Hmax 150 → เลือกรายการ 2 แล้ว 1 · รวม 140 ชม.
-ok 28 - ตัวอย่างในเล่ม 3.6.2: Hmax 150 → เลือกรายการ 2 แล้ว 1 · รวม 140 ชม.
+ok 37 - ตัวอย่างในเล่ม 3.6.2: Hmax 150 → เลือกรายการ 2 แล้ว 1 · รวม 140 ชม.
   ---
-  duration_ms: 2.045249
+  duration_ms: 0.567666
   type: 'test'
   ...
 # Subtest: ค่า dk เท่ากันตัดสินด้วย item_id · ข้ามรายการที่เกินเพดานแล้วเลือกต่อ · ชั่วโมงนับครั้งเดียว
-ok 29 - ค่า dk เท่ากันตัดสินด้วย item_id · ข้ามรายการที่เกินเพดานแล้วเลือกต่อ · ชั่วโมงนับครั้งเดียว
+ok 38 - ค่า dk เท่ากันตัดสินด้วย item_id · ข้ามรายการที่เกินเพดานแล้วเลือกต่อ · ชั่วโมงนับครั้งเดียว
   ---
-  duration_ms: 0.66342
+  duration_ms: 0.277958
   type: 'test'
   ...
 # Subtest: ใช้เฉพาะ L1 + สถานะผ่านตรวจ + verified + โหมดตรง · ข้อ abstained ไม่ใช่ช่องว่าง
-ok 30 - ใช้เฉพาะ L1 + สถานะผ่านตรวจ + verified + โหมดตรง · ข้อ abstained ไม่ใช่ช่องว่าง
+ok 39 - ใช้เฉพาะ L1 + สถานะผ่านตรวจ + verified + โหมดตรง · ข้อ abstained ไม่ใช่ช่องว่าง
   ---
-  duration_ms: 0.395389
+  duration_ms: 0.1305
   type: 'test'
   ...
 # Subtest: DEC-20: gap_coverage สองค่า + uncovered_over_capacity
-ok 31 - DEC-20: gap_coverage สองค่า + uncovered_over_capacity
+ok 40 - DEC-20: gap_coverage สองค่า + uncovered_over_capacity
   ---
-  duration_ms: 0.335629
+  duration_ms: 0.075958
   type: 'test'
   ...
 # Subtest: DEC-21: ไม่มี mapping ผ่านตรวจเลย → ข้อความขึ้นต้น "ข้อผิดพลาดของข้อมูลอ้างอิง"
-ok 32 - DEC-21: ไม่มี mapping ผ่านตรวจเลย → ข้อความขึ้นต้น "ข้อผิดพลาดของข้อมูลอ้างอิง"
+ok 41 - DEC-21: ไม่มี mapping ผ่านตรวจเลย → ข้อความขึ้นต้น "ข้อผิดพลาดของข้อมูลอ้างอิง"
   ---
-  duration_ms: 0.374874
+  duration_ms: 0.0935
   type: 'test'
   ...
 # Subtest: DEC-21: mergeMappingReview โยนเมื่อไฟล์หาย ว่าง หรือผ่าน < 90% ของ L1
-ok 33 - DEC-21: mergeMappingReview โยนเมื่อไฟล์หาย ว่าง หรือผ่าน < 90% ของ L1
+ok 42 - DEC-21: mergeMappingReview โยนเมื่อไฟล์หาย ว่าง หรือผ่าน < 90% ของ L1
   ---
-  duration_ms: 0.872687
+  duration_ms: 0.273625
   type: 'test'
   ...
 # Subtest: plan_strategy: ค่าตั้งเป็น weighted_greedy (DEC-47) · coverage_first เลือกตามจำนวนข้อต่อชั่วโมง · ค่าที่ไม่รู้จักหยุดทำงาน
-ok 34 - plan_strategy: ค่าตั้งเป็น weighted_greedy (DEC-47) · coverage_first เลือกตามจำนวนข้อต่อชั่วโมง · ค่าที่ไม่รู้จักหยุดทำงาน
+ok 43 - plan_strategy: ค่าตั้งเป็น weighted_greedy (DEC-47) · coverage_first เลือกตามจำนวนข้อต่อชั่วโมง · ค่าที่ไม่รู้จักหยุดทำงาน
   ---
-  duration_ms: 296.936543
+  duration_ms: 144.6475
   type: 'test'
   ...
 # Subtest: R0: รหัสสาเหตุห้ารหัส (ตาราง 3.25)
-ok 35 - R0: รหัสสาเหตุห้ารหัส (ตาราง 3.25)
+ok 44 - R0: รหัสสาเหตุห้ารหัส (ตาราง 3.25)
   ---
-  duration_ms: 2.789911
+  duration_ms: 0.845833
   type: 'test'
   ...
 # Subtest: R2: ค้นตรงตัวก่อน แล้วค่อยยุบช่องว่าง · ตำแหน่ง start นับจาก 0 end ไม่รวม
-ok 36 - R2: ค้นตรงตัวก่อน แล้วค่อยยุบช่องว่าง · ตำแหน่ง start นับจาก 0 end ไม่รวม
+ok 45 - R2: ค้นตรงตัวก่อน แล้วค่อยยุบช่องว่าง · ตำแหน่ง start นับจาก 0 end ไม่รวม
   ---
-  duration_ms: 0.451797
+  duration_ms: 0.175292
   type: 'test'
   ...
 # Subtest: R3: คำพ้องยาว ≥ 4 ตัวอักษรปรากฏตรงตัว = 1 · ไม่เช่นนั้นใช้สมการ 3.2
-ok 37 - R3: คำพ้องยาว ≥ 4 ตัวอักษรปรากฏตรงตัว = 1 · ไม่เช่นนั้นใช้สมการ 3.2
+ok 46 - R3: คำพ้องยาว ≥ 4 ตัวอักษรปรากฏตรงตัว = 1 · ไม่เช่นนั้นใช้สมการ 3.2
   ---
-  duration_ms: 1.158911
+  duration_ms: 0.424125
   type: 'test'
   ...
 # Subtest: ตาราง 3.26: evidenced 2 ใน 3 → final evidenced, a = 0.67
-ok 38 - ตาราง 3.26: evidenced 2 ใน 3 → final evidenced, a = 0.67
+ok 47 - ตาราง 3.26: evidenced 2 ใน 3 → final evidenced, a = 0.67
   ---
-  duration_ms: 1.398665
+  duration_ms: 1.285
   type: 'test'
   ...
 # Subtest: R2/R3 ไม่ผ่าน → เสียงเปลี่ยนเป็น missing และนับใน U
-ok 39 - R2/R3 ไม่ผ่าน → เสียงเปลี่ยนเป็น missing และนับใน U
+ok 48 - R2/R3 ไม่ผ่าน → เสียงเปลี่ยนเป็น missing และนับใน U
   ---
-  duration_ms: 1.867945
+  duration_ms: 0.544792
   type: 'test'
   ...
 # Subtest: R1: สองเสียงไม่ตรงกันเมื่อเหลือ 2 โมเดล → abstained · m < 2 → abstained ทั้งหมดและ R = N/A (ตาราง 3.22)
-ok 40 - R1: สองเสียงไม่ตรงกันเมื่อเหลือ 2 โมเดล → abstained · m < 2 → abstained ทั้งหมดและ R = N/A (ตาราง 3.22)
+ok 49 - R1: สองเสียงไม่ตรงกันเมื่อเหลือ 2 โมเดล → abstained · m < 2 → abstained ทั้งหมดและ R = N/A (ตาราง 3.22)
   ---
-  duration_ms: 0.553286
+  duration_ms: 0.756583
   type: 'test'
   ...
 # Subtest: สมการ 3.4–3.5: ตัวอย่างในเล่ม R = 72.50 · C = 0.20
-ok 41 - สมการ 3.4–3.5: ตัวอย่างในเล่ม R = 72.50 · C = 0.20
+ok 50 - สมการ 3.4–3.5: ตัวอย่างในเล่ม R = 72.50 · C = 0.20
   ---
-  duration_ms: 0.284652
+  duration_ms: 0.060583
   type: 'test'
   ...
-# Subtest: WF_IS_68076026_01OCT26 ผ่านตัวตรวจ: 69 โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/
-ok 42 - WF_IS_68076026_01OCT26 ผ่านตัวตรวจ: 69 โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/
+# Subtest: stem: รูปคำต่างกันของคำเดียวกันได้รากเดียว
+ok 51 - stem: รูปคำต่างกันของคำเดียวกันได้รากเดียว
   ---
-  duration_ms: 56.801921
+  duration_ms: 0.56325
+  type: 'test'
+  ...
+# Subtest: R2 ซ่อม quote (DEC-52): เปลี่ยนรูปกริยา/ตัวพิมพ์ → ใช้ข้อความจริงจากเรซูเม · ข้อความที่ไม่มีจริงยังไม่ผ่าน
+ok 52 - R2 ซ่อม quote (DEC-52): เปลี่ยนรูปกริยา/ตัวพิมพ์ → ใช้ข้อความจริงจากเรซูเม · ข้อความที่ไม่มีจริงยังไม่ผ่าน
+  ---
+  duration_ms: 0.647542
+  type: 'test'
+  ...
+# Subtest: R3a ตัดคำต่อท้าย: directed ↔ directing · คำพ้องหลายคำแบบรากเดียวกัน
+ok 53 - R3a ตัดคำต่อท้าย: directed ↔ directing · คำพ้องหลายคำแบบรากเดียวกัน
+  ---
+  duration_ms: 0.890167
+  type: 'test'
+  ...
+# Subtest: R3b ผู้ตรวจข้ามโมเดล (DEC-51): หมุนเวียน A→B→C→A · ข้ามโมเดลที่ล้ม · ไม่ตรวจตัวเอง · คำตัดสินเปลี่ยนเสียง
+ok 54 - R3b ผู้ตรวจข้ามโมเดล (DEC-51): หมุนเวียน A→B→C→A · ข้ามโมเดลที่ล้ม · ไม่ตรวจตัวเอง · คำตัดสินเปลี่ยนเสียง
+  ---
+  duration_ms: 11.158875
+  type: 'test'
+  ...
+# Subtest: R1 ไม่นับเสียง unverified · ablation คำนวณจากผลชุดเดียวกัน
+ok 55 - R1 ไม่นับเสียง unverified · ablation คำนวณจากผลชุดเดียวกัน
+  ---
+  duration_ms: 0.824875
+  type: 'test'
+  ...
+# Subtest: R5 ใบรับรองในเรซูเม → ข้อที่ mapping L1 ระบุได้อย่างน้อย partially · ไม่นับบรรทัดเตรียมสอบ
+ok 56 - R5 ใบรับรองในเรซูเม → ข้อที่ mapping L1 ระบุได้อย่างน้อย partially · ไม่นับบรรทัดเตรียมสอบ
+  ---
+  duration_ms: 3.1735
+  type: 'test'
+  ...
+# Subtest: T และ H (DEC-55): งานหลัก 8 งานต่ออาชีพ · เทคโนโลยีนับแบบทั้งคำ
+ok 57 - T และ H (DEC-55): งานหลัก 8 งานต่ออาชีพ · เทคโนโลยีนับแบบทั้งคำ
+  ---
+  duration_ms: 1.350292
+  type: 'test'
+  ...
+# Subtest: แผนตามระดับผู้เรียน (DEC-56): ประสบการณ์ ≥ 5 ปี ไม่ใช้รายการ Beginner กับข้อ partially
+ok 58 - แผนตามระดับผู้เรียน (DEC-56): ประสบการณ์ ≥ 5 ปี ไม่ใช้รายการ Beginner กับข้อ partially
+  ---
+  duration_ms: 4.428458
+  type: 'test'
+  ...
+# Subtest: R7 ผู้ลงมือทำ: ข้อเชิงปฏิบัติรับเฉพาะ performed · LV ≥ 5 ต้องอย่างน้อย led · actor ไม่ระบุไม่ลดสถานะแต่ติดป้าย
+ok 59 - R7 ผู้ลงมือทำ: ข้อเชิงปฏิบัติรับเฉพาะ performed · LV ≥ 5 ต้องอย่างน้อย led · actor ไม่ระบุไม่ลดสถานะแต่ติดป้าย
+  ---
+  duration_ms: 3.314334
+  type: 'test'
+  ...
+# Subtest: R7 ข้อความซ้ำ: quote เดียวเป็นหลักฐานเต็มได้ไม่เกิน 2 ข้อ · เก็บข้อที่เฉพาะอาชีพ (df ต่ำ) ไว้ก่อน
+ok 60 - R7 ข้อความซ้ำ: quote เดียวเป็นหลักฐานเต็มได้ไม่เกิน 2 ข้อ · เก็บข้อที่เฉพาะอาชีพ (df ต่ำ) ไว้ก่อน
+  ---
+  duration_ms: 0.766917
+  type: 'test'
+  ...
+# Subtest: R7 งานหลัก: อาชีพเทคนิคต้อง performed · R19/R20 รับ led
+ok 61 - R7 งานหลัก: อาชีพเทคนิคต้อง performed · R19/R20 รับ led
+  ---
+  duration_ms: 0.972292
+  type: 'test'
+  ...
+# Subtest: ผู้ตรวจ verifier_v1.1: prompt ส่ง level และ hands_on ของแต่ละข้อ · ข้อมูลเฉพาะอาชีพนับ df/idf ตามสูตร
+ok 62 - ผู้ตรวจ verifier_v1.1: prompt ส่ง level และ hands_on ของแต่ละข้อ · ข้อมูลเฉพาะอาชีพนับ df/idf ตามสูตร
+  ---
+  duration_ms: 1.242167
+  type: 'test'
+  ...
+# Subtest: Role-Fit: ถ่วง idf แล้วผสม T · ป้ายระดับตามเกณฑ์ใน config
+ok 63 - Role-Fit: ถ่วง idf แล้วผสม T · ป้ายระดับตามเกณฑ์ใน config
+  ---
+  duration_ms: 0.065583
+  type: 'test'
+  ...
+# Subtest: H ตัวส่วนคงที่ 10 รายการ · อาชีพที่มีน้อยกว่านี้ได้ N/A
+ok 64 - H ตัวส่วนคงที่ 10 รายการ · อาชีพที่มีน้อยกว่านี้ได้ N/A
+  ---
+  duration_ms: 0.431042
+  type: 'test'
+  ...
+# Subtest: ตราประทับรุ่น: ปฏิเสธเมื่อ engine ไม่ตรง · โหนดต่างรุ่น · build ไม่ตรงรุ่นที่ freeze
+ok 65 - ตราประทับรุ่น: ปฏิเสธเมื่อ engine ไม่ตรง · โหนดต่างรุ่น · build ไม่ตรงรุ่นที่ freeze
+  ---
+  duration_ms: 0.209792
+  type: 'test'
+  ...
+# Subtest: token รายขั้นและรหัสรุ่นโมเดลที่ตอบกลับจริง
+ok 66 - token รายขั้นและรหัสรุ่นโมเดลที่ตอบกลับจริง
+  ---
+  duration_ms: 0.115041
+  type: 'test'
+  ...
+# Subtest: cache ผู้ตรวจ: ข้อที่เคยตรวจใช้คำตัดสินเดิม ไม่เรียกซ้ำ · key เป็น hash ไม่มีข้อความ · ปิดได้ · คำตัดสินเปลี่ยนผลเหมือนเรียกจริง
+ok 67 - cache ผู้ตรวจ: ข้อที่เคยตรวจใช้คำตัดสินเดิม ไม่เรียกซ้ำ · key เป็น hash ไม่มีข้อความ · ปิดได้ · คำตัดสินเปลี่ยนผลเหมือนเรียกจริง
+  ---
+  duration_ms: 1.876958
+  type: 'test'
+  ...
+# Subtest: ค่าควบคุมรุ่น 2.1 ใน config ครบ และ prompt analyst_v1.2 ขอ actor ทั้งข้อกำหนดและงานหลัก
+ok 68 - ค่าควบคุมรุ่น 2.1 ใน config ครบ และ prompt analyst_v1.2 ขอ actor ทั้งข้อกำหนดและงานหลัก
+  ---
+  duration_ms: 0.288792
+  type: 'test'
+  ...
+# Subtest: WF_IS_68076026_01OCT26 ผ่านตัวตรวจ: 79 โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/
+ok 69 - WF_IS_68076026_01OCT26 ผ่านตัวตรวจ: 79 โหนด · 7 ช่วง · ไม่มี Execute Workflow · ไม่อ้างค่าข้ามรอบ · CFG ตรง config/
+  ---
+  duration_ms: 39.096459
   type: 'test'
   ...
 # Subtest: ตัวตรวจจับข้อผิดพลาดหลังแก้ workflow ได้
-ok 43 - ตัวตรวจจับข้อผิดพลาดหลังแก้ workflow ได้
+ok 70 - ตัวตรวจจับข้อผิดพลาดหลังแก้ workflow ได้
   ---
-  duration_ms: 106.791426
+  duration_ms: 96.793834
   type: 'test'
   ...
-# Subtest: เรซูเมสังเคราะห์ A B C: ผลของ workflow เดียวตรงกับ engine (run_local) ทุกข้อ
-ok 44 - เรซูเมสังเคราะห์ A B C: ผลของ workflow เดียวตรงกับ engine (run_local) ทุกข้อ
+# Subtest: เรซูเมสังเคราะห์ A B C D: ผลของ workflow เดียว (รวมผู้ตรวจ R3b) ตรงกับ engine (run_local) ทุกข้อ
+ok 71 - เรซูเมสังเคราะห์ A B C D: ผลของ workflow เดียว (รวมผู้ตรวจ R3b) ตรงกับ engine (run_local) ทุกข้อ
   ---
-  duration_ms: 250.583281
+  duration_ms: 277.377166
   type: 'test'
   ...
 # Subtest: โมเดลล้มครบสามตัว: ทุกข้อ abstained · findings ว่าง (สาขาข้างจบ) · สาขาหลักเดินต่อจนสร้างรายงานได้
-ok 45 - โมเดลล้มครบสามตัว: ทุกข้อ abstained · findings ว่าง (สาขาข้างจบ) · สาขาหลักเดินต่อจนสร้างรายงานได้
+ok 72 - โมเดลล้มครบสามตัว: ทุกข้อ abstained · findings ว่าง (สาขาข้างจบ) · สาขาหลักเดินต่อจนสร้างรายงานได้
   ---
-  duration_ms: 135.724252
+  duration_ms: 71.403458
+  type: 'test'
+  ...
+# Subtest: DEC-51 ผู้ตรวจความหมาย: ไม่มีข้อให้ตรวจ = ไม่เรียก · ผู้ตรวจตอบผิดรูปแบบ = เสียง unverified (ไม่นับใน R1) · ไม่ตรวจข้อความของตัวเอง
+ok 73 - DEC-51 ผู้ตรวจความหมาย: ไม่มีข้อให้ตรวจ = ไม่เรียก · ผู้ตรวจตอบผิดรูปแบบ = เสียง unverified (ไม่นับใน R1) · ไม่ตรวจข้อความของตัวเอง
+  ---
+  duration_ms: 98.944167
   type: 'test'
   ...
 # Subtest: ฟอร์มสองแถวในการ poll เดียว: ได้สองงานแยก run_id · แถวซ้ำในรอบเดียวกันถูกกัน · ไม่ให้ความยินยอมถูกปฏิเสธ
-ok 46 - ฟอร์มสองแถวในการ poll เดียว: ได้สองงานแยก run_id · แถวซ้ำในรอบเดียวกันถูกกัน · ไม่ให้ความยินยอมถูกปฏิเสธ
+ok 74 - ฟอร์มสองแถวในการ poll เดียว: ได้สองงานแยก run_id · แถวซ้ำในรอบเดียวกันถูกกัน · ไม่ให้ความยินยอมถูกปฏิเสธ
   ---
-  duration_ms: 14.823319
+  duration_ms: 2.75025
   type: 'test'
   ...
 # Subtest: ไฟล์เกินขนาด / เกินหน้า / ไม่ใช่ PDF ถูกปฏิเสธพร้อม run_id และรหัสสาเหตุ
-ok 47 - ไฟล์เกินขนาด / เกินหน้า / ไม่ใช่ PDF ถูกปฏิเสธพร้อม run_id และรหัสสาเหตุ
+ok 75 - ไฟล์เกินขนาด / เกินหน้า / ไม่ใช่ PDF ถูกปฏิเสธพร้อม run_id และรหัสสาเหตุ
   ---
-  duration_ms: 36.342808
+  duration_ms: 4.961792
   type: 'test'
   ...
 # Subtest: อ่านข้อความ: มีชั้นข้อความ → ใช้ชั้นข้อความ · ไม่มี/อ่านไม่ได้ → ส่ง Document AI · ปิดบังข้อมูลส่วนบุคคลก่อนส่งโมเดล
-ok 48 - อ่านข้อความ: มีชั้นข้อความ → ใช้ชั้นข้อความ · ไม่มี/อ่านไม่ได้ → ส่ง Document AI · ปิดบังข้อมูลส่วนบุคคลก่อนส่งโมเดล
+ok 76 - อ่านข้อความ: มีชั้นข้อความ → ใช้ชั้นข้อความ · ไม่มี/อ่านไม่ได้ → ส่ง Document AI · ปิดบังข้อมูลส่วนบุคคลก่อนส่งโมเดล
   ---
-  duration_ms: 13.504415
+  duration_ms: 2.233875
   type: 'test'
   ...
 # Subtest: ส่งรายงาน: อัปโหลด PDF ล้มแต่อีเมลส่งสำเร็จ → delivered ครั้งเดียว · กรณีอื่นบันทึกถูก · ไม่หยิบผลของงานก่อนหน้า
-ok 49 - ส่งรายงาน: อัปโหลด PDF ล้มแต่อีเมลส่งสำเร็จ → delivered ครั้งเดียว · กรณีอื่นบันทึกถูก · ไม่หยิบผลของงานก่อนหน้า
+ok 77 - ส่งรายงาน: อัปโหลด PDF ล้มแต่อีเมลส่งสำเร็จ → delivered ครั้งเดียว · กรณีอื่นบันทึกถูก · ไม่หยิบผลของงานก่อนหน้า
   ---
-  duration_ms: 16.747785
+  duration_ms: 3.172125
   type: 'test'
   ...
 # Subtest: ล้มกลางลูป: Error Trigger ในไฟล์เดียวกันหา run_id ของงานล่าสุด · ทำเครื่องหมาย failed · แจ้งผู้วิจัย
-ok 50 - ล้มกลางลูป: Error Trigger ในไฟล์เดียวกันหา run_id ของงานล่าสุด · ทำเครื่องหมาย failed · แจ้งผู้วิจัย
+ok 78 - ล้มกลางลูป: Error Trigger ในไฟล์เดียวกันหา run_id ของงานล่าสุด · ทำเครื่องหมาย failed · แจ้งผู้วิจัย
   ---
-  duration_ms: 6.178651
+  duration_ms: 1.423959
   type: 'test'
   ...
 # Subtest: DEC-48 เรียกโมเดลใน n8n 2.x: 429 เรียกซ้ำพร้อมรอ retry_backoff_ms · หมดเวลาเรียกซ้ำ · 401 ไม่เรียกซ้ำ
-ok 51 - DEC-48 เรียกโมเดลใน n8n 2.x: 429 เรียกซ้ำพร้อมรอ retry_backoff_ms · หมดเวลาเรียกซ้ำ · 401 ไม่เรียกซ้ำ
+ok 79 - DEC-48 เรียกโมเดลใน n8n 2.x: 429 เรียกซ้ำพร้อมรอ retry_backoff_ms · หมดเวลาเรียกซ้ำ · 401 ไม่เรียกซ้ำ
   ---
-  duration_ms: 9.737027
+  duration_ms: 2.877084
   type: 'test'
   ...
 # Subtest: DEC-48 นับหน้าซ้ำด้วย numpages ของ Extract From File (PDF แบบ object stream)
-ok 52 - DEC-48 นับหน้าซ้ำด้วย numpages ของ Extract From File (PDF แบบ object stream)
+ok 80 - DEC-48 นับหน้าซ้ำด้วย numpages ของ Extract From File (PDF แบบ object stream)
   ---
-  duration_ms: 1.598216
+  duration_ms: 0.457292
   type: 'test'
   ...
 # Subtest: DEC-48 ล้มกลางลูป: งานที่ยังไม่ได้เริ่มใน execution เดียวกันบันทึก failed/batch_aborted ไม่หายเงียบ
-ok 53 - DEC-48 ล้มกลางลูป: งานที่ยังไม่ได้เริ่มใน execution เดียวกันบันทึก failed/batch_aborted ไม่หายเงียบ
+ok 81 - DEC-48 ล้มกลางลูป: งานที่ยังไม่ได้เริ่มใน execution เดียวกันบันทึก failed/batch_aborted ไม่หายเงียบ
   ---
-  duration_ms: 3.758353
+  duration_ms: 0.843166
   type: 'test'
   ...
 # Subtest: DEC-48 ล้มก่อนมีงาน (trigger อ่านชีตไม่ได้): ไม่เขียนแถว runs ปลอม · อีเมลไม่เกินชั่วโมงละครั้ง
-ok 54 - DEC-48 ล้มก่อนมีงาน (trigger อ่านชีตไม่ได้): ไม่เขียนแถว runs ปลอม · อีเมลไม่เกินชั่วโมงละครั้ง
+ok 82 - DEC-48 ล้มก่อนมีงาน (trigger อ่านชีตไม่ได้): ไม่เขียนแถว runs ปลอม · อีเมลไม่เกินชั่วโมงละครั้ง
   ---
-  duration_ms: 3.169461
+  duration_ms: 1.123125
   type: 'test'
   ...
 # Subtest: ตัวตรวจ workflow ผ่านทุกข้อ (A14, B1, B3, B5, B6, B7, B9, B10, C6)
-ok 55 - ตัวตรวจ workflow ผ่านทุกข้อ (A14, B1, B3, B5, B6, B7, B9, B10, C6)
+ok 83 - ตัวตรวจ workflow ผ่านทุกข้อ (A14, B1, B3, B5, B6, B7, B9, B10, C6)
   ---
-  duration_ms: 18.533149
+  duration_ms: 10.881417
   type: 'test'
   ...
 # Subtest: ตัวตรวจจับ engine ที่ถูกแก้ใน workflow ได้ (C6)
-ok 56 - ตัวตรวจจับ engine ที่ถูกแก้ใน workflow ได้ (C6)
+ok 84 - ตัวตรวจจับ engine ที่ถูกแก้ใน workflow ได้ (C6)
   ---
-  duration_ms: 49.988342
+  duration_ms: 29.391917
   type: 'test'
   ...
 # Subtest: B6 + B1: trigger 3 แถวได้ 3 งาน · IF ได้ค่า boolean จริง · ไม่ยินยอมถูกปฏิเสธ
-ok 57 - B6 + B1: trigger 3 แถวได้ 3 งาน · IF ได้ค่า boolean จริง · ไม่ยินยอมถูกปฏิเสธ
+ok 85 - B6 + B1: trigger 3 แถวได้ 3 งาน · IF ได้ค่า boolean จริง · ไม่ยินยอมถูกปฏิเสธ
   ---
-  duration_ms: 4.749034
+  duration_ms: 2.277375
   type: 'test'
   ...
 # Subtest: กันงานซ้ำด้วย response_id (A12)
-ok 58 - กันงานซ้ำด้วย response_id (A12)
+ok 86 - กันงานซ้ำด้วย response_id (A12)
   ---
-  duration_ms: 2.444229
+  duration_ms: 1.117584
   type: 'test'
   ...
 # Subtest: B2 + B4 + B5: payload เข้า Decide มี requirements 30 ข้อพร้อมคำพ้อง · ผลเท่ากับ run_local · เรียกโมเดลตัวละครั้งเดียว
-ok 59 - B2 + B4 + B5: payload เข้า Decide มี requirements 30 ข้อพร้อมคำพ้อง · ผลเท่ากับ run_local · เรียกโมเดลตัวละครั้งเดียว
+ok 87 - B2 + B4 + B5: payload เข้า Decide มี requirements 30 ข้อพร้อมคำพ้อง · ผลเท่ากับ run_local · เรียกโมเดลตัวละครั้งเดียว
   ---
-  duration_ms: 181.217436
+  duration_ms: 118.491083
   type: 'test'
   ...
 # Subtest: B2: Decide หยุดพร้อมข้อความเมื่อ payload ไม่มี requirements
-ok 60 - B2: Decide หยุดพร้อมข้อความเมื่อ payload ไม่มี requirements
+ok 88 - B2: Decide หยุดพร้อมข้อความเมื่อ payload ไม่มี requirements
   ---
-  duration_ms: 1.380219
+  duration_ms: 0.590708
   type: 'test'
   ...
 # Subtest: DEC-21 ใน workflow: ref_mappings นำเข้าไม่ครบ → หยุดพร้อม "ข้อผิดพลาดของข้อมูลอ้างอิง"
-ok 61 - DEC-21 ใน workflow: ref_mappings นำเข้าไม่ครบ → หยุดพร้อม "ข้อผิดพลาดของข้อมูลอ้างอิง"
+ok 89 - DEC-21 ใน workflow: ref_mappings นำเข้าไม่ครบ → หยุดพร้อม "ข้อผิดพลาดของข้อมูลอ้างอิง"
   ---
-  duration_ms: 45.831812
+  duration_ms: 38.293666
   type: 'test'
   ...
 # Subtest: B7 + B8: ส่งสำเร็จต้องได้ delivered/sent · error branch ได้ failed · รายงานเดิมที่ส่งแล้วไม่ส่งซ้ำ
-ok 62 - B7 + B8: ส่งสำเร็จต้องได้ delivered/sent · error branch ได้ failed · รายงานเดิมที่ส่งแล้วไม่ส่งซ้ำ
+ok 90 - B7 + B8: ส่งสำเร็จต้องได้ delivered/sent · error branch ได้ failed · รายงานเดิมที่ส่งแล้วไม่ส่งซ้ำ
   ---
-  duration_ms: 56.173492
+  duration_ms: 33.443208
   type: 'test'
   ...
 # Subtest: B11: WF_Error หา run_id ได้จาก execution ที่ล้มเหลว หรือจากข้อความ [run_id=...]
-ok 63 - B11: WF_Error หา run_id ได้จาก execution ที่ล้มเหลว หรือจากข้อความ [run_id=...]
+ok 91 - B11: WF_Error หา run_id ได้จาก execution ที่ล้มเหลว หรือจากข้อความ [run_id=...]
   ---
-  duration_ms: 3.356956
+  duration_ms: 1.161292
   type: 'test'
   ...
 # Subtest: Check File: ปฏิเสธไฟล์เกิน 5 หน้าพร้อม run_id (ตาราง 3.10)
-ok 64 - Check File: ปฏิเสธไฟล์เกิน 5 หน้าพร้อม run_id (ตาราง 3.10)
+ok 92 - Check File: ปฏิเสธไฟล์เกิน 5 หน้าพร้อม run_id (ตาราง 3.10)
   ---
-  duration_ms: 3.915765
+  duration_ms: 1.7985
   type: 'test'
   ...
 # Subtest: Prepare Text: ใช้ Document AI เมื่อสำเร็จ · สำรองเมื่อหลักล้มเหลว · บันทึกชื่อบริการ (A4, A5, A16)
-ok 65 - Prepare Text: ใช้ Document AI เมื่อสำเร็จ · สำรองเมื่อหลักล้มเหลว · บันทึกชื่อบริการ (A4, A5, A16)
+ok 93 - Prepare Text: ใช้ Document AI เมื่อสำเร็จ · สำรองเมื่อหลักล้มเหลว · บันทึกชื่อบริการ (A4, A5, A16)
   ---
-  duration_ms: 3.825261
+  duration_ms: 1.941375
   type: 'test'
   ...
-1..65
-# tests 65
+1..93
+# tests 93
 # suites 0
-# pass 65
+# pass 93
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 6461.601399
+# duration_ms 1856.00271

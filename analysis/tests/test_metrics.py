@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""เป้าทดสอบคำนวณด้วยมือ (Analysis Plan v1.0 ภาคผนวก ก) — แทนค่าที่ Analysis Plan v0.9 อ้างจากตารางที่ไม่มีใน PDF"""
+"""เป้าทดสอบคำนวณด้วยมือ (Analysis_Plan.md ภาคผนวก ก)"""
 import os, sys, tempfile, unittest, csv, json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from metrics import confusion, macro_f1, abstain_rate, cohen_kappa, rq2, likert_items  # noqa: E402
@@ -99,17 +99,27 @@ class TestBootstrapAndCoding(unittest.TestCase):
         out = os.path.join(d, "coding")
         sample = coding_sheets.make(d, out)
         self.assertEqual(len(sample), 2)  # 20% ของ 10
-        hdr = open(os.path.join(out, "coder1_all.csv"), encoding="utf-8").readline()
+        hdr = open(os.path.join(out, "coder_all.csv"), encoding="utf-8").readline()
         self.assertNotIn("final_status", hdr)
-        for fn, st in [("coder1_all.csv", "evidenced"), ("coder2_sample.csv", "missing")]:
+        for fn, st in [("coder_all.csv", "evidenced"), ("recode_sample.csv", "missing")]:
             p = os.path.join(out, fn); rows = list(csv.DictReader(open(p, encoding="utf-8")))
-            for r in rows: r["status"] = st
+            for r in rows: r["status"] = st; r["coded_on"] = "2026-11-01" if fn == "coder_all.csv" else "2026-11-20"
             with open(p, "w", newline="", encoding="utf-8") as f:
                 w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
         gt, dis, k = coding_sheets.merge(out)
-        self.assertEqual(len(dis), 6)  # 2 คน x 3 ข้อ ไม่ตรงกัน -> รอข้อยุติ
+        self.assertEqual(len(dis), 6)  # 2 คน x 3 ข้อ รหัสสองรอบไม่ตรงกัน -> รอข้อยุติ
         self.assertEqual(len(gt), 24)
         self.assertTrue(json.load(open(os.path.join(out, "agreement.json")))["pass_threshold"] is False)
+        # รอบที่ 2 ต้องห่างจากรอบที่ 1 อย่างน้อย 14 วัน
+        p = os.path.join(out, "recode_sample.csv"); rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        for r in rows: r["coded_on"] = "2026-11-05"
+        with open(p, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
+        with self.assertRaises(SystemExit): coding_sheets.merge(out)
+        # ลำดับแถวของไฟล์รอบที่ 2 ต้องไม่เรียงเหมือนรอบที่ 1
+        first = [(r["run_id"], r["requirement_id"]) for r in csv.DictReader(open(os.path.join(out, "coder_all.csv"), encoding="utf-8"))]
+        again = [(r["run_id"], r["requirement_id"]) for r in rows]
+        self.assertNotEqual([x for x in first if x in set(again)], again)
 
 
 class TestRehearsal(unittest.TestCase):

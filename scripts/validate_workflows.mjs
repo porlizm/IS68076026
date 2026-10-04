@@ -325,9 +325,9 @@ export function validateSingle(w) {
     const js = (byName['Call Verifier ' + k] || { parameters: {} }).parameters.jsCode || '';
     if (!/returnFullResponse: true, ignoreHttpStatusErrors: true/.test(js) || !js.includes(`const KEY = '${k}';`) || js.includes('__KEY__') || !/status: 'skipped'/.test(js)) E(`Call Verifier ${k}: ต้องใช้กลไกเรียกแบบ Call Model · KEY = ${k} · ข้ามเมื่อไม่มีข้อให้ตรวจ`);
   }
-  const preRules = (incoming['Apply Rules R0-R6'] || []).map((x) => x.from).join();
-  if (preRules !== 'Load Mappings') E(`Apply Rules R0-R6 ต้องรับจาก Load Mappings (ได้ ${preRules})`);
-  for (const nm of ['Apply Rules R0-R6', 'Prepare Relevance Checks', 'Build Prompt']) if (!/const SIGNALS_FOR = /.test((byName[nm] || { parameters: {} }).parameters.jsCode || '')) E(`${nm}: ต้องฝัง SIGNALS (data/role_tasks.csv ฯลฯ · DEC-54/55)`);
+  const preRules = (incoming['Apply Rules R0-R7'] || []).map((x) => x.from).join();
+  if (preRules !== 'Load Mappings') E(`Apply Rules R0-R7 ต้องรับจาก Load Mappings (ได้ ${preRules})`);
+  for (const nm of ['Apply Rules R0-R7', 'Prepare Relevance Checks', 'Build Prompt']) if (!/const SIGNALS_FOR = /.test((byName[nm] || { parameters: {} }).parameters.jsCode || '')) E(`${nm}: ต้องฝัง SIGNALS (data/role_tasks.csv ฯลฯ · DEC-54/55)`);
   if (!byName['Run Local OCR'] || byName['Run Local OCR'].onError !== 'continueRegularOutput') E('Run Local OCR: ต้องเป็น continueRegularOutput ให้ Mask Personal Data แจ้ง ocr_failed พร้อม run_id');
   for (const n of real) if (n.type === 'n8n-nodes-base.googleSheets' && /^append/.test(n.parameters.operation) && !(n.parameters.options && n.parameters.options.useAppend === true)) E(`${n.name}: append ต้องตั้ง useAppend (values:append) กันเขียนทับแถวเมื่อมีหลาย execution`);
   const ab = (w.connections['Notify Researcher'] || { main: [] }).main;

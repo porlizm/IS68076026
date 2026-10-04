@@ -1,0 +1,61 @@
+{
+  "project": "IS 68076026",
+  "dataset_version": "ONET31.0-IS68076026-v1.0",
+  "corpus_version": "CORPUS_IS68076026-v1.5-01OCT26",
+  "rules_version": "RULES-IS68076026-v2.1",
+  "prompt_version": "analyst_v1.2",
+  "updated_at": "2026-10-03T17:30:37+07:00",
+  "frozen": false,
+  "freeze_blockers": [
+    "รายการรอตรวจ URL 36 รายการ (data/url_manual_check.csv)",
+    "ยังไม่ผ่านการทดสอบนำร่อง 5 คน (P3) และยังไม่ได้หนังสือรับรองจริยธรรม (G2)",
+    "ยังไม่ได้ smoke test โมเดลจริงและบันทึกรหัสรุ่นในตารางที่ 3.8"
+  ],
+  "approved_rows": 2071,
+  "files": {
+    "requirements.csv": {
+      "sha256": "7ab13883eddba28dcae3486aa8df7d9183bd48e7b7d67e02ffd7a76cd4a9abf8",
+      "rows": 600
+    },
+    "roles.json": {
+      "sha256": "60960420a8ab5f6ac2e53d8658fcb93f82b6696642f1f6d37019a0fe2b3379ec",
+      "rows": 20
+    },
+    "aliases.csv": {
+      "sha256": "dec7f7bcc2a20d36129d7a3bbb80fae7004ab8cf4cb2a3d9bec5501e2432f98d",
+      "rows": 61
+    },
+    "corpus.csv": {
+      "sha256": "13b9486e1e67bf6e53fc1f8ef18e6624936a937d5c7907575e7ba662a2f05098",
+      "rows": 602
+    },
+    "mappings.csv": {
+      "sha256": "c09cf188a03c88f2399b5ee95a84b37c31a3c84a42660013b164dbd90d271463",
+      "rows": 7012
+    },
+    "mapping_review.csv": {
+      "sha256": "0b85a34c5f52d84cfc92b61fd6c722108123dd520e76dde36708df53f1c6a4a8",
+      "rows": 7012
+    },
+    "corpus_gap_request.csv": {
+      "sha256": "414c4796a34a6e0f80c5694897818b44a4f63f6a1411dd5a41f6faca885afbad",
+      "rows": 2
+    },
+    "url_manual_check.csv": {
+      "sha256": "e5958fc7b3017925c9df4b95007a3a91fbbe973264c0ec61a957a6e37f3dc97a",
+      "rows": 28
+    },
+    "role_tasks.csv": {
+      "sha256": "cca94c6279839866e4598d18e4ce4fa400c35a601ec99e79e5b41a82de4e6017",
+      "rows": 160
+    },
+    "role_technology.csv": {
+      "sha256": "540b2b6a13c8174cd0b12b63ac9e21398d1e2d6c2eb22a1689228c3f14c15cc1",
+      "rows": 375
+    },
+    "skill_links.csv": {
+      "sha256": "70cfa688fcf7c3cbcbd2a375fe615e27e5521fa45c1eee765e2f5d90c7b0719d",
+      "rows": 232
+    }
+  }
+}

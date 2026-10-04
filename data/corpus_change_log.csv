@@ -1,4 +1,14 @@
 version,item_id,requirement_id,change,detail,decision
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R04-08,,url_verified,https://isqi.org/A4Q-Certified-Selenium-4-Tester-Foundation-v3.0/CSeT-4F,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRS-R15-05,,url_verified,https://learningportal.juniper.net/juniper/user_activity_info.aspx?id=10179,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R04-04,,url_verified,https://istqb.org/certifications/certified-tester-performance-testing-ct-pt/,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRS-R15-04,,url_verified,https://www.netacad.com/courses/ccna-switching-routing-wireless-essentials?courseLang=en-US,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R20-05,,url_verified,https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1/itil-4-foundation-2565,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRS-R20-06,,url_verified,https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1/itil-4-foundation-2565,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R19-04,,url_verified,https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R19-05,,url_verified,https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRS-R19-08,,url_verified,https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2,DEC-16/DEC-29
+CORPUS-IS68076026-v1.4R-01OCT26,CRT-R09-03,,url_verified,https://trailheadacademy.salesforce.com/certificate/exam-tableau-data-analyst---Analytics-DA-201,DEC-16/DEC-29
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-F1,REQ-R02-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-F1,REQ-R03-2.C.7.a,foundation_L1_added,Write Professional Emails in English,DEC-18
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-F1,REQ-R04-2.C.7.a,foundation_L1_extended,Write Professional Emails in English,DEC-45
@@ -231,20 +241,358 @@ CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-F6,REQ-R06-4.A.1.b.3,foundation_L1_extend
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-F6,REQ-R07-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-F6,REQ-R08-4.A.1.b.3,foundation_L1_added,Project Planning: Putting It All Together,DEC-18
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-F6,REQ-R09-4.A.1.b.3,foundation_L1_extended,Project Planning: Putting It All Together,DEC-45
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N01,,coverage_item_pending_researcher,Effective Problem-Solving and Decision-Making,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N02,,coverage_item_pending_researcher,Creative Thinking: Techniques and Tools for Success,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N03,,coverage_item_pending_researcher,Design Thinking for Innovation,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N04,,coverage_item_pending_researcher,Systems Thinking Basics,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N05,,coverage_item_pending_researcher,Introduction to Systems Architecture,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N06,,coverage_item_pending_researcher,Data Science Math Skills,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N07,,coverage_item_pending_researcher,Quality Improvement and Management,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N08,,coverage_item_pending_researcher,Introduction to Technical Writing,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N09,,coverage_item_pending_researcher,The Bits and Bytes of Computer Networking,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N10,,coverage_item_pending_researcher,Technical Support Fundamentals,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N11,,coverage_item_pending_researcher,Programming for Everybody (Getting Started with Python),DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N12,,coverage_item_pending_researcher,Introduction to Software Engineering,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N13,,coverage_item_pending_researcher,Foundations of Project Management,DEC-46
-CORPUS_IS68076026-v1.5-01OCT26,CRS-*-N14,,coverage_item_pending_researcher,Introduction to Relational Databases (RDBMS),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N01,REQ-R01-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N01,REQ-R01-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N01,REQ-R01-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N01,REQ-R02-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N01,REQ-R02-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N01,REQ-R02-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N01,REQ-R03-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N01,REQ-R03-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N01,REQ-R04-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N01,REQ-R04-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N01,REQ-R05-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N01,REQ-R05-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N01,REQ-R05-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N01,REQ-R06-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N01,REQ-R06-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N01,REQ-R06-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N01,REQ-R07-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N01,REQ-R07-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N01,REQ-R07-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N01,REQ-R08-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N01,REQ-R08-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N01,REQ-R08-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N01,REQ-R09-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N01,REQ-R09-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N01,REQ-R09-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N01,REQ-R10-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N01,REQ-R10-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N01,REQ-R10-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N01,REQ-R11-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N01,REQ-R11-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N01,REQ-R11-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N01,REQ-R12-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N01,REQ-R13-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N01,REQ-R13-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N01,REQ-R14-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N01,REQ-R14-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N01,REQ-R14-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N01,REQ-R15-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N01,REQ-R15-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N01,REQ-R15-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N01,REQ-R16-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N01,REQ-R16-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N01,REQ-R17-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N01,REQ-R17-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N01,REQ-R17-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N01,REQ-R18-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N01,REQ-R18-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N01,REQ-R19-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N01,REQ-R20-4.A.2.b.1,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N01,REQ-R20-2.B.4.e,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N01,REQ-R20-2.B.2.i,coverage_L1_added,Effective Problem-Solving and Decision-Making,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N02,REQ-R01-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N02,REQ-R02-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N02,REQ-R03-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N02,REQ-R04-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N02,REQ-R05-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N02,REQ-R06-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N02,REQ-R07-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N02,REQ-R08-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N02,REQ-R09-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N02,REQ-R10-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N02,REQ-R11-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N02,REQ-R12-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N02,REQ-R13-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N02,REQ-R14-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N02,REQ-R17-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N02,REQ-R18-4.A.2.b.2,coverage_L1_added,Creative Thinking: Techniques and Tools for Success,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N03,REQ-R01-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N03,REQ-R01-2.B.3.b,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N03,REQ-R02-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N03,REQ-R02-2.B.3.a,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N03,REQ-R03-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N03,REQ-R04-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N03,REQ-R05-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N03,REQ-R06-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N03,REQ-R07-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N03,REQ-R08-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N03,REQ-R09-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N03,REQ-R10-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N03,REQ-R11-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N03,REQ-R12-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N03,REQ-R13-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N03,REQ-R14-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N03,REQ-R16-2.B.3.a,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N03,REQ-R17-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N03,REQ-R18-4.A.2.b.2,coverage_L1_added,Design Thinking for Innovation,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N04,REQ-R01-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N04,REQ-R01-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N04,REQ-R03-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N04,REQ-R07-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N04,REQ-R07-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N04,REQ-R08-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N04,REQ-R09-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N04,REQ-R11-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N04,REQ-R12-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N04,REQ-R12-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N04,REQ-R13-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N04,REQ-R14-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N04,REQ-R15-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N04,REQ-R15-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N04,REQ-R16-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N04,REQ-R16-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N04,REQ-R17-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N04,REQ-R17-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N04,REQ-R18-2.B.4.g,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N04,REQ-R18-2.B.4.h,coverage_L1_added,Systems Thinking Basics,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N05,REQ-R01-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N05,REQ-R01-2.B.3.b,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N05,REQ-R01-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N05,REQ-R02-2.B.3.a,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N05,REQ-R03-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N05,REQ-R07-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N05,REQ-R07-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N05,REQ-R08-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N05,REQ-R09-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N05,REQ-R11-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N05,REQ-R12-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N05,REQ-R12-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N05,REQ-R13-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N05,REQ-R14-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N05,REQ-R15-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N05,REQ-R15-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N05,REQ-R16-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N05,REQ-R16-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N05,REQ-R16-2.B.3.a,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N05,REQ-R17-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N05,REQ-R17-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N05,REQ-R18-2.B.4.g,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N05,REQ-R18-2.B.4.h,coverage_L1_added,Introduction to Systems Architecture,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N06,REQ-R01-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N06,REQ-R02-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N06,REQ-R03-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N06,REQ-R04-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N06,REQ-R06-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N06,REQ-R06-2.A.1.e,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N06,REQ-R07-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N06,REQ-R08-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N06,REQ-R09-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N06,REQ-R09-2.A.1.e,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N06,REQ-R10-2.C.4.a,coverage_L1_added,Data Science Math Skills,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N07,REQ-R01-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N07,REQ-R01-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N07,REQ-R02-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N07,REQ-R03-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N07,REQ-R03-2.B.3.m,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N07,REQ-R03-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N07,REQ-R04-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N07,REQ-R04-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N07,REQ-R04-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N07,REQ-R04-4.A.2.a.1,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N07,REQ-R04-2.B.3.m,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N07,REQ-R05-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N07,REQ-R05-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N07,REQ-R05-4.A.2.a.1,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N07,REQ-R06-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N07,REQ-R07-4.A.2.a.1,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N07,REQ-R07-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N07,REQ-R08-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N07,REQ-R08-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N07,REQ-R09-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N07,REQ-R10-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N07,REQ-R10-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N07,REQ-R11-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N07,REQ-R11-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N07,REQ-R11-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N07,REQ-R12-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N07,REQ-R12-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N07,REQ-R12-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N07,REQ-R12-2.B.3.m,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N07,REQ-R13-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N07,REQ-R13-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N07,REQ-R14-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N07,REQ-R14-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N07,REQ-R15-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N07,REQ-R15-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N07,REQ-R16-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N07,REQ-R16-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N07,REQ-R17-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N07,REQ-R17-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N07,REQ-R17-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N07,REQ-R17-2.B.3.m,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N07,REQ-R18-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N07,REQ-R18-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N07,REQ-R18-4.A.2.a.1,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N07,REQ-R19-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N07,REQ-R20-2.A.2.d,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N07,REQ-R20-4.A.2.a.1,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N07,REQ-R20-4.A.1.a.2,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N07,REQ-R20-4.A.2.a.3,coverage_L1_added,Quality Improvement and Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N08,REQ-R01-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N08,REQ-R02-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N08,REQ-R03-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N08,REQ-R04-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N08,REQ-R05-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N08,REQ-R06-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N08,REQ-R07-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N08,REQ-R08-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N08,REQ-R09-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N08,REQ-R10-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N08,REQ-R11-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N08,REQ-R12-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N08,REQ-R13-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N08,REQ-R14-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N08,REQ-R15-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N08,REQ-R16-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N08,REQ-R17-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N08,REQ-R18-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N08,REQ-R19-4.A.3.b.6,coverage_L1_added,Introduction to Technical Writing,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N09,REQ-R10-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N09,REQ-R11-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N09,REQ-R13-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N09,REQ-R15-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N09,REQ-R16-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N09,REQ-R17-2.C.9.a,coverage_L1_added,The Bits and Bytes of Computer Networking,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N10,REQ-R01-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N10,REQ-R01-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N10,REQ-R02-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N10,REQ-R02-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N10,REQ-R03-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N10,REQ-R03-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N10,REQ-R04-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N10,REQ-R04-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N10,REQ-R05-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N10,REQ-R05-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N10,REQ-R06-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N10,REQ-R06-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N10,REQ-R07-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N10,REQ-R07-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N10,REQ-R08-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N10,REQ-R08-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N10,REQ-R09-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N10,REQ-R09-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N10,REQ-R10-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N10,REQ-R10-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N10,REQ-R11-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N10,REQ-R11-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N10,REQ-R12-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N10,REQ-R12-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N10,REQ-R13-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N10,REQ-R13-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N10,REQ-R14-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N10,REQ-R14-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N10,REQ-R14-4.A.3.b.5,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N10,REQ-R15-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N10,REQ-R15-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N10,REQ-R16-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N10,REQ-R16-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N10,REQ-R17-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N10,REQ-R17-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N10,REQ-R18-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N10,REQ-R18-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N10,REQ-R19-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N10,REQ-R19-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N10,REQ-R20-4.A.3.b.1,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N10,REQ-R20-2.C.3.a,coverage_L1_added,Technical Support Fundamentals,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N11,REQ-R01-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N11,REQ-R01-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N11,REQ-R02-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N11,REQ-R02-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N11,REQ-R03-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N11,REQ-R03-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N11,REQ-R04-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N11,REQ-R04-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N11,REQ-R05-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N11,REQ-R05-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N11,REQ-R06-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N11,REQ-R06-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N11,REQ-R07-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N11,REQ-R07-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N11,REQ-R08-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N11,REQ-R08-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N11,REQ-R09-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N11,REQ-R10-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N11,REQ-R10-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N11,REQ-R11-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N11,REQ-R12-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N11,REQ-R13-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N11,REQ-R13-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N11,REQ-R14-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N11,REQ-R15-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N11,REQ-R15-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N11,REQ-R16-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N11,REQ-R17-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N11,REQ-R17-2.B.3.e,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N11,REQ-R18-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N11,REQ-R19-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N11,REQ-R20-4.A.3.b.1,coverage_L1_added,Programming for Everybody (Getting Started with Python),DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N12,REQ-R01-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N12,REQ-R02-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N12,REQ-R03-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N12,REQ-R03-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N12,REQ-R04-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N12,REQ-R05-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N12,REQ-R06-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N12,REQ-R07-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N12,REQ-R07-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N12,REQ-R08-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N12,REQ-R08-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N12,REQ-R10-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N12,REQ-R10-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N12,REQ-R11-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N12,REQ-R12-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N12,REQ-R13-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N12,REQ-R13-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N12,REQ-R15-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N12,REQ-R15-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N12,REQ-R16-2.C.3.b,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N12,REQ-R17-2.B.3.e,coverage_L1_added,Introduction to Software Engineering,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N13,REQ-R01-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R01-N13,REQ-R01-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N13,REQ-R02-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R02-N13,REQ-R02-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N13,REQ-R03-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R03-N13,REQ-R03-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N13,REQ-R04-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-N13,REQ-R04-4.A.4.b.1,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N13,REQ-R05-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R05-N13,REQ-R05-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N13,REQ-R06-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R06-N13,REQ-R06-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N13,REQ-R07-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-N13,REQ-R07-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N13,REQ-R08-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N13,REQ-R08-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N13,REQ-R09-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R09-N13,REQ-R09-2.C.1.a,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-N13,REQ-R10-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N13,REQ-R11-2.C.1.a,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R11-N13,REQ-R11-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R12-N13,REQ-R12-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N13,REQ-R13-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R13-N13,REQ-R13-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R14-N13,REQ-R14-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N13,REQ-R15-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N13,REQ-R15-2.B.1.b,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R15-N13,REQ-R15-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R16-N13,REQ-R16-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N13,REQ-R17-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R17-N13,REQ-R17-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N13,REQ-R18-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R18-N13,REQ-R18-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N13,REQ-R19-4.A.4.b.1,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N13,REQ-R19-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N13,REQ-R19-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N13,REQ-R19-2.B.1.b,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R19-N13,REQ-R19-2.B.5.a,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N13,REQ-R20-4.A.2.b.6,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N13,REQ-R20-4.A.2.b.4,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N13,REQ-R20-4.A.4.b.1,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N13,REQ-R20-2.B.1.b,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-N13,REQ-R20-2.C.1.a,coverage_L1_added,Foundations of Project Management,DEC-46
+CORPUS_IS68076026-v1.5-01OCT26,CRS-R08-N14,REQ-R08-2.C.3.c,coverage_L1_added,Introduction to Relational Databases (RDBMS),DEC-46
 CORPUS_IS68076026-v1.5-01OCT26,CRT-R07-08,REQ-R07-2.C.3.b,L2_to_L1_promoted,ออกแบบและปรับแต่งระบบ LLM ระดับโปรดักชัน (คง mapping_rule R10-design),DEC-19
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R10-02,REQ-R10-2.C.3.b,L2_to_L1_promoted,ออกแบบสคีมาและโครงสร้างจัดเก็บข้อมูล (คง mapping_rule R10-design),DEC-19
 CORPUS_IS68076026-v1.5-01OCT26,CRT-R11-01,REQ-R11-2.C.3.b,L2_to_L1_promoted,ออกแบบสถาปัตยกรรมความมั่นคงปลอดภัย (คง mapping_rule R10-design),DEC-19
@@ -262,3 +610,89 @@ CORPUS_IS68076026-v1.5-01OCT26,CRS-R04-02,REQ-R04-4.A.2.a.1,L2_to_L1_promoted,�
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R07-10,REQ-R07-4.A.2.a.1,L2_to_L1_promoted,ประเมินคุณภาพผลลัพธ์ของโมเดลด้วยเกณฑ์และชุดทดสอบ (คง mapping_rule R14-quality),DEC-19
 CORPUS_IS68076026-v1.5-01OCT26,CRT-R18-06,REQ-R18-4.A.2.a.1,L2_to_L1_promoted,IREB กำหนดเกณฑ์คุณภาพของข้อกำหนดและวิธีตรวจตามเกณฑ์นั้น (คง mapping_rule R14-quality),DEC-19
 CORPUS_IS68076026-v1.5-01OCT26,CRS-R20-06,REQ-R20-4.A.2.a.1,L2_to_L1_promoted,กำหนดระดับบริการและประเมินคุณภาพบริการที่ส่งมอบ (คง mapping_rule R14-quality),DEC-19
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R12-09,,update_group_ก,Palo Alto Networks Certified Network Security Engineer (PCNSE) [PCNSE] -> Palo Alto Networks Certified Next-Generation Firewall Engineer [NGFW Engineer],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R15-06,,update_group_ก,Palo Alto Networks Certified Network Security Engineer (PCNSE) [PCNSE] -> Palo Alto Networks Certified Next-Generation Firewall Engineer [NGFW Engineer],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R19-08,,update_group_ก,SAFe 6 Agilist (Leading SAFe) [SA (SAFe 6)] -> Certified AI-Empowered SAFe Agilist [SAFe AI-Empowered Agilist],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R17-06,,update_group_ก,AWS Certified SysOps Administrator – Associate [SOA-C02] -> AWS Certified CloudOps Engineer – Associate [SOA-C03],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R01-11,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-11,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-11,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R13-12,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R16-11,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R17-11,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R19-09,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-04,,update_group_ก,ITIL 4 Foundation [ITIL 4 Foundation] -> ITIL Foundation (Version 5) [ITIL Foundation V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRS-R20-06,,update_group_ก,ITIL 4 Foundation Training [] -> ITIL Foundation (Version 5) Training [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-05,,update_group_ก,ITIL 4 Managing Professional [ITIL 4 MP] -> ITIL Managing Professional (Version 5) [ITIL MP V5],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R09-04,,update_group_ก,Tableau Desktop Specialist [Desktop Specialist] -> Salesforce Certified Tableau Desktop Foundations [Tableau Desktop Foundations],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R04-08,,update_group_ก,A4Q Selenium Tester Foundation [A4Q Selenium] -> A4Q Certified Selenium 4 Tester Foundation v3.0 [CSeT-4F],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R04-02,,update_group_ก,ISTQB Certified Tester Advanced Level – Test Automation Engineer (CT-TAE) [CT-TAE] -> ISTQB Certified Tester Advanced Level – Test Automation Engineering (CTAL-TAE v2.0) [CTAL-TAE v2.0],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R06-07,,update_group_ก,SAS Certified Data Scientist [SAS Data Scientist] -> SAS Certified Data Scientist [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R15-09,,update_group_ก,Fortinet Certified Professional – Network Security [FCP Network Security] -> Fortinet NSE 4 – FortiOS 7.6 Administrator (FCP in Secure Networking) [NSE4_FGT_AD-7.6],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R12-05,,update_group_ข,AWS Certified Security – Specialty [SCS-C02] -> AWS Certified Security – Specialty [SCS-C03],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R07-04,,update_group_ข,Microsoft Certified: Azure AI Apps and Agents Developer Associate [AI-102 successor] -> Microsoft Certified: Azure AI Apps and Agents Developer Associate [AI-103],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R16-07,,update_group_ข,HashiCorp Certified: Terraform Associate [TA-003] -> HashiCorp Certified: Terraform Associate (004) [TA-004],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R17-03,,update_group_ข,HashiCorp Certified: Terraform Associate [TA-003] -> HashiCorp Certified: Terraform Associate (004) [TA-004],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R01-06,,update_group_ข,GitHub Foundations [GitHub Foundations] -> GitHub Foundations [GH-900],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R02-07,,update_group_ข,GitHub Foundations [GitHub Foundations] -> GitHub Foundations [GH-900],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R15-05,,update_group_ข,Juniper Networks Certified Associate – Junos (JNCIA-Junos) [JN0-105] -> Juniper Networks Certified Associate – Junos (JNCIA-Junos) [JN0-106],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R15-10,,update_group_ข,HPE Aruba Networking Certified Associate – Switching [ACSA] -> HPE Aruba Networking Certified Associate – Switching [HPE6-A86],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R13-01,,update_group_ข,OffSec Certified Professional (OSCP) [OSCP] -> OffSec Certified Professional+ (OSCP+) [OSCP+],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R13-04,,update_group_ข,EC-Council Certified Ethical Hacker (CEH) [312-50] -> Certified Ethical Hacker (CEH) v13 [312-50 (v13)],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R14-07,,update_group_ข,Cellebrite Certified Operator (CCO) [CCO] -> Cellebrite Certified Operator (CCO) for Inseyets [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-10,,update_group_ข,Blue Team Level 1 (BTL1) [BTL1] -> Blue Team Level 1 (BTL1) [BTL1],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R19-04,,update_group_ข,PRINCE2 Foundation [PRINCE2 Foundation] -> PRINCE2 Foundation (Version 7) [PRINCE2 7 Foundation],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R19-05,,update_group_ข,PRINCE2 Practitioner [PRINCE2 Practitioner] -> PRINCE2 Practitioner (Version 7) [PRINCE2 7 Practitioner],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRS-R19-08,,update_group_ข,PRINCE2 Foundation Training [] -> PRINCE2 Foundation Training (Version 7) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-06,,update_group_ข,"TOGAF Enterprise Architecture Practitioner [TOGAF EA Practitioner] -> TOGAF Enterprise Architecture Practitioner (TOGAF Standard, 10th Edition) [-]",DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R09-03,,update_group_ข,Tableau Certified Data Analyst [Certified Data Analyst] -> Salesforce Certified Tableau Data Analyst [Tableau Data Analyst],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R08-06,,update_group_ข,SnowPro Core Certification [COF-C02] -> SnowPro Core Certification [COF-C03],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-07,,update_group_ข,SnowPro Core Certification [COF-C02] -> SnowPro Core Certification [COF-C03],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-05,,update_group_ข,EDB Essentials for PostgreSQL Certification [EDB Associate] -> EDB Essentials for PostgreSQL Certification (v16) [PostgreSQL Essentials v16],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R08-08,,update_group_ข,Astronomer Certification: Apache Airflow Fundamentals [Airflow Fundamentals] -> Astronomer Certification: Apache Airflow 3 Fundamentals [Airflow 3 Fundamentals],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R08-10,,update_group_ข,dbt Analytics Engineering Certification Exam [dbt Analytics Engineering] -> dbt Analytics Engineering Certification Exam (dbt 1.11) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R09-09,,update_group_ข,Qlik Sense Business Analyst Certification [Qlik Sense BA] -> Qlik Sense Business Analyst Certification Exam [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R01-08,,update_group_ข,PCPP1 – Certified Professional in Python Programming 1 [PCPP-32-10x] -> PCPP1 – Certified Professional in Python Programming 1 [PCPP-32-101],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R03-08,,update_group_ข,PCPP1 – Certified Professional in Python Programming 1 [PCPP-32-10x] -> PCPP1 – Certified Professional in Python Programming 1 [PCPP-32-101],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R09-06,,update_group_ข,IIBA Certification in Business Data Analytics (CBDA) [CBDA] -> IIBA Certification in Business Data Analytics (CBDA) [IIBA-CBDA],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R18-07,,update_group_ข,IIBA Certification in Business Data Analytics (CBDA) [CBDA] -> IIBA Certification in Business Data Analytics (CBDA) [IIBA-CBDA],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R05-02,,update_group_ข,IxDF UX Designer Certification [IxDF Course Certificate] -> IxDF UX Designer Certification [IxDF Course Certificate],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R06-02,,update_group_ข,AWS Certified Machine Learning Engineer – Associate [MLA-C01] -> AWS Certified Machine Learning Engineer – Associate [MLA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R07-02,,update_group_ข,AWS Certified Machine Learning Engineer – Associate [MLA-C01] -> AWS Certified Machine Learning Engineer – Associate [MLA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R17-08,,update_group_ข,Red Hat Certified Engineer (RHCE) [EX294] -> Red Hat Certified Engineer (RHCE) [EX294],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R06-05,,update_group_ข,IAPP Artificial Intelligence Governance Professional (AIGP) [AIGP] -> IAPP Artificial Intelligence Governance Professional (AIGP) [AIGP],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R07-10,,update_group_ข,IAPP Artificial Intelligence Governance Professional (AIGP) [AIGP] -> IAPP Artificial Intelligence Governance Professional (AIGP) [AIGP],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-09,,update_group_ค,CompTIA DataSys+ [DS0-001] -> CompTIA DataSys+ V2 [DS0-002],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R03-07,,update_group_ค,Microsoft Certified: Power Platform Developer Associate [PL-400] -> Microsoft Certified: Power Platform Developer Associate [AB-400],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-03,,update_group_ค,ISACA COBIT 2019 Foundation [COBIT 2019 Foundation] -> ISACA COBIT 7 Foundations Certificate [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R16-02,,update_group_ค,AWS Certified Solutions Architect – Professional [SAP-C02] -> AWS Certified Solutions Architect – Professional [SAP-C03],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-02,,update_group_ค,ISACA Certified Information Security Manager (CISM) [CISM] -> ISACA Certified Information Security Manager (CISM) [CISM],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-01,,update_group_ค,CompTIA Security+ [SY0-701] -> CompTIA Security+ [SY0-701],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R12-01,,update_group_ค,CompTIA Security+ [SY0-701] -> CompTIA Security+ [SY0-701],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R01-01,,update_group_ค,AWS Certified Developer – Associate [DVA-C02] -> AWS Certified Developer – Associate [DVA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R02-02,,update_group_ค,AWS Certified Developer – Associate [DVA-C02] -> AWS Certified Developer – Associate [DVA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R03-03,,update_group_ค,AWS Certified Developer – Associate [DVA-C02] -> AWS Certified Developer – Associate [DVA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R04-07,,update_group_ค,AWS Certified Developer – Associate [DVA-C02] -> AWS Certified Developer – Associate [DVA-C02],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R15-01,,update_group_ค,Cisco Certified Network Associate (CCNA) [200-301] -> Cisco Certified Network Associate (CCNA) [200-301],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R04-03,,update_group_ค,ISTQB Certified Tester Foundation Level – Agile Tester [CTFL-AT] -> ISTQB Certified Tester Foundation Level – Agile Tester [CTFL-AT],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R19-01,,update_group_ง,PMI Project Management Professional (PMP) [PMP] -> PMI Project Management Professional (PMP) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R20-08,,update_group_ง,PMI Project Management Professional (PMP) [PMP] -> PMI Project Management Professional (PMP) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R18-01,,update_group_ง,IIBA Entry Certificate in Business Analysis (ECBA) [ECBA] -> IIBA Entry Certificate in Business Analysis (ECBA) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R12-03,,update_group_ง,ISC2 Certified Cloud Security Professional (CCSP) [CCSP] -> ISC2 Certified Cloud Security Professional (CCSP) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-03,,update_group_ง,ISC2 Certified in Cybersecurity (CC) [ISC2 CC] -> ISC2 Certified in Cybersecurity (CC) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-04,,update_group_ง,ISC2 Systems Security Certified Practitioner (SSCP) [SSCP] -> ISC2 Systems Security Certified Practitioner (SSCP) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R13-08,,update_group_ง,eLearnSecurity Junior Penetration Tester (eJPT) [eJPT] -> eLearnSecurity Junior Penetration Tester (eJPT) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R08-03,,update_group_ง,Microsoft Certified: Fabric Data Engineer Associate [DP-700] -> Microsoft Certified: Fabric Data Engineer Associate [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R09-02,,update_group_ง,Microsoft Certified: Fabric Analytics Engineer Associate [DP-600] -> Microsoft Certified: Fabric Analytics Engineer Associate [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-01,,update_group_ง,Microsoft Certified: Azure Database Administrator Associate [DP-300] -> Microsoft Certified: Azure Database Administrator Associate [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-05,,update_group_ง,Microsoft Certified: Security Operations Analyst Associate [SC-200] -> Microsoft Certified: Security Operations Analyst Associate [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-06,,update_group_จ,IBM Certified Database Administrator – Db2 [IBM Db2 DBA] -> IBM Certified Database Administrator – Db2 [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-02,,update_group_จ,Oracle Database Administration 2019 Certified Professional [1Z0-083] -> Oracle Database Administration 2019 Certified Professional [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R04-09,,update_group_จ,Tricentis Automation Specialist Level 1 [AS1] -> Tricentis Automation Specialist Level 1 [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R02-10,,update_group_จ,MongoDB Associate Developer [C100DEV] -> MongoDB Associate Developer [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R10-04,,update_group_จ,MongoDB Associate Database Administrator [C100DBA] -> MongoDB Associate Database Administrator [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R11-06,,update_group_จ,Splunk Core Certified Power User [SPLK-1002] -> Splunk Core Certified Power User [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R16-10,,update_group_จ,FinOps Certified Practitioner [FOCP] -> FinOps Certified Practitioner [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R02-05,,update_group_จ,IAAP Web Accessibility Specialist (WAS) [WAS] -> IAAP Web Accessibility Specialist (WAS) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRT-R05-05,,update_group_จ,IAAP Web Accessibility Specialist (WAS) [WAS] -> IAAP Web Accessibility Specialist (WAS) [-],DEC-62
+CORPUS_IS68076026-v1.6-03OCT26,CRS-R03-06,,update_group_ก,"Flutter Development Bootcamp / Build Native Mobile Apps with Flutter [] -> Flutter and Dart: Developing iOS, Android, and Mobile Apps [-]",DEC-62

@@ -47,12 +47,12 @@
 | วิเคราะห์ | เรียกโมเดล A/B/C แยกกัน | Call Model A · Call Model B · Call Model C · Wait for All Models · Collect Model Results | T:เรซูเมสังเคราะห์ A B C |
 | วิเคราะห์ | เรียกซ้ำ ≤ 2 ครั้งเฉพาะ 429/หมดเวลา | Call Model A · Call Model B · Call Model C | T:โมเดลล้มครบสามตัว · T:callModelWithRetry · T:DEC-48 เรียกโมเดลใน n8n 2.x |
 | วิเคราะห์ | บันทึก model_calls ทุกครั้ง | Build Model Call Rows · Record Model Calls · Log Models Called | T:โมเดลล้มครบสามตัว |
-| ตรวจและรวมผล | R0 → R2 (ตรงตัว · ยุบช่องว่าง · ซ่อม quote DEC-52) → R3a คำซ้ำแบบตัดคำต่อท้าย (θ = 0.15) | Start Evidence Check · Prepare Relevance Checks · Apply Rules R0-R6 | T:เรซูเมสังเคราะห์ A B C D · T:R0 · T:R2 ซ่อม quote · T:R3a ตัดคำต่อท้าย |
+| ตรวจและรวมผล | R0 → R2 (ตรงตัว · ยุบช่องว่าง · ซ่อม quote DEC-52) → R3a คำซ้ำแบบตัดคำต่อท้าย (θ = 0.15) | Start Evidence Check · Prepare Relevance Checks · Apply Rules R0-R7 | T:เรซูเมสังเคราะห์ A B C D · T:R0 · T:R2 ซ่อม quote · T:R3a ตัดคำต่อท้าย |
 | ตรวจและรวมผล | R3b ให้โมเดลอื่นตรวจความหมายของข้อความที่ไม่ผ่าน R3a (A→B · B→C · C→A · DEC-51) | Prepare Relevance Checks · Call Verifier A · Call Verifier B · Call Verifier C · Wait for All Verifiers · Collect Verifier Results | T:R3b ผู้ตรวจข้ามโมเดล · T:DEC-51 ผู้ตรวจความหมาย · V:Call Verifier |
 | ตรวจและรวมผล | บันทึกการเรียกผู้ตรวจใน model_calls (call_purpose = verifier) | Build Verifier Call Rows · Record Verifier Calls | T:เรซูเมสังเคราะห์ A B C D |
-| ตรวจและรวมผล | R1 (unverified ไม่นับ) → R4 → R5 ใบรับรอง / R6 ทักษะพื้นฐาน (DEC-54) | Load Corpus · Load Mappings · Apply Rules R0-R6 | T:R1 ไม่นับเสียง unverified · T:R5 ใบรับรองในเรซูเม · V:Apply Rules R0-R6 ต้องรับจาก Load Mappings |
-| ตรวจและรวมผล | คำนวณคะแนนตามสมการ (R C U + ablation) | Apply Rules R0-R6 · Build Decision Rows · Record Decisions | T:เรซูเมสังเคราะห์ A B C D |
-| ตรวจและรวมผล | ดัชนีงานหลักของอาชีพ T และเทคโนโลยี H (DEC-55) | Apply Rules R0-R6 · Build Task Rows · Record Role Task Decisions | T:T และ H (DEC-55) · T:เรซูเมสังเคราะห์ A B C D |
+| ตรวจและรวมผล | R1 (unverified ไม่นับ) → R4 → R5 ใบรับรอง / R6 ทักษะพื้นฐาน (DEC-54) | Load Corpus · Load Mappings · Apply Rules R0-R7 | T:R1 ไม่นับเสียง unverified · T:R5 ใบรับรองในเรซูเม · V:Apply Rules R0-R7 ต้องรับจาก Load Mappings |
+| ตรวจและรวมผล | คำนวณคะแนนตามสมการ (R C U + ablation) | Apply Rules R0-R7 · Build Decision Rows · Record Decisions | T:เรซูเมสังเคราะห์ A B C D |
+| ตรวจและรวมผล | ดัชนีงานหลักของอาชีพ T และเทคโนโลยี H (DEC-55) | Apply Rules R0-R7 · Build Task Rows · Record Role Task Decisions | T:T และ H (DEC-55) · T:เรซูเมสังเคราะห์ A B C D |
 | ตรวจและรวมผล | โมเดลล้มครบสามตัวต้องไปสาขาข้างและปิดงานได้ | Build Finding Rows · Record Findings | T:โมเดลล้มครบสามตัว |
 | จัดแผน | กำหนดช่องว่าง · Hmax จากเดือนและชั่วโมง | Build Learning Plan | T:เรซูเมสังเคราะห์ A B C · T:สมการ 3.7: Hmax |
 | จัดแผน | เลือกรายการจาก mapping L1 ที่ผ่าน review ตามวิธีที่เลือกใน Phase 1 · ระดับผู้เรียน (DEC-56) | Load Corpus · Load Mappings · Build Learning Plan | T:แผนตามระดับผู้เรียน · T:เรซูเมสังเคราะห์ A B C · T:plan_strategy: |

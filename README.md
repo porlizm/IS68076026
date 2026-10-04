@@ -19,7 +19,7 @@ Final_IS/
 │  ├─ baseline/          PDF ฉบับขอสอบ (read-only) + SHA256.txt
 │  ├─ DECISIONS.md       ทะเบียน DEC-01–58
 │  ├─ LOG.md · Plan_IS_30SEP26.md · Spec_Acceptance_Checklist.md · Setup_Guide.md
-│  ├─ Advisor_Email_D0-D5.md · Project_Docs_Index.md · session_end_checklist.md
+│  ├─ Advisor_Email.md · Project_Docs_Index.md · session_end_checklist.md
 │  ├─ ethics/            เอกสารจริยธรรม 6 ไฟล์ (ร่าง v1.0)
 │  ├─ research_tools/    Coding Manual · Analysis Plan · Questionnaire+IOC (ร่าง v1.0)
 │  └─ reference/         เอกสารเดิมที่ใช้อ้างอิง (DECISIONS_31AUG26, START_HERE)

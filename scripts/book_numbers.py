@@ -112,7 +112,7 @@ def main():
     arow = ["| รหัส | รายการเรียนรู้ | ผู้ให้บริการ | ชั่วโมง | องค์ประกอบ O*NET | สถานะ |", "|---|---|---|---|---|---|"]
     for a, ok in zip(adds.itertuples(), conf):
         arow.append(f"| {a.key} | {a.title} | {a.provider} | {fmt(float(a.estimated_hours))} | {a.elements.replace('|', ', ')} | "
-                    + ("ผู้วิจัยยืนยันแล้ว" if ok else "รอผู้วิจัยตรวจ") + " |")
+                    + ("Claude ตรวจหน้าเว็บ 3 ต.ค. 2569 ตามที่ผู้วิจัยมอบหมาย" if ok else "รอตรวจ") + " |")
     n["additions_table"] = "\n".join(arow)
     trow = ["| อาชีพ | ข้อที่มีรายการรองรับ | แผนจำลองครอบคลุม (ข้อ) | ชั่วโมงของแผน | ชั่วโมงขั้นต่ำเพื่อครบทุกข้อ (ILP) |", "|---|---|---|---|---|"]
     per = {r["role_id"]: r for r in sim["primary_6m10h_both"]["per_role"]}
@@ -128,7 +128,7 @@ def main():
     n["wf_final_nodes"] = fmt(wm["superseded"]["WF_Final_IS"]["nodes"])
     n["text_layer_min_chars"] = fmt(J("config", "project.json")["text_layer_min_chars"])
     # DEC-48: ผลทดสอบใน n8n จริง (evidence/n8n_test_summary.json สร้างจากชุดทดสอบ evidence/n8n_s6/) และเวลารอก่อนเรียกซ้ำจาก config/models.json
-    nt = J("evidence", "n8n_test_summary.json"); n["n8n_cases"] = fmt(nt["cases"]); n["n8n_pass"] = fmt(nt["pass"])
+    nt = J("evidence", "n8n_test_summary_03OCT26.json"); n["n8n_cases"] = fmt(nt["cases"]); n["n8n_pass"] = fmt(nt["pass"]); n["n8n_checks"] = fmt(nt["checks"]); n["n8n_checks_pass"] = fmt(nt["checks_pass"]); n["n8n_test_date"] = nt["date"]
     bo = J("config", "models.json")["defaults"]["retry_backoff_ms"]; n["retry_backoff_text"] = " และ ".join(fmt(x / 1000) for x in bo) + " วินาที"
     import re as _re
     tr = open(os.path.join(ROOT, "evidence", "WF_analysis.md"), encoding="utf-8").read().split("## 2 · Traceability")[1].split("\n## ")[0]
@@ -181,7 +181,7 @@ def main():
     GRP = {"operational": "ผลการทำงาน", "evaluation": "การประเมิน", "reference": "ข้อมูลอ้างอิง", "google_forms": "Google Forms เขียน"}
     USE = {"runs": "หนึ่งแถวต่องาน สถานะและสรุปผล", "ocr_results": "บริการอ่านข้อความ จำนวนจุดที่ปิดบัง ค่าแฮช", "model_calls": "การเรียกโมเดลทุกครั้งรวมครั้งที่ล้ม",
            "findings": "ข้อสรุปรายโมเดลและผลกฎ R2 R3 (ชั้นคำซ้ำและผู้ตรวจ)", "decisions": "สถานะสุดท้ายรายข้อกำหนดอ้างอิงและหลักฐาน", "role_task_decisions": "สถานะของงานหลักของอาชีพ 8 งาน", "plan_items": "รายการในแผนตามลำดับ", "deliveries": "ผลการส่งรายงาน",
-           "audit_log": "เหตุการณ์ของระบบ", "ground_truth": "ชุดคำตอบอ้างอิงของผู้ให้รหัสสองคน", "pathway_review": "ผลตรวจแผนของผู้ประเมิน",
+           "audit_log": "เหตุการณ์ของระบบ", "ground_truth": "ชุดคำตอบอ้างอิงของผู้วิจัยและผลให้รหัสซ้ำ", "pathway_review": "ผลตรวจแผนของผู้ประเมิน",
            "ref_roles": "อาชีพ 20 อาชีพ", "ref_requirements": "ข้อกำหนดอ้างอิง 600 ข้อพร้อมคำพ้อง", "ref_corpus": "คลังรายการเรียนรู้", "ref_mappings": "ความเชื่อมโยงพร้อมสถานะการตรวจ",
            "form_responses": "คำตอบแบบฟอร์มรับเรซูเม", "evaluation_responses": "คำตอบแบบประเมินของผู้เข้าร่วม"}
     t = ["| แท็บ | กลุ่ม | คอลัมน์ | เก็บอะไร |", "|---|---|---|---|"]

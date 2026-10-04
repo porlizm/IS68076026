@@ -3,9 +3,13 @@ const now = new Date().toISOString();
 const runs = $('Read Runs').all().map((i) => i.json);
 const seen = new Set();
 const out = [];
+// DEC-60: ปฏิเสธทุกแถวถ้ารุ่นของ workflow ไม่ตรงกับรุ่นที่ freeze (config/project.json freeze)
+const verBad = typeof STAMP === 'undefined' ? [] : ENGINE.versionIssues(STAMP, [], CFG.project.freeze);
 for (const it of $('Form Row Trigger').all()) {
   const ctx = ENGINE.parseFormRow(it.json, CFG.sheets);
   const v = ENGINE.validateIntake(ctx, CFG.project, CFG.roleIds);
+  if (verBad.length) v.errors.push('version_mismatch');
+  if (typeof STAMP !== 'undefined') ctx.stamp = STAMP;
   ctx.response_id = ENGINE.responseId(ctx);
   ctx.created_at = now;
   ctx.run_id = ENGINE.makeRunId(ctx.response_id, now);
@@ -17,8 +21,8 @@ for (const it of $('Form Row Trigger').all()) {
   const event = !valid ? 'rejected_input' : (dup ? 'skipped_duplicate' : 'accepted');
   out.push({ json: {
     ...ctx, valid, not_duplicate: notDuplicate, reject_reason: v.errors.join('|'),
-    run_row: ENGINE.runRowFrom(ctx, { stage: 'running' }),
-    audit: { ts: now, actor: 'WF_Main_Intake', run_id: ctx.run_id, event, detail: JSON.stringify({ reasons: v.errors, response_id: ctx.response_id }) },
+    run_row: ENGINE.runRowFrom(ctx, { stage: 'running', stamp: typeof STAMP === 'undefined' ? null : STAMP }),
+    audit: { ts: now, actor: 'WF_Main_Intake', run_id: ctx.run_id, event, detail: JSON.stringify({ reasons: v.errors, response_id: ctx.response_id, version: verBad }) },
   } });
 }
 return out;

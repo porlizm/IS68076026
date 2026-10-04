@@ -1,1 +1,1 @@
-run_id,requirement_id,element_id,element_name,domain,weight,final_status,agreement_level,n_usable_models,rule_flags,evidence_quote,evidence_char_start,evidence_char_end,evidence_source,created_at
+run_id,requirement_id,element_id,element_name,domain,weight,actor,final_status,agreement_level,n_usable_models,rule_flags,evidence_quote,evidence_char_start,evidence_char_end,evidence_source,created_at

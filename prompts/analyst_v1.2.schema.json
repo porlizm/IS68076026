@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analyst_v1.2.schema.json",
+  "title": "ผลตอบกลับของโมเดลตาม prompt analyst_v1.2 · R0 ใน engine.js ตรวจตามโครงสร้างนี้ (รับ analyst_v1.1 และ v1.0 ได้เพื่อย้อนกลับ)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "role_id",
+    "assessments"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "analyst_v1.2",
+        "analyst_v1.1",
+        "analyst_v1.0"
+      ]
+    },
+    "role_id": {
+      "type": "string",
+      "pattern": "^R(0[1-9]|1[0-9]|20)$"
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "status"
+        ],
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "pattern": "^REQ-R\\d{2}-[0-9A-Za-z.]+$"
+          },
+          "status": {
+            "enum": [
+              "evidenced",
+              "partially",
+              "missing"
+            ]
+          },
+          "quotes": {
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "type": "string"
+            },
+            "description": "prompt กำหนด 20–160 ตัวอักษร · R0 ไม่ตรวจความยาว · ใช้ชิ้นแรกที่ผ่าน R2/R3"
+          },
+          "quote": {
+            "type": "string",
+            "description": "รูปแบบ analyst_v1.0 (ยังรับได้)"
+          },
+          "evidence_type": {
+            "enum": [
+              "action",
+              "result",
+              "tool_list",
+              "credential",
+              "education",
+              "other"
+            ]
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "actor": {
+            "enum": [
+              "performed",
+              "led",
+              "oversaw",
+              "mentioned"
+            ],
+            "description": "ผู้ลงมือทำตามที่ quote แสดง · ใช้ในกฎ R7 · ไม่มีค่านี้ระบบไม่ลดสถานะ แต่ติดป้าย R7_actor_unknown"
+          }
+        }
+      }
+    },
+    "task_assessments": {
+      "type": "array",
+      "description": "DEC-55 · ไม่บังคับ ถ้าผิดรูปแบบ งานหลักทั้งหมดได้ abstained แต่ไม่ทำให้ assessments ใช้ไม่ได้",
+      "items": {
+        "type": "object",
+        "required": [
+          "task_id",
+          "status"
+        ],
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "pattern": "^TASK-R\\d{2}-\\d+$"
+          },
+          "status": {
+            "enum": [
+              "evidenced",
+              "partially",
+              "missing"
+            ]
+          },
+          "quotes": {
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "type": "string"
+            }
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "actor": {
+            "enum": [
+              "performed",
+              "led",
+              "oversaw",
+              "mentioned"
+            ],
+            "description": "ผู้ลงมือทำตามที่ quote แสดง · ใช้ในกฎ R7 · ไม่มีค่านี้ระบบไม่ลดสถานะ แต่ติดป้าย R7_actor_unknown"
+          }
+        }
+      }
+    }
+  },
+  "x-r0-reason-codes": [
+    "no_output",
+    "invalid_json",
+    "schema_mismatch",
+    "role_mismatch",
+    "incomplete_coverage"
+  ]
+}

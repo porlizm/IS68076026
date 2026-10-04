@@ -1,194 +1,350 @@
 # -*- coding: utf-8 -*-
-"""
-make_figures.py — สร้างรูปของเล่มจากข้อมูลและ workflow จริง (Phase 2.8 / 3) · ป้ายภาษาไทย TH Sarabun New
-  python scripts/make_figures.py      -> book/figures/*.png (300 dpi) + book/figures/figures.json (ชื่อรูป alt text ความกว้างพิมพ์)
-กติกา: กว้างพิมพ์ ≤ 14.65 ซม. · ตัวอักษรเมื่อพิมพ์ ≥ 12 pt (สคริปต์คำนวณจากขนาดจริงของภาพและหยุดถ้าไม่ผ่าน)
-"""
-import json, os, shutil, subprocess, sys
-from PIL import Image
+import json, os, sys
+"""make_figures.py: วาดรูปของเล่มเป็น SVG (TH Sarabun New 16px, viewBox กว้าง 415 = 14.65 ซม. พิมพ์ที่ 16 pt)
+  python scripts/make_figures.py [ชื่อรูป ...]  ->  book/figures/*.svg, *.png (4x), figures.json
+  ตรวจเรขาคณิตทุกรูป (ข้อความล้น เส้นทะลุกล่อง ป้ายทับเส้น เส้นตัดกัน จุดต่อชิด อักขระที่ฟอนต์ไม่มี) หยุดถ้ามีข้อผิดพลาด"""
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from dg import *
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-OUT = os.path.join(ROOT, "book", "figures")
-FONT = "TH Sarabun New"; FS = 24; DPI = 300; MAXW_CM = 14.65
-J = lambda *p: json.load(open(os.path.join(ROOT, *p), encoding="utf-8"))
-C = dict(a="#e8f0fb", b="#eaf6ee", c="#fdf3e3", d="#f6eaf6", e="#f2f2f2", r="#fbe9e9", line="#333333")
+NUM = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "book", "numbers.json"), encoding="utf-8"))
+SIM = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "evidence", "coverage_simulation.json"), encoding="utf-8"))
+GAP = 22
 
 
-def ensure_font():
-    home = os.path.expanduser("~/.fonts"); os.makedirs(home, exist_ok=True)
-    src = os.path.join(ROOT, "assets", "fonts")
-    for f in os.listdir(src) if os.path.isdir(src) else []:
-        if f.endswith(".ttf") and not os.path.exists(os.path.join(home, f)): shutil.copy(os.path.join(src, f), home)
-    subprocess.run(["fc-cache", "-f", home], capture_output=True)
-    if "TH Sarabun New" not in subprocess.run(["fc-list"], capture_output=True, text=True).stdout:
-        sys.exit("ไม่พบฟอนต์ TH Sarabun New (assets/fonts/)")
+def stack(f, specs, x, w, y0=6, gap=GAP, **kw):
+    """วางกล่องเรียงลงตามลำดับ คืนรายการกล่อง"""
+    out, y = [], y0
+    for sp in specs:
+        id, lines, fill = sp[:3]
+        extra = sp[3] if len(sp) > 3 else {}
+        b = f.box(id, x, y, w, lines, fill, **{**kw, **extra}); out.append(b); y += b.h + gap
+    return out
 
 
-def head(rankdir="LR", extra=""):
-    return (f'digraph G {{ rankdir={rankdir}; bgcolor="white"; pad=0.15; nodesep=0.35; ranksep=0.45; {extra}\n'
-            f'node [shape=box, style="rounded,filled", fillcolor="{C["a"]}", color="{C["line"]}", penwidth=1.2, fontname="{FONT}", fontsize={FS}, margin="0.18,0.08"];\n'
-            f'edge [color="{C["line"]}", penwidth=1.2, arrowsize=0.8, fontname="{FONT}", fontsize={FS - 2}];\n')
+def wrap_items(items, width, sep=" · "):
+    lines, cur = [], ""
+    for it in items:
+        t = it if not cur else cur + sep + it
+        if cur and tw(t) > width: lines.append(cur); cur = it
+        else: cur = t
+    if cur: lines.append(cur)
+    return lines
+
+
+def hconn(f, r, x, **k):
+    """ลูกศรแนวนอนจากขอบขวาของ r ไปขอบซ้ายของ x ที่ความสูงกึ่งกลางของ r (ต้องอยู่ในช่วงของ x)"""
+    y = r.y + r.h / 2
+    if not (x.y + 5 <= y <= x.y + x.h - 5): f.errs.append(f"hconn {r.id}->{x.id}: ความสูงไม่อยู่ในช่วง")
+    return f.arrow([(r.x + r.w, y), (x.x, y)], r.id, x.id, **k)
+
+
+def down(f, a, b, **k): return f.arrow([a.bottom(), b.top()], a.id, b.id, **k)
 
 
 META = {}
+FIGS = {}
 
 
-def render(name, dot, caption, alt, min_fs=FS - 2):
-    path = os.path.join(OUT, name + ".png")
-    r = subprocess.run(["dot", "-Tpng:cairo", f"-Gdpi={DPI}", "-o", path], input=dot, text=True, capture_output=True)
-    if r.returncode: sys.exit(f"{name}: {r.stderr}")
-    w, h = Image.open(path).size
-    nat_cm = w / DPI * 2.54
-    width_cm = min(nat_cm, MAXW_CM)
-    eff = min_fs * width_cm / nat_cm
-    if eff < 12: sys.exit(f"{name}: ตัวอักษรเมื่อพิมพ์ {eff:.1f} pt < 12 pt (กว้างจริง {nat_cm:.1f} ซม.)")
-    META[name] = dict(file=f"figures/{name}.png", caption=caption, alt=alt, width_cm=round(width_cm, 2), print_font_pt=round(eff, 1), px=[w, h])
-    print(f"{name:28s} {w}x{h}px กว้างพิมพ์ {width_cm:.2f} ซม. ตัวอักษร {eff:.1f} pt")
+def fig(name, caption, alt):
+    def deco(fn):
+        FIGS[name] = (fn, caption, alt); return fn
+    return deco
 
 
-def fig_architecture():
-    d = head("LR", 'compound=true; ranksep=0.9;')
-    d += f'subgraph cluster_g {{ label="Google Workspace\\nบัญชีของผู้วิจัย"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
-    d += 'form [label="Google Forms\\nรับเรซูเมและเงื่อนไข"]; sheets [label="Google Sheets\\nฐานข้อมูลของระบบ"]; drive [label="Google Drive\\nไฟล์และรายงาน"]; gmail [label="Gmail\\nส่งรายงาน"]; }\n'
-    d += f'subgraph cluster_n {{ label="n8n 2.39.9\\nในเครื่องผู้วิจัย"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
-    d += f'wf [label="workflow เดียว\\n{J("workflows", "manifest.json")["workflow"]["file"][:-5]}\\n7 ช่วง\\nengine.js + config/", fillcolor="{C["c"]}"]; }}\n'
-    d += f'subgraph cluster_x {{ label="บริการภายนอก"; fontname="{FONT}"; fontsize={FS}; style="rounded,dashed"; color="#7a8aa6";\n'
-    d += f'ocr [label="Document AI\\nอ่านข้อความจากภาพ", fillcolor="{C["b"]}"]; llm [label="โมเดล A B C\\nสามผู้ให้บริการ", fillcolor="{C["b"]}"]; }}\n'
-    d += 'form -> sheets [style=dotted, constraint=false]; form -> drive [style=dotted, constraint=false];\n'
-    d += 'sheets -> wf [dir=both]; drive -> wf [dir=both]; gmail -> wf [dir=back];\n'
-    d += 'wf -> ocr; wf -> llm;\n}'
-    render("fig_architecture", d, "สถาปัตยกรรมของระบบ", "แผนภาพสามส่วนจากซ้ายไปขวา: Google Workspace (Forms Sheets Drive Gmail) เชื่อมกับ workflow เดียวใน n8n ซึ่งเป็นจุดเดียวที่เรียก Document AI และโมเดลสามผู้ให้บริการ")
+# ---------------------------------------------------------------- กรอบแนวคิด
+@fig("fig_framework", "กรอบแนวคิดของการศึกษา",
+     "ห้ากล่องเรียงจากบนลงล่าง ข้อมูลเข้า วิเคราะห์หลักฐาน ตรวจด้วยกฎ R0 ถึง R7 จัดแผนการเรียนรู้ และรายงานรายบุคคล ข้อกำหนดอ้างอิง 600 ข้อจาก O*NET 31.0 ป้อนเข้าขั้นวิเคราะห์และขั้นตรวจ คำถามการวิจัยข้อ 1 ประเมินสถานะที่ได้จากการตรวจ และข้อ 2 ประเมินแผนในรายงาน")
+def framework():
+    f = Fig("fig_framework", 372)
+    mx, mw = 120, 175
+    ch = stack(f, [("i", ["ข้อมูลเข้า", "เรซูเม PDF และอาชีพ", "เป้าหมาย เวลาที่เรียนได้"], "grey", dict(bold_first=True)),
+                   ("a", ["วิเคราะห์หลักฐาน", "โมเดล 3 ตัวอ่านแยกกัน", "ยกข้อความจากเอกสาร"], "blue", dict(bold_first=True)),
+                   ("v", ["ตรวจด้วยกฎ R0 ถึง R7", "คำและความหมาย", "รวมเสียง ยังสรุปไม่ได้"], "blue", dict(bold_first=True)),
+                   ("p", ["จัดแผนการเรียนรู้", "จากคลังที่ตรึงไว้", "ภายในเวลาที่มี"], "amber", dict(bold_first=True)),
+                   ("o", ["รายงานรายบุคคล", "สถานะรายข้อ หลักฐาน", "แผนและเหตุผล"], "green", dict(bold_first=True))], mx, mw)
+    i, a, v, p, o = ch
+    for u, d in zip(ch, ch[1:]): down(f, u, d)
+    r = f.box("r", 303, a.y, 104, ["ข้อกำหนด", "อ้างอิง", "600 ข้อ", "O*NET 31.0"], "white", h=v.y + v.h - a.y)
+    f.arrow([r.left(a.h / 2), a.right()], "r", "a")
+    f.arrow([r.left(r.h - v.h / 2), v.right()], "r", "v")
+    q1 = f.box("q1", 8, v.y, 104, ["RQ1", "สถานะถูกต้อง"], "purple", h=v.h)
+    q2 = f.box("q2", 8, o.y, 104, ["RQ2", "แผนเหมาะสม", "5 มิติ"], "purple", h=o.h)
+    f.arrow([q1.right(), v.left()], "q1", "v", dashed=True, head=False)
+    f.arrow([q2.right(), o.left()], "q2", "o", dashed=True, head=False)
+    f.H = o.y + o.h + 6
+    return f
 
 
-def fig_workflow():
-    wf = J("workflows", J("workflows", "manifest.json")["import"]); secs = wf["meta"]["is68"]["sections"]
-    show = {"S1": ["Watch Form Responses", "Validate Form Rows", "Loop Over Requests", "Check PDF File"],
-            "S2": ["Extract Text Layer", "Run Document AI OCR", "Mask Personal Data", "Save Masked Text"],
-            "S3": ["Load Requirements", "Build Prompt", "Call Model A · B · C", "Record Model Calls"],
-            "S4": ["Prepare Relevance Checks", "Call Verifier A · B · C", "Apply Rules R0-R6", "Record Decisions"],
-            "S5": ["Build Learning Plan", "Record Plan Items", "Freeze Report Payload"],
-            "S6": ["Render Thai Report", "Export Report PDF", "Send Report Email", "Record Delivery"],
-            "S7": ["Catch Workflow Error", "Classify Error", "Mark Run Failed", "Notify Researcher"]}
-    cols = [C["a"], C["b"], C["c"], C["d"], C["b"], C["a"], C["r"]]
-    def box(i, span=1):
-        sx = secs[i]
-        body = "<br/>".join(f'<font point-size="{FS - 2}">{x}</font>' for x in show[sx["key"]])
-        return (f'<td colspan="{span}" bgcolor="{cols[i]}" style="rounded" border="1" cellpadding="8">'
-                f'<b>{i + 1} {sx["th"]}</b> <font point-size="{FS - 2}">({len(sx["nodes"])} โหนด)</font><br/>{body}</td>')
-    A = lambda t: f'<td border="0"><font point-size="{FS + 6}">{t}</font></td>'
-    E = '<td border="0"></td>'
-    rows = [box(0) + A("→") + box(1), E + E + A("↓"), box(3) + A("←") + box(2), A("↓") + E + E, box(4) + A("→") + box(5),
-            E + E + f'<td border="0"><font point-size="{FS - 2}">↺ วนกลับช่วงที่ 1 เพื่อทำงานถัดไป</font></td>',
-            f'<td colspan="3" border="0"><font point-size="{FS - 2}">ข้อผิดพลาดจากทุกช่วงไปที่ช่วงที่ 7 ↓</font></td>', box(6, 3)]
-    lab = '<<table border="0" cellspacing="6">' + "".join(f"<tr>{r}</tr>" for r in rows) + '</table>>'
-    d = head("TB") + f'g [shape=plaintext, style="", label={lab}];\n}}'
-    render("fig_workflow", d, f'ช่วงการทำงาน 7 ช่วงของ workflow {wf["name"]}', "เจ็ดกล่องเรียงตามลำดับงาน แต่ละกล่องระบุชื่อช่วง จำนวนโหนด และโหนดสำคัญ ช่วงที่หกวนกลับไปช่วงแรกเพื่อทำงานถัดไป ช่วงที่เจ็ดรับข้อผิดพลาด")
+# ---------------------------------------------------------------- ขั้นตอนวิจัย
+@fig("fig_process", "ขั้นตอนการดำเนินการวิจัยเจ็ดขั้น",
+     "เจ็ดขั้นเรียงจากบนลงล่าง สองขั้นแรกสีฟ้าคือการกำหนดเกณฑ์และการสร้างระบบซึ่งเป็นเนื้อหาของรายงานนี้ ขั้นที่สามสีเหลืองคือการยื่นขอรับรองจริยธรรม ขั้นที่สี่ถึงเจ็ดสีเขียวทำกับผู้เข้าร่วม ได้แก่ ทดลองนำร่อง ตรึงรุ่น เก็บข้อมูลกลุ่มหลัก และวิเคราะห์")
+def process():
+    f = Fig("fig_process", 400)
+    st = [(["1  กำหนดนิยาม เกณฑ์ และตัวชี้วัดก่อนเก็บข้อมูล"], "blue"),
+          (["2  สร้างข้อมูลอ้างอิงและระบบ", "ทดสอบด้วยเทสต์อัตโนมัติและเรซูเมสังเคราะห์"], "blue"),
+          (["3  ยื่นขอรับรองจริยธรรม"], "amber"),
+          (["4  ทดลองนำร่อง 5 คน ปรับถ้อยคำและเกณฑ์"], "green"),
+          (["5  ตรึงรุ่น prompt กฎ เกณฑ์ คลัง และแบบประเมิน"], "green"),
+          (["6  เก็บข้อมูลกลุ่มหลัก 30 คน", "ให้รหัสชุดคำตอบอ้างอิงโดยไม่เห็นผลของระบบ"], "green"),
+          (["7  วิเคราะห์ RQ1 และ RQ2 และเขียนรายงานผล"], "green")]
+    bs = stack(f, [(f"s{k}", l, c) for k, (l, c) in enumerate(st)], 16, 383, gap=18, align="l")
+    for u, d in zip(bs, bs[1:]): down(f, u, d)
+    f.H = bs[-1].y + bs[-1].h + 6
+    return f
 
 
-def fig_rules():
-    d = head("TB", 'ranksep=0.30;')
-    d += f'm [label="ผลตอบกลับของโมเดลหนึ่งชุด", fillcolor="{C["e"]}"];\n'
-    d += 'r0 [label="1  R0  JSON ตรงรูปแบบ\\nรหัสอาชีพและรหัสข้อกำหนดอ้างอิงตรง"]; r2 [label="2  R2  ข้อความที่ยกมาปรากฏจริง\\n(ตรงตัว · ยุบช่องว่าง · ซ่อมรูปคำ)"];\n'
-    d += 'r3a [label="3  R3a  คำตรงกับข้อกำหนดอ้างอิง\\nคะแนน ov ≥ 0.15"]; r3b [label="4  R3b  โมเดลอื่นตรวจความหมาย\\nรองรับ · บางส่วน · ไม่เกี่ยว"];\n'
-    d += 'r1 [label="5  R1  อย่างน้อยสองเสียงตรงกัน\\n(ไม่นับเสียงที่ตรวจไม่ได้)", fillcolor="#e1ebf8"]; r4 [label="6  R4  บันทึกสัดส่วน\\nความเห็นตรงกัน", fillcolor="#e1ebf8"];\n'
-    d += f'r5 [label="7  R5 R6  ใบรับรองในเรซูเม ·\\nทักษะพื้นฐานจากกิจกรรม → partially", fillcolor="#e1ebf8"]; out [label="สถานะสุดท้าย\\nevidenced · partially · missing · abstained", fillcolor="{C["b"]}"];\n'
-    d += f'x0 [label="ผลของโมเดลนี้\\nใช้ไม่ได้ทั้งชุด", fillcolor="{C["r"]}"]; x2 [label="เสียงนี้เป็น missing\\nนับใน U", fillcolor="{C["r"]}"]; xu [label="เสียงที่ตรวจไม่ได้\\nไม่นับ", fillcolor="{C["c"]}"]; x1 [label="ระบบยังสรุปไม่ได้\\n(abstained)", fillcolor="{C["c"]}"];\n'
-    d += 'm -> r0; r0 -> r2 [label="ผ่าน"]; r2 -> r3a [label="ผ่าน"]; r3a -> r1 [label="ผ่าน · รวมเสียง"]; r3a -> r3b [label="คำไม่ตรง"]; r3b -> r1 [label="รองรับ"]; r1 -> r4 [label="ผ่าน"]; r4 -> r5; r5 -> out;\n'
-    d += 'r0 -> x0 [label="ไม่ผ่าน"]; r2 -> x2 [label="ไม่ผ่าน"]; r3b -> x2 [label="ไม่เกี่ยว"]; r3b -> xu [label="ไม่ตอบ"]; x2 -> r1 [style=dashed]; r1 -> x1 [label="ไม่ผ่าน"]; x1 -> r5 [style=dashed];\n'
-    d += '{rank=same; r0; x0;} {rank=same; r2; x2;} {rank=same; r3b; xu;} {rank=same; r1; x1;}\n}'
-    render("fig_rules", d, "ลำดับการตรวจหลักฐานด้วยกฎ R0 ถึง R6", "ลำดับจากบนลงล่าง R0 R2 R3a R3b R1 R4 R5 R6 ด้านขวาแสดงผลเมื่อไม่ผ่าน: ผลทั้งชุดใช้ไม่ได้ เสียงเปลี่ยนเป็น missing เสียงที่ตรวจไม่ได้ไม่ถูกนับ หรือข้อกำหนดอ้างอิงได้สถานะระบบยังสรุปไม่ได้ ข้อที่ยัง missing หรือ abstained อาจได้ partially จาก R5 R6")
+# ---------------------------------------------------------------- ข้อกำหนดอ้างอิง
+@fig("fig_requirements", "การคัดข้อกำหนดอ้างอิงจาก O*NET 31.0",
+     "เจ็ดขั้นจากบนลงล่าง จากฐานข้อมูล O*NET 31.0 และ 20 อาชีพ เลือกองค์ประกอบที่ค่าความสำคัญ IM ตั้งแต่ 3.0 ใช้สี่โดเมนยกเว้น Abilities กำหนดโควตาโดเมนละอย่างน้อย 3 ข้อ เรียง IM แล้วเลือก 30 ข้อต่ออาชีพ คำนวณน้ำหนัก ได้ข้อกำหนดอ้างอิง 600 ข้อ")
+def requirements():
+    f = Fig("fig_requirements", 400)
+    ch = stack(f, [("a", ["O*NET 31.0 · 20 อาชีพไอที"], "grey"),
+                   ("b", ["เลือกองค์ประกอบที่ IM ≥ 3.0"], "blue"),
+                   ("c", ["ใช้ 4 โดเมน", "Work Activities · Essential Skills", "Transferable Skills · Knowledge"], "blue", dict(bold_first=True)),
+                   ("e", ["โควตาโดเมนละอย่างน้อย 3 ข้อ"], "blue"),
+                   ("f", ["เรียง IM จากมากไปน้อย", "เท่ากันใช้รหัสองค์ประกอบ", "เลือก 30 ข้อแรกต่ออาชีพ"], "blue"),
+                   ("g", ["น้ำหนัก w = IM ÷ ผลรวม IM ของ 30 ข้อ"], "blue"),
+                   ("h", ["ข้อกำหนดอ้างอิง 600 ข้อ", "ONET31.0-IS68076026-v1.0"], "green", dict(bold_first=True))], 10, 290)
+    for u, d in zip(ch, ch[1:]): down(f, u, d)
+    c = ch[2]
+    x = f.box("x", 322, 0, 83, ["ไม่ใช้", "กลุ่ม", "Abilities"], "red")
+    x.y = c.y + c.h / 2 - x.h / 2
+    f.arrow([c.right(), x.left()], "c", "x", dashed=True)
+    f.H = ch[-1].y + ch[-1].h + 6
+    return f
 
 
-def fig_framework():
-    d = head("TB", 'ranksep=0.35;')
-    d += f'i [label="ข้อมูลเข้า\\nเรซูเม PDF\\nอาชีพเป้าหมาย\\nเวลาที่เรียนได้", fillcolor="{C["e"]}"];\n'
-    d += 'a [label="วิเคราะห์หลักฐาน\\nโมเดล 3 ตัวอ่านแยกกัน\\nยกข้อความจากเอกสาร"];\n'
-    d += 'v [label="ตรวจด้วยกฎ R0–R6\\nคำ + ความหมาย · รวมเสียง ≥ 2\\nแยกสถานะยังสรุปไม่ได้"];\n'
-    d += f'p [label="จัดแผนการเรียนรู้\\nคลังที่ตรึงไว้\\nภายใน Hmax", fillcolor="{C["c"]}"];\n'
-    d += f'o [label="รายงานรายบุคคล\\nสถานะรายข้อ + หลักฐาน\\nแผนและเหตุผล", fillcolor="{C["b"]}"];\n'
-    d += f'q1 [shape=note, fillcolor="{C["d"]}", label="RQ1 ความถูกต้อง\\nของสถานะ"]; q2 [shape=note, fillcolor="{C["d"]}", label="RQ2 ความเหมาะสม\\nของแผน 5 มิติ"];\n'
-    d += 'i -> a -> v -> p -> o; v -> q1 [style=dashed, arrowhead=none]; o -> q2 [style=dashed, arrowhead=none];\n'
-    d += 'r [shape=note, fillcolor="#ffffff", label="ข้อกำหนดอ้างอิง 600 ข้อ\\nO*NET 31.0"]; r -> a [style=dotted]; r -> v [style=dotted]; {rank=same; a; r;} {rank=same; v; q1;} {rank=same; o; q2;}\n}'
-    render("fig_framework", d, "กรอบแนวคิดของการศึกษา", "ห้ากล่องเรียงซ้ายไปขวา ข้อมูลเข้า วิเคราะห์หลักฐาน ตรวจด้วยกฎ จัดแผน รายงาน โดยคำถามการวิจัยข้อ 1 ผูกกับขั้นตรวจ และข้อ 2 ผูกกับรายงานและแผน", min_fs=FS - 2)
+# ---------------------------------------------------------------- สถาปัตยกรรม
+@fig("fig_architecture", "สถาปัตยกรรมสามส่วนของระบบ",
+     "สามส่วนเรียงจากบนลงล่าง Google Workspace มี Forms Sheets Drive และ Gmail ทำงานร่วมกับ workflow เดียวใน n8n ซึ่งเรียก Document AI อ่านข้อความจากภาพ และโมเดล A B C สามผู้ให้บริการที่ทั้งวิเคราะห์และตรวจความหมาย")
+def architecture():
+    f = Fig("fig_architecture", 420)
+    gf = f.box("gf", 6, 4, 403, [], "white", frame=True, h=122)
+    f.text("gt", 16, 8, "Google Workspace ในบัญชีของผู้วิจัย", bold=True)
+    bx = [("form", ["Forms", "รับเรซูเม", "และเงื่อนไข"]), ("sh", ["Sheets", "เก็บผล", f"{NUM['tabs_total']} แท็บ"]),
+          ("dr", ["Drive", "เก็บไฟล์", "และรายงาน"]), ("gm", ["Gmail", "ส่งรายงาน", "ให้ผู้เรียน"])]
+    G = {}
+    for k, (id, ln) in enumerate(bx):
+        G[id] = f.box(id, 14 + k * 98, 38, 92, ln, "blue", bold_first=True)
+    wf = f.box("wf", 6, 172, 403, [f"n8n {NUM['n8n_version']} ในเครื่องผู้วิจัย", f"workflow เดียว {NUM['wf_name']}", f"{NUM['wf_nodes']} โหนดทำงาน {NUM['wf_sections']} ช่วง", "ตรรกะอยู่ในไฟล์ engine.js และ config/"], "amber", bold_first=True)
+    xf = f.box("xf", 6, 300, 403, [], "white", frame=True, h=130)
+    ocr = f.box("ocr", 14, 312, 187, ["Document AI", "อ่านข้อความ", "จากภาพ"], "green", bold_first=True)
+    llm = f.box("llm", 214, 312, 187, ["โมเดล A B C", "สามผู้ให้บริการ", "วิเคราะห์และตรวจ", "ความหมาย (R3b)"], "green", bold_first=True)
+    f.text("xt", 16, 312 + 86 + 6, "บริการภายนอก", bold=True)
+    both = {"form": False, "sh": True, "dr": True, "gm": False}
+    for id in G:
+        b = G[id]
+        if id == "gm": f.arrow([wf.top(b.x + b.w / 2 - wf.x), b.bottom()], "wf", id)
+        else: f.arrow([b.bottom(), wf.top(b.x + b.w / 2 - wf.x)], id, "wf", both=both[id])
+    f.arrow([wf.bottom(ocr.x + ocr.w / 2 - wf.x), ocr.top()], "wf", "ocr", both=True)
+    f.arrow([wf.bottom(llm.x + llm.w / 2 - wf.x), llm.top()], "wf", "llm", both=True)
+    f.H = xf.y + xf.h + 6
+    return f
 
 
-def fig_process():
-    d = head("TB", 'ranksep=0.28;')
-    st = [("กำหนดนิยาม เกณฑ์ และตัวชี้วัดก่อนเก็บข้อมูล", "a"), ("สร้างข้อมูลอ้างอิงและระบบ\\nทดสอบด้วยเทสต์อัตโนมัติและเรซูเมสังเคราะห์", "a"),
-          ("ยื่นขอรับรองจริยธรรม", "c"), ("ทดลองนำร่อง 5 คน ปรับถ้อยคำและเกณฑ์", "b"), ("ตรึงรุ่น prompt กฎ เกณฑ์ คลัง และแบบประเมิน", "b"),
-          ("เก็บข้อมูลกลุ่มหลัก 30 คน\\nให้รหัสชุดคำตอบอ้างอิงโดยไม่เห็นผลระบบ", "b"), ("วิเคราะห์ RQ1 และ RQ2 · เขียนบทที่ 4–5", "b")]
-    for i, (t, c) in enumerate(st): d += f's{i} [label="{i + 1}  {t}", fillcolor="{C[c]}"];\n'
-    d += " -> ".join(f"s{i}" for i in range(len(st))) + ";\n"
-    d += '}'
-    render("fig_process", d, "ขั้นตอนการดำเนินการวิจัย", "เจ็ดขั้นเรียงบนลงล่าง สีฟ้าคือสองขั้นที่ทำในเล่มนี้ สีเหลืองคือการยื่นจริยธรรม สีเขียวคือขั้นที่ทำหลังได้หนังสือรับรอง")
+# ---------------------------------------------------------------- workflow
+@fig("fig_workflow", "เจ็ดช่วงของ workflow พร้อมโหนดสำคัญ",
+     "เจ็ดกล่องเรียงจากบนลงล่างตามช่วงของ workflow แต่ละกล่องมีชื่อช่วง จำนวนโหนด และโหนดสำคัญ ช่วงที่ 6 วนกลับช่วงที่ 1 เพื่อทำงานถัดไป และข้อผิดพลาดจากทุกช่วงไปที่ช่วงที่ 7")
+def workflow():
+    cols = ["blue", "green", "amber", "purple", "green", "blue", "red"]
+    f = Fig("fig_workflow", 500)
+    ids = [("s1", "1 รับข้อมูล", 10, ["Watch Form Responses", "Validate Form Rows", "Loop Over Requests", "Check PDF File"]),
+           ("s2", "2 อ่านและปิดบังข้อมูล", 8, ["Extract Text Layer", "Run Document AI OCR", "Mask Personal Data", "Save Masked Text"]),
+           ("s3", "3 วิเคราะห์ 3 โมเดล", 11, ["Load Requirements", "Build Prompt", "Call Model A B C", "Record Model Calls"]),
+           ("s4", "4 ตรวจและรวมผล", 18, ["Prepare Relevance Checks", "Call Verifier A B C", "Apply Rules R0-R7", "Record Decisions"]),
+           ("s5", "5 จัดแผน", 6, ["Build Learning Plan", "Record Plan Items", "Freeze Report Payload"]),
+           ("s6", "6 ส่งรายงาน", 16, ["Render Thai Report", "Export Report PDF", "Send Report Email", "Record Delivery"]),
+           ("s7", "7 บันทึกและข้อผิดพลาด", 10, ["Catch Workflow Error", "Classify Error", "Mark Run Failed", "Notify Researcher"])]
+    x0, w = 72, 323
+    specs = [(i, [f"{t} ({n} โหนด)"] + wrap_items(l, w - 2 * PAD - 4), c, dict(bold_first=True)) for (i, t, n, l), c in zip(ids, cols)]
+    bs = stack(f, specs, x0, w, gap=16)
+    for u, d in zip(bs[:6], bs[1:6]): down(f, u, d)
+    s7 = bs[6]
+    lx = 38
+    f.arrow([bs[5].left(), (lx, bs[5].y + bs[5].h / 2), (lx, bs[0].y + bs[0].h / 2), bs[0].left()], "s6", "s1", label="ถัดไป", at=(lx, (bs[0].y + bs[5].y + bs[5].h) / 2))
+    tx = 403
+    for b in bs[:6]:
+        f.arrow([b.right(), (tx, b.y + b.h / 2)], b.id, None, head=False, soft=True, dashed=True)
+    f.arrow([(tx, bs[0].y + bs[0].h / 2), (tx, s7.y + s7.h / 2), s7.right()], None, "s7", dashed=True, soft=True)
+    f.H = s7.y + s7.h + 6
+    return f
 
 
-def fig_requirements():
-    d = head("TB", 'ranksep=0.28;')
-    d += f'a [label="O*NET 31.0 · 20 อาชีพไอที", fillcolor="{C["e"]}"]; b [label="เลือกองค์ประกอบที่ IM ≥ 3.0"];\n'
-    d += 'c [label="ใช้ 4 โดเมน\\nWork Activities · Essential Skills · Transferable Skills · Knowledge"]; e [label="โควตาโดเมนละอย่างน้อย 3 ข้อ"];\n'
-    d += 'f [label="เรียง IM จากมากไปน้อย · เท่ากันใช้รหัสองค์ประกอบ\\nเลือก 30 ข้อแรกต่ออาชีพ"]; g [label="น้ำหนัก w = IM ÷ ผลรวม IM ของ 30 ข้อ"];\n'
-    d += f'h [label="ข้อกำหนดอ้างอิง 600 ข้อ  ONET31.0-IS68076026-v1.0", fillcolor="{C["b"]}"]; x [label="ไม่ใช้ Abilities", fillcolor="{C["r"]}"];\n'
-    d += 'a -> b -> c -> e -> f -> g -> h; c -> x [style=dashed]; {rank=same; c; x;}\n}'
-    render("fig_requirements", d, "การคัดข้อกำหนดอ้างอิงจาก O*NET 31.0", "ขั้นตอนเจ็ดขั้นจากฐานข้อมูล O*NET 31.0 ถึงข้อกำหนดอ้างอิง 600 ข้อ มีกล่องข้างแสดงว่าไม่ใช้กลุ่ม Abilities")
+# ---------------------------------------------------------------- กฎ A
+RX = 282; RW = 125
+@fig("fig_rules_a", "ลำดับกฎรายข้อสรุปตั้งแต่ R0 จนถึงการรวมเสียง",
+     "ลำดับจากบนลงล่าง R0 ตรวจผลตอบกลับทั้งชุด R2 ตรวจข้อความที่ยก R3a ตรวจคำที่ตรงกับข้อกำหนด ถ้าคำไม่ตรงส่งให้ R3b ตรวจความหมาย แล้วรวมเสียงด้วย R1 และ R4 ด้านขวาแสดงผลเมื่อไม่ผ่านแต่ละกฎ")
+def rules_a():
+    f = Fig("fig_rules_a", 500)
+    ch = stack(f, [("m", ["ผลตอบกลับของโมเดลหนึ่งชุด"], "grey"),
+                   ("r0", ["R0 ผลตอบกลับทั้งชุด", "JSON ตรงรูปแบบ", "รหัสอาชีพและข้อกำหนดตรง", "ตอบอย่างน้อยครึ่งหนึ่ง"], "blue", dict(bold_first=True)),
+                   ("r2", ["R2 ข้อสรุปรายข้อ", "ข้อความที่ยกมาปรากฏจริง"], "blue", dict(bold_first=True)),
+                   ("r3a", ["R3a ข้อสรุปรายข้อ", "คำตรงกับข้อกำหนดถึงเกณฑ์"], "blue", dict(bold_first=True)),
+                   ("r3b", ["R3b ข้อสรุปรายข้อ", "โมเดลอื่นตรวจความหมาย"], "blue", dict(bold_first=True)),
+                   ("r1", ["R1 รวมเสียงของทุกโมเดล", "ได้สถานะอย่างน้อยสองเสียง", "ไม่นับเสียงที่ตรวจไม่ได้"], "blue", dict(bold_first=True)),
+                   ("r4", ["R4 สัดส่วนโมเดลที่เห็นตรงกัน", "ใช้แสดงในรายงาน"], "blue", dict(bold_first=True)),
+                   ("e", ["สถานะหลังรวมเสียง", "ส่งต่อกฎ R5 R6 R7 (รูปที่ 3.7)"], "green", dict(bold_first=True))], 52, 212, gap=24)
+    m, r0, r2, r3a, r3b, r1, r4, e = ch
+    for b in (r3b, r1, r4, e): b.y += 18
+    for u, d in zip(ch, ch[1:]):
+        if u.id != "r3a": down(f, u, d)
+    f.arrow([r3a.bottom(), r3b.top()], "r3a", "r3b", label="ไม่ผ่าน", at=(r3a.x + r3a.w / 2, (r3a.y + r3a.h + r3b.y) / 2))
+    f.arrow([r3a.left(), (24, r3a.y + r3a.h / 2), (24, r1.y + r1.h / 2), r1.left()], "r3a", "r1", label="ผ่าน", at=(24, (r3a.y + r1.y + r1.h) / 2 - 20))
+    SX, SW = 282, 125
+    def side(id, r, lines, fill, bold=False, dy=0):
+        h = len(lines) * LH + 10
+        b = f.box(id, SX, r.y + r.h / 2 - h / 2 + dy, SW, lines, fill, bold_first=bold)
+        return b
+    x0 = side("x0", r0, ["ไม่ผ่าน", "ผลของโมเดลนี้", "ใช้ไม่ได้ทั้งชุด"], "red")
+    x2 = side("x2", r2, ["ไม่ผ่าน", "เสียงเปลี่ยนเป็น", "missing นับใน U"], "red")
+    x3 = side("x3", r3b, ["ผลของ R3b", "บางส่วน: ลดเป็น", "partially", "ไม่เกี่ยว: missing", "ไม่ตอบ: ตรวจ", "ไม่ได้"], "amber", True, dy=-8)
+    x1 = side("x1", r1, ["ไม่ผ่าน", "ได้สถานะ", "abstained", "(ยังสรุปไม่ได้)"], "amber", dy=28)
+    for r, x in ((r0, x0), (r2, x2), (r3b, x3), (r1, x1)): hconn(f, r, x, dashed=True)
+    f.H = e.y + e.h + 6
+    return f
 
 
-def fig_coding():
-    d = head("TB", 'ranksep=0.35;')
-    d += f'pdf [label="PDF ต้นฉบับ\\nของผู้เข้าร่วม", fillcolor="{C["e"]}"]; sheet [label="ไฟล์ให้รหัส\\nเอกสาร + ข้อกำหนดอ้างอิง 30 ข้อ\\nไม่มีคอลัมน์ผลระบบ"];\n'
-    d += 'c1 [label="ผู้ให้รหัสคนที่ 1\\nผู้วิจัย · ทุกคน"]; c2 [label="ผู้ตรวจคนที่ 2\\n≥ 20% · 6 คน 180 รายการ"];\n'
-    d += f'k [label="κ ≥ 0.61\\nหาข้อยุติ เก็บรหัสเดิม", fillcolor="{C["c"]}"]; gt [label="ชุดคำตอบอ้างอิง\\n3 สถานะ", fillcolor="{C["b"]}"];\n'
-    d += f'sys [label="ผลของระบบ\\n(เปิดหลังให้รหัสรอบแรก)", fillcolor="{C["d"]}"]; m [label="Macro-F1\\nอัตราการไม่สรุป", fillcolor="{C["b"]}"];\n'
-    d += 'pdf -> sheet; sheet -> c1; sheet -> c2; c1 -> k; c2 -> k; k -> gt; gt -> m; sys -> m;\n}'
-    render("fig_coding", d, "การจัดทำชุดคำตอบอ้างอิงโดยไม่เห็นผลของระบบ", "เอกสารต้นฉบับเข้าสู่ไฟล์ให้รหัสที่ไม่มีผลระบบ ผู้ให้รหัสสองคนให้รหัสแยกกัน ตรวจความสอดคล้องด้วย kappa แล้วจึงเทียบกับผลของระบบ")
+# ---------------------------------------------------------------- กฎ B
+@fig("fig_rules_b", "ลำดับกฎหลังรวมเสียง R5 R6 และ R7",
+     "ลำดับจากบนลงล่างหลังรวมเสียง R5 ตรวจใบรับรองในเรซูเม R6 ตรวจกิจกรรมการทำงานที่เชื่อมกับทักษะพื้นฐาน R7 ตรวจบทบาทและข้อความซ้ำ ด้านขวาแสดงผลเมื่อพบเงื่อนไข ทุกกฎปรับสถานะเป็น partially แล้วได้สถานะสุดท้าย")
+def rules_b():
+    f = Fig("fig_rules_b", 500)
+    RX2, RW2 = 246, 161
+    ch = stack(f, [("m", ["สถานะหลังรวมเสียงของแต่ละข้อ"], "grey"),
+                   ("r5", ["R5 ใบรับรองในเรซูเม", "ข้อที่ยัง missing", "หรือ abstained", "พบใบรับรองในคลังที่ตรงกัน"], "blue", dict(bold_first=True)),
+                   ("r6", ["R6 ทักษะพื้นฐาน", "ข้อที่ยัง missing", "หรือ abstained", "กิจกรรมการทำงานที่เชื่อมกัน", "ได้ evidenced"], "blue", dict(bold_first=True)),
+                   ("r7a", ["R7 บทบาท", "ข้อที่ evidenced จากข้อความ", "ของโมเดล", "บทบาทเสียงข้างมากถึงเกณฑ์"], "blue", dict(bold_first=True)),
+                   ("r7b", ["R7 ข้อความซ้ำ", "ข้อความเดียวกันหรือช่วง", "ที่ซ้อนกัน ตั้งแต่ร้อยละ 60"], "blue", dict(bold_first=True)),
+                   ("e", ["สถานะสุดท้าย", "evidenced partially", "missing abstained"], "green", dict(bold_first=True))], 8, 224, gap=22)
+    m, r5, r6, r7a, r7b, e = ch
+    for u, d in zip(ch, ch[1:]): down(f, u, d)
+    outs = [(r5, ["พบ: ได้ partially"]), (r6, ["พบ: ได้ partially"]),
+            (r7a, ["ข้อเชิงปฏิบัติต้อง", "performed", "ข้อ LV ตั้งแต่ 5.0 ต้อง", "อย่างน้อย led", "ไม่ถึงเกณฑ์", "ลดเป็น partially"]),
+            (r7b, ["เป็นหลักฐานเต็มได้", "ไม่เกิน 2 ข้อ", "ข้อที่เกินลดเป็น", "partially"])]
+    for r, ln in outs:
+        h = len(ln) * LH + 10
+        dy = {"r7a": -14, "r7b": 12}.get(r.id, 0)
+        x = f.box("x_" + r.id, RX2, r.y + r.h / 2 - h / 2 + dy, RW2, ln, "amber")
+        f.arrow([r.right(), (x.x, r.y + r.h / 2)] if x.y + 5 <= r.y + r.h / 2 <= x.y + x.h - 5 else [r.right(), x.left()], r.id, x.id, dashed=True)
+    f.H = e.y + e.h + 6
+    return f
 
 
-def fig_evaluation():
-    d = head("TB", 'ranksep=0.35;')
-    d += f'run [label="หนึ่งรอบการวิเคราะห์ของผู้เข้าร่วมหนึ่งคน", fillcolor="{C["e"]}"];\n'
-    d += 'dec [label="สถานะสุดท้าย 30 ข้อ"]; plan [label="แผนที่ส่งให้ผู้เข้าร่วมจริง"];\n'
-    d += f'q1 [label="RQ1\\nเทียบชุดคำตอบอ้างอิง\\nF1 รายสถานะ · Macro-F1\\nอัตราการไม่สรุป", fillcolor="{C["d"]}"];\n'
-    d += f'q2 [label="RQ2\\nตรงประเด็น · ครอบคลุมช่องว่าง\\nข้อมูลรายการถูกต้อง · เวลาเป็นไปได้\\nประโยชน์ที่ผู้เรียนรับรู้", fillcolor="{C["d"]}"];\n'
-    d += 'run -> dec; run -> plan; dec -> q1; plan -> q2; dec -> plan [style=dashed, label="ช่องว่างของระบบ"];\n}'
-    render("fig_evaluation", d, "แบบแผนการประเมินตามคำถามการวิจัยสองข้อ", "ผลการวิเคราะห์หนึ่งรอบแยกเป็นสถานะสุดท้ายซึ่งใช้ตอบคำถามข้อ 1 และแผนการเรียนรู้ซึ่งใช้ตอบคำถามข้อ 2")
+# ---------------------------------------------------------------- ชุดคำตอบอ้างอิง
+@fig("fig_coding", "การจัดทำชุดคำตอบอ้างอิงโดยผู้วิจัยคนเดียว",
+     "ลำดับจากบนลงล่าง จัดทำไฟล์ให้รหัสที่ไม่มีผลของระบบ ผู้วิจัยให้รหัสรอบที่ 1 ทุกคนในกลุ่มหลัก ให้รหัสซ้ำรอบที่ 2 อย่างน้อยร้อยละ 20 ไม่น้อยกว่า 6 คน ห่างจากรอบแรกอย่างน้อย 14 วัน คำนวณ kappa ถ้าต่ำกว่า 0.61 ทบทวนคู่มือแล้วให้รหัสรอบที่ 2 ใหม่ ถ้าผ่านใช้รหัสรอบที่ 1 เป็นชุดคำตอบอ้างอิง แล้วเปิดผลของระบบเพื่อเทียบ")
+def coding():
+    f = Fig("fig_coding", 500)
+    ch = stack(f, [("f", ["ไฟล์ให้รหัส", "เรซูเมและข้อกำหนดอ้างอิง 30 ข้อ", "ไม่มีคอลัมน์ผลของระบบ"], "grey", dict(bold_first=True)),
+                   ("c1", ["รอบที่ 1", "ผู้วิจัยให้รหัสทุกคนในกลุ่มหลัก", "ก่อนเปิดผลของระบบ"], "blue", dict(bold_first=True)),
+                   ("c2", ["รอบที่ 2", "ให้รหัสซ้ำ ≥ 20% ไม่น้อยกว่า 6 คน", "ห่างจากรอบแรก ≥ 14 วัน สลับแถว"], "blue", dict(bold_first=True)),
+                   ("k", ["ค่า kappa ของสองรอบ", "เกณฑ์ขั้นต่ำ 0.61"], "amber", dict(bold_first=True)),
+                   ("g", ["ชุดคำตอบอ้างอิง = รหัสรอบที่ 1", "รายการที่ต่างกันใช้ข้อยุติ", "เก็บรหัสเดิมของทั้งสองรอบ"], "green", dict(bold_first=True)),
+                   ("s", ["เปิดผลของระบบแล้วเทียบ", "Macro-F1 และอัตราการไม่สรุป"], "purple", dict(bold_first=True))], 10, 255, gap=24)
+    fi, c1, c2, k, g, s = ch
+    g.y += 18; s.y += 18
+    for u, d in zip(ch, ch[1:]):
+        if u.id == "k": f.arrow([u.bottom(), d.top()], "k", "g", label="ผ่าน", at=(u.x + u.w / 2, (u.y + u.h + d.y) / 2))
+        else: down(f, u, d)
+    x = f.box("rv", 296, 0, 111, ["ต่ำกว่า 0.61", "ทบทวนคู่มือ", "ให้รหัสรอบที่ 2", "ใหม่"], "red", bold_first=True)
+    x.y = k.y + k.h / 2 - x.h / 2
+    f.arrow([k.right(), x.left()], "k", "rv", dashed=True)
+    f.arrow([x.top(), (x.x + x.w / 2, c2.y + c2.h / 2), c2.right()], "rv", "c2", dashed=True)
+    f.H = s.y + s.h + 6
+    return f
 
 
-def fig_coverage():
-    # วาดด้วย PIL + libraqm (จัดสระและวรรณยุกต์ไทยถูกต้อง) · สีตามชุดสีอ้างอิงของ dataviz: series-1 #2a78d6 · ตัวอักษร #0b0b0b/#52514e
-    from PIL import ImageDraw, ImageFont
-    sim = J("evidence", "coverage_simulation.json")
-    rows = [(f"6 เดือน", f"{x['hours_per_week']} ชม.", x["covered"]) for x in sim["by_capacity"]] + [(f"{x['months']} เดือน", "10 ชม.", x["covered"]) for x in sim["by_months_10h"]]
-    W, H = int(14.6 / 2.54 * DPI), int(8.6 / 2.54 * DPI)
-    pt = lambda p: int(round(p / 72 * DPI))
-    fr = ImageFont.truetype(os.path.join(ROOT, "assets", "fonts", "THSarabunNew.ttf"), pt(14), layout_engine=ImageFont.Layout.RAQM)
-    im = Image.new("RGB", (W, H), "white"); dr = ImageDraw.Draw(im)
-    L, R, T, B = pt(54), W - pt(8), pt(20), H - pt(46)
-    ymax = 640; y = lambda v: B - (B - T) * v / ymax
+# ---------------------------------------------------------------- แบบแผนประเมิน
+@fig("fig_evaluation", "แบบแผนการประเมินตามคำถามการวิจัยสองข้อ",
+     "การวิเคราะห์หนึ่งรอบของผู้เข้าร่วมหนึ่งคนให้สถานะสุดท้าย 30 ข้อและแผนที่ส่งให้ผู้เข้าร่วม สถานะเทียบกับชุดคำตอบอ้างอิงเพื่อตอบคำถามข้อ 1 ส่วนแผนประเมินด้วยแบบประเมินเพื่อตอบคำถามข้อ 2 ช่องว่างที่ระบบระบุเป็นตัวกำหนดแผน")
+def evaluation():
+    f = Fig("fig_evaluation", 400)
+    run = f.box("run", 8, 6, 399, ["การวิเคราะห์หนึ่งรอบของผู้เข้าร่วมหนึ่งคน"], "grey", bold_first=True)
+    dec = f.box("dec", 8, 70, 185, ["สถานะสุดท้าย 30 ข้อ"], "blue")
+    plan = f.box("plan", 222, 70, 185, ["แผนที่ส่งให้ผู้เข้าร่วม", "จัดจากช่องว่างของระบบ"], "amber")
+    plan.y = dec.y + dec.h / 2 - plan.h / 2
+    q1 = f.box("q1", 8, 160, 185, ["RQ1", "เทียบชุดคำตอบอ้างอิง", "F1 รายสถานะ", "Macro-F1", "อัตราการไม่สรุป"], "purple", bold_first=True)
+    q2 = f.box("q2", 222, 160, 185, ["RQ2", "ตรงประเด็น", "ครอบคลุมช่องว่าง", "ข้อมูลรายการถูกต้อง", "เวลาเป็นไปได้", "ประโยชน์ที่รับรู้"], "purple", bold_first=True)
+    f.arrow([run.bottom(dec.x + dec.w / 2 - run.x), dec.top()], "run", "dec")
+    f.arrow([run.bottom(plan.x + plan.w / 2 - run.x), plan.top()], "run", "plan")
+    f.arrow([dec.bottom(), q1.top()], "dec", "q1")
+    f.arrow([plan.bottom(), q2.top()], "plan", "q2")
+    f.arrow([dec.right(), plan.left()], "dec", "plan", dashed=True)
+    f.H = q2.y + q2.h + 6
+    return f
+
+
+# ---------------------------------------------------------------- ความครอบคลุม (กราฟแท่ง)
+@fig("fig_coverage", "ความครอบคลุมของแผนจำลองตามกรอบเวลาและชั่วโมงเรียนต่อสัปดาห์",
+     "กราฟแท่งเจ็ดแท่ง แต่ละแท่งคือจำนวนข้อกำหนดอ้างอิงที่แผนจำลองครอบคลุม ที่ 6 เดือน 5 ชั่วโมงต่อสัปดาห์ได้ 528 ข้อ ที่ 6 เดือน 10 15 และ 20 ชั่วโมงต่อสัปดาห์ รวมถึง 12 18 และ 24 เดือนที่ 10 ชั่วโมงต่อสัปดาห์ ได้ครบ 600 ข้อ")
+def coverage():
+    f = Fig("fig_coverage", 270)
+    rows = [(f"{x['months']}", "เดือน", f"{x['hours_per_week']} ชม.", x["covered"]) for x in SIM["by_capacity"]] + [(f"{x['months']}", "เดือน", "10 ชม.", x["covered"]) for x in SIM["by_months_10h"]]
+    L, R, T, B = 40, 408, 14, 186
+    ymax = 640
+    yy = lambda v: B - (B - T) * v / ymax
+    f.cov = dict(rows=rows, L=L, R=R, T=T, B=B, yy=yy)
+    return f
+
+
+def cov_svg(f):
+    c = f.cov; L, R, T, B, yy = c["L"], c["R"], c["T"], c["B"], c["yy"]; rows = c["rows"]
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {f.H}" width="{W}" height="{f.H}" font-family="\'TH Sarabun New\', sans-serif" font-size="{FS}">',
+         f'<rect width="{W}" height="{f.H}" fill="#ffffff"/>']
     for g in range(0, 601, 100):
-        dr.line([(L, y(g)), (R, y(g))], fill="#e6e6e3", width=2)
-        dr.text((L - pt(6), y(g)), f"{g}", font=fr, fill="#52514e", anchor="rm")
-    dr.line([(L, T), (L, B)], fill="#52514e", width=2); dr.line([(L, B), (R, B)], fill="#52514e", width=2)
-    n_ = len(rows); slot = (R - L) / n_; bw = slot * 0.58
-    for i, (a1, a2, v) in enumerate(rows):
-        cx = L + slot * (i + 0.5)
-        dr.rounded_rectangle([cx - bw / 2, y(v), cx + bw / 2, B], radius=6, fill="#2a78d6")
-        dr.rectangle([cx - bw / 2, y(v) + 8, cx + bw / 2, B], fill="#2a78d6")
-        dr.text((cx, y(v) + pt(4)), f"{v}", font=fr, fill="#ffffff", anchor="mt")
-        dr.text((cx, B + pt(4)), a1, font=fr, fill="#0b0b0b", anchor="mt"); dr.text((cx, B + pt(22)), a2, font=fr, fill="#52514e", anchor="mt")
-    yy = y(600)
-    for x0 in range(int(L), int(R), 24): dr.line([(x0, yy), (min(x0 + 12, R), yy)], fill="#52514e", width=2)
-    dr.text((L + slot * 0.5, yy - pt(2)), "เป้า 600", font=fr, fill="#52514e", anchor="mb")
-    lab = Image.new("RGBA", (pt(260), pt(22)), (255, 255, 255, 0)); ImageDraw.Draw(lab).text((lab.width / 2, lab.height / 2), "ข้อกำหนดอ้างอิงที่แผนจำลองครอบคลุม", font=fr, fill="#0b0b0b", anchor="mm")
-    lab = lab.rotate(90, expand=True); im.paste(lab, (pt(2), int((T + B) / 2 - lab.height / 2)), lab)
-    path = os.path.join(OUT, "fig_coverage.png"); im.save(path, dpi=(DPI, DPI))
-    META["fig_coverage"] = dict(file="figures/fig_coverage.png", caption="ความครอบคลุมของแผนจำลองตามกรอบเวลาและชั่วโมงเรียนต่อสัปดาห์ (ข้อมูลที่นับได้จริง)",
-                                alt="กราฟแท่งเจ็ดแท่ง แต่ละแท่งคือจำนวนข้อกำหนดอ้างอิงที่แผนจำลองครอบคลุมในเงื่อนไขหนึ่ง เส้นประแสดงเป้า 600 ข้อ", width_cm=14.6, print_font_pt=14.0, px=[W, H])
-    print(f"fig_coverage                 {W}x{H}px กว้างพิมพ์ 14.60 ซม. ตัวอักษร 14 pt")
+        o.append(f'<line x1="{L}" x2="{R}" y1="{yy(g):g}" y2="{yy(g):g}" stroke="#e6e6e3" stroke-width="1"/>')
+        o.append(f'<text x="{L - 5}" y="{yy(g):g}" text-anchor="end" dominant-baseline="central" fill="{MUTED}">{g}</text>')
+    o.append(f'<line x1="{L}" x2="{L}" y1="{T}" y2="{B}" stroke="{MUTED}"/><line x1="{L}" x2="{R}" y1="{B}" y2="{B}" stroke="{MUTED}"/>')
+    n = len(rows); slot = (R - L) / n; bw = slot * 0.58
+    for i, (a1, a2, a3, v) in enumerate(rows):
+        cx = L + slot * (i + .5)
+        o.append(f'<rect x="{cx - bw / 2:g}" y="{yy(v):g}" width="{bw:g}" height="{B - yy(v):g}" fill="#2a78d6"/>')
+        o.append(f'<text x="{cx:g}" y="{yy(v) + 11:g}" text-anchor="middle" dominant-baseline="central" fill="#ffffff">{v}</text>')
+        o.append(f'<text x="{cx:g}" y="{B + 12}" text-anchor="middle" dominant-baseline="central" fill="#0b0b0b">{a1}</text>')
+        o.append(f'<text x="{cx:g}" y="{B + 31}" text-anchor="middle" dominant-baseline="central" fill="#0b0b0b">{a2}</text>')
+        o.append(f'<text x="{cx:g}" y="{B + 50}" text-anchor="middle" dominant-baseline="central" fill="{MUTED}">{a3}</text>')
+    o.append(f'<line x1="{L}" x2="{R}" y1="{yy(600):g}" y2="{yy(600):g}" stroke="{MUTED}" stroke-dasharray="6 4"/>')
+    o.append(f'<text x="{R}" y="{yy(600) - 10:g}" text-anchor="end" dominant-baseline="central" fill="{MUTED}">เป้า 600 ข้อ</text>')
+    o.append(f'<text x="{(L + R) / 2:g}" y="{B + 73}" text-anchor="middle" dominant-baseline="central" fill="#0b0b0b">กรอบเวลา (เดือน) และชั่วโมงเรียนต่อสัปดาห์</text>')
+    o.append("</svg>")
+    return "\n".join(o)
+
+
+def cov_check(f):
+    c = f.cov; E = []
+    n = len(c["rows"]); slot = (c["R"] - c["L"]) / n
+    for a1, a2, a3, v in c["rows"]:
+        for t in (a1, a2, a3):
+            if tw(t) > slot - 2: E.append(f"ป้ายแกน '{t}' กว้าง {tw(t):.0f} > {slot - 2:.0f}")
+    if missing_glyphs("".join(a + b + d for a, b, d, _ in c["rows"])): E.append("glyph")
+    return E
+
 
 if __name__ == "__main__":
-    ensure_font(); os.makedirs(OUT, exist_ok=True)
-    which = sys.argv[1:] or [k[4:] for k in list(globals()) if k.startswith("fig_")]
-    old = J("book", "figures", "figures.json") if os.path.exists(os.path.join(OUT, "figures.json")) else {}
-    for k in which: globals()["fig_" + k]()
-    old.update(META)
-    json.dump(old, open(os.path.join(OUT, "figures.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    from PIL import Image
+    ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    out = os.path.join(ROOT, "book", "figures"); os.makedirs(out, exist_ok=True)
+    only = [a for a in sys.argv[1:] if not a.startswith("--")]
+    fn_map = dict(fig_framework=framework, fig_process=process, fig_requirements=requirements, fig_architecture=architecture,
+                  fig_workflow=workflow, fig_rules_a=rules_a, fig_rules_b=rules_b, fig_coding=coding, fig_evaluation=evaluation, fig_coverage=coverage)
+    jp = os.path.join(out, "figures.json")
+    meta = json.load(open(jp, encoding="utf-8")) if os.path.exists(jp) else {}
+    meta.pop("fig_rules", None)
+    bad = 0
+    for name, fn in fn_map.items():
+        if only and name not in only: continue
+        f = fn()
+        errs = cov_check(f) if name == "fig_coverage" else f.check()
+        print(f"{name}: สูง {f.H:.0f} errors={len(errs)}")
+        for e in errs: print("   -", e)
+        bad += len(errs)
+        if errs: continue
+        sp = os.path.join(out, name + ".svg"); open(sp, "w", encoding="utf-8").write(cov_svg(f) if name == "fig_coverage" else f.svg())
+        pp = os.path.join(out, name + ".png"); render_png(sp, pp, f.H)
+        w, h = Image.open(pp).size
+        cm = round(W / 72 * 2.54, 2)
+        meta[name] = dict(file=f"figures/{name}.png", caption=FIGS[name][1], alt=FIGS[name][2], width_cm=cm, print_font_pt=16.0, px=[w, h])
+        print(f"   {w}x{h}px กว้างพิมพ์ {cm} ซม. สูง {h / w * cm:.1f} ซม.")
+    json.dump(meta, open(jp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    if bad: sys.exit(f"มี {bad} ข้อผิดพลาด")

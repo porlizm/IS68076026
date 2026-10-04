@@ -17,7 +17,8 @@ const verIssue = (() => { const c = v.version || {}; const bad = [];
   if (STAMP.build_id !== c.build_id) bad.push('build ' + STAMP.build_id + ' ≠ ' + c.build_id);
   if (ENGINE.ENGINE_VERSION !== STAMP.engine_version) bad.push('engine ' + ENGINE.ENGINE_VERSION + ' ≠ ' + STAMP.engine_version);
   return bad.length ? 'Verify Evidence: ' + bad.join(' · ') : ''; })();
-const reqs = role.requirements.map((r) => ({ requirement_id: r.id, element_id: r.element_id, element_name: r.name, element_description: r.desc, element_aliases: r.aliases, domain: r.domain, weight_renormalized: r.w }));
+const reqs = role.requirements.map((r) => ({ requirement_id: r.id, element_id: r.element_id, element_name: r.name, element_description: r.desc, element_aliases: r.aliases, domain: r.domain, weight_renormalized: r.w, level_lv: r.lv }));
+const spec = { by_element: Object.fromEntries(role.requirements.map((r) => [r.element_id, { df: r.df, idf: r.idf }])) };   // ความเฉพาะอาชีพ (ใช้ใน R7 และ Role-Fit)
 
 // ── 1) คำตอบของผู้ตรวจ (R3b) · รวมคำตัดสินจาก cache + การเรียกใหม่ทุก batch (DEC-59 D4) ───────────────
 const verifier = { called: !!pre.use_verifier, n_checks: pre.n_checks, n_cached: pre.n_cached || 0, n_fresh: pre.n_fresh || 0, cache_enabled: !!pre.cache_enabled,
@@ -46,20 +47,18 @@ if (pre.use_verifier) {
 if (Object.keys(newCache).length) {
   try {
     const sd = $getWorkflowStaticData('global');
-    const merged = Object.assign({}, sd.verifierCache || {}, newCache);
-    const keys = Object.keys(merged); if (keys.length > 3000) keys.sort((x, y) => merged[x].t - merged[y].t).slice(0, keys.length - 3000).forEach((k) => delete merged[k]);
-    if (pre.cache_enabled) sd.verifierCache = merged;
+    if (pre.cache_enabled) sd.verifierCache = ENGINE.mergeVerifierCache(sd.verifierCache, newCache, 3000);
   } catch (e) { /* ไม่อยู่ในโหมด production → ไม่มี cache */ }
 }
 const verifierResults = {};
-const answerText = JSON.stringify({ schema_version: 'verifier_v1.0', checks: Object.entries(answers).map(([check_id, verdict]) => ({ check_id, verdict })) });
+const answerText = JSON.stringify({ schema_version: 'verifier_v1.1', checks: Object.entries(answers).map(([check_id, verdict]) => ({ check_id, verdict })) });
 for (const k of pre.verifier_keys || []) verifierResults[k] = Object.keys(answers).length ? { status: 'ok', output: { text: answerText } } : { status: 'failed', output: null };
 
 // ── 2) ตัดสิน ───────────────────────────────────────────────────────────────
 const corpus = role.items.map((it) => ({ item_id: it.id, item_type: it.type, title: it.title, exam_code: it.exam_code, level: it.level }));
 const mappings = role.items.flatMap((it) => (it.covers_l1 || []).map((rid) => ({ role_id: role.role_id, item_id: it.id, requirement_id: rid, coverage_layer: ENGINE.L1_LAYER, mapping_status: 'source_checked_by_script' })));
 const ev = ENGINE.evaluateRun({ runId: v.run_id, roleId: role.role_id, requirements: reqs, text, modelResults: pre.model_results, verifierResults,
-  roleTasks: role.signal_tasks || [], roleTech: role.signal_tech || [], skillLinks: rd.skill_links || [], corpus, mappings, projectCfg: pre.project_cfg, nowIso: new Date().toISOString() });
+  roleTasks: role.signal_tasks || [], roleTech: role.signal_tech || [], skillLinks: rd.skill_links || [], specificity: spec, corpus, mappings, projectCfg: pre.project_cfg, nowIso: new Date().toISOString() });
 
 // ── 3) แถวรายข้อสำหรับหน้าเว็บ ──────────────────────────────────────────────
 const supOff = prepTxt.supplement_offset;
@@ -75,7 +74,7 @@ const rows = role.requirements.map((r) => {
   let source = d.evidence_source || '';
   if (source && supOff >= 0 && d.evidence_char_start >= supOff) source = 'learner';
   return { id: r.id, element_id: r.element_id, name: r.name, desc: r.desc, domain: r.domain, w: r.w, im: r.im, lv: r.lv, rank: r.rank,
-    df: r.df, idf: r.idf, hands_on: !!r.hands_on, ev_start: d.evidence_char_start, ev_end: d.evidence_char_end, status_engine: d.final_status, actor: '', adjust: '',
+    df: r.df, idf: r.idf, hands_on: !!r.hands_on, ev_start: d.evidence_char_start, ev_end: d.evidence_char_end, status_engine: /R7_(actor|reuse)/.test(d.rule_flags) ? 'evidenced' : d.final_status, actor: d.actor || '', adjust: /R7_reuse/.test(d.rule_flags) ? 'R7_reuse' : (/R7_actor:/.test(d.rule_flags) ? 'R7_actor' : ''),
     claimed: claims.length ? claims.map((f) => f.claimed_status).join('/') : (fs.length ? 'missing' : null), status: d.final_status, quote: d.evidence_quote, source,
     verified: claims.length ? claims.some((f) => f.quote_verified === true) : null, overlap: ovs.length ? Math.max(...ovs) : null,
     r3_layer: claims.some((f) => f.r3_layer === 'lexical') ? 'lexical' : (claims.some((f) => f.r3_layer === 'semantic') ? 'semantic' : ''),
@@ -83,56 +82,6 @@ const rows = role.requirements.map((r) => {
     confidence: confs.length ? Math.round((confs.reduce((s, x) => s + Number(x), 0) / confs.length) * 100) / 100 : null, flags };
 });
 
-
-// ── 3b) DEC-59 · actor (ใครเป็นผู้ทำ) + จำกัดการใช้ข้อความซ้ำ — ปรับสถานะหลังตัดสินด้วย engine · เหลือเฉพาะ "มีหลักฐาน" → "บางส่วน" ─────────
-const ACTOR_RANK = { performed: 3, led: 2, oversaw: 1, mentioned: 0 };
-const actorsBy = {};   // id → { runKey: actor }
-for (const k of Object.keys(pre.model_results || {})) {
-  const mr = pre.model_results[k]; if (!mr || mr.status !== 'ok' || !mr.output) continue;
-  try {
-    const o = JSON.parse(String(mr.output.text).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
-    (Array.isArray(o.actors) ? o.actors : []).forEach((a) => { if (a && typeof a.id === 'string' && a.actor in ACTOR_RANK) (actorsBy[a.id] = actorsBy[a.id] || {})[k] = a.actor; });
-  } catch (e) { /* ไม่มี actors → ไม่ปรับ */ }
-}
-// actor ของข้อหนึ่ง = ค่าเสียงข้างมากของรอบที่ตอบ "มีหลักฐาน" (เสมอ → ค่าที่อ่อนกว่า)
-function actorOf(id, findings) {
-  const runs = findings.filter((f) => f.requirement_id === id && f.final_vote === 'evidenced').map((f) => f.model_key);
-  const use = runs.length ? runs : findings.filter((f) => f.requirement_id === id && f.final_vote === 'partially').map((f) => f.model_key);
-  const labels = use.map((k) => (actorsBy[id] || {})[k]).filter(Boolean);
-  if (!labels.length) return '';
-  const cnt = {}; labels.forEach((x) => { cnt[x] = (cnt[x] || 0) + 1; });
-  return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a] || ACTOR_RANK[a] - ACTOR_RANK[b])[0];
-}
-const findingsAll = ev.findings;
-let nAdjActor = 0, nAdjReuse = 0, nActorKnown = 0;
-for (const r of rows) {
-  r.actor = r.status === 'missing' || r.status === 'abstained' ? '' : actorOf(r.id, findingsAll);
-  if (r.actor) nActorKnown++;
-  if (r.status === 'evidenced' && r.hands_on && r.actor && ACTOR_RANK[r.actor] < ACTOR_RANK.performed) { r.status = 'partially'; r.adjust = 'D3_actor'; nAdjActor++; }
-}
-// D5: ข้อความเดียว (หรือซ้อนทับกัน ≥ 60%) เป็นหลักฐานเต็มได้ไม่เกิน QUOTE_REUSE_CAP ข้อ · เลือกข้อที่เฉพาะอาชีพ (df ต่ำ) น้ำหนักสูงไว้ก่อน
-const cap = Number(cfg.QUOTE_REUSE_CAP) || 2;
-const ovl = (a, b) => Math.max(0, Math.min(a.ev_end, b.ev_end) - Math.max(a.ev_start, b.ev_start)) / Math.max(1, Math.min(a.ev_end - a.ev_start, b.ev_end - b.ev_start));
-const cand = rows.filter((r) => r.status === 'evidenced' && r.ev_start >= 0 && r.source !== 'learner');
-const par = cand.map((_, i) => i); const find = (i) => (par[i] === i ? i : (par[i] = find(par[i])));
-for (let i = 0; i < cand.length; i++) for (let j = i + 1; j < cand.length; j++) if (ovl(cand[i], cand[j]) >= 0.6) par[find(j)] = find(i);
-const groups = {}; cand.forEach((r, i) => { (groups[find(i)] = groups[find(i)] || []).push(r); });
-for (const g of Object.values(groups)) {
-  if (g.length <= cap) continue;
-  g.sort((a, b) => a.df - b.df || b.w - a.w).slice(cap).forEach((r) => { r.status = 'partially'; r.adjust = 'D5_reuse'; nAdjReuse++; });
-}
-// งานหลัก (T): ใช้กฎ actor เดียวกัน · อาชีพเชิงเทคนิคต้อง performed · อาชีพบริหารรับ led
-const minActor = ACTOR_RANK[role.task_min_actor] === undefined ? 3 : ACTOR_RANK[role.task_min_actor];
-const tasksAdj = ev.task_decisions.map((t) => {
-  const fs = ev.findings.filter((f) => f.target_kind === 'task' && f.requirement_id === t.task_id);
-  const runs = fs.filter((f) => f.final_vote === 'evidenced').map((f) => f.model_key);
-  const labels = (runs.length ? runs : fs.filter((f) => f.final_vote === 'partially').map((f) => f.model_key)).map((k) => (actorsBy[t.task_id] || {})[k]).filter(Boolean);
-  let actor = '';
-  if (labels.length) { const cnt = {}; labels.forEach((x) => { cnt[x] = (cnt[x] || 0) + 1; }); actor = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a] || ACTOR_RANK[a] - ACTOR_RANK[b])[0]; }
-  let status = t.final_status, adjust = '';
-  if (status === 'evidenced' && actor && ACTOR_RANK[actor] < minActor) { status = 'partially'; adjust = 'D3_actor'; nAdjActor++; }
-  return { ...t, status, adjust, actor };
-});
 
 // ── 4) ตัวกรอง + คะแนน ──────────────────────────────────────────────────────
 const rf = ev.findings.filter((f) => f.target_kind === 'requirement' && f.claimed_status !== 'missing');
@@ -159,17 +108,14 @@ const by_domain = DOMAINS.map((dn) => {
 }).filter((d) => d.n > 0);
 
 
-// ── 4b) DEC-59 · คำนวณดัชนีใหม่หลังปรับ: R (เดิม), R_role (ถ่วง idf), T, Role-Fit F, H ──────────────────────
-const r2 = (x) => Math.round(x * 100) / 100;
-const Dn = rows.filter((x) => x.status !== 'abstained');
-const wsum = (f) => Dn.reduce((s, x) => s + f(x), 0);
-const R_adj = wsum((x) => x.w) ? r2((wsum((x) => x.w * SC[x.status]) / wsum((x) => x.w)) * 100) : null;
-const R_role = wsum((x) => x.w * x.idf) ? r2((wsum((x) => x.w * x.idf * SC[x.status]) / wsum((x) => x.w * x.idf)) * 100) : null;
-const T_adj = tasksAdj.length ? r2((tasksAdj.reduce((s, t) => s + SC[t.status], 0) / tasksAdj.length) * 100) : null;
-const wT = Number(cfg.FIT_WEIGHT_T); const wTT = isFinite(wT) ? wT : 0.5;
-const F = R_role === null ? null : (T_adj === null ? R_role : r2((1 - wTT) * R_role + wTT * T_adj));
-let fit_band = 'low';
-if (F !== null) { if (F >= cfg.FIT_HIGH_MIN && T_adj !== null && T_adj >= cfg.FIT_HIGH_T_MIN) fit_band = 'high'; else if (F >= cfg.FIT_MID_MIN) fit_band = 'mid'; }
+// ── 4b) ดัชนีจาก engine (R7 ปรับสถานะแล้ว): R · R_role · T · Role-Fit · H ─────────────────────────────────────
+const R_adj = num(S.readiness_pct);
+const R_role = num(S.readiness_role_pct);
+const T_adj = num(S.role_task_index);
+const F = num(S.role_fit);
+const fit_band = S.role_fit_band === 'N/A' ? 'low' : S.role_fit_band;
+const tasksAdj = ev.task_decisions.map((t) => ({ ...t, status: t.final_status, adjust: /R7_actor:/.test(t.rule_flags) ? 'R7_actor' : '' }));
+const nActorKnown = rows.filter((x) => x.actor).length;
 const techTotal = role.signal_tech_available !== undefined ? role.signal_tech_available : S.n_tech_total;
 const h_sufficient = techTotal >= (cfg.H_MIN_TECH || 10);
 // โทเคน (D7)
@@ -185,7 +131,7 @@ const cost = cfg.PRICE_PER_1M_INPUT_USD != null && isFinite(pin) && isFinite(pou
 const tokens = { stages, total: totU, cost_usd: cost, cached_checks: verifier.n_cached, fresh_checks: verifier.n_fresh };
 const counts = { evidenced: rows.filter((x) => x.status === 'evidenced').length, partially: rows.filter((x) => x.status === 'partially').length,
   missing: rows.filter((x) => x.status === 'missing').length, abstained: rows.filter((x) => x.status === 'abstained').length };
-const adjust = { n_actor: nAdjActor, n_reuse: nAdjReuse, n_actor_known: nActorKnown };
+const adjust = { n_actor: S.n_r7_actor + S.n_r7_task_actor, n_reuse: S.n_r7_reuse, n_actor_known: nActorKnown, n_actor_unknown: S.n_actor_unknown };
 
 // ── 5) ข้อมูลผู้สมัคร (แสดงผลเท่านั้น) ───────────────────────────────────────
 let profile = null;

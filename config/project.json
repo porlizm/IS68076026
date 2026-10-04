@@ -71,8 +71,8 @@
   "plan_level_note": "DEC-56 · ผู้มีประสบการณ์ ≥ 5 ปี: ไม่ใช้รายการระดับ Beginner ปิดข้อที่เป็น partially",
   "coverage_layer_used": "L1_researcher_tagged (กำหนดในโค้ด engine.js ไม่ใช่ค่านี้)",
   "min_approved_share_of_L1": 0.9,
-  "prompt_version": "analyst_v1.1",
-  "rules_version": "RULES-IS68076026-v2.0",
+  "prompt_version": "analyst_v1.2",
+  "rules_version": "RULES-IS68076026-v2.1",
   "retention_days": 90,
   "email_enabled": false,
   "ocr": {
@@ -89,5 +89,54 @@
     "masked_text_folder_env": "DRIVE_MASKED_TEXT_FOLDER_ID"
   },
   "researcher_alert_email_env": "RESEARCHER_EMAIL",
-  "verifier_prompt_version": "verifier_v1.0"
+  "verifier_prompt_version": "verifier_v1.1",
+  "actor_rules": {
+    "enabled": true,
+    "hands_on_prefixes": [
+      "2.C.3.",
+      "2.C.4.",
+      "2.C.9.",
+      "2.A.1.e",
+      "2.B.3.",
+      "2.B.4.g",
+      "2.B.4.h",
+      "4.A.1.b.2",
+      "4.A.3.b.1",
+      "4.A.3.b.5"
+    ],
+    "expert_lv_min": 5.0,
+    "expert_min_actor": "led",
+    "task_min_actor_default": "performed",
+    "task_min_actor_by_role": {
+      "R19": "led",
+      "R20": "led"
+    },
+    "note": "DEC-60 · R7 · ข้อกำหนดเชิงปฏิบัติ (คำนำหน้า element_id ตามโครงสร้าง O*NET) ต้องเป็น performed จึงเป็นหลักฐานเต็ม · ข้อที่ LV ≥ expert_lv_min ต้องอย่างน้อย led · งานหลักของอาชีพกลุ่มบริหาร (R19, R20) รับ led · ถ้า actor ต่ำกว่าเกณฑ์ evidenced ลดเป็น partially"
+  },
+  "quote_reuse": {
+    "enabled": true,
+    "max_full_evidence_per_quote": 2,
+    "overlap_min": 0.6,
+    "note": "DEC-60 · R7 · ข้อความเดียว (หรือช่วงที่ซ้อนทับกัน ≥ overlap_min) เป็นหลักฐานเต็มได้ไม่เกินค่านี้ เลือกข้อที่เฉพาะอาชีพ (df ต่ำ) น้ำหนักสูงไว้ก่อน ส่วนเกินลดเป็น partially"
+  },
+  "h_tech_n": 10,
+  "h_tech_note": "DEC-60 · H นับจาก 10 เทคโนโลยีแรกของอาชีพเสมอ (ตัวส่วนคงที่) · อาชีพที่มีน้อยกว่า 10 รายการ รายงาน N/A",
+  "role_fit": {
+    "weight_task": 0.5,
+    "high_min": 75,
+    "high_task_min": 60,
+    "mid_min": 50,
+    "note": "DEC-60 · Role-Fit = (1 − w)·R_role + w·T ใช้ในรายงานผู้เรียนเท่านั้น ไม่เป็นตัวชี้วัดของคำถามวิจัย · ป้ายระดับใช้เพื่ออ่านง่าย ไม่ใช่เกณฑ์ของการศึกษา"
+  },
+  "verifier_cache": {
+    "enabled": true,
+    "max_entries": 3000,
+    "note": "DEC-60 · เก็บคำตัดสินของผู้ตรวจเป็น hash (prompt + รหัสรุ่นผู้ตรวจ + ข้อกำหนด + quote) ไม่เก็บข้อความ · สคริปต์วัดความคงที่ (scripts/validate_scoring.mjs) ปิดเองทุกครั้ง · ลบเมื่อจบโครงการ"
+  },
+  "freeze": {
+    "frozen": false,
+    "build_id": "",
+    "tag": "",
+    "note": "ก่อนนำร่องตั้ง frozen=true และ build_id ของ workflow ที่จะใช้ · ระบบปฏิเสธรอบที่ build_id ไม่ตรง (DEC-60) · หลัง freeze ห้ามแก้ค่าในไฟล์นี้ (P3)"
+  }
 }

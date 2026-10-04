@@ -1,19 +1,19 @@
 {
-  "corpus_version": "CORPUS_IS68076026-v1.5-01OCT26",
-  "rows_total": 7012,
-  "rows_passed": 2071,
+  "corpus_version": "CORPUS_IS68076026-v1.6-03OCT26",
+  "rows_total": 7364,
+  "rows_passed": 2454,
   "rows_failed_not_L1": 4807,
-  "rows_failed_L1_other": 134,
+  "rows_failed_L1_other": 103,
   "failed_L1_reasons": {
-    "C1_item_not_verified": 134
+    "C1_item_not_verified": 103
   },
-  "items_in_passed_rows": 566,
-  "items_total": 602,
-  "requirements_with_passed_item": 598,
+  "items_in_passed_rows": 785,
+  "items_total": 812,
+  "requirements_with_passed_item": 600,
   "requirements_total": 600,
   "roles_passed": 20,
-  "per_role_min": 29,
+  "per_role_min": 30,
   "per_role_max": 30,
-  "L1_rows": 2205,
-  "passed_share_of_L1": 0.9392
+  "L1_rows": 2557,
+  "passed_share_of_L1": 0.9597
 }
