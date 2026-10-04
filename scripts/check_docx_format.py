@@ -23,7 +23,7 @@ BANNED = {"เรซูเม่": "เรซูเม่", "เวิร์ก�
           "คลังหลักสูตร": "คลังหลักสูตร", "เขตข้อมูล": "เขตข้อมูล", "ทักษะเป้าหมาย": "ทักษะเป้าหมาย", "ในยุคปัจจุบัน": "ในยุคปัจจุบัน",
           "ไม่เพียงแต่": "ไม่เพียงแต่", "อันจะนำไปสู่": "อันจะนำไปสู่", "ยกระดับ": "ยกระดับ", "อย่างมีประสิทธิภาพ": "อย่างมีประสิทธิภาพ",
           "อย่างมีนัยสำคัญ": "อย่างมีนัยสำคัญ", "บทบาทสำคัญอย่างยิ่ง": "บทบาทสำคัญอย่างยิ่ง", "em dash": "—",
-          "ข้อกำหนด (ไม่มีอ้างอิง)": r"ข้อกำหนด(?!อ้างอิง)", "AI เดี่ยว": r"(?<!Generative )(?<!generative )(?<!Document )(?<!/ )(?<![A-Za-z/-])AI(?![A-Za-z])"}
+          "ข้อกำหนด (ไม่มีอ้างอิง)": r"ข้อกำหนด(?!อ้างอิง)", "AI เดี่ยว": r"(?<!Generative )(?<!generative )(?<!Document )(?<!/ )(?<!on )(?<![A-Za-z/-])AI(?![A-Za-z])"}
 CLICHE = ["ทั้งนี้", "กล่าวคือ", "นอกจากนี้", "อย่างไรก็ตาม"]
 PLAN_PAST = [r"ผู้เข้าร่วม[^。\n]{0,30}(ได้ทำ|ได้ตอบ|ตอบแล้ว|ประเมินแล้ว)", r"ผลการประเมินพบว่า", r"ผู้เข้าร่วมทั้ง \d+ คน(ได้|ให้)"]
 
@@ -208,7 +208,9 @@ def main():
     zw = sum(1 for p in body_p if len(re.findall(r"[฀-๿]", text_of(p))) > 120 and "​" in "".join(x.text or "" for x in p.iter(q("t"))))
     res("ZWSP อยู่ในทุกย่อหน้าไทยที่ยาวเกินหนึ่งบรรทัด", zw == len(thai_long), f"{zw}/{len(thai_long)} ย่อหน้า")
     res("ไม่มี {{key}} หรือ [@key] ค้าง", not re.search(r"\{\{|\[@", allt), "ค้นทั้งเอกสาร")
-    res("ชื่อรุ่นคลังสะกดตรง", "CORPUS_IS68076026-v1.5-01OCT26" in allt and not re.search(r"CORPUS_IS68076026-v1\.5(?!-01OCT26)", allt), "CORPUS_IS68076026-v1.5-01OCT26")
+    _N = json.load(open(os.path.join(ROOT, "book", "numbers.json"), encoding="utf-8"))
+    _cv = _N.get("corpus_version", "")
+    res("ชื่อคลังใช้ตามป้ายกลางและชื่อรุ่นสะกดตรง", _N.get("corpus_label_short", "~") in allt and (not _cv or _cv in allt) and not re.search(r"CORPUS_IS68076026-v\d+\.\d+(?!-\d\d[A-Z]{3}\d\d)", allt), _N.get("corpus_label_short", ""))
     res("ไม่กล่าวถึง WF_Demo", "WF_Demo" not in allt and "WF Demo" not in allt, "ค้นทั้งเอกสาร")
     # บทคัดย่อ ≤ 300 คำ
     try:

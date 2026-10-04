@@ -61,7 +61,7 @@ def framework():
     ch = stack(f, [("i", ["ข้อมูลเข้า", "เรซูเม PDF และอาชีพ", "เป้าหมาย เวลาที่เรียนได้"], "grey", dict(bold_first=True)),
                    ("a", ["วิเคราะห์หลักฐาน", "โมเดล 3 ตัวอ่านแยกกัน", "ยกข้อความจากเอกสาร"], "blue", dict(bold_first=True)),
                    ("v", ["ตรวจด้วยกฎ R0 ถึง R7", "คำและความหมาย", "รวมเสียง ยังสรุปไม่ได้"], "blue", dict(bold_first=True)),
-                   ("p", ["จัดแผนการเรียนรู้", "จากคลังที่ตรึงไว้", "ภายในเวลาที่มี"], "amber", dict(bold_first=True)),
+                   ("p", ["จัดแผนการเรียนรู้", "จากคลังที่กำหนดรุ่นคงที่ไว้", "ภายในเวลาที่มี"], "amber", dict(bold_first=True)),
                    ("o", ["รายงานรายบุคคล", "สถานะรายข้อ หลักฐาน", "แผนและเหตุผล"], "green", dict(bold_first=True))], mx, mw)
     i, a, v, p, o = ch
     for u, d in zip(ch, ch[1:]): down(f, u, d)
@@ -78,14 +78,14 @@ def framework():
 
 # ---------------------------------------------------------------- ขั้นตอนวิจัย
 @fig("fig_process", "ขั้นตอนการดำเนินการวิจัยเจ็ดขั้น",
-     "เจ็ดขั้นเรียงจากบนลงล่าง สองขั้นแรกสีฟ้าคือการกำหนดเกณฑ์และการสร้างระบบซึ่งเป็นเนื้อหาของรายงานนี้ ขั้นที่สามสีเหลืองคือการยื่นขอรับรองจริยธรรม ขั้นที่สี่ถึงเจ็ดสีเขียวทำกับผู้เข้าร่วม ได้แก่ ทดลองนำร่อง ตรึงรุ่น เก็บข้อมูลกลุ่มหลัก และวิเคราะห์")
+     "เจ็ดขั้นเรียงจากบนลงล่าง สองขั้นแรกสีฟ้าคือการกำหนดเกณฑ์และการสร้างระบบซึ่งเป็นเนื้อหาของรายงานนี้ ขั้นที่สามสีเหลืองคือการยื่นขอรับรองจริยธรรม ขั้นที่สี่ถึงเจ็ดสีเขียวทำกับผู้เข้าร่วม ได้แก่ ทดลองนำร่อง กำหนดรุ่นคงที่ เก็บข้อมูลกลุ่มหลัก และวิเคราะห์")
 def process():
     f = Fig("fig_process", 400)
     st = [(["1  กำหนดนิยาม เกณฑ์ และตัวชี้วัดก่อนเก็บข้อมูล"], "blue"),
           (["2  สร้างข้อมูลอ้างอิงและระบบ", "ทดสอบด้วยเทสต์อัตโนมัติและเรซูเมสังเคราะห์"], "blue"),
           (["3  ยื่นขอรับรองจริยธรรม"], "amber"),
           (["4  ทดลองนำร่อง 5 คน ปรับถ้อยคำและเกณฑ์"], "green"),
-          (["5  ตรึงรุ่น prompt กฎ เกณฑ์ คลัง และแบบประเมิน"], "green"),
+          (["5  กำหนดรุ่นคงที่ของ prompt กฎ เกณฑ์ คลัง และแบบประเมิน"], "green"),
           (["6  เก็บข้อมูลกลุ่มหลัก 30 คน", "ให้รหัสชุดคำตอบอ้างอิงโดยไม่เห็นผลของระบบ"], "green"),
           (["7  วิเคราะห์ RQ1 และ RQ2 และเขียนรายงานผล"], "green")]
     bs = stack(f, [(f"s{k}", l, c) for k, (l, c) in enumerate(st)], 16, 383, gap=18, align="l")
@@ -105,7 +105,7 @@ def requirements():
                    ("e", ["โควตาโดเมนละอย่างน้อย 3 ข้อ"], "blue"),
                    ("f", ["เรียง IM จากมากไปน้อย", "เท่ากันใช้รหัสองค์ประกอบ", "เลือก 30 ข้อแรกต่ออาชีพ"], "blue"),
                    ("g", ["น้ำหนัก w = IM ÷ ผลรวม IM ของ 30 ข้อ"], "blue"),
-                   ("h", ["ข้อกำหนดอ้างอิง 600 ข้อ", "ONET31.0-IS68076026-v1.0"], "green", dict(bold_first=True))], 10, 290)
+                   ("h", ["ข้อกำหนดอ้างอิง 600 ข้อ", NUM['onet_label']], "green", dict(bold_first=True))], 10, 290)
     for u, d in zip(ch, ch[1:]): down(f, u, d)
     c = ch[2]
     x = f.box("x", 322, 0, 83, ["ไม่ใช้", "กลุ่ม", "Abilities"], "red")
@@ -127,10 +127,10 @@ def architecture():
     G = {}
     for k, (id, ln) in enumerate(bx):
         G[id] = f.box(id, 14 + k * 98, 38, 92, ln, "blue", bold_first=True)
-    wf = f.box("wf", 6, 172, 403, [f"n8n {NUM['n8n_version']} ในเครื่องผู้วิจัย", f"workflow เดียว {NUM['wf_name']}", f"{NUM['wf_nodes']} โหนดทำงาน {NUM['wf_sections']} ช่วง", "ตรรกะอยู่ในไฟล์ engine.js และ config/"], "amber", bold_first=True)
+    wf = f.box("wf", 6, 172, 403, [f"n8n {NUM['n8n_version']} ในเครื่องผู้วิจัย", f"workflow เดียวสำหรับทั้งระบบ", f"แบ่งเป็น {NUM['wf_sections']} ช่วงการทำงาน", "ตรรกะตรวจและจัดแผนอยู่ในโปรแกรมของโครงการ"], "amber", bold_first=True)
     xf = f.box("xf", 6, 300, 403, [], "white", frame=True, h=130)
     ocr = f.box("ocr", 14, 312, 187, ["Document AI", "อ่านข้อความ", "จากภาพ"], "green", bold_first=True)
-    llm = f.box("llm", 214, 312, 187, ["โมเดล A B C", "สามผู้ให้บริการ", "วิเคราะห์และตรวจ", "ความหมาย (R3b)"], "green", bold_first=True)
+    llm = f.box("llm", 214, 312, 187, ["โมเดล A B C", "สามผู้ให้บริการ", "วิเคราะห์และตรวจ", "ความหมาย"], "green", bold_first=True)
     f.text("xt", 16, 312 + 86 + 6, "บริการภายนอก", bold=True)
     both = {"form": False, "sh": True, "dr": True, "gm": False}
     for id in G:
@@ -144,20 +144,20 @@ def architecture():
 
 
 # ---------------------------------------------------------------- workflow
-@fig("fig_workflow", "เจ็ดช่วงของ workflow พร้อมโหนดสำคัญ",
-     "เจ็ดกล่องเรียงจากบนลงล่างตามช่วงของ workflow แต่ละกล่องมีชื่อช่วง จำนวนโหนด และโหนดสำคัญ ช่วงที่ 6 วนกลับช่วงที่ 1 เพื่อทำงานถัดไป และข้อผิดพลาดจากทุกช่วงไปที่ช่วงที่ 7")
+@fig("fig_workflow", "เจ็ดช่วงของ workflow พร้อมขั้นตอนสำคัญ",
+     "เจ็ดกล่องเรียงจากบนลงล่างตามช่วงของ workflow แต่ละกล่องมีชื่อช่วงและขั้นตอนสำคัญ ช่วงที่ 6 วนกลับช่วงที่ 1 เพื่อทำงานถัดไป และข้อผิดพลาดจากทุกช่วงไปที่ช่วงที่ 7")
 def workflow():
     cols = ["blue", "green", "amber", "purple", "green", "blue", "red"]
     f = Fig("fig_workflow", 500)
-    ids = [("s1", "1 รับข้อมูล", 10, ["Watch Form Responses", "Validate Form Rows", "Loop Over Requests", "Check PDF File"]),
-           ("s2", "2 อ่านและปิดบังข้อมูล", 8, ["Extract Text Layer", "Run Document AI OCR", "Mask Personal Data", "Save Masked Text"]),
-           ("s3", "3 วิเคราะห์ 3 โมเดล", 11, ["Load Requirements", "Build Prompt", "Call Model A B C", "Record Model Calls"]),
-           ("s4", "4 ตรวจและรวมผล", 18, ["Prepare Relevance Checks", "Call Verifier A B C", "Apply Rules R0-R7", "Record Decisions"]),
-           ("s5", "5 จัดแผน", 6, ["Build Learning Plan", "Record Plan Items", "Freeze Report Payload"]),
-           ("s6", "6 ส่งรายงาน", 16, ["Render Thai Report", "Export Report PDF", "Send Report Email", "Record Delivery"]),
-           ("s7", "7 บันทึกและข้อผิดพลาด", 10, ["Catch Workflow Error", "Classify Error", "Mark Run Failed", "Notify Researcher"])]
+    ids = [("s1", "1 รับข้อมูล", 0, ["รับคำตอบแบบฟอร์ม", "ตรวจแถวข้อมูล", "วนทีละงาน", "ตรวจไฟล์ PDF"]),
+           ("s2", "2 อ่านและปิดบังข้อมูล", 0, ["ดึงชั้นข้อความ", "อ่านด้วย Document AI", "ปิดบังข้อมูลส่วนบุคคล", "บันทึกข้อความหลังปิดบัง"]),
+           ("s3", "3 วิเคราะห์ 3 โมเดล", 0, ["โหลดข้อกำหนดอ้างอิง", "สร้าง prompt", "เรียกโมเดลสามราย", "บันทึกการเรียกโมเดล"]),
+           ("s4", "4 ตรวจและรวมผล", 0, ["เตรียมรายการตรวจความหมาย", "เรียกโมเดลผู้ตรวจ", "ใช้กฎตรวจหลักฐาน", "บันทึกคำตัดสิน"]),
+           ("s5", "5 จัดแผน", 0, ["จัดแผนการเรียนรู้", "บันทึกรายการในแผน", "กำหนดข้อมูลรายงาน"]),
+           ("s6", "6 ส่งรายงาน", 0, ["สร้างรายงานภาษาไทย", "ส่งออกเป็น PDF", "ส่งอีเมลรายงาน", "บันทึกการส่ง"]),
+           ("s7", "7 บันทึกและข้อผิดพลาด", 0, ["ดักข้อผิดพลาด", "จัดประเภทข้อผิดพลาด", "ทำเครื่องหมายงานล้ม", "แจ้งผู้วิจัย"])]
     x0, w = 72, 323
-    specs = [(i, [f"{t} ({n} โหนด)"] + wrap_items(l, w - 2 * PAD - 4), c, dict(bold_first=True)) for (i, t, n, l), c in zip(ids, cols)]
+    specs = [(i, [t] + wrap_items(l, w - 2 * PAD - 4), c, dict(bold_first=True)) for (i, t, n, l), c in zip(ids, cols)]
     bs = stack(f, specs, x0, w, gap=16)
     for u, d in zip(bs[:6], bs[1:6]): down(f, u, d)
     s7 = bs[6]
@@ -168,6 +168,26 @@ def workflow():
         f.arrow([b.right(), (tx, b.y + b.h / 2)], b.id, None, head=False, soft=True, dashed=True)
     f.arrow([(tx, bs[0].y + bs[0].h / 2), (tx, s7.y + s7.h / 2), s7.right()], None, "s7", dashed=True, soft=True)
     f.H = s7.y + s7.h + 6
+    return f
+
+
+# ---------------------------------------------------------------- เส้นทางข้อมูล
+@fig("fig_dataflow", "เส้นทางข้อมูลของผู้เข้าร่วมและผู้รับข้อมูลภายนอก",
+     "ผู้เข้าร่วมส่งเรซูเมและความยินยอมผ่านแบบฟอร์มไปยังที่เก็บของผู้วิจัย n8n ในเครื่องผู้วิจัยประมวลผล ส่งไฟล์ภาพสแกนต้นฉบับให้ Document AI ก่อนปิดบังข้อมูล และส่งเฉพาะข้อความหลังปิดบังให้โมเดลสามราย แล้วส่งรายงานทางอีเมลกลับไปยังผู้เข้าร่วม")
+def dataflow():
+    f = Fig("fig_dataflow", 415)
+    a = f.box("a", 10, 6, 235, ["ผู้เข้าร่วม", "ส่งเรซูเม PDF และความยินยอม"], "grey", bold_first=True)
+    b = f.box("b", 10, 6 + a.h + 26, 235, ["ที่เก็บของผู้วิจัย", "แบบฟอร์ม ไฟล์ และตารางผล", "ในบัญชีของผู้วิจัย"], "blue", bold_first=True)
+    c = f.box("c", 10, b.y + b.h + 26, 235, ["n8n ในเครื่องผู้วิจัย", "ดึงข้อความจากไฟล์", "ปิดบังข้อมูล 4 รูปแบบ", "ใช้กฎตรวจและจัดแผน", "สร้างรายงาน PDF"], "amber", bold_first=True, h=172)
+    d = f.box("d", 10, c.y + c.h + 26, 235, ["ส่งรายงานทางอีเมล", "ถึงผู้เข้าร่วมทีละฉบับ"], "blue", bold_first=True)
+    e = f.box("e", 285, c.y, 120, ["Document AI", "ได้ PDF ต้นฉบับ", "เฉพาะไฟล์สแกน", "ก่อนปิดบัง"], "red", bold_first=True)
+    g = f.box("g", 285, c.y + c.h - 0, 120, ["โมเดลสามราย", "ได้เฉพาะข้อความ", "หลังปิดบัง"], "green", bold_first=True)
+    g.y = c.y + c.h - g.h
+    down(f, a, b); down(f, b, c); down(f, c, d)
+    y1 = e.y + e.h / 2; y2 = g.y + g.h / 2
+    f.arrow([(c.x + c.w, y1), (e.x, y1)], "c", "e", both=True)
+    f.arrow([(c.x + c.w, y2), (g.x, y2)], "c", "g", both=True)
+    f.H = d.y + d.h + 6
     return f
 
 
@@ -241,7 +261,7 @@ def coding():
                    ("c2", ["รอบที่ 2", "ให้รหัสซ้ำ ≥ 20% ไม่น้อยกว่า 6 คน", "ห่างจากรอบแรก ≥ 14 วัน สลับแถว"], "blue", dict(bold_first=True)),
                    ("k", ["ค่า kappa ของสองรอบ", "เกณฑ์ขั้นต่ำ 0.61"], "amber", dict(bold_first=True)),
                    ("g", ["ชุดคำตอบอ้างอิง = รหัสรอบที่ 1", "รายการที่ต่างกันใช้ข้อยุติ", "เก็บรหัสเดิมของทั้งสองรอบ"], "green", dict(bold_first=True)),
-                   ("s", ["เปิดผลของระบบแล้วเทียบ", "Macro-F1 และอัตราการไม่สรุป"], "purple", dict(bold_first=True))], 10, 255, gap=24)
+                   ("s", ["เปิดผลของระบบแล้วเทียบ", "Macro-F1 และอัตราการงดสรุป"], "purple", dict(bold_first=True))], 10, 255, gap=24)
     fi, c1, c2, k, g, s = ch
     g.y += 18; s.y += 18
     for u, d in zip(ch, ch[1:]):
@@ -264,7 +284,7 @@ def evaluation():
     dec = f.box("dec", 8, 70, 185, ["สถานะสุดท้าย 30 ข้อ"], "blue")
     plan = f.box("plan", 222, 70, 185, ["แผนที่ส่งให้ผู้เข้าร่วม", "จัดจากช่องว่างของระบบ"], "amber")
     plan.y = dec.y + dec.h / 2 - plan.h / 2
-    q1 = f.box("q1", 8, 160, 185, ["RQ1", "เทียบชุดคำตอบอ้างอิง", "F1 รายสถานะ", "Macro-F1", "อัตราการไม่สรุป"], "purple", bold_first=True)
+    q1 = f.box("q1", 8, 160, 185, ["RQ1", "เทียบชุดคำตอบอ้างอิง", "F1 รายสถานะ", "Macro-F1", "อัตราการงดสรุป"], "purple", bold_first=True)
     q2 = f.box("q2", 222, 160, 185, ["RQ2", "ตรงประเด็น", "ครอบคลุมช่องว่าง", "ข้อมูลรายการถูกต้อง", "เวลาเป็นไปได้", "ประโยชน์ที่รับรู้"], "purple", bold_first=True)
     f.arrow([run.bottom(dec.x + dec.w / 2 - run.x), dec.top()], "run", "dec")
     f.arrow([run.bottom(plan.x + plan.w / 2 - run.x), plan.top()], "run", "plan")
@@ -327,7 +347,7 @@ if __name__ == "__main__":
     out = os.path.join(ROOT, "book", "figures"); os.makedirs(out, exist_ok=True)
     only = [a for a in sys.argv[1:] if not a.startswith("--")]
     fn_map = dict(fig_framework=framework, fig_process=process, fig_requirements=requirements, fig_architecture=architecture,
-                  fig_workflow=workflow, fig_rules_a=rules_a, fig_rules_b=rules_b, fig_coding=coding, fig_evaluation=evaluation, fig_coverage=coverage)
+                  fig_workflow=workflow, fig_rules_a=rules_a, fig_rules_b=rules_b, fig_coding=coding, fig_evaluation=evaluation, fig_dataflow=dataflow, fig_coverage=coverage)
     jp = os.path.join(out, "figures.json")
     meta = json.load(open(jp, encoding="utf-8")) if os.path.exists(jp) else {}
     meta.pop("fig_rules", None)

@@ -56,7 +56,7 @@
 
 [@peoplecert2026] PeopleCert, "ITIL FAQ: Frequently asked questions about ITIL," PeopleCert Help and Support, 2026. [ออนไลน์]. เข้าถึงได้จาก: https://www.peoplecert.org/help-and-support/faq-itil [เข้าถึงเมื่อ 3 ต.ค. 2569]
 
-[@wilson2024aies] K. Wilson and A. Caliskan, "Gender, race, and intersectional bias in resume screening via language model retrieval," in *Proc. AAAI/ACM Conf. AI, Ethics, and Society (AIES)*, vol. 7, no. 1, 2024, pp. 1578-1590, doi: 10.1609/aies.v7i1.31748.
+[@wilson2024aies] K. Wilson and A. Caliskan, "Gender, race, and intersectional bias in resume screening via language model retrieval," in *Proc. AAAI/ACM Conf. on AI, Ethics, and Society (AIES)*, vol. 7, no. 1, 2024, pp. 1578-1590, doi: 10.1609/aies.v7i1.31748.
 
 [@an2025pnasnexus] J. An, D. Huang, C. Lin, and M. Tai, "Measuring gender and racial biases in large language models: Intersectional evidence from automated resume evaluation," *PNAS Nexus*, vol. 4, no. 3, art. pgaf089, Mar. 2025, doi: 10.1093/pnasnexus/pgaf089.
 
@@ -71,3 +71,17 @@
 [@manakul2023selfcheckgpt] P. Manakul, A. Liusie, and M. Gales, "SelfCheckGPT: Zero-resource black-box hallucination detection for generative large language models," in *Proc. 2023 Conf. Empirical Methods in Natural Language Processing (EMNLP)*, Singapore, 2023, pp. 9004-9017, doi: 10.18653/v1/2023.emnlp-main.557.
 
 [@mchugh2012kappa] M. L. McHugh, "Interrater reliability: The kappa statistic," *Biochemia Medica*, vol. 22, no. 3, pp. 276-282, 2012, doi: 10.11613/BM.2012.031.
+
+[@huang2025halsurvey] L. Huang, W. Yu, W. Ma, W. Zhong, Z. Feng, H. Wang, Q. Chen, W. Peng, X. Feng, B. Qin, and T. Liu, "A survey on hallucination in large language models: Principles, taxonomy, challenges, and open questions," *ACM Transactions on Information Systems*, vol. 43, no. 2, pp. 1-55, Mar. 2025, doi: 10.1145/3703155.
+
+[@dhuliawala2024cove] S. Dhuliawala, M. Komeili, J. Xu, R. Raileanu, X. Li, A. Celikyilmaz, and J. Weston, "Chain-of-verification reduces hallucination in large language models," in *Findings of the Association for Computational Linguistics: ACL 2024*, Bangkok, Thailand, 2024, pp. 3563-3578, doi: 10.18653/v1/2024.findings-acl.212.
+
+[@tang2024minicheck] L. Tang, P. Laban, and G. Durrett, "MiniCheck: Efficient fact-checking of LLMs on grounding documents," in *Proc. 2024 Conf. Empirical Methods in Natural Language Processing (EMNLP)*, Miami, FL, USA, 2024, pp. 8818-8847, doi: 10.18653/v1/2024.emnlp-main.499.
+
+[@verga2024poll] P. Verga, S. Hofstätter, S. Althammer, Y. Su, A. Piktus, A. Arkhangorodsky, M. Xu, N. White, and P. Lewis, "Replacing judges with juries: Evaluating LLM generations with a panel of diverse models," arXiv:2404.18796, Apr. 2024. [ออนไลน์]. เข้าถึงได้จาก: https://arxiv.org/abs/2404.18796 [เข้าถึงเมื่อ 4 ต.ค. 2569]
+
+[@du2024debate] Y. Du, S. Li, A. Torralba, J. B. Tenenbaum, and I. Mordatch, "Improving factuality and reasoning in language models through multiagent debate," in *Proc. 41st Int. Conf. Machine Learning (ICML)*, Proc. Machine Learning Research, vol. 235, 2024, pp. 11733-11763.
+
+[@wen2025abstention] B. Wen, J. Yao, S. Feng, C. Xu, Y. Tsvetkov, B. Howe, and L. L. Wang, "Know your limits: A survey of abstention in large language models," *Transactions of the Association for Computational Linguistics*, vol. 13, pp. 529-556, 2025, doi: 10.1162/tacl_a_00754.
+
+[@depa2025] Digital Economy Promotion Agency, "depa reveals 2024 digital density survey in Thai industry: Moving toward level 2.0," depa, 23 เม.ย. 2568. [ออนไลน์]. เข้าถึงได้จาก: https://depa.or.th/en/article-view/20250423_01 [เข้าถึงเมื่อ 4 ต.ค. 2569]

@@ -160,3 +160,7 @@
 ## 4 ต.ค. 2569 · ลดเล่มตาม Analysis_doc_04OCT26 (DEC-63)
 - สำรอง `archive/04OCT26/book/` · แก้ book/01,02,03,05 ด้วย `archive/04OCT26/shorten_book.py` · build ผ่าน · format 30/33 (ไม่ผ่าน 3 ข้อเดิม: คำต้องห้าม "ข้อกำหนด" · ชื่อรุ่นคลัง v1.5 เทียบ numbers.json v1.6 · บทคัดย่อ 338 คำตาม pythainlp ในเครื่องนี้) · overlap 11 จุด (ข้อคำถามแบบประเมินจาก baseline เดิม) · run_all_checks หยุดที่ ILP เพราะเครื่องไม่มี pulp
 - (4 ต.ค. ต่อ) วิเคราะห์เล่มใหม่ → `docs/Gap_Report_04OCT26.md` · แก้หัวข้อ 2.4 หลุด (ผลข้างเคียง DEC-63) · ย้อนการแบ่งย่อหน้าอัตโนมัติที่ตัดกลางประโยค · พบ build_book.py ตัดโค้ดบล็อก prompt (ภาคผนวก ช มี ":::") ยังไม่แก้
+
+## 4 ต.ค. 2569 · ปรับปรุงเล่มตาม Gap_Report_04OCT26 (DEC-65)
+- commit bb7e31a บันทึกสถานะก่อนแก้ · แก้ book/00–05 · รูปวาดใหม่ 6 รูป (workflow, dataflow, architecture, requirements, process, evaluation) · build ผ่าน 33/33 · PDF 114 หน้า · เทสต์ 93/93
+- งานค้างอยู่ใน DEC-65 หัวข้อ "ยังค้าง"

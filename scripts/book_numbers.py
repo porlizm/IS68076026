@@ -112,7 +112,7 @@ def main():
     arow = ["| รหัส | รายการเรียนรู้ | ผู้ให้บริการ | ชั่วโมง | องค์ประกอบ O*NET | สถานะ |", "|---|---|---|---|---|---|"]
     for a, ok in zip(adds.itertuples(), conf):
         arow.append(f"| {a.key} | {a.title} | {a.provider} | {fmt(float(a.estimated_hours))} | {a.elements.replace('|', ', ')} | "
-                    + ("Claude ตรวจหน้าเว็บ 3 ต.ค. 2569 ตามที่ผู้วิจัยมอบหมาย" if ok else "รอตรวจ") + " |")
+                    + ("ตรวจหน้าเว็บด้วยเครื่องมือ Generative AI 3 ต.ค. 2569 (ผู้วิจัยจะตรวจซ้ำ)" if ok else "รอตรวจ") + " |")
     n["additions_table"] = "\n".join(arow)
     trow = ["| อาชีพ | ข้อที่มีรายการรองรับ | แผนจำลองครอบคลุม (ข้อ) | ชั่วโมงของแผน | ชั่วโมงขั้นต่ำเพื่อครบทุกข้อ (ILP) |", "|---|---|---|---|---|"]
     per = {r["role_id"]: r for r in sim["primary_6m10h_both"]["per_role"]}
@@ -247,6 +247,13 @@ def main():
     rows = ["| ไฟล์ | จำนวนแถว | SHA-256 |", "|---|---|---|"]
     for f, v in man["files"].items(): rows.append(f"| {f} | {v['rows']:,} | {v['sha256']} |")
     n["manifest_table"] = "\n".join(rows)
+    # ป้ายภาษาไทยคู่กับรหัสรุ่น (DEC-65) · เนื้อหาหลักใช้ป้ายไทย รหัสเต็มอยู่ในภาคผนวก ฉ เท่านั้น
+    n["corpus_label"] = "คลังรายการเรียนรู้รุ่นที่ใช้ในการศึกษา (ตัดรอบ 3 ต.ค. 2569)"
+    n["corpus_label_short"] = "คลังรายการเรียนรู้รุ่นที่ใช้ในการศึกษา"
+    n["onet_label"] = "ชุดข้อกำหนดอ้างอิงที่คัดจาก O*NET 31.0"
+    n["rules_label"] = "ชุดกฎตรวจหลักฐานรุ่นสุดท้าย"
+    n["analyst_label"] = "prompt ของโมเดลวิเคราะห์"
+    n["verifier_label"] = "prompt ของโมเดลผู้ตรวจความหมาย"
     with open(os.path.join(ROOT, "book", "numbers.json"), "w", encoding="utf-8") as fh:
         json.dump(n, fh, ensure_ascii=False, indent=1); fh.write("\n")
     print(f"numbers.json · {len(n)} ค่า · corpus {n['corpus_items']} · map {n['map_total']} · passed {n['map_passed']} · req {n['req_covered']}/600 · tests {n['tests_total']}")
